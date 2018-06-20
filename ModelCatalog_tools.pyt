@@ -1,8 +1,19 @@
+# Overview info
+# UI input objects are added to 'parameters' object (getParameterInfo function)
+# values are extracted to individual variables by referencing 'paramaters' indices
+# variable values are applied to feature class fields by referencing Update Cursor row indices
+#
+# Big Question - how to manage domains? - currently UI domains are hard coded in the script...
+# but in theory we could grab those values from lookup tables - this could determine whether...
+# we use ID fields or fields with the actual values
+
+# ----------------------------------------------------------------------------------------------------------------------
+
 import arcpy, os
 
 class Toolbox(object):
     def __init__(self):
-        """Define the toolbox (th e name of the toolbox is the name of the
+        """Define the toolbox (the name of the toolbox is the name of the
         .pyt file)."""
         self.label = "Model Catalog tools"
         self.alias = ""
@@ -94,13 +105,12 @@ class EMGAATS_Model_Registration(object):
         model_alterations = arcpy.Parameter(
             displayName="Model Alterations",
             name="model_alterations",
-            datatype="GPString",
+            datatype="GPValueTable",
             parameterType="Optional",
             direction="Input",
             multiValue=True)
-
-        model_alterations.filter.type = "ValueList"
-        model_alterations.filter.list = ["Boundary Conditions", "Regression Equations", "Roughness"]
+        model_alterations.columns = [['String', 'Alteration Type']]
+        model_alterations.filters[0].list = ["Boundary Conditions", "Regression Equations", "Roughness"]
 
         model_alteration_file = arcpy.Parameter(
             displayName="Model Alterations File",
@@ -123,6 +133,8 @@ class EMGAATS_Model_Registration(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
+
+        # Enables calibration file field if an alteration is added
         if parameters[4].valueAsText == "Calibration":
             if parameters[5].enabled == False:
                 parameters[5].enabled = True
@@ -131,9 +143,17 @@ class EMGAATS_Model_Registration(object):
             parameters[5].enabled = False
             parameters[5].value = self.dummy_model_calibration_file_path
 
-        if parameters[7].altered and parameters[7].valueAsText is not None :
-            parameters[8].enabled = True
-            parameters[8].value = ""
+        # Checks that alteration added is not a duplicate
+        if parameters[7].values is not None:
+           number_of_values = len(parameters[7].values)
+           if number_of_values > 1 and parameters[7].values[-1] in parameters[7].values[0:number_of_values-1]:
+                parameters[7].values = parameters[7].values[0:number_of_values-1]
+
+        # Enables alteration file field if an alteration is added
+        if parameters[7].altered and parameters[7].valueAsText is not None:
+            if parameters[8].enabled == False:
+                parameters[8].enabled = True
+                parameters[8].value = ""
         else:
             parameters[8].enabled = False
             parameters[8].value = self.dummy_model_alteration_file_path
@@ -149,152 +169,6 @@ class EMGAATS_Model_Registration(object):
         EMGAATS_Model_Registration_function(parameters)
         return
 
-# class Tool2(object):
-#     def __init__(self):
-#         self.label = "2) ToolAAA"
-#         self.description = "Checkboxes and Updating Parameter based on another parameter changing"
-#
-# #        self.canRunInBackground = True
-#
-#     def getParameterInfo(self):
-#         """Define parameter definitions"""
-#         param0 = arcpy.Parameter(
-#             displayName="Input Text File",
-#             name="in_text_file",
-#             datatype="DEFile",
-#             parameterType="Required",
-#             direction="Input")
-#         param0.filter.list = ['txt']
-#
-#         param3 = arcpy.Parameter(
-#              displayName="Workspace",
-#              name="in_workspace",
-#              datatype="DEWorkspace",
-#              parameterType="Required",
-#              direction="Input")
-#         param3.filter.list = ["File System", "Local Database"]
-#
-#         param5 = arcpy.Parameter(
-#             displayName="Output File",
-#             name="out_OutputFile",
-#             datatype="DEFile",
-#             parameterType="Required",
-#             direction="Output")
-#
-#         param6 = arcpy.Parameter(
-#             displayName="List of Integers",
-#             name="in_List",
-#             datatype="GPLong",
-#             parameterType="Required",
-#             direction="Input")
-#         param6.value = 15
-#         param6.filter.type = "ValueList"
-#         param6.filter.list = [5, 10, 15, 30, 60]
-#
-#         param7 = arcpy.Parameter(
-#             displayName="Checkbox1",
-#             name="in_box1",
-#             datatype="GPBoolean",
-#             parameterType="Required",
-#             direction="Input")
-#         param7.value = True
-#
-#         param8 = arcpy.Parameter(
-#             displayName="Checkbox2",
-#             name="in_box2",
-#             datatype="GPBoolean",
-#             parameterType="Required",
-#             direction="Input")
-#         param8.value = False
-#
-#         param10 = arcpy.Parameter(
-#              displayName="Cell Assignment",
-#              name="cell_assignment",
-#              datatype="GPString",
-#              parameterType="Required",
-#              direction="Input")
-#
-#         param10.value = "Maximum Area"
-#         param10.filter.type = "ValueList"
-#         param10.filter.list = ["Cell Center", "Maximum Area", "Maximum Combined Area"]
-#
-#         params = [param0, param3, param5, param6, param7, param8, param10]
-#         return params
-#
-#     def isLicensed(self):
-#         try:
-#             if arcpy.CheckExtension("Spatial") != "Available":
-#                 raise Exception
-#         except Exception:
-#             return False  # tool cannot be executed
-#
-#         return True  # tool can be executed
-#
-#     def updateParameters(self, parameters):
-#         """Modify the values and properties of parameters before internal
-#         validation is performed.  This method is called whenever a parameter
-#         has been changed."""
-#         if parameters[1].altered:
-#             parameters[2].value = parameters[1].valueAsText + "\\testOut.txt"
-#
-#     def updateMessages(self, parameters):
-#         """Modify the messages created by internal validation for each tool
-#         parameter.  This method is called after internal validation."""
-#         return
-#
-#     def execute(self, parameters, messages):
-#         tool2_function(parameters)
-#         return
-#
-#
-# class Tool3(object):
-#     def __init__(self):
-#         self.label = "3) Tool"
-#         self.description = "GPValueTable"
-#
-# #        self.canRunInBackground = True
-#
-#     def getParameterInfo(self):
-#         """Define parameter definitions"""
-#
-#         param10 = arcpy.Parameter(
-#             displayName='GPValue Table',
-#             name='gp_ValueTable_optional',
-#             datatype='GPValueTable',
-#             parameterType='Optional',
-#             direction='Input')
-#
-#         param10.columns = [['DEFile', 'TField'], ['String', 'NAME'], ['String', 'UNITS']]
-#         param10.filters[1].type = 'ValueList'
-#         param10.filters[0].list = ["txt"]
-#         param10.filters[1].list = ["Thing1", "Thing2"]
-#         param10.filters[2].list = ["Units1", "Units2"]
-#
-#         params = [param10]
-#         return params
-#
-#     def isLicensed(self):
-#         # try:
-#         #     if arcpy.CheckExtension("Spatial") != "Available":
-#         #         raise Exception
-#         # except Exception:
-#         #     return False  # tool cannot be executed
-#
-#         return True  # tool can be executed
-#
-#     def updateParameters(self, parameters):
-#         """Modify the values and properties of parameters before internal
-#         validation is performed.  This method is called whenever a parameter
-#         has been changed."""
-#
-#     def updateMessages(self, parameters):
-#         """Modify the messages created by internal validation for each tool
-#         parameter.  This method is called after internal validation."""
-#         return
-#
-#     def execute(self, parameters, messages):
-#         tool3_function(parameters)
-#         return
 
 
 def EMGAATS_Model_Registration_function(parameters):
@@ -327,8 +201,8 @@ def EMGAATS_Model_Registration_function(parameters):
 
     # create convex hull of areas_base - buffers took way too long for larger model runs
     print "Creating bounding polygon around model area"
-    #areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"in_memory\areas_hull", "CONVEX_HULL", "ALL")
-    areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"C:\temp\working.gdb\areas_hull", "CONVEX_HULL", "ALL")
+    # areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"in_memory\areas_hull", "CONVEX_HULL", "ALL")
+    areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"C:\temp\working.gdb\areas_hull", "CONVEX_HULL", "ALL")  # can prob make areas hull 'in memory'
 
     # get list of field names
     fields = arcpy.ListFields(areas_hull)
@@ -356,60 +230,70 @@ def EMGAATS_Model_Registration_function(parameters):
             row[0] = newMax
             cursor.updateRow(row)
 
-    # append result to model tracking db, using model tracking results
+    # append result (which should have a single record) to model tracking feature class, using model tracking results
     print "Appending bounding polygon to Model Tracking"
     arcpy.Append_management(areas_hull, tracking, "NO_TEST")
 
     # apply values returned from form inputs to tracking fc
-    edit_fields = ["Model_ID", "Project_Type", "Project_Phase", "Model_Purpose"]
+    # BEWARE - FIELDS HERE WILL NEED TO CHANGE IF SCHEMA CHANGES BUT ORDER DOES NOT MATTER
+    edit_fields = ["Model_ID", "Parent_Model_ID", "Model_Request_ID", "Project_Phase", "Engine_Type", "Create_Date",
+                   "Deploy_Date", "Run_Date", "Extract_Date", "Created_by", "Model_Path", "Project_Type",
+                   "Model_Purpose", "Calibration_File", "Model_Status", "Alterations", "Alteration_File",
+                   "Project_Number"]
 
     print "Applying input values to record"
+    #  NOTE - IT DOES NOT MATTER WHAT ORDER THE PARAMETERS INDEXING IS IN SINCE YOU ASSIGN THEM TO A...
+    #  NON NUMBERED/ ORDERED VARIABLE ABOVE
     with arcpy.da.UpdateCursor(tracking, edit_fields) as cursor:
         for row in cursor:
-            if row[0] == newMax:
-                row[1] = param_projType
-                row[2] = param_projPhase
-                row[3] = param_modelPurpose
+            if row[0] == newMax:  # if row has the current model ID
+                # row[1] = # ParentModel_ID - not currently filled
+                # row[2] = # calculate from model tracking db (does not currently exist)
+                row[3] = param_projPhase  # - what do to about ID field?
+                # row[4] = # Engine_Type - not currently filled - what to do about ID field?
+                # row[5] = # Create_Date - automatic: Editor Tracking enabled for feature class
+                # row[6] = # Deploy Date - not currently filled
+                # row[7] = # Run Date - not currently filled
+                # row[8] = # Extract Date - not currently filled
+                # row[9] = # Created by - automatic: Editor Tracking enabled for feature class
+                row[10] = directory
+                row[11] = param_projType
+                row[12] = param_modelPurpose
+                row[13] = param_calibration_file
+                row[14] = param_modelStatus
+                row[15] = alterationsAsText
+                row[16] = param_alterationFile
+                row[17] = project_number
             cursor.updateRow(row)
 
-# def tool2_function(parameters):
-#     # read input data from toolboox gui
-#     input_filename = parameters[0].valueAsText
-#     workspace = parameters[1].valueAsText
-#     output_filename = parameters[2].valueAsText
-#     number_from_list = parameters[3].valueAsText
-#     checkbox1 = parameters[4].valueAsText
-#     checkbox2 = parameters[5].valueAsText
-#     string_from_list = parameters[6].valueAsText
-#     arcpy.AddMessage(input_filename)
-#     arcpy.AddMessage(workspace)
-#     arcpy.AddMessage(output_filename)
-#     arcpy.AddMessage(number_from_list)
-#     arcpy.AddMessage(checkbox1)
-#     arcpy.AddMessage(checkbox2)
-#     arcpy.AddMessage(string_from_list)
 
-
-# def tool3_function(parameters):
-#     arcpy.AddMessage(parameters[0].valueAsText)
-
-def main():
+########################################################################################################################
+#                                                                                                                      #
+#        Uncomment the section below to debug EMGAATS_Model_Registration_function without the GUI                      #
+#                                                                                                                      #
+#        To use the GUI you MUST comment out this section. As far as I can tell the toolbox won't load in              #
+#        ArcMap or ArcCatalog if the EMGAATS_Model_Registration class is used outside of the Toolbox class.            #
+#                                                                                                                      #
+########################################################################################################################
+"""
+def main():  # runs the whole thing; takes manual input if gui = False
     import os
-    gui = False
-    path = os.path.dirname(os.path.realpath(__file__))
+    gui = False  # not referenced anywhere else
+    path = os.path.dirname(os.path.realpath(__file__))  # gets path of directory where this pyt file sits
     registration = EMGAATS_Model_Registration()
-    parameters = registration.getParameterInfo()
-    parameters[0].value = "10999"
+    parameters = registration.getParameterInfo()  # is this only being used to get to the dummy file paths?
+    parameters[0].value = "E10999"
     parameters[1].value = r"\\cassio\asm_projects\E10922_taggart\models\Preliminary\BaseR011018V4ic - Copy"
     parameters[2].value = "Combined"
     parameters[3].value = "Pre Design"
     parameters[4].value = "Characterization"
     parameters[5].value = registration.dummy_model_calibration_file_path
     parameters[6].value = "Working"
-    parameters[7].values = ["Boundary Conditions", "Roughness"]
+    parameters[7].values = [["Boundary Conditions"], ["Roughness"]] # accomodate for list of lists
     parameters[8].value = registration.dummy_model_alteration_file_path
     EMGAATS_Model_Registration_function(parameters)
 
 
 if __name__ == '__main__':
     main()
+"""
