@@ -176,6 +176,11 @@ def EMGAATS_Model_Registration_function(parameters):
 
     arcpy.env.overwriteOutput = True
 
+    # sde connections to modelcatalog
+    # connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
+    # MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
+    # MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
+
     tracking = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\ModelCatalog_TEST.gdb\ModelTracking"
 
     project_number = parameters[0].valueAsText
@@ -236,10 +241,11 @@ def EMGAATS_Model_Registration_function(parameters):
 
     # apply values returned from form inputs to tracking fc
     # BEWARE - FIELDS HERE WILL NEED TO CHANGE IF SCHEMA CHANGES BUT ORDER DOES NOT MATTER
+    # EG ONCE WE POINT TO REAL DATA ON TEST1 FIELD NAMES CHANGE SLIGHTLY
     edit_fields = ["Model_ID", "Parent_Model_ID", "Model_Request_ID", "Project_Phase", "Engine_Type", "Create_Date",
                    "Deploy_Date", "Run_Date", "Extract_Date", "Created_by", "Model_Path", "Project_Type",
-                   "Model_Purpose", "Calibration_File", "Model_Status", "Alterations", "Alteration_File",
-                   "Project_Number"]
+                   "Model_Purpose", "Model_Calibration_file", "Model_Status", "Model_Alterations",
+                   "Model_Alteration_file", "Project_Number"]
 
     print "Applying input values to record"
     #  NOTE - IT DOES NOT MATTER WHAT ORDER THE PARAMETERS INDEXING IS IN SINCE YOU ASSIGN THEM TO A...
