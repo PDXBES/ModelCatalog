@@ -281,7 +281,7 @@ def EMGAATS_Model_Registration_function(parameters):
 #        ArcMap or ArcCatalog if the EMGAATS_Model_Registration class is used outside of the Toolbox class.            #
 #                                                                                                                      #
 ########################################################################################################################
-"""
+
 def main():  # runs the whole thing; takes manual input if gui = False
     import os
     gui = False  # not referenced anywhere else
@@ -302,4 +302,3 @@ def main():  # runs the whole thing; takes manual input if gui = False
 
 if __name__ == '__main__':
     main()
-"""
