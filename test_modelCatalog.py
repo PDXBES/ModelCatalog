@@ -2,13 +2,12 @@ import mock
 from unittest import TestCase
 from ModelCatalog import ModelCatalog
 from Model import Model
-
+from modelCatalog_exception import  Invalid_Model_exception,  Duplicate_model_Exception, Duplicates_in_input_model_list
 
 
 class TestModelCatalog(TestCase):
     def setUp(self):
         self.model_catalog = ModelCatalog()
-        #  self.model = Model()
         self.model1 = mock.MagicMock(Model)
         self.model2 = mock.MagicMock(Model)
 
@@ -21,7 +20,6 @@ class TestModelCatalog(TestCase):
     def test_model_check_for_valid(self):
         self.model1.valid = False
         self.model_catalog.models.append(self.model1)
-        #self.model_catalog.check_for_valid_model(self.model1)
         with self.assertRaises (Exception):
             self.model_catalog.check_for_valid_model(self.model1)
 
@@ -46,13 +44,13 @@ class TestModelCatalog(TestCase):
 
         self.model1.valid = False
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Invalid_Model_exception):
             self.model_catalog.add_model(self.model1)
 
     def test_add_model_duplicate_model_should_fail(self):
         self.model1.valid = True
         self.model_catalog.add_model(self.model1)
-        with self.assertRaises(Exception):
+        with self.assertRaises(Duplicate_model_Exception):
             self.model_catalog.add_model(self.model1)
 
     def test_add_model_list_add_2_models_verify_2_models_in_catalog_models(self):
@@ -79,7 +77,7 @@ class TestModelCatalog(TestCase):
         models.append(self.model1)
         models.append(self.model2)
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Invalid_Model_exception):
             self.model_catalog.add_models(models)
 
         self.assertEquals(len(self.model_catalog.models), 0)
@@ -91,7 +89,7 @@ class TestModelCatalog(TestCase):
 
         models.append(self.model1)
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Duplicate_model_Exception):
             self.model_catalog.add_models(models)
 
         self.assertEquals(len(self.model_catalog.models), 1)
