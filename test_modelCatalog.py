@@ -1,7 +1,8 @@
+import mock
 from unittest import TestCase
 from ModelCatalog import ModelCatalog
 from Model import Model
-import mock
+
 
 
 class TestModelCatalog(TestCase):
@@ -55,7 +56,7 @@ class TestModelCatalog(TestCase):
             self.model_catalog.add_model(self.model1)
 
     def test_add_model_list_add_2_models_verify_2_models_in_catalog_models(self):
-        models =[]
+        models = []
 
         self.model1.valid = True
         self.model2.valid = True

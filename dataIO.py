@@ -1,26 +1,22 @@
 import arcpy
-
+from modelCatalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 
 class DataIO():
     def __init__(self):
         pass
 
-    # Not sure how to iterate through rows
     def add_model(self, model, location, field_names):
-        cursor = arcpy.da.UpdateCursor(location, field_names)
-        row = [model.Parent_Model_ID, model.Model_Request_ID]
-        cursor.updateRow(row)
-        pass
+        if not model.valid:
+            raise ModelCatalog_exception
 
-    def insert_model(self, model, location, field_names):
+        row = [model.Parent_Model_ID, model.Model_Request_ID]
+
+        if len(field_names) != len(row):
+            raise Field_names_length_does_not_match_row_length_exception
+
         cursor = arcpy.da.InsertCursor(location, field_names)
-        row = [model.Parent_Model_ID, model.Model_Request_ID]
-        cursor.insertRow(row)
-        pass
 
-    #Doesn't work with unit test (It seems to be related to the with and as)
-    def insert_model1(self, model, location, field_names):
-        with arcpy.da.InsertCursor(location, field_names) as cursor:
-            row = [model.Parent_Model_ID, model.Model_Request_ID]
-            cursor.insertRow(row)
-        pass
+        cursor.insertRow(row)
+        del cursor
+
+
