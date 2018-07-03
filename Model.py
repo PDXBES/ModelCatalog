@@ -1,7 +1,7 @@
 class Model:
     def __init__(self):
         self.valid = False
-        self.model_ID = 0
+        self.Model_ID = 0
         self.Parent_Model_ID = 0
         self.Model_Request_ID = 0
         self.Project_Phase = None
@@ -18,4 +18,4 @@ class Model:
         self.Model_Status = None
         self.Model_Alterations = None
         self.Model_Alteration_file = None
-        self.Project_Number = None
+        self.Project_Num = None
