@@ -176,10 +176,11 @@ def EMGAATS_Model_Registration_function(parameters):
 
     arcpy.env.overwriteOutput = True
 
-    # sde connections to modelcatalog
+    # -- sde connection to modelcatalog --
     # connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
     # MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
     # MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
+    # ModelTracking = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
 
     tracking = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\ModelCatalog_TEST.gdb\ModelTracking"
 
