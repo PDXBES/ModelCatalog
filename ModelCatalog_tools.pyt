@@ -11,7 +11,7 @@
 
 import arcpy, os
 from ModelCatalog import ModelCatalog
-from model import Model
+from Model import Model
 from dataIO import DataIO
 import getpass
 
@@ -193,7 +193,7 @@ class EMGAATS_Model_Registration(object):
         self.model.Model_Alterations = parameters[7].valueAsText
         self.model.Model_Alteration_file = parameters[8].valueAsText
         self.model.Project_Num = parameters[0].valueAsText
-        self.model.valid = True
+        self.model.valid
 
         self.model_catalog.add_model(self.model)
         EMGAATS_Model_Registration_function(self.model_catalog)

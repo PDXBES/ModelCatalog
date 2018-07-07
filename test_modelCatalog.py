@@ -1,7 +1,7 @@
 import mock
 from unittest import TestCase
-from modelCatalog import ModelCatalog
-from model import Model
+from ModelCatalog import ModelCatalog
+from Model import Model
 from modelCatalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
 
 
