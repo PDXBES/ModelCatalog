@@ -1,8 +1,8 @@
 import mock
 from unittest import TestCase
-from ModelCatalog import ModelCatalog
-from Model import Model
-from modelCatalog_exception import  Invalid_Model_exception,  Duplicate_model_Exception, Duplicates_in_input_model_list
+from modelCatalog import ModelCatalog
+from model import Model
+from modelCatalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
 
 
 class TestModelCatalog(TestCase):
@@ -14,13 +14,13 @@ class TestModelCatalog(TestCase):
     def test_model_check_for_duplicates(self):
         self.model1.valid = True
         self.model_catalog.models.append(self.model1)
-        with self.assertRaises(Exception):
+        with self.assertRaises(Duplicate_model_Exception):
             self.model_catalog.check_for_duplicate_model(self.model1)
 
     def test_model_check_for_valid(self):
         self.model1.valid = False
         self.model_catalog.models.append(self.model1)
-        with self.assertRaises (Exception):
+        with self.assertRaises (Invalid_Model_exception):
             self.model_catalog.check_for_valid_model(self.model1)
 
     def test_add_model_new_model_into_empty_list(self):
@@ -104,7 +104,7 @@ class TestModelCatalog(TestCase):
         models.append(self.model1)
         models.append(self.model1)
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(Duplicates_in_input_model_list):
             self.model_catalog.add_models(models)
 
         self.assertEquals(len(self.model_catalog.models), 0)

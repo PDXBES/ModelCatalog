@@ -11,7 +11,7 @@
 
 import arcpy, os
 from ModelCatalog import ModelCatalog
-from Model import Model
+from model import Model
 from dataIO import DataIO
 import getpass
 
@@ -324,16 +324,6 @@ def EMGAATS_Model_Registration_functionOld(parameters):
                 row[16] = param_alterationFile
                 row[17] = project_number
             cursor.updateRow(row)
-
-
-########################################################################################################################
-#                                                                                                                      #
-#        Uncomment the section below to debug EMGAATS_Model_Registration_function without the GUI                      #
-#                                                                                                                      #
-#        To use the GUI you MUST comment out this section. As far as I can tell the toolbox won't load in              #
-#        ArcMap or ArcCatalog if the EMGAATS_Model_Registration class is used outside of the Toolbox class.            #
-#                                                                                                                      #
-########################################################################################################################
 
 def main():  # runs the whole thing; takes manual input if gui = False
     model = Model()

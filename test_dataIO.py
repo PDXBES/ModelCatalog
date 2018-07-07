@@ -1,8 +1,8 @@
 from unittest import TestCase
 from dataIO import DataIO
 import mock
-from ModelCatalog import ModelCatalog
-from Model import Model
+from modelCatalog import ModelCatalog
+from model import Model
 import arcpy
 from modelCatalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 
