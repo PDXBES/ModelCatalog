@@ -207,8 +207,8 @@ def EMGAATS_Model_Registration_function(parameters):
 
     # create convex hull of areas_base - buffers took way too long for larger model runs
     print "Creating bounding polygon around model area"
-    # areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"in_memory\areas_hull", "CONVEX_HULL", "ALL")
-    areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"C:\temp\working.gdb\areas_hull", "CONVEX_HULL", "ALL")  # can prob make areas hull 'in memory'
+    areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"in_memory\areas_hull", "CONVEX_HULL", "ALL")
+    # areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"C:\temp\working.gdb\areas_hull", "CONVEX_HULL", "ALL")
 
     # get list of field names
     fields = arcpy.ListFields(areas_hull)
