@@ -19,3 +19,7 @@ class Duplicate_model_Exception(ModelCatalog_exception):
 class Duplicates_in_input_model_list(ModelCatalog_exception):
     pass
 
+class Invalid_model_path_exception(ModelCatalog_exception):
+    pass
+
+

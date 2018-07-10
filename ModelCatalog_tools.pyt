@@ -10,6 +10,10 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 import arcpy, os
+from ModelCatalog import ModelCatalog
+from Model import Model
+from dataIO import DataIO
+import getpass
 
 class Toolbox(object):
     def __init__(self):
@@ -29,6 +33,10 @@ class EMGAATS_Model_Registration(object):
         path = os.path.dirname(os.path.realpath(__file__))
         self.dummy_model_calibration_file_path = path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
         self.dummy_model_alteration_file_path = path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
+        self.model_catalog = ModelCatalog()
+        self.model = Model()
+        self.dataio = DataIO()
+
 
 #        self.canRunInBackground = True
 
@@ -166,12 +174,56 @@ class EMGAATS_Model_Registration(object):
 
     def execute(self, parameters, messages):
 
-        EMGAATS_Model_Registration_function(parameters)
+        model_id = self.dataio.retrieve_next_model_id(self.dataio.ValueTable,["Object_Type", "Current_ID"])
+        self.model.Model_ID = model_id
+        self.model.Parent_Model_ID = 0
+        self.model.Model_Request_ID = 0
+        self.model.Project_Phase = parameters[3].valueAsText
+        self.model.Engine_Type = "EMGAATS"
+        self.model.Create_Date = None
+        self.model.Deploy_Date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.Run_Date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.Extract_Date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.Created_by = getpass.getuser() #TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
+        self.model.Model_Path = parameters[1].valueAsText
+        self.model.Project_Type = parameters[2].valueAsText
+        self.model.Model_Purpose = parameters[4].valueAsText
+        self.model.Model_Calibration_file = parameters[5].valueAsText
+        self.model.Model_Status = parameters[6].valueAsText
+        self.model.Model_Alterations = parameters[7].valueAsText
+        self.model.Model_Alteration_file = parameters[8].valueAsText
+        self.model.Project_Num = parameters[0].valueAsText
+        self.model.valid
+
+        self.model_catalog.add_model(self.model)
+        EMGAATS_Model_Registration_function(self.model_catalog)
         return
 
 
+def EMGAATS_Model_Registration_function(model_catalog):
+    dataio = DataIO()
+    # TODO Ask Dan about IDs being attached to domains
+    field_names = [
+        "Model_ID",
+        "Parent_Model_ID",
+        "Model_Request_ID",
+        "Project_Phase",
+        "Engine_Type",
+        "Create_Date",
+        "Deploy_Date",
+        "Run_Date",
+        "Model_Path",
+        "Project_Type",
+        "Model_Purpose",
+        "Model_Calibration_file",
+        "Model_Status",
+        "Model_Alterations",
+        "Model_Alteration_file",
+        "Project_Num"]
+    
+    dataio.add_model(model_catalog.models[0],dataio.ModelTracking,field_names)
 
-def EMGAATS_Model_Registration_function(parameters):
+def EMGAATS_Model_Registration_functionOld(parameters):
     # read input data from proxy
 
     arcpy.env.overwriteOutput = True
@@ -273,32 +325,33 @@ def EMGAATS_Model_Registration_function(parameters):
                 row[17] = project_number
             cursor.updateRow(row)
 
-
-########################################################################################################################
-#                                                                                                                      #
-#        Uncomment the section below to debug EMGAATS_Model_Registration_function without the GUI                      #
-#                                                                                                                      #
-#        To use the GUI you MUST comment out this section. As far as I can tell the toolbox won't load in              #
-#        ArcMap or ArcCatalog if the EMGAATS_Model_Registration class is used outside of the Toolbox class.            #
-#                                                                                                                      #
-########################################################################################################################
-
 def main():  # runs the whole thing; takes manual input if gui = False
-    import os
-    gui = False  # not referenced anywhere else
-    path = os.path.dirname(os.path.realpath(__file__))  # gets path of directory where this pyt file sits
-    registration = EMGAATS_Model_Registration()
-    parameters = registration.getParameterInfo()  # is this only being used to get to the dummy file paths?
-    parameters[0].value = "E10999"
-    parameters[1].value = r"\\cassio\asm_projects\E10922_taggart\models\Preliminary\BaseR011018V4ic - Copy"
-    parameters[2].value = "Combined"
-    parameters[3].value = "Pre Design"
-    parameters[4].value = "Characterization"
-    parameters[5].value = registration.dummy_model_calibration_file_path
-    parameters[6].value = "Working"
-    parameters[7].values = [["Boundary Conditions"], ["Roughness"]] # accomodate for list of lists
-    parameters[8].value = registration.dummy_model_alteration_file_path
-    EMGAATS_Model_Registration_function(parameters)
+    model = Model()
+    model_catalog = ModelCatalog()
+    dataio = DataIO()
+    model_id = dataio.retrieve_next_model_id(dataio.ValueTable, ["Object_Type", "Current_ID"])
+    model.Model_ID = model_id
+    model.Parent_Model_ID = 555
+    model.Model_Request_ID = 777
+    model.Project_Phase = "Final"
+    model.Engine_Type = "EMGAATS"
+    model.Create_Date = None
+    model.Deploy_Date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+    model.Run_Date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+    model.Extract_Date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+    model.Created_by = getpass.getuser()  # TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
+    model.Model_Path = "C:\Temp"
+    model.Project_Type = 1
+    model.Model_Purpose = 1
+    model.Model_Calibration_file = "C:\Temp\Cal"
+    model.Model_Status = 2
+    model.Model_Alterations = 1
+    model.Model_Alteration_file = "C:\Temp\BC"
+    model.Project_Num = "E10TEST"
+    model.valid = True
+
+    model_catalog.add_model(model)
+    EMGAATS_Model_Registration_function(model_catalog)
 
 
 if __name__ == '__main__':
