@@ -21,6 +21,9 @@ class Model:
         self.Model_Alterations = None
         self.Model_Alteration_file = None
         self.Project_Num = None
+        self.simulations = []
+
+# TODO - correct capitalization of attributes to PEP8 (lower)
 
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.Model_Path)

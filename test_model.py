@@ -1,5 +1,6 @@
 from unittest import TestCase
 from Model import Model
+from simulation import Simulation
 import mock
 from modelCatalog_exception import Invalid_model_path_exception
 
@@ -180,3 +181,14 @@ class TestModel(TestCase):
         mock_validate_model_path.return_value = False
         is_valid = self.model.valid
         self.assertFalse(is_valid)
+
+    def test_model_has_simulations(self):
+        simulation = Simulation()
+        self.model.simulations.append(simulation)
+        self.assertTrue(len(self.model.simulations) > 0 )
+
+    def test_first_simulation_is_valid(self):
+        sim_one = self.model.simulations[0]
+
+        self.assertTrue(sim_one)
+
