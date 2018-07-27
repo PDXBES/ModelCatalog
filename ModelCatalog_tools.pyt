@@ -10,9 +10,9 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 import arcpy, os
-from ModelCatalog import ModelCatalog
-from Model import Model
-from dataIO import DataIO
+from model_catalog import ModelCatalog
+from model import Model
+from data_io import DataIO
 import getpass
 
 class Toolbox(object):

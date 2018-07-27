@@ -1,8 +1,7 @@
 from unittest import TestCase
-from Model import Model
+from model import Model
 from simulation import Simulation
 import mock
-from modelCatalog_exception import Invalid_model_path_exception
 
 
 class TestModel(TestCase):
@@ -104,10 +103,10 @@ class TestModel(TestCase):
 
     #TODO Troubleshoot following test
 
-    @mock.patch("Model.Model.validate_model_path")
-    @mock.patch("Model.Model.validate_config_file")
-    @mock.patch("Model.Model.validate_gdb")
-    @mock.patch("Model.Model.validate_sim")
+    @mock.patch("model.Model.validate_model_path")
+    @mock.patch("model.Model.validate_config_file")
+    @mock.patch("model.Model.validate_gdb")
+    @mock.patch("model.Model.validate_sim")
     def test_valid_if_model_path_config_gdb_and_sim_are_valid_return_true(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
@@ -117,10 +116,10 @@ class TestModel(TestCase):
         is_valid = self.model.valid
         self.assertTrue(is_valid)
 
-    @mock.patch("Model.Model.validate_model_path")
-    @mock.patch("Model.Model.validate_config_file")
-    @mock.patch("Model.Model.validate_gdb")
-    @mock.patch("Model.Model.validate_sim")
+    @mock.patch("model.Model.validate_model_path")
+    @mock.patch("model.Model.validate_config_file")
+    @mock.patch("model.Model.validate_gdb")
+    @mock.patch("model.Model.validate_sim")
     def test_valid_if_model_path_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
@@ -130,10 +129,10 @@ class TestModel(TestCase):
         is_valid = self.model.valid
         self.assertFalse(is_valid)
 
-    @mock.patch("Model.Model.validate_model_path")
-    @mock.patch("Model.Model.validate_config_file")
-    @mock.patch("Model.Model.validate_gdb")
-    @mock.patch("Model.Model.validate_sim")
+    @mock.patch("model.Model.validate_model_path")
+    @mock.patch("model.Model.validate_config_file")
+    @mock.patch("model.Model.validate_gdb")
+    @mock.patch("model.Model.validate_sim")
     def test_valid_if_model_config_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
@@ -143,10 +142,10 @@ class TestModel(TestCase):
         is_valid = self.model.valid
         self.assertFalse(is_valid)
 
-    @mock.patch("Model.Model.validate_model_path")
-    @mock.patch("Model.Model.validate_config_file")
-    @mock.patch("Model.Model.validate_gdb")
-    @mock.patch("Model.Model.validate_sim")
+    @mock.patch("model.Model.validate_model_path")
+    @mock.patch("model.Model.validate_config_file")
+    @mock.patch("model.Model.validate_gdb")
+    @mock.patch("model.Model.validate_sim")
     def test_valid_if_gdb_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
@@ -156,10 +155,10 @@ class TestModel(TestCase):
         is_valid = self.model.valid
         self.assertFalse(is_valid)
 
-    @mock.patch("Model.Model.validate_model_path")
-    @mock.patch("Model.Model.validate_config_file")
-    @mock.patch("Model.Model.validate_gdb")
-    @mock.patch("Model.Model.validate_sim")
+    @mock.patch("model.Model.validate_model_path")
+    @mock.patch("model.Model.validate_config_file")
+    @mock.patch("model.Model.validate_gdb")
+    @mock.patch("model.Model.validate_sim")
     def test_valid_if_sim_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = False
@@ -169,10 +168,10 @@ class TestModel(TestCase):
         is_valid = self.model.valid
         self.assertFalse(is_valid)
 
-    @mock.patch("Model.Model.validate_model_path")
-    @mock.patch("Model.Model.validate_config_file")
-    @mock.patch("Model.Model.validate_gdb")
-    @mock.patch("Model.Model.validate_sim")
+    @mock.patch("model.Model.validate_model_path")
+    @mock.patch("model.Model.validate_config_file")
+    @mock.patch("model.Model.validate_gdb")
+    @mock.patch("model.Model.validate_sim")
     def test_valid_if_all_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = False
@@ -182,14 +181,14 @@ class TestModel(TestCase):
         is_valid = self.model.valid
         self.assertFalse(is_valid)
 
-    def test_model_has_simulations(self):
-        simulation = Simulation()
-        self.model.simulations.append(simulation)
-        self.assertTrue(len(self.model.simulations) > 0 )
-
-    def test_first_simulation_is_valid(self):
-        sim_one = self.model.simulations[0]
-
-        self.assertTrue(sim_one)
+    # def test_model_has_simulations(self):
+    #     simulation = Simulation()
+    #     self.model.simulations.append(simulation)
+    #     self.assertTrue(len(self.model.simulations) > 0 )
+    #
+    # def test_first_simulation_is_valid(self):
+    #     sim_one = self.model.simulations[0]
+    #
+    #     self.assertTrue(sim_one)
 
 

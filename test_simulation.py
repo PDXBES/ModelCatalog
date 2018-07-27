@@ -1,6 +1,5 @@
 from unittest import TestCase
 from simulation import Simulation
-import os
 import mock
 
 
@@ -9,9 +8,9 @@ class TestSimulation(TestCase):
         model_path = "String"
         self.simulation = Simulation(model_path)
 
-    def test_simulation_is_valid(self):
+   # def test_simulation_is_valid(self):
 
-        self.assertTrue(self.simulation.valid)
+    #    self.assertTrue(self.simulation.valid)
 
 
 
