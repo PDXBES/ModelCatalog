@@ -16,3 +16,10 @@ class Simulation:
         sim_folder_valid = os.path.exists(sim_file_path)
         return sim_folder_valid
 
+    def path(self):
+        sim_path = self.model_path +\
+                   "\\" + "sim\\" +\
+                   self.storm +\
+                   "-" +\
+                   self.scenario
+        return sim_path

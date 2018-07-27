@@ -48,3 +48,13 @@ class TestSimulation(TestCase):
         is_valid = self.simulation.has_results()
         self.assertFalse(is_valid)
 
+    def test_simulation_path_built(self):
+        self.simulation.storm = "D25yr6hr"
+        self.simulation.scenario = "50"
+        sim_path = self.simulation.path()
+        self.assertEquals(sim_path, self.simulation.model_path
+                                               + "\\" + "sim\\"
+                                               + self.simulation.storm
+                                               + "-"
+                                               + self.simulation.scenario)
+
