@@ -18,14 +18,11 @@ class SimulationDataIO:
         field_names_extended.append("Is_Orphaned")
         for row in cursor:
             insert = arcpy.da.InsertCursor(path, field_names_extended)
-            insert_row = arcpy.Row()
-            for field in field_names:
-                insert_row.setValue(field, row.getValue(field))
-            insert_row.setValue("Model_ID", model.Model_ID)
-            insert_row.setValue("Storm_ID", simulation.storm_id)
-            insert_row.setValue("Scenario_ID", simulation.scenario_id)
-            insert_row.setValue("Is_Orphaned", 0)
+            insert_row = row + (model.Model_ID,
+                                simulation.storm_id,
+                                simulation.scenario_id,
+                                0)
             insert.insertRow(insert_row)
-
+            pass
 
 
