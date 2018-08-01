@@ -36,6 +36,7 @@ class DataIO():
         cursor.insertRow(row)
         del cursor
 
+
 #import os
 # #from Model import Model
 # connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"

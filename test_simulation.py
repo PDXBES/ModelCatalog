@@ -47,6 +47,7 @@ class TestSimulation(TestCase):
         is_valid = self.simulation.has_results()
         self.assertFalse(is_valid)
 
+    #TODO need to deal with dev_scenario correctly
     def test_simulation_path_built(self):
         self.simulation.storm = "D25yr6hr"
         self.simulation.scenario = "50"
