@@ -54,7 +54,7 @@ class TestSimulation(TestCase):
         sim_path = self.simulation.path()
         self.assertEquals(sim_path, self.simulation.model_path
                                                + "\\" + "sim\\"
-                                               + self.simulation.storm
-                                               + "-"
-                                               + self.simulation.scenario)
+                                               + self.simulation.storm)
+                                                #+ "-"
+                                               #+ self.simulation.scenario)
 

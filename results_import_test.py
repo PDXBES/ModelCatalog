@@ -3,8 +3,8 @@ from model import Model
 from simulation import Simulation
 model = Model()
 simulation_data_io = SimulationDataIO()
-model.Model_Path = "c:\\temp\\BaseR011018V4ic"
-simulation = Simulation(model.Model_Path)
+model.model_path = "c:\\temp\\BaseR011018V4ic"
+simulation = Simulation(model.model_path)
 simulation.storm_id = 11
 simulation.scenario_id = 22
 simulation.storm = "D25yr6h"

@@ -13,7 +13,8 @@ import arcpy, os
 from model_catalog import ModelCatalog
 from model import Model
 from data_io import DataIO
-import getpass
+import getpass, datetime
+
 
 class Toolbox(object):
     def __init__(self):
@@ -175,24 +176,24 @@ class EMGAATS_Model_Registration(object):
     def execute(self, parameters, messages):
 
         model_id = self.dataio.retrieve_next_model_id(self.dataio.ValueTable,["Object_Type", "Current_ID"])
-        self.model.Model_ID = model_id
-        self.model.Parent_Model_ID = 0
-        self.model.Model_Request_ID = 0
-        self.model.Project_Phase = parameters[3].valueAsText
-        self.model.Engine_Type = "EMGAATS"
-        self.model.Create_Date = None
-        self.model.Deploy_Date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.Run_Date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.Extract_Date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.Created_by = getpass.getuser() #TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
-        self.model.Model_Path = parameters[1].valueAsText
-        self.model.Project_Type = parameters[2].valueAsText
-        self.model.Model_Purpose = parameters[4].valueAsText
-        self.model.Model_Calibration_file = parameters[5].valueAsText
-        self.model.Model_Status = parameters[6].valueAsText
-        self.model.Model_Alterations = parameters[7].valueAsText
-        self.model.Model_Alteration_file = parameters[8].valueAsText
-        self.model.Project_Num = parameters[0].valueAsText
+        self.model.model_id = model_id
+        self.model.parent_model_id = 0
+        self.model.model_request_id = 0
+        self.model.project_phase_id = parameters[3].valueAsText
+        self.model.engine_type_id = 1
+        self.model.create_date = datetime.datetime.today()
+        self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.run_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.created_by = getpass.getuser() #TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
+        self.model.model_path = parameters[1].valueAsText
+        self.model.project_type_id = parameters[2].valueAsText
+        self.model.model_purpose_id = parameters[4].valueAsText
+        self.model.model_calibration_file = parameters[5].valueAsText
+        self.model.model_status_id = parameters[6].valueAsText
+        self.model.model_alterations_id = parameters[7].valueAsText
+        self.model.model_alteration_file = parameters[8].valueAsText
+        self.model.project_num = parameters[0].valueAsText
         self.model.valid
 
         self.model_catalog.add_model(self.model)
@@ -207,17 +208,18 @@ def EMGAATS_Model_Registration_function(model_catalog):
         "Model_ID",
         "Parent_Model_ID",
         "Model_Request_ID",
-        "Project_Phase",
-        "Engine_Type",
+        "Project_Phase_ID",
+        "Engine_Type_ID",
         "Create_Date",
+        "Created_by",
         "Deploy_Date",
         "Run_Date",
         "Model_Path",
-        "Project_Type",
-        "Model_Purpose",
+        "Project_Type_ID",
+        "Model_Purpose_ID",
         "Model_Calibration_file",
-        "Model_Status",
-        "Model_Alterations",
+        "Model_Status_ID",
+        "Model_Alterations_ID",
         "Model_Alteration_file",
         "Project_Num"]
     
@@ -330,26 +332,27 @@ def main():  # runs the whole thing; takes manual input if gui = False
     model_catalog = ModelCatalog()
     dataio = DataIO()
     model_id = dataio.retrieve_next_model_id(dataio.ValueTable, ["Object_Type", "Current_ID"])
-    model.Model_ID = model_id
-    model.Parent_Model_ID = 555
-    model.Model_Request_ID = 777
-    model.Project_Phase = "Final"
-    model.Engine_Type = "EMGAATS"
-    model.Create_Date = None
-    model.Deploy_Date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.Run_Date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.Extract_Date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.Created_by = getpass.getuser()  # TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
-    model.Model_Path = "C:\Temp"
-    model.Project_Type = 1
-    model.Model_Purpose = 1
-    model.Model_Calibration_file = "C:\Temp\Cal"
-    model.Model_Status = 2
-    model.Model_Alterations = 1
-    model.Model_Alteration_file = "C:\Temp\BC"
-    model.Project_Num = "E10TEST"
+    model.model_id = model_id
+    model.parent_model_id = 555
+    model.model_request_id = 777
+    model.project_phase_id = 1
+    model.engine_type_id = 1
+    model.create_date = None
+    model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+    model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+    model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+    model.created_by = getpass.getuser()  # TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
+    model.model_path = "C:\Temp"
+    model.project_type_id = 1
+    model.model_purpose_id = 1
+    model.model_calibration_file = "C:\Temp\Cal"
+    model.model_status_id = 2
+    model.model_alterations_id = 1
+    model.model_alteration_file = "C:\Temp\BC"
+    model.project_num = "E10TEST"
     model.valid = True
 
+    model.create_date = datetime.datetime.today()
     model_catalog.add_model(model)
     EMGAATS_Model_Registration_function(model_catalog)
 

@@ -8,7 +8,7 @@ class TestModel(TestCase):
 
     def setUp(self):
         self.model = Model()
-        self.model.Model_Path = r"c:\temp"
+        self.model.model_path = r"c:\temp"
 
     @mock.patch("os.path.exists")
     def test_validate_model_path_check_path_exists_called(self, mock_os_path_exists):
@@ -18,7 +18,7 @@ class TestModel(TestCase):
     @mock.patch("os.path.exists")
     def test_validate_model_path_called_with_correct_arguments(self, mock_os_path_exists):
         self.model.validate_model_path()
-        mock_os_path_exists.assert_called_with(self.model.Model_Path)
+        mock_os_path_exists.assert_called_with(self.model.model_path)
 
     @mock.patch("os.path.exists")
     def test_validate_model_path_check_for_valid_path_if_valid_return_true(self, mock_os_path_exists):
@@ -39,7 +39,7 @@ class TestModel(TestCase):
     @mock.patch("os.path.isfile")
     def test_validate_config_file_called_with_correct_arguments(self, mock_os_path_isfile):
         self.model.validate_config_file()
-        mock_os_path_isfile.assert_called_with(self.model.Model_Path + "\\" + "emgaats.config")
+        mock_os_path_isfile.assert_called_with(self.model.model_path + "\\" + "emgaats.config")
 
     @mock.patch("os.path.isfile")
     def test_validate_config_file_if_config_file_exists_return_true(self,mock_os_path_isfile):
@@ -63,7 +63,7 @@ class TestModel(TestCase):
     @mock.patch("os.path.exists")
     def test_validate_gdb_called_with_correct_arguments(self, mock_os_path_exists):
         self.model.validate_gdb()
-        mock_os_path_exists.assert_called_with(self.model.Model_Path + "\\" + "EmgaatsModel.gdb")
+        mock_os_path_exists.assert_called_with(self.model.model_path + "\\" + "EmgaatsModel.gdb")
 
     @mock.patch("os.path.exists")
     def test_validate_gdb_gdb_exists_return_true(self,mock_os_path_exists):
@@ -85,7 +85,7 @@ class TestModel(TestCase):
     @mock.patch("os.path.exists")
     def test_validate_sim_called_with_correct_arguments(self, mock_os_path_exists):
         self.model.validate_sim()
-        mock_os_path_exists.assert_called_with(self.model.Model_Path + "\\" + "sim")
+        mock_os_path_exists.assert_called_with(self.model.model_path + "\\" + "sim")
 
     @mock.patch("os.path.exists")
     def test_validate_sim_sim_folder_exists_return_true(self, mock_os_path_exists):

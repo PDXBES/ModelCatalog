@@ -12,40 +12,41 @@ class TestDataIO(TestCase):
         self.dataio = DataIO()
         self.model_catalog = mock.MagicMock(ModelCatalog)
         self.model = mock.MagicMock(Model)
-        self.model.Model_ID = 0
-        self.model.Parent_Model_ID = 0
-        self.model.Model_Request_ID = 0
-        self.model.Project_Phase = None
-        self.model.Engine_Type = None
-        self.model.Create_Date = None
-        self.model.Deploy_Date = None
-        self.model.Run_Date = None
-        self.model.Extract_Date = None
-        self.model.Created_by = None
-        self.model.Model_Path = None
-        self.model.Project_Type = None
-        self.model.Model_Purpose = None
-        self.model.Model_Calibration_file = None
-        self.model.Model_Status = None
-        self.model.Model_Alterations = None
-        self.model.Model_Alteration_file = None
-        self.model.Project_Num = None
+        self.model.model_id = 0
+        self.model.parent_model_id = 0
+        self.model.model_request_id = 0
+        self.model.project_phase_id = None
+        self.model.engine_type_id = None
+        self.model.create_date = None
+        self.model.deploy_date = None
+        self.model.run_date = None
+        self.model.extract_date = None
+        self.model.created_by = None
+        self.model.model_path = None
+        self.model.project_type_id = None
+        self.model.model_purpose_id = None
+        self.model.model_calibration_file = None
+        self.model.model_status_id = None
+        self.model.model_alterations_id = None
+        self.model.model_alteration_file = None
+        self.model.project_num = None
+
         self.database_location = "location"
-        self.field_names = [
-        "Model_ID",
+        self.field_names = [  "Model_ID",
         "Parent_Model_ID",
         "Model_Request_ID",
-        "Project_Phase",
-        "Engine_Type",
+        "Project_Phase_ID",
+        "Engine_Type_ID",
         "Create_Date",
+        "Created_by",
         "Deploy_Date",
         "Run_Date",
         "Model_Path",
-        "Project_Type",
-        "Model_Purpose",
+        "Project_Type_ID",
+        "Model_Purpose_ID",
         "Model_Calibration_file",
-        "Model_Status",
-        "Model_Alterations",
+        "Model_Status_ID",
+        "Model_Alterations_ID",
         "Model_Alteration_file",
         "Project_Num"]
         self.field_names_retrieve_id = ["object_type", "ID"]
@@ -56,7 +57,7 @@ class TestDataIO(TestCase):
         self.model.valid = True
 
     @mock.patch("arcpy.da.InsertCursor")
-    def test_add_model_called_update_cursor(self, mock_da_InsertCursor):
+    def test_add_model_called_insert_cursor(self, mock_da_InsertCursor):
         self.dataio.add_model(self.model_catalog.models[0], self.database_location, self.field_names)
         self.assertTrue(mock_da_InsertCursor.called)
 

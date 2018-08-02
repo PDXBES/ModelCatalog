@@ -22,11 +22,23 @@ class DataIO():
         if not model.valid:
             raise ModelCatalog_exception
 
-        row = [model.Model_ID, model.Parent_Model_ID,
-               model.Model_Request_ID, model.Project_Phase, model.Engine_Type, model.Create_Date,
-               model.Deploy_Date, model.Run_Date, model.Model_Path, model.Project_Type,
-               model.Model_Purpose, model.Model_Calibration_file, model.Model_Status,
-               model.Model_Alterations, model.Model_Alteration_file, model.Project_Num]
+        row = [model.model_id,
+               model.parent_model_id,
+               model.model_request_id,
+               model.project_phase_id,
+               model.engine_type_id,
+               model.create_date,
+               model.created_by,
+               model.deploy_date,
+               model.run_date,
+               model.model_path,
+               model.project_type_id,
+               model.model_purpose_id,
+               model.model_calibration_file,
+               model.model_status_id,
+               model.model_alterations_id,
+               model.model_alteration_file,
+               model.project_num]
 
         if len(field_names) != len(row):
             raise Field_names_length_does_not_match_row_length_exception

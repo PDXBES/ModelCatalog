@@ -142,7 +142,7 @@ class TestSimulationDataIO(TestCase):
 
 #TODO fix this test work out how to mock a function inside of the class that it is being called
     # @mock.patch("simulation_data_io.SimulationDataIO.copy_feature_class_results")
-    # @mock.patch("simulation_data_io.SimulationDataIO.area_results_path")
+    # @mock.patch("simulationdataio.area_results_path")
     # def test_copy_area_results_copy_feature_class_results_is_called_with_correct_argments(self,
     #                                                                                       mock_area_results_path,
     #                                                                                       mock_copy_feature_class_results):
