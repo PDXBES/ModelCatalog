@@ -1,5 +1,5 @@
 from unittest import TestCase
-from data_io import DataIO
+from model_catalog_data_io import ModelCatalogDataIO
 import mock
 from model_catalog import ModelCatalog
 from model import Model
@@ -9,7 +9,7 @@ from model_catalog_exception import ModelCatalog_exception, Field_names_length_d
 
 class TestDataIO(TestCase):
     def setUp(self):
-        self.dataio = DataIO()
+        self.dataio = ModelCatalogDataIO()
         self.model_catalog = mock.MagicMock(ModelCatalog)
         self.model = mock.MagicMock(Model)
         self.model.model_id = 0
@@ -32,7 +32,7 @@ class TestDataIO(TestCase):
         self.model.project_num = None
 
         self.database_location = "location"
-        self.field_names = [  "Model_ID",
+        self.field_names = ["Model_ID",
         "Parent_Model_ID",
         "Model_Request_ID",
         "Project_Phase_ID",
@@ -40,6 +40,7 @@ class TestDataIO(TestCase):
         "Create_Date",
         "Created_by",
         "Deploy_Date",
+        "Extract_Date",
         "Run_Date",
         "Model_Path",
         "Project_Type_ID",
@@ -55,6 +56,7 @@ class TestDataIO(TestCase):
         self.model_catalog.models = []
         self.model_catalog.models.append(self.model)
         self.model.valid = True
+
 
     @mock.patch("arcpy.da.InsertCursor")
     def test_add_model_called_insert_cursor(self, mock_da_InsertCursor):
@@ -73,7 +75,7 @@ class TestDataIO(TestCase):
             self.dataio.add_model(self.model_catalog.models[0], self.database_location, self.field_names)
         self.assertTrue(mock_cursor.insertRow.called)
         mock_cursor.insertRow.assert_called_with([0, 0, 0, None, None, None, None, None, None, None,
-                                                  None, None, None, None, None, None])
+                                                  None, None, None, None, None, None, None, None])
 
     @mock.patch("arcpy.da.InsertCursor")
     def test_add_model_add_invalid_model_exception_raised(self, mock_da_InsertCursor):
@@ -121,3 +123,27 @@ class TestDataIO(TestCase):
         current_id = self.dataio.retrieve_next_model_id(self.database_location, self.field_names_retrieve_id)
         self.assertTrue(current_id == 44)
 
+    @mock.patch("arcpy.da.ListDomains")
+    def test_storm_scenario_dict_calls_list_of_domains(self, mock_list_of_domains):
+        path = "a very long path name"
+        self.dataio.storm_scenario_dict(path)
+        self.assertTrue(mock_list_of_domains.called)
+
+    @mock.patch("arcpy.da.ListDomains")
+    def test_storm_scenario_dict_calls_list_of_domains_with_correct_arguments(self, mock_list_of_domains):
+        path = "a very long path name"
+        self.dataio.storm_scenario_dict(path)
+        mock_list_of_domains.assert_called_with("a very long path name")
+
+    @mock.patch("arcpy.da.ListDomains")
+    def test_storm_scenario_dict_returns_storm_scenario_dict(self, mock_list_of_domains):
+        mock_domain1 = mock.MagicMock(arcpy.da.Domain)
+        mock_domain1.name = "Dev_Scenario"
+        mock_domain1.codedValues = {"1": "ex", "2": "-50", "3": "-BO"}
+        mock_domain2 = mock.MagicMock(arcpy.da.Domain)
+        mock_domain2.name = "Storm_Type"
+        mock_list_of_domains.return_value = [mock_domain1, mock_domain2]
+        path = "a very long path name"
+        dict_of_scenarios = {"1": "ex", "2": "-50", "3": "-BO"}
+        domain_dict_of_scenarios = self.dataio.storm_scenario_dict(path)
+        self.assertEquals(domain_dict_of_scenarios, dict_of_scenarios)

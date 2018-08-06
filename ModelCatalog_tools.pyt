@@ -12,7 +12,7 @@
 import arcpy, os
 from model_catalog import ModelCatalog
 from model import Model
-from data_io import DataIO
+from model_catalog_data_io import ModelCatalogDataIO
 import getpass, datetime
 
 
@@ -36,7 +36,7 @@ class EMGAATS_Model_Registration(object):
         self.dummy_model_alteration_file_path = path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
         self.model_catalog = ModelCatalog()
         self.model = Model()
-        self.dataio = DataIO()
+        self.modelcatalogdataio = ModelCatalogDataIO()
 
 
 #        self.canRunInBackground = True
@@ -175,7 +175,7 @@ class EMGAATS_Model_Registration(object):
 
     def execute(self, parameters, messages):
 
-        model_id = self.dataio.retrieve_next_model_id(self.dataio.ValueTable,["Object_Type", "Current_ID"])
+        model_id = self.modelcatalogdataio.retrieve_next_model_id(self.modelcatalogdataio.ValueTable, ["Object_Type", "Current_ID"])
         self.model.model_id = model_id
         self.model.parent_model_id = 0
         self.model.model_request_id = 0
@@ -202,7 +202,7 @@ class EMGAATS_Model_Registration(object):
 
 
 def EMGAATS_Model_Registration_function(model_catalog):
-    dataio = DataIO()
+    modelcatalogdataio = ModelCatalogDataIO()
     # TODO Ask Dan about IDs being attached to domains
     field_names = [
         "Model_ID",
@@ -213,6 +213,7 @@ def EMGAATS_Model_Registration_function(model_catalog):
         "Create_Date",
         "Created_by",
         "Deploy_Date",
+        "Extract_Date",
         "Run_Date",
         "Model_Path",
         "Project_Type_ID",
@@ -223,115 +224,14 @@ def EMGAATS_Model_Registration_function(model_catalog):
         "Model_Alteration_file",
         "Project_Num"]
     
-    dataio.add_model(model_catalog.models[0],dataio.ModelTracking,field_names)
+    modelcatalogdataio.add_model(model_catalog.models[0], modelcatalogdataio.ModelTracking, field_names)
 
-def EMGAATS_Model_Registration_functionOld(parameters):
-    # read input data from proxy
-
-    arcpy.env.overwriteOutput = True
-
-    # -- sde connection to modelcatalog --
-    # connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
-    # MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
-    # MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
-    # ModelTracking = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
-
-    tracking = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\ModelCatalog_TEST.gdb\ModelTracking"
-
-    project_number = parameters[0].valueAsText
-    directory = parameters[1].valueAsText
-    param_projType = parameters[2].valueAsText
-    param_projPhase = parameters[3].valueAsText
-    param_modelPurpose = parameters[4].valueAsText
-    param_calibration_file = parameters[5].valueAsText
-    param_modelStatus = parameters[6].valueAsText
-    #alterations = parameters[7].values
-    alterationsAsText = parameters[7].valueAsText
-    #alterationValue = parameters[7].value
-    param_alterationFile = parameters[8].valueAsText
-
-    # arcpy.AddMessage(input_filename)
-    # print input_filename
-    # arcpy.AddMessage(project_number)
-    # print project_number
-
-    # get feature class from model
-    print "Identifying model feature class"
-    areas_base = os.path.join(directory, r"EmgaatsModel.gdb\Areas_base")
-
-    # create convex hull of areas_base - buffers took way too long for larger model runs
-    print "Creating bounding polygon around model area"
-    areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"in_memory\areas_hull", "CONVEX_HULL", "ALL")
-    # areas_hull = arcpy.MinimumBoundingGeometry_management(areas_base, r"C:\temp\working.gdb\areas_hull", "CONVEX_HULL", "ALL")
-
-    # get list of field names
-    fields = arcpy.ListFields(areas_hull)
-    field_names = []
-    for field in fields:
-        field_names.append(field.name)
-
-    # create field if it does not exist
-    my_field = "Model_ID"
-    if my_field not in field_names:
-        arcpy.AddField_management(areas_hull, my_field, "LONG")
-
-    # get max count of Model_ID from tracking - FOR THIS TO WORK MUST HAVE INITIAL RECORD WITH MODELID == 0
-    maxlist = []
-    with arcpy.da.SearchCursor(tracking, [my_field]) as cursor:
-        for row in cursor:
-            maxlist.append(row[0])
-                
-    newMax = max(maxlist) + 1
-
-    # update Model ID field + 1
-    print "Fill Model ID with value + 1"
-    with arcpy.da.UpdateCursor(areas_hull, my_field) as cursor:
-        for row in cursor:
-            row[0] = newMax
-            cursor.updateRow(row)
-
-    # append result (which should have a single record) to model tracking feature class, using model tracking results
-    print "Appending bounding polygon to Model Tracking"
-    arcpy.Append_management(areas_hull, tracking, "NO_TEST")
-
-    # apply values returned from form inputs to tracking fc
-    # BEWARE - FIELDS HERE WILL NEED TO CHANGE IF SCHEMA CHANGES BUT ORDER DOES NOT MATTER
-    # EG ONCE WE POINT TO REAL DATA ON TEST1 FIELD NAMES CHANGE SLIGHTLY
-    edit_fields = ["Model_ID", "Parent_Model_ID", "Model_Request_ID", "Project_Phase", "Engine_Type", "Create_Date",
-                   "Deploy_Date", "Run_Date", "Extract_Date", "Created_by", "Model_Path", "Project_Type",
-                   "Model_Purpose", "Model_Calibration_file", "Model_Status", "Model_Alterations",
-                   "Model_Alteration_file", "Project_Number"]
-
-    print "Applying input values to record"
-    #  NOTE - IT DOES NOT MATTER WHAT ORDER THE PARAMETERS INDEXING IS IN SINCE YOU ASSIGN THEM TO A...
-    #  NON NUMBERED/ ORDERED VARIABLE ABOVE
-    with arcpy.da.UpdateCursor(tracking, edit_fields) as cursor:
-        for row in cursor:
-            if row[0] == newMax:  # if row has the current model ID
-                # row[1] = # ParentModel_ID - not currently filled
-                # row[2] = # calculate from model tracking db (does not currently exist)
-                row[3] = param_projPhase  # - what do to about ID field?
-                # row[4] = # Engine_Type - not currently filled - what to do about ID field?
-                # row[5] = # Create_Date - automatic: Editor Tracking enabled for feature class
-                # row[6] = # Deploy Date - not currently filled
-                # row[7] = # Run Date - not currently filled
-                # row[8] = # Extract Date - not currently filled
-                # row[9] = # Created by - automatic: Editor Tracking enabled for feature class
-                row[10] = directory
-                row[11] = param_projType
-                row[12] = param_modelPurpose
-                row[13] = param_calibration_file
-                row[14] = param_modelStatus
-                row[15] = alterationsAsText
-                row[16] = param_alterationFile
-                row[17] = project_number
-            cursor.updateRow(row)
 
 def main():  # runs the whole thing; takes manual input if gui = False
     model = Model()
     model_catalog = ModelCatalog()
-    dataio = DataIO()
-    model_id = dataio.retrieve_next_model_id(dataio.ValueTable, ["Object_Type", "Current_ID"])
+    modelcatalogdataio = ModelCatalogDataIO()
+    model_id = modelcatalogdataio.retrieve_next_model_id(modelcatalogdataio.ValueTable, ["Object_Type", "Current_ID"])
     model.model_id = model_id
     model.parent_model_id = 555
     model.model_request_id = 777

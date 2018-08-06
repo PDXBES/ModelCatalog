@@ -1,4 +1,8 @@
 import arcpy, os
+from model import Model
+from simulation import Simulation
+from typing import List, Any
+
 
 class SimulationDataIO:
     def __init__(self):
@@ -10,6 +14,7 @@ class SimulationDataIO:
 
 #TODO: add test for in_path
     def copy_feature_class_results(self, simulation, model, model_results_feature_class_path, rrad_results_feature_class_path):
+        # type: (Simulation, Model, str, str) -> None
         field_names, field_names_extended = self.modify_field_names_for_RRAD(model_results_feature_class_path)
         cursor = arcpy.da.SearchCursor(model_results_feature_class_path, field_names)
         row_number = 0
@@ -18,7 +23,7 @@ class SimulationDataIO:
                 print row_number
             row_number += 1
             insert = arcpy.da.InsertCursor(rrad_results_feature_class_path, field_names_extended)
-            insert_row = row + (model.Model_ID,
+            insert_row = row + (model.model_id,
                                 simulation.storm_id,
                                 simulation.scenario_id,
                                 0)
@@ -26,6 +31,7 @@ class SimulationDataIO:
             pass
 
     def modify_field_names_for_RRAD(self, model_results_feature_class_path):
+        # type: (str) -> (List[str], List[str])
         fields = arcpy.ListFields(model_results_feature_class_path)
         field_names = []
         field_names_extended = []
@@ -45,41 +51,49 @@ class SimulationDataIO:
         return field_names, field_names_extended
 
     def area_results_path(self, simulation):
+        # type: (Simulation) -> str
         sim_path = simulation.path()
         area_results_path = sim_path + "\\" + "results.gdb" + "\\" + "AreaResults"
         return area_results_path
 
     def link_results_path(self, simulation):
+        # type: (Simulation) -> str
         sim_path = simulation.path()
         link_results_path = sim_path + "\\" + "results.gdb" + "\\" + "LinkResults"
         return link_results_path
 
     def node_results_path(self, simulation):
+        # type: (Simulation) -> str
         sim_path = simulation.path()
         node_results_path = sim_path + "\\" + "results.gdb" + "\\" + "NodeResults"
         return node_results_path
 
     def node_flooding_results_path(self, simulation):
+        # type: (Simulation) -> str
         sim_path = simulation.path()
         node_flooding_results_path = sim_path + "\\" + "results.gdb" + "\\" + "NodeFloodingResults"
         return node_flooding_results_path
 
     def copy_area_results(self, simulation, model):
+        # type: (Simulation, Model) -> None
         model_area_results_path = self.area_results_path(simulation)
         rrad_area_results_path = self.RRAD + r"\RRAD.GIS.AreaResults"
         self.copy_feature_class_results(simulation, model, model_area_results_path, rrad_area_results_path)
 
     def copy_link_results(self, simulation, model):
+        # type: (Simulation, Model) -> None
         model_link_results_path = self.link_results_path(simulation)
         rrad_link_results_path = self.RRAD + r"\RRAD.GIS.LinkResults"
         self.copy_feature_class_results(simulation, model, model_link_results_path, rrad_link_results_path)
 
     def copy_node_results(self, simulation, model):
+        # type: (Simulation, Model) -> None
         model_node_results_path = self.node_results_path(simulation)
         rrad_node_results_path = self.RRAD + r"\RRAD.GIS.NodeResults"
         self.copy_feature_class_results(simulation, model, model_node_results_path, rrad_node_results_path)
 
     def copy_node_flooding_results(self, simulation, model):
+        # type: (Simulation, Model) -> None
         model_node_flooding_results_path = self.node_flooding_results_path(simulation)
         rrad_node_flooding_results_path = self.RRAD + r"\RRAD.GIS.NodeFloodingResults"
         self.copy_feature_class_results(simulation, model, model_node_flooding_results_path, rrad_node_flooding_results_path)

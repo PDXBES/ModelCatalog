@@ -1,14 +1,16 @@
 import arcpy
 import os
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
+from typing import List, Any
+from model import Model
 
-class DataIO():
+class ModelCatalogDataIO():
     def __init__(self):
         connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
         MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
-        MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
-        self.ValueTable = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
-        self.ModelTracking = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
+        self.MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
+        self.ValueTable = self.MODEL_CATALOG + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
+        self.ModelTracking = self.MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
         pass
 
     def retrieve_next_model_id(self, location, field_names):
@@ -19,6 +21,7 @@ class DataIO():
         return current_id
 
     def add_model(self, model, location, field_names):
+        # type: (Model, str, List[str]) -> None
         if not model.valid:
             raise ModelCatalog_exception
 
@@ -30,6 +33,7 @@ class DataIO():
                model.create_date,
                model.created_by,
                model.deploy_date,
+               model.extract_date,
                model.run_date,
                model.model_path,
                model.project_type_id,
@@ -48,9 +52,22 @@ class DataIO():
         cursor.insertRow(row)
         del cursor
 
+    def storm_scenario_dict(self, location):
+        list_of_domains = arcpy.da.ListDomains(location)
+        dict_of_scenarios = None
+        for domain in list_of_domains:
+            if domain.name == "Dev_Scenario":
+                dict_of_scenarios = domain.codedValues
+                break
+        return dict_of_scenarios
+
+
+
+
+
 
 #import os
-# #from Model import Model
+# #from model import Model
 # connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
 # MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
 # MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)

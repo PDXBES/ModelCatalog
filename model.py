@@ -1,13 +1,19 @@
 import os
 
+from typing import List, Any
+from simulation import Simulation
+
 
 class Model:
+
+    simulations = None  # type: List[Simulation]
+
     def __init__(self):
         self.model_id = 0
         self.parent_model_id = 0
         self.model_request_id = 0
-        self.project_phase_id = None
-        self.engine_type_id = None
+        self.project_phase_id = 0
+        self.engine_type_id = 0
         self.create_date = None
         self.deploy_date = None
         self.run_date = None

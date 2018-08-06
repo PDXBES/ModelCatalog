@@ -8,14 +8,6 @@ class TestSimulation(TestCase):
         model_path = "String"
         self.simulation = Simulation(model_path)
 
-   # def test_simulation_is_valid(self):
-
-    #    self.assertTrue(self.simulation.valid)
-
-
-
-
-# TODO fix all this
 
     @mock.patch("os.path.exists")
     def test_has_results_check_sim_folder_has_results(self, mock_os_path_exists):
