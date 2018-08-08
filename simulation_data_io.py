@@ -1,16 +1,14 @@
-import arcpy, os
+import arcpy
 from model import Model
 from simulation import Simulation
-from typing import List, Any
+from typing import List
+from config import Config
 
 
 class SimulationDataIO:
-    def __init__(self):
-        connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
-        RRAD_sde = r"BESDBTEST1.RRAD_write.sde"
-        self.RRAD = os.path.join(connections, RRAD_sde)
-
-
+    def __init__(self, config):
+        # type: (Config) -> None
+        self.config = config
 
 #TODO: add test for in_path
     def copy_feature_class_results(self, simulation, model, model_results_feature_class_path, rrad_results_feature_class_path):
@@ -77,23 +75,25 @@ class SimulationDataIO:
     def copy_area_results(self, simulation, model):
         # type: (Simulation, Model) -> None
         model_area_results_path = self.area_results_path(simulation)
-        rrad_area_results_path = self.RRAD + r"\RRAD.GIS.AreaResults"
+        rrad_area_results_path = self.config.area_results_sde_path
         self.copy_feature_class_results(simulation, model, model_area_results_path, rrad_area_results_path)
 
     def copy_link_results(self, simulation, model):
         # type: (Simulation, Model) -> None
         model_link_results_path = self.link_results_path(simulation)
-        rrad_link_results_path = self.RRAD + r"\RRAD.GIS.LinkResults"
+        rrad_link_results_path = self.config.link_results_sde_path
         self.copy_feature_class_results(simulation, model, model_link_results_path, rrad_link_results_path)
 
     def copy_node_results(self, simulation, model):
         # type: (Simulation, Model) -> None
         model_node_results_path = self.node_results_path(simulation)
-        rrad_node_results_path = self.RRAD + r"\RRAD.GIS.NodeResults"
+        rrad_node_results_path = self.config.node_results_sde_path
         self.copy_feature_class_results(simulation, model, model_node_results_path, rrad_node_results_path)
 
     def copy_node_flooding_results(self, simulation, model):
         # type: (Simulation, Model) -> None
         model_node_flooding_results_path = self.node_flooding_results_path(simulation)
-        rrad_node_flooding_results_path = self.RRAD + r"\RRAD.GIS.NodeFloodingResults"
-        self.copy_feature_class_results(simulation, model, model_node_flooding_results_path, rrad_node_flooding_results_path)
+        rrad_node_flooding_results_path = self.config.flooding_results_sde_path
+        self.copy_feature_class_results(simulation, model, model_node_flooding_results_path,
+                                        rrad_node_flooding_results_path)
+

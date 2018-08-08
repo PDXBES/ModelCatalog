@@ -1,13 +1,15 @@
 from typing import List, Any
 from model import Model
 from model_catalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
-
+from config import Config
 
 class ModelCatalog:
     models = None  # type: List[Model]
 
-    def __init__(self):
+    def __init__(self, config):
+        # type: (Config) -> None
         self.models = []
+        self.config = config
 
     def add_model(self, model):
         # type: (model) -> None

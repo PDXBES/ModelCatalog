@@ -13,10 +13,13 @@ class Simulation:
         self.config = config
 
     def has_results(self):
+        dev_scenario=""
+        if self.config.dev_scenario[self.dev_scenario_id] != "EX":
+            dev_scenario = "-" + self.config.dev_scenario[self.dev_scenario_id]
         sim_file_path = self.model_path \
-                        + "\\" + "sim\\" \
-                        + self.storm_id + "-" \
-                        + self.dev_scenario_id \
+                        + "\\" + "sim\\"  \
+                        + self.config.storm[self.storm_id][1]\
+                        + self.config.storm[self.storm_id][0] + dev_scenario \
                         + "\\results.gdb"
         sim_folder_valid = os.path.exists(sim_file_path)
         return sim_folder_valid

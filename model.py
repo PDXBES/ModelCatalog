@@ -2,13 +2,15 @@ import os
 
 from typing import List, Any
 from simulation import Simulation
+from config import Config
 
 
 class Model:
 
     simulations = None  # type: List[Simulation]
 
-    def __init__(self):
+    def __init__(self, config):
+        # type: (Config) -> None
         self.model_id = 0
         self.parent_model_id = 0
         self.model_request_id = 0
@@ -28,6 +30,7 @@ class Model:
         self.model_alteration_file = None
         self.project_num = None
         self.simulations = []
+        self.config = config
 
 # TODO - correct capitalization of attributes to PEP8 (lower)
 

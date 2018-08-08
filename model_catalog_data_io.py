@@ -3,15 +3,13 @@ import os
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 from typing import List, Any
 from model import Model
+from config import Config
 
 class ModelCatalogDataIO():
-    def __init__(self):
-        connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
-        MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
-        self.MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
-        self.ValueTable = self.MODEL_CATALOG + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
-        self.ModelTracking = self.MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
-        pass
+    def __init__(self, config):
+        # type: (Config) -> None
+        self.config = config
+
 
     def retrieve_next_model_id(self, location, field_names):
         cursor = arcpy.da.UpdateCursor(location, field_names)
@@ -61,41 +59,3 @@ class ModelCatalogDataIO():
                 break
         return dict_of_scenarios
 
-
-
-
-
-
-#import os
-# #from model import Model
-# connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
-# MODELCATALOG_sde = r"BESDBTEST1.MODELCATALOG.sde"
-# MODEL_CATALOG = os.path.join(connections, MODELCATALOG_sde)
-# ModelTracking = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
-# ValueTable = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
-# ModelTracking = MODEL_CATALOG + r"\MODEL_CATALOG.GIS.ModelTracking"
-# dataio = DataIO()
-# model = Model()
-# current_id = dataio.retrieve_next_model_id(ValueTable, ["Object_Type", "Current_ID"])
-#
-# field_names = [
-#     "Model_ID",
-#     "Parent_Model_ID",
-#     "Model_Request_ID",
-#     "Project_Phase",
-#     "Engine_Type",
-#     "Create_Date",
-#     "Deploy_Date",
-#     "Run_Date",
-#     "Model_Path",
-#     "Project_Type",
-#     "Model_Purpose",
-#     "Model_Calibration_file",
-#     "Model_Status",
-#     "Model_Alterations",
-#     "Model_Alteration_file",
-#     "Project_Num"]
-#
-# model.Model_ID = current_id
-# model.valid = True
-# dataio.add_model(model,  ModelTracking, field_names)

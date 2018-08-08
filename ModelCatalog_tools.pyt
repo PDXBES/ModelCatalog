@@ -14,6 +14,8 @@ from model_catalog import ModelCatalog
 from model import Model
 from model_catalog_data_io import ModelCatalogDataIO
 import getpass, datetime
+from config import Config
+
 
 
 class Toolbox(object):
@@ -31,12 +33,13 @@ class EMGAATS_Model_Registration(object):
     def __init__(self):
         self.label = "EMGAATS Model Registration"
         self.description = "Tool for registering EMGAATS derived models"
-        path = os.path.dirname(os.path.realpath(__file__))
-        self.dummy_model_calibration_file_path = path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
-        self.dummy_model_alteration_file_path = path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
-        self.model_catalog = ModelCatalog()
-        self.model = Model()
-        self.modelcatalogdataio = ModelCatalogDataIO()
+        self.config = Config()
+        self.model_catalog = ModelCatalog(self.config)
+        self.model = Model(self.config)
+        self.modelcatalogdataio = ModelCatalogDataIO(self.config)
+
+        self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
+        self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
 
 
 #        self.canRunInBackground = True
@@ -175,7 +178,7 @@ class EMGAATS_Model_Registration(object):
 
     def execute(self, parameters, messages):
 
-        model_id = self.modelcatalogdataio.retrieve_next_model_id(self.modelcatalogdataio.ValueTable, ["Object_Type", "Current_ID"])
+        model_id = self.modelcatalogdataio.retrieve_next_model_id(self.modelcatalogdataio.value_table, ["Object_Type", "Current_ID"])
         self.model.model_id = model_id
         self.model.parent_model_id = 0
         self.model.model_request_id = 0
@@ -224,14 +227,15 @@ def EMGAATS_Model_Registration_function(model_catalog):
         "Model_Alteration_file",
         "Project_Num"]
     
-    modelcatalogdataio.add_model(model_catalog.models[0], modelcatalogdataio.ModelTracking, field_names)
+    modelcatalogdataio.add_model(model_catalog.models[0], modelcatalogdataio.model_tracking, field_names)
 
 
 def main():  # runs the whole thing; takes manual input if gui = False
-    model = Model()
-    model_catalog = ModelCatalog()
-    modelcatalogdataio = ModelCatalogDataIO()
-    model_id = modelcatalogdataio.retrieve_next_model_id(modelcatalogdataio.ValueTable, ["Object_Type", "Current_ID"])
+    config = Config()
+    model = Model(config)
+    model_catalog = ModelCatalog(config)
+    modelcatalogdataio = ModelCatalogDataIO(config)
+    model_id = modelcatalogdataio.retrieve_next_model_id(modelcatalogdataio.value_table, ["Object_Type", "Current_ID"])
     model.model_id = model_id
     model.parent_model_id = 555
     model.model_request_id = 777
