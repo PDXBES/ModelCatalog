@@ -3,9 +3,8 @@ import os
 
 class Config:
     def __init__(self):
-        self.storm = {0: ("user_def", "U"), 1: ("25yr6h", "D")}
+        self.storm = {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.dev_scenario = {0: "EX", 1: "50", 2: "BO"}
-
         executable_path = os.path.dirname(os.path.realpath(__file__))
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
         self.dummy_model_alteration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
@@ -25,5 +24,19 @@ class Config:
         self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
         self.flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
 
+
+    def standard_simulation_names(self):
+        standard_simulation_names = []
+        for storm in self.storm.values():
+            if storm != ("user_def", "U"):
+                for scenario in self.dev_scenario.values():
+                    simulation_name = ""
+                    type_and_storm_name = storm[1] + storm[0]
+                    if scenario == "EX":
+                        simulation_name = type_and_storm_name
+                    else:
+                        simulation_name = type_and_storm_name + "-" + scenario
+                    standard_simulation_names.append(simulation_name)
+        return standard_simulation_names
 
 

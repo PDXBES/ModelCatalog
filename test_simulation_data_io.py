@@ -3,21 +3,24 @@ import mock, arcpy
 from simulation import Simulation
 from model import Model
 from simulation_data_io import SimulationDataIO
+from config import Config
 import os
 
 
 class TestSimulationDataIO(TestCase):
     def setUp(self):
+        self.config = Config()
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
-        self.simulationdataio = SimulationDataIO()
+        self.simulationdataio = SimulationDataIO(self.config)
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
         self.mock_simulation.scenario = ""
         self.mock_simulation.storm_id = 22
         self.mock_simulation.scenario_id = 33
         self.mock_model = mock.MagicMock(Model)
-        self.mock_model.Model_Path = r"c:\temp\fake"
-        self.mock_model.Model_ID = 1
+        self.simulation = Simulation(self.mock_model, self.config)
+        self.mock_model.model_path = r"c:\temp\fake"
+        self.mock_model.model_id = 1
         self.mock_search_cursor = [("a_value", "b_value")]
         self.mock_cursor = mock.MagicMock(arcpy.da.InsertCursor)
         self.mock_fields1 = mock.MagicMock(arcpy.Field)
@@ -109,29 +112,25 @@ class TestSimulationDataIO(TestCase):
     @mock.patch("simulation.Simulation.path")
     def test_area_results_path_creates_correct_path(self, mock_simulation_path):
         mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
-        simulation = Simulation(self.mock_model)
-        area_results_path = self.simulationdataio.area_results_path(simulation)
+        area_results_path = self.simulationdataio.area_results_path(self.simulation)
         self.assertEquals(area_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults")
 
     @mock.patch("simulation.Simulation.path")
     def test_link_results_path_creates_correct_path(self, mock_simulation_path):
         mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
-        simulation = Simulation(self.mock_model)
-        link_results_path = self.simulationdataio.link_results_path(simulation)
+        link_results_path = self.simulationdataio.link_results_path(self.simulation)
         self.assertEquals(link_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\LinkResults")
 
     @mock.patch("simulation.Simulation.path")
     def test_node_results_path_creates_correct_path(self, mock_simulation_path):
         mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
-        simulation = Simulation(self.mock_model)
-        node_results_path = self.simulationdataio.node_results_path(simulation)
+        node_results_path = self.simulationdataio.node_results_path(self.simulation)
         self.assertEquals(node_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\NodeResults")
 
     @mock.patch("simulation.Simulation.path")
     def test_node_flooding_results_path_creates_correct_path(self, mock_simulation_path):
         mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
-        simulation = Simulation(self.mock_model)
-        node_flooding_results_path = self.simulationdataio.node_flooding_results_path(simulation)
+        node_flooding_results_path = self.simulationdataio.node_flooding_results_path(self.simulation)
         self.assertEquals(node_flooding_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\NodeFloodingResults")
 
     @mock.patch("simulation_data_io.SimulationDataIO.copy_feature_class_results")
@@ -139,21 +138,22 @@ class TestSimulationDataIO(TestCase):
         self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
         mock_copy_feature_class_results.assert_called()
 
+ #TODO fix this test work out how to mock a function inside of the class that it is being called
+#     @mock.patch("simulation_data_io.SimulationDataIO.copy_feature_class_results")
+#     @mock.patch("simulation.path")
+#     def test_copy_area_results_copy_feature_class_results_is_called_with_correct_argments(self,
+#                                                                                           mock_simulation_path,
+#                                                                                           mock_copy_feature_class_results):
+#         model_area_results_path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
+#         mock_simulation_path.return_value = model_area_results_path
+#         rrad_area_results_path = self.config.area_results_sde_path
+#         self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
+#         mock_copy_feature_class_results.assert_called_with(self.mock_simulation,
+#                                                            self.mock_model,
+#                                                            model_area_results_path,
+#                                                            rrad_area_results_path)
+    @mock.patch("os.walk")
+    def test_read_simulations_calls_os_walk(self, mock_os_walk):
 
-#TODO fix this test work out how to mock a function inside of the class that it is being called
-    # @mock.patch("simulation_data_io.SimulationDataIO.copy_feature_class_results")
-    # @mock.patch("simulationdataio.area_results_path")
-    # def test_copy_area_results_copy_feature_class_results_is_called_with_correct_argments(self,
-    #                                                                                       mock_area_results_path,
-    #                                                                                       mock_copy_feature_class_results):
-    #     self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
-    #     model_area_results_path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
-    #     mock_area_results_path.return_value = model_area_results_path
-    #     connections = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Dev\connection_files"
-    #     RRAD_sde = r"BESDBTEST1.RRAD_write.sde"
-    #     RRAD = os.path.join(connections, RRAD_sde)
-    #     rrad_area_results_path = RRAD + r"\RRAD.GIS.AreaResults"
-    #     mock_copy_feature_class_results.assert_called_with(self.mock_simulation,
-    #                                                        self.mock_model,
-    #                                                        model_area_results_path,
-    #                                                        rrad_area_results_path)
+        self.simulationdataio.read_simulations(self.mock_model)
+        self.assertTrue(mock_os_walk.called)

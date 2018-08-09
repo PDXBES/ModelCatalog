@@ -49,9 +49,13 @@ class Model:
         return gdb_file_valid
 
     def validate_sim(self):
-        sim_file_path = self.model_path + "\\" + "sim"
+        sim_file_path = self.simulation_folder_path()
         sim_folder_valid = os.path.exists(sim_file_path)
         return sim_folder_valid
+
+    def simulation_folder_path(self):
+        sim_file_path = self.model_path + "\\" + "sim"
+        return sim_file_path
 
     @property
     def valid(self):

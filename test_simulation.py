@@ -48,14 +48,18 @@ class TestSimulation(TestCase):
         is_valid = self.simulation.has_results()
         self.assertFalse(is_valid)
 
-    #TODO need to deal with dev_scenario correctly
-    def test_simulation_path_built(self):
-        self.simulation.storm = "D25yr6hr"
-        self.simulation.scenario = "50"
+    def test_simulation_path_built_for_existing_scenario(self):
+        self.simulation.dev_scenario_id = 0
+        path = "String" + "\\" + "sim\\" + "D25yr6h" + \
+               "\\results.gdb"
         sim_path = self.simulation.path()
-        self.assertEquals(sim_path, self.simulation.model_path
-                                               + "\\" + "sim\\"
-                                               + self.simulation.storm)
-                                                #+ "-"
-                                               #+ self.simulation.scenario)
+        self.assertEquals(sim_path, path)
+
+    def test_simulation_path_built_for_BO_scenario(self):
+        self.simulation.dev_scenario_id = 2
+        path = "String" + "\\" + "sim\\" + "D25yr6h" + "-BO" \
+               "\\results.gdb"
+        sim_path = self.simulation.path()
+        self.assertEquals(sim_path, path)
+    
 

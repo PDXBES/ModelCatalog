@@ -2,12 +2,13 @@ from unittest import TestCase
 from model import Model
 from simulation import Simulation
 import mock
-
+from config import Config
 
 class TestModel(TestCase):
 
     def setUp(self):
-        self.model = Model()
+        self.config = Config()
+        self.model = Model(self.config)
         self.model.model_path = r"c:\temp"
 
     @mock.patch("os.path.exists")
@@ -190,5 +191,12 @@ class TestModel(TestCase):
     #     sim_one = self.model.simulations[0]
     #
     #     self.assertTrue(sim_one)
+
+    def test_simulation_folder_path(self):
+        sim_folder_path = r"c:\temp\sim"
+        return_sim_folder_path = self.model.simulation_folder_path()
+        self.assertEquals(sim_folder_path, return_sim_folder_path)
+
+
 
 

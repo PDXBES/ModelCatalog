@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_catalog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_catalog_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_catalog_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_simulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_simulation_data_io.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,27 +54,14 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5325914">
+    <splitter split-orientation="horizontal" split-proportion="0.50823826">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file leaf-file-name="simulation_data_io.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/simulation_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="441">
-                  <caret line="98" selection-start-line="98" selection-end-line="98" />
-                  <folding>
-                    <element signature="e#0#16#0" expanded="true" />
-                    <marker date="1533755839463" expanded="true" signature="211:242" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/model_catalog_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+                <state relative-caret-position="262">
+                  <caret line="103" column="12" lean-forward="true" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -82,7 +69,19 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file leaf-file-name="model_catalog_data_io.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/model_catalog_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                  <caret line="11" selection-start-line="11" selection-end-line="11" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="model_catalog.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/model_catalog.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="51">
@@ -91,44 +90,29 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="71">
-                  <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-                  <folding>
-                    <marker date="1533758075741" expanded="true" signature="25:30" ph="..." />
-                  </folding>
+                <state relative-caret-position="306">
+                  <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file leaf-file-name="simulation.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/simulation.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="13">
-                  <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+                <state relative-caret-position="278">
+                  <caret line="29" selection-start-line="29" selection-end-line="29" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test_simulation_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="489">
-                  <caret line="159" selection-start-line="159" selection-end-line="159" />
-                  <folding>
-                    <element signature="e#0#29#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
+          <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="140">
-                  <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+                <state relative-caret-position="264">
+                  <caret line="63" column="13" lean-forward="true" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -140,23 +124,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test_model.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="136">
-                  <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-                  <folding>
-                    <element signature="e#0#29#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
+          <file leaf-file-name="test_simulation.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test_simulation.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+                <state relative-caret-position="306">
+                  <caret line="63" selection-start-line="63" selection-end-line="63" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -164,9 +136,37 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file leaf-file-name="test_config.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test_config.py">
-              <provider selected="true" editor-type-id="text-editor" />
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                  <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test_simulation_data_io.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/test_simulation_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="279">
+                  <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test_model.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test_model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="272">
+                  <caret line="16" column="51" lean-forward="true" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
             </entry>
           </file>
         </leaf>
@@ -198,6 +198,7 @@
       <find>field</find>
       <find>modelca</find>
       <find>model_c</find>
+      <find>ca</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -218,26 +219,27 @@
         <option value="$PROJECT_DIR$/backup.py" />
         <option value="$PROJECT_DIR$/backend.py" />
         <option value="$PROJECT_DIR$/test_EMGAATS_Model_Registration.py" />
-        <option value="$PROJECT_DIR$/test_simulation_data_io.py" />
         <option value="$PROJECT_DIR$/data_io.py" />
         <option value="$PROJECT_DIR$/test_data_io.py" />
-        <option value="$PROJECT_DIR$/test_config.py" />
         <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
         <option value="$PROJECT_DIR$/model_catalog.py" />
-        <option value="$PROJECT_DIR$/model.py" />
         <option value="$PROJECT_DIR$/model_catalog_data_io.py" />
-        <option value="$PROJECT_DIR$/simulation_data_io.py" />
         <option value="$PROJECT_DIR$/simulation.py" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/test_simulation.py" />
+        <option value="$PROJECT_DIR$/test_model.py" />
+        <option value="$PROJECT_DIR$/model.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/test_config.py" />
+        <option value="$PROJECT_DIR$/test_simulation_data_io.py" />
+        <option value="$PROJECT_DIR$/simulation_data_io.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-720" />
-    <option name="y" value="-14" />
-    <option name="width" value="3677" />
-    <option name="height" value="1650" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1022" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -249,8 +251,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
+              <item name="GitHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GitHub" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -261,7 +263,7 @@
   <component name="PropertiesComponent">
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -275,8 +277,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_simulation.TestSimulation">
-    <configuration name="Unittests for test_config.TestConfig" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk">
+    <configuration name="Unittests for test_config.TestConfig.test_standard_simulation_names" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -286,11 +288,10 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig&quot;" />
+      <option name="_new_target" value="&quot;test_config.TestConfig.test_standard_simulation_names&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_simulation.TestSimulation" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -300,11 +301,10 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_simulation.TestSimulation&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_simulation_folder_path" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -314,11 +314,10 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_simulation.TestSimulation.test_has_results_called_with_correct_arguments&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_simulation_folder_path&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments_for_BO_scenario" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_simulation_data_io.TestSimulationDataIO" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -328,11 +327,10 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_simulation.TestSimulation.test_has_results_called_with_correct_arguments_for_BO_scenario&quot;" />
+      <option name="_new_target" value="&quot;test_simulation_data_io.TestSimulationDataIO&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -342,24 +340,23 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true&quot;" />
+      <option name="_new_target" value="&quot;test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
-      <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation" />
-      <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" />
-      <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments_for_BO_scenario" />
-      <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" />
+      <item itemvalue="Python tests.Unittests for test_simulation_data_io.TestSimulationDataIO" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_simulation_folder_path" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_standard_simulation_names" />
+      <item itemvalue="Python tests.Unittests for test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation" />
-        <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" />
-        <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments_for_BO_scenario" />
-        <item itemvalue="Python tests.Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
+        <item itemvalue="Python tests.Unittests for test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk" />
+        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_standard_simulation_names" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_simulation_folder_path" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel" />
+        <item itemvalue="Python tests.Unittests for test_simulation_data_io.TestSimulationDataIO" />
       </list>
     </recent_temporary>
   </component>
@@ -377,35 +374,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_called_with_correct_arguments - 2018.08.08 at 12h 29m 06s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_simulation_folder_path - 2018.08.09 at 12h 12m 15s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_simulation_folder_path" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_called_with_correct_arguments - 2018.08.08 at 12h 39m 23s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel - 2018.08.09 at 12h 14m 21s.xml">
+      <configuration name="Unittests for test_model.TestModel" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_called_with_correct_arguments - 2018.08.08 at 12h 50m 33s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_simulation_folder_path - 2018.08.09 at 12h 16m 11s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_simulation_folder_path" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_called_with_correct_arguments - 2018.08.08 at 12h 51m 27s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_standard_simulation_names - 2018.08.09 at 12h 32m 34s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_standard_simulation_names" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_called_with_correct_arguments_for_BO_scenario - 2018.08.08 at 12h 54m 36s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_called_with_correct_arguments_for_BO_scenario" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_standard_simulation_names - 2018.08.09 at 12h 33m 20s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_standard_simulation_names" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_results_gdb_exists_return_true - 2018.08.08 at 12h 55m 13s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_standard_simulation_names - 2018.08.09 at 12h 47m 11s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_standard_simulation_names" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_results_gdb_exists_return_true - 2018.08.08 at 12h 55m 31s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_standard_simulation_names - 2018.08.09 at 12h 48m 28s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_standard_simulation_names" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_results_gdb_exists_return_true - 2018.08.08 at 12h 56m 59s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_standard_simulation_names - 2018.08.09 at 12h 50m 09s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_standard_simulation_names" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation_test_has_results_results_gdb_exists_return_true - 2018.08.08 at 12h 58m 06s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation.test_has_results_results_gdb_exists_return_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_simulation_data_io_TestSimulationDataIO_test_read_simulations_calls_os_walk - 2018.08.09 at 13h 02m 10s.xml">
+      <configuration name="Unittests for test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_simulation_TestSimulation - 2018.08.08 at 12h 59m 30s.xml">
-      <configuration name="Unittests for test_simulation.TestSimulation" configurationId="tests" />
+    <history-entry file="Unittests_for_test_simulation_data_io_TestSimulationDataIO_test_read_simulations_calls_os_walk - 2018.08.09 at 13h 04m 01s.xml">
+      <configuration name="Unittests for test_simulation_data_io.TestSimulationDataIO.test_read_simulations_calls_os_walk" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -418,26 +415,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="855" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.12877584" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.32749563" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.852459" visible="true" weight="0.380035" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.70335674" weight="0.42031524" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12864386" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.0" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.39254385" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32943678" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.14754099" side_tool="true" weight="0.4383117" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.39254385" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.852459" visible="true" weight="0.40585774" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32943678" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.70335674" weight="0.41980475" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.32749563" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -448,13 +444,98 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/simulation.py</url>
-          <line>23</line>
+          <line>16</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
+      <option name="time" value="4" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_catalog_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_catalog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_config.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/Desktop/GUIExamples.pyt" />
     <entry file="file://$PROJECT_DIR$/GUIExamples.pyt" />
     <entry file="file://$PROJECT_DIR$/Model Catalog tools.pyt" />
@@ -488,67 +569,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data_io.py" />
     <entry file="file://$PROJECT_DIR$/test_data_io.py" />
-    <entry file="file://$PROJECT_DIR$/test_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
-          <folding>
-            <element signature="e#642#658#0" expanded="true" />
-            <element signature="e#829#1123#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_config.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model_catalog_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="102">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulation_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-            <marker date="1533755839463" expanded="true" signature="211:242" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_simulation_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="159" selection-start-line="159" selection-end-line="159" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -560,27 +593,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
+    <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="264">
+          <caret line="63" column="13" lean-forward="true" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
           <folding>
-            <marker date="1533758075741" expanded="true" signature="25:30" ph="..." />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="53" column="32" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+        <state relative-caret-position="306">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="51" lean-forward="true" selection-start-line="16" selection-start-column="51" selection-end-line="16" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="103" column="12" lean-forward="true" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>

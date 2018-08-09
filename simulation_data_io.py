@@ -11,7 +11,9 @@ class SimulationDataIO:
         self.config = config
 
 #TODO: add test for in_path
-    def copy_feature_class_results(self, simulation, model, model_results_feature_class_path, rrad_results_feature_class_path):
+    def copy_feature_class_results(self, simulation, model,
+                                   model_results_feature_class_path,
+                                   rrad_results_feature_class_path):
         # type: (Simulation, Model, str, str) -> None
         field_names, field_names_extended = self.modify_field_names_for_RRAD(model_results_feature_class_path)
         cursor = arcpy.da.SearchCursor(model_results_feature_class_path, field_names)
@@ -97,3 +99,6 @@ class SimulationDataIO:
         self.copy_feature_class_results(simulation, model, model_node_flooding_results_path,
                                         rrad_node_flooding_results_path)
 
+    def read_simulations(self, model):
+        # type: (Model) -> None
+        pass
