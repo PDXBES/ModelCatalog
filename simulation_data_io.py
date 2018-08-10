@@ -98,7 +98,3 @@ class SimulationDataIO:
         rrad_node_flooding_results_path = self.config.flooding_results_sde_path
         self.copy_feature_class_results(simulation, model, model_node_flooding_results_path,
                                         rrad_node_flooding_results_path)
-
-    def read_simulations(self, model):
-        # type: (Model) -> None
-        pass

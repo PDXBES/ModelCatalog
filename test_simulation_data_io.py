@@ -152,8 +152,4 @@ class TestSimulationDataIO(TestCase):
 #                                                            self.mock_model,
 #                                                            model_area_results_path,
 #                                                            rrad_area_results_path)
-    @mock.patch("os.walk")
-    def test_read_simulations_calls_os_walk(self, mock_os_walk):
 
-        self.simulationdataio.read_simulations(self.mock_model)
-        self.assertTrue(mock_os_walk.called)
