@@ -138,18 +138,18 @@ class TestSimulationDataIO(TestCase):
         self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
         mock_copy_feature_class_results.assert_called()
 
- #TODO fix this test work out how to mock a function inside of the class that it is being called
-#     @mock.patch("simulation_data_io.SimulationDataIO.copy_feature_class_results")
-#     @mock.patch("simulation.path")
-#     def test_copy_area_results_copy_feature_class_results_is_called_with_correct_argments(self,
-#                                                                                           mock_simulation_path,
-#                                                                                           mock_copy_feature_class_results):
-#         model_area_results_path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
-#         mock_simulation_path.return_value = model_area_results_path
-#         rrad_area_results_path = self.config.area_results_sde_path
-#         self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
-#         mock_copy_feature_class_results.assert_called_with(self.mock_simulation,
-#                                                            self.mock_model,
-#                                                            model_area_results_path,
-#                                                            rrad_area_results_path)
+    @mock.patch("simulation_data_io.SimulationDataIO.copy_feature_class_results")
+    @mock.patch("simulation.Simulation.path")
+    def test_copy_area_results_copy_feature_class_results_is_called_with_correct_argments(self,
+                                                                                          mock_simulation_path,
+                                                                                          mock_copy_feature_class_results):
+        simulation_path = r"c:\temp\fake\sim\D25yr6h"
+        model_area_results_path = simulation_path + "\\" + "results.gdb" + "\\" + "AreaResults"
+        mock_simulation_path.return_value = simulation_path
+        rrad_area_results_path = self.config.area_results_sde_path
+        self.simulationdataio.copy_area_results(self.simulation, self.mock_model)
+        mock_copy_feature_class_results.assert_called_with(self.simulation,
+                                                           self.mock_model,
+                                                           model_area_results_path,
+                                                           rrad_area_results_path)
 

@@ -24,7 +24,6 @@ class Simulation:
         sim_file_path = self.model_path \
                         + "\\" + "sim\\" \
                         + self.config.storm[self.storm_id][1] \
-                        + self.config.storm[self.storm_id][0] + dev_scenario \
-                        + "\\results.gdb"
+                        + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
 

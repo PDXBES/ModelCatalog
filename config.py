@@ -5,6 +5,8 @@ class Config:
     def __init__(self):
         self.storm = {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.dev_scenario = {0: "EX", 1: "50", 2: "BO"}
+        self.storm_id = dict(zip(self.storm.values(), self.storm.keys()))
+        self.dev_scenario_id = dict(zip(self.dev_scenario.values(), self.dev_scenario.keys()))
         executable_path = os.path.dirname(os.path.realpath(__file__))
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
         self.dummy_model_alteration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"

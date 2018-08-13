@@ -21,8 +21,7 @@ class TestSimulation(TestCase):
                                                        mock_os_path_exists):
         self.simulation.dev_scenario_id = 0
         self.simulation.has_results()
-        path = "String" + "\\" + "sim\\" + "D25yr6h" + \
-               "\\results.gdb"
+        path = "String" + "\\" + "sim\\" + "D25yr6h"
         mock_os_path_exists.assert_called_with(path)
 
     @mock.patch("os.path.exists")
@@ -30,8 +29,7 @@ class TestSimulation(TestCase):
                                                        mock_os_path_exists):
         self.simulation.dev_scenario_id = 2
         self.simulation.has_results()
-        path = "String" + "\\" + "sim\\" + "D25yr6h" + "-BO" \
-               "\\results.gdb"
+        path = "String" + "\\" + "sim\\" + "D25yr6h" + "-BO"
         mock_os_path_exists.assert_called_with(path)
 
     @mock.patch("os.path.exists")
@@ -50,15 +48,13 @@ class TestSimulation(TestCase):
 
     def test_simulation_path_built_for_existing_scenario(self):
         self.simulation.dev_scenario_id = 0
-        path = "String" + "\\" + "sim\\" + "D25yr6h" + \
-               "\\results.gdb"
+        path = "String" + "\\" + "sim\\" + "D25yr6h" 
         sim_path = self.simulation.path()
         self.assertEquals(sim_path, path)
 
     def test_simulation_path_built_for_BO_scenario(self):
         self.simulation.dev_scenario_id = 2
-        path = "String" + "\\" + "sim\\" + "D25yr6h" + "-BO" \
-               "\\results.gdb"
+        path = "String" + "\\" + "sim\\" + "D25yr6h" + "-BO"
         sim_path = self.simulation.path()
         self.assertEquals(sim_path, path)
     

@@ -12,6 +12,7 @@ class ModelDataIO:
 
     def read_simulations(self, model):
         # type: (Model) -> List[Simulation]
+        simulations = []  # type: List[Simulation]
         simulation_descriptions = os.walk(model.simulation_folder_path()).next()[1]
         for simulation_description in simulation_descriptions:
             simulation = Simulation(model.model_path, self.config)
@@ -24,6 +25,17 @@ class ModelDataIO:
                     dev_scenario = "EX"
                 else:
                     dev_scenario = simulation_desc_parts[1]
-        pass
+            else:
+                dev_scenario = "EX"
+                storm_type = "U"
+                storm_name = "user_def"
+            simulation.storm_id = self.config.storm_id[(storm_name, storm_type)]
+            simulation.dev_scenario_id = self.config.dev_scenario_id[dev_scenario]
+            simulation.sim_desc = simulation_description
+            simulations.append(simulation)
+        return simulations
+
+
+
 
 
