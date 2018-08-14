@@ -1,4 +1,5 @@
 import os
+import arcpy
 from config import Config
 from typing import List
 from model import Model
@@ -34,6 +35,22 @@ class ModelDataIO:
             simulation.sim_desc = simulation_description
             simulations.append(simulation)
         return simulations
+
+    def add_simulation(self, location, field_names, model_id, simulation):
+        # type: (str, List[str]) -> None
+
+
+
+        row = [model_id,
+               simulation.simulation_id,
+               simulation.storm_id,
+               simulation.dev_scenario_id,
+               simulation.sim_desc]
+
+        cursor = arcpy.da.InsertCursor(location, field_names)
+
+        cursor.insertRow(row)
+        del cursor
 
 
 

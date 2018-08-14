@@ -1,6 +1,7 @@
 from unittest import TestCase
 import mock
 import os
+import arcpy
 from model_data_io import ModelDataIO
 from model import Model
 from simulation import Simulation
@@ -14,6 +15,12 @@ class TestModelDataIO(TestCase):
         self.modeldataio = ModelDataIO(self.config)
         self.mock_model = mock.MagicMock(Model)
         self.mock_model.model_path = r"C:\model_path"
+        self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
+        self.mock_simulation = mock.MagicMock(Simulation)
+        self.mock_simulation.simulation_id = 22
+        self.mock_simulation.storm_id = 33
+        self.mock_simulation.dev_scenario_id = 44
+        self.mock_simulation.sim_desc = "sim_desc"
 
     @mock.patch("os.walk")
     def test_read_simulations_calls_os_walk(self, mock_os_walk):
@@ -70,3 +77,20 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 0)
         self.assertEquals(first_simulation.sim_desc, "Dec2015")
 
+    @mock.patch("arcpy.da.InsertCursor")
+    def test_add_simulation_calls_insert_cursor(self, mock_insert_cursor):
+        self.modeldataio.add_simulation("location", self.field_names, 11, self.mock_simulation)
+        self.assertTrue(mock_insert_cursor.called)
+
+    @mock.patch("arcpy.da.InsertCursor")
+    def test_add_simulation_calls_insert_cursor_with_correct_arguments(self, mock_insert_cursor):
+        self.modeldataio.add_simulation("location", self.field_names, 11, self.mock_simulation)
+        mock_insert_cursor.assert_called_with("location", self.field_names)
+
+    def test_add_simulation_parameters_are_passed_into_row(self):
+        mock_cursor = mock.MagicMock(arcpy.da.InsertCursor)
+        with mock.patch("arcpy.da.InsertCursor") as mock_da_InsertCursor:
+            mock_da_InsertCursor.return_value = mock_cursor
+            self.modeldataio.add_simulation("location", self.field_names, 11, self.mock_simulation)
+        self.assertTrue(mock_cursor.insertRow.called)
+        mock_cursor.insertRow.assert_called_with([11, 22, 33, 44, "sim_desc"])

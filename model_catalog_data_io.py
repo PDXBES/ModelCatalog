@@ -11,7 +11,8 @@ class ModelCatalogDataIO():
         self.config = config
 
 
-    def retrieve_next_model_id(self, location, field_names):
+    def retrieve_next_id(self, location, object_type):
+        field_names = ["Object_Type", "Current_ID"]
         cursor = arcpy.da.UpdateCursor(location, field_names)
         object_name, current_id = cursor.next()
         next_id = current_id + 1
