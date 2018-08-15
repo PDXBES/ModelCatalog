@@ -10,14 +10,25 @@ class ModelCatalogDataIO():
         # type: (Config) -> None
         self.config = config
 
-
-    def retrieve_next_id(self, location, object_type):
+    def retrieve_current_id(self, location, object_type):
+        # type: (str, str) -> int
         field_names = ["Object_Type", "Current_ID"]
         cursor = arcpy.da.UpdateCursor(location, field_names)
-        object_name, current_id = cursor.next()
-        next_id = current_id + 1
+        for row in cursor:
+            object_name, current_id = row
+            if object_type == object_name:
+                next_id = current_id + 1
+                break
         cursor.updateRow([object_name, next_id])
         return current_id
+
+    def retrieve_current_model_id(self):
+        current_model_id = self.retrieve_current_id(self.config.current_id_table_sde_path, "model")
+        return current_model_id
+
+    def retrieve_current_simulation_id(self):
+        current_simulation_id = self.retrieve_current_id(self.config.current_id_table_sde_path, "simulation")
+        return current_simulation_id
 
     def add_model(self, model, location, field_names):
         # type: (Model, str, List[str]) -> None

@@ -15,8 +15,9 @@ class Config:
 
         model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
-        self.next_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
+        self.current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
+        self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
 
         RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
         self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
