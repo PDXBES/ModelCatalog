@@ -9,7 +9,7 @@
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-import arcpy, os
+import arcpy
 from model_catalog import ModelCatalog
 from model import Model
 from model_catalog_data_io import ModelCatalogDataIO
@@ -72,7 +72,7 @@ class EMGAATS_Model_Registration(object):
             multiValue=True)
 
         project_type.filter.type = "ValueList"
-        project_type.filter.list = ["Combined", "Sanitary", "Storm", "Other"]
+        project_type.filter.list = self.config.proj_type.values
 
         project_phase = arcpy.Parameter(
             displayName="Project Phase",
@@ -82,7 +82,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input")
 
         project_phase.filter.type = "ValueList"
-        project_phase.filter.list = ["Planning", "Pre design", "Design 30", "Design 60", "Design 90"]
+        project_phase.filter.list = self.config.proj_phase.values
 
         model_purpose = arcpy.Parameter(
             displayName="Model Purpose",
@@ -92,7 +92,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input")
 
         model_purpose.filter.type = "ValueList"
-        model_purpose.filter.list = ["Calibration", "Characterization", "Alternative", "Recommended Plan"]
+        model_purpose.filter.list = self.config.model_purpose.values
 
         model_status = arcpy.Parameter(
             displayName="Model Status",
@@ -122,7 +122,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input",
             multiValue=True)
         model_alterations.columns = [['String', 'Alteration Type']]
-        model_alterations.filters[0].list = ["Boundary Conditions", "Regression Equations", "Roughness"]
+        model_alterations.filters[0].list = self.config.model_alteration.values
 
         model_alteration_file = arcpy.Parameter(
             displayName="Model Alterations File",
@@ -178,11 +178,11 @@ class EMGAATS_Model_Registration(object):
 
     def execute(self, parameters, messages):
 
-        model_id = self.modelcatalogdataio.retrieve_next_model_id(self.modelcatalogdataio.value_table, ["Object_Type", "Current_ID"])
+        model_id = self.modelcatalogdataio.retrieve_current_model_id()
         self.model.model_id = model_id
         self.model.parent_model_id = 0
         self.model.model_request_id = 0
-        self.model.project_phase_id = parameters[3].valueAsText
+        self.model.project_phase_id = self.config.proj_phase_id(parameters[3].valueAsText)
         self.model.engine_type_id = 1
         self.model.create_date = datetime.datetime.today()
         self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
@@ -190,11 +190,11 @@ class EMGAATS_Model_Registration(object):
         self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser() #TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
         self.model.model_path = parameters[1].valueAsText
-        self.model.project_type_id = parameters[2].valueAsText
-        self.model.model_purpose_id = parameters[4].valueAsText
+        self.model.project_type_id = self.config.proj_type_id(parameters[2].valueAsText)
+        self.model.model_purpose_id = self.config.model_purpose_id(parameters[4].valueAsText)
         self.model.model_calibration_file = parameters[5].valueAsText
-        self.model.model_status_id = parameters[6].valueAsText
-        self.model.model_alterations_id = parameters[7].valueAsText
+        self.model.model_status_id = self.config.model_status_id(parameters[6].valueAsText)
+        self.model.model_alterations_id = self.config.model_alteration_id(parameters[7].valueAsText)
         self.model.model_alteration_file = parameters[8].valueAsText
         self.model.project_num = parameters[0].valueAsText
         self.model.valid
@@ -226,8 +226,8 @@ def EMGAATS_Model_Registration_function(model_catalog):
         "Model_Alterations_ID",
         "Model_Alteration_file",
         "Project_Num"]
-    
-    modelcatalogdataio.add_model(model_catalog.models[0], modelcatalogdataio.model_tracking, field_names)
+
+    modelcatalogdataio.add_model(model_catalog.models[0], field_names)
 
 
 def main():  # runs the whole thing; takes manual input if gui = False
@@ -235,7 +235,7 @@ def main():  # runs the whole thing; takes manual input if gui = False
     model = Model(config)
     model_catalog = ModelCatalog(config)
     modelcatalogdataio = ModelCatalogDataIO(config)
-    model_id = modelcatalogdataio.retrieve_next_model_id(modelcatalogdataio.value_table, ["Object_Type", "Current_ID"])
+    model_id = modelcatalogdataio.retrieve_current_model_id()
     model.model_id = model_id
     model.parent_model_id = 555
     model.model_request_id = 777

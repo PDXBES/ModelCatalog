@@ -1,5 +1,5 @@
 import os
-
+from model_catalog_data_io import ModelCatalogDataIO
 
 class Config:
     def __init__(self):
@@ -18,6 +18,25 @@ class Config:
         self.current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
+
+        self.engine_type = ModelCatalogDataIO.retrieve_engine_type_domain_as_dict(self.model_catalog_sde_path)
+        self.engine_type_id = dict(zip(self.engine_type.values(), self.engine_type.keys()))
+
+        self.model_alteration = ModelCatalogDataIO.retrieve_model_alterations_domain_as_dict(self.model_catalog_sde_path)
+        self.model_alteration_id = dict(zip(self.model_alteration.values(), self.model_alteration.keys()))
+
+        self.model_purpose = ModelCatalogDataIO.retrieve_model_purpose_domain_as_dict(self.model_catalog_sde_path)
+        self.model_purpose_id = dict(zip(self.model_purpose.values(), self.model_purpose.keys()))
+
+        self.model_status = ModelCatalogDataIO.retrieve_model_status_domain_as_dict(self.model_catalog_sde_path)
+        self.model_status_id = dict(zip(self.model_status.values(), self.model_status.keys()))
+
+        self.proj_phase = ModelCatalogDataIO.retrieve_proj_phase_domain_as_dict(self.model_catalog_sde_path)
+        self.proj_phase_id = dict(zip(self.proj_phase.values(), self.proj_phase.keys()))
+
+        self.proj_type = ModelCatalogDataIO.retrieve_proj_type_domain_as_dict(self.model_catalog_sde_path)
+        self.proj_type_id = dict(zip(self.proj_type.values(), self.proj_type.keys()))
+
 
         RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
         self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
@@ -41,5 +60,6 @@ class Config:
                         simulation_name = type_and_storm_name + "-" + scenario
                     standard_simulation_names.append(simulation_name)
         return standard_simulation_names
+
 
 
