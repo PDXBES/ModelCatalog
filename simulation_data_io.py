@@ -10,7 +10,6 @@ class SimulationDataIO:
         # type: (Config) -> None
         self.config = config
 
-#TODO: add test for in_path
     def copy_feature_class_results(self, simulation, model,
                                    model_results_feature_class_path,
                                    rrad_results_feature_class_path):

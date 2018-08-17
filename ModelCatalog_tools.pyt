@@ -191,7 +191,7 @@ class EMGAATS_Model_Registration(object):
         self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.run_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.created_by = getpass.getuser() #TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
+        self.model.created_by = getpass.getuser()
         self.model.model_path = parameters[1].valueAsText
         self.model.project_type_id = self.config.proj_type_id[parameters[2].valueAsText]
         self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
@@ -239,14 +239,15 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     arcpy.AddMessage("Model Added")
     arcpy.AddMessage("Adding Simulations...")
     model.simulations = modeldataio.read_simulations(model)
-    arcpy.AddMessage("Simulations Added")
     modeldataio.add_simulations(model, modelcatalogdataio)
+    arcpy.AddMessage("Simulations Added")
     arcpy.AddMessage("Writing results to RRAD")
     for simulation in model.simulations:
         arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
         simulationdataio.copy_area_results(simulation, model)
         simulationdataio.copy_node_results(simulation, model)
-        simulationdataio.copy_node_flooding_results(simulation, model)
+        #TODO: Flooding results not loaded during testing
+        #simulationdataio.copy_node_flooding_results(simulation, model)
         simulationdataio.copy_link_results(simulation, model)
     arcpy.AddMessage("Results written to RRAD")
 
@@ -265,8 +266,8 @@ def main():  # runs the whole thing; takes manual input if gui = False
     model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
     model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
     model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.created_by = getpass.getuser()  # TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
-    model.model_path = "C:\Temp\Base_Calib"
+    model.created_by = getpass.getuser()
+    model.model_path = "C:\Temp\C2_Rehab"
     model.project_type_id = 1
     model.model_purpose_id = 1
     model.model_calibration_file = "C:\Temp\Cal"

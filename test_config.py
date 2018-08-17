@@ -86,3 +86,24 @@ class TestConfig(TestCase):
                                                                                        mock_retrieve_domain_as_dict):
         self.config.retrieve_proj_type_domain_as_dict()
         mock_retrieve_domain_as_dict.assert_called_with("Proj_Type")
+
+    @mock.patch("arcpy.da.SearchCursor")
+    def test_retrieve_storms_calls_search_cursor(self, mock_retrieve_storms):
+        self.config.retrieve_storms()
+        self.assertTrue(mock_retrieve_storms.called)
+
+    @mock.patch("arcpy.da.SearchCursor")
+    def test_retrieve_storms_calls_search_cursor_with_correct_arguments(self, mock_retrieve_storms):
+        self.config.retrieve_storms()
+        mock_retrieve_storms.assert_called_with(self.config.storms_sde_path, ["storm_id", "storm_name", "storm_type"])
+
+    @mock.patch("arcpy.da.SearchCursor")
+    def test_retrieve_storms_returns_correct_dictionary(self, mock_retrieve_storms):
+        self.fail()
+
+
+    def test_reverse_dict_returns_reverse_dict(self):
+        test_dictionary = {0: "one", 1: "two", 2: "three"}
+        reverse_dictionary = {"one": 0, "two": 1, "three": 2}
+        test_reverse = self.config.reverse_dict(test_dictionary)
+        self.assertEquals(test_reverse, reverse_dictionary)

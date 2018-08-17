@@ -32,8 +32,6 @@ class Model:
         self.simulations = []
         self.config = config
 
-# TODO - correct capitalization of attributes to PEP8 (lower)
-
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.model_path)
         return valid_model_path

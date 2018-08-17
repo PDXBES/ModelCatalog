@@ -102,8 +102,6 @@ class TestModel(TestCase):
 
     #TODO Write tests to for method to check for simulations
 
-    #TODO Troubleshoot following test
-
     @mock.patch("model.Model.validate_model_path")
     @mock.patch("model.Model.validate_config_file")
     @mock.patch("model.Model.validate_gdb")
