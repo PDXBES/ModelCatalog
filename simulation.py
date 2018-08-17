@@ -21,9 +21,12 @@ class Simulation:
         dev_scenario = ""
         if self.config.dev_scenario[self.dev_scenario_id] != "EX":
             dev_scenario = "-" + self.config.dev_scenario[self.dev_scenario_id]
-        sim_file_path = self.model_path \
-                        + "\\" + "sim\\" \
-                        + self.config.storm[self.storm_id][1] \
-                        + self.config.storm[self.storm_id][0] + dev_scenario
+        if self.storm_id == 0:
+            sim_file_path = self.model_path + "\\" + "sim\\" + self.sim_desc
+        else:
+            sim_file_path = self.model_path \
+                       + "\\" + "sim\\" \
+                       + self.config.storm[self.storm_id][1] \
+                       + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
 

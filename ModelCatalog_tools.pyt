@@ -13,7 +13,10 @@ import arcpy
 from model_catalog import ModelCatalog
 from model import Model
 from model_catalog_data_io import ModelCatalogDataIO
-import getpass, datetime
+from simulation_data_io import SimulationDataIO
+from model_data_io import ModelDataIO
+import getpass
+import datetime
 from config import Config
 
 
@@ -72,7 +75,7 @@ class EMGAATS_Model_Registration(object):
             multiValue=True)
 
         project_type.filter.type = "ValueList"
-        project_type.filter.list = self.config.proj_type.values
+        project_type.filter.list = self.config.proj_type.values()
 
         project_phase = arcpy.Parameter(
             displayName="Project Phase",
@@ -82,7 +85,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input")
 
         project_phase.filter.type = "ValueList"
-        project_phase.filter.list = self.config.proj_phase.values
+        project_phase.filter.list = self.config.proj_phase.values()
 
         model_purpose = arcpy.Parameter(
             displayName="Model Purpose",
@@ -92,7 +95,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input")
 
         model_purpose.filter.type = "ValueList"
-        model_purpose.filter.list = self.config.model_purpose.values
+        model_purpose.filter.list = self.config.model_purpose.values()
 
         model_status = arcpy.Parameter(
             displayName="Model Status",
@@ -122,7 +125,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input",
             multiValue=True)
         model_alterations.columns = [['String', 'Alteration Type']]
-        model_alterations.filters[0].list = self.config.model_alteration.values
+        model_alterations.filters[0].list = self.config.model_alteration.values()
 
         model_alteration_file = arcpy.Parameter(
             displayName="Model Alterations File",
@@ -182,7 +185,7 @@ class EMGAATS_Model_Registration(object):
         self.model.model_id = model_id
         self.model.parent_model_id = 0
         self.model.model_request_id = 0
-        self.model.project_phase_id = self.config.proj_phase_id(parameters[3].valueAsText)
+        self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
         self.model.engine_type_id = 1
         self.model.create_date = datetime.datetime.today()
         self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
@@ -190,23 +193,27 @@ class EMGAATS_Model_Registration(object):
         self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser() #TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
         self.model.model_path = parameters[1].valueAsText
-        self.model.project_type_id = self.config.proj_type_id(parameters[2].valueAsText)
-        self.model.model_purpose_id = self.config.model_purpose_id(parameters[4].valueAsText)
+        self.model.project_type_id = self.config.proj_type_id[parameters[2].valueAsText]
+        self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
         self.model.model_calibration_file = parameters[5].valueAsText
-        self.model.model_status_id = self.config.model_status_id(parameters[6].valueAsText)
-        self.model.model_alterations_id = self.config.model_alteration_id(parameters[7].valueAsText)
+        self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
+        if parameters[7].valueAsText == None:
+            self.model.model_alterations_id = 1
+        else:
+            self.model.model_alterations_id = self.config.model_alteration_id[parameters[7].valueAsText]
         self.model.model_alteration_file = parameters[8].valueAsText
         self.model.project_num = parameters[0].valueAsText
         self.model.valid
 
         self.model_catalog.add_model(self.model)
-        EMGAATS_Model_Registration_function(self.model_catalog)
+        EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         return
 
 
-def EMGAATS_Model_Registration_function(model_catalog):
-    modelcatalogdataio = ModelCatalogDataIO()
-    # TODO Ask Dan about IDs being attached to domains
+def EMGAATS_Model_Registration_function(model_catalog, config):
+    modelcatalogdataio = ModelCatalogDataIO(config)
+    modeldataio = ModelDataIO(config)
+    simulationdataio = SimulationDataIO(config)
     field_names = [
         "Model_ID",
         "Parent_Model_ID",
@@ -226,9 +233,22 @@ def EMGAATS_Model_Registration_function(model_catalog):
         "Model_Alterations_ID",
         "Model_Alteration_file",
         "Project_Num"]
-
-    modelcatalogdataio.add_model(model_catalog.models[0], field_names)
-
+    model = model_catalog.models[0]
+    arcpy.AddMessage("Adding Model...")
+    modelcatalogdataio.add_model(model, field_names)
+    arcpy.AddMessage("Model Added")
+    arcpy.AddMessage("Adding Simulations...")
+    model.simulations = modeldataio.read_simulations(model)
+    arcpy.AddMessage("Simulations Added")
+    modeldataio.add_simulations(model, modelcatalogdataio)
+    arcpy.AddMessage("Writing results to RRAD")
+    for simulation in model.simulations:
+        arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
+        simulationdataio.copy_area_results(simulation, model)
+        simulationdataio.copy_node_results(simulation, model)
+        simulationdataio.copy_node_flooding_results(simulation, model)
+        simulationdataio.copy_link_results(simulation, model)
+    arcpy.AddMessage("Results written to RRAD")
 
 def main():  # runs the whole thing; takes manual input if gui = False
     config = Config()
@@ -246,7 +266,7 @@ def main():  # runs the whole thing; takes manual input if gui = False
     model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
     model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
     model.created_by = getpass.getuser()  # TODO NEEDS TO CHANGE DATABASE FIELD TO NOT AUTOPOPULATE
-    model.model_path = "C:\Temp"
+    model.model_path = "C:\Temp\Base_Calib"
     model.project_type_id = 1
     model.model_purpose_id = 1
     model.model_calibration_file = "C:\Temp\Cal"
@@ -258,7 +278,7 @@ def main():  # runs the whole thing; takes manual input if gui = False
 
     model.create_date = datetime.datetime.today()
     model_catalog.add_model(model)
-    EMGAATS_Model_Registration_function(model_catalog)
+    EMGAATS_Model_Registration_function(model_catalog, config)
 
 
 if __name__ == '__main__':

@@ -25,7 +25,7 @@ class SimulationDataIO:
             insert = arcpy.da.InsertCursor(rrad_results_feature_class_path, field_names_extended)
             insert_row = row + (model.model_id,
                                 simulation.storm_id,
-                                simulation.scenario_id,
+                                simulation.dev_scenario_id,
                                 0)
             insert.insertRow(insert_row)
             pass

@@ -16,7 +16,7 @@ class TestSimulationDataIO(TestCase):
         self.mock_simulation.storm = "D25yr6h"
         self.mock_simulation.scenario = ""
         self.mock_simulation.storm_id = 22
-        self.mock_simulation.scenario_id = 33
+        self.mock_simulation.dev_scenario_id = 33
         self.mock_model = mock.MagicMock(Model)
         self.simulation = Simulation(self.mock_model, self.config)
         self.mock_model.model_path = r"c:\temp\fake"

@@ -1,5 +1,5 @@
 import os
-from model_catalog_data_io import ModelCatalogDataIO
+import arcpy
 
 class Config:
     def __init__(self):
@@ -19,22 +19,22 @@ class Config:
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
 
-        self.engine_type = ModelCatalogDataIO.retrieve_engine_type_domain_as_dict(self.model_catalog_sde_path)
+        self.engine_type = self.retrieve_engine_type_domain_as_dict()
         self.engine_type_id = dict(zip(self.engine_type.values(), self.engine_type.keys()))
 
-        self.model_alteration = ModelCatalogDataIO.retrieve_model_alterations_domain_as_dict(self.model_catalog_sde_path)
+        self.model_alteration = self.retrieve_model_alterations_domain_as_dict()
         self.model_alteration_id = dict(zip(self.model_alteration.values(), self.model_alteration.keys()))
 
-        self.model_purpose = ModelCatalogDataIO.retrieve_model_purpose_domain_as_dict(self.model_catalog_sde_path)
+        self.model_purpose = self.retrieve_model_purpose_domain_as_dict()
         self.model_purpose_id = dict(zip(self.model_purpose.values(), self.model_purpose.keys()))
 
-        self.model_status = ModelCatalogDataIO.retrieve_model_status_domain_as_dict(self.model_catalog_sde_path)
+        self.model_status = self.retrieve_model_status_domain_as_dict()
         self.model_status_id = dict(zip(self.model_status.values(), self.model_status.keys()))
 
-        self.proj_phase = ModelCatalogDataIO.retrieve_proj_phase_domain_as_dict(self.model_catalog_sde_path)
+        self.proj_phase = self.retrieve_proj_phase_domain_as_dict()
         self.proj_phase_id = dict(zip(self.proj_phase.values(), self.proj_phase.keys()))
 
-        self.proj_type = ModelCatalogDataIO.retrieve_proj_type_domain_as_dict(self.model_catalog_sde_path)
+        self.proj_type = self.retrieve_proj_type_domain_as_dict()
         self.proj_type_id = dict(zip(self.proj_type.values(), self.proj_type.keys()))
 
 
@@ -61,5 +61,34 @@ class Config:
                     standard_simulation_names.append(simulation_name)
         return standard_simulation_names
 
+    def retrieve_domain_as_dict(self,domain_name):
+        list_of_domains = arcpy.da.ListDomains(self.model_catalog_sde_path)
+        dict_of_scenarios = None
+        for domain in list_of_domains:
+            if domain.name == domain_name:
+                dict_of_scenarios = domain.codedValues
+                break
+        return dict_of_scenarios
 
+    def retrieve_engine_type_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Engine_Type")
+
+    #TODO - make this one 1-M
+    def retrieve_model_alterations_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Model_Alterations")
+
+
+    def retrieve_model_purpose_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Model_Purpose")
+
+    def retrieve_model_status_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Model_Status")
+
+
+    def retrieve_proj_phase_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Proj_Phase")
+
+
+    def retrieve_proj_type_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Proj_Type")
 

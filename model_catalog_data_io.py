@@ -1,6 +1,6 @@
 import arcpy
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
-from typing import List, Any
+from typing import List
 from model import Model
 from config import Config
 
@@ -61,37 +61,4 @@ class ModelCatalogDataIO():
         cursor.insertRow(row)
         del cursor
 
-    @staticmethod
-    def retrieve_domain_as_dict(domain_name, model_catalog_path_sde):
-        list_of_domains = arcpy.da.ListDomains(model_catalog_path_sde)
-        dict_of_scenarios = None
-        for domain in list_of_domains:
-            if domain.name == domain_name:
-                dict_of_scenarios = domain.codedValues
-                break
-        return dict_of_scenarios
 
-    @staticmethod
-    def retrieve_engine_type_domain_as_dict(model_catalog_path_sde):
-        return ModelCatalogDataIO.retrieve_domain_as_dict("Engine_Type",model_catalog_path_sde )
-
-    #TODO - make this one 1-M
-    @staticmethod
-    def retrieve_model_alterations_domain_as_dict(model_catalog_path_sde):
-        return ModelCatalogDataIO.retrieve_domain_as_dict("Model_Alterations", model_catalog_path_sde )
-
-    @staticmethod
-    def retrieve_model_purpose_domain_as_dict(model_catalog_path_sde):
-        return ModelCatalogDataIO.retrieve_domain_as_dict("Model_Purpose", model_catalog_path_sde )
-
-    @staticmethod
-    def retrieve_model_status_domain_as_dict(model_catalog_path_sde):
-        return ModelCatalogDataIO.retrieve_domain_as_dict("Model_Status", model_catalog_path_sde )
-
-    @staticmethod
-    def retrieve_proj_phase_domain_as_dict(model_catalog_path_sde):
-        return ModelCatalogDataIO.retrieve_domain_as_dict("Proj_Phase", model_catalog_path_sde )
-
-    @staticmethod
-    def retrieve_proj_type_domain_as_dict(model_catalog_path_sde):
-        return ModelCatalogDataIO.retrieve_domain_as_dict("Proj_Type", model_catalog_path_sde )

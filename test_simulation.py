@@ -57,5 +57,11 @@ class TestSimulation(TestCase):
         path = "String" + "\\" + "sim\\" + "D25yr6h" + "-BO"
         sim_path = self.simulation.path()
         self.assertEquals(sim_path, path)
-    
+
+    def test_simulation_path_built_for_user_defined_storm(self):
+        self.simulation.storm_id = 0
+        self.simulation.sim_desc = "test_u_sim"
+        path = "String" + "\\" + "sim\\" + "test_u_sim"
+        sim_path = self.simulation.path()
+        self.assertEquals(sim_path, path)
 
