@@ -7,6 +7,10 @@ import arcpy
 class TestConfig(TestCase):
     def setUp(self):
         self.config = Config()
+        self.mock_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
+        self.mock_search_cursor.__iter__.return_value = iter([(1, "02yr6h", "D"), (2, "05yr6h", "D")])
+        self.mock_dev_scenario_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
+        self.mock_dev_scenario_search_cursor.__iter__.return_value = iter([(1, "EX"), (2, "50")])
 
     def test_storm_dict_return_correct_value_for_storm(self):
         storm_name, storm_type = self.config.storm[0]
@@ -89,18 +93,37 @@ class TestConfig(TestCase):
 
     @mock.patch("arcpy.da.SearchCursor")
     def test_retrieve_storms_calls_search_cursor(self, mock_retrieve_storms):
-        self.config.retrieve_storms()
+        self.config.retrieve_storm_dict()
         self.assertTrue(mock_retrieve_storms.called)
 
     @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_storms_calls_search_cursor_with_correct_arguments(self, mock_retrieve_storms):
-        self.config.retrieve_storms()
+    def test_retrieve_storm_dict_calls_search_cursor_with_correct_arguments(self, mock_retrieve_storms):
+        self.config.retrieve_storm_dict()
         mock_retrieve_storms.assert_called_with(self.config.storms_sde_path, ["storm_id", "storm_name", "storm_type"])
 
     @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_storms_returns_correct_dictionary(self, mock_retrieve_storms):
-        self.fail()
+    def test_retrieve_storm_dict_returns_correct_dictionary(self, mock_retrieve_storms):
+        mock_retrieve_storms.return_value = self.mock_search_cursor
+        return_dict =  {1: ("02yr6h", "D"), 2: ("05yr6h", "D")}
+        storm_dict = self.config.retrieve_storm_dict()
+        self.assertEqual(storm_dict, return_dict)
 
+    @mock.patch("arcpy.da.SearchCursor")
+    def test_retrieve_storm_dict_calls_search_cursor(self, mock_retrieve_storms):
+        self.config.retrieve_storm_dict()
+        self.assertTrue(mock_retrieve_storms.called)
+
+    @mock.patch("arcpy.da.SearchCursor")
+    def test_retrieve_dev_scenario_dict_calls_search_cursor_with_correct_arguments(self, mock_retrieve_dev_scenario_dict):
+        self.config.retrieve_dev_scenario_dict()
+        mock_retrieve_dev_scenario_dict.assert_called_with(self.config.dev_scenarios_sde_path, ["dev_scenario_id", "dev_scenario"])
+
+    @mock.patch("arcpy.da.SearchCursor")
+    def test_retrieve_dev_scenario_dict_returns_correct_dictionary(self, mock_retrieve_dev_scenario_dict):
+        mock_retrieve_dev_scenario_dict.return_value = self.mock_dev_scenario_search_cursor
+        return_dict = {1: "EX", 2: "50"}
+        dev_scenario_dict = self.config.retrieve_dev_scenario_dict()
+        self.assertEqual(dev_scenario_dict, return_dict)
 
     def test_reverse_dict_returns_reverse_dict(self):
         test_dictionary = {0: "one", 1: "two", 2: "three"}

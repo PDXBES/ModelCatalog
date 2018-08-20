@@ -282,5 +282,5 @@ def main():  # runs the whole thing; takes manual input if gui = False
     EMGAATS_Model_Registration_function(model_catalog, config)
 
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()

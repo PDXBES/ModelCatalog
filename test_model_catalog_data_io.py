@@ -9,7 +9,9 @@ from config import Config
 
 class TestModelCatalogDataIO(TestCase):
     def setUp(self):
-        self.config = Config()
+        self.config = mock.MagicMock(Config)
+        self.config.current_id_table_sde_path = "current_id_table_sde_path"
+        self.config.model_tracking_sde_path = "model_tracking_sde_path"
         self.modelcatalogdataio = ModelCatalogDataIO(self.config)
         self.model_catalog = mock.MagicMock(ModelCatalog)
         self.model = mock.MagicMock(Model)

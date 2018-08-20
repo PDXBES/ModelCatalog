@@ -4,8 +4,8 @@ from typing import Dict
 
 class Config:
     def __init__(self):
-        self.storm = {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
-        self.dev_scenario = {0: "EX", 1: "50", 2: "BO"}
+        self.storm = self.retrieve_storm_dict() #{0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
+        self.dev_scenario = self.retrieve_dev_scenario_dict() #{0: "EX", 1: "50", 2: "BO"}
 
         self.storm_id = self.reverse_dict(self.storm)
         self.dev_scenario_id = self.reverse_dict(self.dev_scenario)
@@ -48,7 +48,7 @@ class Config:
         self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
         self.flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
 
-        EMGAATS_test_sde = r"BESDBTEST1.EMGAATS_read.sde"
+        EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
 
         self.storms_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMS"
@@ -102,9 +102,34 @@ class Config:
     def retrieve_proj_type_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Proj_Type")
 
-    def retrieve_storms(self):
+    def retrieve_storm_dict(self):
         storm_field_names = ["storm_id", "storm_name", "storm_type"]
+        storm_IDs = []
+        storm_types = []
+        storm_names = []
         cursor = arcpy.da.SearchCursor(self.storms_sde_path, storm_field_names)
+        for row in cursor:
+            storm_IDs.append(row[0])
+            storm_names.append(row[1])
+            storm_types.append(row[2])
+        storm_name_and_type = zip(storm_names, storm_types)
+        storm_dict = dict(zip(storm_IDs, storm_name_and_type))
+        del cursor
+        return storm_dict
+
+    def retrieve_dev_scenario_dict(self):
+        dev_scenario_field_names = ["dev_scenario_id", "dev_scenario"]
+        dev_scenario_IDs = []
+        dev_scenario = []
+        cursor = arcpy.da.SearchCursor(self.dev_scenarios_sde_path, dev_scenario_field_names)
+        for row in cursor:
+            dev_scenario_IDs.append(row[0])
+            dev_scenario.append(row[1])
+
+        dev_scenario_dict = dict(zip(dev_scenario_IDs, dev_scenario))
+        del cursor
+        return dev_scenario_dict
+
 
     def reverse_dict(self, dictionary):
         # type: (Dict) -> Dict

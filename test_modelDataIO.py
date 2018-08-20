@@ -12,7 +12,10 @@ from model_catalog_data_io import ModelCatalogDataIO
 class TestModelDataIO(TestCase):
 
     def setUp(self):
-        self.config = Config()
+        self.config = mock.MagicMock(Config)
+        self.config.simulation_sde_path = "simulation_sde_path"
+        self.config.current_id_table_sde_path = "current_id_table_sde_path"
+    #TODO patch methods that create dictionaries in config class
         self.modeldataio = ModelDataIO(self.config)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
         self.mock_simulation = mock.MagicMock(Simulation)
@@ -100,6 +103,7 @@ class TestModelDataIO(TestCase):
             self.modeldataio.add_simulation(11, self.mock_simulation, self.model_catalog_data_io)
         self.assertTrue(mock_cursor.insertRow.called)
         mock_cursor.insertRow.assert_called_with([11, 22, 33, 44, "sim_desc"])
+
 
     @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
     @mock.patch("model_data_io.ModelDataIO.add_simulation")
