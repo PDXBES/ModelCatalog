@@ -1,6 +1,8 @@
 import os
-
-from typing import List, Any
+try:
+    from typing import List, Any
+except:
+    pass
 from simulation import Simulation
 from config import Config
 

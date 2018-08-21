@@ -1,12 +1,13 @@
 from unittest import TestCase
 from simulation import Simulation
 import mock
-from config import Config
+from mock_config import MockConfig
 
 class TestSimulation(TestCase):
     def setUp(self):
         model_path = "String"
-        self.config = Config()
+        mock_config = MockConfig()
+        self.config = mock_config.config
         self.simulation = Simulation(model_path,self.config)
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1

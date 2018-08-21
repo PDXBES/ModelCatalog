@@ -1,7 +1,10 @@
 import os
 import arcpy
 from config import Config
-from typing import List
+try:
+    from typing import List, Any
+except:
+    pass
 from model import Model
 from simulation import Simulation
 from model_catalog_data_io import ModelCatalogDataIO

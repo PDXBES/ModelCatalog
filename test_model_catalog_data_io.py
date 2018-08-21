@@ -5,13 +5,12 @@ from model_catalog import ModelCatalog
 from model import Model
 import arcpy
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
-from config import Config
+from mock_config import MockConfig
 
 class TestModelCatalogDataIO(TestCase):
     def setUp(self):
-        self.config = mock.MagicMock(Config)
-        self.config.current_id_table_sde_path = "current_id_table_sde_path"
-        self.config.model_tracking_sde_path = "model_tracking_sde_path"
+        mock_config = MockConfig()
+        self.config = mock_config.config
         self.modelcatalogdataio = ModelCatalogDataIO(self.config)
         self.model_catalog = mock.MagicMock(ModelCatalog)
         self.model = mock.MagicMock(Model)
@@ -30,7 +29,6 @@ class TestModelCatalogDataIO(TestCase):
         self.model.model_purpose_id = None
         self.model.model_calibration_file = None
         self.model.model_status_id = None
-        self.model.model_alterations_id = None
         self.model.model_alteration_file = None
         self.model.project_num = None
 
@@ -50,7 +48,6 @@ class TestModelCatalogDataIO(TestCase):
         "Model_Purpose_ID",
         "Model_Calibration_file",
         "Model_Status_ID",
-        "Model_Alterations_ID",
         "Model_Alteration_file",
         "Project_Num"]
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
@@ -79,7 +76,7 @@ class TestModelCatalogDataIO(TestCase):
             self.modelcatalogdataio.add_model(self.model_catalog.models[0], self.field_names)
         self.assertTrue(mock_cursor.insertRow.called)
         mock_cursor.insertRow.assert_called_with([0, 0, 0, None, None, None, None, None, None, None,
-                                                  None, None, None, None, None, None, None, None])
+                                                  None, None, None, None, None, None, None])
 
     @mock.patch("arcpy.da.InsertCursor")
     def test_add_model_add_invalid_model_exception_raised(self, mock_da_InsertCursor):

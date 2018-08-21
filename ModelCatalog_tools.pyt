@@ -197,10 +197,6 @@ class EMGAATS_Model_Registration(object):
         self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
         self.model.model_calibration_file = parameters[5].valueAsText
         self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
-        if parameters[7].valueAsText == None:
-            self.model.model_alterations_id = 1
-        else:
-            self.model.model_alterations_id = self.config.model_alteration_id[parameters[7].valueAsText]
         self.model.model_alteration_file = parameters[8].valueAsText
         self.model.project_num = parameters[0].valueAsText
         self.model.valid
@@ -230,7 +226,6 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         "Model_Purpose_ID",
         "Model_Calibration_file",
         "Model_Status_ID",
-        "Model_Alterations_ID",
         "Model_Alteration_file",
         "Project_Num"]
     model = model_catalog.models[0]
@@ -272,7 +267,6 @@ def main():  # runs the whole thing; takes manual input if gui = False
     model.model_purpose_id = 1
     model.model_calibration_file = "C:\Temp\Cal"
     model.model_status_id = 2
-    model.model_alterations_id = 1
     model.model_alteration_file = "C:\Temp\BC"
     model.project_num = "E10TEST"
     model.valid = True

@@ -3,13 +3,13 @@ import mock, arcpy
 from simulation import Simulation
 from model import Model
 from simulation_data_io import SimulationDataIO
-from config import Config
-import os
+from mock_config import MockConfig
 
 
 class TestSimulationDataIO(TestCase):
     def setUp(self):
-        self.config = Config()
+        mock_config = MockConfig()
+        self.config = mock_config.config
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
         self.simulationdataio = SimulationDataIO(self.config)
         self.mock_simulation = mock.MagicMock(Simulation)

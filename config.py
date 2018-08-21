@@ -1,15 +1,12 @@
 import os
 import arcpy
-from typing import Dict
+try:
+    from typing import Dict
+except:
+    pass
 
 class Config:
     def __init__(self):
-        self.storm = self.retrieve_storm_dict() #{0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
-        self.dev_scenario = self.retrieve_dev_scenario_dict() #{0: "EX", 1: "50", 2: "BO"}
-
-        self.storm_id = self.reverse_dict(self.storm)
-        self.dev_scenario_id = self.reverse_dict(self.dev_scenario)
-
         executable_path = os.path.dirname(os.path.realpath(__file__))
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
         self.dummy_model_alteration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
@@ -18,9 +15,31 @@ class Config:
 
         model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
-        self.current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.VAT_MaxVal"
+        self.current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
+        self.model_alterations_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alterations"
+
+        RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
+        self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
+
+        self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
+        self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
+        self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
+        self.flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
+
+        EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
+        self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
+
+        self.storms_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMS"
+        self.storm_types_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMTYPES"
+        self.dev_scenarios_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.DEVSCENARIOS"
+
+        self.storm = self.retrieve_storm_dict()  # {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
+        self.storm_id = self.reverse_dict(self.storm)
+
+        self.dev_scenario = self.retrieve_dev_scenario_dict()  # {0: "EX", 1: "50", 2: "BO"}
+        self.dev_scenario_id = self.reverse_dict(self.dev_scenario)
 
         self.engine_type = self.retrieve_engine_type_domain_as_dict()
         self.engine_type_id = self.reverse_dict(self.engine_type)
@@ -39,23 +58,6 @@ class Config:
 
         self.proj_type = self.retrieve_proj_type_domain_as_dict()
         self.proj_type_id = self.reverse_dict(self.proj_type)
-
-        RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
-        self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
-
-        self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
-        self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
-        self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
-        self.flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
-
-        EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
-        self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
-
-        self.storms_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMS"
-        self.storm_types_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMTYPES"
-        self.dev_scenarios_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.DEVSCENARIOS"
-
-
 
     def standard_simulation_names(self):
         standard_simulation_names = []

@@ -1,7 +1,10 @@
 import arcpy
 from model import Model
 from simulation import Simulation
-from typing import List
+try:
+    from typing import List, Any
+except:
+    pass
 from config import Config
 
 

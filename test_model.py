@@ -1,13 +1,13 @@
 from unittest import TestCase
 from model import Model
-from simulation import Simulation
 import mock
-from config import Config
+from mock_config import MockConfig
 
 class TestModel(TestCase):
 
     def setUp(self):
-        self.config = Config()
+        mock_config = MockConfig()
+        self.config = mock_config.config
         self.model = Model(self.config)
         self.model.model_path = r"c:\temp"
 

@@ -1,6 +1,9 @@
 import arcpy
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
-from typing import List
+try:
+    from typing import List, Any
+except:
+    pass
 from model import Model
 from config import Config
 
@@ -30,7 +33,7 @@ class ModelCatalogDataIO():
         return current_simulation_id
 
     def add_model(self, model, field_names):
-        # type: (Model, str, List[str]) -> None
+        # type: (Model, List[str]) -> None
         if not model.valid:
             raise ModelCatalog_exception
 
@@ -49,7 +52,6 @@ class ModelCatalogDataIO():
                model.model_purpose_id,
                model.model_calibration_file,
                model.model_status_id,
-               model.model_alterations_id,
                model.model_alteration_file,
                model.project_num]
 

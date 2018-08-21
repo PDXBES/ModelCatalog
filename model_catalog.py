@@ -1,4 +1,7 @@
-from typing import List, Any
+try:
+    from typing import List, Any
+except:
+    pass
 from model import Model
 from model_catalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
 from config import Config

@@ -1,21 +1,18 @@
 from unittest import TestCase
 import mock
-import os
 import arcpy
 from model_data_io import ModelDataIO
 from model import Model
 from simulation import Simulation
-from config import Config
 from model_catalog_data_io import ModelCatalogDataIO
-
+from mock_config import MockConfig
+from config import Config
 
 class TestModelDataIO(TestCase):
 
     def setUp(self):
-        self.config = mock.MagicMock(Config)
-        self.config.simulation_sde_path = "simulation_sde_path"
-        self.config.current_id_table_sde_path = "current_id_table_sde_path"
-    #TODO patch methods that create dictionaries in config class
+        mock_config = MockConfig()
+        self.config = mock_config.config
         self.modeldataio = ModelDataIO(self.config)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
         self.mock_simulation = mock.MagicMock(Simulation)
@@ -23,6 +20,7 @@ class TestModelDataIO(TestCase):
         self.mock_simulation.storm_id = 33
         self.mock_simulation.dev_scenario_id = 44
         self.mock_simulation.sim_desc = "sim_desc"
+        self.mock_simulation.config = self.config
         self.mock_model = mock.MagicMock(Model)
         self.mock_model.model_path = r"C:\model_path"
         self.mock_model.model_id = 11
@@ -58,8 +56,8 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.sim_desc, "D25yr6h-BO")
 
     @mock.patch("os.walk")
+#    @mock.patch("config.Config.standard_simulation_names")
     def test_read_simulation_reads_list_of_simulations_and_returns_correct_simulation_objects(self, mock_os_walk):
-
         mock_os_walk.return_value = iter([("path", ["D25yr6h-BO","D10yr6h"], "file name")])
         list_of_simulations = self.modeldataio.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
@@ -85,12 +83,16 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.sim_desc, "Dec2015")
 
     @mock.patch("arcpy.da.InsertCursor")
-    def test_add_simulation_calls_insert_cursor(self, mock_insert_cursor):
+    @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
+    def test_add_simulation_calls_insert_cursor(self, mock_retrieve_current_simulation_id, mock_insert_cursor):
+        mock_retrieve_current_simulation_id.return_value = 1
         self.modeldataio.add_simulation(11, self.mock_simulation, self.model_catalog_data_io)
         self.assertTrue(mock_insert_cursor.called)
 
     @mock.patch("arcpy.da.InsertCursor")
-    def test_add_simulation_calls_insert_cursor_with_correct_arguments(self, mock_insert_cursor):
+    @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
+    def test_add_simulation_calls_insert_cursor_with_correct_arguments(self, mock_retrieve_current_simulation_id, mock_insert_cursor):
+        mock_retrieve_current_simulation_id.return_value = 1
         self.modeldataio.add_simulation(11, self.mock_simulation, self.model_catalog_data_io)
         mock_insert_cursor.assert_called_with(self.config.simulation_sde_path, self.field_names)
 

@@ -3,11 +3,12 @@ from unittest import TestCase
 from model_catalog import ModelCatalog
 from model import Model
 from model_catalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
-from config import Config
+from mock_config import MockConfig
 
 class TestModelCatalog(TestCase):
     def setUp(self):
-        self.config = Config()
+        mock_config = MockConfig()
+        self.config = mock_config.config
         self.model_catalog = ModelCatalog(self.config)
         self.model1 = mock.MagicMock(Model)
         self.model2 = mock.MagicMock(Model)
