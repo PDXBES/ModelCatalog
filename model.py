@@ -24,15 +24,15 @@ class Model:
         self.extract_date = None
         self.created_by = None
         self.model_path = None
-        self.project_type_id = None
         self.model_purpose_id = None
         self.model_calibration_file = None
         self.model_status_id = None
-        self.model_alterations_id = None
         self.model_alteration_file = None
         self.project_num = None
         self.simulations = []
         self.config = config
+        self.project_types = []
+        self.model_alterations = []
 
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.model_path)

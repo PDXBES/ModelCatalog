@@ -44,7 +44,6 @@ class TestModelCatalogDataIO(TestCase):
         "Extract_Date",
         "Run_Date",
         "Model_Path",
-        "Project_Type_ID",
         "Model_Purpose_ID",
         "Model_Calibration_file",
         "Model_Status_ID",
@@ -76,7 +75,7 @@ class TestModelCatalogDataIO(TestCase):
             self.modelcatalogdataio.add_model(self.model_catalog.models[0], self.field_names)
         self.assertTrue(mock_cursor.insertRow.called)
         mock_cursor.insertRow.assert_called_with([0, 0, 0, None, None, None, None, None, None, None,
-                                                  None, None, None, None, None, None, None])
+                                                  None, None, None, None, None, None])
 
     @mock.patch("arcpy.da.InsertCursor")
     def test_add_model_add_invalid_model_exception_raised(self, mock_da_InsertCursor):

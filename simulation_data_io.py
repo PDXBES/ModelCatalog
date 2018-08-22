@@ -22,7 +22,7 @@ class SimulationDataIO:
         row_number = 0
         for row in cursor:
             if row_number%100 == 0:
-                print row_number
+                arcpy.AddMessage("      " + str(row_number))
             row_number += 1
             insert = arcpy.da.InsertCursor(rrad_results_feature_class_path, field_names_extended)
             insert_row = row + (model.model_id,

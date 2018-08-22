@@ -193,7 +193,8 @@ class EMGAATS_Model_Registration(object):
         self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
         self.model.model_path = parameters[1].valueAsText
-        self.model.project_type_id = self.config.proj_type_id[parameters[2].valueAsText]
+        #TODO: need 1-M for project types, write code to add project types
+        #TODO: need 1-M for model alterations, write code to add model alterations
         self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
         self.model.model_calibration_file = parameters[5].valueAsText
         self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
@@ -207,6 +208,7 @@ class EMGAATS_Model_Registration(object):
 
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
+    # type: (ModelCatalog, Config) -> None
     modelcatalogdataio = ModelCatalogDataIO(config)
     modeldataio = ModelDataIO(config)
     simulationdataio = SimulationDataIO(config)
@@ -222,7 +224,6 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         "Extract_Date",
         "Run_Date",
         "Model_Path",
-        "Project_Type_ID",
         "Model_Purpose_ID",
         "Model_Calibration_file",
         "Model_Status_ID",
@@ -236,15 +237,28 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     model.simulations = modeldataio.read_simulations(model)
     modeldataio.add_simulations(model, modelcatalogdataio)
     arcpy.AddMessage("Simulations Added")
-    arcpy.AddMessage("Writing results to RRAD")
-    for simulation in model.simulations:
-        arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-        simulationdataio.copy_area_results(simulation, model)
-        simulationdataio.copy_node_results(simulation, model)
-        #TODO: Flooding results not loaded during testing
-        #simulationdataio.copy_node_flooding_results(simulation, model)
-        simulationdataio.copy_link_results(simulation, model)
-    arcpy.AddMessage("Results written to RRAD")
+    # if config.model_status[model.model_status_id] == "Working":
+    #     arcpy.AddMessage("Model Status has been set to 'Working'")
+    #     arcpy.AddMessage("No results will be added to the RRAD")
+    # else:
+    #     arcpy.AddMessage("Writing results to RRAD")
+    #     for simulation in model.simulations:
+    #         arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
+    #         arcpy.AddMessage("  Adding Area results:")
+    #         simulationdataio.copy_area_results(simulation, model)
+    #         arcpy.AddMessage("  Adding node results:")
+    #         simulationdataio.copy_node_results(simulation, model)
+    #         #TODO: Flooding results not loaded during testing
+    #         try:
+    #             arcpy.AddMessage("  Adding node flooding results:")
+    #             simulationdataio.copy_node_flooding_results(simulation, model)
+    #         except:
+    #             arcpy.AddWarning("This results.gdb does not have a node flooding feature class.")
+    #             arcpy.AddWarning("The results should be processed with a newer version of EMGAATS.")
+    #         arcpy.AddMessage("  Adding link results:")
+    #         simulationdataio.copy_link_results(simulation, model)
+    #         arcpy.AddMessage("Results written to RRAD")
+
 
 def main():  # runs the whole thing; takes manual input if gui = False
     config = Config()
@@ -262,7 +276,7 @@ def main():  # runs the whole thing; takes manual input if gui = False
     model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
     model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
     model.created_by = getpass.getuser()
-    model.model_path = "C:\Temp\C2_Rehab"
+    model.model_path = r"C:\temp\15_pct_Base"
     model.project_type_id = 1
     model.model_purpose_id = 1
     model.model_calibration_file = "C:\Temp\Cal"

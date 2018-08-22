@@ -48,7 +48,6 @@ class ModelCatalogDataIO():
                model.extract_date,
                model.run_date,
                model.model_path,
-               model.project_type_id,
                model.model_purpose_id,
                model.model_calibration_file,
                model.model_status_id,
