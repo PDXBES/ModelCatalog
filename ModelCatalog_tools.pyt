@@ -260,34 +260,34 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
             arcpy.AddMessage("Results written to RRAD")
 
 
-def main():  # runs the whole thing; takes manual input if gui = False
-    config = Config()
-    model = Model(config)
-    model_catalog = ModelCatalog(config)
-    modelcatalogdataio = ModelCatalogDataIO(config)
-    model_id = modelcatalogdataio.retrieve_current_model_id()
-    model.model_id = model_id
-    model.parent_model_id = 555
-    model.model_request_id = 777
-    model.project_phase_id = 1
-    model.engine_type_id = 1
-    model.create_date = None
-    model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-    model.created_by = getpass.getuser()
-    model.model_path = r"C:\temp\15_pct_Base"
-    model.project_type_id = 1
-    model.model_purpose_id = 1
-    model.model_calibration_file = "C:\Temp\Cal"
-    model.model_status_id = 2
-    model.model_alteration_file = "C:\Temp\BC"
-    model.project_num = "E10TEST"
-    model.valid = True
-
-    model.create_date = datetime.datetime.today()
-    model_catalog.add_model(model)
-    EMGAATS_Model_Registration_function(model_catalog, config)
+# def main():  # runs the whole thing; takes manual input if gui = False
+#     config = Config()
+#     model = Model(config)
+#     model_catalog = ModelCatalog(config)
+#     modelcatalogdataio = ModelCatalogDataIO(config)
+#     model_id = modelcatalogdataio.retrieve_current_model_id()
+#     model.model_id = model_id
+#     model.parent_model_id = 555
+#     model.model_request_id = 777
+#     model.project_phase_id = 1
+#     model.engine_type_id = 1
+#     model.create_date = None
+#     model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+#     model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+#     model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+#     model.created_by = getpass.getuser()
+#     model.model_path = r"C:\temp\15_pct_Base"
+#     model.project_type_id = 1
+#     model.model_purpose_id = 1
+#     model.model_calibration_file = "C:\Temp\Cal"
+#     model.model_status_id = 2
+#     model.model_alteration_file = "C:\Temp\BC"
+#     model.project_num = "E10TEST"
+#     model.valid = True
+#
+#     model.create_date = datetime.datetime.today()
+#     model_catalog.add_model(model)
+#     EMGAATS_Model_Registration_function(model_catalog, config)
 
 
 #if __name__ == '__main__':

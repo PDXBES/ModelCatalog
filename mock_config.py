@@ -8,6 +8,7 @@ class MockConfig():
         self.config.current_id_table_sde_path = "current_id_table_sde_path"
         self.config.model_tracking_sde_path = "model_tracking_sde_path"
         self.config.simulation_sde_path = "simulation_sde_path"
+        self.config.rehab_nbcr_data_sde_path = "rehab_nbcr_data_sde_path"
 
         self.config.RRAD_sde_path = "RRAD_sde_path"
         self.config.area_results_sde_path = "area_results_sde_path"

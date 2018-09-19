@@ -20,6 +20,10 @@ class Config:
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
         self.model_alterations_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alterations"
 
+        rehab_test_sde = r"BESDBTEST1.REHAB.sde"
+        self.rehab_test_sde_path = os.path.join(sde_connections, rehab_test_sde)
+        self.rehab_nbcr_data_sde_path = self.rehab_test_sde_path + r"\REHAB.GIS.nBCR_Data"
+
         RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
         self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
 
