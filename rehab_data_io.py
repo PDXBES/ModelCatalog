@@ -15,7 +15,7 @@ class RehabDataIO():
         self.active_whole_pipe_feature_class = "nbcr_data_whole_pipes"
         self.rehab_branches_feature_class = "rehab_branches"
 
-        self.workspace = "c:\\temp\\in_memory.gdb"
+        self.workspace = "in_memory"
         self.active_whole_pipe_feature_class_path = self.workspace + "/" + self.active_whole_pipe_feature_class
         self.rehab_branches_feature_class_path = self.workspace + "/" + self.rehab_branches_feature_class
 
@@ -31,7 +31,7 @@ class RehabDataIO():
         arcpy.CopyFeatures_management(self.active_whole_pipe_layer, self.active_whole_pipe_feature_class_path)
 
     def create_branches_feature_class(self):
-        arcpy.Copy_management(self.config.rehab_branches_sde_path,
+        arcpy.CopyRows_management(self.config.rehab_branches_sde_path,
                                       self.rehab_branches_feature_class_path)
 
     def delete_nbcr_data_bpw_field(self):
@@ -45,9 +45,24 @@ class RehabDataIO():
                                    "BPW")
 
     def append_whole_pipes_to_rehab_results(self):
-        arcpy.Append_management(self.active_whole_pipe_feature_class_path,
-                                self.config.rehab_results_sde_path,
-                                "NO_TEST")
+        try:
+            edit = arcpy.da.Editor(self.config.RRAD_sde_path)
 
+            edit.startEditing(False, True)
 
-#TODO: try copy rows to use in_memory
+            edit.startOperation()
+            print("starting append")
+            arcpy.Append_management(self.active_whole_pipe_feature_class_path, self.config.rehab_results_sde_path, "NO_TEST")
+            #raise arcpy.ExecuteError()
+            print("Append Complete")
+            edit.stopOperation()
+
+            edit.stopEditing(True)
+
+        except:
+            print("Exception Raised, stopping edits")
+            edit.undoOperation()
+            edit.abortOperation()
+            edit.stopEditing(False)
+
+#TODO: make unit test match what we did in append_whole_pipes_to_rehab_results and patch the edit sessions to append whole pipes

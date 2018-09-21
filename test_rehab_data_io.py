@@ -26,8 +26,8 @@ class TestRehabDataIO(TestCase):
         self.patch_copy_features = mock.patch("arcpy.CopyFeatures_management")
         self.mock_copy_features = self.patch_copy_features.start()
 
-        self.patch_copy = mock.patch("arcpy.Copy_management")
-        self.mock_copy = self.patch_copy.start()
+        self.patch_copy_rows = mock.patch("arcpy.CopyRows_management")
+        self.mock_copy_rows = self.patch_copy_rows.start()
 
     def tearDown(self):
         self.mock_make_feature_layer = self.patch_make_feature_layer.stop()
@@ -36,7 +36,7 @@ class TestRehabDataIO(TestCase):
         self.mock_join_field = self.patch_join_field.stop()
         self.mock_append = self.patch_append.stop()
         self.mock_copy_features = self.patch_copy_features.stop()
-        self.mock_copy = self.patch_copy.stop()
+        self.mock_copy_rows = self.patch_copy_rows.stop()
 
     def test_select_nbcr_data_pipes_calls_make_feature_layer(self):
         self.rehab_data_io.select_nbcr_data_pipes()
@@ -59,14 +59,14 @@ class TestRehabDataIO(TestCase):
         self.mock_copy_features.assert_called_with("nbcr_data_whole_pipes_layer",
                                                    "in_memory/nbcr_data_whole_pipes")
 
-    def test_create_branches_feature_class_calls_copy(self):
+    def test_create_branches_feature_class_calls_copy_rows(self):
         self.rehab_data_io.create_branches_feature_class()
-        self.assertTrue(self.mock_copy.called)
+        self.assertTrue(self.mock_copy_rows.called)
 
 
     def test_create_branches_feature_class_called_with_correct_arguments(self):
         self.rehab_data_io.create_branches_feature_class()
-        self.mock_copy.assert_called_with("rehab_branches_sde_path",
+        self.mock_copy_rows.assert_called_with("rehab_branches_sde_path",
                                                    "in_memory/rehab_branches")
 
     def test_delete_nbcr_data_bpw_field_calls_delete_field_management(self):
@@ -99,3 +99,4 @@ class TestRehabDataIO(TestCase):
         self.mock_append.assert_called_with("in_memory/nbcr_data_whole_pipes",
                                             "rehab_results_sde_path",
                                             "NO_TEST")
+
