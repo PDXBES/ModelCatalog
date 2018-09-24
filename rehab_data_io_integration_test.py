@@ -5,15 +5,16 @@ import arcpy
 config = Config()
 rehab_data_io = RehabDataIO(config)
 
+rehab_data_io.convert_nbcr_data_to_table()
 
 print("starting copy data management for branches")
 rehab_data_io.create_branches_feature_class()
 print("copy data management for branches complete, Starting pipe selection")
 
-rehab_data_io.select_nbcr_data_pipes()
+rehab_data_io._select_nbcr_data_pipes()
 print("Pipe Selection complete, starting copy data management for pipes")
 
-rehab_data_io.create_pipe_feature_class()
+rehab_data_io._create_pipe_feature_class()
 print("data management for pipes complete, starting delete field")
 
 rehab_data_io.delete_nbcr_data_bpw_field()
