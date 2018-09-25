@@ -4,11 +4,12 @@ import mock
 from mock_config import MockConfig
 
 class TestRehabDataIO(TestCase):
+
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
 
-        self.rehab_data_io = RehabDataIO(self.config )
+        self.rehab_data_io = RehabDataIO(self.config)
         self.patch_make_feature_layer = mock.patch("arcpy.MakeFeatureLayer_management")
         self.patch_select_by_attribute = mock.patch("arcpy.SelectLayerByAttribute_management")
         self.mock_make_feature_layer = self.patch_make_feature_layer.start()
@@ -32,8 +33,11 @@ class TestRehabDataIO(TestCase):
         self.patch_table_to_table = mock.patch("arcpy.TableToTable_conversion")
         self.mock_table_to_table = self.patch_table_to_table.start()
 
-        self.patch_select_nbcr_data_pipes = mock.patch("select_nbcr_data_pipes")
-        self.mock_select_nbcr_data_pipes = self.patch_select_nbcr_data_pipes.start()
+        #self.patch_select_nbcr_data_pipes = mock.patch.object(self.rehab_data_io, "_select_nbcr_data_pipes")
+        #self.mock_select_nbcr_data_pipes = self.patch_select_nbcr_data_pipes.start()
+
+        #self.patch_create_pipe_feature_class = mock.patch.object(self.rehab_data_io, "_create_pipe_feature_class")
+        #self.mock_create_pipe_feature_class = self.patch_create_pipe_feature_class.start()
 
     def tearDown(self):
         self.mock_make_feature_layer = self.patch_make_feature_layer.stop()
@@ -44,7 +48,8 @@ class TestRehabDataIO(TestCase):
         self.mock_copy_features = self.patch_copy_features.stop()
         self.mock_copy_rows = self.patch_copy_rows.stop()
         self.mock_table_to_table = self.patch_table_to_table.stop()
-        self.mock_select_nbcr_data_pipes = self.patch_select_nbcr_data_pipes.stop()
+        #self.mock_select_nbcr_data_pipes = self.patch_select_nbcr_data_pipes.stop()
+        #self.mock_create_pipe_feature_class = self.patch_create_pipe_feature_class.stop()
 
     def test_select_nbcr_data_pipes_calls_make_feature_layer(self):
         self.rehab_data_io._select_nbcr_data_pipes()
@@ -67,22 +72,22 @@ class TestRehabDataIO(TestCase):
         self.mock_copy_features.assert_called_with("nbcr_data_whole_pipes_layer",
                                                    "in_memory/nbcr_data_whole_pipes")
 
-    def test_create_branches_feature_class_calls_copy_rows(self):
-        self.rehab_data_io.create_branches_feature_class()
+    def test_create_branches_table_calls_copy_rows(self):
+        self.rehab_data_io.create_branches_table()
         self.assertTrue(self.mock_copy_rows.called)
 
 
-    def test_create_branches_feature_class_called_with_correct_arguments(self):
-        self.rehab_data_io.create_branches_feature_class()
+    def test_create_branches_table_called_with_correct_arguments(self):
+        self.rehab_data_io.create_branches_table()
         self.mock_copy_rows.assert_called_with("rehab_branches_sde_path",
                                                    "in_memory/rehab_branches")
 
     def test_delete_nbcr_data_bpw_field_calls_delete_field_management(self):
-        self.rehab_data_io.delete_nbcr_data_bpw_field()
+        self.rehab_data_io.delete_nbcr_data_bpw_field("in_memory/nbcr_data_whole_pipes")
         self.assertTrue(self.mock_delete_field.called)
 
     def test_delete_nbcr_data_bpw_field_called_with_correct_arguments(self):
-        self.rehab_data_io.delete_nbcr_data_bpw_field()
+        self.rehab_data_io.delete_nbcr_data_bpw_field("in_memory/nbcr_data_whole_pipes")
         self.mock_delete_field.assert_called_with("in_memory/nbcr_data_whole_pipes",
                                                   "BPW")
 
@@ -119,8 +124,16 @@ class TestRehabDataIO(TestCase):
                                              "nbcr_data_whole_pipe_table",
                                              "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' ) and cutno = 0 and compkey is not Null")
 
-    def test_convert_nbcr_data_to_table_calls_select_nbcr_data_pipes(self):
-        self.rehab_data_io.convert_nbcr_data_to_table()
-        self.assertTrue(self.mock_select_nbcr_data_pipes.called)
+    # @mock.patch.object(rehab_data_io, "_select_nbcr_data_pipes")
+    # @mock.patch.object(rehab_data_io, "_create_pipe_feature_class")
+    # def test_convert_nbcr_data_to_table_calls_select_nbcr_data_pipes(self, mock_create_pipe_feature_class, mock_select_nbcr_data_pipes):
+    #     self.rehab_data_io.convert_nbcr_data_to_table()
+    #     self.assertTrue(mock_select_nbcr_data_pipes.called)
+    #
+    # @mock.patch.object(rehab_data_io, "_select_nbcr_data_pipes")
+    # @mock.patch.object(rehab_data_io, "_create_pipe_feature_class")
+    # def test_convert_nbcr_data_to_table_calls_create_pipe_feature_class(self, mock_create_pipe_feature_class, mock_select_nbcr_data_pipes):
+    #     self.rehab_data_io.convert_nbcr_data_to_table()
+    #     self.assertTrue(mock_create_pipe_feature_class.called)
 
-#TODO: test for functions in convert_nbcr_data_to_table
+

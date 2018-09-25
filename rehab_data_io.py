@@ -17,8 +17,9 @@ class RehabDataIO():
 
         self.workspace = "in_memory"
         self.active_whole_pipe_feature_class_path = self.workspace + "/" + self.active_whole_pipe_feature_class
-        self.rehab_branches_feature_class_path = self.workspace + "/" + self.rehab_branches_feature_class
+        self.rehab_branches_table_path = self.workspace + "/" + self.rehab_branches_feature_class
         self.nbcr_data_whole_pipe_table = "nbcr_data_whole_pipe_table"
+        self.nbcr_data_whole_pipe_table_path = self.workspace + "/" +self.nbcr_data_whole_pipe_table
 
         self.select_active_segments_sql = "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' )"
         self.select_whole_pipe_sql = "cutno = 0 and compkey is not Null"
@@ -32,17 +33,17 @@ class RehabDataIO():
     def _create_pipe_feature_class(self):
         arcpy.CopyFeatures_management(self.active_whole_pipe_layer, self.active_whole_pipe_feature_class_path)
 
-    def create_branches_feature_class(self):
+    def create_branches_table(self):
         arcpy.CopyRows_management(self.config.rehab_branches_sde_path,
-                                      self.rehab_branches_feature_class_path)
+                                  self.rehab_branches_table_path)
 
-    def delete_nbcr_data_bpw_field(self):
-        arcpy.DeleteField_management(self.active_whole_pipe_feature_class_path, "BPW")
+    def delete_nbcr_data_bpw_field(self, input_table):
+        arcpy.DeleteField_management(input_table, "BPW")
 
     def add_bpw_from_branches(self):
         arcpy.JoinField_management(self.active_whole_pipe_feature_class_path,
                                    "compkey",
-                                   self.rehab_branches_feature_class_path,
+                                   self.rehab_branches_table_path,
                                    "compkey",
                                    "BPW")
 
@@ -74,6 +75,9 @@ class RehabDataIO():
                                       self.workspace,
                                       self.nbcr_data_whole_pipe_table,
                                       self.select_active_whole_pipe_sql)
+        self.delete_nbcr_data_bpw_field(self.nbcr_data_whole_pipe_table_path)
+        self.create_branches_table()
+        self.add_bpw_from_branches()
 
-#TODO: can we mock a function that we're using in a different function in the same class
+
 #TODO: make unit test match what we did in append_whole_pipes_to_rehab_results and patch the edit sessions to append whole pipes
