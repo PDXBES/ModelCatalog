@@ -33,11 +33,9 @@ class TestRehabDataIO(TestCase):
         self.patch_table_to_table = mock.patch("arcpy.TableToTable_conversion")
         self.mock_table_to_table = self.patch_table_to_table.start()
 
-        #self.patch_select_nbcr_data_pipes = mock.patch.object(self.rehab_data_io, "_select_nbcr_data_pipes")
-        #self.mock_select_nbcr_data_pipes = self.patch_select_nbcr_data_pipes.start()
+        #self.patch_da_editor = mock.patch("arcpy.da.Editor")
+        #self.mock_da_editor = self.patch_da_editor.start()
 
-        #self.patch_create_pipe_feature_class = mock.patch.object(self.rehab_data_io, "_create_pipe_feature_class")
-        #self.mock_create_pipe_feature_class = self.patch_create_pipe_feature_class.start()
 
     def tearDown(self):
         self.mock_make_feature_layer = self.patch_make_feature_layer.stop()
@@ -48,8 +46,7 @@ class TestRehabDataIO(TestCase):
         self.mock_copy_features = self.patch_copy_features.stop()
         self.mock_copy_rows = self.patch_copy_rows.stop()
         self.mock_table_to_table = self.patch_table_to_table.stop()
-        #self.mock_select_nbcr_data_pipes = self.patch_select_nbcr_data_pipes.stop()
-        #self.mock_create_pipe_feature_class = self.patch_create_pipe_feature_class.stop()
+        #self.mock_da_editor = self.patch_da_editor.stop()
 
     def test_select_nbcr_data_pipes_calls_make_feature_layer(self):
         self.rehab_data_io._select_nbcr_data_pipes()
@@ -103,6 +100,39 @@ class TestRehabDataIO(TestCase):
                                                 "compkey",
                                                 "BPW")
 
+    def test_convert_nbcr_data_to_table_calls_table_to_table(self):
+        self.rehab_data_io.convert_nbcr_data_to_table()
+        self.assertTrue(self.mock_table_to_table.called)
+
+    def test_convert_nbcr_data_to_table_calls_select_nbcr_data_pipes(self):
+        with mock.patch.object(self.rehab_data_io, "_select_nbcr_data_pipes") as mock_select_nbcr_data_pipes:
+            self.rehab_data_io.convert_nbcr_data_to_table()
+            self.assertTrue(mock_select_nbcr_data_pipes.called)
+
+    def test_convert_nbcr_data_to_table_calls_create_pipe_feature_class(self):
+        with mock.patch.object(self.rehab_data_io, "_create_pipe_feature_class") as mock_create_pipe_feature_class:
+            self.rehab_data_io.convert_nbcr_data_to_table()
+            self.assertTrue(mock_create_pipe_feature_class.called)
+
+    def test_convert_nbcr_data_to_table_called_with_correct_arguments(self):
+        self.rehab_data_io.convert_nbcr_data_to_table()
+        self.mock_table_to_table.assert_called_with("rehab_nbcr_data_sde_path",
+                                             "in_memory",
+                                             "nbcr_data_whole_pipe_table",
+                                             "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' ) and cutno = 0 and compkey is not Null")
+
+    # def test_convert_nbcr_data_to_table_calls_delete_nbcr_data_bpw_field(self):
+
+    # def test_convert_nbcr_data_to_table_calls_create_branches_table(self):
+
+    # def test_convert_nbcr_data_to_table_calls_add_bpw_from_branches(self):
+
+    # def test_create_pipes
+
+    # def test_write_pipes_to_table
+
+    # def test_join_pipe_table_to_pipe_feature_class
+
     def test_append_whole_pipes_to_rehab_results_calls_append_management(self):
         self.rehab_data_io.append_whole_pipes_to_rehab_results()
         self.assertTrue(self.mock_append.called)
@@ -112,28 +142,3 @@ class TestRehabDataIO(TestCase):
         self.mock_append.assert_called_with("in_memory/nbcr_data_whole_pipes",
                                             "rehab_results_sde_path",
                                             "NO_TEST")
-
-    def test_convert_nbcr_data_to_table_calls_table_to_table(self):
-        self.rehab_data_io.convert_nbcr_data_to_table()
-        self.assertTrue(self.mock_table_to_table.called)
-
-    def test_convert_nbcr_data_to_table_called_with_correct_arguments(self):
-        self.rehab_data_io.convert_nbcr_data_to_table()
-        self.mock_table_to_table.assert_called_with("rehab_nbcr_data_sde_path",
-                                             "in_memory",
-                                             "nbcr_data_whole_pipe_table",
-                                             "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' ) and cutno = 0 and compkey is not Null")
-
-    # @mock.patch.object(rehab_data_io, "_select_nbcr_data_pipes")
-    # @mock.patch.object(rehab_data_io, "_create_pipe_feature_class")
-    # def test_convert_nbcr_data_to_table_calls_select_nbcr_data_pipes(self, mock_create_pipe_feature_class, mock_select_nbcr_data_pipes):
-    #     self.rehab_data_io.convert_nbcr_data_to_table()
-    #     self.assertTrue(mock_select_nbcr_data_pipes.called)
-    #
-    # @mock.patch.object(rehab_data_io, "_select_nbcr_data_pipes")
-    # @mock.patch.object(rehab_data_io, "_create_pipe_feature_class")
-    # def test_convert_nbcr_data_to_table_calls_create_pipe_feature_class(self, mock_create_pipe_feature_class, mock_select_nbcr_data_pipes):
-    #     self.rehab_data_io.convert_nbcr_data_to_table()
-    #     self.assertTrue(mock_create_pipe_feature_class.called)
-
-
