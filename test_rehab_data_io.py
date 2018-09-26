@@ -2,6 +2,7 @@ from unittest import TestCase
 from rehab_data_io import RehabDataIO
 import mock
 from mock_config import MockConfig
+from pipe import Pipe
 
 class TestRehabDataIO(TestCase):
 
@@ -33,9 +34,33 @@ class TestRehabDataIO(TestCase):
         self.patch_table_to_table = mock.patch("arcpy.TableToTable_conversion")
         self.mock_table_to_table = self.patch_table_to_table.start()
 
-        #self.patch_da_editor = mock.patch("arcpy.da.Editor")
-        #self.mock_da_editor = self.patch_da_editor.start()
+        self.patch_da_editor = mock.patch("arcpy.da.Editor")
+        self.mock_da_editor = self.patch_da_editor.start()
 
+        self.patch_da_search_cursor = mock.patch("arcpy.da.SearchCursor")
+        self.mock_da_search_cursor = self.patch_da_search_cursor.start()
+
+        self.whole_pipe_fields = ["compkey", "bpw", "usnode",
+                                  "dsnode", "diamwidth", "length",
+                                  "material", "lateralcost", "manholecost",
+                                  "asmrecommendednbcr", "asmrecommendedaction",
+                                  "apwspot","apwliner", "apwwhole", "lateralcount", "globalid"]
+
+        self.dummy_row_1 = [1, 2, "usnode1",
+                                   "dsnode1", 3, 4,
+                                   "material1", 5, 6,
+                                   7, "asmrecommendedaction1",
+                                   9, 10, 11, 12, 13]
+
+        self.dummy_row_2 = [12, 22, "usnode2",
+                                   "dsnode2", 32, 42,
+                                   "material2", 52, 62,
+                                   72, "asmrecommendedaction2",
+                                   92, 102, 112, 122, 132]
+
+        self.mock_da_search_cursor.return_value = [self.dummy_row_1, self.dummy_row_2]
+
+        self.rehab_id = 99
 
     def tearDown(self):
         self.mock_make_feature_layer = self.patch_make_feature_layer.stop()
@@ -46,7 +71,9 @@ class TestRehabDataIO(TestCase):
         self.mock_copy_features = self.patch_copy_features.stop()
         self.mock_copy_rows = self.patch_copy_rows.stop()
         self.mock_table_to_table = self.patch_table_to_table.stop()
-        #self.mock_da_editor = self.patch_da_editor.stop()
+        self.mock_da_editor = self.patch_da_editor.stop()
+        self.mock_da_search_cursor = self.patch_da_search_cursor.stop()
+
 
     def test_select_nbcr_data_pipes_calls_make_feature_layer(self):
         self.rehab_data_io._select_nbcr_data_pipes()
@@ -121,13 +148,83 @@ class TestRehabDataIO(TestCase):
                                              "nbcr_data_whole_pipe_table",
                                              "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' ) and cutno = 0 and compkey is not Null")
 
-    # def test_convert_nbcr_data_to_table_calls_delete_nbcr_data_bpw_field(self):
+    def test_convert_nbcr_data_to_table_calls_delete_nbcr_data_bpw_field(self):
+        with mock.patch.object(self.rehab_data_io, "delete_nbcr_data_bpw_field") as mock_delete_nbcr_data_bpw_field:
+            self.rehab_data_io.convert_nbcr_data_to_table()
+            self.assertTrue(mock_delete_nbcr_data_bpw_field.called)
 
-    # def test_convert_nbcr_data_to_table_calls_create_branches_table(self):
+    def test_convert_nbcr_data_to_table_calls_delete_nbcr_data_bpw_field_with_correct_arguments(self):
+        with mock.patch.object(self.rehab_data_io, "delete_nbcr_data_bpw_field") as mock_delete_nbcr_data_bpw_field:
+            self.rehab_data_io.nbcr_data_whole_pipe_table_path = "nbcr_data_whole_pipe_table_path"
+            self.rehab_data_io.convert_nbcr_data_to_table()
+            mock_delete_nbcr_data_bpw_field.assert_called_with("nbcr_data_whole_pipe_table_path")
 
-    # def test_convert_nbcr_data_to_table_calls_add_bpw_from_branches(self):
 
-    # def test_create_pipes
+    def test_convert_nbcr_data_to_table_calls_create_branches_table(self):
+        with mock.patch.object(self.rehab_data_io, "create_branches_table") as mock_create_branches_table:
+            self.rehab_data_io.convert_nbcr_data_to_table()
+            self.assertTrue(mock_create_branches_table.called)
+
+    def test_convert_nbcr_data_to_table_calls_add_bpw_from_branches(self):
+        with mock.patch.object(self.rehab_data_io, "add_bpw_from_branches") as mock_add_bpw_from_branches:
+            self.rehab_data_io.convert_nbcr_data_to_table()
+            self.assertTrue(mock_add_bpw_from_branches.called)
+
+    def test_create_pipes_calls_search_cursor(self):
+        self.rehab_data_io.create_pipes(self.rehab_id)
+        self.assertTrue(self.mock_da_search_cursor.called)
+
+    def test_create_pipes_calls_search_cursor_with_correct_arguments(self):
+        self.rehab_data_io.nbcr_data_whole_pipe_table_path = "nbcr_data_whole_pipe_table_path"
+        self.rehab_data_io.create_pipes(self.rehab_id)
+        self.mock_da_search_cursor.assert_called_with("nbcr_data_whole_pipe_table_path",
+                                                      self.whole_pipe_fields)
+
+    def test_create_pipes_returns_list_of_two_pipes(self):
+        return_pipes = self.rehab_data_io.create_pipes(self.rehab_id)
+        self.assertTrue(len(return_pipes),2)
+
+    def test_create_pipes_returns_matching_values(self):
+        return_pipes = self.rehab_data_io.create_pipes(self.rehab_id)
+        pipe1 = return_pipes[0]
+        pipe2 = return_pipes[1]
+
+        self.assertTrue(pipe1.rehab_id, self.rehab_id)
+        self.assertTrue(pipe1.compkey, self.dummy_row_1[0])
+        self.assertTrue(pipe1.bpw, self.dummy_row_1[1])
+        self.assertTrue(pipe1.usnode, self.dummy_row_1[2])
+        self.assertTrue(pipe1.dsnode, self.dummy_row_1[3])
+        self.assertTrue(pipe1.diamwidth, self.dummy_row_1[4])
+        self.assertTrue(pipe1.length, self.dummy_row_1[5])
+        self.assertTrue(pipe1.material, self.dummy_row_1[6])
+        self.assertTrue(pipe1.lateralcost, self.dummy_row_1[7])
+        self.assertTrue(pipe1.manholecost, self.dummy_row_1[8])
+        self.assertTrue(pipe1.asmrecommendednbcr, self.dummy_row_1[9])
+        self.assertTrue(pipe1.asmrecommendedaction, self.dummy_row_1[10])
+        self.assertTrue(pipe1.apwspot, self.dummy_row_1[11])
+        self.assertTrue(pipe1.apwliner, self.dummy_row_1[12])
+        self.assertTrue(pipe1.apwwhole, self.dummy_row_1[13])
+        self.assertTrue(pipe1.lateralcount, self.dummy_row_1[14])
+        self.assertTrue(pipe1.globalid, self.dummy_row_1[15])
+
+        self.assertTrue(pipe2.rehab_id, self.rehab_id)
+        self.assertTrue(pipe2.compkey, self.dummy_row_2[0])
+        self.assertTrue(pipe2.bpw, self.dummy_row_2[1])
+        self.assertTrue(pipe2.usnode, self.dummy_row_2[2])
+        self.assertTrue(pipe2.dsnode, self.dummy_row_2[3])
+        self.assertTrue(pipe2.diamwidth, self.dummy_row_2[4])
+        self.assertTrue(pipe2.length, self.dummy_row_2[5])
+        self.assertTrue(pipe2.material, self.dummy_row_2[6])
+        self.assertTrue(pipe2.lateralcost, self.dummy_row_2[7])
+        self.assertTrue(pipe2.manholecost, self.dummy_row_2[8])
+        self.assertTrue(pipe2.asmrecommendednbcr, self.dummy_row_2[9])
+        self.assertTrue(pipe2.asmrecommendedaction, self.dummy_row_2[10])
+        self.assertTrue(pipe2.apwspot, self.dummy_row_2[11])
+        self.assertTrue(pipe2.apwliner, self.dummy_row_2[12])
+        self.assertTrue(pipe2.apwwhole, self.dummy_row_2[13])
+        self.assertTrue(pipe2.lateralcount, self.dummy_row_2[14])
+        self.assertTrue(pipe2.globalid, self.dummy_row_2[15])
+
 
     # def test_write_pipes_to_table
 

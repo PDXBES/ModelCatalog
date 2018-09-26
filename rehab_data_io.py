@@ -4,6 +4,7 @@ try:
 except:
     pass
 from config import Config
+from pipe import Pipe
 
 
 class RehabDataIO():
@@ -24,6 +25,12 @@ class RehabDataIO():
         self.select_active_segments_sql = "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' )"
         self.select_whole_pipe_sql = "cutno = 0 and compkey is not Null"
         self.select_active_whole_pipe_sql = self.select_active_segments_sql + " and " + self.select_whole_pipe_sql
+
+        self.whole_pipe_fields = ["compkey", "bpw", "usnode",
+                                  "dsnode", "diamwidth", "length",
+                                  "material", "lateralcost", "manholecost",
+                                  "asmrecommendednbcr", "asmrecommendedaction",
+                                  "apwspot", "apwliner", "apwwhole", "lateralcount", "globalid"]
 
     def _select_nbcr_data_pipes(self):
 
@@ -79,5 +86,29 @@ class RehabDataIO():
         self.create_branches_table()
         self.add_bpw_from_branches()
 
+    def create_pipes(self, rehab_id):
+        pipes = []
+        cursor = arcpy.da.SearchCursor(self.nbcr_data_whole_pipe_table_path, self.whole_pipe_fields)
+        for row in cursor:
+            pipe = Pipe()
+            pipe.rehab_id = rehab_id
+            pipe.compkey = row[0]
+            pipe.bpw = row[1]
+            pipe.usnode = row[2]
+            pipe.dsnode = row[3]
+            pipe.diamwidth = row[4]
+            pipe.length = row[5]
+            pipe.material = row[6]
+            pipe.lateralcost = row[7]
+            pipe.manholecost = row[8]
+            pipe.asmrecommendednbcr = row[9]
+            pipe.asmrecommendedaction = row[10]
+            pipe.apwspot = row[11]
+            pipe.apwliner = row[12]
+            pipe.apwwhole = row[13]
+            pipe.lateralcount = row[14]
+            pipe.globalid = row[15]
+            pipes.append(pipe)
+        return pipes
 
 #TODO: make unit test match what we did in append_whole_pipes_to_rehab_results and patch the edit sessions to append whole pipes
