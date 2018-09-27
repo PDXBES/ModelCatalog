@@ -5,11 +5,12 @@ class MockConfig():
     def __init__(self):
         self.config = mock.MagicMock(Config)
         self.config.model_catalog_sde_path = "model_catalog_sde_path"
-        self.config.current_id_table_sde_path = "current_id_table_sde_path"
+        self.config.model_catalog_current_id_table_sde_path = "model_catalog_current_id_table_sde_path"
         self.config.model_tracking_sde_path = "model_tracking_sde_path"
         self.config.simulation_sde_path = "simulation_sde_path"
         self.config.rehab_nbcr_data_sde_path = "rehab_nbcr_data_sde_path"
         self.config.rehab_branches_sde_path = "rehab_branches_sde_path"
+        self.config.rrad_current_id_table_sde_path = "rrad_current_id_table_sde_path"
 
         self.config.RRAD_sde_path = "RRAD_sde_path"
         self.config.area_results_sde_path = "area_results_sde_path"

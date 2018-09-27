@@ -120,8 +120,9 @@ class TestRehabDataIO(TestCase):
         self.assertTrue(self.mock_join_field.called)
 
     def test_add_bpw_from_branches_called_with_correct_arguments(self):
+        self.rehab_data_io.nbcr_data_whole_pipe_table_path = "in_memory/nbcr_data_whole_pipes_table"
         self.rehab_data_io.add_bpw_from_branches()
-        self.mock_join_field.assert_called_with("in_memory/nbcr_data_whole_pipes",
+        self.mock_join_field.assert_called_with("in_memory/nbcr_data_whole_pipes_table",
                                                 "compkey",
                                                 "in_memory/rehab_branches",
                                                 "compkey",

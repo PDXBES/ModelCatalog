@@ -6,23 +6,14 @@ except:
     pass
 from model import Model
 from config import Config
+from data_io import DataIO
 
-class ModelCatalogDataIO():
+class ModelCatalogDataIO(DataIO):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config
+        self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
 
-    def retrieve_current_id(self, object_type):
-        # type: (str, str) -> int
-        field_names = ["Object_Type", "Current_ID"]
-        cursor = arcpy.da.UpdateCursor(self.config.current_id_table_sde_path, field_names)
-        for row in cursor:
-            object_name, current_id = row
-            if object_type == object_name:
-                next_id = current_id + 1
-                break
-        cursor.updateRow([object_name, next_id])
-        return current_id
 
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id("model")

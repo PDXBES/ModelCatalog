@@ -57,6 +57,12 @@ class TestModelCatalogDataIO(TestCase):
         self.model_catalog.models.append(self.model)
         self.model.valid = True
 
+        self.patch_da_UpdateCursor = mock.patch("arcpy.da.UpdateCursor")
+        self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.start()
+
+    def tearDown(self):
+        self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
+
 
     @mock.patch("arcpy.da.InsertCursor")
     def test_add_model_called_insert_cursor(self, mock_da_InsertCursor):
@@ -89,48 +95,14 @@ class TestModelCatalogDataIO(TestCase):
         with self.assertRaises(Field_names_length_does_not_match_row_length_exception):
             self.modelcatalogdataio.add_model(self.model_catalog.models[0], self.field_names)
 
-    def test_retrieve_current_id_called_update_cursor(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            self.modelcatalogdataio.retrieve_current_id("model")
-        self.assertTrue(mock_da_UpdateCursor.called)
-
-    def test_retrieve_current_id_called_with_correct_arguments(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            self.modelcatalogdataio.retrieve_current_id("model")
-        mock_da_UpdateCursor.assert_called_with(self.config.current_id_table_sde_path, self.field_names_retrieve_id)
-
-    def test_retrieve_current_id_update_next_id_of_model_object(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            self.modelcatalogdataio.retrieve_current_id("model")
-        self.assertTrue(self.mock_update_cursor.updateRow.called)
-        self.mock_update_cursor.updateRow.assert_called_with(["model", 45])
-
-    def test_retrieve_current_id_update_next_id_of_simulation_object(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            self.modelcatalogdataio.retrieve_current_id("simulation")
-        self.assertTrue(self.mock_update_cursor.updateRow.called)
-        self.mock_update_cursor.updateRow.assert_called_with(["simulation", 56])
-
-    def test_retrieve_current_id_return_current_ID(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            current_id = self.modelcatalogdataio.retrieve_current_id("model")
-        self.assertTrue(current_id == 44)
-
     def test_retrieve_current_model_id(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            current_model_id = self.modelcatalogdataio.retrieve_current_model_id()
+        self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+        current_model_id = self.modelcatalogdataio.retrieve_current_model_id()
         self.assertTrue(current_model_id == 44)
 
     def test_retrieve_current_simulation_id(self):
-        with mock.patch("arcpy.da.UpdateCursor") as mock_da_UpdateCursor:
-            mock_da_UpdateCursor.return_value = self.mock_update_cursor
-            current_simulation_id = self.modelcatalogdataio.retrieve_current_simulation_id()
+        self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+        current_simulation_id = self.modelcatalogdataio.retrieve_current_simulation_id()
         self.assertTrue(current_simulation_id == 55)
 
 

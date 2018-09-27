@@ -15,7 +15,7 @@ class Config:
 
         model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
-        self.current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
+        self.model_catalog_current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
         self.model_alterations_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alterations"
@@ -33,6 +33,7 @@ class Config:
         self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
         self.flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
         self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
+        self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
 
         EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)

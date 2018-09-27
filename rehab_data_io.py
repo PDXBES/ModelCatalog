@@ -48,7 +48,7 @@ class RehabDataIO():
         arcpy.DeleteField_management(input_table, "BPW")
 
     def add_bpw_from_branches(self):
-        arcpy.JoinField_management(self.active_whole_pipe_feature_class_path,
+        arcpy.JoinField_management(self.nbcr_data_whole_pipe_table_path,
                                    "compkey",
                                    self.rehab_branches_table_path,
                                    "compkey",
