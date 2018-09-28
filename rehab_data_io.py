@@ -17,6 +17,8 @@ class RehabDataIO():
         self.rehab_branches_feature_class = "rehab_branches"
 
         self.workspace = "in_memory"
+        self.output_pipes_table = "output_pipes_table"
+        self.output_pipes_table_path = self.workspace + "/" + self.output_pipes_table
         self.active_whole_pipe_feature_class_path = self.workspace + "/" + self.active_whole_pipe_feature_class
         self.rehab_branches_table_path = self.workspace + "/" + self.rehab_branches_feature_class
         self.nbcr_data_whole_pipe_table = "nbcr_data_whole_pipe_table"
@@ -32,6 +34,7 @@ class RehabDataIO():
                                   "asmrecommendednbcr", "asmrecommendedaction",
                                   "apwspot", "apwliner", "apwwhole", "lateralcount", "globalid"]
 
+        self.output_pipes_table_fields = self.whole_pipe_fields + ["apw", "capitalcost"]
     def _select_nbcr_data_pipes(self):
 
         arcpy.MakeFeatureLayer_management(self.config.rehab_nbcr_data_sde_path, self.active_whole_pipe_layer,
@@ -111,4 +114,6 @@ class RehabDataIO():
             pipes.append(pipe)
         return pipes
 
-#TODO: make unit test match what we did in append_whole_pipes_to_rehab_results and patch the edit sessions to append whole pipes
+    def write_pipes_to_table(self, rehab):
+        arcpy.CreateTable_management(self.workspace, self.output_pipes_table, self.config.rehab_results_sde_path)
+        arcpy.da.InsertCursor(self.output_pipes_table_path, self.output_pipes_table_fields )

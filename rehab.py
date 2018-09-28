@@ -16,3 +16,13 @@ class Rehab():
         self.last_inspection_date = None
         self.purpose = None
         self.pipes = []
+
+
+    def calculate_apw(self):
+        for pipe in self.pipes:
+            pipe.calculate_apw()
+
+    def calculate_capital_cost(self):
+        for pipe in self.pipes:
+            pipe.calculate_capital_cost()
+

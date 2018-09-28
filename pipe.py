@@ -22,7 +22,7 @@ class Pipe():
         self.globalid = None
 
 
-    def _calculate_apw(self):
+    def calculate_apw(self):
         if self.asmrecommendedaction.upper() == "SP":
             self.apw = self.apwspot
         elif self.asmrecommendedaction.upper() == "CIPP":
@@ -32,22 +32,24 @@ class Pipe():
         else:
             raise Exception
 
-    def _calculate_capital_cost(self):
-        self.capitalcost = (self.bpw - self.apw) / self.asmrecommendednbcr
+    def calculate_capital_cost(self):
+        if self._is_greater_than_zero(self.apw) and self._is_greater_than_zero(self.asmrecommendednbcr):
+            self.capitalcost = (self.bpw - self.apw) / self.asmrecommendednbcr
+        else:
+            return None
 
-    def _is_positive_number(self, input_value):
+    def _is_greater_than_zero(self, input_value):
         try:
             float(input_value)
-            if input_value < 0 or math.isnan(input_value):
+            if input_value <= 0 or math.isnan(input_value):
                 return False
         except:
             return False
         return True
 
     def valid(self):
-        if self._is_positive_number(self.apw) and self._is_positive_number(self.bpw) and self._is_positive_number(self.capitalcost):
-            self._calculate_apw()
-            self._calculate_capital_cost()
+        if self._is_greater_than_zero(self.apw) and self._is_greater_than_zero(self.bpw) and self._is_greater_than_zero(self.capitalcost):
             return True
         else:
             return False
+

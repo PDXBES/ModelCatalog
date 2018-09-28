@@ -2,6 +2,7 @@ from unittest import TestCase
 from rehab_data_io import RehabDataIO
 import mock
 from mock_config import MockConfig
+from rehab import Rehab
 from pipe import Pipe
 
 class TestRehabDataIO(TestCase):
@@ -9,6 +10,8 @@ class TestRehabDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
+
+        self.mock_rehab = mock.MagicMock(Rehab)
 
         self.rehab_data_io = RehabDataIO(self.config)
         self.patch_make_feature_layer = mock.patch("arcpy.MakeFeatureLayer_management")
@@ -40,11 +43,23 @@ class TestRehabDataIO(TestCase):
         self.patch_da_search_cursor = mock.patch("arcpy.da.SearchCursor")
         self.mock_da_search_cursor = self.patch_da_search_cursor.start()
 
+        self.patch_da_insert_cursor = mock.patch("arcpy.da.InsertCursor")
+        self.mock_da_insert_cursor = self.patch_da_insert_cursor.start()
+
+        self.patch_CreateTable_management = mock.patch("arcpy.CreateTable_management")
+        self.mock_CreateTable_management = self.patch_CreateTable_management.start()
+
         self.whole_pipe_fields = ["compkey", "bpw", "usnode",
                                   "dsnode", "diamwidth", "length",
                                   "material", "lateralcost", "manholecost",
                                   "asmrecommendednbcr", "asmrecommendedaction",
                                   "apwspot","apwliner", "apwwhole", "lateralcount", "globalid"]
+
+        self.output_pipe_table_fields = ["compkey", "bpw", "usnode",
+                                  "dsnode", "diamwidth", "length",
+                                  "material", "lateralcost", "manholecost",
+                                  "asmrecommendednbcr", "asmrecommendedaction",
+                                  "apwspot","apwliner", "apwwhole", "lateralcount", "globalid", "apw", "capitalcost"]
 
         self.dummy_row_1 = [1, 2, "usnode1",
                                    "dsnode1", 3, 4,
@@ -73,6 +88,9 @@ class TestRehabDataIO(TestCase):
         self.mock_table_to_table = self.patch_table_to_table.stop()
         self.mock_da_editor = self.patch_da_editor.stop()
         self.mock_da_search_cursor = self.patch_da_search_cursor.stop()
+        self.mock_da_insert_cursor = self.patch_da_insert_cursor.stop()
+        self.mock_CreateTable_management = self.patch_CreateTable_management.stop()
+
 
 
     def test_select_nbcr_data_pipes_calls_make_feature_layer(self):
@@ -227,9 +245,24 @@ class TestRehabDataIO(TestCase):
         self.assertTrue(pipe2.globalid, self.dummy_row_2[15])
 
 
-    # def test_write_pipes_to_table
+    def test_write_pipes_to_table_calls_create_table_management(self):
+        self.rehab_data_io.write_pipes_to_table(self.mock_rehab)
+        self.assertTrue(self.mock_CreateTable_management.called)
 
-    # def test_join_pipe_table_to_pipe_feature_class
+    def test_write_pipes_to_table_calls_create_table_management_with_correct_arguments(self):
+        self.rehab_data_io.write_pipes_to_table(self.mock_rehab)
+        self.mock_CreateTable_management.assert_called_with("in_memory", "output_pipes_table","rehab_results_sde_path")
+
+    def test_write_pipes_to_table_calls_insert_cursor(self):
+        self.rehab_data_io.write_pipes_to_table(self.mock_rehab)
+        self.assertTrue(self.mock_da_insert_cursor.called)
+
+    def test_write_pipes_to_table_calls_insert_cursor_with_correct_arguments(self):
+        self.rehab_data_io.write_pipes_to_table(self.mock_rehab)
+        self.mock_da_insert_cursor.assert_called_with("in_memory/output_pipes_table", self.output_pipe_table_fields)
+
+
+    #def test_join_pipe_table_to_pipe_feature_class
 
     def test_append_whole_pipes_to_rehab_results_calls_append_management(self):
         self.rehab_data_io.append_whole_pipes_to_rehab_results()
