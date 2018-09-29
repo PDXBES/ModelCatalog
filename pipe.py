@@ -30,7 +30,9 @@ class Pipe():
         elif self.asmrecommendedaction.upper() == "OC":
             self.apw = self.apwwhole
         else:
-            raise Exception
+            #TODO not sure what to do with this exception
+            #raise Exception
+            pass
 
     def calculate_capital_cost(self):
         if self._is_greater_than_zero(self.apw) and self._is_greater_than_zero(self.asmrecommendednbcr):
@@ -48,6 +50,7 @@ class Pipe():
         return True
 
     def valid(self):
+        #TODO we need the BPW for all pipes so we need to decide what a valid pipe really should be
         if self._is_greater_than_zero(self.apw) and self._is_greater_than_zero(self.bpw) and self._is_greater_than_zero(self.capitalcost):
             return True
         else:

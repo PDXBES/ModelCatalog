@@ -3,6 +3,7 @@ from rehab_data_io import RehabDataIO
 import mock
 from mock_config import MockConfig
 from rehab import Rehab
+import arcpy
 from pipe import Pipe
 
 class TestRehabDataIO(TestCase):
@@ -18,9 +19,6 @@ class TestRehabDataIO(TestCase):
         self.patch_select_by_attribute = mock.patch("arcpy.SelectLayerByAttribute_management")
         self.mock_make_feature_layer = self.patch_make_feature_layer.start()
         self.mock_select_by_attribute = self.patch_select_by_attribute.start()
-
-        self.patch_delete_field = mock.patch("arcpy.DeleteField_management")
-        self.mock_delete_field = self.patch_delete_field.start()
 
         self.patch_join_field = mock.patch("arcpy.JoinField_management")
         self.mock_join_field = self.patch_join_field.start()
@@ -43,11 +41,19 @@ class TestRehabDataIO(TestCase):
         self.patch_da_search_cursor = mock.patch("arcpy.da.SearchCursor")
         self.mock_da_search_cursor = self.patch_da_search_cursor.start()
 
+        self.mock_cursor = mock.MagicMock(arcpy.da.InsertCursor) #Must be created before patching arcpy.da.InsertCursor
+
         self.patch_da_insert_cursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_insert_cursor = self.patch_da_insert_cursor.start()
 
+        self.patch_da_delete_field_management = mock.patch("arcpy.DeleteField_management")
+        self.mock_da_delete_field_management = self.patch_da_delete_field_management.start()
+
         self.patch_CreateTable_management = mock.patch("arcpy.CreateTable_management")
         self.mock_CreateTable_management = self.patch_CreateTable_management.start()
+
+        self.patch_list_fields = mock.patch("arcpy.ListFields")
+        self.mock_list_fields = self.patch_list_fields.start()
 
         self.whole_pipe_fields = ["compkey", "bpw", "usnode",
                                   "dsnode", "diamwidth", "length",
@@ -59,7 +65,8 @@ class TestRehabDataIO(TestCase):
                                   "dsnode", "diamwidth", "length",
                                   "material", "lateralcost", "manholecost",
                                   "asmrecommendednbcr", "asmrecommendedaction",
-                                  "apwspot","apwliner", "apwwhole", "lateralcount", "globalid", "apw", "capitalcost"]
+                                  "apwspot","apwliner", "apwwhole", "lateralcount", "globalid", "apw", "capitalcost", 
+                                         "rehab_id"]
 
         self.dummy_row_1 = [1, 2, "usnode1",
                                    "dsnode1", 3, 4,
@@ -76,11 +83,40 @@ class TestRehabDataIO(TestCase):
         self.mock_da_search_cursor.return_value = [self.dummy_row_1, self.dummy_row_2]
 
         self.rehab_id = 99
+        
+        self.mock_update_cursor = mock.MagicMock(arcpy.da.InsertCursor)
+
+        self.output_pipes_table_row = [12, 22, "usnode2",
+                                   "dsnode2", 32, 42,
+                                   "material2", 52, 62,
+                                   72, "asmrecommendedaction2",
+                                   92, 102, 112, 122, 132, 1000, 3000,111]
+        self.mock_pipe = mock.MagicMock(Pipe)
+
+        self.mock_pipe.compkey = self.output_pipes_table_row[0]
+        self.mock_pipe.bpw = self.output_pipes_table_row[1]
+        self.mock_pipe.usnode = self.output_pipes_table_row[2]
+        self.mock_pipe.dsnode = self.output_pipes_table_row[3]
+        self.mock_pipe.diamwidth = self.output_pipes_table_row[4]
+        self.mock_pipe.length = self.output_pipes_table_row[5]
+        self.mock_pipe.material = self.output_pipes_table_row[6]
+        self.mock_pipe.lateralcost = self.output_pipes_table_row[7]
+        self.mock_pipe.manholecost = self.output_pipes_table_row[8]
+        self.mock_pipe.asmrecommendednbcr = self.output_pipes_table_row[9]
+        self.mock_pipe.asmrecommendedaction = self.output_pipes_table_row[10]
+        self.mock_pipe.apwspot = self.output_pipes_table_row[11]
+        self.mock_pipe.apwliner = self.output_pipes_table_row[12]
+        self.mock_pipe.apwwhole = self.output_pipes_table_row[13]
+        self.mock_pipe.lateralcount = self.output_pipes_table_row[14]
+        self.mock_pipe.globalid = self.output_pipes_table_row[15]
+        self.mock_pipe.apw = self.output_pipes_table_row[16]
+        self.mock_pipe.capitalcost = self.output_pipes_table_row[17]
+        self.mock_pipe.rehab_id = self.output_pipes_table_row[18]
+        self.mock_rehab.pipes = [self.mock_pipe]
 
     def tearDown(self):
         self.mock_make_feature_layer = self.patch_make_feature_layer.stop()
         self.mock_select_by_attribute = self.patch_select_by_attribute.stop()
-        self.mock_delete_field = self.patch_delete_field.stop()
         self.mock_join_field = self.patch_join_field.stop()
         self.mock_append = self.patch_append.stop()
         self.mock_copy_features = self.patch_copy_features.stop()
@@ -90,13 +126,12 @@ class TestRehabDataIO(TestCase):
         self.mock_da_search_cursor = self.patch_da_search_cursor.stop()
         self.mock_da_insert_cursor = self.patch_da_insert_cursor.stop()
         self.mock_CreateTable_management = self.patch_CreateTable_management.stop()
-
-
+        self.mock_da_delete_field_management = self.patch_da_delete_field_management.stop()
+        self.mock_list_fields = self.patch_list_fields.stop()
 
     def test_select_nbcr_data_pipes_calls_make_feature_layer(self):
         self.rehab_data_io._select_nbcr_data_pipes()
         self.assertTrue(self.mock_make_feature_layer.called)
-
 
     def test_select_nbcr_data_pipes_called_with_correct_arguments(self):
         self.rehab_data_io._select_nbcr_data_pipes()
@@ -126,11 +161,11 @@ class TestRehabDataIO(TestCase):
 
     def test_delete_nbcr_data_bpw_field_calls_delete_field_management(self):
         self.rehab_data_io.delete_nbcr_data_bpw_field("in_memory/nbcr_data_whole_pipes")
-        self.assertTrue(self.mock_delete_field.called)
+        self.assertTrue(self.mock_da_delete_field_management.called)
 
     def test_delete_nbcr_data_bpw_field_called_with_correct_arguments(self):
         self.rehab_data_io.delete_nbcr_data_bpw_field("in_memory/nbcr_data_whole_pipes")
-        self.mock_delete_field.assert_called_with("in_memory/nbcr_data_whole_pipes",
+        self.mock_da_delete_field_management.assert_called_with("in_memory/nbcr_data_whole_pipes",
                                                   "BPW")
 
     def test_add_bpw_from_branches_calls_join_field_management(self):
@@ -261,8 +296,53 @@ class TestRehabDataIO(TestCase):
         self.rehab_data_io.write_pipes_to_table(self.mock_rehab)
         self.mock_da_insert_cursor.assert_called_with("in_memory/output_pipes_table", self.output_pipe_table_fields)
 
+    def test_write_pipes_to_table_calls_insert_row_with_correct_arguments(self):
+        self.mock_da_insert_cursor.return_value = self.mock_cursor
+        self.rehab_data_io.write_pipes_to_table(self.mock_rehab)
+        self.mock_cursor.insertRow.assert_called_with(self.output_pipes_table_row)
 
-    #def test_join_pipe_table_to_pipe_feature_class
+    def test_delete_fields_calls_list_fields(self):
+        feature_class = "feature_class"
+        fields_to_keep = ["compkey"]
+        self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
+        self.assertTrue(self.mock_list_fields.called)
+
+    def test_delete_fields_calls_list_fields_with_correct_arguments(self):
+        feature_class = "feature_class"
+        fields_to_keep = ["compkey"]
+        self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
+        self.mock_list_fields.assert_called_with("feature_class")
+
+    def test_delete_fields_calls_delete_field_management_if_field_not_in_keep_fields(self):
+        feature_class = "feature_class"
+        fields_to_keep = ["compkey"]
+        mock_field_1 = mock.MagicMock(arcpy.Field)
+        mock_field_2 = mock.MagicMock(arcpy.Field)
+        mock_field_3 = mock.MagicMock(arcpy.Field)
+        mock_field_1.name = "apw"
+        mock_field_1.type = "not geometry"
+        mock_field_2.name = "@Shape"
+        mock_field_2.type = "Geometry"
+        mock_field_3.name = "compkey"
+        mock_field_3.type = "not Geometry"
+        self.mock_list_fields.return_value = [mock_field_1, mock_field_2, mock_field_3]
+        self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
+        self.assertTrue(self.mock_da_delete_field_management.called)
+
+
+#   def test_join_pipe_table_to_pipe_feature_class
+    def test_join_output_pipe_table_and_geometry_calls_join_field_management(self):
+        self.rehab_data_io.join_output_pipe_table_and_geometry()
+        self.assertTrue(self.mock_join_field.called)
+
+    def test_join_output_pipe_table_and_geometry_with_correct_arguments(self):
+        self.active_whole_pipe_feature_class_path = "in_memory/nbcr_data_whole_pipes"
+        self.output_pipes_table_path = "in_memory/output_pipes_table"
+        self.rehab_data_io.join_output_pipe_table_and_geometry()
+        self.mock_join_field.assert_called_with("in_memory/nbcr_data_whole_pipes",
+                                                "compkey",
+                                                "in_memory/output_pipes_table",
+                                                "compkey")
 
     def test_append_whole_pipes_to_rehab_results_calls_append_management(self):
         self.rehab_data_io.append_whole_pipes_to_rehab_results()
