@@ -13,8 +13,7 @@ rehab = Rehab(config)
 
 t1 = time.time()
 print "getting rehab id"
-#rehab_id = rrad_data_io.retrieve_current_rehab_id()
-rehab_id = 1
+rehab_id = rrad_data_io.retrieve_current_rehab_id()
 rehab.rehab_id = rehab_id
 rehab.extract_date = datetime.datetime.today()
 rehab.last_inspection_date = datetime.datetime.today()
@@ -62,5 +61,3 @@ rehab_data_io.append_whole_pipes_to_rehab_results()
 t10 = time.time()
 print str(t10-t9) + " seconds"
 print "Append pipes to rehab results complete"
-
-
