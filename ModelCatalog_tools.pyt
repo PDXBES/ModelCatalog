@@ -212,26 +212,9 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     modelcatalogdataio = ModelCatalogDataIO(config)
     modeldataio = ModelDataIO(config)
     simulationdataio = SimulationDataIO(config)
-    field_names = [
-        "Model_ID",
-        "Parent_Model_ID",
-        "Model_Request_ID",
-        "Project_Phase_ID",
-        "Engine_Type_ID",
-        "Create_Date",
-        "Created_by",
-        "Deploy_Date",
-        "Extract_Date",
-        "Run_Date",
-        "Model_Path",
-        "Model_Purpose_ID",
-        "Model_Calibration_file",
-        "Model_Status_ID",
-        "Model_Alteration_file",
-        "Project_Num"]
     model = model_catalog.models[0]
     arcpy.AddMessage("Adding Model...")
-    modelcatalogdataio.add_model(model, field_names)
+    modelcatalogdataio.add_model(model)
     arcpy.AddMessage("Model Added")
     arcpy.AddMessage("Adding Simulations...")
     model.simulations = modeldataio.read_simulations(model)
