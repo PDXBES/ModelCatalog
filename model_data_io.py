@@ -21,8 +21,9 @@ class ModelDataIO:
         model_out = "in_memory\\" + model_name
         arcpy.Dissolve_management(model_in, model_out, "", "", "MULTI_PART")
         cursor = arcpy.da.SearchCursor(model_out, ["Shape@"])
-        geometry = cursor.next()[0]
-        model.model_geometry = geometry.buffer(10)
+        row = cursor.next()
+        geometry = row[0]
+        model.model_geometry = geometry
         del cursor
 
     def read_simulations(self, model):
