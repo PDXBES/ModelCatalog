@@ -15,6 +15,16 @@ class ModelDataIO:
         # type: (Config) -> None
         self.config = config
 
+    def create_model_geometry(self, model):
+        model_name = "Links"
+        model_in = model.model_path + "\\" + "EmgaatsModel.gdb" + "\\Network\\" + model_name
+        model_out = "in_memory\\" + model_name
+        arcpy.Dissolve_management(model_in, model_out, "", "", "MULTI_PART")
+        cursor = arcpy.da.SearchCursor(model_out, ["Shape@"])
+        geometry = cursor.next()[0]
+        model.model_geometry = geometry.buffer(10)
+        del cursor
+
     def read_simulations(self, model):
         # type: (Model) -> List[Simulation]
         simulations = []  # type: List[Simulation]

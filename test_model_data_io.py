@@ -27,6 +27,9 @@ class TestModelDataIO(TestCase):
         self.mock_model.simulations = [self.mock_simulation]
         self.model_catalog_data_io = ModelCatalogDataIO(self.config)
 
+    def tearDown(self):
+        pass
+
     @mock.patch("os.walk")
     def test_read_simulations_calls_os_walk(self, mock_os_walk):
 
@@ -117,3 +120,8 @@ class TestModelDataIO(TestCase):
             mock_da_InsertCursor.return_value = mock_cursor
             self.modeldataio.add_simulations(self.mock_model, self.model_catalog_data_io)
         mock_add_simulation.assert_called_with(11, self.mock_model.simulations[0], self.model_catalog_data_io)
+
+    #def test_create_model_geometry_calls_arcpy_dissolve_management(self):
+    #def test_create_model_geometry_calls_arcpy_dissolve_management_with_the_correct_arguments(self):
+    #def test_create_model_geometry_calls_search_cursor(self):
+    #def test_create_model_geometry_calls_search_cursor_with_correct_arguments(self):

@@ -33,6 +33,7 @@ class Model:
         self.config = config
         self.project_types = []
         self.model_alterations = []
+        self.model_geometry = None
 
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.model_path)

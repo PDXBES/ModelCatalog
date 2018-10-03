@@ -31,6 +31,7 @@ class ModelCatalogDataIO(DataIO):
         self.field_attribute_lookup["Model_Status_ID"] = "model_status_id"
         self.field_attribute_lookup["Model_Alteration_file"] = "model_alteration_file"
         self.field_attribute_lookup["Project_Num"] = "project_num"
+        self.field_attribute_lookup["Shape@"] = "model_geometry"
 
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id("model")
