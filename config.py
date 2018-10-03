@@ -28,6 +28,7 @@ class Config:
         RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
         self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
 
+        self.rehab_tracking_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Tracking"
         self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
         self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
         self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"

@@ -33,6 +33,7 @@ class ModelCatalogDataIO(DataIO):
         self.field_attribute_lookup["Project_Num"] = "project_num"
         self.field_attribute_lookup["Shape@"] = "model_geometry"
 
+
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id("model")
         return current_model_id
@@ -43,6 +44,6 @@ class ModelCatalogDataIO(DataIO):
 
     def add_model(self, model):
         # type: (Model) -> None
-        self.add_object(model)
+        self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
 
 

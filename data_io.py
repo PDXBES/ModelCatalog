@@ -12,7 +12,6 @@ class DataIO:
     def __init__(self, config):
         # type: (Config) -> None
         self.current_id_database_table_path = None
-        self.field_attribute_lookup = None
         self.config = config
 
     def retrieve_current_id(self, object_type):
@@ -27,26 +26,34 @@ class DataIO:
         cursor.updateRow([object_name, next_id])
         return current_id
 
-    def add_object(self, object_class):
+    def add_object(self, object_class, field_attribute_lookup, object_tracking_sde_path):
 
         if not object_class.valid:
             raise DataIO_exception
 
-        row = self.create_row_from_object(object_class)
-        field_names = self.field_attribute_lookup.keys()
+        row = self.create_row_from_object(object_class, field_attribute_lookup )
+        field_names = field_attribute_lookup.keys()
 
         if len(field_names) != len(row):
             raise Field_names_length_does_not_match_row_length_exception
 
-        cursor = arcpy.da.InsertCursor(self.config.model_tracking_sde_path, field_names)
+        cursor = arcpy.da.InsertCursor(object_tracking_sde_path, field_names)
 
         cursor.insertRow(row)
         del cursor
 
-    def create_row_from_object(self, generic_object):
-        attribute_names = self.field_attribute_lookup.values()
+    def create_row_from_object(self, generic_object, field_attribute_lookup):
+        attribute_names = field_attribute_lookup.values()
         row = []
-        for attribute_name in attribute_names:
-            attribute_value = getattr(generic_object, attribute_name)
-            row.append(attribute_value)
+        try:
+            for attribute_name in attribute_names:
+                attribute_value = getattr(generic_object, attribute_name)
+                row.append(attribute_value)
+        except AttributeError:
+            arcpy.AddMessage("When creating a row from a " + generic_object.name +
+                  " the attribute " + attribute_name + " could not be found.")
+            raise AttributeError
+            #TODO find cleaner way to get traceback and stop program
+
         return row
+

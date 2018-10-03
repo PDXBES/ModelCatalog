@@ -14,10 +14,11 @@ rehab = Rehab(config)
 t1 = time.time()
 print "getting rehab id"
 rehab_id = rrad_data_io.retrieve_current_rehab_id()
-rehab.rehab_id = rehab_id
+rehab.id = rehab_id
 rehab.extract_date = datetime.datetime.today()
 rehab.last_inspection_date = datetime.datetime.today()
 rehab.purpose = "test"
+rrad_data_io.add_rehab(rehab)
 t2 = time.time()
 print str(t2-t1) + " seconds"
 

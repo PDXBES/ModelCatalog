@@ -25,11 +25,6 @@ class TestPipe(TestCase):
         self.pipe.calculate_apw()
         self.assertAlmostEquals(self.pipe.apw, 3.33, 2)
 
-    def test_calculate_apw_recommended_action_is_false(self):
-        self.pipe.asmrecommendedaction = "false"
-        with self.assertRaises(Exception):
-            self.pipe.calculate_apw()
-
     def test_calculate_apw_recommended_is_not_case_sensitive(self):
         self.pipe.asmrecommendedaction = "oc"
         self.pipe.apwwhole = 3.33

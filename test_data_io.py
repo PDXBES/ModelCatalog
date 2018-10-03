@@ -34,7 +34,8 @@ class TestDataIO(TestCase):
         self.field_attribute_lookup["id_field"] = "id"
         self.field_attribute_lookup["name"] = "name"
 
-        self.dataio.field_attribute_lookup = self.field_attribute_lookup
+        self.object_tracking_sde_path = "object_tracking_sde_path"
+
 
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
@@ -72,15 +73,15 @@ class TestDataIO(TestCase):
 
     def test_add_object_calls_insert_cursor(self):
         self.mock_generic_object.valid = True
-        self.dataio.add_object(self.mock_generic_object)
+        self.dataio.add_object(self.mock_generic_object, self.field_attribute_lookup, self.object_tracking_sde_path)
         self.assertTrue(self.mock_da_InsertCursor.called)
 
     def test_create_row_from_object_creates_row_with_correct_values(self):
-        row = self.dataio.create_row_from_object(self.mock_generic_object)
+        row = self.dataio.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup)
         self.assertEquals(row, [1, "name"])
 
     def test_create_row_from_object_raise_exception_when_attribute_name_does_not_exist(self):
         self.field_attribute_lookup["color"] = "red"
         with self.assertRaises(AttributeError):
-            self.dataio.create_row_from_object(self.mock_generic_object)
+            self.dataio.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup)
 

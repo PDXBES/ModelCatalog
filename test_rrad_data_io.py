@@ -3,11 +3,13 @@ import mock
 from mock_config import MockConfig
 import arcpy
 from rrad_data_io import RradDataIO
-
+from rehab import Rehab
 class TestRradDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
+
+        self.mock_rehab = mock.MagicMock(Rehab)
 
         self.rrad_data_io = RradDataIO(self.config)
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
@@ -24,3 +26,8 @@ class TestRradDataIO(TestCase):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
         current_model_id = self.rrad_data_io.retrieve_current_rehab_id()
         self.assertTrue(current_model_id == 44)
+
+    def test_add_rehab_calls_add_object(self):
+        with mock.patch.object(self.rrad_data_io, "add_object") as mock_add_object:
+            self.rrad_data_io.add_rehab(self.mock_rehab)
+            self.assertTrue(mock_add_object.called)

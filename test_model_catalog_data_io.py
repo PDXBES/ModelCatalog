@@ -31,6 +31,7 @@ class TestModelCatalogDataIO(TestCase):
         self.model.model_status_id = None
         self.model.model_alteration_file = None
         self.model.project_num = None
+        self.model.model_geometry = None
 
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("model", 44), ("simulation", 55)])
@@ -39,6 +40,7 @@ class TestModelCatalogDataIO(TestCase):
 
         self.patch_da_InsertCursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.start()
+
 
 
     def tearDown(self):
@@ -57,6 +59,8 @@ class TestModelCatalogDataIO(TestCase):
         self.assertTrue(current_simulation_id == 55)
 
     def test_add_model_calls_add_object(self):
-        self.modelcatalogdataio.add_model(self.model)
+        with mock.patch.object(self.modelcatalogdataio, "add_object") as mock_add_object:
+            self.modelcatalogdataio.add_model(self.model)
+            self.assertTrue(mock_add_object.called)
 
 
