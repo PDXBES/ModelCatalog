@@ -25,6 +25,7 @@ class ModelDataIO:
         geometry = row[0]
         model.model_geometry = geometry
         del cursor
+        arcpy.Delete_management(model_out)
 
     def read_simulations(self, model):
         # type: (Model) -> List[Simulation]
