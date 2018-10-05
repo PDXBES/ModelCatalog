@@ -329,8 +329,41 @@ class TestRehabDataIO(TestCase):
         self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
         self.assertTrue(self.mock_da_delete_field_management.called)
 
+    def test_delete_fields_calls_delete_field_management_if_field_not_in_geometry(self):
+        feature_class = "feature_class"
+        fields_to_keep = ["compkey"]
+        mock_field_2 = mock.MagicMock(arcpy.Field)
+        mock_field_2.name = "@Shape"
+        mock_field_2.type = "Geometry"
+        self.mock_list_fields.return_value = [mock_field_2]
+        self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
+        self.assertFalse(self.mock_da_delete_field_management.called)
 
-#   def test_join_pipe_table_to_pipe_feature_class
+    def test_delete_fields_calls_delete_field_management_if_field_not_in_oid(self):
+        feature_class = "feature_class"
+        fields_to_keep = ["compkey"]
+        mock_field_2 = mock.MagicMock(arcpy.Field)
+        mock_field_2.name = "ID"
+        mock_field_2.type = "OID"
+        self.mock_list_fields.return_value = [mock_field_2]
+        self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
+        self.assertFalse(self.mock_da_delete_field_management.called)
+
+    def test_delete_specified_fields_calls_list_fields_with_correct_arguments(self):
+        feature_class = "feature_class"
+        fields_to_delete = ["@shape"]
+        self.rehab_data_io.delete_fields(feature_class, fields_to_delete)
+        self.mock_list_fields.assert_called_with("feature_class")
+
+    def test_delete_specified_fields_calls_delete_field_management(self):
+        feature_class = "feature_class"
+        fields_to_delete = ["@shape"]
+        mock_field_1 = mock.MagicMock(arcpy.Field)
+        mock_field_1.name = "@shape"
+        mock_field_1.type = "@geometry"
+        self.mock_list_fields.return_value = [mock_field_1]
+        self.rehab_data_io.delete_specified_fields(feature_class, fields_to_delete )
+
     def test_join_output_pipe_table_and_geometry_calls_join_field_management(self):
         self.rehab_data_io.join_output_pipe_table_and_geometry()
         self.assertTrue(self.mock_join_field.called)

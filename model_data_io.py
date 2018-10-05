@@ -8,7 +8,7 @@ except:
 from model import Model
 from simulation import Simulation
 from model_catalog_data_io import ModelCatalogDataIO
-
+from model_catalog_exception import Invalid_Model_exception
 
 class ModelDataIO:
     def __init__(self, config):
@@ -16,16 +16,19 @@ class ModelDataIO:
         self.config = config
 
     def create_model_geometry(self, model):
-        model_name = "Links"
-        model_in = model.model_path + "\\" + "EmgaatsModel.gdb" + "\\Network\\" + model_name
-        model_out = "in_memory\\" + model_name
-        arcpy.Dissolve_management(model_in, model_out, "", "", "MULTI_PART")
-        cursor = arcpy.da.SearchCursor(model_out, ["Shape@"])
-        row = cursor.next()
-        geometry = row[0]
-        model.model_geometry = geometry
-        del cursor
-        arcpy.Delete_management(model_out)
+        if model.valid:
+            model_name = "Links"
+            model_in = model.model_path + "\\" + "EmgaatsModel.gdb" + "\\Network\\" + model_name
+            model_out = "in_memory\\" + model_name
+            arcpy.Dissolve_management(model_in, model_out, "", "", "MULTI_PART")
+            cursor = arcpy.da.SearchCursor(model_out, ["Shape@"])
+            for row in cursor:
+                geometry = row[0]
+                model.model_geometry = geometry
+            del cursor
+            arcpy.Delete_management(model_out)
+        else:
+            raise Invalid_Model_exception
 
     def read_simulations(self, model):
         # type: (Model) -> List[Simulation]
