@@ -1,0 +1,50 @@
+digraph "classes" {
+charset="utf-8"
+nodesep=0.5;
+rankdir="TB";
+edge [ constraint=False ];
+splines="ortho";
+
+"_d0" [label="_d0", shape="record" style=invis];
+"_d4" [label="_d4", shape="record" style=invis];
+"_d9" [label="_d9", shape="record" style=invis];
+"_d13" [label="_d13", shape="record" style=invis];
+"_d17" [label="_d17", shape="record" style=invis];
+"_d1" [label="_d1", shape="record" style=invis];
+"_d7" [label="_d7", shape="record" style=invis];
+"_d10" [label="_d10", shape="record" style=invis];
+"_d14" [label="_d14", shape="record" style=invis];
+"_d18" [label="_d18", shape="record" style=invis];
+"_d2" [label="_d2", shape="record" style=invis];
+"_d5" [label="_d5", shape="record" style=invis];
+"_d11" [label="_d11", shape="record" style=invis];
+"_d15" [label="_d15", shape="record" style=invis];
+"_d19" [label="_d19", shape="record" style=invis];
+"_d3" [label="_d3", shape="record" style=invis];
+"_d6" [label="_d6", shape="record" style=invis];
+"_d8" [label="_d8", shape="record" style=invis];
+"_d12" [label="_d12", shape="record" style=invis];
+"_d16" [label="_d16", shape="record" style=invis];
+"_d20" [label="_d20", shape="record" style=invis];
+
+{rank= tb "_d0"->"_d4"->"Business_Classes"->"_d9"->"_d13"->"_d17" [constraint=true style=invis]};
+{rank= tb "_d1"->"UI"->"_d7"->"_d10"->"_d14"->"_d18" [constraint=true style=invis]};
+{rank= tb "_d2"->"_d5"->"Data_IO"->"_d11"->"_d15"->"_d19" [constraint=true style=invis]};
+{rank= tb "_d3"->"_d6"->"_d8"->"_d12"->"_d16"->"_d20" [constraint=true style=invis]};
+{rank= tb "WorkOrderTracking_DB"->"Rehab_DB"->"EMGAATSDB"->"EMGAATSModels"->"Model_Catalog_DB"->"RRAD_DB" [constraint=true style=invis]};
+{rank= same _d4->UI->_d5->_d6->Rehab_DB [constraint=True style=invis]};
+"Data_IO"->"WorkOrderTracking_DB" [color="green"];
+"Data_IO"->"Business_Classes" [color="green"];
+"UI"->"Business_Classes" [color="green"];
+"UI"->"Data_IO" [color="green"];
+"Business_Classes"->"Data_IO" [color="green"];
+"RRAD_DB"->"Data_IO" [color="green"];
+"Model_Catalog_DB"->"Data_IO" [color="green"];
+"EMGAATSDB"->"Data_IO" [color="green"];
+"WorkOrderTracking_DB"->"Data_IO" [color="green"];
+"EMGAATSModels"->"Data_IO" [color="green"];
+"Rehab_DB"->"Data_IO" [color="green"];
+"Data_IO"->"EMGAATSModels" [color="green"];
+"Data_IO"->"Model_Catalog_DB" [color="green"];
+"Data_IO"->"RRAD_DB" [color="green"];
+}

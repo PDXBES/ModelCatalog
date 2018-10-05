@@ -1,0 +1,4 @@
+*,*,*,*,*
+*,*,Exception,*,*
+*,*,ModelCatalog_exception(Exception),*,*
+Field_names_length_does_not_match_row_length_exception(ModelCatalog_exception),Invalid_Model_exception(ModelCatalog_exception),Duplicate_model_Exception(ModelCatalog_exception),Duplicates_in_input_model_list(ModelCatalog_exception),Invalid_model_path_exception(ModelCatalog_exception)

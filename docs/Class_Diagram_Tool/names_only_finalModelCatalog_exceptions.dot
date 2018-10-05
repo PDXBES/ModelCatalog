@@ -1,0 +1,36 @@
+digraph "classes" {
+charset="utf-8"
+nodesep=0.5;
+rankdir="TB";
+edge [ constraint=False ];
+splines="ortho";
+"Duplicate_model_Exception"[label= "Duplicate_model_Exception" , shape="record"];
+"Duplicates_in_input_model_list"[label= "Duplicates_in_input_model_list" , shape="record"];
+"Field_names_length_does_not_match_row_length_exception"[label= "Field_names_length_does_not_match_row_length_exception" , shape="record"];
+"Field_names_length_does_not_match_row_length_exception"[label= "Field_names_length_does_not_match_row_length_exception" , shape="record"];
+"Invalid_Model_exception"[label= "Invalid_Model_exception" , shape="record"];
+"Invalid_model_path_exception"[label= "Invalid_model_path_exception" , shape="record"];
+"ModelCatalog_exception"[label= "ModelCatalog_exception" , shape="record"];
+
+"_d0" [label="_d0", shape="record" style=invis];
+"_d4" [label="_d4", shape="record" style=invis];
+"_d1" [label="_d1", shape="record" style=invis];
+"_d5" [label="_d5", shape="record" style=invis];
+"_d2" [label="_d2", shape="record" style=invis];
+"_d6" [label="_d6", shape="record" style=invis];
+"_d3" [label="_d3", shape="record" style=invis];
+"_d7" [label="_d7", shape="record" style=invis];
+
+{rank= tb "_d0"->"_d4"->"Field_names_length_does_not_match_row_length_exception" [constraint=true style=invis]};
+{rank= tb "_d1"->"_d5"->"Invalid_Model_exception" [constraint=true style=invis]};
+{rank= tb "Exception"->"ModelCatalog_exception"->"Duplicate_model_Exception" [constraint=true style=invis]};
+{rank= tb "_d2"->"_d6"->"Duplicates_in_input_model_list" [constraint=true style=invis]};
+{rank= tb "_d3"->"_d7"->"Invalid_model_path_exception" [constraint=true style=invis]};
+{rank= same _d4->_d5->ModelCatalog_exception->_d6->_d7 [constraint=True style=invis]};
+"Exception"->"ModelCatalog_exception" [color="green"];
+"ModelCatalog_exception"->"Field_names_length_does_not_match_row_length_exception" [color="green"];
+"ModelCatalog_exception"->"Invalid_Model_exception" [color="green"];
+"ModelCatalog_exception"->"Duplicate_model_Exception" [color="green"];
+"ModelCatalog_exception"->"Duplicates_in_input_model_list" [color="green"];
+"ModelCatalog_exception"->"Invalid_model_path_exception" [color="green"];
+}
