@@ -18,6 +18,7 @@ from model_data_io import ModelDataIO
 import getpass
 import datetime
 from config import Config
+from model_catalog_exception import Invalid_model_path_exception
 
 
 class Toolbox(object):
@@ -180,31 +181,33 @@ class EMGAATS_Model_Registration(object):
         return
 
     def execute(self, parameters, messages):
-
-        model_id = self.modelcatalogdataio.retrieve_current_model_id()
-        self.model.model_id = model_id
-        self.model.parent_model_id = 0
-        self.model.model_request_id = 0
-        self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
-        self.model.engine_type_id = 1
-        self.model.create_date = datetime.datetime.today()
-        self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.run_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.created_by = getpass.getuser()
-        self.model.model_path = parameters[1].valueAsText
-        #TODO: need 1-M for project types, write code to add project types
-        #TODO: need 1-M for model alterations, write code to add model alterations
-        self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
-        self.model.model_calibration_file = parameters[5].valueAsText
-        self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
-        self.model.model_alteration_file = parameters[8].valueAsText
-        self.model.project_num = parameters[0].valueAsText
-        self.model.valid
-        self.model_dataio.create_model_geometry(self.model)
-        self.model_catalog.add_model(self.model)
-        EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-        return
+        try:
+            model_id = self.modelcatalogdataio.retrieve_current_model_id()
+            self.model.model_id = model_id
+            self.model.parent_model_id = 0
+            self.model.model_request_id = 0
+            self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
+            self.model.engine_type_id = 1
+            self.model.create_date = datetime.datetime.today()
+            self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.run_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.created_by = getpass.getuser()
+            self.model.model_path = parameters[1].valueAsText
+            #TODO: need 1-M for project types, write code to add project types
+            #TODO: need 1-M for model alterations, write code to add model alterations
+            self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
+            self.model.model_calibration_file = parameters[5].valueAsText
+            self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
+            self.model.model_alteration_file = parameters[8].valueAsText
+            self.model.project_num = parameters[0].valueAsText
+            self.model.valid
+            self.model_dataio.create_model_geometry(self.model)
+            self.model_catalog.add_model(self.model)
+            EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+        except Invalid_model_path_exception:
+            arcpy.AddMessage("Current Model Path does not point to a valid EMGAATS model")
+            quit()
 
 
 def EMGAATS_Model_Registration_function(model_catalog, config):

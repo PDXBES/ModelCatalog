@@ -5,6 +5,7 @@ except:
 from model import Model
 from model_catalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
 from config import Config
+import arcpy
 
 class ModelCatalog:
     models = None  # type: List[Model]
@@ -17,8 +18,12 @@ class ModelCatalog:
     def add_model(self, model):
         # type: (model) -> None
         self.check_for_duplicate_model(model)
-
-        self.check_for_valid_model(model)
+        try:
+            self.check_for_valid_model(model)
+        except:
+            arcpy.AddMessage("Current Model Path does not point to a valid EMGAATS model")
+            quit()
+            #TODO work out best way to deal with exceptions
 
         self.models.append(model)
 
