@@ -1,0 +1,24 @@
+digraph "classes" {
+charset="utf-8"
+nodesep=0.5;
+rankdir="TB";
+edge [ constraint=False ];
+splines="ortho";
+"DataIO_exception"[label= "DataIO_exception" , shape="record"];
+"Field_names_length_does_not_match_row_length_exception"[label= "Field_names_length_does_not_match_row_length_exception" , shape="record"];
+"Field_names_length_does_not_match_row_length_exception"[label= "Field_names_length_does_not_match_row_length_exception" , shape="record"];
+
+"_d0" [label="_d0", shape="record" style=invis];
+"_d2" [label="_d2", shape="record" style=invis];
+"_d4" [label="_d4", shape="record" style=invis];
+"_d1" [label="_d1", shape="record" style=invis];
+"_d3" [label="_d3", shape="record" style=invis];
+"_d5" [label="_d5", shape="record" style=invis];
+
+{rank= tb "_d0"->"_d2"->"_d4" [constraint=true style=invis]};
+{rank= tb "Exception"->"DataIO_exception"->"Field_names_length_does_not_match_row_length_exception" [constraint=true style=invis]};
+{rank= tb "_d1"->"_d3"->"_d5" [constraint=true style=invis]};
+{rank= same _d2->DataIO_exception->_d3 [constraint=True style=invis]};
+"Exception"->"DataIO_exception" [color="green"];
+"DataIO_exception"->"Field_names_length_does_not_match_row_length_exception" [color="green"];
+}

@@ -65,11 +65,14 @@ print "\n\n"
 ########################################################################################################################
 print "#####Testing invalid model registration.#####"
 print "\n\n"
-model_catalog = ModelCatalog(config)
-model_id = model_catalog_dataio.retrieve_current_model_id()
-model.valid
-model_dataio.create_model_geometry(model)
-model.create_date = datetime.datetime.today()
-model.model_path = r"Invalid_path"
-model_catalog.add_model(model)
-model_catalog_tools.EMGAATS_Model_Registration_function(model_catalog, config)
+try:
+    model_catalog = ModelCatalog(config)
+    model_id = model_catalog_dataio.retrieve_current_model_id()
+    model.valid
+    model_dataio.create_model_geometry(model)
+    model.create_date = datetime.datetime.today()
+    model.model_path = r"Invalid_path"
+    model_catalog.add_model(model)
+    model_catalog_tools.EMGAATS_Model_Registration_function(model_catalog, config)
+except:
+    print("Current Model Path does not point to a valid EMGAATS model")

@@ -135,9 +135,7 @@ class RehabDataIO():
                 arcpy.DeleteField_management(feature_class, field.name)
                 arcpy.AddMessage("Deleting field: " + field.name)
 
-    def delete_fields_1(self, feature_class):
-        #TODO Tests for this or work out what field that is being deleted in the delete_fields function that is needed to append to SDE
-        fields_to_delete = self.whole_pipe_fields
+    def delete_specified_fields(self, feature_class, fields_to_delete):
         uppercase_fields_to_delete = [field.upper() for field in fields_to_delete]
         fields = arcpy.ListFields(feature_class)
         for field in fields:
@@ -151,7 +149,13 @@ class RehabDataIO():
                 arcpy.AddMessage("Field Type: " + field.type)
 
     def delete_fields_except_compkey_from_feature(self):
-        self.delete_fields_1(self.active_whole_pipe_feature_class_path)
+        fields_to_delete = []
+        for field in self.whole_pipe_fields:
+            if field.upper() == "COMPKEY":
+                pass
+            else:
+                fields_to_delete.append(field)
+        self.delete_specified_fields(self.active_whole_pipe_feature_class_path, fields_to_delete)
         #self.delete_fields(self.active_whole_pipe_feature_class_path, ["compkey", "geom_Length"])
 
     def join_output_pipe_table_and_geometry(self):

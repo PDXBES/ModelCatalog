@@ -1,0 +1,7 @@
+*,*,*,*,*
+*,*,*,*,WorkOrderTracking_DB (Data_IO)
+*,UI,*,*,Rehab_DB
+Business_Classes(Data_IO;UI),*,Data_IO(UI;Business_Classes;RRAD_DB;Model_Catalog_DB;EMGAATSDB;WorkOrderTracking_DB;EMGAATSModels;Rehab_DB),*,EMGAATSDB
+*,*,*,*,EMGAATSModels(Data_IO)
+*,*,*,*,Model_Catalog_DB(Data_IO)
+*,*,*,*,RRAD_DB(Data_IO)
