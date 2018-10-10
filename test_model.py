@@ -195,6 +195,8 @@ class TestModel(TestCase):
         return_sim_folder_path = self.model.simulation_folder_path()
         self.assertEquals(sim_folder_path, return_sim_folder_path)
 
+    def test_create_model_alterations(self):
+        pass
 
 
 

@@ -75,7 +75,7 @@ class ModelDataIO:
         # type: (Model, ModelCatalogDataIO) -> None
 
         for simulation in model.simulations:
-            self.add_simulation(model.model_id, simulation, model_catalog_data_io)
+            self.add_simulation(model.id, simulation, model_catalog_data_io)
 
 
 
