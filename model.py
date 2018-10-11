@@ -5,15 +5,15 @@ except:
     pass
 from simulation import Simulation
 from config import Config
+from generic_object import GenericObject
 
-
-class Model:
+class Model(GenericObject):
 
     simulations = None  # type: List[Simulation]
 
     def __init__(self, config):
         # type: (Config) -> None
-        self.model_id = 0
+        self.id = 0
         self.parent_model_id = 0
         self.model_request_id = 0
         self.project_phase_id = 0
@@ -57,7 +57,7 @@ class Model:
     def simulation_folder_path(self):
         sim_file_path = self.model_path + "\\" + "sim"
         return sim_file_path
-
+#TODO: move dataIO functions to a DataIO class; Validate results.gdb;
     @property
     def valid(self):
         if self.validate_model_path():

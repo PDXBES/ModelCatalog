@@ -183,7 +183,7 @@ class EMGAATS_Model_Registration(object):
     def execute(self, parameters, messages):
         try:
             model_id = self.modelcatalogdataio.retrieve_current_model_id()
-            self.model.model_id = model_id
+            self.model.id = model_id
             self.model.parent_model_id = 0
             self.model.model_request_id = 0
             self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]

@@ -23,7 +23,7 @@ try:
     model_catalog = ModelCatalog(config)
     model_catalog_dataio = ModelCatalogDataIO(config)
     model_id = model_catalog_dataio.retrieve_current_model_id()
-    model.model_id = model_id
+    model.id = model_id
     model.parent_model_id = 555
     model.model_request_id = 777
     model.project_phase_id = 1
