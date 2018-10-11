@@ -34,7 +34,7 @@ class TestModelCatalogDataIO(TestCase):
         self.model.model_geometry = None
 
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
-        self.mock_update_cursor.__iter__.return_value = iter([("model", 44), ("simulation", 55)])
+        self.mock_update_cursor.__iter__.return_value = iter([("model", 44), ("simulation", 55), ("model_alteration", 66)])
         self.patch_da_UpdateCursor = mock.patch("arcpy.da.UpdateCursor")
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.start()
 
@@ -58,9 +58,15 @@ class TestModelCatalogDataIO(TestCase):
         current_simulation_id = self.modelcatalogdataio.retrieve_current_simulation_id()
         self.assertTrue(current_simulation_id == 55)
 
+    def test_retrieve_current_model_alteration_id(self):
+        self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+        current_model_alteration_id = self.modelcatalogdataio.retrieve_current_model_alteration_id()
+        self.assertTrue(current_model_alteration_id == 66)
+
     def test_add_model_calls_add_object(self):
         with mock.patch.object(self.modelcatalogdataio, "add_object") as mock_add_object:
             self.modelcatalogdataio.add_model(self.model)
             self.assertTrue(mock_add_object.called)
+
 
 

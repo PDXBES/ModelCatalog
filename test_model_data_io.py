@@ -7,6 +7,7 @@ from simulation import Simulation
 from model_catalog_data_io import ModelCatalogDataIO
 from mock_config import MockConfig
 from config import Config
+from model_alteration import ModelAlteration
 
 class TestModelDataIO(TestCase):
 
@@ -16,6 +17,7 @@ class TestModelDataIO(TestCase):
         self.modeldataio = ModelDataIO(self.config)
         self.model_catalog_data_io = ModelCatalogDataIO(self.config)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
+        self.mock_model_alteration = mock.MagicMock(ModelAlteration)
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.simulation_id = 22
         self.mock_simulation.storm_id = 33
@@ -148,3 +150,10 @@ class TestModelDataIO(TestCase):
         self.mock_model.model_geometry = None
         self.modeldataio.create_model_geometry(self.mock_model)
         self.assertEqual(self.mock_model.model_geometry, "geom")
+
+
+
+    def test_add_model_alteration_calls_add_object(self):
+        with mock.patch.object(self.modeldataio, "add_object") as mock_add_object:
+            self.modeldataio.add_model_alteration(self.mock_model_alteration)
+            self.assertTrue(mock_add_object.called)

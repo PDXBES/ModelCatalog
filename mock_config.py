@@ -36,8 +36,8 @@ class MockConfig():
         # self.config.engine_type =
         # self.config.engine_type_id =
         #
-        # self.config.model_alteration =
-        # self.config.model_alteration_id =
+        self.config.model_alteration = {0: "zero", 1: "one", 2: "two"}
+        self.config.model_alteration_id = {"zero": 0, "one": 1, "two": 2}
         #
         # self.config.model_purpose =
         # self.config.model_purpose_id =

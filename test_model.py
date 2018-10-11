@@ -195,8 +195,23 @@ class TestModel(TestCase):
         return_sim_folder_path = self.model.simulation_folder_path()
         self.assertEquals(sim_folder_path, return_sim_folder_path)
 
-    def test_create_model_alterations(self):
-        pass
+    def test_create_model_alteration_model_alteration_created_with_correct_attributes(self):
+        id = 1
+        alteration_type = "zero"
+        model_alteration = self.model.create_model_alteration(id, alteration_type)
+        self.assertEquals(model_alteration.id, 1)
+        self.assertEquals(model_alteration.model_alteration_type_id, 0)
 
+    def test_create_model_alteration_nonexistant_type_throws_exception(self):
+        id = 1
+        alteration_type = "type that does not exist"
+        with self.assertRaises(KeyError):
+            self.model.create_model_alteration(id, alteration_type)
 
+    def test_create_model_alterations_model_alterations_list_has_correct_values(self):
+        alteration_types = ["zero", "one", "two"]
+        self.model.create_model_alterations(alteration_types)
+        self.assertEquals(self.model.model_alterations[0].model_alteration_type_id, 0)
+        self.assertEquals(self.model.model_alterations[1].model_alteration_type_id, 1)
+        self.assertEquals(self.model.model_alterations[2].model_alteration_type_id, 2)
 

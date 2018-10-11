@@ -6,6 +6,7 @@ except:
 from simulation import Simulation
 from config import Config
 from generic_object import GenericObject
+from model_alteration import ModelAlteration
 
 class Model(GenericObject):
 
@@ -85,3 +86,14 @@ class Model(GenericObject):
         else:
             is_valid = True
         return is_valid
+
+    def create_model_alteration(self, id, alteration_type):
+        model_alteration = ModelAlteration(self.config)
+        model_alteration.id = id
+        model_alteration.model_alteration_type_id = self.config.model_alteration_id[alteration_type]
+        return model_alteration
+
+    def create_model_alterations(self, alteration_types):
+        for alteration_type in alteration_types:
+            model_alteration = self.create_model_alteration(None, alteration_type)
+            self.model_alterations.append(model_alteration)

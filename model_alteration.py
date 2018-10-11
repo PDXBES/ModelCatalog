@@ -4,6 +4,7 @@ try:
     from typing import List, Any
 except:
     pass
+from collections import OrderedDict
 
 class ModelAlteration(GenericObject):
 
@@ -12,3 +13,8 @@ class ModelAlteration(GenericObject):
         self.id = None
         self.model_alteration_type_id = None
         self.config = config
+
+        self.field_attribute_lookup = OrderedDict()
+        self.field_attribute_lookup["Model_Alteration_ID"] = "id"
+        self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_domain_id"
+

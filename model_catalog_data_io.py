@@ -15,7 +15,7 @@ class ModelCatalogDataIO(DataIO):
         self.config = config
         self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
         self.field_attribute_lookup = OrderedDict()
-        self.field_attribute_lookup["Model_ID"] = "model_id"
+        self.field_attribute_lookup["Model_ID"] = "id"
         self.field_attribute_lookup["Parent_Model_ID"] = "parent_model_id"
         self.field_attribute_lookup["Model_Request_ID"] = "model_request_id"
         self.field_attribute_lookup["Project_Phase_ID"] = "project_phase_id"
@@ -42,8 +42,13 @@ class ModelCatalogDataIO(DataIO):
         current_simulation_id = self.retrieve_current_id("simulation")
         return current_simulation_id
 
+    def retrieve_current_model_alteration_id(self):
+        current_model_alteration_id = self.retrieve_current_id("model_alteration")
+        return current_model_alteration_id
+
     def add_model(self, model):
         # type: (Model) -> None
         self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
+
 
 

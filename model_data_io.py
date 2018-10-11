@@ -9,12 +9,12 @@ from model import Model
 from simulation import Simulation
 from model_catalog_data_io import ModelCatalogDataIO
 from model_catalog_exception import Invalid_Model_exception
+from data_io import DataIO
 
-class ModelDataIO:
+class ModelDataIO(DataIO):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config
-
     def create_model_geometry(self, model):
         if model.valid:
             model_name = "Links"
@@ -76,6 +76,12 @@ class ModelDataIO:
 
         for simulation in model.simulations:
             self.add_simulation(model.id, simulation, model_catalog_data_io)
+
+    def add_model_alteration(self, model_alteration):
+        # type: (ModelAlteration) -> None
+
+        self.add_object(model_alteration, self.field_attribute_lookup, self.config.model_tracking_sde_path)
+
 
 
 

@@ -57,3 +57,4 @@ class DataIO:
 
         return row
 
+#TODO - create separate dataIO for database and other
