@@ -22,7 +22,6 @@ class ModelCatalog:
             self.check_for_valid_model(model)
         except:
             arcpy.AddMessage("Current Model Path does not point to a valid EMGAATS model")
-            quit()
             #TODO work out best way to deal with exceptions
 
         self.models.append(model)

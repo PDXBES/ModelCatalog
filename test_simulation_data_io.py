@@ -20,7 +20,7 @@ class TestSimulationDataIO(TestCase):
         self.mock_model = mock.MagicMock(Model)
         self.simulation = Simulation(self.mock_model, self.config)
         self.mock_model.model_path = r"c:\temp\fake"
-        self.mock_model.model_id = 1
+        self.mock_model.id = 1
         self.mock_search_cursor = [("a_value", "b_value")]
         self.mock_cursor = mock.MagicMock(arcpy.da.InsertCursor)
         self.mock_fields1 = mock.MagicMock(arcpy.Field)

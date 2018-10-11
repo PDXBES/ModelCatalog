@@ -26,7 +26,7 @@ class TestModelDataIO(TestCase):
         self.mock_simulation.config = self.config
         self.mock_model = mock.MagicMock(Model)
         self.mock_model.model_path = r"C:\model_path"
-        self.mock_model.model_id = 11
+        self.mock_model.id = 11
         self.mock_model.valid = True
         self.mock_model.simulations = [self.mock_simulation]
 
