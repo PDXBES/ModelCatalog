@@ -1,9 +1,9 @@
 Business Class Tests,Business Classes,*,Data IO,Data IO Tests
-*,GenericObject,Config,DataIO,TestDataIO
-TestModelCatalog,ModelCatalog,TestConfig,ModelCatalogDataIO(DataIO),TestModelCatalogDataIO
-TestModel,Model(GenericObject),*,ModelDataIO(DataIO),TestModelDataIO
+*,GenericObject,Config,DbDataIo,TestDataIO
+TestModelCatalog,ModelCatalog,TestConfig,ModelCatalogDbDataIo(DbDataIo),TestModelCatalogDataIO
+TestModel,Model(GenericObject),*,ModelDataIo,TestModelDataIO
 *,ModelAlteration(GenericObject),*,*,*
 TestSimulation,Simulation,*,SimulationDataIO,TestSimulationDataIO
-*,*,*,RradDataIO(DataIO),TestRradDataIO
+*,*,*,RradDbDataIo(DbDataIo),TestRradDataIO
 TestRehab,Rehab,*,RehabDataIO,TestRehabDataIO
 TestPipe,Pipe,*,*,*  
