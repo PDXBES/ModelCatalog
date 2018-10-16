@@ -2,7 +2,7 @@ from unittest import TestCase
 import mock
 from mock_config import MockConfig
 import arcpy
-from rrad_data_io import RradDataIO
+from rrad_data_io import RradDbDataIo
 from rehab import Rehab
 class TestRradDataIO(TestCase):
     def setUp(self):
@@ -11,7 +11,7 @@ class TestRradDataIO(TestCase):
 
         self.mock_rehab = mock.MagicMock(Rehab)
 
-        self.rrad_data_io = RradDataIO(self.config)
+        self.rrad_data_io = RradDbDataIo(self.config)
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("rehab", 44), ("object_2", 55)])

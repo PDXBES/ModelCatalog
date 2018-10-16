@@ -12,9 +12,9 @@
 import arcpy
 from model_catalog import ModelCatalog
 from model import Model
-from model_catalog_data_io import ModelCatalogDataIO
+from model_catalog_data_io import ModelCatalogDbDataIo
 from simulation_data_io import SimulationDataIO
-from model_data_io import ModelDataIO
+from model_data_io import ModelDataIo
 import getpass
 import datetime
 from config import Config
@@ -39,8 +39,8 @@ class EMGAATS_Model_Registration(object):
         self.config = Config()
         self.model_catalog = ModelCatalog(self.config)
         self.model = Model(self.config)
-        self.modelcatalogdataio = ModelCatalogDataIO(self.config)
-        self.model_dataio = ModelDataIO(self.config)
+        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
+        self.model_dataio = ModelDataIo(self.config)
 
         self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
         self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
@@ -212,8 +212,8 @@ class EMGAATS_Model_Registration(object):
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
-    modelcatalogdataio = ModelCatalogDataIO(config)
-    modeldataio = ModelDataIO(config)
+    modelcatalogdataio = ModelCatalogDbDataIo(config)
+    modeldataio = ModelDataIo(config)
     simulationdataio = SimulationDataIO(config)
     model = model_catalog.models[0]
     arcpy.AddMessage("Adding Model...")

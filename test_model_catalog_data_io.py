@@ -1,5 +1,5 @@
 from unittest import TestCase
-from model_catalog_data_io import ModelCatalogDataIO
+from model_catalog_data_io import ModelCatalogDbDataIo
 import mock
 from model_catalog import ModelCatalog
 from model import Model
@@ -11,7 +11,7 @@ class TestModelCatalogDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
-        self.modelcatalogdataio = ModelCatalogDataIO(self.config)
+        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_catalog = mock.MagicMock(ModelCatalog)
         self.model = mock.MagicMock(Model)
         self.model.model_id = 0

@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/emgaats_registration_integration_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/emgaats_registration_integration_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_catalog_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_catalog_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulation_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rehab_data_io_integration_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/rehab_data_io_integration_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rrad_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/rrad_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_db_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_model_catalog_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_model_catalog_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_model_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_rrad_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_rrad_data_io.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,37 +24,37 @@
     <session id="-1785687224">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.4" value="10" />
-          <entry key="project.open.time.5" value="5" />
+          <entry key="project.open.time.5" value="6" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="116" />
+          <entry key="py" value="126" />
           <entry key="pyt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="118" />
+          <entry key="Python" value="128" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="" value="12" />
           <entry key="Python Console" value="95" />
-          <entry key="dummy" value="39" />
-          <entry key="py" value="11159" />
+          <entry key="dummy" value="55" />
+          <entry key="py" value="11548" />
           <entry key="pyt" value="232" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="39" />
-          <entry key="Python" value="11498" />
+          <entry key="PLAIN_TEXT" value="55" />
+          <entry key="Python" value="11887" />
         </counts>
       </usages-collector>
     </session>
@@ -90,14 +94,14 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6534181">
+    <splitter split-orientation="horizontal" split-proportion="0.41494435">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-146">
-                  <caret line="209" column="18" lean-forward="true" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
+                <state relative-caret-position="17">
+                  <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
                   <folding>
                     <element signature="e#642#654#0" expanded="true" />
                   </folding>
@@ -108,31 +112,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-880">
-                  <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="32" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/model_alteration.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-                  <folding>
-                    <element signature="e#0#40#0" expanded="true" />
-                    <marker date="1539190234106" expanded="true" signature="160:161" ph="..." />
-                    <marker date="1539190234106" expanded="true" signature="160:166" ph="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/simulation.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+                <state relative-caret-position="221">
+                  <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
                 </state>
               </provider>
             </entry>
@@ -146,11 +127,34 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/emgaats_registration_integration_test.py">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1101">
-                  <caret line="83" column="10" selection-start-line="82" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+                <state relative-caret-position="360">
+                  <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/object_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                  <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                    <marker date="1539712451129" expanded="true" signature="168:173" ph="..." />
+                    <marker date="1539712451129" expanded="true" signature="364:365" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/model_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                  <caret line="7" column="23" lean-forward="true" selection-end-line="7" selection-end-column="23" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -161,12 +165,40 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/test_model.py">
+            <entry file="file://$PROJECT_DIR$/test_object_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="322">
-                  <caret line="197" column="38" selection-start-line="197" selection-start-column="38" selection-end-line="197" selection-end-column="38" />
+                <state relative-caret-position="275">
+                  <caret line="21" selection-start-line="21" selection-end-line="21" />
+                  <folding>
+                    <element signature="e#1#30#0" expanded="true" />
+                    <marker date="1539713287034" expanded="true" signature="1286:1815" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test_model_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="133">
+                  <caret line="110" column="39" selection-start-line="110" selection-start-column="39" selection-end-line="110" selection-end-column="39" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test_db_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="221">
+                  <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -211,6 +243,7 @@
       <find>walk</find>
       <find>config</find>
       <find>alterations</find>
+      <find>add_o</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -258,8 +291,6 @@
         <option value="$PROJECT_DIR$/rrad_data_io.py" />
         <option value="$PROJECT_DIR$/test_rehab_data_io.py" />
         <option value="$PROJECT_DIR$/mock_config.py" />
-        <option value="$PROJECT_DIR$/test_model_data_io.py" />
-        <option value="$PROJECT_DIR$/model_data_io.py" />
         <option value="$PROJECT_DIR$/rehab_data_io.py" />
         <option value="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.py" />
         <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
@@ -269,14 +300,20 @@
         <option value="$PROJECT_DIR$/model_alterations.py" />
         <option value="$PROJECT_DIR$/model_alteration.py" />
         <option value="$PROJECT_DIR$/test_model.py" />
+        <option value="$PROJECT_DIR$/db_data_io.py" />
+        <option value="$PROJECT_DIR$/test_model_data_io.py" />
+        <option value="$PROJECT_DIR$/model_data_io.py" />
+        <option value="$PROJECT_DIR$/object_data_io.py" />
+        <option value="$PROJECT_DIR$/test_db_data_io.py" />
+        <option value="$PROJECT_DIR$/test_object_data_io.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-3" />
-    <option name="y" value="-3" />
-    <option name="width" value="645" />
-    <option name="height" value="366" />
+    <option name="x" value="-1" />
+    <option name="y" value="-1" />
+    <option name="width" value="215" />
+    <option name="height" value="122" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -323,63 +360,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_model.TestModel.test_create_model_alterations">
-    <configuration name="emgaats_registration_integration_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/emgaats_registration_integration_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="rehab_data_io_integration_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rehab_data_io_integration_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test_model.TestModel" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Unittests in ModelCatalog">
     <configuration name="Unittests for test_model.TestModel.test_create_model_alterations" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -391,6 +372,48 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_model.TestModel.test_create_model_alterations&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_model_data_io.TestModelDataIO" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_model_data_io.TestModelDataIO&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_add_simulation_calls_insert_cursor" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_model_data_io.TestModelDataIO.test_add_simulation_calls_insert_cursor&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -410,18 +433,18 @@
     </configuration>
     <list>
       <item itemvalue="Python tests.Unittests in ModelCatalog" />
-      <item itemvalue="Python.emgaats_registration_integration_test" />
-      <item itemvalue="Python.rehab_data_io_integration_test" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel" />
       <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alterations" />
+      <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO" />
+      <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO.test_add_simulation_calls_insert_cursor" />
+      <item itemvalue="Python tests.Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alterations" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel" />
-        <item itemvalue="Python.rehab_data_io_integration_test" />
-        <item itemvalue="Python.emgaats_registration_integration_test" />
         <item itemvalue="Python tests.Unittests in ModelCatalog" />
+        <item itemvalue="Python tests.Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" />
+        <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO" />
+        <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO.test_add_simulation_calls_insert_cursor" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alterations" />
       </list>
     </recent_temporary>
   </component>
@@ -439,35 +462,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO_test_create_model_geometry_invalid_model_returns_exception - 2018.10.04 at 16h 19m 25s.xml">
-      <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_create_model_geometry_invalid_model_returns_exception" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.04 at 16h 20m 00s.xml">
+    <history-entry file="Unittests_in_ModelCatalog - 2018.10.16 at 10h 23m 25s.xml">
       <configuration name="Unittests in ModelCatalog" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.04 at 16h 30m 40s.xml">
+    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO - 2018.10.16 at 10h 25m 16s.xml">
+      <configuration name="Unittests for test_model_data_io.TestModelDataIO" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO_test_add_simulation_calls_insert_cursor - 2018.10.16 at 10h 26m 10s.xml">
+      <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_add_simulation_calls_insert_cursor" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO - 2018.10.16 at 10h 26m 56s.xml">
+      <configuration name="Unittests for test_model_data_io.TestModelDataIO" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_object_data_io_TestObjectDataIo_test_add_object_calls_insert_cursor - 2018.10.16 at 10h 46m 31s.xml">
+      <configuration name="Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_object_data_io_TestObjectDataIo_test_add_object_calls_insert_cursor - 2018.10.16 at 10h 47m 06s.xml">
+      <configuration name="Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_object_data_io_TestObjectDataIo_test_add_object_calls_insert_cursor - 2018.10.16 at 10h 50m 19s.xml">
+      <configuration name="Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_object_data_io_TestObjectDataIo_test_add_object_calls_insert_cursor - 2018.10.16 at 10h 51m 34s.xml">
+      <configuration name="Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_object_data_io_TestObjectDataIo_test_add_object_calls_insert_cursor - 2018.10.16 at 10h 54m 16s.xml">
+      <configuration name="Unittests for test_object_data_io.TestObjectDataIo.test_add_object_calls_insert_cursor" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_ModelCatalog - 2018.10.16 at 11h 01m 13s.xml">
       <configuration name="Unittests in ModelCatalog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.04 at 16h 34m 22s.xml">
-      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.04 at 16h 36m 19s.xml">
-      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.04 at 16h 37m 25s.xml">
-      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.04 at 16h 38m 17s.xml">
-      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.10.05 at 14h 48m 44s.xml">
-      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel - 2018.10.10 at 09h 35m 20s.xml">
-      <configuration name="Unittests for test_model.TestModel" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_create_model_alterations - 2018.10.10 at 09h 56m 51s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_create_model_alterations" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -480,14 +503,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="704" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.27106518" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17966281" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.32562277" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.852459" weight="0.08056042" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.852459" weight="0.44313306" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.70335674" weight="0.3442623" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -686,13 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="766">
-          <caret line="68" column="51" lean-forward="true" selection-start-line="68" selection-start-column="51" selection-end-line="68" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_rrad_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -721,20 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1335">
-          <caret line="116" column="92" selection-start-line="116" selection-start-column="66" selection-end-line="116" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rehab_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
@@ -746,13 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -797,13 +792,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emgaats_registration_integration_test.py">
+    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1101">
-          <caret line="83" column="10" selection-start-line="82" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+        <state relative-caret-position="17">
+          <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#642#654#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -814,45 +816,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulation.py">
+    <entry file="file://$PROJECT_DIR$/emgaats_registration_integration_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        <state relative-caret-position="1275">
+          <caret line="83" column="10" selection-start-line="82" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model_alteration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="219">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-            <marker date="1539190234106" expanded="true" signature="160:161" ph="..." />
-            <marker date="1539190234106" expanded="true" signature="160:166" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="23" lean-forward="true" selection-end-line="7" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-880">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="32" />
+        <state relative-caret-position="221">
+          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/object_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1539712451129" expanded="true" signature="168:173" ph="..." />
+            <marker date="1539712451129" expanded="true" signature="364:365" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="110" column="39" selection-start-line="110" selection-start-column="39" selection-end-line="110" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="197" column="38" selection-start-line="197" selection-start-column="38" selection-end-line="197" selection-end-column="38" />
+        <state relative-caret-position="1734">
+          <caret line="189" selection-start-line="188" selection-end-line="189" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
+    <entry file="file://$PROJECT_DIR$/test_object_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="209" column="18" lean-forward="true" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
+        <state relative-caret-position="275">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
-            <element signature="e#642#654#0" expanded="true" />
+            <element signature="e#1#30#0" expanded="true" />
+            <marker date="1539713287034" expanded="true" signature="1286:1815" ph="..." />
           </folding>
         </state>
       </provider>

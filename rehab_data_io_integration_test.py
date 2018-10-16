@@ -1,13 +1,13 @@
 from rehab_data_io import RehabDataIO
 from rehab import Rehab
 from config import Config
-from rrad_data_io import  RradDataIO
+from rrad_data_io import  RradDbDataIo
 import datetime
 import time
 
 config = Config()
 
-rrad_data_io = RradDataIO(config)
+rrad_data_io = RradDbDataIo(config)
 rehab_data_io = RehabDataIO(config)
 rehab = Rehab(config)
 

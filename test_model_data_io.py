@@ -1,10 +1,10 @@
 from unittest import TestCase
 import mock
 import arcpy
-from model_data_io import ModelDataIO
+from model_data_io import ModelDataIo
 from model import Model
 from simulation import Simulation
-from model_catalog_data_io import ModelCatalogDataIO
+from model_catalog_data_io import ModelCatalogDbDataIo
 from mock_config import MockConfig
 from config import Config
 from model_alteration import ModelAlteration
@@ -14,8 +14,8 @@ class TestModelDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
-        self.modeldataio = ModelDataIO(self.config)
-        self.model_catalog_data_io = ModelCatalogDataIO(self.config)
+        self.modeldataio = ModelDataIo(self.config)
+        self.model_catalog_data_io = ModelCatalogDbDataIo(self.config)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
         self.mock_model_alteration = mock.MagicMock(ModelAlteration)
         self.mock_simulation = mock.MagicMock(Simulation)
@@ -100,19 +100,19 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 0)
         self.assertEquals(first_simulation.sim_desc, "Dec2015")
 
-    @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
+    @mock.patch("model_catalog_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
     def test_add_simulation_calls_insert_cursor(self, mock_retrieve_current_simulation_id):
         mock_retrieve_current_simulation_id.return_value = 1
         self.modeldataio.add_simulation(11, self.mock_simulation, self.model_catalog_data_io)
         self.assertTrue(self.mock_insert_cursor.called)
 
-    @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
+    @mock.patch("model_catalog_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
     def test_add_simulation_calls_insert_cursor_with_correct_arguments(self, mock_retrieve_current_simulation_id):
         mock_retrieve_current_simulation_id.return_value = 1
         self.modeldataio.add_simulation(11, self.mock_simulation, self.model_catalog_data_io)
         self.mock_insert_cursor.assert_called_with(self.config.simulation_sde_path, self.field_names)
 
-    @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
+    @mock.patch("model_catalog_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
     def test_add_simulation_parameters_are_passed_into_row(self, mock_retrieve_current_simulation):
         mock_retrieve_current_simulation.return_value = 22
         self.mock_insert_cursor.return_value = self.mock_insert_cursor
@@ -120,7 +120,7 @@ class TestModelDataIO(TestCase):
         self.assertTrue(self.mock_insert_cursor.insertRow.called)
         self.mock_insert_cursor.insertRow.assert_called_with([11, 22, 33, 44, "sim_desc"])
 
-    @mock.patch("model_catalog_data_io.ModelCatalogDataIO.retrieve_current_simulation_id")
+    @mock.patch("model_catalog_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
     @mock.patch("model_data_io.ModelDataIO.add_simulation")
     def test_add_simulations_called_with_correct_arguments(self, mock_add_simulation,
                                                            mock_retrieve_current_simulation):

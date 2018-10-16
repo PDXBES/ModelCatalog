@@ -7,11 +7,11 @@ except:
     pass
 from model import Model
 from simulation import Simulation
-from model_catalog_data_io import ModelCatalogDataIO
+from model_catalog_data_io import ModelCatalogDbDataIo
 from model_catalog_exception import Invalid_Model_exception
-from data_io import DataIO
+from db_data_io import DbDataIo
 
-class ModelDataIO(DataIO):
+class ModelDataIo():
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config
@@ -56,7 +56,7 @@ class ModelDataIO(DataIO):
         return simulations
 
     def add_simulation(self, model_id, simulation, model_catalog_data_io):
-        # type: (int, Simulation, ModelCatalogDataIO) -> None
+        # type: (int, Simulation, ModelCatalogDbDataIo) -> None
         field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
         simulation.simulation_id = model_catalog_data_io.retrieve_current_simulation_id()
 
@@ -72,7 +72,7 @@ class ModelDataIO(DataIO):
         del cursor
 
     def add_simulations(self, model, model_catalog_data_io):
-        # type: (Model, ModelCatalogDataIO) -> None
+        # type: (Model, ModelCatalogDbDataIo) -> None
 
         for simulation in model.simulations:
             self.add_simulation(model.id, simulation, model_catalog_data_io)

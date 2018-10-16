@@ -1,8 +1,8 @@
 import os
 from model_catalog import ModelCatalog
 from model import Model
-from model_catalog_data_io import ModelCatalogDataIO
-from model_data_io import ModelDataIO
+from model_catalog_data_io import ModelCatalogDbDataIo
+from model_data_io import ModelDataIo
 import getpass
 import datetime
 from config import Config
@@ -19,9 +19,9 @@ print "\n\n"
 try:
     config = Config()
     model = Model(config)
-    model_dataio = ModelDataIO(config)
+    model_dataio = ModelDataIo(config)
     model_catalog = ModelCatalog(config)
-    model_catalog_dataio = ModelCatalogDataIO(config)
+    model_catalog_dataio = ModelCatalogDbDataIo(config)
     model_id = model_catalog_dataio.retrieve_current_model_id()
     model.id = model_id
     model.parent_model_id = 555

@@ -6,10 +6,10 @@ except:
     pass
 from model import Model
 from config import Config
-from data_io import DataIO
+from db_data_io import DbDataIo
 from collections import OrderedDict
 
-class ModelCatalogDataIO(DataIO):
+class ModelCatalogDbDataIo(DbDataIo):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config

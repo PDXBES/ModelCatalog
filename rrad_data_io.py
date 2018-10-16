@@ -4,12 +4,12 @@ try:
 except:
     pass
 from config import Config
-from data_io import DataIO
+from db_data_io import DbDataIo
 from rehab import Rehab
 from collections import OrderedDict
 
 
-class RradDataIO(DataIO):
+class RradDbDataIo(DbDataIo):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config
