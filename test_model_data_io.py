@@ -8,16 +8,21 @@ from model_catalog_data_io import ModelCatalogDbDataIo
 from mock_config import MockConfig
 from config import Config
 from model_alteration import ModelAlteration
+from collections import OrderedDict
 
 class TestModelDataIO(TestCase):
 
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
-        self.modeldataio = ModelDataIo(self.config)
         self.model_catalog_data_io = ModelCatalogDbDataIo(self.config)
+        self.modeldataio = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
         self.mock_model_alteration = mock.MagicMock(ModelAlteration)
+        self.field_attribute_lookup = OrderedDict()
+        self.field_attribute_lookup["Model_Alteration_ID"] = "id"
+        self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_domain_id"
+        self.mock_model_alteration.field_attribute_lookup = self.field_attribute_lookup
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.simulation_id = 22
         self.mock_simulation.storm_id = 33
@@ -121,7 +126,7 @@ class TestModelDataIO(TestCase):
         self.mock_insert_cursor.insertRow.assert_called_with([11, 22, 33, 44, "sim_desc"])
 
     @mock.patch("model_catalog_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
-    @mock.patch("model_data_io.ModelDataIO.add_simulation")
+    @mock.patch("model_data_io.ModelDataIo.add_simulation")
     def test_add_simulations_called_with_correct_arguments(self, mock_add_simulation,
                                                            mock_retrieve_current_simulation):
         mock_retrieve_current_simulation.return_value = 22

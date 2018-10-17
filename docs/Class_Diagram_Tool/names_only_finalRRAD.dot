@@ -33,6 +33,7 @@ splines="ortho";
 {rank= tb "TestDataIO"->"TestRradDataIO"->"TestRehabDataIO"->"_d7" [constraint=true style=invis]};
 {rank= same _d1->_d2->_d3->RradDbDataIo->TestRradDataIO [constraint=True style=invis]};
 "Config"->"DbDataIo";
+"DbDataIo"->"TestDataIO";
 "Config"->"RradDbDataIo";
 "Rehab"->"TestRehab";
 "Pipe"->"TestRehab";

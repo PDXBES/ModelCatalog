@@ -26,7 +26,7 @@ class DbDataIo:
         cursor.updateRow([object_name, next_id])
         return current_id
 
-    def add_object(self, object_class, field_attribute_lookup, object_tracking_sde_path):
+    def add_object(self, object_class, field_attribute_lookup, object_table_sde_path):
 
         if not object_class.valid:
             raise DataIO_exception
@@ -37,7 +37,7 @@ class DbDataIo:
         if len(field_names) != len(row):
             raise Field_names_length_does_not_match_row_length_exception
 
-        cursor = arcpy.da.InsertCursor(object_tracking_sde_path, field_names)
+        cursor = arcpy.da.InsertCursor(object_table_sde_path, field_names)
 
         cursor.insertRow(row)
         del cursor
