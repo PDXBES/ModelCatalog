@@ -1,6 +1,7 @@
 Business Class Tests,Business Classes,*,Data IO,Data IO Tests
 *,GenericObject,Config,DbDataIo,TestDataIO
+*,*,*,ObjectDataIo,TestObjectDataIo
 TestModelCatalog,ModelCatalog,TestConfig,ModelCatalogDbDataIo(DbDataIo),TestModelCatalogDataIO
-TestModel,Model(GenericObject),*,ModelDataIo,TestModelDataIO
+TestModel,Model(GenericObject),*,ModelDataIo(ObjectDataIo),TestModelDataIO
 *,ModelAlteration(GenericObject),*,*,*
-TestSimulation,Simulation,*,SimulationDataIO,TestSimulationDataIO
+TestSimulation,Simulation(GenericObject),*,SimulationDataIO(ObjectDataIo),TestSimulationDataIO

@@ -15,6 +15,7 @@ class Model(GenericObject):
     def __init__(self, config):
         # type: (Config) -> None
         self.id = 0
+        self.name = "model"
         self.parent_model_id = 0
         self.model_request_id = 0
         self.project_phase_id = 0
@@ -87,13 +88,12 @@ class Model(GenericObject):
             is_valid = True
         return is_valid
 
-    def create_model_alteration(self, id, alteration_type):
+    def create_model_alteration(self, alteration_type):
         model_alteration = ModelAlteration(self.config)
-        model_alteration.id = id
         model_alteration.model_alteration_type_id = self.config.model_alteration_id[alteration_type]
         return model_alteration
 
     def create_model_alterations(self, alteration_types):
         for alteration_type in alteration_types:
-            model_alteration = self.create_model_alteration(None, alteration_type)
+            model_alteration = self.create_model_alteration(alteration_type)
             self.model_alterations.append(model_alteration)

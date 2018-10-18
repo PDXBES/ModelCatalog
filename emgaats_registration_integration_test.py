@@ -1,7 +1,7 @@
 import os
 from model_catalog import ModelCatalog
 from model import Model
-from model_catalog_data_io import ModelCatalogDbDataIo
+from model_catalog_db_data_io import ModelCatalogDbDataIo
 from model_data_io import ModelDataIo
 import getpass
 import datetime

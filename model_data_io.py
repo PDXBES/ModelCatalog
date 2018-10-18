@@ -7,10 +7,11 @@ except:
     pass
 from model import Model
 from simulation import Simulation
-from model_catalog_data_io import ModelCatalogDbDataIo
+from model_catalog_db_data_io import ModelCatalogDbDataIo
 from model_catalog_exception import Invalid_Model_exception
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
+from model_alteration import ModelAlteration
 
 class ModelDataIo(ObjectDataIo):
     def __init__(self, config, db_data_io):
@@ -58,32 +59,25 @@ class ModelDataIo(ObjectDataIo):
             simulations.append(simulation)
         return simulations
 
-    def add_simulation(self, model_id, simulation, model_catalog_data_io):
-        # type: (int, Simulation, ModelCatalogDbDataIo) -> None
-        field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
-        simulation.simulation_id = model_catalog_data_io.retrieve_current_simulation_id()
+    def add_simulation(self, model_id, simulation):
+        # type: (int, Simulation) -> None
+        self.add_object(model_id, simulation, simulation.field_attribute_lookup, self.config.simulation_sde_path)
 
-        row = [model_id,
-               simulation.simulation_id,
-               simulation.storm_id,
-               simulation.dev_scenario_id,
-               simulation.sim_desc]
-
-        cursor = arcpy.da.InsertCursor(self.config.simulation_sde_path, field_names)
-
-        cursor.insertRow(row)
-        del cursor
-
-    def add_simulations(self, model, model_catalog_data_io):
+    def add_simulations(self, model):
         # type: (Model, ModelCatalogDbDataIo) -> None
-
         for simulation in model.simulations:
-            self.add_simulation(model.id, simulation, model_catalog_data_io)
+            self.add_simulation(model.id, simulation)
 
-    def add_model_alteration(self, model_alteration):
-        # type: (ModelAlteration) -> None
+    def add_model_alteration(self, model_id, model_alteration):
+        # type: (int, ModelAlteration) -> None
+        self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_tracking_sde_path)
 
-        self.add_object(model_alteration, model_alteration.field_attribute_lookup, self.config.model_tracking_sde_path)
+    def add_model_alterations(self, model):
+        # type: (Model) -> None
+        for model_alteraton in model.model_alterations:
+            self.add_model_alteration(model.id, model_alteraton)
+
+
 
 
 

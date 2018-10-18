@@ -9,7 +9,7 @@ except:
     print("Failed to run pyReverse")
     quit()
 
-output_format = "pdf"  # pdf svg png etc. see https://graphviz.gitlab.io/_pages/doc/info/output.html
+output_format = "svg"  # pdf svg png etc. see https://graphviz.gitlab.io/_pages/doc/info/output.html
 control_files = []
 executable_path = os.path.dirname(os.path.realpath(__file__))
 for file in os.listdir(executable_path + "\\" + "Control_Files"):
@@ -84,7 +84,8 @@ for control_file in control_files:
         fout_name_only.write("rankdir=\"TB\";\n")
         fout.write("edge [ constraint=False ];\n")
         fout_name_only.write("edge [ constraint=False ];\n")
-        #fout.write("ratio = 1.35;\n")
+        #fout_name_only.write("ratio = 0.65;\n")
+        #fout_name_only.write("size = \"8.5, 11\";\n")
         #fout.write("ranksep=equally;\n")
         #fout_name_only.write("ranksep=equally;\n")
         fout.write("splines=\"ortho\";\n")

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from model_catalog_data_io import ModelCatalogDbDataIo
+from model_catalog_db_data_io import ModelCatalogDbDataIo
 import mock
 from model_catalog import ModelCatalog
 from model import Model
