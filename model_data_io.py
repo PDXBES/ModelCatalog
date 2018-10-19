@@ -12,6 +12,7 @@ from model_catalog_exception import Invalid_Model_exception
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from model_alteration import ModelAlteration
+from project_type import ProjectType
 
 class ModelDataIo(ObjectDataIo):
     def __init__(self, config, db_data_io):
@@ -74,10 +75,20 @@ class ModelDataIo(ObjectDataIo):
 
     def add_model_alterations(self, model):
         # type: (Model) -> None
-        for model_alteraton in model.model_alterations:
-            self.add_model_alteration(model.id, model_alteraton)
+        for model_alteration in model.model_alterations:
+            self.add_model_alteration(model.id, model_alteration)
 
+    def add_project_type(self, model_id, project_type):
+        # type: (int, ProjectType) -> None
+        self.add_object(model_id, project_type, project_type.field_attribute_lookup,
+                        self.config.project_type_sde_path)
 
+    def add_project_types(self, model):
+        # type: (Model) -> None
+        for project_type in model.project_types:
+            self.add_project_type(model.id, project_type)
+
+#TODO: Create tests for add_project and add_project_types
 
 
 

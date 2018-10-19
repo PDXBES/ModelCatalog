@@ -40,7 +40,7 @@ class EMGAATS_Model_Registration(object):
         self.model_catalog = ModelCatalog(self.config)
         self.model = Model(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
-        self.model_dataio = ModelDataIo(self.config)
+        self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
 
         self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
         self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
@@ -194,8 +194,7 @@ class EMGAATS_Model_Registration(object):
             self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = parameters[1].valueAsText
-            #TODO: need 1-M for project types, write code to add project types
-            arcpy.AddMessage(parameters[7].values)
+            self.model.create_project_types(parameters[2].values)
             self.model.create_model_alterations(parameters[7].values)
             self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
             self.model.model_calibration_file = parameters[5].valueAsText
@@ -222,8 +221,16 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     arcpy.AddMessage("Adding Simulations...")
     model.simulations = modeldataio.read_simulations(model)
     modeldataio.add_simulations(model)
-    modeldataio.add_model_alterations(model)
     arcpy.AddMessage("Simulations Added")
+
+    arcpy.AddMessage("Adding Alterations...")
+    modeldataio.add_model_alterations(model)
+    arcpy.AddMessage("Alterations Added")
+
+    arcpy.AddMessage("Adding Project Types...")
+    modeldataio.add_project_types(model)
+    arcpy.AddMessage("Project Types Added")
+
     if config.model_status[model.model_status_id] == "Working":
         arcpy.AddMessage("Model Status has been set to 'Working'")
         arcpy.AddMessage("No results will be added to the RRAD")

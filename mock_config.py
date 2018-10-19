@@ -11,6 +11,8 @@ class MockConfig():
         self.config.rehab_nbcr_data_sde_path = "rehab_nbcr_data_sde_path"
         self.config.rehab_branches_sde_path = "rehab_branches_sde_path"
         self.config.rrad_current_id_table_sde_path = "rrad_current_id_table_sde_path"
+        self.config.project_type_sde_path = "project_type_sde_path"
+
 
         self.config.RRAD_sde_path = "RRAD_sde_path"
         self.config.area_results_sde_path = "area_results_sde_path"

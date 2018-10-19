@@ -56,5 +56,3 @@ class DbDataIo:
             #TODO find cleaner way to get traceback and stop program
 
         return row
-
-#TODO - create separate dataIO for database and other

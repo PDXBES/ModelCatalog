@@ -1,5 +1,6 @@
 import os
 import arcpy
+
 try:
     from typing import List, Any
 except:
@@ -8,6 +9,7 @@ from simulation import Simulation
 from config import Config
 from generic_object import GenericObject
 from model_alteration import ModelAlteration
+from project_type import ProjectType
 
 class Model(GenericObject):
 
@@ -124,3 +126,15 @@ class Model(GenericObject):
         for alteration_type in alteration_types:
             model_alteration = self.create_model_alteration(alteration_type[0])
             self.model_alterations.append(model_alteration)
+
+    def create_project_type(self, project_type_name):
+        project_type = ProjectType(self.config)
+        project_type.project_type_id = self.config.proj_type_id[project_type_name]
+        return project_type
+
+    def create_project_types(self, project_types):
+        for project_type_name in project_types:
+            project_type = self.create_project_type(project_type_name)
+            self.project_types.append(project_type)
+
+    # TODO: Create tests for add_project and add_project_types

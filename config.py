@@ -19,6 +19,7 @@ class Config:
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
         self.model_alterations_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alterations"
+        self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
 
         rehab_test_sde = r"BESDBTEST1.REHAB.sde"
         self.rehab_test_sde_path = os.path.join(sde_connections, rehab_test_sde)
@@ -54,6 +55,7 @@ class Config:
 
         self.model_alteration = self.retrieve_model_alterations_domain_as_dict()
         self.model_alteration_id = self.reverse_dict(self.model_alteration)
+
 
         self.model_purpose = self.retrieve_model_purpose_domain_as_dict()
         self.model_purpose_id = self.reverse_dict(self.model_purpose)
@@ -93,7 +95,6 @@ class Config:
     def retrieve_engine_type_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Engine_Type")
 
-    #TODO - make this one 1-M (database change)
     def retrieve_model_alterations_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Model_Alterations")
 

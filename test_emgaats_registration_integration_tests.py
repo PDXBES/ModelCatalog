@@ -35,8 +35,6 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
         self.model.model_path = r"\\BESFIle1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\Model_Catalog\Test_Cases\Carolina_Trunk\Base_Calib"
-        # TODO: need 1-M for project types, write code to add project types
-        # TODO: need 1-M for model alterations, write code to add model alterations
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"
@@ -44,11 +42,11 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.model_alteration_file = "C:\Temp\BC"
         self.model.project_num = "E10TEST"
         self.model.create_date = datetime.datetime.today()
-
+        self.model.create_model_alterations([["Boundary Conditions"]])
+        self.model.create_project_types(["Storm"])
 
     def test_model_registration_with_model_status_working(self):
         self.model_dataio.create_model_geometry(self.model)
-        self.model.create_model_alterations([["Boundary Conditions"]])
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
 
