@@ -17,5 +17,7 @@ class ModelAlteration(GenericObject):
 
         self.field_attribute_lookup = OrderedDict()
         self.field_attribute_lookup["Model_Alteration_ID"] = "id"
-        self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_domain_id"
+        self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
 
+    def valid(self):
+        return True

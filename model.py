@@ -1,4 +1,5 @@
 import os
+import arcpy
 try:
     from typing import List, Any
 except:
@@ -36,24 +37,27 @@ class Model(GenericObject):
         self.project_types = []
         self.model_alterations = []
         self.model_geometry = None
+        self.config_file_path = None
+        self.gdb_file_path = None
+        self.sim_file_path = None
 
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.model_path)
         return valid_model_path
 
     def validate_config_file(self):
-        config_file_path = self.model_path + "\\" + "emgaats.config"
-        config_file_valid = os.path.isfile(config_file_path)
+        self.config_file_path = self.model_path + "\\" + "emgaats.config"
+        config_file_valid = os.path.isfile(self.config_file_path)
         return config_file_valid
 
     def validate_gdb(self):
-        gdb_file_path = self.model_path + "\\" + "EmgaatsModel.gdb"
-        gdb_file_valid = os.path.exists(gdb_file_path)
+        self.gdb_file_path = self.model_path + "\\" + "EmgaatsModel.gdb"
+        gdb_file_valid = os.path.exists(self.gdb_file_path)
         return gdb_file_valid
 
     def validate_sim(self):
-        sim_file_path = self.simulation_folder_path()
-        sim_folder_valid = os.path.exists(sim_file_path)
+        self.sim_file_path = self.simulation_folder_path()
+        sim_folder_valid = os.path.exists(self.sim_file_path)
         return sim_folder_valid
 
     def simulation_folder_path(self):
@@ -88,6 +92,29 @@ class Model(GenericObject):
             is_valid = True
         return is_valid
 
+    def model_valid_diagnostic(self):
+        if self.validate_model_path():
+            arcpy.AddMessage("Model Path is valid: " + self.model_path)
+        else:
+            arcpy.AddMessage("Model Path is not valid: " + self.model_path)
+
+        if self.validate_config_file():
+            arcpy.AddMessage("Config File is valid: " + self.config_file_path)
+        else:
+            arcpy.AddMessage("Config File is not valid: " + self.config_file_path)
+
+        if self.validate_gdb():
+            arcpy.AddMessage("GDB is valid: " + self.gdb_file_path)
+
+        else:
+            arcpy.AddMessage("GDB is not valid: " + self.gdb_file_path)
+
+        if self.validate_sim():
+            arcpy.AddMessage("Sim folder is valid: " + self.sim_file_path)
+
+        else:
+            arcpy.AddMessage("Sim folder is not valid: " + self.sim_file_path)
+
     def create_model_alteration(self, alteration_type):
         model_alteration = ModelAlteration(self.config)
         model_alteration.model_alteration_type_id = self.config.model_alteration_id[alteration_type]
@@ -95,5 +122,5 @@ class Model(GenericObject):
 
     def create_model_alterations(self, alteration_types):
         for alteration_type in alteration_types:
-            model_alteration = self.create_model_alteration(alteration_type)
+            model_alteration = self.create_model_alteration(alteration_type[0])
             self.model_alterations.append(model_alteration)

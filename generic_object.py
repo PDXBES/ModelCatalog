@@ -8,4 +8,5 @@ class GenericObject():
 
     @property
     def valid(self):
-        pass
+        # type: () -> bool
+        return False

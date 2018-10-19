@@ -195,13 +195,13 @@ class EMGAATS_Model_Registration(object):
             self.model.created_by = getpass.getuser()
             self.model.model_path = parameters[1].valueAsText
             #TODO: need 1-M for project types, write code to add project types
-            #TODO: need 1-M for model alterations, write code to add model alterations
+            arcpy.AddMessage(parameters[7].values)
+            self.model.create_model_alterations(parameters[7].values)
             self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
             self.model.model_calibration_file = parameters[5].valueAsText
             self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
             self.model.model_alteration_file = parameters[8].valueAsText
             self.model.project_num = parameters[0].valueAsText
-            self.model.valid
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
@@ -213,7 +213,7 @@ class EMGAATS_Model_Registration(object):
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
     modelcatalogdataio = ModelCatalogDbDataIo(config)
-    modeldataio = ModelDataIo(config)
+    modeldataio = ModelDataIo(config, modelcatalogdataio)
     simulationdataio = SimulationDataIO(config)
     model = model_catalog.models[0]
     arcpy.AddMessage("Adding Model...")
@@ -221,7 +221,8 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     arcpy.AddMessage("Model Added")
     arcpy.AddMessage("Adding Simulations...")
     model.simulations = modeldataio.read_simulations(model)
-    modeldataio.add_simulations(model, modelcatalogdataio)
+    modeldataio.add_simulations(model)
+    modeldataio.add_model_alterations(model)
     arcpy.AddMessage("Simulations Added")
     if config.model_status[model.model_status_id] == "Working":
         arcpy.AddMessage("Model Status has been set to 'Working'")

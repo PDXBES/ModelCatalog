@@ -64,13 +64,13 @@ class ModelDataIo(ObjectDataIo):
         self.add_object(model_id, simulation, simulation.field_attribute_lookup, self.config.simulation_sde_path)
 
     def add_simulations(self, model):
-        # type: (Model, ModelCatalogDbDataIo) -> None
+        # type: (Model) -> None
         for simulation in model.simulations:
             self.add_simulation(model.id, simulation)
 
     def add_model_alteration(self, model_id, model_alteration):
         # type: (int, ModelAlteration) -> None
-        self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_tracking_sde_path)
+        self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_alterations_sde_path)
 
     def add_model_alterations(self, model):
         # type: (Model) -> None

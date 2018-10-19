@@ -19,9 +19,9 @@ print "\n\n"
 try:
     config = Config()
     model = Model(config)
-    model_dataio = ModelDataIo(config)
-    model_catalog = ModelCatalog(config)
     model_catalog_dataio = ModelCatalogDbDataIo(config)
+    model_dataio = ModelDataIo(config, model_catalog_dataio)
+    model_catalog = ModelCatalog(config)
     model_id = model_catalog_dataio.retrieve_current_model_id()
     model.id = model_id
     model.parent_model_id = 555
