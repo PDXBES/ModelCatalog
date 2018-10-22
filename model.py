@@ -123,9 +123,12 @@ class Model(GenericObject):
         return model_alteration
 
     def create_model_alterations(self, alteration_types):
-        for alteration_type in alteration_types:
-            model_alteration = self.create_model_alteration(alteration_type[0])
-            self.model_alterations.append(model_alteration)
+        if alteration_types is None:
+            pass
+        else:
+            for alteration_type in alteration_types:
+                model_alteration = self.create_model_alteration(alteration_type[0])
+                self.model_alterations.append(model_alteration)
 
     def create_project_type(self, project_type_name):
         project_type = ProjectType(self.config)

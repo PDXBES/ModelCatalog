@@ -10,6 +10,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 import arcpy
+reload(arcpy)
 from model_catalog import ModelCatalog
 from model import Model
 from model_catalog_db_data_io import ModelCatalogDbDataIo
@@ -19,6 +20,7 @@ import getpass
 import datetime
 from config import Config
 from model_catalog_exception import Invalid_model_path_exception
+from model_catalog_exception import Invalid_Model_exception
 
 
 class Toolbox(object):
@@ -52,7 +54,7 @@ class EMGAATS_Model_Registration(object):
         """Define parameter definitions"""
 
         project_no = arcpy.Parameter(
-            displayName="Project Number",
+            displayName="Model Analysis Tracking Number",
             name="project_number",
             datatype="GPString",
             parameterType="Required",
@@ -204,9 +206,9 @@ class EMGAATS_Model_Registration(object):
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-        except Invalid_model_path_exception:
-            arcpy.AddMessage("Current Model Path does not point to a valid EMGAATS model")
-            quit()
+        except Invalid_Model_exception:
+            self.model.model_valid_diagnostic()
+            arcpy.AddError("Model is not valid")
 
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
