@@ -16,6 +16,7 @@ class ModelAlteration(GenericObject):
         self.config = config
 
         self.field_attribute_lookup = OrderedDict()
+        self.field_attribute_lookup["Model_ID"] = "parent_id"
         self.field_attribute_lookup["Model_Alteration_ID"] = "id"
         self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
 

@@ -8,6 +8,7 @@ class Simulation(GenericObject):
         # type: (str, Config) -> None
         self.model_path = model_path
         self.id = None
+        self.parent_id = None
         self.name = "simulation"
         self.dev_scenario_id = None
         self.storm_id = None
