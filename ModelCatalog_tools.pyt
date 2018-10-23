@@ -1,14 +1,3 @@
-# Overview info
-# UI input objects are added to 'parameters' object (getParameterInfo function)
-# values are extracted to individual variables by referencing 'paramaters' indices
-# variable values are applied to feature class fields by referencing Update Cursor row indices
-#
-# Big Question - how to manage domains? - currently UI domains are hard coded in the script...
-# but in theory we could grab those values from lookup tables - this could determine whether...
-# we use ID fields or fields with the actual values
-
-# ----------------------------------------------------------------------------------------------------------------------
-
 import arcpy
 reload(arcpy)
 from model_catalog import ModelCatalog
@@ -19,7 +8,6 @@ from model_data_io import ModelDataIo
 import getpass
 import datetime
 from config import Config
-from model_catalog_exception import Invalid_model_path_exception
 from model_catalog_exception import Invalid_Model_exception
 
 
@@ -67,7 +55,7 @@ class EMGAATS_Model_Registration(object):
             parameterType="Required",
             direction="Input")
 
-        model_dir.filter.list = ["File System", "Local Database"]  # review
+        model_dir.filter.list = ["File System", "Local Database"]
 
         project_type = arcpy.Parameter(
             displayName="Project Type",
@@ -145,7 +133,7 @@ class EMGAATS_Model_Registration(object):
         return params
 
     def isLicensed(self):
-        return True # tool can be executed
+        return True
 
     def updateParameters(self, parameters):
         """Modify the values and properties of parameters before internal

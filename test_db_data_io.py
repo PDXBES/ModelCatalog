@@ -98,5 +98,3 @@ class TestDataIO(TestCase):
             self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup)
 
 
-
-

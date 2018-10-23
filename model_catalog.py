@@ -18,12 +18,7 @@ class ModelCatalog:
     def add_model(self, model):
         # type: (model) -> None
         self.check_for_duplicate_model(model)
-        try:
-            self.check_for_valid_model(model)
-        except:
-            arcpy.AddMessage("Current Model Path does not point to a valid EMGAATS model")
-            #TODO work out best way to deal with exceptions
-
+        self.check_for_valid_model(model)
         self.models.append(model)
 
     def remove_model(self):

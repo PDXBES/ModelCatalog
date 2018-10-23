@@ -15,7 +15,7 @@ executable_path = os.path.dirname(os.path.realpath(__file__))
 from imp import load_source
 model_catalog_tools = load_source("ModelCatalog_tools", executable_path + "\\ModelCatalog_tools.pyt")
 
-
+@unittest.skip("Integration Tests")
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.config = Config()
@@ -45,13 +45,12 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.create_model_alterations([["Boundary Conditions"]])
         self.model.create_project_types(["Storm"])
 
-    @unittest.skip
     def test_model_registration_with_model_status_working(self):
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
 
-    @unittest.skip
+
     def test_model_registration_with_model_status_final(self):
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]
@@ -61,7 +60,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
 
-    @unittest.skip
+
     def test_model_registration_with_model_invalid(self):
         self.model.model_path = r"Invalid_path"
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()

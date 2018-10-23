@@ -88,7 +88,6 @@ class ModelDataIo(ObjectDataIo):
         for project_type in model.project_types:
             self.add_project_type(model.id, project_type)
 
-#TODO: Create tests for add_project and add_project_types
 
 
 

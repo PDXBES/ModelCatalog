@@ -206,7 +206,7 @@ class TestModel(TestCase):
             self.model.create_model_alteration(alteration_type)
 
     def test_create_model_alterations_model_alterations_list_has_correct_values(self):
-        alteration_types = ["zero", "one", "two"]
+        alteration_types = [["zero"], ["one"], ["two"]]
         self.model.create_model_alterations(alteration_types)
         self.assertEquals(self.model.model_alterations[0].model_alteration_type_id, 0)
         self.assertEquals(self.model.model_alterations[1].model_alteration_type_id, 1)

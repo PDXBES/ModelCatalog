@@ -8,6 +8,7 @@ from model_catalog_db_data_io import ModelCatalogDbDataIo
 from mock_config import MockConfig
 from model_alteration import ModelAlteration
 from collections import OrderedDict
+from project_type import ProjectType
 
 class TestModelDataIO(TestCase):
 
@@ -18,10 +19,10 @@ class TestModelDataIO(TestCase):
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
         self.mock_model_alteration = mock.MagicMock(ModelAlteration)
-        self.field_attribute_lookup = OrderedDict()
-        self.field_attribute_lookup["Model_Alteration_ID"] = "id"
-        self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_domain_id"
-        self.mock_model_alteration.field_attribute_lookup = self.field_attribute_lookup
+        self.generic_field_attribute_lookup = OrderedDict()
+        self.generic_field_attribute_lookup["Generic_ID"] = "id"
+        self.generic_field_attribute_lookup["Generic_Domain_ID"] = "generic_domain_id"
+        self.mock_model_alteration.field_attribute_lookup = self.generic_field_attribute_lookup
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.simulation_id = 22
         self.mock_simulation.storm_id = 33
@@ -34,14 +35,17 @@ class TestModelDataIO(TestCase):
         field_attribute_lookup[2] = ["Storm_ID", "storm_id"]
         field_attribute_lookup[3] = ["Dev_Scenario_ID", "dev_scenario_id"]
         field_attribute_lookup[4] = ["Sim_Desc", "sim_desc"]
-        self.mock_simulation.field_attribute_lookup =  field_attribute_lookup
+        self.mock_simulation.field_attribute_lookup = field_attribute_lookup
 
+        self.mock_project_type = mock.MagicMock(ProjectType)
+        self.mock_project_type.field_attribute_lookup = self.generic_field_attribute_lookup
 
         self.mock_model = mock.MagicMock(Model)
         self.mock_model.model_path = r"C:\model_path"
         self.mock_model.id = 11
         self.mock_model.valid = True
         self.mock_model.simulations = [self.mock_simulation]
+        self.mock_model.project_types = [self.mock_project_type]
 
         self.mock_insert_cursor_object = mock.MagicMock(arcpy.da.InsertCursor)
         self.mock_search_cursor_object = mock.MagicMock(arcpy.da.SearchCursor)
@@ -161,31 +165,62 @@ class TestModelDataIO(TestCase):
             self.model_data_io.add_model_alteration(11, self.mock_model_alteration)
             self.assertTrue(mock_add_object.called)
 
+    def test_add_model_alteration_calls_add_object_with_correct_arguments(self):
+        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
+            self.model_data_io.add_model_alteration(11, self.mock_model_alteration)
+            mock_add_object.assert_called_with(11, self.mock_model_alteration,
+                                               self.generic_field_attribute_lookup,
+                                               self.config.model_alterations_sde_path)
+
     def test_add_simulations_calls_add_simulation(self):
         patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")
         mock_add_simulation = patch_add_simulation.start()
         self.model_data_io.add_simulations(self.mock_model)
         self.assertTrue(mock_add_simulation.called)
-        mock_add_simulation = patch_add_simulation.stop()
+        patch_add_simulation.stop()
 
     def test_add_simulations_calls_add_simulation_with_correct_arguments(self):
         patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")
         mock_add_simulation = patch_add_simulation.start()
         self.model_data_io.add_simulations(self.mock_model)
         mock_add_simulation.assert_called_with(11, self.mock_simulation)
-        mock_add_simulation = patch_add_simulation.stop()
+        patch_add_simulation.stop()
 
     def test_add_model_alterations_calls_add_model_alteration(self):
         patch_add_model_alteration = mock.patch.object(self.model_data_io, "add_model_alteration")
         mock_add_model_alteration = patch_add_model_alteration.start()
         self.model_data_io.add_model_alterations(self.mock_model)
         self.assertTrue(mock_add_model_alteration.called)
-        mock_add_model_alteration = patch_add_model_alteration.stop()
+        patch_add_model_alteration.stop()
 
     def test_add_model_alterations_calls_add_model_alteration_with_correct_arguments(self):
         patch_add_model_alteration = mock.patch.object(self.model_data_io, "add_model_alteration")
         mock_add_model_alteration = patch_add_model_alteration.start()
         self.model_data_io.add_model_alterations(self.mock_model)
         mock_add_model_alteration.assert_called_with(11, self.mock_model_alteration)
-        mock_add_model_alteration = patch_add_model_alteration.stop()
+        patch_add_model_alteration.stop()
 
+    def test_add_project_type_calls_add_object(self):
+        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
+            self.model_data_io.add_project_type(11, self.mock_project_type)
+            self.assertTrue(mock_add_object.called)
+
+    def test_add_project_type_calls_add_object_with_correct_arguments(self):
+        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
+            self.model_data_io.add_project_type(11, self.mock_project_type)
+            mock_add_object.assert_called_with(11, self.mock_project_type,
+                                               self.generic_field_attribute_lookup, self.config.project_type_sde_path)
+
+    def test_add_project_types_calls_add_project_type(self):
+        patch_add_project_type = mock.patch.object(self.model_data_io, "add_project_type")
+        mock_add_project_type = patch_add_project_type.start()
+        self.model_data_io.add_project_types(self.mock_model)
+        self.assertTrue(mock_add_project_type.called)
+        patch_add_project_type.stop()
+
+    def test_add_project_types_calls_add_project_type_with_correct_arguments(self):
+        patch_add_project_type = mock.patch.object(self.model_data_io, "add_project_type")
+        mock_add_project_type = patch_add_project_type.start()
+        self.model_data_io.add_project_types(self.mock_model)
+        mock_add_project_type.assert_called_with(11, self.mock_project_type)
+        patch_add_project_type.stop()
