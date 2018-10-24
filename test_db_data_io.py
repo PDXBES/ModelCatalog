@@ -12,6 +12,7 @@ class TestDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
+        self.parent_id_to_db_field_mapping = [(1, "id_field_one"), (2, "id_field_two")]
 
         self.db_data_io = DbDataIo(self.config)
         self.object_class = None
@@ -19,6 +20,12 @@ class TestDataIO(TestCase):
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_insert_cursor = mock.MagicMock(arcpy.da.InsertCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("object_1", 44), ("object_2", 55)])
+
+        self.patch_append = mock.patch("arcpy.Append_management")
+        self.mock_append = self.patch_append.start()
+
+        self.patch_calculate_field = mock.patch("arcpy.CalculateField_management")
+        self.mock_calculate_field = self.patch_calculate_field.start()
 
         self.patch_da_UpdateCursor = mock.patch("arcpy.da.UpdateCursor")
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.start()
@@ -42,6 +49,10 @@ class TestDataIO(TestCase):
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.stop()
+        self.mock_append = self.patch_append.stop()
+        self.mock_calculate_field = self.patch_calculate_field.stop()
+
+
 
 
     def test_retrieve_current_id_called_update_cursor(self):
@@ -96,5 +107,29 @@ class TestDataIO(TestCase):
         self.field_attribute_lookup["color"] = "red"
         with self.assertRaises(AttributeError):
             self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup)
+
+    def test_copy_calls_append(self):
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        self.assertTrue(self.mock_append.called)
+
+    def test_copy_if_field_mappings_is_not_None_append_called_with_correct_arguments(self):
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        self.mock_append.assert_called_with("input_table", "target", "NO_TEST", "field_mappings")
+
+    def test_copy_if_field_mappings_is_None_append_called_with_correct_arguments(self):
+        self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping)
+        self.mock_append.assert_called_with("input_table", "target", "NO_TEST")
+
+    def test_copy_calls_calculate_field(self):
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        self.assertTrue(self.mock_calculate_field.called)
+
+    def test_copy_calls_calculate_field_with_correct_arguments(self):
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        id_1 = 1
+        id_2 = 2
+        self.assertEqual( self.mock_calculate_field.call_args_list[0][0], ("target", "id_field_one", id_1))
+        self.assertEqual( self.mock_calculate_field.call_args_list[1][0], ("target", "id_field_two", id_2))
+
 
 

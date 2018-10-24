@@ -2,7 +2,7 @@ from simulation_data_io import SimulationDataIO
 from model import Model
 from simulation import Simulation
 model = Model()
-simulation_data_io = SimulationDataIO()
+simulation_data_io = SimulationDataIO(,
 model.model_path = "c:\\temp\\BaseR011018V4ic"
 simulation = Simulation(model.model_path)
 simulation.storm_id = 11

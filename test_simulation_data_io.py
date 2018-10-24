@@ -4,14 +4,18 @@ from simulation import Simulation
 from model import Model
 from simulation_data_io import SimulationDataIO
 from mock_config import MockConfig
+from model_catalog_db_data_io import ModelCatalogDbDataIo
 
 
 class TestSimulationDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
+        mock_model_catalog_db_data_io = mock.MagicMock(ModelCatalogDbDataIo)
+        mock_model_catalog_db_data_io.config = self.config
+
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
-        self.simulationdataio = SimulationDataIO(self.config)
+        self.simulationdataio = SimulationDataIO(self.config, mock_model_catalog_db_data_io)
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
         self.mock_simulation.scenario = ""
@@ -153,3 +157,4 @@ class TestSimulationDataIO(TestCase):
                                                            model_area_results_path,
                                                            rrad_area_results_path)
 
+#TODO: Write new tests( copy function called, called with correct args) for copy link results due to new copy function

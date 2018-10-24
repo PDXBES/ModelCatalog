@@ -56,3 +56,16 @@ class DbDataIo:
             #TODO find cleaner way to get traceback and stop program
 
         return row
+
+    def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
+        # type: (str, str, arcpy.FieldMappings) -> None
+        if field_mappings != None:
+            arcpy.Append_management(input_table, target, "NO_TEST", field_mappings)
+        else:
+            arcpy.Append_management(input_table, target, "NO_TEST")
+
+        for parent_id, db_id_field in parent_id_to_db_field_mapping:
+            arcpy.CalculateField_management(target, db_id_field, parent_id)
+
+
+

@@ -203,7 +203,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
     modelcatalogdataio = ModelCatalogDbDataIo(config)
     modeldataio = ModelDataIo(config, modelcatalogdataio)
-    simulationdataio = SimulationDataIO(config)
+    simulationdataio = SimulationDataIO(config, modelcatalogdataio)
     model = model_catalog.models[0]
     arcpy.AddMessage("Adding Model...")
     modelcatalogdataio.add_model(model)

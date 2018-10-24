@@ -6,12 +6,14 @@ try:
 except:
     pass
 from config import Config
+from model_catalog_db_data_io import ModelCatalogDbDataIo
 
 
 class SimulationDataIO:
-    def __init__(self, config):
-        # type: (Config) -> None
+    def __init__(self, config, model_catalog_db_data_io):
+        # type: (Config, ModelCatalogDbDataIo) -> None
         self.config = config
+        self.model_catalog_db_data_io = model_catalog_db_data_io
 
     def copy_feature_class_results(self, simulation, model,
                                    model_results_feature_class_path,
@@ -81,12 +83,15 @@ class SimulationDataIO:
         model_area_results_path = self.area_results_path(simulation)
         rrad_area_results_path = self.config.area_results_sde_path
         self.copy_feature_class_results(simulation, model, model_area_results_path, rrad_area_results_path)
+        #self.model_catalog_db_data_io.copy(model_area_results_path, rrad_area_results_path, )
 
     def copy_link_results(self, simulation, model):
         # type: (Simulation, Model) -> None
         model_link_results_path = self.link_results_path(simulation)
         rrad_link_results_path = self.config.link_results_sde_path
-        self.copy_feature_class_results(simulation, model, model_link_results_path, rrad_link_results_path)
+        id_to_db_field_mapping = [(model.id, "Model_ID"), (simulation.storm_id, "Storm_ID"), (simulation.dev_scenario_id, "Dev_Scenario_ID")]
+        #TODO: refactor id_to_field_mapping creation to a function to return field mapping
+        self.model_catalog_db_data_io.copy(model_link_results_path, rrad_link_results_path, None, id_to_db_field_mapping)
 
     def copy_node_results(self, simulation, model):
         # type: (Simulation, Model) -> None
