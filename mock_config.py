@@ -18,7 +18,7 @@ class MockConfig():
         self.config.area_results_sde_path = "area_results_sde_path"
         self.config.link_results_sde_path = "link_results_sde_path"
         self.config.node_results_sde_path = "node_results_sde_path"
-        self.config.flooding_results_sde_path = "flooding_results_sde_path"
+        self.config.flooding_results_sde_path = "node_flooding_results_sde_path"
         self.config.rehab_results_sde_path = "rehab_results_sde_path"
         self.config.rehab_tracking_sde_path = "rehab_tracking_sde_path"
         self.config.model_alterations_sde_path = "model_alterations_sde_path"
