@@ -14,6 +14,7 @@ class DbDataIo:
         # type: (Config) -> None
         self.current_id_database_table_path = None
         self.config = config
+        self.workspace = "in_memory"
 
     def retrieve_current_id(self, object_type):
         # type: (str, str) -> int
@@ -58,7 +59,38 @@ class DbDataIo:
 
         return row
 
+    def _create_field_map_for_sde_db(self, model_link_results_path):
+        field_mappings = arcpy.FieldMappings()
+        fields = arcpy.ListFields(model_link_results_path)
+        for field in fields:
+            if field.name == "SHAPE_Area" or field.name == "SHAPE_Length" or field.name == "OBJECTID" or field.name == "SHAPE":
+                pass
+            else:
+                field_map = arcpy.FieldMap()
+                field_map.addInputField(model_link_results_path, field.name)
+                field_name = field_map.outputField
+                field_name.name = field.name[0:31]
+                field_map.outputField = field_name
+                field_mappings.addFieldMap(field_map)
+
+        return field_mappings
+
     def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
+        # type: (str, str, arcpy.FieldMappings) -> None
+        in_memory_table = self.workspace + "\input_table"
+        arcpy.CopyFeatures_management(input_table, in_memory_table)
+        for parent_id, db_id_field in parent_id_to_db_field_mapping:
+            arcpy.AddField_management(in_memory_table, db_id_field, "LONG")
+            arcpy.CalculateField_management(in_memory_table, db_id_field, parent_id)
+
+        if field_mappings != None:
+            arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
+        else:
+            field_mappings = self._create_field_map_for_sde_db(in_memory_table)
+            arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
+        arcpy.Delete_management(in_memory_table)
+
+    def copy_db_to_db(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None
         arcpy.AddMessage("Starting append")
         start_time = time.time()

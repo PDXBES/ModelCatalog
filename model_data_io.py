@@ -20,6 +20,7 @@ class ModelDataIo(ObjectDataIo):
         self.config = config
         self.db_data_io = db_data_io
 
+
     def create_model_geometry(self, model):
         if model.valid:
             model_name = "Links"

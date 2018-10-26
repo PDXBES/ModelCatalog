@@ -34,7 +34,8 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
-        self.model.model_path = r"\\BESFile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Carolina_Trunk\Base_Calib"
+        #self.model.model_path = r"\\BESFile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Carolina_Trunk\Base_Calib"
+        self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\BaseR011018V4ic"
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"

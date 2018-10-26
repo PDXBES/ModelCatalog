@@ -32,6 +32,7 @@ class ModelCatalogDbDataIo(DbDataIo):
         self.field_attribute_lookup["Model_Alteration_file"] = "model_alteration_file"
         self.field_attribute_lookup["Project_Num"] = "project_num"
         self.field_attribute_lookup["Shape@"] = "model_geometry"
+        self.workspace = "in_memory"
 
 
     def retrieve_current_model_id(self):

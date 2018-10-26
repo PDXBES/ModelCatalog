@@ -55,18 +55,7 @@ class SimulationDataIO:
         model_link_results_path = self.link_results_path(simulation)
         rrad_link_results_path = self.config.link_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(model, simulation)
-        field_mappings = self._create_field_map_for_link_results(model_link_results_path)
-        self.model_catalog_db_data_io.copy(model_link_results_path, rrad_link_results_path, field_mappings, id_to_db_field_mapping)
-
-    def _create_field_map_for_link_results(self, model_link_results_path):
-        field_map = arcpy.FieldMap()
-        field_map.addInputField(model_link_results_path, "ActualDepthToFullRatioDownstream")
-        field_name = field_map.outputField
-        field_name.name = "ActualDepthToFullRatioDownstrea"
-        field_map.outputField = field_name
-        field_mappings = arcpy.FieldMappings()
-        field_mappings.addFieldMap(field_map)
-        return field_mappings
+        self.model_catalog_db_data_io.copy(model_link_results_path, rrad_link_results_path, None, id_to_db_field_mapping)
 
     def copy_node_results(self, simulation, model):
         # type: (Simulation, Model) -> None

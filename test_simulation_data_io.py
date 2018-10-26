@@ -20,6 +20,7 @@ class TestSimulationDataIO(TestCase):
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
         self.simulationdataio = SimulationDataIO(self.config, mock_model_catalog_db_data_io)
 
+
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
         self.mock_simulation.scenario = ""
@@ -41,8 +42,10 @@ class TestSimulationDataIO(TestCase):
         self.mock_fields4.name = "SHAPE_Length"
         self.patch_search_cursor = mock.patch("arcpy.da.SearchCursor")
         self.patch_insert_cursor = mock.patch("arcpy.da.InsertCursor")
+
         self.patch_list_fields = mock.patch("arcpy.ListFields")
         self.mock_list_fields = self.patch_list_fields.start()
+
         self.mock_da_SearchCursor = self.patch_search_cursor.start()
         self.mock_da_InsertCursor = self.patch_insert_cursor.start()
         self.mock_da_InsertCursor.return_value = self.mock_cursor
@@ -84,30 +87,22 @@ class TestSimulationDataIO(TestCase):
         self.assertEquals(node_flooding_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\NodeFloodingResults")
 
     def test_copy_link_results_calls_copy(self):
-        patch_create_field_map_for_link_results = mock.patch.object(self.simulationdataio, "_create_field_map_for_link_results")
-        mock_create_field_map_for_link_results = patch_create_field_map_for_link_results.start()
         self.simulationdataio.copy_link_results(self.mock_simulation, self.mock_model)
         self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
-        patch_create_field_map_for_link_results.stop()
+
 
     def test_copy_link_results_calls_copy_with_correct_arguments(self):
         patch_link_results_path = mock.patch.object(self.simulationdataio, "link_results_path")
         mock_link_results_path = patch_link_results_path.start()
-        patch_create_field_map_for_link_results = mock.patch.object(self.simulationdataio, "_create_field_map_for_link_results")
-        mock_create_field_map_for_link_results = patch_create_field_map_for_link_results.start()
         patch_id_to_field_map = mock.patch.object(self.simulationdataio, "_id_to_field_map")
         mock_id_to_field_map = patch_id_to_field_map.start()
-
         mock_link_results_path.return_value = "link_results_path"
         mock_id_to_field_map.return_value = "id_to_field_map"
-        mock_create_field_map_for_link_results.return_value = "field_map_for_link_results"
-
         self.simulationdataio.copy_link_results(self.mock_simulation, self.mock_model)
-        self.mock_model_catalog_db_data_io_copy.assert_called_with("link_results_path", "link_results_sde_path", "field_map_for_link_results", "id_to_field_map")
-
+        self.mock_model_catalog_db_data_io_copy.assert_called_with("link_results_path", "link_results_sde_path", None, "id_to_field_map")
         patch_link_results_path.stop()
         patch_id_to_field_map.stop()
-        patch_create_field_map_for_link_results.stop()
+
 
     def test_copy_node_results_calls_copy(self):
         self.simulationdataio.copy_node_results(self.mock_simulation, self.mock_model)
