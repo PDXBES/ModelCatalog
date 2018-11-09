@@ -3,8 +3,6 @@ import mock
 from mock_config import MockConfig
 import arcpy
 from db_data_io import DbDataIo
-from data_io_exception import Field_names_length_does_not_match_row_length_exception
-from generic_object import GenericObject
 from collections import OrderedDict
 
 class TestDataIO(TestCase):
@@ -39,6 +37,9 @@ class TestDataIO(TestCase):
         self.patch_da_InsertCursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.start()
 
+        self.patch_create_field_map_for_sde_db = mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db")
+        self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.start()
+
         self.mock_da_InsertCursor.return_value = self.mock_insert_cursor
         self.mock_generic_object = mock.MagicMock("GenericObject")
         self.mock_generic_object.id = 1
@@ -59,6 +60,9 @@ class TestDataIO(TestCase):
         self.mock_copy_features_management = self.patch_copy_features_management.stop()
         self.mock_add_field_management = self.patch_add_field_management.stop()
         self.mock_calculate_field = self.patch_calculate_field.stop()
+        self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.stop()
+
+
 
 
 
@@ -130,8 +134,6 @@ class TestDataIO(TestCase):
 
     def test_copy_calls_add_field_management_with_correct_arguments(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
-        id_1 = 1
-        id_2 = 2
         self.assertEqual(self.mock_add_field_management.call_args_list[0][0], ("in_memory\input_table", "id_field_one", "LONG"))
         self.assertEqual(self.mock_add_field_management.call_args_list[1][0], ("in_memory\input_table", "id_field_two", "LONG"))
 
@@ -155,11 +157,10 @@ class TestDataIO(TestCase):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
         self.mock_append.assert_called_with("in_memory\input_table", "target", "NO_TEST", "field_mappings")
 
-#TODO: Create return value from patch of create_field_mappings_for_sde_db
     def test_copy_if_field_mappings_is_None_append_called_with_correct_arguments(self):
+        self.mock_create_field_map_for_sde_db.return_value = "field_mappings"
         self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping)
-        self.mock_append.assert_called_with("in_memory\input_table", "target", "NO_TEST")
-#TODO - patch arcpy.ListFields
+        self.mock_append.assert_called_with("in_memory\input_table", "target", "NO_TEST", "field_mappings")
 
     def test_copy_db_to_db_calls_append(self):
         self.db_data_io.copy_db_to_db("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)

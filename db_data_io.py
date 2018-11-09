@@ -1,5 +1,4 @@
 import arcpy
-import time
 from config import Config
 try:
     from typing import List, Any
@@ -92,19 +91,12 @@ class DbDataIo:
 
     def copy_db_to_db(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None
-        arcpy.AddMessage("Starting append")
-        start_time = time.time()
         if field_mappings != None:
             arcpy.Append_management(input_table, target, "NO_TEST", field_mappings)
         else:
             arcpy.Append_management(input_table, target, "NO_TEST")
-        end_time = time.time()
-        arcpy.AddMessage((end_time - start_time))
-        start_time = time.time()
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.CalculateField_management(target, db_id_field, parent_id)
-        end_time = time.time()
-        arcpy.AddMessage((end_time - start_time))
 
 
 

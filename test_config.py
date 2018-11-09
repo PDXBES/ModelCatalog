@@ -25,22 +25,6 @@ class TestConfig(TestCase):
     def tearDown(self):
         self.mock_search_cursor_instance = self.patch_search_cursor.stop()
 
-    # def test_storm_dict_return_correct_value_for_storm(self):
-    #     storm_name, storm_type = self.config.storm[0]
-    #     self.assertEquals(storm_name, "user_def")
-    #     self.assertEquals(storm_type, "U")
-    #
-    # def test_dev_scenario_dict_return_correct_value(self):
-    #     dev_scenario = self.config.dev_scenario
-    #     self.assertEquals(dev_scenario[0], "EX")
-    #
-    # def test_storm_id_dict_returns_correct_id_for_storm(self):
-    #     storm_id = self.config.storm_id[("user_def", "U")]
-    #     self.assertEquals(storm_id, 0)
-    #
-    # def test_dev_scenario_dict_returns_correct_id_for_dev_scenario(self):
-    #     dev_scenario_id = self.config.dev_scenario_id["EX"]
-    #     self.assertEquals(dev_scenario_id, 0)
 
     def test_standard_simulation_names(self):
         standard_simulation_names = ['D25yr6h', 'D25yr6h-50', 'D25yr6h-BO', 'D10yr6h', 'D10yr6h-50', 'D10yr6h-BO']
@@ -105,11 +89,6 @@ class TestConfig(TestCase):
         self.config_real.retrieve_proj_type_domain_as_dict()
         mock_retrieve_domain_as_dict.assert_called_with("Proj_Type")
 
-    @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_storms_calls_search_cursor(self, mock_retrieve_storms):
-        self.config_real.retrieve_storm_dict()
-        self.assertTrue(mock_retrieve_storms.called)
-
     def test_retrieve_dict_from_db_calls_search_cursor(self):
         self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
         self.assertTrue(self.mock_search_cursor_instance.called)
@@ -130,4 +109,58 @@ class TestConfig(TestCase):
         storm_dict = self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
         self.assertEqual(storm_dict, return_dict)
 
-    #TODO - create test for retrive_storm_dict and retrieve_dev_scenario_dict - for calls and calls with correct args
+    def test_retrieve_storm_dict_calls_retrieve_dict_from_db(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            self.config_real.retrieve_storm_dict()
+            self.assertTrue(mock_retrieve_dict_from_db.called)
+
+    def test_retrieve_storm_dict_calls_retrieve_dict_from_db_with_correct_arguments(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            self.config_real.retrieve_storm_dict()
+            mock_retrieve_dict_from_db.assert_called_with("storm_id", ["storm_name", "storm_type"],self.config_real.storms_sde_path)
+
+    def test_retrieve_storm_dict_returns_correct_value(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            mock_retrieve_dict_from_db.return_value = "return value"
+            return_value = self.config_real.retrieve_storm_dict()
+            self.assertEqual(return_value, "return value")
+
+    def test_retrieve_dev_scenario_dict_calls_retrieve_dict_from_db(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            self.config_real.retrieve_dev_scenario_dict()
+            self.assertTrue(mock_retrieve_dict_from_db.called)
+
+    def test_retrieve_dev_scenario_dict_calls_retrieve_dict_from_db_with_correct_arguments(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            self.config_real.retrieve_dev_scenario_dict()
+            mock_retrieve_dict_from_db.assert_called_with("dev_scenario_id", ["dev_scenario"], self.config_real.dev_scenarios_sde_path)
+
+    def test_retrieve_dev_scenario_dict_returns_correct_value(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            mock_retrieve_dict_from_db.return_value = "return value"
+            return_value = self.config_real.retrieve_dev_scenario_dict()
+            self.assertEqual(return_value, "return value")
+
+    def test_retrieve_cip_analysis_request_dict_is_called(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            self.config_real.retrieve_cip_analysis_request_dict()
+            self.assertTrue(mock_retrieve_dict_from_db.called)
+
+    def test_retrieve_cip_analysis_request_dict_is_called_with_correct_arguments(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            self.config_real.retrieve_cip_analysis_request_dict()
+            mock_retrieve_dict_from_db.assert_called_with("AR_ID", ["ProjectNumber"], self.config_real.analysis_requests_sde_path)
+
+    def test_retrieve_cip_analysis_request_dict_returns_correct_value(self):
+        with mock.patch.object(self.config_real, "retrieve_dict_from_db") as mock_retrieve_dict_from_db:
+            mock_retrieve_dict_from_db.return_value = {"key1": "value", "key2": None}
+            return_value = self.config_real.retrieve_cip_analysis_request_dict()
+            self.assertEqual(return_value, {"key1": "value"})
+#TODO: create and test use a set to remove duplicates
+
+    def test_get_keys_based_on_value_returns_correct_keys(self):
+        test_dict = {"Key1": "value", "Key2": "value", "Key3": "bad_value"}
+        test_value = "value"
+        return_keys = ["Key1", "Key2"]
+        check_keys = self.config_real.get_keys_based_on_value(test_dict, test_value)
+        self.assertItemsEqual(check_keys, ["Key1", "Key2"])

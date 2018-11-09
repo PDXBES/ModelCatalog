@@ -45,6 +45,11 @@ class Config:
         self.storm_types_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMTYPES"
         self.dev_scenarios_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.DEVSCENARIOS"
 
+        ASM_WORK_test_sde = r"BESDBTEST1.ASM_WORK.sde"
+        self.ASM_WORK_sde_path = os.path.join(sde_connections, ASM_WORK_test_sde)
+
+        self.analysis_requests_sde_path = self.ASM_WORK_sde_path + r"\ASM_Work.GIS.Analysis_Requests"
+
         self.storm = self.retrieve_storm_dict()  # {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.storm_id = self.reverse_dict(self.storm)
 
@@ -70,6 +75,8 @@ class Config:
         self.proj_type = self.retrieve_proj_type_domain_as_dict()
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
+        self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
+
     def standard_simulation_names(self):
         standard_simulation_names = []
         for storm in self.storm.values():
@@ -84,7 +91,7 @@ class Config:
                     standard_simulation_names.append(simulation_name)
         return standard_simulation_names
 
-    def retrieve_domain_as_dict(self,domain_name):
+    def retrieve_domain_as_dict(self, domain_name):
         list_of_domains = arcpy.da.ListDomains(self.model_catalog_sde_path)
         dict_of_scenarios = None
         for domain in list_of_domains:
@@ -126,8 +133,28 @@ class Config:
         dev_scenario_dict = self.retrieve_dict_from_db(dev_scenario_id, dev_scenario_fields, self.dev_scenarios_sde_path)
         return dev_scenario_dict
 
+    def retrieve_cip_analysis_request_dict(self):
+        ar_id = "AR_ID"
+        cip_fields = ["ProjectNumber"]
+        list_of_keys_and_values = []
+        analysis_request_dict = self.retrieve_dict_from_db(ar_id, cip_fields, self.analysis_requests_sde_path)
+        for key, value in analysis_request_dict.iteritems():
+            if value != None:
+                list_of_keys_and_values.append((key, value))
+
+        cip_analysis_request_dict = dict(list_of_keys_and_values)
+        return cip_analysis_request_dict
+
+    def get_keys_based_on_value(self, input_dict, input_value):
+        keys = []
+        for key, value in input_dict.iteritems():
+            if value == input_value:
+                keys.append(key)
+        return keys
+
+
     def retrieve_dict_from_db(self, key_field, value_fields, db_table):
-        # type: (str, List(str), str) -> Dict
+        # type: (str, List[str], str) -> Dict
         fields = [key_field] + value_fields
         values = []
         db_dict_keys = []
@@ -141,6 +168,7 @@ class Config:
         db_dict = dict(zip(db_dict_keys, values))
         del cursor
         return db_dict
+
 
     def reverse_dict(self, dictionary):
         # type: (Dict) -> Dict
