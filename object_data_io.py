@@ -19,3 +19,5 @@ class ObjectDataIo():
         object_class.parent_id = parent_id
         object_class.id = self.db_data_io.retrieve_current_id(object_class.name)
         self.db_data_io.add_object(object_class, field_attribute_lookup, object_table_sde_path)
+
+

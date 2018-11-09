@@ -2,6 +2,7 @@ import os
 import arcpy
 try:
     from typing import Dict
+    from typing import List
 except:
     pass
 
@@ -114,33 +115,32 @@ class Config:
         return self.retrieve_domain_as_dict("Proj_Type")
 
     def retrieve_storm_dict(self):
-        storm_field_names = ["storm_id", "storm_name", "storm_type"]
-        storm_IDs = []
-        storm_types = []
-        storm_names = []
-        cursor = arcpy.da.SearchCursor(self.storms_sde_path, storm_field_names)
-        for row in cursor:
-            storm_IDs.append(row[0])
-            storm_names.append(row[1])
-            storm_types.append(row[2])
-        storm_name_and_type = zip(storm_names, storm_types)
-        storm_dict = dict(zip(storm_IDs, storm_name_and_type))
-        del cursor
+        storm_id = "storm_id"
+        storm_fields = ["storm_name", "storm_type"]
+        storm_dict = self.retrieve_dict_from_db(storm_id, storm_fields, self.storms_sde_path)
         return storm_dict
 
     def retrieve_dev_scenario_dict(self):
-        dev_scenario_field_names = ["dev_scenario_id", "dev_scenario"]
-        dev_scenario_IDs = []
-        dev_scenario = []
-        cursor = arcpy.da.SearchCursor(self.dev_scenarios_sde_path, dev_scenario_field_names)
-        for row in cursor:
-            dev_scenario_IDs.append(row[0])
-            dev_scenario.append(row[1])
-
-        dev_scenario_dict = dict(zip(dev_scenario_IDs, dev_scenario))
-        del cursor
+        dev_scenario_id = "dev_scenario_id"
+        dev_scenario_fields = ["dev_scenario"]
+        dev_scenario_dict = self.retrieve_dict_from_db(dev_scenario_id, dev_scenario_fields, self.dev_scenarios_sde_path)
         return dev_scenario_dict
 
+    def retrieve_dict_from_db(self, key_field, value_fields, db_table):
+        # type: (str, List(str), str) -> Dict
+        fields = [key_field] + value_fields
+        values = []
+        db_dict_keys = []
+        cursor = arcpy.da.SearchCursor(db_table, fields)
+        for row in cursor:
+            db_dict_keys.append(row[0])
+            if len(value_fields) > 1:
+                values.append(row[1:len(row)])
+            else:
+                values.append(row[1])
+        db_dict = dict(zip(db_dict_keys, values))
+        del cursor
+        return db_dict
 
     def reverse_dict(self, dictionary):
         # type: (Dict) -> Dict

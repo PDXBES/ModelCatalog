@@ -159,7 +159,7 @@ class TestDataIO(TestCase):
     def test_copy_if_field_mappings_is_None_append_called_with_correct_arguments(self):
         self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping)
         self.mock_append.assert_called_with("in_memory\input_table", "target", "NO_TEST")
-
+#TODO - patch arcpy.ListFields
 
     def test_copy_db_to_db_calls_append(self):
         self.db_data_io.copy_db_to_db("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)

@@ -14,6 +14,17 @@ class TestConfig(TestCase):
         self.mock_dev_scenario_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_dev_scenario_search_cursor.__iter__.return_value = iter([(1, "EX"), (2, "50")])
 
+        self.patch_search_cursor = mock.patch("arcpy.da.SearchCursor")
+        self.mock_search_cursor_instance = self.patch_search_cursor.start()
+        self.mock_search_cursor_instance.return_value = self.mock_search_cursor
+
+        self.key_field = "key_field"
+        self.value_fields = ["field1", "field2"]
+        self.db_table = "db_table_path"
+
+    def tearDown(self):
+        self.mock_search_cursor_instance = self.patch_search_cursor.stop()
+
     # def test_storm_dict_return_correct_value_for_storm(self):
     #     storm_name, storm_type = self.config.storm[0]
     #     self.assertEquals(storm_name, "user_def")
@@ -99,32 +110,24 @@ class TestConfig(TestCase):
         self.config_real.retrieve_storm_dict()
         self.assertTrue(mock_retrieve_storms.called)
 
-    @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_storm_dict_calls_search_cursor_with_correct_arguments(self, mock_retrieve_storms):
-        self.config_real.retrieve_storm_dict()
-        mock_retrieve_storms.assert_called_with(self.config_real.storms_sde_path, ["storm_id", "storm_name", "storm_type"])
+    def test_retrieve_dict_from_db_calls_search_cursor(self):
+        self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
+        self.assertTrue(self.mock_search_cursor_instance.called)
 
-    @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_storm_dict_returns_correct_dictionary(self, mock_retrieve_storms):
-        mock_retrieve_storms.return_value = self.mock_search_cursor
+    def test_retrieve_dict_from_db_calls_search_cursor_with_correct_arguments(self):
+        self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
+        self.mock_search_cursor_instance.assert_called_with("db_table_path", ["key_field", "field1", "field2"])
+
+    def test_retrieve_dict_from_db_has_multiple_fields_returns_correct_dictionary(self):
         return_dict = {1: ("02yr6h", "D"), 2: ("05yr6h", "D")}
-        storm_dict = self.config_real.retrieve_storm_dict()
+        storm_dict = self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
         self.assertEqual(storm_dict, return_dict)
 
-    @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_storm_dict_calls_search_cursor(self, mock_retrieve_storms):
-        self.config_real.retrieve_storm_dict()
-        self.assertTrue(mock_retrieve_storms.called)
-
-    @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_dev_scenario_dict_calls_search_cursor_with_correct_arguments(self, mock_retrieve_dev_scenario_dict):
-        self.config_real.retrieve_dev_scenario_dict()
-        mock_retrieve_dev_scenario_dict.assert_called_with(self.config_real.dev_scenarios_sde_path,
-                                                           ["dev_scenario_id", "dev_scenario"])
-
-    @mock.patch("arcpy.da.SearchCursor")
-    def test_retrieve_dev_scenario_dict_returns_correct_dictionary(self, mock_retrieve_dev_scenario_dict):
-        mock_retrieve_dev_scenario_dict.return_value = self.mock_dev_scenario_search_cursor
+    def test_retrieve_dict_from_db_has_one_field_returns_correct_dictionary(self):
         return_dict = {1: "EX", 2: "50"}
-        dev_scenario_dict = self.config_real.retrieve_dev_scenario_dict()
-        self.assertEqual(dev_scenario_dict, return_dict)
+        self.value_fields = ["field1"]
+        self.mock_search_cursor_instance.return_value = self.mock_dev_scenario_search_cursor
+        storm_dict = self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
+        self.assertEqual(storm_dict, return_dict)
+
+    #TODO - create test for retrive_storm_dict and retrieve_dev_scenario_dict - for calls and calls with correct args
