@@ -76,6 +76,8 @@ class Config:
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
+        self.unique_cip_numbers = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
+
 
     def standard_simulation_names(self):
         standard_simulation_names = []
@@ -152,6 +154,30 @@ class Config:
                 keys.append(key)
         return keys
 
+    def get_unique_values(self, input_dict):
+        # type:(Dict) -> List
+        values = input_dict.values()
+        output_list = list(set(values))
+        return output_list
+
+    def get_unique_values_case_insensitive(self, input_dict):
+        # type:(Dict) -> List
+        unique_value_list = self.get_unique_values(input_dict)
+        uppercase_value_list = [value.upper() for value in unique_value_list]
+        unique_uppercase_value_list = list(set(uppercase_value_list))
+        return unique_uppercase_value_list
+
+    def get_keys_based_on_value_case_insensitive(self, input_dict, input_value):
+        keys = []
+        for key, value in input_dict.iteritems():
+            if input_value.upper() == value.upper():
+                keys.append(key)
+        return keys
+
+    def get_cip_analysis_requests(self, cip_number):
+        cip_analysis_requests = self.get_keys_based_on_value_case_insensitive(self.cip_analysis_requests, cip_number)
+
+        return cip_analysis_requests
 
     def retrieve_dict_from_db(self, key_field, value_fields, db_table):
         # type: (str, List[str], str) -> Dict

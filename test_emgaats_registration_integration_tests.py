@@ -19,6 +19,8 @@ model_catalog_tools = load_source("ModelCatalog_tools", executable_path + "\\Mod
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.config = Config()
+        arcpy.AddMessage(self.config.unique_cip_numbers)
+        cip_numbers = [cip_number for cip_number in self.config.unique_cip_numbers]
         self.model = Model(self.config)
         self.model_catalog_dataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.model_catalog_dataio)

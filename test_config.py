@@ -156,11 +156,31 @@ class TestConfig(TestCase):
             mock_retrieve_dict_from_db.return_value = {"key1": "value", "key2": None}
             return_value = self.config_real.retrieve_cip_analysis_request_dict()
             self.assertEqual(return_value, {"key1": "value"})
-#TODO: create and test use a set to remove duplicates
+
+    def test_get_unique_values_returns_unique_values(self):
+        input_dict = {"key1": "value", "key2": "value", "key3": "value1"}
+        unique_values = self.config_real.get_unique_values(input_dict)
+        self.assertItemsEqual(unique_values, ["value", "value1"])
+
+    def test_get_unique_values_case_insensitive_returns_unique_values_regardless_of_case(self):
+        input_dict = {"key1": "value", "key2": "Value", "key3": "value1"}
+        unique_values = self.config_real.get_unique_values_case_insensitive(input_dict)
+        self.assertItemsEqual(unique_values, ["VALUE", "VALUE1"])
 
     def test_get_keys_based_on_value_returns_correct_keys(self):
         test_dict = {"Key1": "value", "Key2": "value", "Key3": "bad_value"}
         test_value = "value"
-        return_keys = ["Key1", "Key2"]
         check_keys = self.config_real.get_keys_based_on_value(test_dict, test_value)
         self.assertItemsEqual(check_keys, ["Key1", "Key2"])
+
+    def test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case(self):
+        test_dict = {"Key1": "value", "Key2": "VALUE", "Key3": "bad_value"}
+        test_value = "value"
+        return_keys = self.config_real.get_keys_based_on_value_case_insensitive(test_dict, test_value)
+        self.assertItemsEqual(return_keys, ["Key1", "Key2"])
+
+    def test_get_cip_analysis_requests_returns_correct_cip_requests(self):
+        self.config_real.cip_analysis_requests = {"Key1": "e1000", "Key2": "E1000", "Key3": "bad_value"}
+        cip_number = "E1000"
+        cip_analysis_requests = self.config_real.get_cip_analysis_requests(cip_number)
+        self.assertItemsEqual(cip_analysis_requests, ["Key1", "Key2"])

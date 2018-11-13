@@ -1,5 +1,4 @@
 import arcpy
-reload(arcpy)
 from model_catalog import ModelCatalog
 from model import Model
 from model_catalog_db_data_io import ModelCatalogDbDataIo
@@ -7,9 +6,15 @@ from simulation_data_io import SimulationDataIO
 from model_data_io import ModelDataIo
 import getpass
 import datetime
-from config import Config
+import config
 from model_catalog_exception import Invalid_Model_exception
-
+reload(arcpy)
+#reload(config)
+# reload(ModelCatalog)
+# reload(Model)
+# reload(ModelCatalogDbDataIo)
+# reload(ModelDataIo)
+# reload(SimulationDataIO)
 
 class Toolbox(object):
     def __init__(self):
@@ -26,7 +31,8 @@ class EMGAATS_Model_Registration(object):
     def __init__(self):
         self.label = "EMGAATS Model Registration"
         self.description = "Tool for registering EMGAATS derived models"
-        self.config = Config()
+        self.config = config.Config()
+        self.cip_numbers = ["1"]
         self.model_catalog = ModelCatalog(self.config)
         self.model = Model(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
@@ -77,6 +83,18 @@ class EMGAATS_Model_Registration(object):
 
         project_phase.filter.type = "ValueList"
         project_phase.filter.list = self.config.proj_phase.values()
+
+        project_cip_number = arcpy.Parameter(
+            displayName="CIP Number",
+            name="cip_number",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+
+        project_cip_number.filter.type = "ValueList"
+
+       # cip_numbers = self.config.unique_cip_numbers
+        project_cip_number.filter.list = self.cip_numbers
 
         model_purpose = arcpy.Parameter(
             displayName="Model Purpose",
