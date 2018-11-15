@@ -53,6 +53,8 @@ class EMGAATS_Model_Registration(object):
             parameterType="Required",
             direction="Input")
 
+        self.project_no.enabled = False
+
         self.model_dir = arcpy.Parameter(
             displayName="Model Directory",
             name="model_directory",
@@ -90,9 +92,12 @@ class EMGAATS_Model_Registration(object):
             parameterType="Required",
             direction="Input")
 
+        self.project_cip_number.enabled = False
         self.project_cip_number.filter.type = "ValueList"
-
-        self.project_cip_number.filter.list = self.config.unique_cip_numbers
+        cip_numbers = self.config.unique_cip_numbers
+        cip_numbers.append(u"None")
+        self.project_cip_number.filter.list = cip_numbers
+        self.project_cip_number.value = u"None"
 
         self.model_purpose = arcpy.Parameter(
             displayName="Model Purpose",
@@ -157,6 +162,17 @@ class EMGAATS_Model_Registration(object):
         validation is performed.  This method is called whenever a parameter
         has been changed."""
 
+        if parameters[3].valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
+            if parameters[4].value == u"None":
+                parameters[4].value = None
+            parameters[4].enabled = True
+            parameters[4].filter.list = self.config.unique_cip_numbers
+
+        else:
+            parameters[4].enabled = False
+            parameters[4].filter.list = [u"None"]
+            parameters[4].value = u"None"
+
         # Enables calibration file field if an alteration is added
         if parameters[5].valueAsText == "Calibration":
             if parameters[6].enabled == False:
@@ -192,29 +208,36 @@ class EMGAATS_Model_Registration(object):
             model_id = self.modelcatalogdataio.retrieve_current_model_id()
             self.model.id = model_id
             self.model.parent_model_id = 0
-            self.model.model_request_id = 0
-            self.model.project_phase_id = self.config.proj_phase_id[self.project_phase.valueAsText]
+            if parameters[4] == u"None":
+                pass
+            else:
+                analysis_request_ids = ""
+                for analysis_request_id in self.config.get_cip_analysis_requests(parameters[4].valueAsText):
+                    analysis_request_ids += " " + analysis_request_id
+                analysis_request_ids.strip()
+                arcpy.AddMessage(analysis_request_ids)
+                self.model.model_request_id = analysis_request_ids
+            self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
             self.model.engine_type_id = 1
             self.model.create_date = datetime.datetime.today()
-            self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-            self.model.run_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-            self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
-            self.model.model_path = self.model_dir.valueAsText
-            self.model.create_project_types(self.project_type.values)
-            self.model.create_model_alterations(self.model_alterations.values)
-            self.model.model_purpose_id = self.config.model_purpose_id[self.model_purpose.valueAsText]
-            self.model.model_calibration_file = self.model_calibration_file.valueAsText
-            self.model.model_status_id = self.config.model_status_id[self.model_status.valueAsText]
-            self.model.model_alteration_file = self.model_alteration_file.valueAsText
-            self.model.project_num = self.project_no.valueAsText
+            self.model.model_path = parameters[1].valueAsText
+            self.model.create_project_types(parameters[2].values)
+            self.model.create_model_alterations(parameters[8].values)
+            self.model.model_purpose_id = self.config.model_purpose_id[parameters[5].valueAsText]
+            self.model.model_calibration_file = parameters[6].valueAsText
+            self.model.model_status_id = self.config.model_status_id[parameters[7].valueAsText]
+            self.model.model_alteration_file = parameters[9].valueAsText
+            self.model.project_num = parameters[0].valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         except Invalid_Model_exception:
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
-
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
