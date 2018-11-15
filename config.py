@@ -76,8 +76,17 @@ class Config:
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
-        self.unique_cip_numbers = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
+        self.unique_cip_numbers = self.get_unique_cip_numbers()
+        #TODO - move piece to remove unicode empty string to separate function
 
+    def get_unique_cip_numbers(self):
+        unique_cip_numbers = []
+        unique_cip_numbers_w_empty_unicode_string = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
+        for cip_number in unique_cip_numbers_w_empty_unicode_string:
+            if cip_number != u'':
+                unique_cip_numbers.append(cip_number)
+
+        return sorted(unique_cip_numbers, reverse = True)
 
     def standard_simulation_names(self):
         standard_simulation_names = []
@@ -108,17 +117,14 @@ class Config:
     def retrieve_model_alterations_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Model_Alterations")
 
-
     def retrieve_model_purpose_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Model_Purpose")
 
     def retrieve_model_status_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Model_Status")
 
-
     def retrieve_proj_phase_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Proj_Phase")
-
 
     def retrieve_proj_type_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Proj_Type")

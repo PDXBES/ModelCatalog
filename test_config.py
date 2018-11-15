@@ -184,3 +184,11 @@ class TestConfig(TestCase):
         cip_number = "E1000"
         cip_analysis_requests = self.config_real.get_cip_analysis_requests(cip_number)
         self.assertItemsEqual(cip_analysis_requests, ["Key1", "Key2"])
+
+    def test_get_unique_cip_numbers_returns_cip_numbers_without_empty_unicode_string(self):
+        input_dict = {"key1": "value1", "key2": "Value", "key3": "value","key4": u''}
+        self.config_real.cip_analysis_requests = input_dict
+        unique_values = self.config_real.get_unique_cip_numbers()
+        self.assertItemsEqual(unique_values, ["VALUE", "VALUE1"])
+        self.assertEqual(unique_values[0], "VALUE1")
+        self.assertEqual(unique_values[1], "VALUE")

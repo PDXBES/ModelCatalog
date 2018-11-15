@@ -32,7 +32,6 @@ class EMGAATS_Model_Registration(object):
         self.label = "EMGAATS Model Registration"
         self.description = "Tool for registering EMGAATS derived models"
         self.config = config.Config()
-        self.cip_numbers = ["1"]
         self.model_catalog = ModelCatalog(self.config)
         self.model = Model(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
@@ -47,23 +46,23 @@ class EMGAATS_Model_Registration(object):
     def getParameterInfo(self):
         """Define parameter definitions"""
 
-        project_no = arcpy.Parameter(
+        self.project_no = arcpy.Parameter(
             displayName="Model Analysis Tracking Number",
             name="project_number",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
 
-        model_dir = arcpy.Parameter(
+        self.model_dir = arcpy.Parameter(
             displayName="Model Directory",
             name="model_directory",
             datatype="DEWorkspace",
             parameterType="Required",
             direction="Input")
 
-        model_dir.filter.list = ["File System", "Local Database"]
+        self.model_dir.filter.list = ["File System", "Local Database"]
 
-        project_type = arcpy.Parameter(
+        self.project_type = arcpy.Parameter(
             displayName="Project Type",
             name="project_type",
             datatype="GPString",
@@ -71,83 +70,83 @@ class EMGAATS_Model_Registration(object):
             direction="Input",
             multiValue=True)
 
-        project_type.filter.type = "ValueList"
-        project_type.filter.list = self.config.proj_type.values()
+        self.project_type.filter.type = "ValueList"
+        self.project_type.filter.list = self.config.proj_type.values()
 
-        project_phase = arcpy.Parameter(
+        self.project_phase = arcpy.Parameter(
             displayName="Project Phase",
             name="project_phase",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
 
-        project_phase.filter.type = "ValueList"
-        project_phase.filter.list = self.config.proj_phase.values()
+        self.project_phase.filter.type = "ValueList"
+        self.project_phase.filter.list = self.config.proj_phase.values()
 
-        project_cip_number = arcpy.Parameter(
+        self.project_cip_number = arcpy.Parameter(
             displayName="CIP Number",
             name="cip_number",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
 
-        project_cip_number.filter.type = "ValueList"
+        self.project_cip_number.filter.type = "ValueList"
 
-       # cip_numbers = self.config.unique_cip_numbers
-        project_cip_number.filter.list = self.cip_numbers
+        self.project_cip_number.filter.list = self.config.unique_cip_numbers
 
-        model_purpose = arcpy.Parameter(
+        self.model_purpose = arcpy.Parameter(
             displayName="Model Purpose",
             name="model_purpose",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
 
-        model_purpose.filter.type = "ValueList"
-        model_purpose.filter.list = self.config.model_purpose.values()
+        self.model_purpose.filter.type = "ValueList"
+        self.model_purpose.filter.list = self.config.model_purpose.values()
 
-        model_status = arcpy.Parameter(
+        self.model_status = arcpy.Parameter(
             displayName="Model Status",
             name="model_status",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
 
-        model_status.filter.type = "ValueList"
-        model_status.filter.list = ["Working", "Final"]
+        self.model_status.filter.type = "ValueList"
+        self.model_status.filter.list = ["Working", "Final"]
 
-        model_calibration_file = arcpy.Parameter(
+        self.model_calibration_file = arcpy.Parameter(
             displayName="Model Calibration File",
             name="model_calibration_file",
             datatype="DEFile",
             parameterType="Required",
             direction="Input")
-        model_calibration_file.enabled = False
-        model_calibration_file.value = self.dummy_model_calibration_file_path
-        model_calibration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
+        self.model_calibration_file.enabled = False
+        self.model_calibration_file.value = self.dummy_model_calibration_file_path
+        self.model_calibration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
-        model_alterations = arcpy.Parameter(
+        self.model_alterations = arcpy.Parameter(
             displayName="Model Alterations",
             name="model_alterations",
             datatype="GPValueTable",
             parameterType="Optional",
             direction="Input",
             multiValue=True)
-        model_alterations.columns = [['String', 'Alteration Type']]
-        model_alterations.filters[0].list = self.config.model_alteration.values()
+        self.model_alterations.columns = [['String', 'Alteration Type']]
+        self.model_alterations.filters[0].list = self.config.model_alteration.values()
 
-        model_alteration_file = arcpy.Parameter(
+        self.model_alteration_file = arcpy.Parameter(
             displayName="Model Alterations File",
             name="model_alteration_file",
             datatype="DEFile",
             parameterType="Required",
             direction="Input")
-        model_alteration_file.enabled = False
-        model_alteration_file.value = self.dummy_model_alteration_file_path
-        model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
+        self.model_alteration_file.enabled = False
+        self.model_alteration_file.value = self.dummy_model_alteration_file_path
+        self.model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
-        params = [project_no, model_dir, project_type, project_phase, model_purpose,
-                  model_calibration_file, model_status, model_alterations, model_alteration_file]
+        params = [self.project_no, self.model_dir, self.project_type, self.project_phase, self.project_cip_number,
+                  self.model_purpose, self.model_calibration_file, self.model_status, self.model_alterations,
+                  self.model_alteration_file]
         return params
 
     def isLicensed(self):
@@ -159,28 +158,28 @@ class EMGAATS_Model_Registration(object):
         has been changed."""
 
         # Enables calibration file field if an alteration is added
-        if parameters[4].valueAsText == "Calibration":
-            if parameters[5].enabled == False:
-                parameters[5].enabled = True
-                parameters[5].value = ""
+        if parameters[5].valueAsText == "Calibration":
+            if parameters[6].enabled == False:
+                parameters[6].enabled = True
+                parameters[6].value = ""
         else:
-            parameters[5].enabled = False
-            parameters[5].value = self.dummy_model_calibration_file_path
+            parameters[6].enabled = False
+            parameters[6].value = self.dummy_model_calibration_file_path
 
-        # Checks that alteration added is not a duplicate
-        if parameters[7].values is not None:
-           number_of_values = len(parameters[7].values)
-           if number_of_values > 1 and parameters[7].values[-1] in parameters[7].values[0:number_of_values-1]:
-                parameters[7].values = parameters[7].values[0:number_of_values-1]
-
-        # Enables alteration file field if an alteration is added
-        if parameters[7].altered and parameters[7].valueAsText is not None:
-            if parameters[8].enabled == False:
-                parameters[8].enabled = True
-                parameters[8].value = ""
-        else:
-            parameters[8].enabled = False
-            parameters[8].value = self.dummy_model_alteration_file_path
+        # # Checks that alteration added is not a duplicate
+        # if self.model_alterations.values is not None:
+        #     number_of_values = len(self.model_alterations.values)
+        #     if number_of_values > 1 and self.model_alterations.values[-1] in self.model_alterations.values[0:number_of_values-1]:
+        #         self.model_alterations.values = self.model_alterations.values[0:number_of_values-1]
+        #
+        # # Enables alteration file field if an alteration is added
+        # if self.model_alterations.altered and self.model_alterations.valueAsText is not None:
+        #     if self.model_alteration_file.enabled == False:
+        #         self.model_alteration_file.enabled = True
+        #         self.model_alteration_file.value = ""
+        # else:
+        #     self.model_alteration_file.enabled = False
+        #     self.model_alteration_file.value = self.dummy_model_alteration_file_path
 
 
     def updateMessages(self, parameters):
@@ -194,21 +193,21 @@ class EMGAATS_Model_Registration(object):
             self.model.id = model_id
             self.model.parent_model_id = 0
             self.model.model_request_id = 0
-            self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
+            self.model.project_phase_id = self.config.proj_phase_id[self.project_phase.valueAsText]
             self.model.engine_type_id = 1
             self.model.create_date = datetime.datetime.today()
             self.model.deploy_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.run_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.extract_date = None #TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
-            self.model.model_path = parameters[1].valueAsText
-            self.model.create_project_types(parameters[2].values)
-            self.model.create_model_alterations(parameters[7].values)
-            self.model.model_purpose_id = self.config.model_purpose_id[parameters[4].valueAsText]
-            self.model.model_calibration_file = parameters[5].valueAsText
-            self.model.model_status_id = self.config.model_status_id[parameters[6].valueAsText]
-            self.model.model_alteration_file = parameters[8].valueAsText
-            self.model.project_num = parameters[0].valueAsText
+            self.model.model_path = self.model_dir.valueAsText
+            self.model.create_project_types(self.project_type.values)
+            self.model.create_model_alterations(self.model_alterations.values)
+            self.model.model_purpose_id = self.config.model_purpose_id[self.model_purpose.valueAsText]
+            self.model.model_calibration_file = self.model_calibration_file.valueAsText
+            self.model.model_status_id = self.config.model_status_id[self.model_status.valueAsText]
+            self.model.model_alteration_file = self.model_alteration_file.valueAsText
+            self.model.project_num = self.project_no.valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
