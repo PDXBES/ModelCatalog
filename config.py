@@ -19,7 +19,11 @@ class Config:
         self.model_catalog_current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
-        self.model_alterations_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alterations"
+
+        self.model_alt_bc_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_BC"
+        self.model_alt_hydraulic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydraulic"
+        self.model_alt_hydrologic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydrologic"
+
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
 
         rehab_test_sde = r"BESDBTEST1.REHAB.sde"
@@ -59,9 +63,14 @@ class Config:
         self.engine_type = self.retrieve_engine_type_domain_as_dict()
         self.engine_type_id = self.reverse_dict(self.engine_type)
 
-        self.model_alteration = self.retrieve_model_alterations_domain_as_dict()
-        self.model_alteration_id = self.reverse_dict(self.model_alteration)
+        self.model_alt_bc = self.retrieve_model_alt_bc_domain_as_dict()
+        self.model_alt_bc_id = self.reverse_dict(self.model_alt_bc)
 
+        self.model_alt_hydraulic = self.retrieve_model_alt_hydraulic_domain_as_dict()
+        self.model_alt_hydraulic_id = self.reverse_dict(self.model_alt_hydraulic)
+
+        self.model_alt_hydrologic = self.retrieve_model_alt_hydrologic_domain_as_dict()
+        self.model_alt_hydrologic_id = self.reverse_dict(self.model_alt_hydrologic)
 
         self.model_purpose = self.retrieve_model_purpose_domain_as_dict()
         self.model_purpose_id = self.reverse_dict(self.model_purpose)
@@ -114,8 +123,14 @@ class Config:
     def retrieve_engine_type_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Engine_Type")
 
-    def retrieve_model_alterations_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Model_Alterations")
+    def retrieve_model_alt_bc_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Model_Alt_BC")
+
+    def retrieve_model_alt_hydraulic_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Model_Alt_Hydraulic")
+
+    def retrieve_model_alt_hydrologic_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Model_Alt_Hydrologic")
 
     def retrieve_model_purpose_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Model_Purpose")

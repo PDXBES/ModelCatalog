@@ -78,6 +78,5 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
             arcpy.AddError("Model is not valid")
 
 
+
 #TODO: Add test for model without alterations
-#TODO: add 2 more classes for model alterations
-#TODO: add object to other generic object classes 

@@ -9,7 +9,7 @@ import datetime
 import config
 from model_catalog_exception import Invalid_Model_exception
 reload(arcpy)
-#reload(config)
+reload(config)
 # reload(ModelCatalog)
 # reload(Model)
 # reload(ModelCatalogDbDataIo)
@@ -39,20 +39,20 @@ class EMGAATS_Model_Registration(object):
 
         self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
         self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
-
+        arcpy.AddMessage("Init")
 
 #        self.canRunInBackground = True
 
     def getParameterInfo(self):
         """Define parameter definitions"""
-
+        arcpy.AddMessage("Get parameter info")
         project_no = arcpy.Parameter(
             displayName="Model Analysis Tracking Number",
             name="project_number",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
-
+        project_no.value = " "
         project_no.enabled = False
 
         model_dir = arcpy.Parameter(
@@ -137,7 +137,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input",
             multiValue=True)
         model_alterations_boundary_conditions.columns = [['String', 'Alteration Type']]
-        model_alterations_boundary_conditions.filters[0].list = self.config.model_alteration.values()
+        model_alterations_boundary_conditions.filters[0].list = self.config.model_alt_bc.values()
 
         model_alterations_hydrologic = arcpy.Parameter(
             displayName="Model Alterations Hydrologic Parameters",
@@ -147,7 +147,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input",
             multiValue=True)
         model_alterations_hydrologic.columns = [['String', 'Alteration Type']]
-        model_alterations_hydrologic.filters[0].list = self.config.model_alteration.values()
+        model_alterations_hydrologic.filters[0].list = self.config.model_alt_hydrologic.values()
 
         model_alterations_hydraulic = arcpy.Parameter(
             displayName="Model Alterations Hydraulic Parameters",
@@ -157,7 +157,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input",
             multiValue=True)
         model_alterations_hydraulic.columns = [['String', 'Alteration Type']]
-        model_alterations_hydraulic.filters[0].list = self.config.model_alteration.values()
+        model_alterations_hydraulic.filters[0].list = self.config.model_alt_hydraulic.values()
 
         model_alteration_file = arcpy.Parameter(
             displayName="Model Alterations File",
@@ -182,6 +182,7 @@ class EMGAATS_Model_Registration(object):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
         has been changed."""
+        arcpy.AddMessage("Update Parameters")
 
         if parameters[3].valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
             if parameters[4].value == u"None":
@@ -230,6 +231,8 @@ class EMGAATS_Model_Registration(object):
         return
 
     def execute(self, parameters, messages):
+        arcpy.AddMessage("Execute")
+
         try:
             model_id = self.modelcatalogdataio.retrieve_current_model_id()
             self.model.id = model_id

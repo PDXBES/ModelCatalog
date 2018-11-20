@@ -8,7 +8,8 @@ except:
 from generic_object import GenericObject
 from db_data_io import DbDataIo
 
-class ObjectDataIo():
+
+class ObjectDataIo(object):
     def __init__(self, config, db_data_io):
         # type: (Config, DbDataIo) -> None
         self.config = config

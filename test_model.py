@@ -195,15 +195,35 @@ class TestModel(TestCase):
         return_sim_folder_path = self.model.simulation_folder_path()
         self.assertEquals(sim_folder_path, return_sim_folder_path)
 
-    def test_create_model_alteration_model_alteration_created_with_correct_attributes(self):
+    def test_create_model_alt_bc_model_alt_bc_created_with_correct_attributes(self):
         alteration_type = "zero"
-        model_alteration = self.model.create_model_alteration(alteration_type)
-        self.assertEquals(model_alteration.model_alteration_type_id, 0)
+        model_alteration = self.model.create_model_alt_bc(alteration_type)
+        self.assertEquals(model_alteration.model_alt_bc_type_id, 0)
 
-    def test_create_model_alteration_nonexistant_type_throws_exception(self):
+    def test_create_model_alt_bc_nonexistant_type_throws_exception(self):
         alteration_type = "type that does not exist"
         with self.assertRaises(KeyError):
-            self.model.create_model_alteration(alteration_type)
+            self.model.create_model_alt_bc(alteration_type)
+
+    def test_create_model_alt_hydrologic_model_alt_hydrologic_created_with_correct_attributes(self):
+        alteration_type = "zero"
+        model_alteration = self.model.create_model_alt_hydrologic(alteration_type)
+        self.assertEquals(model_alteration.model_alt_hydrologic_type_id, 0)
+
+    def test_create_model_alt_hydrologic_nonexistant_type_throws_exception(self):
+        alteration_type = "type that does not exist"
+        with self.assertRaises(KeyError):
+            self.model.create_model_alt_hydrologic(alteration_type)
+
+    def test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes(self):
+        alteration_type = "zero"
+        model_alteration = self.model.create_model_alt_hydraulic(alteration_type)
+        self.assertEquals(model_alteration.model_alt_hydraulic_type_id, 0)
+
+    def test_create_model_alt_hydraulic_nonexistant_type_throws_exception(self):
+        alteration_type = "type that does not exist"
+        with self.assertRaises(KeyError):
+            self.model.create_model_alt_hydraulic(alteration_type)
 
     def test_create_model_alterations_model_alterations_list_has_correct_values(self):
         alteration_types = [["zero"], ["one"], ["two"]]

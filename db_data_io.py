@@ -8,7 +8,7 @@ except:
 from data_io_exception import DataIO_exception
 from data_io_exception import Field_names_length_does_not_match_row_length_exception
 
-class DbDataIo:
+class DbDataIo(object):
     def __init__(self, config):
         # type: (Config) -> None
         self.current_id_database_table_path = None

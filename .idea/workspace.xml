@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/model.py" line="127" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generic_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/generic_object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mock_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mock_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_alteration.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_alteration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_alterations_boundary_conditions.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_alt_bc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/object_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_emgaats_registration_integration_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_emgaats_registration_integration_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,37 +32,39 @@
           <entry key="project.closed" value="28" />
           <entry key="project.open.time.4" value="16" />
           <entry key="project.open.time.5" value="18" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="35" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.opened" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="bat" value="1" />
           <entry key="dot" value="1" />
-          <entry key="py" value="187" />
-          <entry key="pyt" value="7" />
+          <entry key="py" value="207" />
+          <entry key="pyt" value="8" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="194" />
+          <entry key="Python" value="215" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="" value="52" />
-          <entry key="Python Console" value="559" />
-          <entry key="dummy" value="55" />
-          <entry key="py" value="23489" />
-          <entry key="pyt" value="1218" />
+          <entry key="Python Console" value="784" />
+          <entry key="dummy" value="70" />
+          <entry key="py" value="24664" />
+          <entry key="pyt" value="1368" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="55" />
-          <entry key="Python" value="25318" />
+          <entry key="PLAIN_TEXT" value="70" />
+          <entry key="Python" value="26868" />
         </counts>
       </usages-collector>
     </session>
@@ -91,13 +104,13 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.28134403">
+    <splitter split-orientation="horizontal" split-proportion="0.33408073">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/model_catalog_db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
+                <state relative-caret-position="-100">
                   <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
@@ -107,16 +120,10 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/config.py">
+            <entry file="file://$PROJECT_DIR$/object_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="182" column="50" selection-start-line="182" selection-start-column="50" selection-end-line="182" selection-end-column="50" />
-                  <folding>
-                    <marker date="1542395307909" expanded="true" signature="7567:8724" ph="..." />
-                    <marker date="1542395307909" expanded="true" signature="7968:7977" ph="..." />
-                    <marker date="1542395307909" expanded="true" signature="8562:8724" ph="..." />
-                    <marker date="1542395307909" expanded="true" signature="9285:9291" ph="..." />
-                  </folding>
+                <state relative-caret-position="220">
+                  <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
                 </state>
               </provider>
             </entry>
@@ -124,8 +131,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/model_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="21" selection-start-line="21" selection-end-line="21" />
+                <state relative-caret-position="120">
+                  <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
                 </state>
               </provider>
             </entry>
@@ -133,8 +140,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1085">
-                  <caret line="220" column="41" lean-forward="true" selection-start-line="220" selection-start-column="41" selection-end-line="220" selection-end-column="41" />
+                <state relative-caret-position="93">
+                  <caret line="14" column="25" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="25" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -143,10 +150,19 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="23">
+                  <caret line="139" column="13" lean-forward="true" selection-start-line="138" selection-start-column="16" selection-end-line="139" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/model_alteration.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="200">
-                  <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+                <state relative-caret-position="373">
+                  <caret line="21" selection-start-line="21" selection-end-line="21" />
                   <folding>
                     <element signature="e#0#40#0" expanded="true" />
                   </folding>
@@ -155,24 +171,46 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/generic_object.py">
+            <entry file="file://$PROJECT_DIR$/model_alt_bc.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+                <state relative-caret-position="80">
+                  <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="28" />
+                  <folding>
+                    <marker date="1542671801720" expanded="true" signature="230:231" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/model_alterations_boundary_conditions.py">
+            <entry file="file://$PROJECT_DIR$/config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+                <state relative-caret-position="61">
+                  <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
                   <folding>
-                    <element signature="e#0#25#0" expanded="true" />
-                    <marker date="1542401919671" expanded="true" signature="221:442" ph="..." />
-                    <marker date="1542401919671" expanded="true" signature="254:255" ph="..." />
+                    <marker date="1542669284528" expanded="true" signature="8363:9520" ph="..." />
+                    <marker date="1542669284528" expanded="true" signature="8764:8773" ph="..." />
+                    <marker date="1542669284528" expanded="true" signature="9358:9520" ph="..." />
+                    <marker date="1542669284528" expanded="true" signature="10081:10087" ph="..." />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/generic_object.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="20">
+                  <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/data_io_exception.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret column="3" selection-start-column="3" selection-end-column="3" />
                 </state>
               </provider>
             </entry>
@@ -180,25 +218,107 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+        <leaf>
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test_config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="170" column="16" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
+                <state relative-caret-position="32">
+                  <caret line="54" column="67" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
                   <folding>
-                    <marker date="1542395307910" expanded="true" signature="5062:5071" ph="..." />
-                    <marker date="1542395307910" expanded="true" signature="9828:10062" ph="..." />
+                    <element signature="e#1152#1415#0" />
+                    <element signature="e#1479#1721#0" />
+                    <element signature="e#1882#2026#0" />
+                    <element signature="e#2163#2629#0" />
+                    <element signature="e#3293#3420#0" />
+                    <element signature="e#3695#3836#0" />
+                    <element signature="e#4112#4255#0" />
+                    <element signature="e#4525#4654#0" />
+                    <element signature="e#4922#5049#0" />
+                    <element signature="e#5313#5436#0" />
+                    <element signature="e#5698#5819#0" />
+                    <element signature="e#5891#6044#0" />
+                    <element signature="e#6139#6339#0" />
+                    <element signature="e#6438#6652#0" />
+                    <element signature="e#6745#7069#0" />
+                    <element signature="e#7147#7357#0" />
+                    <element signature="e#7256#7357#0" />
+                    <element signature="e#7458#7738#0" />
+                    <element signature="e#7567#7738#0" />
+                    <element signature="e#7810#8100#0" />
+                    <element signature="e#7919#8100#0" />
+                    <element signature="e#8185#8402#0" />
+                    <element signature="e#8294#8402#0" />
+                    <element signature="e#8510#8800#0" />
+                    <element signature="e#8619#8800#0" />
+                    <element signature="e#8879#9176#0" />
+                    <element signature="e#8988#9176#0" />
+                    <element signature="e#9251#9476#0" />
+                    <element signature="e#9360#9476#0" />
+                    <element signature="e#9574#9867#0" />
+                    <element signature="e#9683#9867#0" />
+                    <element signature="e#9954#10279#0" />
+                    <element signature="e#10063#10279#0" />
+                    <element signature="e#10349#10551#0" />
+                    <element signature="e#10657#10876#0" />
+                    <element signature="e#10951#11192#0" />
+                    <element signature="e#11309#11569#0" />
+                    <element signature="e#11654#11937#0" />
+                    <element signature="e#12039#12413#0" />
+                    <marker date="1542673658624" expanded="false" signature="5956:5965" ph="..." />
+                    <marker date="1542673658624" expanded="false" signature="10722:10956" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/test_emgaats_registration_integration_tests.py">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test_model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="698">
-                  <caret line="82" column="50" lean-forward="true" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
+                <state relative-caret-position="294">
+                  <caret line="227" column="15" lean-forward="true" selection-start-line="227" selection-start-column="15" selection-end-line="227" selection-end-column="15" />
+                  <folding>
+                    <element signature="e#159#309#0" />
+                    <element signature="e#439#523#0" />
+                    <element signature="e#658#760#0" />
+                    <element signature="e#907#991#0" />
+                    <element signature="e#1141#1275#0" />
+                    <element signature="e#1406#1491#0" />
+                    <element signature="e#1627#1756#0" />
+                    <element signature="e#1895#2021#0" />
+                    <element signature="e#2169#2304#0" />
+                    <element signature="e#2533#2610#0" />
+                    <element signature="e#2738#2861#0" />
+                    <element signature="e#2981#3099#0" />
+                    <element signature="e#3233#3360#0" />
+                    <element signature="e#3482#3559#0" />
+                    <element signature="e#3687#3797#0" />
+                    <element signature="e#3925#4043#0" />
+                    <element signature="e#4180#4307#0" />
+                    <element signature="e#4793#5053#0" />
+                    <element signature="e#5457#5719#0" />
+                    <element signature="e#6125#6387#0" />
+                    <element signature="e#6784#7046#0" />
+                    <element signature="e#7443#7705#0" />
+                    <element signature="e#8102#8367#0" />
+                    <element signature="e#8373#8412#0" />
+                    <element signature="e#8754#8922#0" />
+                    <element signature="e#9017#9184#0" />
+                    <element signature="e#9268#9414#0" />
+                    <element signature="e#9521#9688#0" />
+                    <element signature="e#9772#9918#0" />
+                    <element signature="e#10062#10231#0" />
+                    <element signature="e#10317#10465#0" />
+                    <element signature="e#9535#9905#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/mock_config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                  <caret line="27" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="27" />
                 </state>
               </provider>
             </entry>
@@ -217,10 +337,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>parameters</find>
-      <find>tracking</find>
-      <find>dummy_model_alteration_file_path</find>
-      <find>edit_fields</find>
       <find>directory</find>
       <find>EMGAATS_Model_Registration</find>
       <find>tear</find>
@@ -247,6 +363,10 @@
       <find>output_pip</find>
       <find>copy</find>
       <find>self.</find>
+      <find>alter</find>
+      <find>altera</find>
+      <find>.start</find>
+      <find>.stop</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -267,10 +387,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/TEST.py" />
-        <option value="$USER_HOME$/Desktop/GUIExamples.pyt" />
-        <option value="$PROJECT_DIR$/GUIExamples.pyt" />
-        <option value="$PROJECT_DIR$/Model Catalog tools.pyt" />
         <option value="$PROJECT_DIR$/backup.py" />
         <option value="$PROJECT_DIR$/backend.py" />
         <option value="$PROJECT_DIR$/test_EMGAATS_Model_Registration.py" />
@@ -292,29 +408,36 @@
         <option value="$PROJECT_DIR$/rehab_data_io.py" />
         <option value="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.py" />
         <option value="$PROJECT_DIR$/model_alterations.py" />
-        <option value="$PROJECT_DIR$/object_data_io.py" />
         <option value="$PROJECT_DIR$/test_object_data_io.py" />
         <option value="$PROJECT_DIR$/simulation.py" />
-        <option value="$PROJECT_DIR$/model_alteration.py" />
         <option value="$PROJECT_DIR$/project_type.py" />
         <option value="$PROJECT_DIR$/emgaats_registration_integration_test.py" />
-        <option value="$PROJECT_DIR$/model.py" />
-        <option value="$PROJECT_DIR$/test_model.py" />
         <option value="$PROJECT_DIR$/model_catalog.py" />
         <option value="$PROJECT_DIR$/test_model_data_io.py" />
-        <option value="$PROJECT_DIR$/mock_config.py" />
         <option value="$PROJECT_DIR$/model_data_io.py" />
         <option value="$PROJECT_DIR$/model_catalog_db_data_io.py" />
         <option value="$PROJECT_DIR$/simulation_data_io.py" />
         <option value="$PROJECT_DIR$/test_simulation_data_io.py" />
-        <option value="$PROJECT_DIR$/db_data_io.py" />
         <option value="$PROJECT_DIR$/test_db_data_io.py" />
-        <option value="$PROJECT_DIR$/test_config.py" />
+        <option value="$PROJECT_DIR$/generic_object.py" />
+        <option value="$PROJECT_DIR$/model_alteration.py" />
+        <option value="$PROJECT_DIR$/model_alterations_hydraulic_input.py" />
+        <option value="$PROJECT_DIR$/model_alterations_hydrologic_input.py" />
+        <option value="$PROJECT_DIR$/model_alterations_hydrologic.py" />
+        <option value="$PROJECT_DIR$/model_alterations_hydraulic.py" />
+        <option value="$PROJECT_DIR$/model_alterations_boundary_conditions.py" />
+        <option value="$PROJECT_DIR$/db_data_io.py" />
+        <option value="$PROJECT_DIR$/object_data_io.py" />
+        <option value="$PROJECT_DIR$/test_emgaats_registration_integration_tests.py" />
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
-        <option value="$PROJECT_DIR$/generic_object.py" />
-        <option value="$PROJECT_DIR$/model_alterations_boundary_conditions.py" />
-        <option value="$PROJECT_DIR$/test_emgaats_registration_integration_tests.py" />
+        <option value="$PROJECT_DIR$/mock_config.py" />
+        <option value="$PROJECT_DIR$/model_alt_bc.py" />
+        <option value="$PROJECT_DIR$/model_alt_hydraulic.py" />
+        <option value="$PROJECT_DIR$/model_alt_hydrologic.py" />
+        <option value="$PROJECT_DIR$/test_model.py" />
+        <option value="$PROJECT_DIR$/model.py" />
+        <option value="$PROJECT_DIR$/test_config.py" />
       </list>
     </option>
   </component>
@@ -332,6 +455,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -343,7 +467,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,6 +474,11 @@
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bfreeman\Documents\ModelCatalog" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -379,7 +507,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -389,11 +517,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests&quot;" />
+      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_config.TestConfig.test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -403,11 +531,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig.test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_create_model_alt_hydraulic_nonexistant_type_throws_exception" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -417,7 +545,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_create_model_alt_hydraulic_nonexistant_type_throws_exception&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -436,19 +564,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case" />
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" />
-      <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alt_hydraulic_nonexistant_type_throws_exception" />
       <item itemvalue="Python tests.Unittests in ModelCatalog" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Unittests in ModelCatalog" />
-        <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" />
+        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name" />
         <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alt_hydraulic_nonexistant_type_throws_exception" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes" />
       </list>
     </recent_temporary>
   </component>
@@ -466,34 +594,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_config_TestConfig_test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case - 2018.11.13 at 13h 09m 48s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes - 2018.11.19 at 16h 02m 04s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case - 2018.11.13 at 13h 11m 17s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_get_keys_based_on_value_case_insensitive_returns_correct_keys_regardless_of_value_case" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes - 2018.11.19 at 16h 03m 32s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig - 2018.11.13 at 13h 12m 05s.xml">
+    <history-entry file="Unittests_for_test_model_TestModel_test_create_model_alt_hydraulic_nonexistant_type_throws_exception - 2018.11.19 at 16h 03m 53s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_create_model_alt_hydraulic_nonexistant_type_throws_exception" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_ModelCatalog - 2018.11.19 at 16h 05m 39s.xml">
+      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name - 2018.11.19 at 16h 06m 43s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_config_TestConfig - 2018.11.19 at 16h 07m 34s.xml">
       <configuration name="Unittests for test_config.TestConfig" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_get_cip_analysis_requests_returns_correct_cip_requests - 2018.11.13 at 13h 21m 46s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" configurationId="tests" />
+    <history-entry file="Unittests_in_ModelCatalog - 2018.11.19 at 16h 08m 22s.xml">
+      <configuration name="Unittests in ModelCatalog" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_get_cip_analysis_requests_returns_correct_cip_requests - 2018.11.13 at 13h 22m 32s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name - 2018.11.19 at 16h 22m 20s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_get_cip_analysis_requests_returns_correct_cip_requests - 2018.11.13 at 13h 22m 59s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name - 2018.11.19 at 16h 25m 25s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_get_cip_analysis_requests_returns_correct_cip_requests - 2018.11.13 at 13h 26m 50s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_get_cip_analysis_requests_returns_correct_cip_requests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest - 2018.11.13 at 13h 51m 41s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest - 2018.11.13 at 13h 53m 43s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_ModelCatalog - 2018.11.16 at 11h 11m 02s.xml">
+    <history-entry file="Unittests_in_ModelCatalog - 2018.11.19 at 16h 26m 11s.xml">
       <configuration name="Unittests in ModelCatalog" configurationId="tests" />
     </history-entry>
   </component>
@@ -507,21 +635,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1586" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1376" height="754" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.214342" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.21375187" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33682373" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8513514" weight="0.35950413" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8513514" visible="true" weight="0.3548387" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.70335674" weight="0.036480688" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.010471204" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" visible="true" weight="0.4077135" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32924694" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.009677419" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.3564516" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32903227" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.14864865" side_tool="true" weight="0.31937173" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -632,9 +759,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Desktop/GUIExamples.pyt" />
-    <entry file="file://$PROJECT_DIR$/GUIExamples.pyt" />
-    <entry file="file://$PROJECT_DIR$/Model Catalog tools.pyt" />
     <entry file="file://C:/Program Files (x86)/ArcGIS/Desktop10.3/arcpy/arcpy/management.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2571">
@@ -740,20 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="214" lean-forward="true" selection-start-line="214" selection-end-line="214" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_io_exception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="3" selection-start-column="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -789,27 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mock_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="90" column="23" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="121" selection-start-line="121" selection-end-line="121" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simulation_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="491">
@@ -824,24 +913,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="136" selection-start-line="136" selection-end-line="136" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/object_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="95" selection-start-line="20" selection-start-column="95" selection-end-line="20" selection-end-column="95" />
         </state>
       </provider>
     </entry>
@@ -873,51 +948,297 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model_catalog_db_data_io.py">
+    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.EMGAATS_Model_Registration.pyt.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+          <folding>
+            <element signature="e#466#470#0" expanded="true" />
+            <element signature="e#498#502#0" expanded="true" />
+            <element signature="e#502#506#0" expanded="true" />
+            <element signature="e#509#513#0" expanded="true" />
+            <element signature="e#513#517#0" expanded="true" />
+            <element signature="e#520#524#0" expanded="true" />
+            <element signature="e#524#528#0" expanded="true" />
+            <element signature="e#529#533#0" expanded="true" />
+            <element signature="e#533#537#0" expanded="true" />
+            <element signature="e#541#545#0" expanded="true" />
+            <element signature="e#682#686#0" expanded="true" />
+            <element signature="e#691#695#0" expanded="true" />
+            <element signature="e#695#699#0" expanded="true" />
+            <element signature="e#701#705#0" expanded="true" />
+            <element signature="e#705#709#0" expanded="true" />
+            <element signature="e#713#717#0" expanded="true" />
+            <element signature="e#717#721#0" expanded="true" />
+            <element signature="e#725#729#0" expanded="true" />
+            <element signature="e#729#733#0" expanded="true" />
+            <element signature="e#737#741#0" expanded="true" />
+            <element signature="e#1271#1275#0" expanded="true" />
+            <element signature="e#1303#1307#0" expanded="true" />
+            <element signature="e#1307#1311#0" expanded="true" />
+            <element signature="e#1314#1318#0" expanded="true" />
+            <element signature="e#1318#1322#0" expanded="true" />
+            <element signature="e#1325#1329#0" expanded="true" />
+            <element signature="e#1329#1333#0" expanded="true" />
+            <element signature="e#1334#1338#0" expanded="true" />
+            <element signature="e#1338#1342#0" expanded="true" />
+            <element signature="e#1346#1350#0" expanded="true" />
+            <element signature="e#1411#1415#0" expanded="true" />
+            <element signature="e#1420#1424#0" expanded="true" />
+            <element signature="e#1424#1428#0" expanded="true" />
+            <element signature="e#1430#1434#0" expanded="true" />
+            <element signature="e#1434#1438#0" expanded="true" />
+            <element signature="e#1441#1445#0" expanded="true" />
+            <element signature="e#1445#1449#0" expanded="true" />
+            <element signature="e#1453#1457#0" expanded="true" />
+            <element signature="e#1457#1461#0" expanded="true" />
+            <element signature="e#1465#1469#0" expanded="true" />
+            <element signature="e#1469#1473#0" expanded="true" />
+            <element signature="e#1477#1481#0" expanded="true" />
+            <element signature="e#1668#1672#0" expanded="true" />
+            <element signature="e#1700#1704#0" expanded="true" />
+            <element signature="e#1704#1708#0" expanded="true" />
+            <element signature="e#1711#1715#0" expanded="true" />
+            <element signature="e#1715#1719#0" expanded="true" />
+            <element signature="e#1722#1726#0" expanded="true" />
+            <element signature="e#1726#1730#0" expanded="true" />
+            <element signature="e#1731#1735#0" expanded="true" />
+            <element signature="e#1735#1739#0" expanded="true" />
+            <element signature="e#1743#1747#0" expanded="true" />
+            <element signature="e#1864#1868#0" expanded="true" />
+            <element signature="e#1873#1877#0" expanded="true" />
+            <element signature="e#1877#1881#0" expanded="true" />
+            <element signature="e#1883#1887#0" expanded="true" />
+            <element signature="e#1887#1891#0" expanded="true" />
+            <element signature="e#1894#1898#0" expanded="true" />
+            <element signature="e#1898#1902#0" expanded="true" />
+            <element signature="e#1903#1907#0" expanded="true" />
+            <element signature="e#1907#1911#0" expanded="true" />
+            <element signature="e#1917#1921#0" expanded="true" />
+            <element signature="e#1921#1925#0" expanded="true" />
+            <element signature="e#1927#1931#0" expanded="true" />
+            <element signature="e#1931#1935#0" expanded="true" />
+            <element signature="e#1939#1943#0" expanded="true" />
+            <element signature="e#1943#1947#0" expanded="true" />
+            <element signature="e#1951#1955#0" expanded="true" />
+            <element signature="e#1955#1959#0" expanded="true" />
+            <element signature="e#1963#1967#0" expanded="true" />
+            <element signature="e#2173#2177#0" expanded="true" />
+            <element signature="e#2205#2209#0" expanded="true" />
+            <element signature="e#2209#2213#0" expanded="true" />
+            <element signature="e#2216#2220#0" expanded="true" />
+            <element signature="e#2220#2224#0" expanded="true" />
+            <element signature="e#2227#2231#0" expanded="true" />
+            <element signature="e#2231#2235#0" expanded="true" />
+            <element signature="e#2236#2240#0" expanded="true" />
+            <element signature="e#2240#2244#0" expanded="true" />
+            <element signature="e#2248#2252#0" expanded="true" />
+            <element signature="e#2301#2305#0" expanded="true" />
+            <element signature="e#2310#2314#0" expanded="true" />
+            <element signature="e#2314#2318#0" expanded="true" />
+            <element signature="e#2320#2324#0" expanded="true" />
+            <element signature="e#2324#2328#0" expanded="true" />
+            <element signature="e#2329#2333#0" expanded="true" />
+            <element signature="e#2333#2337#0" expanded="true" />
+            <element signature="e#2341#2345#0" expanded="true" />
+            <element signature="e#2426#2430#0" expanded="true" />
+            <element signature="e#2435#2439#0" expanded="true" />
+            <element signature="e#2439#2443#0" expanded="true" />
+            <element signature="e#2445#2449#0" expanded="true" />
+            <element signature="e#2449#2453#0" expanded="true" />
+            <element signature="e#2457#2461#0" expanded="true" />
+            <element signature="e#2461#2465#0" expanded="true" />
+            <element signature="e#2469#2473#0" expanded="true" />
+            <element signature="e#2473#2477#0" expanded="true" />
+            <element signature="e#2481#2485#0" expanded="true" />
+            <element signature="e#2707#2711#0" expanded="true" />
+            <element signature="e#2739#2743#0" expanded="true" />
+            <element signature="e#2743#2747#0" expanded="true" />
+            <element signature="e#2750#2754#0" expanded="true" />
+            <element signature="e#2754#2758#0" expanded="true" />
+            <element signature="e#2761#2765#0" expanded="true" />
+            <element signature="e#2765#2769#0" expanded="true" />
+            <element signature="e#2770#2774#0" expanded="true" />
+            <element signature="e#2774#2778#0" expanded="true" />
+            <element signature="e#2782#2786#0" expanded="true" />
+            <element signature="e#2837#2841#0" expanded="true" />
+            <element signature="e#2846#2850#0" expanded="true" />
+            <element signature="e#2850#2854#0" expanded="true" />
+            <element signature="e#2856#2860#0" expanded="true" />
+            <element signature="e#2860#2864#0" expanded="true" />
+            <element signature="e#2868#2872#0" expanded="true" />
+            <element signature="e#2872#2876#0" expanded="true" />
+            <element signature="e#2880#2884#0" expanded="true" />
+            <element signature="e#2884#2888#0" expanded="true" />
+            <element signature="e#2892#2896#0" expanded="true" />
+            <element signature="e#3124#3128#0" expanded="true" />
+            <element signature="e#3156#3160#0" expanded="true" />
+            <element signature="e#3160#3164#0" expanded="true" />
+            <element signature="e#3167#3171#0" expanded="true" />
+            <element signature="e#3171#3175#0" expanded="true" />
+            <element signature="e#3178#3182#0" expanded="true" />
+            <element signature="e#3182#3186#0" expanded="true" />
+            <element signature="e#3187#3191#0" expanded="true" />
+            <element signature="e#3191#3195#0" expanded="true" />
+            <element signature="e#3199#3203#0" expanded="true" />
+            <element signature="e#3281#3285#0" expanded="true" />
+            <element signature="e#3290#3294#0" expanded="true" />
+            <element signature="e#3294#3298#0" expanded="true" />
+            <element signature="e#3300#3304#0" expanded="true" />
+            <element signature="e#3304#3308#0" expanded="true" />
+            <element signature="e#3312#3316#0" expanded="true" />
+            <element signature="e#3316#3320#0" expanded="true" />
+            <element signature="e#3324#3328#0" expanded="true" />
+            <element signature="e#3328#3332#0" expanded="true" />
+            <element signature="e#3336#3340#0" expanded="true" />
+            <element signature="e#3543#3547#0" expanded="true" />
+            <element signature="e#3575#3579#0" expanded="true" />
+            <element signature="e#3579#3583#0" expanded="true" />
+            <element signature="e#3586#3590#0" expanded="true" />
+            <element signature="e#3590#3594#0" expanded="true" />
+            <element signature="e#3597#3601#0" expanded="true" />
+            <element signature="e#3601#3605#0" expanded="true" />
+            <element signature="e#3606#3610#0" expanded="true" />
+            <element signature="e#3610#3614#0" expanded="true" />
+            <element signature="e#3618#3622#0" expanded="true" />
+            <element signature="e#3673#3677#0" expanded="true" />
+            <element signature="e#3682#3686#0" expanded="true" />
+            <element signature="e#3686#3690#0" expanded="true" />
+            <element signature="e#3692#3696#0" expanded="true" />
+            <element signature="e#3696#3700#0" expanded="true" />
+            <element signature="e#3701#3705#0" expanded="true" />
+            <element signature="e#3705#3709#0" expanded="true" />
+            <element signature="e#3713#3717#0" expanded="true" />
+            <element signature="e#3794#3798#0" expanded="true" />
+            <element signature="e#3803#3807#0" expanded="true" />
+            <element signature="e#3807#3811#0" expanded="true" />
+            <element signature="e#3813#3817#0" expanded="true" />
+            <element signature="e#3817#3821#0" expanded="true" />
+            <element signature="e#3825#3829#0" expanded="true" />
+            <element signature="e#3829#3833#0" expanded="true" />
+            <element signature="e#3837#3841#0" expanded="true" />
+            <element signature="e#3841#3845#0" expanded="true" />
+            <element signature="e#3849#3853#0" expanded="true" />
+            <element signature="e#4031#4035#0" expanded="true" />
+            <element signature="e#4063#4067#0" expanded="true" />
+            <element signature="e#4067#4071#0" expanded="true" />
+            <element signature="e#4074#4078#0" expanded="true" />
+            <element signature="e#4078#4082#0" expanded="true" />
+            <element signature="e#4085#4089#0" expanded="true" />
+            <element signature="e#4089#4093#0" expanded="true" />
+            <element signature="e#4094#4098#0" expanded="true" />
+            <element signature="e#4098#4102#0" expanded="true" />
+            <element signature="e#4106#4110#0" expanded="true" />
+            <element signature="e#4139#4143#0" expanded="true" />
+            <element signature="e#4148#4152#0" expanded="true" />
+            <element signature="e#4152#4156#0" expanded="true" />
+            <element signature="e#4158#4162#0" expanded="true" />
+            <element signature="e#4162#4166#0" expanded="true" />
+            <element signature="e#4170#4174#0" expanded="true" />
+            <element signature="e#4174#4178#0" expanded="true" />
+            <element signature="e#4182#4186#0" expanded="true" />
+            <element signature="e#4186#4190#0" expanded="true" />
+            <element signature="e#4194#4198#0" expanded="true" />
+            <element signature="e#4412#4416#0" expanded="true" />
+            <element signature="e#4444#4448#0" expanded="true" />
+            <element signature="e#4448#4452#0" expanded="true" />
+            <element signature="e#4455#4459#0" expanded="true" />
+            <element signature="e#4459#4463#0" expanded="true" />
+            <element signature="e#4466#4470#0" expanded="true" />
+            <element signature="e#4470#4474#0" expanded="true" />
+            <element signature="e#4475#4479#0" expanded="true" />
+            <element signature="e#4479#4483#0" expanded="true" />
+            <element signature="e#4487#4491#0" expanded="true" />
+            <element signature="e#4575#4579#0" expanded="true" />
+            <element signature="e#4584#4588#0" expanded="true" />
+            <element signature="e#4588#4592#0" expanded="true" />
+            <element signature="e#4594#4598#0" expanded="true" />
+            <element signature="e#4598#4602#0" expanded="true" />
+            <element signature="e#4605#4609#0" expanded="true" />
+            <element signature="e#4609#4613#0" expanded="true" />
+            <element signature="e#4617#4621#0" expanded="true" />
+            <element signature="e#4621#4625#0" expanded="true" />
+            <element signature="e#4629#4633#0" expanded="true" />
+            <element signature="e#4633#4637#0" expanded="true" />
+            <element signature="e#4641#4645#0" expanded="true" />
+            <element signature="e#4846#4850#0" expanded="true" />
+            <element signature="e#4878#4882#0" expanded="true" />
+            <element signature="e#4882#4886#0" expanded="true" />
+            <element signature="e#4889#4893#0" expanded="true" />
+            <element signature="e#4893#4897#0" expanded="true" />
+            <element signature="e#4900#4904#0" expanded="true" />
+            <element signature="e#4904#4908#0" expanded="true" />
+            <element signature="e#4909#4913#0" expanded="true" />
+            <element signature="e#4913#4917#0" expanded="true" />
+            <element signature="e#4921#4925#0" expanded="true" />
+            <element signature="e#4976#4980#0" expanded="true" />
+            <element signature="e#4985#4989#0" expanded="true" />
+            <element signature="e#4989#4993#0" expanded="true" />
+            <element signature="e#4995#4999#0" expanded="true" />
+            <element signature="e#4999#5003#0" expanded="true" />
+            <element signature="e#5007#5011#0" expanded="true" />
+            <element signature="e#5011#5015#0" expanded="true" />
+            <element signature="e#5019#5023#0" expanded="true" />
+            <element signature="e#5023#5027#0" expanded="true" />
+            <element signature="e#5031#5035#0" expanded="true" />
+            <element signature="e#5083#5087#0" expanded="true" />
+            <element signature="e#5115#5119#0" expanded="true" />
+            <element signature="e#5119#5123#0" expanded="true" />
+            <element signature="e#5126#5130#0" expanded="true" />
+            <element signature="e#5130#5134#0" expanded="true" />
+            <element signature="e#5137#5141#0" expanded="true" />
+            <element signature="e#5141#5145#0" expanded="true" />
+            <element signature="e#5146#5150#0" expanded="true" />
+            <element signature="e#5150#5154#0" expanded="true" />
+            <element signature="e#5158#5162#0" expanded="true" />
+            <element signature="e#5299#5303#0" expanded="true" />
+            <element signature="e#5308#5312#0" expanded="true" />
+            <element signature="e#5312#5316#0" expanded="true" />
+            <element signature="e#5318#5322#0" expanded="true" />
+            <element signature="e#5322#5326#0" expanded="true" />
+            <element signature="e#5330#5334#0" expanded="true" />
+            <element signature="e#5334#5338#0" expanded="true" />
+            <element signature="e#5342#5346#0" expanded="true" />
+            <element signature="e#5346#5350#0" expanded="true" />
+            <element signature="e#5354#5358#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
+    <entry file="file://$PROJECT_DIR$/generic_object.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="182" column="50" selection-start-line="182" selection-start-column="50" selection-end-line="182" selection-end-column="50" />
-          <folding>
-            <marker date="1542395307909" expanded="true" signature="7567:8724" ph="..." />
-            <marker date="1542395307909" expanded="true" signature="7968:7977" ph="..." />
-            <marker date="1542395307909" expanded="true" signature="8562:8724" ph="..." />
-            <marker date="1542395307909" expanded="true" signature="9285:9291" ph="..." />
-          </folding>
+        <state relative-caret-position="20">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model_data_io.py">
+    <entry file="file://$PROJECT_DIR$/test_emgaats_registration_integration_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="1120">
+          <caret line="66" column="11" lean-forward="true" selection-start-line="66" selection-start-column="11" selection-end-line="66" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_config.py">
+    <entry file="file://$PROJECT_DIR$/object_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="170" column="16" selection-start-line="170" selection-start-column="16" selection-end-line="170" selection-end-column="16" />
-          <folding>
-            <marker date="1542395307910" expanded="true" signature="5062:5071" ph="..." />
-            <marker date="1542395307910" expanded="true" signature="9828:10062" ph="..." />
-          </folding>
+        <state relative-caret-position="220">
+          <caret line="13" column="42" lean-forward="true" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
+    <entry file="file://$PROJECT_DIR$/model_catalog_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1085">
-          <caret line="220" column="41" lean-forward="true" selection-start-line="220" selection-start-column="41" selection-end-line="220" selection-end-column="41" />
+        <state relative-caret-position="-100">
+          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
@@ -926,37 +1247,184 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model_alteration.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+        <state relative-caret-position="373">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generic_object.py">
+    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_alterations_boundary_conditions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+        <state relative-caret-position="93">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="25" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1542401919671" expanded="true" signature="221:442" ph="..." />
-            <marker date="1542401919671" expanded="true" signature="254:255" ph="..." />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_emgaats_registration_integration_tests.py">
+    <entry file="file://$PROJECT_DIR$/test_model_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="82" column="50" lean-forward="true" selection-start-line="82" selection-start-column="50" selection-end-line="82" selection-end-column="50" />
+        <state relative-caret-position="158">
+          <caret line="188" column="59" selection-start-line="188" selection-start-column="59" selection-end-line="188" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_io_exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_alt_bc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="28" />
+          <folding>
+            <marker date="1542671801720" expanded="true" signature="230:231" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_alt_hydraulic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_alt_hydrologic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="139" column="13" lean-forward="true" selection-start-line="138" selection-start-column="16" selection-end-line="139" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="227" column="15" lean-forward="true" selection-start-line="227" selection-start-column="15" selection-end-line="227" selection-end-column="15" />
+          <folding>
+            <element signature="e#159#309#0" />
+            <element signature="e#439#523#0" />
+            <element signature="e#658#760#0" />
+            <element signature="e#907#991#0" />
+            <element signature="e#1141#1275#0" />
+            <element signature="e#1406#1491#0" />
+            <element signature="e#1627#1756#0" />
+            <element signature="e#1895#2021#0" />
+            <element signature="e#2169#2304#0" />
+            <element signature="e#2533#2610#0" />
+            <element signature="e#2738#2861#0" />
+            <element signature="e#2981#3099#0" />
+            <element signature="e#3233#3360#0" />
+            <element signature="e#3482#3559#0" />
+            <element signature="e#3687#3797#0" />
+            <element signature="e#3925#4043#0" />
+            <element signature="e#4180#4307#0" />
+            <element signature="e#4793#5053#0" />
+            <element signature="e#5457#5719#0" />
+            <element signature="e#6125#6387#0" />
+            <element signature="e#6784#7046#0" />
+            <element signature="e#7443#7705#0" />
+            <element signature="e#8102#8367#0" />
+            <element signature="e#8373#8412#0" />
+            <element signature="e#8754#8922#0" />
+            <element signature="e#9017#9184#0" />
+            <element signature="e#9268#9414#0" />
+            <element signature="e#9521#9688#0" />
+            <element signature="e#9772#9918#0" />
+            <element signature="e#10062#10231#0" />
+            <element signature="e#10317#10465#0" />
+            <element signature="e#9535#9905#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mock_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="27" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+          <folding>
+            <marker date="1542669284528" expanded="true" signature="8363:9520" ph="..." />
+            <marker date="1542669284528" expanded="true" signature="8764:8773" ph="..." />
+            <marker date="1542669284528" expanded="true" signature="9358:9520" ph="..." />
+            <marker date="1542669284528" expanded="true" signature="10081:10087" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="54" column="67" selection-start-line="54" selection-start-column="67" selection-end-line="54" selection-end-column="67" />
+          <folding>
+            <element signature="e#1152#1415#0" />
+            <element signature="e#1479#1721#0" />
+            <element signature="e#1882#2026#0" />
+            <element signature="e#2163#2629#0" />
+            <element signature="e#3293#3420#0" />
+            <element signature="e#3695#3836#0" />
+            <element signature="e#4112#4255#0" />
+            <element signature="e#4525#4654#0" />
+            <element signature="e#4922#5049#0" />
+            <element signature="e#5313#5436#0" />
+            <element signature="e#5698#5819#0" />
+            <element signature="e#5891#6044#0" />
+            <element signature="e#6139#6339#0" />
+            <element signature="e#6438#6652#0" />
+            <element signature="e#6745#7069#0" />
+            <element signature="e#7147#7357#0" />
+            <element signature="e#7256#7357#0" />
+            <element signature="e#7458#7738#0" />
+            <element signature="e#7567#7738#0" />
+            <element signature="e#7810#8100#0" />
+            <element signature="e#7919#8100#0" />
+            <element signature="e#8185#8402#0" />
+            <element signature="e#8294#8402#0" />
+            <element signature="e#8510#8800#0" />
+            <element signature="e#8619#8800#0" />
+            <element signature="e#8879#9176#0" />
+            <element signature="e#8988#9176#0" />
+            <element signature="e#9251#9476#0" />
+            <element signature="e#9360#9476#0" />
+            <element signature="e#9574#9867#0" />
+            <element signature="e#9683#9867#0" />
+            <element signature="e#9954#10279#0" />
+            <element signature="e#10063#10279#0" />
+            <element signature="e#10349#10551#0" />
+            <element signature="e#10657#10876#0" />
+            <element signature="e#10951#11192#0" />
+            <element signature="e#11309#11569#0" />
+            <element signature="e#11654#11937#0" />
+            <element signature="e#12039#12413#0" />
+            <marker date="1542673658624" expanded="false" signature="5956:5965" ph="..." />
+            <marker date="1542673658624" expanded="false" signature="10722:10956" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -21,7 +21,10 @@ class MockConfig():
         self.config.flooding_results_sde_path = "node_flooding_results_sde_path"
         self.config.rehab_results_sde_path = "rehab_results_sde_path"
         self.config.rehab_tracking_sde_path = "rehab_tracking_sde_path"
-        self.config.model_alterations_sde_path = "model_alterations_sde_path"
+
+        self.config.model_alt_bc_sde_path = "model_alt_bc_sde_path"
+        self.config.model_alt_hydrologic_sde_path = "model_alt_hydrologic_sde_path"
+        self.config.model_alt_hydraulic_sde_path = "model_alt_hydraulic_sde_path"
 
         self.config.EMGAATS_sde_path = "EMGAATS_sde_path"
         self.config.storms_sde_path = "storms_sde_path"
@@ -39,8 +42,14 @@ class MockConfig():
         # self.config.engine_type =
         # self.config.engine_type_id =
         #
-        self.config.model_alteration = {0: "zero", 1: "one", 2: "two"}
-        self.config.model_alteration_id = {"zero": 0, "one": 1, "two": 2}
+        self.config.model_alt_bc = {0: "zero", 1: "one", 2: "two"}
+        self.config.model_alt_bc_id = {"zero": 0, "one": 1, "two": 2}
+
+        self.config.model_alt_hydrologic = {0: "zero", 1: "one", 2: "two"}
+        self.config.model_alt_hydrologic_id = {"zero": 0, "one": 1, "two": 2}
+
+        self.config.model_alt_hydraulic = {0: "zero", 1: "one", 2: "two"}
+        self.config.model_alt_hydraulic_id = {"zero": 0, "one": 1, "two": 2}
         #
         # self.config.model_purpose =
         # self.config.model_purpose_id =

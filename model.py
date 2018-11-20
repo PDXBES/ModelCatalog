@@ -8,7 +8,9 @@ except:
 from simulation import Simulation
 from config import Config
 from generic_object import GenericObject
-from model_alteration import ModelAlteration
+from model_alt_bc import ModelAltBC
+from model_alt_hydrologic import ModelAltHydrologic
+from model_alt_hydraulic import ModelAltHydraulic
 from project_type import ProjectType
 
 class Model(GenericObject):
@@ -117,11 +119,21 @@ class Model(GenericObject):
         else:
             arcpy.AddMessage("Sim folder is not valid: " + self.sim_file_path)
 
-    def create_model_alteration(self, alteration_type):
-        model_alteration = ModelAlteration(self.config)
-        model_alteration.model_alteration_type_id = self.config.model_alteration_id[alteration_type]
-        return model_alteration
+    def create_model_alt_bc(self, alteration_type):
+        model_alt_bc = ModelAltBC(self.config)
+        model_alt_bc.model_alt_bc_type_id = self.config.model_alt_bc_id[alteration_type]
+        return model_alt_bc
 
+    def create_model_alt_hydrologic(self, alteration_type):
+        model_alt_hydrologic = ModelAltHydrologic(self.config)
+        model_alt_hydrologic.model_alt_hydrologic_type_id = self.config.model_alt_hydrologic_id[alteration_type]
+        return model_alt_hydrologic
+
+    def create_model_alt_hydraulic(self, alteration_type):
+        model_alt_hydraulic = ModelAltHydraulic(self.config)
+        model_alt_hydraulic.model_alt_hydraulic_type_id = self.config.model_alt_hydraulic_id[alteration_type]
+        return model_alt_hydraulic
+#TODO: add logic in create model alterations to differentiate between alt types
     def create_model_alterations(self, alteration_types):
         if alteration_types is None:
             pass

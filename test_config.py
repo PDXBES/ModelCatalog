@@ -52,18 +52,30 @@ class TestConfig(TestCase):
         mock_list_of_domains.return_value = [mock_domain1, mock_domain2]
         domain_dict_of_scenarios = self.config_real.retrieve_domain_as_dict("Engine_Type")
         self.assertEquals(domain_dict_of_scenarios, {1: "EMGAATS"})
+#TODO: fix 10 more failing tests by patching on the object as below
+   # @mock.patch("config.Config.retrieve_domain_as_dict")
+    def test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_engine_type_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Engine_Type")
 
     @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                 mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_engine_type_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Engine_Type")
-
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_model_alterations_domain_as_dict_called_with_correct_domain_name(self,
+    def test_retrieve_model_alt_bc_domain_as_dict_called_with_correct_domain_name(self,
                                                                                        mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_model_alterations_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Model_Alterations")
+        self.config_real.retrieve_model_alt_bc_domain_as_dict()
+        mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_BC")
+
+    @mock.patch("config.Config.retrieve_domain_as_dict")
+    def test_retrieve_model_alt_hydraulic_domain_as_dict_called_with_correct_domain_name(self,
+                                                                                  mock_retrieve_domain_as_dict):
+        self.config_real.retrieve_model_alt_hydraulic_domain_as_dict()
+        mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydraulic")
+
+    @mock.patch("config.Config.retrieve_domain_as_dict")
+    def test_retrieve_model_alt_hydrologic_domain_as_dict_called_with_correct_domain_name(self,
+                                                                                  mock_retrieve_domain_as_dict):
+        self.config_real.retrieve_model_alt_hydrologic_domain_as_dict()
+        mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydrologic")
 
     @mock.patch("config.Config.retrieve_domain_as_dict")
     def test_retrieve_model_purpose_domain_as_dict_called_with_correct_domain_name(self,
