@@ -72,7 +72,12 @@ class ModelDataIo(ObjectDataIo):
 
     def add_model_alteration(self, model_id, model_alteration):
         # type: (int, ModelAlteration) -> None
-        self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_alterations_sde_path)
+        if model_alteration.name == "model_alt_bc":
+            self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_alt_bc_sde_path)
+        elif model_alteration.name == "model_alt_hydrologic":
+            self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_alt_hydrologic_sde_path)
+        elif model_alteration.name == "model_alt_hydraulic":
+            self.add_object(model_id, model_alteration, model_alteration.field_attribute_lookup, self.config.model_alt_hydraulic_sde_path)
 
     def add_model_alterations(self, model):
         # type: (Model) -> None

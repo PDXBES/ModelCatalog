@@ -52,54 +52,46 @@ class TestConfig(TestCase):
         mock_list_of_domains.return_value = [mock_domain1, mock_domain2]
         domain_dict_of_scenarios = self.config_real.retrieve_domain_as_dict("Engine_Type")
         self.assertEquals(domain_dict_of_scenarios, {1: "EMGAATS"})
-#TODO: fix 10 more failing tests by patching on the object as below
-   # @mock.patch("config.Config.retrieve_domain_as_dict")
+
     def test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_engine_type_domain_as_dict()
             mock_retrieve_domain_as_dict.assert_called_with("Engine_Type")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_model_alt_bc_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                       mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_model_alt_bc_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_BC")
+    def test_retrieve_model_alt_bc_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_model_alt_bc_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_BC")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_model_alt_hydraulic_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                  mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_model_alt_hydraulic_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydraulic")
+    def test_retrieve_model_alt_hydraulic_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_model_alt_hydraulic_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydraulic")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_model_alt_hydrologic_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                  mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_model_alt_hydrologic_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydrologic")
+    def test_retrieve_model_alt_hydrologic_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_model_alt_hydrologic_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydrologic")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_model_purpose_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                   mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_model_purpose_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Model_Purpose")
+    def test_retrieve_model_purpose_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_model_purpose_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Purpose")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_model_status_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                  mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_model_status_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Model_Status")
+    def test_retrieve_model_status_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_model_status_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Status")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_proj_phase_domain_as_dict_called_with_correct_domain_name(self,
-                                                                                mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_proj_phase_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Proj_Phase")
+    def test_retrieve_proj_phase_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_proj_phase_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Proj_Phase")
 
-    @mock.patch("config.Config.retrieve_domain_as_dict")
-    def test_retrieve_proj_type_domain_as_dict_called_with_correct_domain_name(self,
-                                                                               mock_retrieve_domain_as_dict):
-        self.config_real.retrieve_proj_type_domain_as_dict()
-        mock_retrieve_domain_as_dict.assert_called_with("Proj_Type")
+    def test_retrieve_proj_type_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_proj_type_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Proj_Type")
 
     def test_retrieve_dict_from_db_calls_search_cursor(self):
         self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)

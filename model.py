@@ -121,26 +121,34 @@ class Model(GenericObject):
 
     def create_model_alt_bc(self, alteration_type):
         model_alt_bc = ModelAltBC(self.config)
-        model_alt_bc.model_alt_bc_type_id = self.config.model_alt_bc_id[alteration_type]
+        model_alt_bc.model_alteration_type_id = self.config.model_alt_bc_id[alteration_type]
         return model_alt_bc
 
     def create_model_alt_hydrologic(self, alteration_type):
         model_alt_hydrologic = ModelAltHydrologic(self.config)
-        model_alt_hydrologic.model_alt_hydrologic_type_id = self.config.model_alt_hydrologic_id[alteration_type]
+        model_alt_hydrologic.model_alteration_type_id = self.config.model_alt_hydrologic_id[alteration_type]
         return model_alt_hydrologic
 
     def create_model_alt_hydraulic(self, alteration_type):
         model_alt_hydraulic = ModelAltHydraulic(self.config)
-        model_alt_hydraulic.model_alt_hydraulic_type_id = self.config.model_alt_hydraulic_id[alteration_type]
+        model_alt_hydraulic.model_alteration_type_id = self.config.model_alt_hydraulic_id[alteration_type]
         return model_alt_hydraulic
-#TODO: add logic in create model alterations to differentiate between alt types
-    def create_model_alterations(self, alteration_types):
+
+    def create_model_alterations(self, alteration_types, alteration_category):
         if alteration_types is None:
             pass
         else:
             for alteration_type in alteration_types:
-                model_alteration = self.create_model_alteration(alteration_type[0])
-                self.model_alterations.append(model_alteration)
+                if alteration_category == "bc":
+                    model_alteration = self.create_model_alt_bc(alteration_type[0])
+                    self.model_alterations.append(model_alteration)
+                elif alteration_category == "hydrologic":
+                    model_alteration = self.create_model_alt_hydrologic(alteration_type[0])
+                    self.model_alterations.append(model_alteration)
+                elif alteration_category == "hydraulic":
+                    model_alteration = self.create_model_alt_hydraulic(alteration_type[0])
+                    self.model_alterations.append(model_alteration)
+
 
     def create_project_type(self, project_type_name):
         project_type = ProjectType(self.config)

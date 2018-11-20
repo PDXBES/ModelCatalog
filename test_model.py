@@ -11,6 +11,7 @@ class TestModel(TestCase):
         self.model = Model(self.config)
         self.model.model_path = r"c:\temp"
 
+
     @mock.patch("os.path.exists")
     def test_validate_model_path_check_path_exists_called(self, mock_os_path_exists):
         self.model.validate_model_path()
@@ -196,9 +197,9 @@ class TestModel(TestCase):
         self.assertEquals(sim_folder_path, return_sim_folder_path)
 
     def test_create_model_alt_bc_model_alt_bc_created_with_correct_attributes(self):
-        alteration_type = "zero"
-        model_alteration = self.model.create_model_alt_bc(alteration_type)
-        self.assertEquals(model_alteration.model_alt_bc_type_id, 0)
+        alteration_type = "zero_bc"
+        model_alt_bc = self.model.create_model_alt_bc(alteration_type)
+        self.assertEquals(model_alt_bc.model_alteration_type_id, 0)
 
     def test_create_model_alt_bc_nonexistant_type_throws_exception(self):
         alteration_type = "type that does not exist"
@@ -206,9 +207,9 @@ class TestModel(TestCase):
             self.model.create_model_alt_bc(alteration_type)
 
     def test_create_model_alt_hydrologic_model_alt_hydrologic_created_with_correct_attributes(self):
-        alteration_type = "zero"
-        model_alteration = self.model.create_model_alt_hydrologic(alteration_type)
-        self.assertEquals(model_alteration.model_alt_hydrologic_type_id, 0)
+        alteration_type = "zero_hydrologic"
+        model_alt_hydrologic = self.model.create_model_alt_hydrologic(alteration_type)
+        self.assertEquals(model_alt_hydrologic.model_alteration_type_id, 0)
 
     def test_create_model_alt_hydrologic_nonexistant_type_throws_exception(self):
         alteration_type = "type that does not exist"
@@ -216,19 +217,56 @@ class TestModel(TestCase):
             self.model.create_model_alt_hydrologic(alteration_type)
 
     def test_create_model_alt_hydraulic_model_alt_hydraulic_created_with_correct_attributes(self):
-        alteration_type = "zero"
-        model_alteration = self.model.create_model_alt_hydraulic(alteration_type)
-        self.assertEquals(model_alteration.model_alt_hydraulic_type_id, 0)
+        alteration_type = "zero_hydraulic"
+        model_alt_hydraulic = self.model.create_model_alt_hydraulic(alteration_type)
+        self.assertEquals(model_alt_hydraulic.model_alteration_type_id, 0)
 
     def test_create_model_alt_hydraulic_nonexistant_type_throws_exception(self):
         alteration_type = "type that does not exist"
         with self.assertRaises(KeyError):
             self.model.create_model_alt_hydraulic(alteration_type)
 
-    def test_create_model_alterations_model_alterations_list_has_correct_values(self):
-        alteration_types = [["zero"], ["one"], ["two"]]
-        self.model.create_model_alterations(alteration_types)
+    def test_create_model_alterations_model_with_bc_category_alterations_list_has_correct_values(self):
+        alteration_types = [["zero_bc"], ["one_bc"], ["two_bc"]]
+        alteration_category = "bc"
+        self.model.create_model_alterations(alteration_types, alteration_category)
         self.assertEquals(self.model.model_alterations[0].model_alteration_type_id, 0)
         self.assertEquals(self.model.model_alterations[1].model_alteration_type_id, 1)
         self.assertEquals(self.model.model_alterations[2].model_alteration_type_id, 2)
 
+    def test_create_model_alterations_model_with_hydrologic_category_alterations_list_has_correct_values(self):
+        alteration_types = [["zero_hydrologic"], ["one_hydrologic"], ["two_hydrologic"]]
+        alteration_category = "hydrologic"
+        self.model.create_model_alterations(alteration_types, alteration_category)
+        self.assertEquals(self.model.model_alterations[0].model_alteration_type_id, 0)
+        self.assertEquals(self.model.model_alterations[1].model_alteration_type_id, 1)
+        self.assertEquals(self.model.model_alterations[2].model_alteration_type_id, 2)
+
+    def test_create_model_alterations_model_with_hydraulic_category_alterations_list_has_correct_values(self):
+        alteration_types = [["zero_hydraulic"], ["one_hydraulic"], ["two_hydraulic"]]
+        alteration_category = "hydraulic"
+        self.model.create_model_alterations(alteration_types, alteration_category)
+        self.assertEquals(self.model.model_alterations[0].model_alteration_type_id, 0)
+        self.assertEquals(self.model.model_alterations[1].model_alteration_type_id, 1)
+        self.assertEquals(self.model.model_alterations[2].model_alteration_type_id, 2)
+
+    def test_create_model_alterations_called_with_bc_category_calls_create_model_alt_bc(self):
+        with mock.patch.object(self.model, "create_model_alt_bc") as mock_create_model_alt_bc:
+            alteration_types = [["zero"], ["one"], ["two"]]
+            alteration_category = "bc"
+            self.model.create_model_alterations(alteration_types, alteration_category)
+            self.assertTrue(mock_create_model_alt_bc.called)
+
+    def test_create_model_alterations_called_with_hydrologic_category_calls_create_model_alt_hydrologic(self):
+        with mock.patch.object(self.model, "create_model_alt_hydrologic") as mock_create_model_alt_hydrologic:
+            alteration_types = [["zero"], ["one"], ["two"]]
+            alteration_category = "hydrologic"
+            self.model.create_model_alterations(alteration_types, alteration_category)
+            self.assertTrue(mock_create_model_alt_hydrologic.called)
+
+    def test_create_model_alterations_called_with_hydraulic_category_calls_create_model_alt_hydraulic(self):
+        with mock.patch.object(self.model, "create_model_alt_hydraulic") as mock_create_model_alt_hydraulic:
+            alteration_types = [["zero"], ["one"], ["two"]]
+            alteration_category = "hydraulic"
+            self.model.create_model_alterations(alteration_types, alteration_category)
+            self.assertTrue(mock_create_model_alt_hydraulic.called)

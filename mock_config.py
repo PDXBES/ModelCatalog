@@ -42,14 +42,14 @@ class MockConfig():
         # self.config.engine_type =
         # self.config.engine_type_id =
         #
-        self.config.model_alt_bc = {0: "zero", 1: "one", 2: "two"}
-        self.config.model_alt_bc_id = {"zero": 0, "one": 1, "two": 2}
+        self.config.model_alt_bc = {0: "zero_bc", 1: "one_bc", 2: "two_bc"}
+        self.config.model_alt_bc_id = {"zero_bc": 0, "one_bc": 1, "two_bc": 2}
 
-        self.config.model_alt_hydrologic = {0: "zero", 1: "one", 2: "two"}
-        self.config.model_alt_hydrologic_id = {"zero": 0, "one": 1, "two": 2}
+        self.config.model_alt_hydrologic = {0: "zero_hydrologic", 1: "one_hydrologic", 2: "two_hydrologic"}
+        self.config.model_alt_hydrologic_id = {"zero_hydrologic": 0, "one_hydrologic": 1, "two_hydrologic": 2}
 
-        self.config.model_alt_hydraulic = {0: "zero", 1: "one", 2: "two"}
-        self.config.model_alt_hydraulic_id = {"zero": 0, "one": 1, "two": 2}
+        self.config.model_alt_hydraulic = {0: "zero_hydraulic", 1: "one_hydraulic", 2: "two_hydraulic"}
+        self.config.model_alt_hydraulic_id = {"zero_hydraulic": 0, "one_hydraulic": 1, "two_hydraulic": 2}
         #
         # self.config.model_purpose =
         # self.config.model_purpose_id =

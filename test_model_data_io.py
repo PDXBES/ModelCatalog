@@ -7,6 +7,9 @@ from simulation import Simulation
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from mock_config import MockConfig
 from model_alteration import ModelAlteration
+from model_alt_bc import ModelAltBC
+from model_alt_hydrologic import ModelAltHydrologic
+from model_alt_hydraulic import ModelAltHydraulic
 from collections import OrderedDict
 from project_type import ProjectType
 
@@ -18,11 +21,21 @@ class TestModelDataIO(TestCase):
         self.model_catalog_data_io = ModelCatalogDbDataIo(self.config)
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
-        self.mock_model_alteration = mock.MagicMock(ModelAlteration)
+
+        self.mock_model_alt_bc = mock.MagicMock(ModelAltBC)
+        self.mock_model_alt_hydrologic = mock.MagicMock(ModelAltHydrologic)
+        self.mock_model_alt_hydraulic = mock.MagicMock(ModelAltHydraulic)
         self.generic_field_attribute_lookup = OrderedDict()
         self.generic_field_attribute_lookup["Generic_ID"] = "id"
         self.generic_field_attribute_lookup["Generic_Domain_ID"] = "generic_domain_id"
-        self.mock_model_alteration.field_attribute_lookup = self.generic_field_attribute_lookup
+
+        self.mock_model_alt_bc.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_model_alt_bc.name = "model_alt_bc"
+        self.mock_model_alt_hydrologic.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_model_alt_hydrologic.name = "model_alt_hydrologic"
+        self.mock_model_alt_hydraulic.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_model_alt_hydraulic.name = "model_alt_hydraulic"
+
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.simulation_id = 22
         self.mock_simulation.storm_id = 33
@@ -69,7 +82,7 @@ class TestModelDataIO(TestCase):
         self.mock_add_object = self.patch_add_object.start()
 
         self.mock_model.simulations = [self.mock_simulation]
-        self.mock_model.model_alterations = [self.mock_model_alteration]
+        self.mock_model.model_alterations = [self.mock_model_alt_bc]
 
 
     def tearDown(self):
@@ -160,17 +173,26 @@ class TestModelDataIO(TestCase):
         self.model_data_io.create_model_geometry(self.mock_model)
         self.assertEqual(self.mock_model.model_geometry, "geom")
 
-    def test_add_model_alteration_calls_add_object(self):
+    def test_add_model_alteration_called_with_alt_bc_calls_add_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
-            self.model_data_io.add_model_alteration(11, self.mock_model_alteration)
-            self.assertTrue(mock_add_object.called)
-
-    def test_add_model_alteration_calls_add_object_with_correct_arguments(self):
-        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
-            self.model_data_io.add_model_alteration(11, self.mock_model_alteration)
-            mock_add_object.assert_called_with(11, self.mock_model_alteration,
+            self.model_data_io.add_model_alteration(11, self.mock_model_alt_bc)
+            mock_add_object.assert_called_with(11, self.mock_model_alt_bc,
                                                self.generic_field_attribute_lookup,
-                                               self.config.model_alterations_sde_path)
+                                               self.config.model_alt_bc_sde_path)
+
+    def test_add_model_alteration_called_with_alt_hydrologic_calls_add_object_with_correct_arguments(self):
+        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
+            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydrologic)
+            mock_add_object.assert_called_with(11, self.mock_model_alt_hydrologic,
+                                               self.generic_field_attribute_lookup,
+                                               self.config.model_alt_hydrologic_sde_path)
+
+    def test_add_model_alteration_called_with_alt_hydraulic_calls_add_object_with_correct_arguments(self):
+        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
+            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydraulic)
+            mock_add_object.assert_called_with(11, self.mock_model_alt_hydraulic,
+                                               self.generic_field_attribute_lookup,
+                                               self.config.model_alt_hydraulic_sde_path)
 
     def test_add_simulations_calls_add_simulation(self):
         patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")
@@ -197,7 +219,7 @@ class TestModelDataIO(TestCase):
         patch_add_model_alteration = mock.patch.object(self.model_data_io, "add_model_alteration")
         mock_add_model_alteration = patch_add_model_alteration.start()
         self.model_data_io.add_model_alterations(self.mock_model)
-        mock_add_model_alteration.assert_called_with(11, self.mock_model_alteration)
+        mock_add_model_alteration.assert_called_with(11, self.mock_model_alt_bc)
         patch_add_model_alteration.stop()
 
     def test_add_project_type_calls_add_object(self):
