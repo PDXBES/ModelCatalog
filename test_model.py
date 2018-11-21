@@ -270,3 +270,21 @@ class TestModel(TestCase):
             alteration_category = "hydraulic"
             self.model.create_model_alterations(alteration_types, alteration_category)
             self.assertTrue(mock_create_model_alt_hydraulic.called)
+
+    def test_create_model_alterations_bc_calls_create_model_alterations_with_correct_argument(self):
+        with mock.patch.object(self.model, "create_model_alterations") as mock_create_model_alterations:
+            alteration_types = [["zero"], ["one"], ["two"]]
+            self.model.create_model_alterations_bc(alteration_types)
+            mock_create_model_alterations.assert_called_with(alteration_types, "bc")
+
+    def test_create_model_alterations_hydrologic_calls_create_model_alterations_with_correct_argument(self):
+        with mock.patch.object(self.model, "create_model_alterations") as mock_create_model_alterations:
+            alteration_types = [["zero"], ["one"], ["two"]]
+            self.model.create_model_alterations_hydrologic(alteration_types)
+            mock_create_model_alterations.assert_called_with(alteration_types, "hydrologic")
+
+    def test_create_model_alterations_hydraulic_calls_create_model_alterations_with_correct_argument(self):
+        with mock.patch.object(self.model, "create_model_alterations") as mock_create_model_alterations:
+            alteration_types = [["zero"], ["one"], ["two"]]
+            self.model.create_model_alterations_hydraulic(alteration_types)
+            mock_create_model_alterations.assert_called_with(alteration_types, "hydraulic")

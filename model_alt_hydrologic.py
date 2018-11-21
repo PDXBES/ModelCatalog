@@ -14,5 +14,10 @@ class ModelAltHydrologic(ModelAlteration):
        #ModelAlteration.__init__(self, config)
         self.name = "model_alt_hydrologic"
 
+        self.field_attribute_lookup = OrderedDict()
+        self.field_attribute_lookup["Model_ID"] = "parent_id"
+        self.field_attribute_lookup["Model_Alt_Hydro_ID"] = "id"
+        self.field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
+
     def valid(self):
         return True

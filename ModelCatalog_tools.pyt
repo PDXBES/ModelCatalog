@@ -189,7 +189,15 @@ class EMGAATS_Model_Registration(object):
                 parameters[4].value = None
             parameters[4].enabled = True
             parameters[4].filter.list = self.config.unique_cip_numbers
-
+            if parameters[4].value != None or parameters[4].value == u"None":
+                parameters[0].value = "ARID"
+                analysis_request_ids = ""
+                for analysis_request_id in self.config.get_cip_analysis_requests(parameters[4].valueAsText):
+                    analysis_request_ids += " " + analysis_request_id
+                analysis_request_ids.strip()
+                parameters[0].value = analysis_request_ids
+            else:
+                parameters[0].value = ""
         else:
             parameters[4].enabled = False
             parameters[4].filter.list = [u"None"]
@@ -255,11 +263,13 @@ class EMGAATS_Model_Registration(object):
             self.model.created_by = getpass.getuser()
             self.model.model_path = parameters[1].valueAsText
             self.model.create_project_types(parameters[2].values)
-            self.model.create_model_alterations(parameters[8].values)
+            self.model.create_model_alterations_bc(parameters[8].values)
+            self.model.create_model_alterations_hydrologic(parameters[9].values)
+            self.model.create_model_alterations_hydraulic(parameters[10].values)
             self.model.model_purpose_id = self.config.model_purpose_id[parameters[5].valueAsText]
             self.model.model_calibration_file = parameters[6].valueAsText
             self.model.model_status_id = self.config.model_status_id[parameters[7].valueAsText]
-            self.model.model_alteration_file = parameters[9].valueAsText
+            self.model.model_alteration_file = parameters[11].valueAsText
             self.model.project_num = parameters[0].valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)

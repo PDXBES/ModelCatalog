@@ -149,6 +149,14 @@ class Model(GenericObject):
                     model_alteration = self.create_model_alt_hydraulic(alteration_type[0])
                     self.model_alterations.append(model_alteration)
 
+    def create_model_alterations_bc(self, alteration_types):
+        self.create_model_alterations(alteration_types, "bc")
+
+    def create_model_alterations_hydrologic(self, alteration_types):
+        self.create_model_alterations(alteration_types, "hydrologic")
+
+    def create_model_alterations_hydraulic(self, alteration_types):
+        self.create_model_alterations(alteration_types, "hydraulic")
 
     def create_project_type(self, project_type_name):
         project_type = ProjectType(self.config)

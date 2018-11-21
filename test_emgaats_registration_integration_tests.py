@@ -15,7 +15,7 @@ executable_path = os.path.dirname(os.path.realpath(__file__))
 from imp import load_source
 model_catalog_tools = load_source("ModelCatalog_tools", executable_path + "\\ModelCatalog_tools.pyt")
 
-@unittest.skip("Integration Tests")
+#@unittest.skip("Integration Tests")
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.config = Config()
@@ -45,7 +45,9 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.model_alteration_file = "C:\Temp\BC"
         self.model.project_num = "E10TEST"
         self.model.create_date = datetime.datetime.today()
-        self.model.create_model_alterations([["Boundary Conditions"]])
+        self.model.create_model_alterations_bc([["Stage"]])
+        self.model.create_model_alterations_hydrologic([["Area Factor"]])
+        self.model.create_model_alterations_hydraulic([["Pipe Roughness"]])
         self.model.create_project_types(["Storm"])
 
     def test_model_registration_with_model_status_working(self):
