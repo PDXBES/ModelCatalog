@@ -184,3 +184,5 @@ class RehabDataIO():
             edit.undoOperation()
             edit.abortOperation()
             edit.stopEditing(False)
+
+    # TODO - write method using add model that uses and edit session like append above

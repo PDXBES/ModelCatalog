@@ -47,9 +47,12 @@ class ModelCatalogDbDataIo(DbDataIo):
         current_model_alteration_id = self.retrieve_current_id("model_alteration")
         return current_model_alteration_id
 
-    def add_model(self, model):
+    def add_model(self, model, model_data_io):
         # type: (Model) -> None
         self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
 
-
+        model.simulations = model_data_io.read_simulations(model)
+        model_data_io.add_simulations(model)
+        model_data_io.add_model_alterations(model)
+        model_data_io.add_project_types(model)
 

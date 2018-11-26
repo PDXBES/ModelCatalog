@@ -285,20 +285,8 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     simulationdataio = SimulationDataIO(config, modelcatalogdataio)
     model = model_catalog.models[0]
     arcpy.AddMessage("Adding Model...")
-    modelcatalogdataio.add_model(model)
+    modelcatalogdataio.add_model(model, modeldataio)
     arcpy.AddMessage("Model Added")
-    arcpy.AddMessage("Adding Simulations...")
-    model.simulations = modeldataio.read_simulations(model)
-    modeldataio.add_simulations(model)
-    arcpy.AddMessage("Simulations Added")
-
-    arcpy.AddMessage("Adding Alterations...")
-    modeldataio.add_model_alterations(model)
-    arcpy.AddMessage("Alterations Added")
-
-    arcpy.AddMessage("Adding Project Types...")
-    modeldataio.add_project_types(model)
-    arcpy.AddMessage("Project Types Added")
 
     if config.model_status[model.model_status_id] == "Working":
         arcpy.AddMessage("Model Status has been set to 'Working'")
