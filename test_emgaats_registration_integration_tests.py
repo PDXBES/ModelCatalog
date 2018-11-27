@@ -9,6 +9,7 @@ import datetime
 import arcpy
 from config import Config
 from model_catalog_exception import Invalid_Model_exception
+import mock
 
 # This allows a file without a .py extension to be imported (ESRI pyt file)
 executable_path = os.path.dirname(os.path.realpath(__file__))
@@ -79,6 +80,13 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
 
+    def test_model_registration_with_model_status_working_locked_database(self):
+        with mock.patch("model_data_io.ModelDataIo.read_simulations") as mock_read_simulations:
+            mock_read_simulations.side_effect = Exception()
+            self.model_dataio.create_model_geometry(self.model)
+
+            self.model_catalog.add_model(self.model)
+            model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
 
 
 #TODO: Add test for model without alterations

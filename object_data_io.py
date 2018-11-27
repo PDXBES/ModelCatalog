@@ -21,4 +21,13 @@ class ObjectDataIo(object):
         object_class.id = self.db_data_io.retrieve_current_id(object_class.name)
         self.db_data_io.add_object(object_class, field_attribute_lookup, object_table_sde_path)
 
+    def start_editing_session(self, workspace_path):
+        editor = arcpy.da.Editor(workspace_path)
+        editor.startEditing(False, True)
+        #editor.startOperation()
+        return editor
+
+    def stop_editing_session(self, workspace_editor, save_changes):
+        #workspace_editor.stopOperation()
+        workspace_editor.stopEditing(save_changes)
 

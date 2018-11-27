@@ -8,6 +8,7 @@ from model import Model
 from config import Config
 from db_data_io import DbDataIo
 from collections import OrderedDict
+from object_data_io import ObjectDataIo
 
 class ModelCatalogDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -48,11 +49,22 @@ class ModelCatalogDbDataIo(DbDataIo):
         return current_model_alteration_id
 
     def add_model(self, model, model_data_io):
-        # type: (Model) -> None
-        self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
+        # type: (Model, ObjectDataIo) -> None
 
-        model.simulations = model_data_io.read_simulations(model)
-        model_data_io.add_simulations(model)
-        model_data_io.add_model_alterations(model)
-        model_data_io.add_project_types(model)
+        editor = model_data_io.start_editing_session(self.config.model_catalog_sde_path)
+        editor.startOperation()
+        try:
+            self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
+            model.simulations = model_data_io.read_simulations(model)
+            model_data_io.add_simulations(model)
+            model_data_io.add_model_alterations(model)
+            model_data_io.add_project_types(model)
+            model_data_io.stop_editing_session(editor, True)
+            #editor.stopOperation()
+        except Exception:
+            raise arcpy.ExecuteError()
+            model_data_io.stop_editing_session(editor, False)
+
+
+
 
