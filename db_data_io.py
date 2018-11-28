@@ -25,6 +25,7 @@ class DbDataIo(object):
                 next_id = current_id + 1
                 break
         cursor.updateRow([object_name, next_id])
+        del cursor
         return current_id
 
     def add_object(self, object_class, field_attribute_lookup, object_table_sde_path):

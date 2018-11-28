@@ -53,8 +53,12 @@ class TestModelDataIO(TestCase):
         self.mock_project_type = mock.MagicMock(ProjectType)
         self.mock_project_type.field_attribute_lookup = self.generic_field_attribute_lookup
 
+        self.mock_object_data_io = mock.Mock()
+        self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
+
         self.mock_model = mock.MagicMock(Model)
         self.mock_model.model_path = r"C:\model_path"
+        self.mock_model.object_data_io = self.mock_object_data_io
         self.mock_model.id = 11
         self.mock_model.valid = True
         self.mock_model.simulations = [self.mock_simulation]

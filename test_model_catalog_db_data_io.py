@@ -103,10 +103,6 @@ class TestModelCatalogDbDataIO(TestCase):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.assertTrue(self.mock_add_object.called)
 
-    def test_add_model_calls_read_simulations(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.assertTrue(self.mock_read_simulations.called)
-
     def test_add_model_calls_add_simulations(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.assertTrue(self.mock_add_simulations.called)

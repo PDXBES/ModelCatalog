@@ -52,19 +52,16 @@ class ModelCatalogDbDataIo(DbDataIo):
         # type: (Model, ObjectDataIo) -> None
 
         editor = model_data_io.start_editing_session(self.config.model_catalog_sde_path)
-        editor.startOperation()
         try:
             self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
-            model.simulations = model_data_io.read_simulations(model)
             model_data_io.add_simulations(model)
             model_data_io.add_model_alterations(model)
             model_data_io.add_project_types(model)
             model_data_io.stop_editing_session(editor, True)
-            #editor.stopOperation()
         except Exception:
-            raise arcpy.ExecuteError()
             model_data_io.stop_editing_session(editor, False)
-
+            arcpy.AddMessage("DB Error while adding model. Rolling back...")
+            raise arcpy.ExecuteError()
 
 
 

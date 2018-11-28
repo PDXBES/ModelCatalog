@@ -11,6 +11,7 @@ from generic_object import GenericObject
 from model_alt_bc import ModelAltBC
 from model_alt_hydrologic import ModelAltHydrologic
 from model_alt_hydraulic import ModelAltHydraulic
+from model_alteration import ModelAlteration
 from project_type import ProjectType
 
 class Model(GenericObject):
@@ -44,6 +45,7 @@ class Model(GenericObject):
         self.config_file_path = None
         self.gdb_file_path = None
         self.sim_file_path = None
+        self.object_data_io = None
 
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.model_path)
@@ -120,17 +122,17 @@ class Model(GenericObject):
             arcpy.AddMessage("Sim folder is not valid: " + self.sim_file_path)
 
     def create_model_alt_bc(self, alteration_type):
-        model_alt_bc = ModelAltBC(self.config)
+        model_alt_bc = ModelAltBC.initialize_with_current_id(self.config, self.object_data_io)
         model_alt_bc.model_alteration_type_id = self.config.model_alt_bc_id[alteration_type]
         return model_alt_bc
 
     def create_model_alt_hydrologic(self, alteration_type):
-        model_alt_hydrologic = ModelAltHydrologic(self.config)
+        model_alt_hydrologic = ModelAltHydrologic.initialize_with_current_id(self.config,self.object_data_io)
         model_alt_hydrologic.model_alteration_type_id = self.config.model_alt_hydrologic_id[alteration_type]
         return model_alt_hydrologic
 
     def create_model_alt_hydraulic(self, alteration_type):
-        model_alt_hydraulic = ModelAltHydraulic(self.config)
+        model_alt_hydraulic = ModelAltHydraulic.initialize_with_current_id(self.config, self.object_data_io)
         model_alt_hydraulic.model_alteration_type_id = self.config.model_alt_hydraulic_id[alteration_type]
         return model_alt_hydraulic
 
@@ -159,13 +161,18 @@ class Model(GenericObject):
         self.create_model_alterations(alteration_types, "hydraulic")
 
     def create_project_type(self, project_type_name):
-        project_type = ProjectType(self.config)
+        # type: (str)->ProjectType
+        project_type = ProjectType.initialize_with_current_id(self.config, self.object_data_io)
         project_type.project_type_id = self.config.proj_type_id[project_type_name]
         return project_type
 
     def create_project_types(self, project_types):
+        # type: (str)->None
         for project_type_name in project_types:
             project_type = self.create_project_type(project_type_name)
             self.project_types.append(project_type)
+
+    def create_simulations(self):
+        self.simulations = self.object_data_io.read_simulations(self)
 
     # TODO: Create tests for add_project and add_project_types

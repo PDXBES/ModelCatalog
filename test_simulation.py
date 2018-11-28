@@ -8,7 +8,8 @@ class TestSimulation(TestCase):
         model_path = "String"
         mock_config = MockConfig()
         self.config = mock_config.config
-        self.simulation = Simulation(model_path,self.config)
+        self.simulation = Simulation(self.config)
+        self.simulation.model_path = model_path
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1
 

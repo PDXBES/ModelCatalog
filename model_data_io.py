@@ -20,7 +20,6 @@ class ModelDataIo(ObjectDataIo):
         self.config = config
         self.db_data_io = db_data_io
 
-
     def create_model_geometry(self, model):
         if model.valid:
             model_name = "Links"
@@ -41,7 +40,8 @@ class ModelDataIo(ObjectDataIo):
         simulations = []  # type: List[Simulation]
         simulation_descriptions = os.walk(model.simulation_folder_path()).next()[1]
         for simulation_description in simulation_descriptions:
-            simulation = Simulation(model.model_path, self.config)
+            simulation = Simulation.initialize_with_current_id(self.config, model.object_data_io)
+            simulation.model_path = model.model_path
             if simulation_description in self.config.standard_simulation_names():
                 simulation_desc_parts = simulation_description.split("-")
                 storm_type = simulation_desc_parts[0][0]
