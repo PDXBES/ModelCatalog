@@ -59,10 +59,10 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.add_model_alterations(model)
             model_data_io.add_project_types(model)
             model_data_io.stop_editing_session(editor, True)
-        except Exception:
+        except:
             model_data_io.stop_editing_session(editor, False)
-            arcpy.AddMessage("DB Error while adding model. Rolling back...")
-            raise AddModelException
+            arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
+            raise
 
 
 

@@ -131,8 +131,7 @@ class TestModelCatalogDbDataIO(TestCase):
 
         try:
             self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-
-        except AddModelException():
+        except:
             self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
 
