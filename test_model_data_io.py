@@ -12,6 +12,8 @@ from model_alt_hydrologic import ModelAltHydrologic
 from model_alt_hydraulic import ModelAltHydraulic
 from collections import OrderedDict
 from project_type import ProjectType
+from data_io_exception import AddObjectException, AddModelAlterationException, AddProjectTypeException, AddSimulationException
+
 
 class TestModelDataIO(TestCase):
 
@@ -197,6 +199,11 @@ class TestModelDataIO(TestCase):
             mock_add_object.assert_called_with(11, self.mock_model_alt_hydraulic,
                                                self.generic_field_attribute_lookup,
                                                self.config.model_alt_hydraulic_sde_path)
+
+    def test_add_model_alteration_add_object_raises_exception_raises_add_model_alteration_exception(self):
+        self.mock_add_object.side_effect = AddObjectException()
+        with self.assertRaises((Exception, AddModelAlterationException)):
+            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydraulic)
 
     def test_add_simulations_calls_add_simulation(self):
         patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")

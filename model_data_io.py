@@ -9,6 +9,7 @@ from model import Model
 from simulation import Simulation
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from model_catalog_exception import Invalid_Model_exception
+from data_io_exception import AddObjectException, AddModelAlterationException, AddProjectTypeException, AddSimulationException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from model_alteration import ModelAlteration
@@ -64,6 +65,7 @@ class ModelDataIo(ObjectDataIo):
     def add_simulation(self, model_id, simulation):
         # type: (int, Simulation) -> None
         self.add_object(model_id, simulation, simulation.field_attribute_lookup, self.config.simulation_sde_path)
+
 
     def add_simulations(self, model):
         # type: (Model) -> None

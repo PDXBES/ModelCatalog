@@ -3,7 +3,7 @@ import mock
 from mock_config import MockConfig
 import arcpy
 from object_data_io import ObjectDataIo
-from data_io_exception import Field_names_length_does_not_match_row_length_exception
+from data_io_exception import FieldNamesLengthDoesNotMatchRowLengthException
 from generic_object import GenericObject
 from collections import OrderedDict
 from db_data_io import DbDataIo

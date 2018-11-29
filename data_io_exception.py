@@ -1,6 +1,21 @@
-class DataIO_exception(Exception):
+class DataIoException(Exception):
     pass
 
-class Field_names_length_does_not_match_row_length_exception(DataIO_exception):
+class FieldNamesLengthDoesNotMatchRowLengthException(DataIoException):
     pass
 
+
+class AddObjectException(DataIoException):
+    pass
+
+class AddSimulationException(AddObjectException):
+    pass
+
+class AddModelAlterationException(AddObjectException):
+    pass
+
+class AddProjectTypeException(AddObjectException):
+    pass
+
+class AddModelException(AddObjectException):
+    pass

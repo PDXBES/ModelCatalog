@@ -7,6 +7,7 @@ import arcpy
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 from mock_config import MockConfig
 from model_data_io import ModelDataIo
+from data_io_exception import AddModelException
 
 class TestModelCatalogDbDataIO(TestCase):
     def setUp(self):
@@ -126,9 +127,13 @@ class TestModelCatalogDbDataIO(TestCase):
 
     def test_add_model_calls_stop_editing_session_exception_thrown_with_save_changes_false(self):
         self.mock_add_simulations.side_effect = Exception()
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         save_changes = False
-        self.mock_stop_editing_session.assert_called_with("editor", save_changes)
+
+        try:
+            self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+
+        except AddModelException():
+            self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
 
 

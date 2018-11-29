@@ -16,7 +16,7 @@ executable_path = os.path.dirname(os.path.realpath(__file__))
 from imp import load_source
 model_catalog_tools = load_source("ModelCatalog_tools", executable_path + "\\ModelCatalog_tools.pyt")
 
-unittest.skip("Integration Tests")
+#unittest.skip("Integration Tests")
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.config = Config()

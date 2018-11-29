@@ -1,5 +1,5 @@
 import arcpy
-from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
+from model_catalog_exception import  ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 try:
     from typing import List, Any
 except:
@@ -9,6 +9,7 @@ from config import Config
 from db_data_io import DbDataIo
 from collections import OrderedDict
 from object_data_io import ObjectDataIo
+from data_io_exception import AddModelException
 
 class ModelCatalogDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -61,7 +62,7 @@ class ModelCatalogDbDataIo(DbDataIo):
         except Exception:
             model_data_io.stop_editing_session(editor, False)
             arcpy.AddMessage("DB Error while adding model. Rolling back...")
-            raise arcpy.ExecuteError()
+            raise AddModelException
 
 
 
