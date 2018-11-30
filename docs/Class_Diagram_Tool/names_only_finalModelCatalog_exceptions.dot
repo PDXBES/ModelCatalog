@@ -7,7 +7,6 @@ splines="ortho";
 "Duplicate_model_Exception"[label= "Duplicate_model_Exception" , shape="record"];
 "Duplicates_in_input_model_list"[label= "Duplicates_in_input_model_list" , shape="record"];
 "Field_names_length_does_not_match_row_length_exception"[label= "Field_names_length_does_not_match_row_length_exception" , shape="record"];
-"Field_names_length_does_not_match_row_length_exception"[label= "Field_names_length_does_not_match_row_length_exception" , shape="record"];
 "Invalid_Model_exception"[label= "Invalid_Model_exception" , shape="record"];
 "Invalid_model_path_exception"[label= "Invalid_model_path_exception" , shape="record"];
 "ModelCatalog_exception"[label= "ModelCatalog_exception" , shape="record"];

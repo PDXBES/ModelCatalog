@@ -7,7 +7,7 @@ from simulation import Simulation
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from mock_config import MockConfig
 from model_alteration import ModelAlteration
-from model_alt_bc import ModelAltBC
+from model_alt_bc import ModelAltBc
 from model_alt_hydrologic import ModelAltHydrologic
 from model_alt_hydraulic import ModelAltHydraulic
 from collections import OrderedDict
@@ -24,7 +24,7 @@ class TestModelDataIO(TestCase):
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
 
-        self.mock_model_alt_bc = mock.MagicMock(ModelAltBC)
+        self.mock_model_alt_bc = mock.MagicMock(ModelAltBc)
         self.mock_model_alt_hydrologic = mock.MagicMock(ModelAltHydrologic)
         self.mock_model_alt_hydraulic = mock.MagicMock(ModelAltHydraulic)
         self.generic_field_attribute_lookup = OrderedDict()

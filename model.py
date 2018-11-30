@@ -8,7 +8,7 @@ except:
 from simulation import Simulation
 from config import Config
 from generic_object import GenericObject
-from model_alt_bc import ModelAltBC
+from model_alt_bc import ModelAltBc
 from model_alt_hydrologic import ModelAltHydrologic
 from model_alt_hydraulic import ModelAltHydraulic
 from model_alteration import ModelAlteration
@@ -122,7 +122,7 @@ class Model(GenericObject):
             arcpy.AddMessage("Sim folder is not valid: " + self.sim_file_path)
 
     def create_model_alt_bc(self, alteration_type):
-        model_alt_bc = ModelAltBC.initialize_with_current_id(self.config, self.object_data_io)
+        model_alt_bc = ModelAltBc.initialize_with_current_id(self.config, self.object_data_io)
         model_alt_bc.model_alteration_type_id = self.config.model_alt_bc_id[alteration_type]
         return model_alt_bc
 
