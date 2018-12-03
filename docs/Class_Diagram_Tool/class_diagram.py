@@ -9,7 +9,7 @@ except:
     print("Failed to run pyReverse")
     quit()
 
-output_format = "svg"  # pdf svg png etc. see https://graphviz.gitlab.io/_pages/doc/info/output.html
+output_format = "pdf"  # pdf svg png etc. see https://graphviz.gitlab.io/_pages/doc/info/output.html
 control_files = []
 executable_path = os.path.dirname(os.path.realpath(__file__))
 for file in os.listdir(executable_path + "\\" + "Control_Files"):

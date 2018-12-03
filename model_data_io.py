@@ -9,6 +9,7 @@ from model import Model
 from simulation import Simulation
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from model_catalog_exception import Invalid_Model_exception
+from data_io_exception import AddObjectException, AddModelAlterationException, AddProjectTypeException, AddSimulationException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from model_alteration import ModelAlteration
@@ -19,7 +20,6 @@ class ModelDataIo(ObjectDataIo):
         # type: (Config, DbDataIo) -> None
         self.config = config
         self.db_data_io = db_data_io
-
 
     def create_model_geometry(self, model):
         if model.valid:
@@ -41,7 +41,8 @@ class ModelDataIo(ObjectDataIo):
         simulations = []  # type: List[Simulation]
         simulation_descriptions = os.walk(model.simulation_folder_path()).next()[1]
         for simulation_description in simulation_descriptions:
-            simulation = Simulation(model.model_path, self.config)
+            simulation = Simulation.initialize_with_current_id(self.config, model.object_data_io)
+            simulation.model_path = model.model_path
             if simulation_description in self.config.standard_simulation_names():
                 simulation_desc_parts = simulation_description.split("-")
                 storm_type = simulation_desc_parts[0][0]
@@ -64,6 +65,7 @@ class ModelDataIo(ObjectDataIo):
     def add_simulation(self, model_id, simulation):
         # type: (int, Simulation) -> None
         self.add_object(model_id, simulation, simulation.field_attribute_lookup, self.config.simulation_sde_path)
+
 
     def add_simulations(self, model):
         # type: (Model) -> None

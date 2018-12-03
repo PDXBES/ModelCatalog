@@ -8,7 +8,9 @@ class TestModel(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
-        self.model = Model(self.config)
+        self.mock_object_data_io = mock.Mock()
+        self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
+        self.model = Model.initialize_with_current_id(self.config, self.mock_object_data_io)
         self.model.model_path = r"c:\temp"
 
 

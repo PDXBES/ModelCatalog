@@ -9,24 +9,23 @@ import datetime
 import arcpy
 from config import Config
 from model_catalog_exception import Invalid_Model_exception
+import mock
 
 # This allows a file without a .py extension to be imported (ESRI pyt file)
 executable_path = os.path.dirname(os.path.realpath(__file__))
 from imp import load_source
 model_catalog_tools = load_source("ModelCatalog_tools", executable_path + "\\ModelCatalog_tools.pyt")
 
-#@unittest.skip("Integration Tests")
+#unittest.skip("Integration Tests")
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.config = Config()
-        #arcpy.AddMessage(self.config.unique_cip_numbers)
         cip_numbers = self.config.unique_cip_numbers
-        self.model = Model(self.config)
         self.model_catalog_dataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.model_catalog_dataio)
         self.model_catalog = ModelCatalog(self.config)
-        self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
-        self.model.id = self.model_id
+        self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
+
         self.model.parent_model_id = 555
         self.model.model_request_id = 777
         self.model.project_phase_id = 1
@@ -54,7 +53,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-
+        arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_final(self):
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
@@ -64,7 +63,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-
+        arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_invalid(self):
         self.model.model_path = r"Invalid_path"
@@ -78,7 +77,15 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         except Invalid_Model_exception:
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
+        arcpy.AddMessage("\n")
 
-
+    def test_model_registration_with_model_status_working_exception_thrown_after_model_added_to_db_should_rollback(self):
+        with mock.patch("model_data_io.ModelDataIo.add_simulations") as mock_add_simulations:
+            self.model.id = 999
+            mock_add_simulations.side_effect = Exception()
+            self.model_dataio.create_model_geometry(self.model)
+            self.model_catalog.add_model(self.model)
+            model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+        arcpy.AddMessage("\n")
 
 #TODO: Add test for model without alterations

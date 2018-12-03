@@ -4,9 +4,9 @@ from generic_object import GenericObject
 from collections import OrderedDict
 
 class Simulation(GenericObject):
-    def __init__(self, model_path, config):
+    def __init__(self, config):
         # type: (str, Config) -> None
-        self.model_path = model_path
+        self.model_path = None
         self.id = None
         self.parent_id = None
         self.name = "simulation"

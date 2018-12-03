@@ -7,11 +7,13 @@ from simulation import Simulation
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from mock_config import MockConfig
 from model_alteration import ModelAlteration
-from model_alt_bc import ModelAltBC
+from model_alt_bc import ModelAltBc
 from model_alt_hydrologic import ModelAltHydrologic
 from model_alt_hydraulic import ModelAltHydraulic
 from collections import OrderedDict
 from project_type import ProjectType
+from data_io_exception import AddObjectException, AddModelAlterationException, AddProjectTypeException, AddSimulationException
+
 
 class TestModelDataIO(TestCase):
 
@@ -22,7 +24,7 @@ class TestModelDataIO(TestCase):
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
 
-        self.mock_model_alt_bc = mock.MagicMock(ModelAltBC)
+        self.mock_model_alt_bc = mock.MagicMock(ModelAltBc)
         self.mock_model_alt_hydrologic = mock.MagicMock(ModelAltHydrologic)
         self.mock_model_alt_hydraulic = mock.MagicMock(ModelAltHydraulic)
         self.generic_field_attribute_lookup = OrderedDict()
@@ -53,8 +55,12 @@ class TestModelDataIO(TestCase):
         self.mock_project_type = mock.MagicMock(ProjectType)
         self.mock_project_type.field_attribute_lookup = self.generic_field_attribute_lookup
 
+        self.mock_object_data_io = mock.Mock()
+        self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
+
         self.mock_model = mock.MagicMock(Model)
         self.mock_model.model_path = r"C:\model_path"
+        self.mock_model.object_data_io = self.mock_object_data_io
         self.mock_model.id = 11
         self.mock_model.valid = True
         self.mock_model.simulations = [self.mock_simulation]
@@ -193,6 +199,11 @@ class TestModelDataIO(TestCase):
             mock_add_object.assert_called_with(11, self.mock_model_alt_hydraulic,
                                                self.generic_field_attribute_lookup,
                                                self.config.model_alt_hydraulic_sde_path)
+
+    def test_add_model_alteration_add_object_raises_exception_raises_add_model_alteration_exception(self):
+        self.mock_add_object.side_effect = AddObjectException()
+        with self.assertRaises((Exception, AddModelAlterationException)):
+            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydraulic)
 
     def test_add_simulations_calls_add_simulation(self):
         patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")

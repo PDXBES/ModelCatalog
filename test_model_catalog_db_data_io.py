@@ -7,6 +7,7 @@ import arcpy
 from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 from mock_config import MockConfig
 from model_data_io import ModelDataIo
+from data_io_exception import AddModelException
 
 class TestModelCatalogDbDataIO(TestCase):
     def setUp(self):
@@ -34,7 +35,7 @@ class TestModelCatalogDbDataIO(TestCase):
         self.model.model_alteration_file = None
         self.model.project_num = None
         self.model.model_geometry = None
-        self.mock_Editor = mock.MagicMock("arcpy.da.Editor")
+
 
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("model", 44), ("simulation", 55), ("model_alteration", 66)])
@@ -43,6 +44,7 @@ class TestModelCatalogDbDataIO(TestCase):
 
         self.patch_da_InsertCursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.start()
+
 
         self.patch_add_object = mock.patch.object(self.modelcatalogdataio, "add_object")
         self.mock_add_object = self.patch_add_object.start()
@@ -59,21 +61,15 @@ class TestModelCatalogDbDataIO(TestCase):
         self.patch_add_project_types = mock.patch("model_data_io.ModelDataIo.add_project_types")
         self.mock_add_project_types = self.patch_add_project_types.start()
 
-        self.patch_da_Editor = mock.patch("arcpy.da.Editor")
-        self.mock_da_Editor = self.patch_da_Editor.start()
-        self.mock_da_Editor.return_value = self.mock_Editor
+        self.patch_start_editing_session = mock.patch("model_data_io.ModelDataIo.start_editing_session")
+        self.mock_start_editing_session = self.patch_start_editing_session.start()
 
-        self.patch_startEditing = mock.patch("arcpy.da.Editor.startEditing")
-        self.mock_startEditing = self.patch_startEditing.start()
+        self.mock_start_editing_session.return_value = "editor"
 
-        self.patch_startOperation = mock.patch("arcpy.da.Editor.startOperation")
-        self.mock_startOperation = self.patch_startOperation.start()
+        self.patch_stop_editing_session = mock.patch("model_data_io.ModelDataIo.stop_editing_session")
+        self.mock_stop_editing_session = self.patch_stop_editing_session.start()
 
-        self.patch_stopOperation = mock.patch("arcpy.da.Editor.stopOperation")
-        self.mock_stopOperation = self.patch_stopOperation.start()
 
-        self.patch_stopEditing = mock.patch("arcpy.da.Editor.stopEditing")
-        self.mock_stopEditing = self.patch_stopEditing.start()
 
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
@@ -83,11 +79,11 @@ class TestModelCatalogDbDataIO(TestCase):
         self.mock_add_simulations = self.patch_add_simulations.stop()
         self.mock_add_model_alterations = self.patch_add_model_alterations.stop()
         self.mock_add_project_types = self.patch_add_project_types.stop()
-        self.mock_da_Editor = self.patch_da_Editor.stop()
-        self.mock_startEditing = self.patch_startEditing.stop()
-        self.mock_startOperation = self.patch_startOperation.stop()
-        self.mock_stopOperation = self.patch_stopOperation.stop()
-        self.mock_stopEditing = self.patch_stopEditing.stop()
+        self.mock_start_editing_session = self.patch_start_editing_session.stop()
+        self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
+
+
+
 
     def test_retrieve_current_model_id(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -108,10 +104,6 @@ class TestModelCatalogDbDataIO(TestCase):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.assertTrue(self.mock_add_object.called)
 
-    def test_add_model_calls_read_simulations(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.assertTrue(self.mock_read_simulations.called)
-
     def test_add_model_calls_add_simulations(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.assertTrue(self.mock_add_simulations.called)
@@ -124,8 +116,23 @@ class TestModelCatalogDbDataIO(TestCase):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.assertTrue(self.mock_add_project_types.called)
 
-    #TODO - write tests for add model method internals
+    def test_add_model_calls_start_editing_session_with_correct_workspace(self):
+        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.mock_start_editing_session.assert_called_with(self.config.model_catalog_sde_path)
 
+    def test_add_model_calls_stop_editing_session_no_exception_with_save_changes_true(self):
+        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        save_changes = True
+        self.mock_stop_editing_session.assert_called_with("editor", save_changes)
+
+    def test_add_model_calls_stop_editing_session_exception_thrown_with_save_changes_false(self):
+        self.mock_add_simulations.side_effect = Exception()
+        save_changes = False
+
+        try:
+            self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        except:
+            self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
 
 

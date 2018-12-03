@@ -4,8 +4,6 @@ nodesep=0.5;
 rankdir="TB";
 edge [ constraint=False ];
 splines="ortho";
-"DataIO_exception" [fontcolor="red", label="{DataIO_exception|\l|}", shape="record"];
-"Field_names_length_does_not_match_row_length_exception" [fontcolor="red", label="{Field_names_length_does_not_match_row_length_exception|\l|}", shape="record"];
 "Field_names_length_does_not_match_row_length_exception" [fontcolor="red", label="{Field_names_length_does_not_match_row_length_exception|\l|}", shape="record"];
 
 "_d0" [label="_d0", shape="record" style=invis];

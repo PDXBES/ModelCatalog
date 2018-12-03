@@ -1,5 +1,5 @@
 import arcpy
-from model_catalog_exception import ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
+from model_catalog_exception import  ModelCatalog_exception, Field_names_length_does_not_match_row_length_exception
 try:
     from typing import List, Any
 except:
@@ -8,6 +8,8 @@ from model import Model
 from config import Config
 from db_data_io import DbDataIo
 from collections import OrderedDict
+from object_data_io import ObjectDataIo
+from data_io_exception import AddModelException
 
 class ModelCatalogDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -48,11 +50,19 @@ class ModelCatalogDbDataIo(DbDataIo):
         return current_model_alteration_id
 
     def add_model(self, model, model_data_io):
-        # type: (Model) -> None
-        self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
+        # type: (Model, ObjectDataIo) -> None
 
-        model.simulations = model_data_io.read_simulations(model)
-        model_data_io.add_simulations(model)
-        model_data_io.add_model_alterations(model)
-        model_data_io.add_project_types(model)
+        editor = model_data_io.start_editing_session(self.config.model_catalog_sde_path)
+        try:
+            self.add_object(model, self.field_attribute_lookup, self.config.model_tracking_sde_path)
+            model_data_io.add_simulations(model)
+            model_data_io.add_model_alterations(model)
+            model_data_io.add_project_types(model)
+            model_data_io.stop_editing_session(editor, True)
+        except:
+            model_data_io.stop_editing_session(editor, False)
+            arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
+            raise
+
+
 

@@ -33,7 +33,6 @@ class EMGAATS_Model_Registration(object):
         self.description = "Tool for registering EMGAATS derived models"
         self.config = config.Config()
         self.model_catalog = ModelCatalog(self.config)
-        self.model = Model(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
 
@@ -242,8 +241,9 @@ class EMGAATS_Model_Registration(object):
         arcpy.AddMessage("Execute")
 
         try:
-            model_id = self.modelcatalogdataio.retrieve_current_model_id()
-            self.model.id = model_id
+            self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
+            #model_id = self.modelcatalogdataio.retrieve_current_model_id()
+            #self.model.id = model_id
             self.model.parent_model_id = 0
             if parameters[4] == u"None":
                 pass
@@ -272,7 +272,9 @@ class EMGAATS_Model_Registration(object):
             self.model.model_alteration_file = parameters[11].valueAsText
             self.model.project_num = parameters[0].valueAsText
             self.model_dataio.create_model_geometry(self.model)
+            self.model.create_simulations()
             self.model_catalog.add_model(self.model)
+
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         except Invalid_Model_exception:
             self.model.model_valid_diagnostic()
@@ -284,9 +286,12 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     modeldataio = ModelDataIo(config, modelcatalogdataio)
     simulationdataio = SimulationDataIO(config, modelcatalogdataio)
     model = model_catalog.models[0]
-    arcpy.AddMessage("Adding Model...")
-    modelcatalogdataio.add_model(model, modeldataio)
-    arcpy.AddMessage("Model Added")
+    try:
+        arcpy.AddMessage("Adding Model...")
+        modelcatalogdataio.add_model(model, modeldataio)
+        arcpy.AddMessage("Model Added")
+    except:
+        arcpy.ExecuteError
 
     if config.model_status[model.model_status_id] == "Working":
         arcpy.AddMessage("Model Status has been set to 'Working'")

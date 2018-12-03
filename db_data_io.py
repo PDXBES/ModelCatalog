@@ -5,8 +5,8 @@ try:
 except:
     pass
 
-from data_io_exception import DataIO_exception
-from data_io_exception import Field_names_length_does_not_match_row_length_exception
+from data_io_exception import DataIoException
+from data_io_exception import FieldNamesLengthDoesNotMatchRowLengthException
 
 class DbDataIo(object):
     def __init__(self, config):
@@ -25,18 +25,19 @@ class DbDataIo(object):
                 next_id = current_id + 1
                 break
         cursor.updateRow([object_name, next_id])
+        del cursor
         return current_id
 
     def add_object(self, object_class, field_attribute_lookup, object_table_sde_path):
 
         if not object_class.valid:
-            raise DataIO_exception
+            raise DataIoException
 
         row = self.create_row_from_object(object_class, field_attribute_lookup )
         field_names = field_attribute_lookup.keys()
 
         if len(field_names) != len(row):
-            raise Field_names_length_does_not_match_row_length_exception
+            raise FieldNamesLengthDoesNotMatchRowLengthException
 
         cursor = arcpy.da.InsertCursor(object_table_sde_path, field_names)
 
