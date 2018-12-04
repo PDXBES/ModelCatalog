@@ -120,13 +120,13 @@ class TestDataIO(TestCase):
         with self.assertRaises(AttributeError):
             self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup)
 
-    def test_copy_calls_copy_features_management(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+    def test_copy_to_memory_calls_copy_features_management(self):
+        self.db_data_io.copy_to_memory("input_table", self.parent_id_to_db_field_mapping)
         self.assertTrue(self.mock_copy_features_management.called)
 
-    def test_copy_calls_copy_features_management_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
-        self.mock_copy_features_management.assert_called_with("input_table", "in_memory\input_table")
+    def test_copy_to_memory_calls_copy_features_management_with_correct_arguments(self):
+        self.db_data_io.copy_to_memory("input_table", self.parent_id_to_db_field_mapping)
+        self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\input_table")
 
     def test_copy_calls_add_field_management(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)

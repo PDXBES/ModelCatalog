@@ -24,6 +24,6 @@ class Area(GenericObject):
         self.san_crown_elev_ft = None
         self.area_type = None
 
-#TODO - should we have generic area class that building class inherits?
+
 
 
