@@ -15,9 +15,17 @@ class TestDataIO(TestCase):
         self.db_data_io = DbDataIo(self.config)
         self.object_class = None
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
+
+        self.mock_row = self.MockRow()
+        self.field_attribute_lookup = OrderedDict([("id_db", "id"), ("parent_id_db", "parent_id")])
+
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
-        self.mock_insert_cursor = mock.MagicMock(arcpy.da.InsertCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("object_1", 44), ("object_2", 55)])
+
+        self.mock_insert_cursor = mock.MagicMock(arcpy.da.InsertCursor)
+
+        self.mock_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
+        self.mock_search_cursor.__iter__.return_value = iter([self.mock_row])
 
         self.patch_append = mock.patch("arcpy.Append_management")
         self.mock_append = self.patch_append.start()
@@ -37,6 +45,9 @@ class TestDataIO(TestCase):
         self.patch_da_InsertCursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.start()
 
+        self.patch_da_SearchCursor = mock.patch("arcpy.da.SearchCursor")
+        self.mock_da_SearchCursor = self.patch_da_SearchCursor.start()
+
         self.patch_create_field_map_for_sde_db = mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db")
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.start()
 
@@ -51,8 +62,6 @@ class TestDataIO(TestCase):
         self.field_attribute_lookup["name"] = "name"
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
-
-        self.mock_row = self.MockRow()
 
     class MockRow:
 
@@ -69,6 +78,7 @@ class TestDataIO(TestCase):
         self.mock_add_field_management = self.patch_add_field_management.stop()
         self.mock_calculate_field = self.patch_calculate_field.stop()
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.stop()
+        self.mock_da_SearchCursor = self.patch_da_SearchCursor.stop()
 
     def test_retrieve_current_id_called_update_cursor(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -187,15 +197,22 @@ class TestDataIO(TestCase):
         self.assertEqual(self.mock_calculate_field.call_args_list[1][0], ("target", "id_field_two", id_2))
 
     def test_create_object_from_row_creates_object_with_correct_attributes(self):
-        field_attribute_lookup = OrderedDict([("id_db", "id"), ("parent_id_db", "parent_id")])
-        #self.mock_generic_object.field_attribute_lookup = field_attribute_lookup
         self.mock_generic_object.id = None
         self.mock_generic_object.parent_id = None
-        #row.setValue("id_db", 1)
-        #row.setValue("parent_id_db", 2)
-        self.db_data_io.create_object_from_row(self.mock_generic_object, field_attribute_lookup, self.mock_row)
+        self.db_data_io.create_object_from_row(self.mock_generic_object, self.field_attribute_lookup, self.mock_row)
         self.assertEqual(self.mock_generic_object.id, 1)
         self.assertEqual(self.mock_generic_object.parent_id, 2)
+
+    def test_create_objects_from_table_calls_search_cursor_with_correct_arguments(self):
+        self.db_data_io.create_objects_from_table("table", self.field_attribute_lookup)
+        self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup.keys())
+
+    def test_create_objects_from_table_returns_list_with_correct_object(self):
+        list_of_objects = self.db_data_io.create_objects_from_table("table", self.field_attribute_lookup)
+        object_1 = list_of_objects[0]
+        self.assertEqual(object_1.id, 1)
+        self.assertEqual(object_1.parent_id, 2)
+
 
 
 

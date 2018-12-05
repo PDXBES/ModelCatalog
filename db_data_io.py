@@ -5,6 +5,7 @@ try:
 except:
     pass
 
+#from generic_object import GenericObject
 from data_io_exception import DataIoException
 from data_io_exception import FieldNamesLengthDoesNotMatchRowLengthException
 
@@ -64,6 +65,14 @@ class DbDataIo(object):
         for field_name, attribute_name in field_attribute_lookup.items():
             setattr(generic_object, attribute_name, row.getValue(field_name))
 
+    def create_objects_from_table(self, table, field_attribute_lookup):
+        generic_objects = []
+        cursor = arcpy.da.SearchCursor(table, field_attribute_lookup.keys())
+        for row in cursor:
+            generic_object = GenericObject() # seems to be causing circular reference
+            self.create_object_from_row(generic_object, field_attribute_lookup, row)
+            generic_objects.append(generic_object)
+        return generic_objects
 
     def _create_field_map_for_sde_db(self, model_link_results_path):
         field_mappings = arcpy.FieldMappings()

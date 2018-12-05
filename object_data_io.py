@@ -31,18 +31,6 @@ class ObjectDataIo(object):
         workspace_editor.stopOperation()
         workspace_editor.stopEditing(save_changes)
 
-    def create_object(self, row, generic_object, field_attribute_lookup):
-        # map from row fields to objects
-        # create an object
-        pass
-
-    def create_objects(self, input_table, field_attribute_lookup):
-        # calls search cursor
-        # loop through rows
-        # call create object
-        # return list of objects
-        pass
-
     def create_table_from_objects(self):
         pass
 
