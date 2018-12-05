@@ -52,6 +52,14 @@ class TestDataIO(TestCase):
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
 
+        self.mock_row = self.MockRow()
+
+    class MockRow:
+
+        def getValue(self, field_name):
+            dummy_ordered_dict = OrderedDict([("id_db", 1), ("parent_id_db", 2)])
+            field_value = dummy_ordered_dict[field_name]
+            return field_value
 
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
@@ -61,11 +69,6 @@ class TestDataIO(TestCase):
         self.mock_add_field_management = self.patch_add_field_management.stop()
         self.mock_calculate_field = self.patch_calculate_field.stop()
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.stop()
-
-
-
-
-
 
     def test_retrieve_current_id_called_update_cursor(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -94,7 +97,6 @@ class TestDataIO(TestCase):
         self.db_data_io.retrieve_current_id("object_2")
         self.assertTrue(self.mock_update_cursor.updateRow.called)
         self.mock_update_cursor.updateRow.assert_called_with(["object_2", 56])
-
 
     def test_add_object_calls_insert_cursor(self):
         self.mock_generic_object.valid = True
@@ -148,7 +150,6 @@ class TestDataIO(TestCase):
         self.assertEqual( self.mock_calculate_field.call_args_list[0][0], ("in_memory\input_table", "id_field_one", id_1))
         self.assertEqual( self.mock_calculate_field.call_args_list[1][0], ("in_memory\input_table", "id_field_two", id_2))
 
-
     def test_copy_calls_append(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
         self.assertTrue(self.mock_append.called)
@@ -184,6 +185,18 @@ class TestDataIO(TestCase):
         id_2 = 2
         self.assertEqual(self.mock_calculate_field.call_args_list[0][0], ("target", "id_field_one", id_1))
         self.assertEqual(self.mock_calculate_field.call_args_list[1][0], ("target", "id_field_two", id_2))
+
+    def test_create_object_from_row_creates_object_with_correct_attributes(self):
+        field_attribute_lookup = OrderedDict([("id_db", "id"), ("parent_id_db", "parent_id")])
+        #self.mock_generic_object.field_attribute_lookup = field_attribute_lookup
+        self.mock_generic_object.id = None
+        self.mock_generic_object.parent_id = None
+        #row.setValue("id_db", 1)
+        #row.setValue("parent_id_db", 2)
+        self.db_data_io.create_object_from_row(self.mock_generic_object, field_attribute_lookup, self.mock_row)
+        self.assertEqual(self.mock_generic_object.id, 1)
+        self.assertEqual(self.mock_generic_object.parent_id, 2)
+
 
 
 

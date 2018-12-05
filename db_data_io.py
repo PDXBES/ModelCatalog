@@ -59,6 +59,12 @@ class DbDataIo(object):
 
         return row
 
+    def create_object_from_row(self, generic_object, field_attribute_lookup, row):
+
+        for field_name, attribute_name in field_attribute_lookup.items():
+            setattr(generic_object, attribute_name, row.getValue(field_name))
+
+
     def _create_field_map_for_sde_db(self, model_link_results_path):
         field_mappings = arcpy.FieldMappings()
         fields = arcpy.ListFields(model_link_results_path)
@@ -102,6 +108,7 @@ class DbDataIo(object):
             arcpy.Append_management(input_table, target, "NO_TEST")
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.CalculateField_management(target, db_id_field, parent_id)
+
 
 
 
