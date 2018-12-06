@@ -2,8 +2,16 @@ import os
 from config import Config
 from generic_object import GenericObject
 from collections import OrderedDict
+from area import Area
+from db_data_io import DbDataIo
+
+try:
+    from typing import List, Any
+except:
+    pass
 
 class Simulation(GenericObject):
+    areas = None  # type: List[Area]
     def __init__(self, config):
         # type: (str, Config) -> None
         self.model_path = None
@@ -20,6 +28,7 @@ class Simulation(GenericObject):
         self.field_attribute_lookup["Storm_ID"] = "storm_id"
         self.field_attribute_lookup["Dev_Scenario_ID"] = "dev_scenario_id"
         self.field_attribute_lookup["Sim_Desc"] = "sim_desc"
+        self.areas = []
 
     def valid(self):
         return self.has_results()
@@ -41,4 +50,8 @@ class Simulation(GenericObject):
                        + self.config.storm[self.storm_id][1] \
                        + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
+
+    def create_areas(self, input_table, db_data_io):
+        area = Area(self.config)
+        db_data_io.create_objects_from_table(input_table, "area", area.field_attribute_lookup)
 

@@ -8,13 +8,16 @@ except:
 #from generic_object import GenericObject
 from data_io_exception import DataIoException
 from data_io_exception import FieldNamesLengthDoesNotMatchRowLengthException
+from generic_class_factory import GenericClassFactory
 
 class DbDataIo(object):
-    def __init__(self, config):
+    def __init__(self, config, class_factory):
         # type: (Config) -> None
         self.current_id_database_table_path = None
         self.config = config
         self.workspace = "in_memory"
+        self.class_factory = class_factory
+
 
     def retrieve_current_id(self, object_type):
         # type: (str, str) -> int
@@ -61,15 +64,14 @@ class DbDataIo(object):
         return row
 
     def create_object_from_row(self, generic_object, field_attribute_lookup, row):
-
         for field_name, attribute_name in field_attribute_lookup.items():
             setattr(generic_object, attribute_name, row.getValue(field_name))
 
-    def create_objects_from_table(self, table, field_attribute_lookup):
+    def create_objects_from_table(self, table, class_type, field_attribute_lookup):
         generic_objects = []
         cursor = arcpy.da.SearchCursor(table, field_attribute_lookup.keys())
         for row in cursor:
-            generic_object = GenericObject() # seems to be causing circular reference
+            generic_object = self.class_factory.create_object(class_type)
             self.create_object_from_row(generic_object, field_attribute_lookup, row)
             generic_objects.append(generic_object)
         return generic_objects

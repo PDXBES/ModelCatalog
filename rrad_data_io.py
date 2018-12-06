@@ -10,7 +10,7 @@ from collections import OrderedDict
 
 
 class RradDbDataIo(DbDataIo):
-    def __init__(self, config):
+    def __init__(self, config, class_factory):
         # type: (Config) -> None
         self.config = config
         self.current_id_database_table_path = self.config.rrad_current_id_table_sde_path
@@ -19,6 +19,8 @@ class RradDbDataIo(DbDataIo):
         self.field_attribute_lookup["Extract_Date"] = "extract_date"
         self.field_attribute_lookup["Last_Inspection_Date"] = "last_inspection_date"
         self.field_attribute_lookup["Purpose"] = "purpose"
+        self.class_factory = class_factory
+
 
     def retrieve_current_rehab_id(self):
         rehab_id = self.retrieve_current_id("rehab")

@@ -2,16 +2,34 @@ from unittest import TestCase
 from simulation import Simulation
 import mock
 from mock_config import MockConfig
+from db_data_io import DbDataIo
+from generic_class_factory import GenericClassFactory
+from collections import OrderedDict
+
+
 
 class TestSimulation(TestCase):
     def setUp(self):
         model_path = "String"
         mock_config = MockConfig()
+        generic_class_factory = GenericClassFactory(mock_config)
+        self.db_data_io = DbDataIo(mock_config, generic_class_factory)
         self.config = mock_config.config
         self.simulation = Simulation(self.config)
         self.simulation.model_path = model_path
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1
+
+        self.patch_create_objects_from_table = mock.patch("db_data_io.DbDataIo.create_objects_from_table")
+        self.mock_create_objects_from_table = self.patch_create_objects_from_table.start()
+
+        self.field_attribute_lookup_create_object = OrderedDict()
+        self.field_attribute_lookup_create_object["id_db"] = "id"
+        self.field_attribute_lookup_create_object["parent_id_db"] = "parent_id"
+
+    def tearDown(self):
+        self.mock_create_objects_from_table = self.patch_create_objects_from_table.stop()
+
 
     @mock.patch("os.path.exists")
     def test_has_results_check_sim_folder_has_results(self, mock_os_path_exists):
@@ -67,3 +85,7 @@ class TestSimulation(TestCase):
         sim_path = self.simulation.path()
         self.assertEquals(sim_path, path)
 
+    def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
+        input_table = "table"
+        self.simulation.create_areas(input_table, self.db_data_io)
+        self.mock_create_objects_from_table.assert_called_with("table", "area", self.field_attribute_lookup_create_object)
