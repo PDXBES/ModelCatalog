@@ -7,11 +7,7 @@ except:
     pass
 
 class Area(GenericObject):
-    @staticmethod
-    def field_attribute_lookup():
-        field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["id"] = ["test"]
-        return field_attribute_lookup
+
 
     def __init__(self, config):
         # type: (Config) -> None
@@ -30,7 +26,15 @@ class Area(GenericObject):
         self.maxHGL = None
         self.san_crown_elev_ft = None
         self.area_type = None
-        self.field_attribute_lookup = self.field_attribute_lookup.__get__(Area, object)()
+        self.field_attribute_lookup = Area.field_attribute_lookup()
+
+    @staticmethod
+    def field_attribute_lookup():
+        field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["id"] = ["test"]
+        return field_attribute_lookup
+
+
 
 
 
