@@ -48,6 +48,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.create_model_alterations_hydrologic([["Area Factor"]])
         self.model.create_model_alterations_hydraulic([["Pipe Roughness"]])
         self.model.create_project_types(["Storm"])
+        self.model.create_simulations()
 
     def test_model_registration_with_model_status_working(self):
         self.model_dataio.create_model_geometry(self.model)

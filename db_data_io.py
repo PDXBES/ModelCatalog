@@ -94,8 +94,8 @@ class DbDataIo(object):
 
     def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None
-        in_memory_table = self.workspace + "\\" + input_table
-        self.copy_to_memory(input_table, parent_id_to_db_field_mapping)
+        in_memory_table = self.workspace + "\\" + "copy_table"
+        self.copy_to_memory(input_table, "copy_table", parent_id_to_db_field_mapping)
 
         if field_mappings != None:
             arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
@@ -104,12 +104,12 @@ class DbDataIo(object):
         arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
         arcpy.Delete_management(in_memory_table)
 
-    def copy_to_memory(self, input_table,  parent_id_to_db_field_mapping):
-        in_memory_table = self.workspace + "\\" + input_table
+    def copy_to_memory(self, input_table, in_memory_output_table_name, parent_id_to_db_field_mapping):
+        in_memory_table = self.workspace + "\\" + in_memory_output_table_name
         arcpy.CopyFeatures_management(input_table, in_memory_table)
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.AddField_management(in_memory_table, db_id_field, "LONG")
-            arcpy.CalculateField_management(in_memory_table, db_id_field, parent_id)
+            arcpy.CalculateField_management(in_memory_table, db_id_field, parent_id, "PYTHON_9.3")
 
     def copy_db_to_db(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None

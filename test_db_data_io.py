@@ -149,12 +149,12 @@ class TestDataIO(TestCase):
             self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
 
     def test_copy_to_memory_calls_copy_features_management(self):
-        self.db_data_io.copy_to_memory("input_table", self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name", self.parent_id_to_db_field_mapping)
         self.assertTrue(self.mock_copy_features_management.called)
 
     def test_copy_to_memory_calls_copy_features_management_with_correct_arguments(self):
-        self.db_data_io.copy_to_memory("input_table", self.parent_id_to_db_field_mapping)
-        self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\input_table")
+        self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name", self.parent_id_to_db_field_mapping)
+        self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\in_memory_output_table_name")
 
     def test_copy_calls_add_field_management(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
@@ -162,8 +162,8 @@ class TestDataIO(TestCase):
 
     def test_copy_calls_add_field_management_with_correct_arguments(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
-        self.assertEqual(self.mock_add_field_management.call_args_list[0][0], ("in_memory\input_table", "id_field_one", "LONG"))
-        self.assertEqual(self.mock_add_field_management.call_args_list[1][0], ("in_memory\input_table", "id_field_two", "LONG"))
+        self.assertEqual(self.mock_add_field_management.call_args_list[0][0], ("in_memory\copy_table", "id_field_one", "LONG"))
+        self.assertEqual(self.mock_add_field_management.call_args_list[1][0], ("in_memory\copy_table", "id_field_two", "LONG"))
 
     def test_copy_calls_calculate_field(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
@@ -173,8 +173,8 @@ class TestDataIO(TestCase):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
         id_1 = 1
         id_2 = 2
-        self.assertEqual( self.mock_calculate_field.call_args_list[0][0], ("in_memory\input_table", "id_field_one", id_1))
-        self.assertEqual( self.mock_calculate_field.call_args_list[1][0], ("in_memory\input_table", "id_field_two", id_2))
+        self.assertEqual( self.mock_calculate_field.call_args_list[0][0], ("in_memory\copy_table", "id_field_one", id_1, 'PYTHON_9.3'))
+        self.assertEqual( self.mock_calculate_field.call_args_list[1][0], ("in_memory\copy_table", "id_field_two", id_2, 'PYTHON_9.3'))
 
     def test_copy_calls_append(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
@@ -182,12 +182,12 @@ class TestDataIO(TestCase):
 
     def test_copy_if_field_mappings_is_not_None_append_called_with_correct_arguments(self):
         self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
-        self.mock_append.assert_called_with("in_memory\input_table", "target", "NO_TEST", "field_mappings")
+        self.mock_append.assert_called_with("in_memory\copy_table", "target", "NO_TEST", "field_mappings")
 
     def test_copy_if_field_mappings_is_None_append_called_with_correct_arguments(self):
         self.mock_create_field_map_for_sde_db.return_value = "field_mappings"
         self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping)
-        self.mock_append.assert_called_with("in_memory\input_table", "target", "NO_TEST", "field_mappings")
+        self.mock_append.assert_called_with("in_memory\copy_table", "target", "NO_TEST", "field_mappings")
 
     def test_copy_db_to_db_calls_append(self):
         self.db_data_io.copy_db_to_db("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
