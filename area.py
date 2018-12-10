@@ -27,11 +27,24 @@ class Area(GenericObject):
         self.san_crown_elev_ft = None
         self.area_type = None
         self.field_attribute_lookup = Area.field_attribute_lookup()
+        self.geometry = None
 
     @staticmethod
     def field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["id"] = ["test"]
+        #field_attribute_lookup["Simulation_ID"] = "parent_id"
+        field_attribute_lookup["area_id"] = "id"
+        field_attribute_lookup["area_name"] = "area_name"
+        field_attribute_lookup["first_floor_elev_ft"] = "first_floor_elev_ft"
+        field_attribute_lookup["first_floor_elev_qc"] = "first_floor_elev_qc"
+        field_attribute_lookup["has_basement"] = "has_basement"
+        field_attribute_lookup["has_basement_qc"] = "has_basement_qc"
+        field_attribute_lookup["minDHGL"] = "minDHGL"
+        field_attribute_lookup["maxHGL"] = "maxHGL"
+        field_attribute_lookup["san_crown_elev_ft"] = "san_crown_elev_ft"
+        field_attribute_lookup["area_type"] = "area_type"
+        field_attribute_lookup["Shape@"] = "geometry"
+
         return field_attribute_lookup
 
 

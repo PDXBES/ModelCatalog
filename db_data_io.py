@@ -69,7 +69,8 @@ class DbDataIo(object):
 
     def create_objects_from_table(self, table, class_type, field_attribute_lookup):
         generic_objects = []
-        cursor = arcpy.da.SearchCursor(table, field_attribute_lookup.keys())
+        fields = field_attribute_lookup.keys()
+        cursor = arcpy.da.SearchCursor(table, fields)
         for row in cursor:
             generic_object = self.class_factory.create_object(class_type)
             self.create_object_from_row(generic_object, field_attribute_lookup, row)

@@ -5,8 +5,7 @@ from mock_config import MockConfig
 from db_data_io import DbDataIo
 from generic_class_factory import GenericClassFactory
 from collections import OrderedDict
-
-
+from area import Area
 
 class TestSimulation(TestCase):
     def setUp(self):
@@ -20,6 +19,9 @@ class TestSimulation(TestCase):
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1
 
+        self.patch_area_field_attribute_lookup = mock.patch("area.Area.field_attribute_lookup")
+        self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.start()
+
         self.patch_create_objects_from_table = mock.patch("db_data_io.DbDataIo.create_objects_from_table")
         self.mock_create_objects_from_table = self.patch_create_objects_from_table.start()
 
@@ -29,6 +31,8 @@ class TestSimulation(TestCase):
 
     def tearDown(self):
         self.mock_create_objects_from_table = self.patch_create_objects_from_table.stop()
+        self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.stop()
+
 
 
     @mock.patch("os.path.exists")
@@ -87,5 +91,6 @@ class TestSimulation(TestCase):
 
     def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
         input_table = "table"
-        self.simulation.create_areas(input_table, self.db_data_io)
-        self.mock_create_objects_from_table.assert_called_with("table", "area", self.field_attribute_lookup_create_object)
+        self.mock_area_field_attribute_lookup.return_value = "area_field_attribute_lookup"
+        self.simulation.create_areas(self.db_data_io)
+        self.mock_create_objects_from_table.assert_called_with("table", "area", "area_field_attribute_lookup")

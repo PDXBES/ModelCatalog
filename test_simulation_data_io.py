@@ -17,6 +17,9 @@ class TestSimulationDataIO(TestCase):
         self.patch_model_catalog_db_data_io_copy = mock.patch.object(mock_model_catalog_db_data_io, "copy")
         self.mock_model_catalog_db_data_io_copy = self.patch_model_catalog_db_data_io_copy.start()
 
+        self.patch_model_catalog_db_data_io_copy_to_memory = mock.patch.object(mock_model_catalog_db_data_io, "copy_to_memory")
+        self.mock_model_catalog_db_data_io_copy_to_memory = self.patch_model_catalog_db_data_io_copy_to_memory.start()
+
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
         self.simulationdataio = SimulationDataIO(self.config, mock_model_catalog_db_data_io)
 
@@ -24,6 +27,7 @@ class TestSimulationDataIO(TestCase):
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
         self.mock_simulation.scenario = ""
+        self.mock_simulation.id = 1
         self.mock_simulation.storm_id = 22
         self.mock_simulation.dev_scenario_id = 33
         self.mock_model = mock.MagicMock(Model)
@@ -61,6 +65,8 @@ class TestSimulationDataIO(TestCase):
         self.mock_da_SearchCursor = self.patch_search_cursor.stop()
         self.mock_da_InsertCursor = self.patch_insert_cursor.stop()
         self.mock_model_catalog_db_data_io_copy = self.patch_model_catalog_db_data_io_copy.stop()
+        self.mock_model_catalog_db_data_io_copy_to_memory = self.patch_model_catalog_db_data_io_copy_to_memory.stop()
+
 
     @mock.patch("simulation.Simulation.path")
     def test_area_results_path_creates_correct_path(self, mock_simulation_path):
@@ -87,7 +93,7 @@ class TestSimulationDataIO(TestCase):
         self.assertEquals(node_flooding_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\NodeFloodingResults")
 
     def test_copy_link_results_calls_copy(self):
-        self.simulationdataio.copy_link_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_link_results(self.mock_simulation)
         self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
 
 
@@ -98,14 +104,14 @@ class TestSimulationDataIO(TestCase):
         mock_id_to_field_map = patch_id_to_field_map.start()
         mock_link_results_path.return_value = "link_results_path"
         mock_id_to_field_map.return_value = "id_to_field_map"
-        self.simulationdataio.copy_link_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_link_results(self.mock_simulation)
         self.mock_model_catalog_db_data_io_copy.assert_called_with("link_results_path", "link_results_sde_path", None, "id_to_field_map")
         patch_link_results_path.stop()
         patch_id_to_field_map.stop()
 
 
     def test_copy_node_results_calls_copy(self):
-        self.simulationdataio.copy_node_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_node_results(self.mock_simulation)
         self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
 
     def test_copy_node_results_calls_copy_with_correct_arguments(self):
@@ -118,7 +124,7 @@ class TestSimulationDataIO(TestCase):
         mock_node_results_path.return_value = "node_results_path"
         mock_id_to_field_map.return_value = "id_to_field_map"
 
-        self.simulationdataio.copy_node_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_node_results(self.mock_simulation)
         self.mock_model_catalog_db_data_io_copy.assert_called_with("node_results_path", "node_results_sde_path", None,
                                                                    "id_to_field_map")
 
@@ -126,7 +132,7 @@ class TestSimulationDataIO(TestCase):
         patch_id_to_field_map.stop()
 
     def test_copy_node_flooding_results_calls_copy(self):
-        self.simulationdataio.copy_node_flooding_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_node_flooding_results(self.mock_simulation)
         self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
 
     def test_copy_node_flooding_results_calls_copy_with_correct_arguments(self):
@@ -139,7 +145,7 @@ class TestSimulationDataIO(TestCase):
         mock_node_flooding_results_path.return_value = "node_flooding_results_path"
         mock_id_to_field_map.return_value = "id_to_field_map"
 
-        self.simulationdataio.copy_node_flooding_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_node_flooding_results(self.mock_simulation)
         self.mock_model_catalog_db_data_io_copy.assert_called_with("node_flooding_results_path", "node_flooding_results_sde_path",
                                                                    None,
                                                                    "id_to_field_map")
@@ -148,7 +154,7 @@ class TestSimulationDataIO(TestCase):
         patch_id_to_field_map.stop()
 
     def test_copy_area_results_calls_copy(self):
-        self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_area_results(self.mock_simulation)
         self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
 
     def test_copy_area_results_calls_copy_with_correct_arguments(self):
@@ -161,7 +167,7 @@ class TestSimulationDataIO(TestCase):
         mock_area_results_path.return_value = "area_results_path"
         mock_id_to_field_map.return_value = "id_to_field_map"
 
-        self.simulationdataio.copy_area_results(self.mock_simulation, self.mock_model)
+        self.simulationdataio.copy_area_results(self.mock_simulation)
         self.mock_model_catalog_db_data_io_copy.assert_called_with("area_results_path", "area_results_sde_path",
                                                                    None,
                                                                    "id_to_field_map")
@@ -169,3 +175,18 @@ class TestSimulationDataIO(TestCase):
         patch_area_results_path.stop()
         patch_id_to_field_map.stop()
 
+    def test_copy_area_results_to_memory_calls_copy_with_correct_arguments(self):
+        patch_area_results_path = mock.patch.object(self.simulationdataio, "area_results_path")
+        mock_area_results_path = patch_area_results_path.start()
+
+        patch_id_to_field_map = mock.patch.object(self.simulationdataio, "_id_to_field_map")
+        mock_id_to_field_map = patch_id_to_field_map.start()
+
+        mock_area_results_path.return_value = "area_results_path"
+        mock_id_to_field_map.return_value = "parent_id_to_db_field_mapping"
+
+        self.simulationdataio.copy_area_results_to_memory(self.mock_simulation, "output_table_name")
+        self.mock_model_catalog_db_data_io_copy_to_memory.assert_called_with("area_results_path", "output_table_name", "parent_id_to_db_field_mapping")
+
+        patch_area_results_path.stop()
+        patch_id_to_field_map.stop()

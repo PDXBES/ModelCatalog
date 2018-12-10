@@ -1,4 +1,5 @@
 import os
+import arcpy
 from config import Config
 from generic_object import GenericObject
 from collections import OrderedDict
@@ -51,7 +52,12 @@ class Simulation(GenericObject):
                        + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
 
-    def create_areas(self, input_table, db_data_io):
-        area = Area(self.config)
-        db_data_io.create_objects_from_table(input_table, "area", area.field_attribute_lookup)
+    def create_areas(self, simulation_data_io):
+        in_memory_table = simulation_data_io.model_catalog_db_data_io.workspace + "\\in_memory_table"
+        simulation_data_io.copy_area_results_to_memory(self, "in_memory_table")
+        area_field_attribute_lookup = Area.field_attribute_lookup()
+        area_results = simulation_data_io.model_catalog_db_data_io.create_objects_from_table(in_memory_table, "area", area_field_attribute_lookup)
+        self.areas = area_results
+        arcpy.da.Delete_management(in_memory_table)
+
 

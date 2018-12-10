@@ -301,16 +301,17 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
             arcpy.AddMessage("  Adding Area results:")
-            simulationdataio.copy_area_results(simulation, model)
+            #simulationdataio.copy_area_results(simulation)
+            simulation.create_areas(simulationdataio)
             arcpy.AddMessage("  Adding node results:")
-            simulationdataio.copy_node_results(simulation, model)
+            simulationdataio.copy_node_results(simulation)
             #TODO: Flooding results not loaded during testing
             try:
                 arcpy.AddMessage("  Adding node flooding results:")
-                simulationdataio.copy_node_flooding_results(simulation, model)
+                simulationdataio.copy_node_flooding_results(simulation)
             except:
                 arcpy.AddWarning("This results.gdb does not have a node flooding feature class.")
                 arcpy.AddWarning("The results should be processed with a newer version of EMGAATS.")
             arcpy.AddMessage("  Adding link results:")
-            simulationdataio.copy_link_results(simulation, model)
+            simulationdataio.copy_link_results(simulation)
             arcpy.AddMessage("Results written to RRAD")
