@@ -58,6 +58,6 @@ class Simulation(GenericObject):
         area_field_attribute_lookup = Area.field_attribute_lookup()
         area_results = simulation_data_io.model_catalog_db_data_io.create_objects_from_table(in_memory_table, "area", area_field_attribute_lookup)
         self.areas = area_results
-        arcpy.da.Delete_management(in_memory_table)
+        arcpy.Delete_management(in_memory_table)
 
 

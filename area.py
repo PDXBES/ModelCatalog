@@ -47,6 +47,13 @@ class Area(GenericObject):
 
         return field_attribute_lookup
 
+    #def determine_area_type(self):
+
+    # check if basement higher than crown
+
+    def determine_basement_flooding(self):
+        pass
+
 
 
 

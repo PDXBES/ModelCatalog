@@ -10,6 +10,9 @@ from db_data_io import DbDataIo
 from collections import OrderedDict
 from object_data_io import ObjectDataIo
 from data_io_exception import AddModelException
+from generic_class_factory import GenericClassFactory
+from simulation import Simulation
+from area import Area
 
 class ModelCatalogDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -35,7 +38,8 @@ class ModelCatalogDbDataIo(DbDataIo):
         self.field_attribute_lookup["Project_Num"] = "project_num"
         self.field_attribute_lookup["Shape@"] = "model_geometry"
         self.workspace = "in_memory"
-
+        self.class_factory = GenericClassFactory(self.config)
+        self.class_factory.class_dict = {"model": Model(self.config), "simulation": Simulation(self.config), "area": Area(self.config)}
 
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id("model")

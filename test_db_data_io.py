@@ -19,7 +19,7 @@ class TestDataIO(TestCase):
         self.object_class = None
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
 
-        self.mock_row = self.MockRow()
+        self.mock_row = (1,2)
         self.field_attribute_lookup_add_object = OrderedDict([("id_db", "id"), ("parent_id_db", "parent_id")])
 
         self.patch_create_object = mock.patch("generic_class_factory.GenericClassFactory.create_object")
@@ -75,14 +75,6 @@ class TestDataIO(TestCase):
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
 
-
-
-    class MockRow:
-
-        def getValue(self, field_name):
-            dummy_ordered_dict = OrderedDict([("id_db", 1), ("parent_id_db", 2)])
-            field_value = dummy_ordered_dict[field_name]
-            return field_value
 
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
@@ -229,6 +221,7 @@ class TestDataIO(TestCase):
         object_1 = list_of_objects[0]
         self.assertEqual(object_1.id, 1)
         self.assertEqual(object_1.parent_id, 2)
+
 
 
 

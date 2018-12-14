@@ -64,8 +64,10 @@ class DbDataIo(object):
         return row
 
     def create_object_from_row(self, generic_object, field_attribute_lookup, row):
+        field_name_list = field_attribute_lookup.keys()
         for field_name, attribute_name in field_attribute_lookup.items():
-            setattr(generic_object, attribute_name, row.getValue(field_name))
+            field_name_index = field_name_list.index(field_name)
+            setattr(generic_object, attribute_name, row[field_name_index])
 
     def create_objects_from_table(self, table, class_type, field_attribute_lookup):
         generic_objects = []
