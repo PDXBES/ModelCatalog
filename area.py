@@ -28,6 +28,9 @@ class Area(GenericObject):
         self.area_type = None
         self.field_attribute_lookup = Area.field_attribute_lookup()
         self.geometry = None
+        self.bsbr = None
+        self.basement_depth = 8
+        self.storm_bsbr_lookup = {"2yr6h": 91535, "5yr6h": 36614, "25yr6h": 7323}
 
     @staticmethod
     def field_attribute_lookup():
@@ -51,11 +54,38 @@ class Area(GenericObject):
 
     # check if basement higher than crown
 
-    def determine_basement_flooding(self):
-        pass
+    def ffe_above_crown(self):
+        elev_diff = self.first_floor_elev_ft - self.san_crown_elev_ft
+        return elev_diff >= self.basement_depth
+
+    def max_hgl_above_basement_elev(self):
+
+        return self.first_floor_elev_ft - self.maxHGL < self.basement_depth
+
+    def basement_exists(self):
+        if self.has_basement is "Y" or self.has_basement is "U":
+            return True
+        elif self.has_basement is "N":
+            return False
+        else:
+            raise Exception
+
+    def basement_flooding(self):
+        if self.ffe_above_crown() \
+                and self.max_hgl_above_basement_elev() \
+                and self.basement_exists() \
+                and self.area_type is "BLDG":
+            return True
+        else:
+            return False
 
 
-
+    def calculate_bsbr(self, simulation):
+        if self.basement_flooding() is False:
+            self.bsbr = 0
+        else:
+            storm = self.config.storm[simulation.storm_id][0]
+            self.bsbr = self.storm_bsbr_lookup[storm]
 
 
 

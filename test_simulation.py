@@ -115,3 +115,4 @@ class TestSimulation(TestCase):
     def test_create_areas_sets_area_list_to_correct_value(self):
         self.simulation.create_areas(self.simulation_data_io)
         self.assertEquals(self.simulation.areas, "areas")
+
