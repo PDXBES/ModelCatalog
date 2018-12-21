@@ -97,8 +97,23 @@ class TestArea(TestCase):
 
     def test_calculate_bsbr_basement_flooding_25_year_storm_is_correct(self):
         self.storm_bsbr_lookup = {"2yr6h": 91535, "5yr6h": 36614, "25yr6h": 7323}
+        self.area.storm_bsbr_lookup = self.storm_bsbr_lookup
         self.area.calculate_bsbr(self.mock_simulation)
-        self.assertEqual(self.area.bsbr, 7323)
+        self.assertAlmostEqual(self.area.bsbr, 7323)
+
+    def test_calculate_bsbr_basement_flooding_5_year_storm_is_correct(self):
+        self.storm_bsbr_lookup = {"2yr6h": 91535, "10yr6h": 36614, "25yr6h": 7323}
+        self.area.storm_bsbr_lookup = self.storm_bsbr_lookup
+        self.mock_simulation.storm_id = 2
+        self.area.calculate_bsbr(self.mock_simulation)
+        self.assertAlmostEqual(self.area.bsbr, 36614)
+
+    def test_calculate_bsbr_unknown_storm_throws_Exception(self):
+        self.storm_bsbr_lookup = {"2yr6h": 91535, "10yr6h": 36614, "25yr6h": 7323}
+        self.area.storm_bsbr_lookup = self.storm_bsbr_lookup
+        self.mock_simulation.storm_id = 10
+        with self.assertRaises(Exception):
+            self.area.calculate_bsbr(self.mock_simulation)
 
     #TODO: add other tests for other values and exceptions
 

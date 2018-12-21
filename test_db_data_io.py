@@ -58,11 +58,15 @@ class TestDataIO(TestCase):
         self.patch_create_field_map_for_sde_db = mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db")
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.start()
 
+        self.patch_create_table = mock.patch("arcpy.CreateTable_management")
+        self.mock_create_table = self.patch_create_table.start()
+
         self.mock_da_InsertCursor.return_value = self.mock_insert_cursor
         self.mock_generic_object = mock.MagicMock("GenericObject")
         self.mock_generic_object.id = 1
         self.mock_generic_object.name = "name"
         self.mock_generic_object.valid = False
+        self.mock_generic_object.parent_id = 2
 
         self.field_attribute_lookup_add_object = OrderedDict()
         self.field_attribute_lookup_add_object["id_field"] = "id"
@@ -71,6 +75,8 @@ class TestDataIO(TestCase):
         self.field_attribute_lookup_create_object = OrderedDict()
         self.field_attribute_lookup_create_object["id_db"] = "id"
         self.field_attribute_lookup_create_object["parent_id_db"] = "parent_id"
+
+        self.field_attribute_lookup_create_table_from_objects = self.field_attribute_lookup_create_object
 
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
@@ -86,7 +92,7 @@ class TestDataIO(TestCase):
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.stop()
         self.mock_da_SearchCursor = self.patch_da_SearchCursor.stop()
         self.mock_create_object = self.patch_create_object.stop()
-
+        self.mock_create_table = self.patch_create_table.stop()
 
     def test_retrieve_current_id_called_update_cursor(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -222,8 +228,33 @@ class TestDataIO(TestCase):
         self.assertEqual(object_1.id, 1)
         self.assertEqual(object_1.parent_id, 2)
 
+    def test_create_table_from_objects_calls_create_table_with_correct_arguments(self):
+        self.db_data_io.workspace = "in_memory"
+        output_table_name = "output_table_name"
+        object_list = ["obj1", "obj2"]
+        field_attribute_lookup = OrderedDict()
+        template_table_path = "template_table_path"
+        self.db_data_io.create_table_from_objects(output_table_name, object_list, field_attribute_lookup, template_table_path)
+        self.mock_create_table.assert_called_with("in_memory", "output_table_name", "template_table_path")
+
+    def test_create_table_from_objects_calls_insert_cursor_with_correct_arguments(self):
+        self.db_data_io.workspace = "in_memory"
+        output_table_name = "output_table_name"
+        object_list = [self.mock_generic_object]
+        template_table_path = "template_table_path"
+        field_list = ["id_db", "parent_id_db"]
+        self.db_data_io.create_table_from_objects(output_table_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_table_path)
+        self.mock_da_InsertCursor.assert_called_with("in_memory\\output_table_name", field_list)
 
 
+
+    def test_create_table_from_objects_calls_insert_row_with_correct_arguments(self):
+        self.db_data_io.workspace = "in_memory"
+        output_table_name = "output_table_name"
+        object_list = [self.mock_generic_object]
+        template_table_path = "template_table_path"
+        self.db_data_io.create_table_from_objects(output_table_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_table_path)
+        self.mock_insert_cursor.insertRow.assert_called_with([1, 2])
 
 
 

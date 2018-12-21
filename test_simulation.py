@@ -20,6 +20,9 @@ class TestSimulation(TestCase):
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1
         self.simulation_data_io = SimulationDataIO(mock_config, self.db_data_io)
+        area1 = Area(mock_config)
+        area2 = Area(mock_config)
+        self.simulation.areas  = [area1, area2]
 
         self.patch_area_field_attribute_lookup = mock.patch("area.Area.field_attribute_lookup")
         self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.start()
@@ -34,6 +37,9 @@ class TestSimulation(TestCase):
         self.patch_delete_management = mock.patch("arcpy.Delete_management")
         self.mock_delete_management = self.patch_delete_management.start()
 
+        self.patch_calculate_bsbr = mock.patch("area.Area.calculate_bsbr")
+        self.mock_calculate_bsbr = self.patch_calculate_bsbr.start()
+
         self.field_attribute_lookup_create_object = OrderedDict()
         self.field_attribute_lookup_create_object["id_db"] = "id"
         self.field_attribute_lookup_create_object["parent_id_db"] = "parent_id"
@@ -43,7 +49,7 @@ class TestSimulation(TestCase):
         self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.stop()
         self.mock_copy_area_results_to_memory = self.patch_copy_area_results_to_memory.stop()
         self.mock_delete_management = self.patch_delete_management.stop()
-
+        self.mock_calculate_bsbr = self.patch_calculate_bsbr.stop()
 
     @mock.patch("os.path.exists")
     def test_has_results_check_sim_folder_has_results(self, mock_os_path_exists):
@@ -100,19 +106,41 @@ class TestSimulation(TestCase):
         self.assertEquals(sim_path, path)
 
     def test_create_areas_calls_copy_area_results_to_memory_with_correct_arguments(self):
-        self.simulation.create_areas(self.simulation_data_io)
-        self.mock_copy_area_results_to_memory.assert_called_with(self.simulation, "in_memory_table")
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
+            self.simulation.create_areas(self.simulation_data_io)
+            self.mock_copy_area_results_to_memory.assert_called_with(self.simulation, "in_memory_table")
 
     def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
-        self.mock_area_field_attribute_lookup.return_value = "area_field_attribute_lookup"
-        self.simulation.create_areas(self.simulation_data_io)
-        self.mock_create_objects_from_table.assert_called_with("in_memory\\in_memory_table", "area", "area_field_attribute_lookup")
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
+            self.mock_area_field_attribute_lookup.return_value = "area_field_attribute_lookup"
+            self.simulation.create_areas(self.simulation_data_io)
+            self.mock_create_objects_from_table.assert_called_with("in_memory\\in_memory_table", "area", "area_field_attribute_lookup")
 
     def test_create_areas_calls_delete_with_correct_arguments(self):
-        self.simulation.create_areas(self.simulation_data_io)
-        self.mock_delete_management.assert_called_with("in_memory\\in_memory_table")
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
+            self.simulation.create_areas(self.simulation_data_io)
+            self.mock_delete_management.assert_called_with("in_memory\\in_memory_table")
 
     def test_create_areas_sets_area_list_to_correct_value(self):
-        self.simulation.create_areas(self.simulation_data_io)
-        self.assertEquals(self.simulation.areas, "areas")
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
+            self.simulation.create_areas(self.simulation_data_io)
+            self.assertEquals(self.simulation.areas, "areas")
+
+    def test_create_areas_calls_calculate_bsbrs_for_areas(self):
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
+            self.simulation.create_areas(self.simulation_data_io)
+            self.assertTrue(mock_calculate_bsbrs_for_areas.called)
+
+    def test_calculate_bsbrs_for_areas_calls_calculate_bsbr_with_correct_arguments(self):
+        self.simulation.calculate_bsbrs_for_areas()
+        self.mock_calculate_bsbr.assert_called_with(self.simulation)
+
+    def test_calculate_bsbrs_for_areas_simulation_has_two_areas_calls_calculate_bsbr_twice(self):
+        self.simulation.calculate_bsbrs_for_areas()
+        self.assertEquals(self.mock_calculate_bsbr.call_count, 2)
+
+
+
+
+
 

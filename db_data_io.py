@@ -123,6 +123,24 @@ class DbDataIo(object):
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.CalculateField_management(target, db_id_field, parent_id)
 
+    def create_table_from_objects(self, output_table_name, object_list, field_attribute_lookup, template_table_path):
+        arcpy.CreateTable_management(self.workspace, output_table_name, template_table_path)
+        output_table_path = self.workspace + "\\" + output_table_name
+        field_list = field_attribute_lookup.keys()
+        cursor = arcpy.da.InsertCursor(output_table_path, field_list)
+        for generic_object in object_list:
+            row = self.create_row_from_object(generic_object, field_attribute_lookup)
+            cursor.insertRow(row)
+        del cursor
+
+
+    def append_table_to_db(self, object_list, field_attribute_lookup, template_table_path):
+        pass
+
+    # see line #120
+    #call create_table From Objects
+    # call arcpy append management
+
 
 
 

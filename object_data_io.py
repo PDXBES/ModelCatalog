@@ -31,10 +31,5 @@ class ObjectDataIo(object):
         workspace_editor.stopOperation()
         workspace_editor.stopEditing(save_changes)
 
-    def create_table_from_objects(self):
-        pass
-
-    def append_table_to_db(self):
-        pass
 
 
