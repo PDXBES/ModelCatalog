@@ -101,7 +101,7 @@ class TestArea(TestCase):
         self.area.calculate_bsbr(self.mock_simulation)
         self.assertAlmostEqual(self.area.bsbr, 7323)
 
-    def test_calculate_bsbr_basement_flooding_5_year_storm_is_correct(self):
+    def test_calculate_bsbr_basement_flooding_10_year_storm_is_correct(self):
         self.storm_bsbr_lookup = {"2yr6h": 91535, "10yr6h": 36614, "25yr6h": 7323}
         self.area.storm_bsbr_lookup = self.storm_bsbr_lookup
         self.mock_simulation.storm_id = 2

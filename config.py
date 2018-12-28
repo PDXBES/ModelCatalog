@@ -42,6 +42,8 @@ class Config:
         self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
         self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
 
+        self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
+
         EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
 
