@@ -5,6 +5,7 @@ from model import Model
 from simulation_data_io import SimulationDataIO
 from mock_config import MockConfig
 from model_catalog_db_data_io import ModelCatalogDbDataIo
+from area import Area
 
 
 class TestSimulationDataIO(TestCase):
@@ -23,6 +24,8 @@ class TestSimulationDataIO(TestCase):
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
         self.simulationdataio = SimulationDataIO(self.config, mock_model_catalog_db_data_io)
 
+        self.patch_append_table_to_db = mock.patch("db_data_io.DbDataIo.append_table_to_db")
+        self.mock_append_table_to_db = self.patch_append_table_to_db.start()
 
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
@@ -66,7 +69,7 @@ class TestSimulationDataIO(TestCase):
         self.mock_da_InsertCursor = self.patch_insert_cursor.stop()
         self.mock_model_catalog_db_data_io_copy = self.patch_model_catalog_db_data_io_copy.stop()
         self.mock_model_catalog_db_data_io_copy_to_memory = self.patch_model_catalog_db_data_io_copy_to_memory.stop()
-
+        self.mock_append_table_to_db = self.patch_append_table_to_db.stop()
 
     @mock.patch("simulation.Simulation.path")
     def test_area_results_path_creates_correct_path(self, mock_simulation_path):
@@ -190,3 +193,9 @@ class TestSimulationDataIO(TestCase):
 
         patch_area_results_path.stop()
         patch_id_to_field_map.stop()
+
+    def test_append_area_results_to_db_calls_append_table_to_db_with_correct_arguments(self):
+        output_table_name = self.config.area_results_sde_path
+        area_results = ["area1", "area2"]
+        field_attribute_lookup = Area.field_attribute_lookup()
+        self.mock_append_table_to_db.assert_called_with(output_table_name, ["area1", "area2"], field_attribute_lookup, output_table_name, target_path)

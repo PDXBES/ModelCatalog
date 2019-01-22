@@ -14,7 +14,7 @@ class TestRradDataIO(TestCase):
         self.mock_rehab = mock.MagicMock(Rehab)
         generic_class_factory = GenericClassFactory(self.config)
 
-        self.rrad_data_io = RradDbDataIo(self.config, generic_class_factory)
+        self.rrad_data_io = RradDbDataIo(self.config)
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("rehab", 44), ("object_2", 55)])
