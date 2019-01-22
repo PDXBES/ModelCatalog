@@ -255,7 +255,7 @@ class EMGAATS_Model_Registration(object):
                 arcpy.AddMessage(analysis_request_ids)
                 self.model.model_request_id = analysis_request_ids
             self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
-            self.model.engine_type_id = 1
+            self.model.engine_type_id = 1  # not currently in use
             self.model.create_date = datetime.datetime.today()
             self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE

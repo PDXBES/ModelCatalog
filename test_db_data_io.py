@@ -12,7 +12,6 @@ class TestDataIO(TestCase):
         mock_config = MockConfig()
         self.config = mock_config.config
 
-
         self.parent_id_to_db_field_mapping = [(1, "id_field_one"), (2, "id_field_two")]
         generic_class_factory = GenericClassFactory(self.config)
         self.db_data_io = DbDataIo(self.config, generic_class_factory)
@@ -58,10 +57,14 @@ class TestDataIO(TestCase):
         self.patch_create_field_map_for_sde_db = mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db")
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.start()
 
+        self.patch_create_table_from_objects = mock.patch.object(self.db_data_io, "create_table_from_objects")
+        self.mock_create_table_from_objects = self.patch_create_table_from_objects.start()
+
         self.patch_create_table = mock.patch("arcpy.CreateTable_management")
         self.mock_create_table = self.patch_create_table.start()
 
         self.mock_da_InsertCursor.return_value = self.mock_insert_cursor
+
         self.mock_generic_object = mock.MagicMock("GenericObject")
         self.mock_generic_object.id = 1
         self.mock_generic_object.name = "name"
@@ -78,7 +81,6 @@ class TestDataIO(TestCase):
 
         self.field_attribute_lookup_create_table_from_objects = self.field_attribute_lookup_create_object
 
-
         self.object_tracking_sde_path = "object_tracking_sde_path"
 
 
@@ -93,8 +95,9 @@ class TestDataIO(TestCase):
         self.mock_da_SearchCursor = self.patch_da_SearchCursor.stop()
         self.mock_create_object = self.patch_create_object.stop()
         self.mock_create_table = self.patch_create_table.stop()
+        self.mock_create_table_from_objects = self.patch_create_table_from_objects.start()
 
-    def test_retrieve_current_id_called_update_cursor(self):
+    def test_retrieve_current_id_calls_update_cursor(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
         self.db_data_io.retrieve_current_id("object_1")
         self.assertTrue(self.mock_da_UpdateCursor.called)
@@ -246,8 +249,6 @@ class TestDataIO(TestCase):
         self.db_data_io.create_table_from_objects(output_table_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_table_path)
         self.mock_da_InsertCursor.assert_called_with("in_memory\\output_table_name", field_list)
 
-
-
     def test_create_table_from_objects_calls_insert_row_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
         output_table_name = "output_table_name"
@@ -255,6 +256,29 @@ class TestDataIO(TestCase):
         template_table_path = "template_table_path"
         self.db_data_io.create_table_from_objects(output_table_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_table_path)
         self.mock_insert_cursor.insertRow.assert_called_with([1, 2])
+
+    def test_append_table_to_db_calls_create_table_from_objects(self):
+        self.db_data_io.workspace = "in_memory"
+        output_table_name = "output_table_name"
+        object_list = [self.mock_generic_object]
+        field_attribute_lookup = OrderedDict()
+        template_table_path = "template_table_path"
+        target_path = "target_path"
+        self.db_data_io.append_table_to_db(output_table_name, object_list, field_attribute_lookup, template_table_path, target_path)
+        self.assertTrue(self.mock_create_table_from_objects.called)
+
+    def test_append_table_to_db_calls_create_table_from_objects_with_correct_arguments(self):
+        self.db_data_io.workspace = "in_memory"
+        output_table_name = "output_table_name"
+        object_list = [self.mock_generic_object]
+        field_attribute_lookup = OrderedDict()
+        template_table_path = "template_table_path"
+        target_path = "target_path"
+        self.db_data_io.append_table_to_db(output_table_name, object_list, field_attribute_lookup, template_table_path,target_path)
+        self.mock_create_table_from_objects.assert_called_with(output_table_name, object_list, field_attribute_lookup, template_table_path)
+    
+
+
 
 
 

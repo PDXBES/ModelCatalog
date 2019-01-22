@@ -1,9 +1,10 @@
 from rehab_data_io import RehabDataIO
 from rehab import Rehab
 from config import Config
-from rrad_data_io import  RradDbDataIo
+from rrad_data_io import RradDbDataIo
 import datetime
 import time
+from generic_class_factory import GenericClassFactory
 
 config = Config()
 

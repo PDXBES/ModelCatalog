@@ -80,6 +80,11 @@ class DbDataIo(object):
         return generic_objects
 
     def _create_field_map_for_sde_db(self, model_link_results_path):
+        """
+
+        :param model_link_results_path:
+        :return:
+        """
         field_mappings = arcpy.FieldMappings()
         fields = arcpy.ListFields(model_link_results_path)
         for field in fields:
@@ -133,21 +138,22 @@ class DbDataIo(object):
             cursor.insertRow(row)
         del cursor
 
-
     def append_table_to_db(self, output_table_name, object_list, field_attribute_lookup, template_table_path, target_path):
+        field_mappings = self._create_field_map_for_sde_db(template_table_path)
+        self.create_table_from_objects(self, output_table_name, object_list, field_attribute_lookup, template_table_path)
+        # input_table =  self.workspace + "\\" + output_table_name
+
+        # arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
 
 
-    # see line #120
-    #call create_table From Objects
-    # call arcpy append management
+
+        # see line #120
+        #call create_table From Objects
+        # call arcpy append management
 
 
-        #field_mappings = self._create_field_map_for_sde_db(template_table_path)
-        #self.create_table_from_objects(self, output_table_name, object_list, field_attribute_lookup, template_table_path)
-        #input_table =  self.workspace + "\\" + output_table_name
 
-        #arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
-        pass
+
 
 
 
