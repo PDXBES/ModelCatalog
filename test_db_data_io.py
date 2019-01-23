@@ -261,34 +261,34 @@ class TestDataIO(TestCase):
             field_attribute_lookup = OrderedDict()
             template_table_path = "template_table_path"
             target_path = "target_path"
-            self.db_data_io.append_table_to_db(output_table_name, object_list, field_attribute_lookup, template_table_path, target_path)
+            self.db_data_io.append_table_to_db(object_list, field_attribute_lookup, template_table_path, target_path)
             self.assertTrue(mock_create_table_from_objects.called)
 
     def test_append_table_to_db_calls_create_table_from_objects_with_correct_arguments(self):
         with mock.patch.object(self.db_data_io, "create_table_from_objects") as mock_create_table_from_objects:
             self.db_data_io.workspace = "in_memory"
-            output_table_name = "output_table_name"
+            output_table_name = "intermediate_table_to_append"
             object_list = [self.mock_generic_object]
             field_attribute_lookup = OrderedDict()
             template_table_path = "template_table_path"
             target_path = "target_path"
-            self.db_data_io.append_table_to_db(output_table_name, object_list, field_attribute_lookup, template_table_path,target_path)
+            self.db_data_io.append_table_to_db(object_list, field_attribute_lookup, template_table_path, target_path)
             mock_create_table_from_objects.assert_called_with(output_table_name, object_list, field_attribute_lookup, template_table_path)
 
     def test_append_table_to_db_calls_append_with_correct_arguments(self):
         with mock.patch.object(self.db_data_io, "create_table_from_objects") as mock_create_table_from_objects:
             with mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db") as mock_create_field_map_for_sde_db:
                 self.db_data_io.workspace = "in_memory"
-                output_table_name = "output_table_name"
+                output_table_name = "intermediate_table_to_append"
                 object_list = [self.mock_generic_object]
                 field_attribute_lookup = OrderedDict()
                 template_table_path = "template_table_path"
                 target_path = "target_path"
                 mock_create_field_map_for_sde_db.return_value = "field_mapping_for_sde_db"
 
-                self.db_data_io.append_table_to_db(output_table_name, object_list, field_attribute_lookup,
-                                                   template_table_path, target_path)
-                self.mock_append.assert_called_with("in_memory\\output_table_name", "target_path", "NO_TEST", "field_mapping_for_sde_db")
+                self.db_data_io.append_table_to_db(object_list, field_attribute_lookup, template_table_path,
+                                                   target_path)
+                self.mock_append.assert_called_with("in_memory\\intermediate_table_to_append", "target_path", "NO_TEST", "field_mapping_for_sde_db")
 
 
 

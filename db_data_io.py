@@ -138,13 +138,13 @@ class DbDataIo(object):
             cursor.insertRow(row)
         del cursor
 
-    def append_table_to_db(self, output_table_name, object_list, field_attribute_lookup, template_table_path, target_path):
+    def append_table_to_db(self, object_list, field_attribute_lookup, template_table_path, target_path):
         field_mappings = self._create_field_map_for_sde_db(template_table_path)
+        output_table_name = "intermediate_table_to_append"
         self.create_table_from_objects(output_table_name, object_list, field_attribute_lookup, template_table_path)
         input_table = self.workspace + "\\" + output_table_name
-
         arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
-
+        del input_table
 
 
 

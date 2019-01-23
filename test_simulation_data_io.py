@@ -24,7 +24,7 @@ class TestSimulationDataIO(TestCase):
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
         self.simulationdataio = SimulationDataIO(self.config, mock_model_catalog_db_data_io)
 
-        self.patch_append_table_to_db = mock.patch("db_data_io.DbDataIo.append_table_to_db")
+        self.patch_append_table_to_db = mock.patch.object(mock_model_catalog_db_data_io, "append_table_to_db")
         self.mock_append_table_to_db = self.patch_append_table_to_db.start()
 
         self.mock_simulation = mock.MagicMock(Simulation)
@@ -152,7 +152,6 @@ class TestSimulationDataIO(TestCase):
         self.mock_model_catalog_db_data_io_copy.assert_called_with("node_flooding_results_path", "node_flooding_results_sde_path",
                                                                    None,
                                                                    "id_to_field_map")
-
         patch_node_flooding_results_path.stop()
         patch_id_to_field_map.stop()
 
@@ -195,7 +194,9 @@ class TestSimulationDataIO(TestCase):
         patch_id_to_field_map.stop()
 
     def test_append_area_results_to_db_calls_append_table_to_db_with_correct_arguments(self):
-        output_table_name = self.config.area_results_sde_path
+        target_path = self.config.area_results_sde_path
+        template_path = target_path
         area_results = ["area1", "area2"]
         field_attribute_lookup = Area.field_attribute_lookup()
-        self.mock_append_table_to_db.assert_called_with(output_table_name, ["area1", "area2"], field_attribute_lookup, output_table_name, target_path)
+        self.simulationdataio.append_area_results_to_db(area_results)
+        self.mock_append_table_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")

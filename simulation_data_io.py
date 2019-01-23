@@ -7,7 +7,7 @@ except:
     pass
 from config import Config
 from model_catalog_db_data_io import ModelCatalogDbDataIo
-
+from area import Area
 
 class SimulationDataIO:
     def __init__(self, config, model_catalog_db_data_io):
@@ -75,3 +75,10 @@ class SimulationDataIO:
         input_table = self.area_results_path(simulation)
         parent_id_to_db_field_mapping = self._id_to_field_map(simulation)
         self.model_catalog_db_data_io.copy_to_memory(input_table, output_table_name, parent_id_to_db_field_mapping)
+
+    def append_area_results_to_db(self, area_results):
+        field_attribute_lookup = Area.field_attribute_lookup()
+        #template_table_path = self.config.area_results_sde_path
+        template_table_path = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\BaseR011018V4ic\sim\D25yr6h\Results.gdb\AreaResults"
+        target_path = self.config.area_results_sde_path
+        self.model_catalog_db_data_io.append_table_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
