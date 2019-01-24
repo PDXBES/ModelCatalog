@@ -4,8 +4,9 @@ from config import Config
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from simulation import Simulation
 import mock
+import unittest
 
-
+unittest.skip("Integration Tests")
 class TestRRADCapacityResults(TestCase):
 
     def setUp(self):

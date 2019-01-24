@@ -23,12 +23,12 @@ class Simulation(GenericObject):
         self.storm_id = None
         self.sim_desc = ""
         self.config = config
-        self.field_attribute_lookup = OrderedDict()
-        self.field_attribute_lookup["Model_ID"] = "parent_id"
-        self.field_attribute_lookup["Simulation_ID"] = "id"
-        self.field_attribute_lookup["Storm_ID"] = "storm_id"
-        self.field_attribute_lookup["Dev_Scenario_ID"] = "dev_scenario_id"
-        self.field_attribute_lookup["Sim_Desc"] = "sim_desc"
+        self.input_field_attribute_lookup = OrderedDict()
+        self.input_field_attribute_lookup["Model_ID"] = "parent_id"
+        self.input_field_attribute_lookup["Simulation_ID"] = "id"
+        self.input_field_attribute_lookup["Storm_ID"] = "storm_id"
+        self.input_field_attribute_lookup["Dev_Scenario_ID"] = "dev_scenario_id"
+        self.input_field_attribute_lookup["Sim_Desc"] = "sim_desc"
         self.areas = []
 
     def valid(self):
@@ -55,7 +55,8 @@ class Simulation(GenericObject):
     def create_areas(self, simulation_data_io):
         in_memory_table = simulation_data_io.model_catalog_db_data_io.workspace + "\\in_memory_table"
         simulation_data_io.copy_area_results_to_memory(self, "in_memory_table")
-        area_field_attribute_lookup = Area.field_attribute_lookup()
+        area_field_attribute_lookup = Area.input_field_attribute_lookup()
+        area_field_attribute_lookup["Simulation_ID"] = "parent_id"
         area_results = simulation_data_io.model_catalog_db_data_io.create_objects_from_table(in_memory_table, "area", area_field_attribute_lookup)
         self.areas = area_results
         self.calculate_bsbrs_for_areas()

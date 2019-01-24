@@ -64,7 +64,7 @@ class ModelDataIo(ObjectDataIo):
 
     def add_simulation(self, model_id, simulation):
         # type: (int, Simulation) -> None
-        self.add_object(model_id, simulation, simulation.field_attribute_lookup, self.config.simulation_sde_path)
+        self.add_object(model_id, simulation, simulation.input_field_attribute_lookup, self.config.simulation_sde_path)
 
 
     def add_simulations(self, model):

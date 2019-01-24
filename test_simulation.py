@@ -24,7 +24,7 @@ class TestSimulation(TestCase):
         area2 = Area(mock_config)
         self.simulation.areas  = [area1, area2]
 
-        self.patch_area_field_attribute_lookup = mock.patch("area.Area.field_attribute_lookup")
+        self.patch_area_field_attribute_lookup = mock.patch("area.Area.input_field_attribute_lookup")
         self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.start()
 
         self.patch_create_objects_from_table = mock.patch("db_data_io.DbDataIo.create_objects_from_table")

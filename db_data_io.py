@@ -129,7 +129,8 @@ class DbDataIo(object):
             arcpy.CalculateField_management(target, db_id_field, parent_id)
 
     def create_table_from_objects(self, output_table_name, object_list, field_attribute_lookup, template_table_path):
-        arcpy.CreateTable_management(self.workspace, output_table_name, template_table_path)
+        #arcpy.CreateTable_management(self.workspace, output_table_name, template_table_path) # change to Create feature class
+        arcpy.CreateFeatureclass_management(self.workspace, output_table_name, "", template_table_path, "", "", template_table_path)
         output_table_path = self.workspace + "\\" + output_table_name
         field_list = field_attribute_lookup.keys()
         cursor = arcpy.da.InsertCursor(output_table_path, field_list)
@@ -143,7 +144,7 @@ class DbDataIo(object):
         output_table_name = "intermediate_table_to_append"
         self.create_table_from_objects(output_table_name, object_list, field_attribute_lookup, template_table_path)
         input_table = self.workspace + "\\" + output_table_name
-        arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
+        arcpy.Append_management(input_table, target_path, "NO_TEST")#, field_mappings)
         del input_table
 
 

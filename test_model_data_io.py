@@ -31,11 +31,11 @@ class TestModelDataIO(TestCase):
         self.generic_field_attribute_lookup["Generic_ID"] = "id"
         self.generic_field_attribute_lookup["Generic_Domain_ID"] = "generic_domain_id"
 
-        self.mock_model_alt_bc.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_model_alt_bc.input_field_attribute_lookup = self.generic_field_attribute_lookup
         self.mock_model_alt_bc.name = "model_alt_bc"
-        self.mock_model_alt_hydrologic.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_model_alt_hydrologic.input_field_attribute_lookup = self.generic_field_attribute_lookup
         self.mock_model_alt_hydrologic.name = "model_alt_hydrologic"
-        self.mock_model_alt_hydraulic.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_model_alt_hydraulic.input_field_attribute_lookup = self.generic_field_attribute_lookup
         self.mock_model_alt_hydraulic.name = "model_alt_hydraulic"
 
         self.mock_simulation = mock.MagicMock(Simulation)
@@ -50,10 +50,10 @@ class TestModelDataIO(TestCase):
         field_attribute_lookup[2] = ["Storm_ID", "storm_id"]
         field_attribute_lookup[3] = ["Dev_Scenario_ID", "dev_scenario_id"]
         field_attribute_lookup[4] = ["Sim_Desc", "sim_desc"]
-        self.mock_simulation.field_attribute_lookup = field_attribute_lookup
+        self.mock_simulation.input_field_attribute_lookup = field_attribute_lookup
 
         self.mock_project_type = mock.MagicMock(ProjectType)
-        self.mock_project_type.field_attribute_lookup = self.generic_field_attribute_lookup
+        self.mock_project_type.input_field_attribute_lookup = self.generic_field_attribute_lookup
 
         self.mock_object_data_io = mock.Mock()
         self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
@@ -154,7 +154,7 @@ class TestModelDataIO(TestCase):
 
     def test_add_simulation_calls_add_object_with_correct_arguments(self):
         self.model_data_io.add_simulation(11, self.mock_simulation)
-        self.mock_add_object.assert_called_with(11, self.mock_simulation, self.mock_simulation.field_attribute_lookup,
+        self.mock_add_object.assert_called_with(11, self.mock_simulation, self.mock_simulation.input_field_attribute_lookup,
                                                 self.config.simulation_sde_path)
 
     def test_create_model_geometry_calls_arcpy_dissolve_management(self):

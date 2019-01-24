@@ -12,7 +12,7 @@ class GenericObject(object):
         self.id = None
         self.name = None
         self.parent_id = None
-        self.field_attribute_lookup = None
+        self.input_field_attribute_lookup = None
 
     @classmethod
     def initialize_with_current_id(cls, config, object_data_io):
