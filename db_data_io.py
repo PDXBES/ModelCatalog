@@ -104,6 +104,7 @@ class DbDataIo(object):
         # type: (str, str, arcpy.FieldMappings) -> None
         in_memory_table = self.workspace + "\\" + "copy_table"
         self.copy_to_memory(input_table, "copy_table", parent_id_to_db_field_mapping)
+        self.add_parent_id(in_memory_table, parent_id_to_db_field_mapping)
 
         if field_mappings != None:
             arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
@@ -115,6 +116,8 @@ class DbDataIo(object):
     def copy_to_memory(self, input_table, in_memory_output_table_name, parent_id_to_db_field_mapping):
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
         arcpy.CopyFeatures_management(input_table, in_memory_table)
+
+    def add_parent_id(self, in_memory_table, parent_id_to_db_field_mapping):
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.AddField_management(in_memory_table, db_id_field, "LONG")
             arcpy.CalculateField_management(in_memory_table, db_id_field, parent_id, "PYTHON_9.3")
@@ -128,23 +131,23 @@ class DbDataIo(object):
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.CalculateField_management(target, db_id_field, parent_id)
 
-    def create_table_from_objects(self, output_table_name, object_list, field_attribute_lookup, template_table_path):
-        #arcpy.CreateTable_management(self.workspace, output_table_name, template_table_path) # change to Create feature class
-        arcpy.CreateFeatureclass_management(self.workspace, output_table_name, "", template_table_path, "", "", template_table_path)
-        output_table_path = self.workspace + "\\" + output_table_name
+    def create_feature_class_from_objects(self, output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path):
+        spatial_reference_template = template_feature_class_path
+        arcpy.CreateFeatureclass_management(self.workspace, output_feature_class_name, "", template_feature_class_path, "", "", spatial_reference_template)
+        output_feature_class_path = self.workspace + "\\" + output_feature_class_name
         field_list = field_attribute_lookup.keys()
-        cursor = arcpy.da.InsertCursor(output_table_path, field_list)
+        cursor = arcpy.da.InsertCursor(output_feature_class_path, field_list)
         for generic_object in object_list:
             row = self.create_row_from_object(generic_object, field_attribute_lookup)
             cursor.insertRow(row)
         del cursor
 
-    def append_table_to_db(self, object_list, field_attribute_lookup, template_table_path, target_path):
+    def append_feature_class_to_db(self, object_list, field_attribute_lookup, template_table_path, target_path):
         field_mappings = self._create_field_map_for_sde_db(template_table_path)
-        output_table_name = "intermediate_table_to_append"
-        self.create_table_from_objects(output_table_name, object_list, field_attribute_lookup, template_table_path)
-        input_table = self.workspace + "\\" + output_table_name
-        arcpy.Append_management(input_table, target_path, "NO_TEST")#, field_mappings)
+        output_feature_class_name = "intermediate_feature_class_to_append"
+        self.create_feature_class_from_objects(output_feature_class_name, object_list, field_attribute_lookup, template_table_path)
+        input_table = self.workspace + "\\" + output_feature_class_name
+        arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
         del input_table
 
 

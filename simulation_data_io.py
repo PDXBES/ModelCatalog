@@ -80,4 +80,4 @@ class SimulationDataIO:
         field_attribute_lookup = Area.output_field_attribute_lookup()
         template_table_path = self.config.area_results_sde_path
         target_path = self.config.area_results_sde_path
-        self.model_catalog_db_data_io.append_table_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
+        self.model_catalog_db_data_io.append_feature_class_to_db(area_results, field_attribute_lookup, template_table_path, target_path)

@@ -57,8 +57,8 @@ class TestDataIO(TestCase):
         self.patch_create_field_map_for_sde_db = mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db")
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.start()
 
-        self.patch_create_table = mock.patch("arcpy.CreateTable_management")
-        self.mock_create_table = self.patch_create_table.start()
+        self.patch_create_feature_class = mock.patch("arcpy.CreateFeatureclass_management")
+        self.mock_create_feature_class = self.patch_create_feature_class.start()
 
         self.mock_da_InsertCursor.return_value = self.mock_insert_cursor
 
@@ -91,7 +91,7 @@ class TestDataIO(TestCase):
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.stop()
         self.mock_da_SearchCursor = self.patch_da_SearchCursor.stop()
         self.mock_create_object = self.patch_create_object.stop()
-        self.mock_create_table = self.patch_create_table.stop()
+        self.mock_create_feature_class = self.patch_create_feature_class.stop()
 
     def test_retrieve_current_id_calls_update_cursor(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -227,68 +227,68 @@ class TestDataIO(TestCase):
         self.assertEqual(object_1.id, 1)
         self.assertEqual(object_1.parent_id, 2)
 
-    def test_create_table_from_objects_calls_create_table_with_correct_arguments(self):
+    def test_create_feature_class_from_objects_calls_create_table_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
-        output_table_name = "output_table_name"
+        output_feature_class_name = "output_feature_class_name"
         object_list = ["obj1", "obj2"]
         field_attribute_lookup = OrderedDict()
-        template_table_path = "template_table_path"
-        self.db_data_io.create_table_from_objects(output_table_name, object_list, field_attribute_lookup, template_table_path)
-        self.mock_create_table.assert_called_with("in_memory", "output_table_name", "template_table_path")
+        template_feature_class_path = "template_feature_class_path"
+        self.db_data_io.create_feature_class_from_objects(output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path)
+        self.mock_create_feature_class.assert_called_with("in_memory", "output_feature_class_name", "", "template_feature_class_path", "", "", "template_feature_class_path")
 
-    def test_create_table_from_objects_calls_insert_cursor_with_correct_arguments(self):
+    def test_create_feature_class_from_objects_calls_insert_cursor_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
-        output_table_name = "output_table_name"
+        output_feature_class_name = "output_feature_class_name"
         object_list = [self.mock_generic_object]
-        template_table_path = "template_table_path"
+        template_feature_class_path = "template_feature_class_path"
         field_list = ["id_db", "parent_id_db"]
-        self.db_data_io.create_table_from_objects(output_table_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_table_path)
-        self.mock_da_InsertCursor.assert_called_with("in_memory\\output_table_name", field_list)
+        self.db_data_io.create_feature_class_from_objects(output_feature_class_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_feature_class_path)
+        self.mock_da_InsertCursor.assert_called_with("in_memory\\output_feature_class_name", field_list)
 
-    def test_create_table_from_objects_calls_insert_row_with_correct_arguments(self):
+    def test_create_feature_class_from_objects_calls_insert_row_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
-        output_table_name = "output_table_name"
+        output_feature_class_name = "output_feature_class_name"
         object_list = [self.mock_generic_object]
-        template_table_path = "template_table_path"
-        self.db_data_io.create_table_from_objects(output_table_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_table_path)
+        template_feature_class_path = "template_feature_class_path"
+        self.db_data_io.create_feature_class_from_objects(output_feature_class_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_feature_class_path)
         self.mock_insert_cursor.insertRow.assert_called_with([1, 2])
 
     def test_append_table_to_db_calls_create_table_from_objects(self):
-        with mock.patch.object(self.db_data_io, "create_table_from_objects") as mock_create_table_from_objects:
+        with mock.patch.object(self.db_data_io, "create_feature_class_from_objects") as mock_create_feature_class_from_objects:
             self.db_data_io.workspace = "in_memory"
-            output_table_name = "output_table_name"
+            output_feature_class_name = "output_feature_class_name"
             object_list = [self.mock_generic_object]
             field_attribute_lookup = OrderedDict()
-            template_table_path = "template_table_path"
+            template_feature_class_path = "template_feature_class_path"
             target_path = "target_path"
-            self.db_data_io.append_table_to_db(object_list, field_attribute_lookup, template_table_path, target_path)
-            self.assertTrue(mock_create_table_from_objects.called)
+            self.db_data_io.append_feature_class_to_db(object_list, field_attribute_lookup, template_feature_class_path, target_path)
+            self.assertTrue(mock_create_feature_class_from_objects.called)
 
-    def test_append_table_to_db_calls_create_table_from_objects_with_correct_arguments(self):
-        with mock.patch.object(self.db_data_io, "create_table_from_objects") as mock_create_table_from_objects:
+    def test_append_feature_class_to_db_calls_create_feature_class_from_objects_with_correct_arguments(self):
+        with mock.patch.object(self.db_data_io, "create_feature_class_from_objects") as mock_create_feature_class_from_objects:
             self.db_data_io.workspace = "in_memory"
-            output_table_name = "intermediate_table_to_append"
+            output_feature_class_name = "intermediate_feature_class_to_append"
             object_list = [self.mock_generic_object]
             field_attribute_lookup = OrderedDict()
-            template_table_path = "template_table_path"
+            template_feature_class_path = "template_feature_class_path"
             target_path = "target_path"
-            self.db_data_io.append_table_to_db(object_list, field_attribute_lookup, template_table_path, target_path)
-            mock_create_table_from_objects.assert_called_with(output_table_name, object_list, field_attribute_lookup, template_table_path)
+            self.db_data_io.append_feature_class_to_db(object_list, field_attribute_lookup, template_feature_class_path, target_path)
+            mock_create_feature_class_from_objects.assert_called_with(output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path)
 
-    def test_append_table_to_db_calls_append_with_correct_arguments(self):
-        with mock.patch.object(self.db_data_io, "create_table_from_objects") as mock_create_table_from_objects:
+    def test_append_feature_class_to_db_calls_append_with_correct_arguments(self):
+        with mock.patch.object(self.db_data_io, "create_feature_class_from_objects") as mock_create_feature_class_from_objects:
             with mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db") as mock_create_field_map_for_sde_db:
                 self.db_data_io.workspace = "in_memory"
-                output_table_name = "intermediate_table_to_append"
+                output_feature_class_name = "intermediate_feature_class_to_append"
                 object_list = [self.mock_generic_object]
                 field_attribute_lookup = OrderedDict()
-                template_table_path = "template_table_path"
+                template_feature_class_path = "template_feature_class_path"
                 target_path = "target_path"
                 mock_create_field_map_for_sde_db.return_value = "field_mapping_for_sde_db"
 
-                self.db_data_io.append_table_to_db(object_list, field_attribute_lookup, template_table_path,
-                                                   target_path)
-                self.mock_append.assert_called_with("in_memory\\intermediate_table_to_append", "target_path", "NO_TEST", "field_mapping_for_sde_db")
+                self.db_data_io.append_feature_class_to_db(object_list, field_attribute_lookup, template_feature_class_path,
+                                                           target_path)
+                self.mock_append.assert_called_with("in_memory\\intermediate_feature_class_to_append", "target_path", "NO_TEST", "field_mapping_for_sde_db")
 
 
 

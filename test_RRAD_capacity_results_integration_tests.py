@@ -6,7 +6,7 @@ from simulation import Simulation
 import mock
 import unittest
 
-unittest.skip("Integration Tests")
+#@unittest.skip("Integration Tests")
 class TestRRADCapacityResults(TestCase):
 
     def setUp(self):
@@ -14,7 +14,8 @@ class TestRRADCapacityResults(TestCase):
         self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
         self.simulation_data_io = SimulationDataIO(self.config, self.model_catalog_db_data_io)
         self.simulation = Simulation(self.config)
-        self.simulation.id = 9999999
+        self.simulation.id = 888887
+        self.simulation.storm_id = 1
 
         self.patch_simulation_path = mock.patch.object(self.simulation, "path")
         self.mock_simulation_path = self.patch_simulation_path.start()
@@ -28,5 +29,3 @@ class TestRRADCapacityResults(TestCase):
         self.simulation.create_areas(self.simulation_data_io)
         self.simulation_data_io.append_area_results_to_db(self.simulation.areas)
 
-
-        #self.fail()

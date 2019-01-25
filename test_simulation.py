@@ -22,14 +22,15 @@ class TestSimulation(TestCase):
         self.simulation_data_io = SimulationDataIO(mock_config, self.db_data_io)
         area1 = Area(mock_config)
         area2 = Area(mock_config)
-        self.simulation.areas  = [area1, area2]
+        self.mock_areas = [area1, area2]
+        self.simulation.areas = self.mock_areas
 
         self.patch_area_field_attribute_lookup = mock.patch("area.Area.input_field_attribute_lookup")
         self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.start()
 
         self.patch_create_objects_from_table = mock.patch("db_data_io.DbDataIo.create_objects_from_table")
         self.mock_create_objects_from_table = self.patch_create_objects_from_table.start()
-        self.mock_create_objects_from_table.return_value = "areas"
+        self.mock_create_objects_from_table.return_value = self.mock_areas
 
         self.patch_copy_area_results_to_memory = mock.patch("simulation_data_io.SimulationDataIO.copy_area_results_to_memory")
         self.mock_copy_area_results_to_memory = self.patch_copy_area_results_to_memory.start()
@@ -124,7 +125,7 @@ class TestSimulation(TestCase):
     def test_create_areas_sets_area_list_to_correct_value(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
             self.simulation.create_areas(self.simulation_data_io)
-            self.assertEquals(self.simulation.areas, "areas")
+            self.assertEquals(self.simulation.areas, self.mock_areas )
 
     def test_create_areas_calls_calculate_bsbrs_for_areas(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:

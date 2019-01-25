@@ -17,7 +17,7 @@ class TestArea(TestCase):
         self.area.maxHGL = .1
         self.area.has_basement = "Y"
         self.area.area_type = "BLDG"
-
+        self.area.san_connect_type = "Not None"
 
 
     def test_ffe_above_crown_ffe_greater_than_or_equal_to_8_feet_from_crown_returns_true(self):
@@ -69,9 +69,16 @@ class TestArea(TestCase):
         with self.assertRaises(Exception):
             self.area.basement_exists()
 
+    def test_has_sanitary_connection_if_not_None_returns_true(self):
+        self.area.san_connect_type = "not None"
+        self.assertTrue(self.area.has_sanitary_connection())
+
+    def test_has_sanitary_connection_if_None_returns_false(self):
+        self.area.san_connect_type = None
+        self.assertFalse(self.area.has_sanitary_connection())
+
     def test_basement_flooding_ffe_above_crown_and_max_hgl_above_basement_and_basement_exists_and_is_building_returns_true(self):
         self.assertTrue(self.area.basement_flooding())
-
 
     def test_basement_flooding_ffe_below_crown_and_max_hgl_above_basement_and_basement_exists_and_is_building_returns_true(self):
         self.area.first_floor_elev_ft = 7
@@ -114,6 +121,8 @@ class TestArea(TestCase):
         self.mock_simulation.storm_id = 10
         with self.assertRaises(Exception):
             self.area.calculate_bsbr(self.mock_simulation)
+
+
 
     #TODO: add other tests for other values and exceptions
 

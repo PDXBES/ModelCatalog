@@ -30,7 +30,8 @@ class Area(GenericObject):
         self.geometry = None
         self.bsbr = None
         self.basement_depth = 8
-        self.storm_bsbr_lookup = {"2yr6h": 91535, "5yr6h": 36614, "25yr6h": 7323}
+        self.storm_bsbr_lookup = {"02yr6h": 91535, "05yr6h": 36614, "25yr6h": 7323}
+        self.san_connect_type = None
 
     @staticmethod
     def input_field_attribute_lookup():
@@ -52,19 +53,10 @@ class Area(GenericObject):
     @staticmethod
     def output_field_attribute_lookup():
         output_field_attribute_lookup = Area.input_field_attribute_lookup()
-        for key, value in Area.field_attribute_lookup_required_for_output().items():
-            output_field_attribute_lookup[key] = value
+        output_field_attribute_lookup["Simulation_ID"] = "parent_id"
+        output_field_attribute_lookup["bsbr"] = "bsbr"
 
         return output_field_attribute_lookup
-
-    @staticmethod
-    def field_attribute_lookup_required_for_output():
-        field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["Simulation_ID"] = "parent_id"
-        field_attribute_lookup["bsbr"] = "bsbr"
-        return field_attribute_lookup
-
-
 
 
     #def determine_area_type(self):
@@ -83,15 +75,23 @@ class Area(GenericObject):
         return self.first_floor_elev_ft - self.maxHGL < self.basement_depth
 
     def basement_exists(self):
-        if self.has_basement is "Y" or self.has_basement is "U":
+        if self.has_basement == "Y" or self.has_basement == "U":
             return True
-        elif self.has_basement is "N":
+        elif self.has_basement == "N":
+            return False
+        else:
+            raise Exception
+
+    def has_sanitary_connection(self):
+        if self.san_connect_type is not None:
+            return True
+        elif self.san_connect_type is None:
             return False
         else:
             raise Exception
 
     def basement_flooding(self):
-        if self.area_type is "BLDG":
+        if self.area_type == "BLDG" and self.has_sanitary_connection() is True:
             if self.ffe_above_crown() \
                     and self.max_hgl_above_basement_elev() \
                     and self.basement_exists():
@@ -101,9 +101,8 @@ class Area(GenericObject):
         else:
             return False
 
-
     def calculate_bsbr(self, simulation):
-        if self.basement_flooding() is False:
+        if self.basement_flooding() == False:
             self.bsbr = 0
         else:
             storm = self.config.storm[simulation.storm_id][0]
