@@ -14,7 +14,7 @@ class TestRRADCapacityResults(TestCase):
         self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
         self.simulation_data_io = SimulationDataIO(self.config, self.model_catalog_db_data_io)
         self.simulation = Simulation(self.config)
-        self.simulation.id = 888887
+        self.simulation.id = 999998
         self.simulation.storm_id = 1
 
         self.patch_simulation_path = mock.patch.object(self.simulation, "path")

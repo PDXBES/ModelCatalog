@@ -80,20 +80,20 @@ class TestArea(TestCase):
     def test_basement_flooding_ffe_above_crown_and_max_hgl_above_basement_and_basement_exists_and_is_building_returns_true(self):
         self.assertTrue(self.area.basement_flooding())
 
-    def test_basement_flooding_ffe_below_crown_and_max_hgl_above_basement_and_basement_exists_and_is_building_returns_true(self):
+    def test_basement_flooding_ffe_below_crown_and_max_hgl_above_basement_and_basement_exists_and_is_building_returns_false(self):
         self.area.first_floor_elev_ft = 7
         self.area.san_crown_elev_ft = 0
         self.assertFalse(self.area.basement_flooding())
 
-    def test_basement_flooding_ffe_above_crown_and_max_hgl_below_basement_and_basement_exists_and_is_building_returns_true(self):
+    def test_basement_flooding_ffe_above_crown_and_max_hgl_below_basement_and_basement_exists_and_is_building_returns_false(self):
         self.area.maxHGL = 0
         self.assertFalse(self.area.basement_flooding())
 
-    def test_basement_flooding_ffe_above_crown_and_max_hgl_above_basement_and_basement__does_not_exist_and_is_building_returns_true(self):
+    def test_basement_flooding_ffe_above_crown_and_max_hgl_above_basement_and_basement_does_not_exist_and_is_building_returns_false(self):
         self.area.has_basement = "N"
         self.assertFalse(self.area.basement_flooding())
 
-    def test_basement_flooding_ffe_above_crown_and_max_hgl_above_basement_and_basement_exists_and_is_not_building_returns_true(self):
+    def test_basement_flooding_ffe_above_crown_and_max_hgl_above_basement_and_basement_exists_and_is_not_building_returns_false(self):
         self.area.area_type = "STRT"
         self.assertFalse(self.area.basement_flooding())
 

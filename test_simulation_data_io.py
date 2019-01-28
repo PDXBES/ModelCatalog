@@ -27,6 +27,13 @@ class TestSimulationDataIO(TestCase):
         self.patch_append_feature_class_to_db = mock.patch.object(mock_model_catalog_db_data_io, "append_feature_class_to_db")
         self.mock_append_feature_class_to_db = self.patch_append_feature_class_to_db.start()
 
+        self.patch_start_editing_session = mock.patch.object(self.simulationdataio, "start_editing_session")
+        self.mock_start_editing_session = self.patch_start_editing_session.start()
+        self.mock_start_editing_session.return_value = "editor"
+
+        self.patch_stop_editing_session = mock.patch.object(self.simulationdataio, "stop_editing_session")
+        self.mock_stop_editing_session = self.patch_stop_editing_session.start()
+
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
         self.mock_simulation.scenario = ""
@@ -70,6 +77,8 @@ class TestSimulationDataIO(TestCase):
         self.mock_model_catalog_db_data_io_copy = self.patch_model_catalog_db_data_io_copy.stop()
         self.mock_model_catalog_db_data_io_copy_to_memory = self.patch_model_catalog_db_data_io_copy_to_memory.stop()
         self.mock_append_feature_class_to_db = self.patch_append_feature_class_to_db.stop()
+        self.mock_start_editing_session = self.patch_start_editing_session.stop()
+        self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
 
     @mock.patch("simulation.Simulation.path")
     def test_area_results_path_creates_correct_path(self, mock_simulation_path):
@@ -200,3 +209,34 @@ class TestSimulationDataIO(TestCase):
         field_attribute_lookup = Area.output_field_attribute_lookup()
         self.simulationdataio.append_area_results_to_db(area_results)
         self.mock_append_feature_class_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")
+
+    def test_append_area_results_calls_start_editing_session_with_correct_workspace(self):
+        target_path = self.config.area_results_sde_path
+        template_path = target_path
+        area_results = ["area1", "area2"]
+        field_attribute_lookup = Area.output_field_attribute_lookup()
+        self.simulationdataio.append_area_results_to_db(area_results)
+        self.mock_start_editing_session.assert_called_with("area_results_sde_path")
+
+    def test_append_area_results_calls_stop_editing_session_no_exception_with_save_changes_true(self):
+        target_path = self.config.area_results_sde_path
+        template_path = target_path
+        area_results = ["area1", "area2"]
+        field_attribute_lookup = Area.output_field_attribute_lookup()
+        self.simulationdataio.append_area_results_to_db(area_results)
+        save_changes = True
+        self.mock_stop_editing_session.assert_called_with("editor", save_changes)
+
+    def test_append_area_results_calls_stop_editing_session_exception_thrown_with_save_changes_false(self):
+        target_path = self.config.area_results_sde_path
+        template_path = target_path
+        area_results = ["area1", "area2"]
+        field_attribute_lookup = Area.output_field_attribute_lookup()
+        self.simulationdataio.append_area_results_to_db(area_results)
+        save_changes = False
+        self.mock_append_feature_class_to_db.side_effect = Exception()
+
+        try:
+            self.simulationdataio.append_area_results_to_db(area_results)
+        except:
+            self.mock_stop_editing_session.assert_called_with("editor", save_changes)

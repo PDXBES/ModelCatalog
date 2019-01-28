@@ -47,6 +47,7 @@ class Area(GenericObject):
         field_attribute_lookup["san_crown_elev_ft"] = "san_crown_elev_ft"
         field_attribute_lookup["area_type"] = "area_type"
         field_attribute_lookup["Shape@"] = "geometry"
+        field_attribute_lookup["san_connect_type"] = "san_connect_type"
 
         return field_attribute_lookup
 
@@ -83,9 +84,9 @@ class Area(GenericObject):
             raise Exception
 
     def has_sanitary_connection(self):
-        if self.san_connect_type is not None:
+        if self.san_connect_type != None:
             return True
-        elif self.san_connect_type is None:
+        elif self.san_connect_type == None:
             return False
         else:
             raise Exception

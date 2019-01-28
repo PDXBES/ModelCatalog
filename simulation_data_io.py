@@ -8,8 +8,9 @@ except:
 from config import Config
 from model_catalog_db_data_io import ModelCatalogDbDataIo
 from area import Area
+from object_data_io import ObjectDataIo
 
-class SimulationDataIO:
+class SimulationDataIO(ObjectDataIo):
     def __init__(self, config, model_catalog_db_data_io):
         # type: (Config, ModelCatalogDbDataIo) -> None
         self.config = config
@@ -77,7 +78,14 @@ class SimulationDataIO:
         self.model_catalog_db_data_io.copy_to_memory(input_table, output_table_name, parent_id_to_db_field_mapping)
 
     def append_area_results_to_db(self, area_results):
-        field_attribute_lookup = Area.output_field_attribute_lookup()
-        template_table_path = self.config.area_results_sde_path
-        target_path = self.config.area_results_sde_path
-        self.model_catalog_db_data_io.append_feature_class_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
+        editor = self.start_editing_session(self.config.RRAD_sde_path)
+        try:
+            field_attribute_lookup = Area.output_field_attribute_lookup()
+            template_table_path = self.config.area_results_sde_path
+            target_path = self.config.area_results_sde_path
+            self.model_catalog_db_data_io.append_feature_class_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
+            self.stop_editing_session(editor, True)
+        except:
+            self.stop_editing_session(editor, False)
+            arcpy.AddMessage("DB Error while adding area results. Changes rolled back.")
+            raise
