@@ -216,6 +216,17 @@ class EMGAATS_Model_Registration(object):
             number_of_values = len(parameters[8].values)
             if number_of_values > 1 and parameters[8].values[-1] in parameters[8].values[0:number_of_values-1]:
                 parameters[8].values = parameters[8].values[0:number_of_values-1]
+
+        if parameters[9].values is not None:
+            number_of_values = len(parameters[9].values)
+            if number_of_values > 1 and parameters[9].values[-1] in parameters[9].values[0:number_of_values-1]:
+                parameters[9].values = parameters[9].values[0:number_of_values-1]
+
+        if parameters[10].values is not None:
+            number_of_values = len(parameters[10].values)
+            if number_of_values > 1 and parameters[10].values[-1] in parameters[10].values[0:number_of_values-1]:
+                parameters[10].values = parameters[10].values[0:number_of_values-1]
+
         values_altered= False
         alterations_present = False
         # Enables alteration file field if an alteration is added
