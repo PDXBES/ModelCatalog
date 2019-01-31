@@ -78,12 +78,21 @@ class SimulationDataIO(ObjectDataIo):
         self.model_catalog_db_data_io.copy_to_memory(input_table, output_table_name, parent_id_to_db_field_mapping)
 
     def append_area_results_to_db(self, area_results):
-        editor = self.start_editing_session(self.config.RRAD_sde_path)
-        try:
+
             field_attribute_lookup = Area.output_field_attribute_lookup()
             template_table_path = self.config.area_results_sde_path
             target_path = self.config.area_results_sde_path
             self.model_catalog_db_data_io.append_feature_class_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
+
+
+    def add_simulation_results(self, simulation):
+        simulation.create_areas(self)
+        editor = self.start_editing_session(self.config.RRAD_sde_path)
+        try:
+            self.copy_link_results(simulation)
+            self.copy_node_results(simulation)
+            self.copy_node_flooding_results(simulation)
+            self.append_area_results_to_db(simulation.areas)
             self.stop_editing_session(editor, True)
         except:
             self.stop_editing_session(editor, False)

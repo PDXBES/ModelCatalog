@@ -25,7 +25,6 @@ class TestRRADCapacityResults(TestCase):
     def tearDown(self):
         self.mock_simulation_path = self.patch_simulation_path.stop()
 
-    def test_append_area_results_to_db(self):
-        self.simulation.create_areas(self.simulation_data_io)
-        self.simulation_data_io.append_area_results_to_db(self.simulation.areas)
+    def test_add_simulation_results(self):
+        self.simulation_data_io.add_simulation_results(self.simulation)
 
