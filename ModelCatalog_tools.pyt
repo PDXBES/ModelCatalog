@@ -1,13 +1,13 @@
 import arcpy
-from model_catalog import ModelCatalog
-from model import Model
-from model_catalog_db_data_io import ModelCatalogDbDataIo
-from simulation_data_io import SimulationDataIO
-from model_data_io import ModelDataIo
+from businessclasses.model_catalog import ModelCatalog
+from businessclasses.model import Model
+from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
+from dataio.simulation_data_io import SimulationDataIO
+from dataio.model_data_io import ModelDataIo
 import getpass
 import datetime
-import config
-from model_catalog_exception import Invalid_Model_exception
+from businessclasses import config
+from businessclasses.model_catalog_exception import Invalid_Model_exception
 reload(arcpy)
 reload(config)
 # reload(ModelCatalog)
