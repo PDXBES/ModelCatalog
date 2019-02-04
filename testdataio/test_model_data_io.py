@@ -3,14 +3,14 @@ import mock
 import arcpy
 from dataio.model_data_io import ModelDataIo
 from businessclasses.model import Model
-from simulation import Simulation
+from businessclasses.simulation import Simulation
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 from testbusinessclasses.mock_config import MockConfig
-from model_alt_bc import ModelAltBc
+from businessclasses.model_alt_bc import ModelAltBc
 from businessclasses.model_alt_hydrologic import ModelAltHydrologic
-from model_alt_hydraulic import ModelAltHydraulic
+from businessclasses.model_alt_hydraulic import ModelAltHydraulic
 from collections import OrderedDict
-from project_type import ProjectType
+from businessclasses.project_type import ProjectType
 from dataio.data_io_exception import AddObjectException, AddModelAlterationException
 
 
@@ -79,7 +79,7 @@ class TestModelDataIO(TestCase):
         self.mock_search_cursor = self.patch_search_cursor.start()
         self.mock_search_cursor.return_value = self.mock_search_cursor_object
 
-        self.patch_retrieve_current_simulation_id = mock.patch("model_catalog_db_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
+        self.patch_retrieve_current_simulation_id = mock.patch("dataio.model_catalog_db_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
         self.mock_retrieve_current_simulation_id = self.patch_retrieve_current_simulation_id.start()
         self.mock_retrieve_current_simulation_id.return_value = 1
 
@@ -89,6 +89,8 @@ class TestModelDataIO(TestCase):
         self.mock_model.simulations = [self.mock_simulation]
         self.mock_model.model_alterations = [self.mock_model_alt_bc]
 
+        self.patch_os_walk = mock.patch("os.walk")
+        self.mock_os_walk = self.patch_os_walk.start()
 
     def tearDown(self):
         self.mock_dissolve = self.patch_dissolve.stop()
@@ -96,15 +98,14 @@ class TestModelDataIO(TestCase):
         self.mock_search_cursor = self.patch_search_cursor.stop()
         self.mock_retrieve_current_simulation_id = self.patch_retrieve_current_simulation_id.stop()
         self.mock_add_object = self.patch_add_object.stop()
+        self.mock_os_walk = self.patch_os_walk.stop()
 
-    @mock.patch("os.walk")
-    def test_read_simulations_calls_os_walk(self, mock_os_walk):
+    def test_read_simulations_calls_os_walk(self):
         self.model_data_io.read_simulations(self.mock_model)
-        self.assertTrue(mock_os_walk.called)
+        self.assertTrue(self.mock_os_walk.called)
 
-    @mock.patch("os.walk")
-    def test_read_simulation_reads_standard_simulation_existing_scenario_returns_simulation_object(self, mock_os_walk):
-        mock_os_walk.return_value = iter([("path", ["D25yr6h"], "file name")])
+    def test_read_simulation_reads_standard_simulation_existing_scenario_returns_simulation_object(self):
+        self.mock_os_walk.return_value = iter([("path", ["D25yr6h"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
         self.assertEquals(first_simulation.model_path, r"C:\model_path")
@@ -112,9 +113,8 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 1)
         self.assertEquals(first_simulation.sim_desc, "D25yr6h")
 
-    @mock.patch("os.walk")
-    def test_read_simulation_reads_standard_simulation_build_out_scenario_returns_simulation_object(self, mock_os_walk):
-        mock_os_walk.return_value = iter([("path", ["D25yr6h-BO"], "file name")])
+    def test_read_simulation_reads_standard_simulation_build_out_scenario_returns_simulation_object(self):
+        self.mock_os_walk.return_value = iter([("path", ["D25yr6h-BO"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
         self.assertEquals(first_simulation.model_path, r"C:\model_path")
@@ -122,9 +122,8 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 1)
         self.assertEquals(first_simulation.sim_desc, "D25yr6h-BO")
 
-    @mock.patch("os.walk")
-    def test_read_simulation_reads_list_of_simulations_and_returns_correct_simulation_objects(self, mock_os_walk):
-        mock_os_walk.return_value = iter([("path", ["D25yr6h-BO","D10yr6h"], "file name")])
+    def test_read_simulation_reads_list_of_simulations_and_returns_correct_simulation_objects(self):
+        self.mock_os_walk.return_value = iter([("path", ["D25yr6h-BO","D10yr6h"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
         second_simulation = list_of_simulations[1]  # type: Simulation
@@ -137,9 +136,8 @@ class TestModelDataIO(TestCase):
         self.assertEquals(second_simulation.storm_id, 2)
         self.assertEquals(second_simulation.sim_desc, "D10yr6h")
 
-    @mock.patch("os.walk")
-    def test_read_simulation_reads_user_defined_simulation_returns_simulation_object(self, mock_os_walk):
-        mock_os_walk.return_value = iter([("path", ["Dec2015"], "file name")])
+    def test_read_simulation_reads_user_defined_simulation_returns_simulation_object(self):
+        self.mock_os_walk.return_value = iter([("path", ["Dec2015"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
         self.assertEquals(first_simulation.model_path, r"C:\model_path")
@@ -147,27 +145,15 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 0)
         self.assertEquals(first_simulation.sim_desc, "Dec2015")
 
-    def test_add_simulation_calls_add_object(self):
-        self.model_data_io.add_simulation(11, self.mock_simulation)
-        self.assertTrue(self.mock_add_object.called)
-
     def test_add_simulation_calls_add_object_with_correct_arguments(self):
         self.model_data_io.add_simulation(11, self.mock_simulation)
         self.mock_add_object.assert_called_with(11, self.mock_simulation, self.mock_simulation.input_field_attribute_lookup,
                                                 self.config.simulation_sde_path)
 
-    def test_create_model_geometry_calls_arcpy_dissolve_management(self):
-        self.model_data_io.create_model_geometry(self.mock_model)
-        self.assertTrue(self.mock_dissolve.called)
-
     def test_create_model_geometry_calls_arcpy_dissolve_management_with_the_correct_arguments(self):
         self.model_data_io.create_model_geometry(self.mock_model)
         input = "C:\model_path" + "\\" + "EmgaatsModel.gdb" + "\\Network\\Links"
         self.mock_dissolve.assert_called_with(input, "in_memory\\Links", "", "", "MULTI_PART")
-
-    def test_create_model_geometry_calls_search_cursor(self):
-        self.model_data_io.create_model_geometry(self.mock_model)
-        self.assertTrue(self.mock_search_cursor.called)
 
     def test_create_model_geometry_calls_search_cursor_with_correct_arguments(self):
         self.model_data_io.create_model_geometry(self.mock_model)
@@ -204,26 +190,12 @@ class TestModelDataIO(TestCase):
         with self.assertRaises((Exception, AddModelAlterationException)):
             self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydraulic)
 
-    def test_add_simulations_calls_add_simulation(self):
-        patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")
-        mock_add_simulation = patch_add_simulation.start()
-        self.model_data_io.add_simulations(self.mock_model)
-        self.assertTrue(mock_add_simulation.called)
-        patch_add_simulation.stop()
-
     def test_add_simulations_calls_add_simulation_with_correct_arguments(self):
         patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")
         mock_add_simulation = patch_add_simulation.start()
         self.model_data_io.add_simulations(self.mock_model)
         mock_add_simulation.assert_called_with(11, self.mock_simulation)
         patch_add_simulation.stop()
-
-    def test_add_model_alterations_calls_add_model_alteration(self):
-        patch_add_model_alteration = mock.patch.object(self.model_data_io, "add_model_alteration")
-        mock_add_model_alteration = patch_add_model_alteration.start()
-        self.model_data_io.add_model_alterations(self.mock_model)
-        self.assertTrue(mock_add_model_alteration.called)
-        patch_add_model_alteration.stop()
 
     def test_add_model_alterations_calls_add_model_alteration_with_correct_arguments(self):
         patch_add_model_alteration = mock.patch.object(self.model_data_io, "add_model_alteration")
@@ -232,23 +204,11 @@ class TestModelDataIO(TestCase):
         mock_add_model_alteration.assert_called_with(11, self.mock_model_alt_bc)
         patch_add_model_alteration.stop()
 
-    def test_add_project_type_calls_add_object(self):
-        with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
-            self.model_data_io.add_project_type(11, self.mock_project_type)
-            self.assertTrue(mock_add_object.called)
-
     def test_add_project_type_calls_add_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "add_object") as mock_add_object:
             self.model_data_io.add_project_type(11, self.mock_project_type)
             mock_add_object.assert_called_with(11, self.mock_project_type,
                                                self.generic_field_attribute_lookup, self.config.project_type_sde_path)
-
-    def test_add_project_types_calls_add_project_type(self):
-        patch_add_project_type = mock.patch.object(self.model_data_io, "add_project_type")
-        mock_add_project_type = patch_add_project_type.start()
-        self.model_data_io.add_project_types(self.mock_model)
-        self.assertTrue(mock_add_project_type.called)
-        patch_add_project_type.stop()
 
     def test_add_project_types_calls_add_project_type_with_correct_arguments(self):
         patch_add_project_type = mock.patch.object(self.model_data_io, "add_project_type")

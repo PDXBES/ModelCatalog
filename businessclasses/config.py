@@ -8,7 +8,8 @@ except:
 
 class Config:
     def __init__(self):
-        executable_path = os.path.dirname(os.path.realpath(__file__))
+        executable_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
+
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
         self.dummy_model_alteration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
 

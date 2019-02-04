@@ -1,6 +1,6 @@
 import unittest
 import os
-from model_catalog import ModelCatalog
+from businessclasses.model_catalog import ModelCatalog
 from businessclasses.model import Model
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 from dataio.model_data_io import ModelDataIo
@@ -8,15 +8,16 @@ import getpass
 import datetime
 import arcpy
 from businessclasses.config import Config
-from model_catalog_exception import Invalid_Model_exception
+from businessclasses.model_catalog_exception import Invalid_Model_exception
 import mock
 
 # This allows a file without a .py extension to be imported (ESRI pyt file)
 executable_path = os.path.dirname(os.path.realpath(__file__))
+pyt_path = os.path.abspath(os.path.join(executable_path, '..', "ModelCatalog_tools.pyt"))
 from imp import load_source
-model_catalog_tools = load_source("ModelCatalog_tools", executable_path + "\\ModelCatalog_tools.pyt")
+model_catalog_tools = load_source("ModelCatalog_tools", pyt_path)
 
-#@unittest.skip("Integration Tests")
+
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
         self.config = Config()
@@ -81,7 +82,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_working_exception_thrown_after_model_added_to_db_should_rollback(self):
-        with mock.patch("model_data_io.ModelDataIo.add_simulations") as mock_add_simulations:
+        with mock.patch("dataio.model_data_io.ModelDataIo.add_simulations") as mock_add_simulations:
             self.model.id = 999
             mock_add_simulations.side_effect = Exception()
             self.model_dataio.create_model_geometry(self.model)

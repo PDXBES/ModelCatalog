@@ -3,9 +3,10 @@ import mock
 from testbusinessclasses.mock_config import MockConfig
 import arcpy
 from dataio.object_data_io import ObjectDataIo
-from generic_object import GenericObject
+from businessclasses.generic_object import GenericObject
 from collections import OrderedDict
 from dataio.db_data_io import DbDataIo
+
 
 class TestObjectDataIo(TestCase):
 
@@ -52,7 +53,6 @@ class TestObjectDataIo(TestCase):
         self.patch_stopEditing = mock.patch("arcpy.da.Editor.stopEditing")
         self.mock_stopEditing = self.patch_stopEditing.start()
 
-
     def tearDown(self):
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.stop()
         self.mock_da_Editor = self.patch_da_Editor.stop()
@@ -61,18 +61,11 @@ class TestObjectDataIo(TestCase):
         self.mock_stopOperation = self.patch_stopOperation.stop()
         self.mock_stopEditing = self.patch_stopEditing.stop()
 
-
     def test_add_object_sets_generic_object_parent_id(self):
         self.mock_generic_object.valid = True
         self.mock_generic_object.parent_id = None
         self.object_data_io.add_object(self.parent_id, self.mock_generic_object, self.field_attribute_lookup, self.object_table_sde_path)
         self.assertEqual(self.mock_generic_object.parent_id, 1)
-
-    def test_add_object_calls_db_data_io_add_object(self):
-        self.mock_generic_object.valid = True
-        self.object_data_io.add_object(self.parent_id, self.mock_generic_object,
-                                       self.field_attribute_lookup, self.object_table_sde_path)
-        self.assertTrue(self.mock_db_data_io.add_object.called)
 
     def test_add_object_calls_db_data_io_add_object_with_correct_arguments(self):
         self.mock_generic_object.valid = True
@@ -98,7 +91,6 @@ class TestObjectDataIo(TestCase):
         editor = self.object_data_io.start_editing_session(workspace_path)
         start_operation_called = editor.startOperation.called
         self.assertTrue(start_operation_called)
-
 
     def test_stop_editing_session_calls_stop_operation(self):
         self.object_data_io.stop_editing_session(self.mock_Editor, self.save_changes)

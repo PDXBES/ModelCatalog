@@ -93,22 +93,21 @@ class TestModelCatalogDbDataIO(TestCase):
         current_model_alteration_id = self.modelcatalogdataio.retrieve_current_model_alteration_id()
         self.assertTrue(current_model_alteration_id == 66)
 
-# TODO: fix and check tests below here
-    def test_add_model_calls_add_object(self):
+    def test_add_model_calls_add_object_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.mock_add_object.assert_called_with(self.model)
+        self.mock_add_object.assert_called_with(self.model, Model.input_field_attribute_lookup(), "model_tracking_sde_path")
 
-    def test_add_model_calls_add_simulations(self):
+    def test_add_model_calls_add_simulations_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.assertTrue(self.mock_add_simulations.called)
+        self.mock_add_simulations.assert_called_with(self.model)
 
-    def test_add_model_calls_add_model_alterations(self):
+    def test_add_model_calls_add_model_alterations_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.assertTrue(self.mock_add_model_alterations.called)
+        self.mock_add_model_alterations.assert_called_with(self.model)
 
-    def test_add_model_calls_add_project_types(self):
+    def test_add_model_calls_add_project_types_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.assertTrue(self.mock_add_project_types.called)
+        self.mock_add_project_types.assert_called_with(self.model)
 
     def test_add_model_calls_start_editing_session_with_correct_workspace(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)

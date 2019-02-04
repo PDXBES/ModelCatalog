@@ -6,7 +6,7 @@ from businessclasses.simulation import Simulation
 import mock
 import unittest
 
-@unittest.skip("Integration Tests")
+
 class TestRRADCapacityResults(TestCase):
 
     def setUp(self):

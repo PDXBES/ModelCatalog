@@ -11,6 +11,8 @@ rrad_data_io = RradDbDataIo(config)
 rehab_data_io = RehabDataIO(config)
 rehab = Rehab(config)
 
+# TODO: Rehab tracking table is not versioned, these need to be wrapped in edit sessions
+
 t1 = time.time()
 print "getting rehab id"
 rehab_id = rrad_data_io.retrieve_current_rehab_id()

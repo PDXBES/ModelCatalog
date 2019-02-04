@@ -34,7 +34,8 @@ class TestSimulationDataIO(TestCase):
         self.patch_stop_editing_session = mock.patch.object(self.simulationdataio, "stop_editing_session")
         self.mock_stop_editing_session = self.patch_stop_editing_session.start()
 
-
+        self.patch_simulation_path = mock.patch("businessclasses.simulation.Simulation.path")
+        self.mock_simulation_path = self.patch_simulation_path.start()
 
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
@@ -76,8 +77,6 @@ class TestSimulationDataIO(TestCase):
                                               self.mock_fields3,
                                               self.mock_fields4]
 
-
-
     def tearDown(self):
         self.mock_list_fields = self.patch_list_fields.stop()
         self.mock_da_SearchCursor = self.patch_search_cursor.stop()
@@ -88,36 +87,27 @@ class TestSimulationDataIO(TestCase):
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
         self.mock_create_areas = self.patch_create_areas.stop()
+        self.mock_simulation_path = self.patch_simulation_path.stop()
 
-
-    @mock.patch("simulation.Simulation.path")
-    def test_area_results_path_creates_correct_path(self, mock_simulation_path):
-        mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
+    def test_area_results_path_creates_correct_path(self):
+        self.mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
         area_results_path = self.simulationdataio.area_results_path(self.simulation)
         self.assertEquals(area_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults")
 
-    @mock.patch("simulation.Simulation.path")
-    def test_link_results_path_creates_correct_path(self, mock_simulation_path):
-        mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
+    def test_link_results_path_creates_correct_path(self):
+        self.mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
         link_results_path = self.simulationdataio.link_results_path(self.simulation)
         self.assertEquals(link_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\LinkResults")
 
-    @mock.patch("simulation.Simulation.path")
-    def test_node_results_path_creates_correct_path(self, mock_simulation_path):
-        mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
+    def test_node_results_path_creates_correct_path(self):
+        self.mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
         node_results_path = self.simulationdataio.node_results_path(self.simulation)
         self.assertEquals(node_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\NodeResults")
 
-    @mock.patch("simulation.Simulation.path")
-    def test_node_flooding_results_path_creates_correct_path(self, mock_simulation_path):
-        mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
+    def test_node_flooding_results_path_creates_correct_path(self):
+        self.mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
         node_flooding_results_path = self.simulationdataio.node_flooding_results_path(self.simulation)
         self.assertEquals(node_flooding_results_path, r"c:\temp\fake\sim\D25yr6h\results.gdb\NodeFloodingResults")
-
-    def test_copy_link_results_calls_copy(self):
-        self.simulationdataio.copy_link_results(self.mock_simulation)
-        self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
-
 
     def test_copy_link_results_calls_copy_with_correct_arguments(self):
         patch_link_results_path = mock.patch.object(self.simulationdataio, "link_results_path")
@@ -130,11 +120,6 @@ class TestSimulationDataIO(TestCase):
         self.mock_model_catalog_db_data_io_copy.assert_called_with("link_results_path", "link_results_sde_path", None, "id_to_field_map")
         patch_link_results_path.stop()
         patch_id_to_field_map.stop()
-
-
-    def test_copy_node_results_calls_copy(self):
-        self.simulationdataio.copy_node_results(self.mock_simulation)
-        self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
 
     def test_copy_node_results_calls_copy_with_correct_arguments(self):
         patch_node_results_path = mock.patch.object(self.simulationdataio, "node_results_path")
@@ -153,10 +138,6 @@ class TestSimulationDataIO(TestCase):
         patch_node_results_path.stop()
         patch_id_to_field_map.stop()
 
-    def test_copy_node_flooding_results_calls_copy(self):
-        self.simulationdataio.copy_node_flooding_results(self.mock_simulation)
-        self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
-
     def test_copy_node_flooding_results_calls_copy_with_correct_arguments(self):
         patch_node_flooding_results_path = mock.patch.object(self.simulationdataio, "node_flooding_results_path")
         mock_node_flooding_results_path = patch_node_flooding_results_path.start()
@@ -173,10 +154,6 @@ class TestSimulationDataIO(TestCase):
                                                                    "id_to_field_map")
         patch_node_flooding_results_path.stop()
         patch_id_to_field_map.stop()
-
-    def test_copy_area_results_calls_copy(self):
-        self.simulationdataio.copy_area_results(self.mock_simulation)
-        self.assertTrue(self.mock_model_catalog_db_data_io_copy.called)
 
     def test_copy_area_results_calls_copy_with_correct_arguments(self):
         patch_area_results_path = mock.patch.object(self.simulationdataio, "area_results_path")

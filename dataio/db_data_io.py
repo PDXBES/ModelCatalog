@@ -37,7 +37,7 @@ class DbDataIo(object):
         if not object_class.valid:
             raise DataIoException
 
-        row = self.create_row_from_object(object_class, field_attribute_lookup )
+        row = self.create_row_from_object(object_class, field_attribute_lookup)
         field_names = field_attribute_lookup.keys()
 
         if len(field_names) != len(row):
