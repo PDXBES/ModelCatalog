@@ -1,10 +1,5 @@
 import os
 import arcpy
-
-try:
-    from typing import List, Any
-except:
-    pass
 from simulation import Simulation
 from config import Config
 from generic_object import GenericObject
@@ -14,6 +9,11 @@ from model_alt_hydraulic import ModelAltHydraulic
 from model_alteration import ModelAlteration
 from project_type import ProjectType
 from collections import OrderedDict
+import datetime
+try:
+    from typing import List, Any
+except:
+    pass
 
 
 class Model(GenericObject):
@@ -97,49 +97,63 @@ class Model(GenericObject):
 #TODO: move dataIO functions to a DataIO class; Validate results.gdb;
     @property
     def valid(self):
+        return self.valid_emgaats_model_structure()
+
+    def valid_emgaats_model_structure(self):
         if self.validate_model_path():
             is_model_path_valid = True
         else:
             is_model_path_valid = False
-
         if self.validate_config_file():
             is_config_file_valid = True
         else:
             is_config_file_valid = False
-
         if self.validate_gdb():
             is_gdb_valid = True
         else:
             is_gdb_valid = False
-
         if self.validate_sim():
             is_sim_valid = True
         else:
             is_sim_valid = False
-
         if not is_model_path_valid or not is_config_file_valid or not is_gdb_valid or not is_sim_valid:
             is_valid = False
         else:
             is_valid = True
         return is_valid
 
+    def valid_calibration_storms(self):
+        for simulation in self.simulations:
+            if simulation.storm_id == 0:
+                if len(simulation.sim_desc) == 11:
+                    sim_year = simulation.sim_desc[3:7]
+                    sim_month =simulation.sim_desc[7:9]
+                    sim_day = simulation.sim_desc[9:11]
+                    current_date = datetime.datetime.now()
+                    simulation_date = datetime.datetime(year=sim_year, month=sim_month, day=sim_day)
+                    if simulation_date < current_date:
+
+
+
+
+
     def model_valid_diagnostic(self):
+        self.valid_emgaats_model_structure_diagnostic()
+
+    def valid_emgaats_model_structure_diagnostic(self):
         if self.validate_model_path():
             arcpy.AddMessage("Model Path is valid: " + self.model_path)
         else:
             arcpy.AddMessage("Model Path is not valid: " + self.model_path)
-
         if self.validate_config_file():
             arcpy.AddMessage("Config File is valid: " + self.config_file_path)
         else:
             arcpy.AddMessage("Config File is not valid: " + self.config_file_path)
-
         if self.validate_gdb():
             arcpy.AddMessage("GDB is valid: " + self.gdb_file_path)
 
         else:
             arcpy.AddMessage("GDB is not valid: " + self.gdb_file_path)
-
         if self.validate_sim():
             arcpy.AddMessage("Sim folder is valid: " + self.sim_file_path)
 

@@ -2,6 +2,7 @@ from unittest import TestCase
 from businessclasses.model import Model
 import mock
 from mock_config import MockConfig
+from businessclasses.simulation import Simulation
 
 class TestModel(TestCase):
 
@@ -12,6 +13,22 @@ class TestModel(TestCase):
         self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
         self.model = Model.initialize_with_current_id(self.config, self.mock_object_data_io)
         self.model.model_path = r"c:\temp"
+
+        self.mock_simulation1 = mock.MagicMock(Simulation)
+        self.mock_simulation1.storm_id = 1
+        self.mock_simulation1.sim_desc = ""
+
+        self.mock_simulation2 = mock.MagicMock(Simulation)
+        self.mock_simulation2.storm_id = 2
+        self.mock_simulation2.sim_desc = ""
+
+        self.mock_calibration_simulation1 = mock.MagicMock(Simulation)
+        self.mock_calibration_simulation1.storm_id = 0
+        self.mock_calibration_simulation1.sim_desc = "TAG20181225"
+
+        self.mock_calibration_simulation2 = mock.MagicMock(Simulation)
+        self.mock_calibration_simulation2.storm_id = 0
+        self.mock_calibration_simulation2.sim_desc = "TAG20191225"
 
         self.patch_os_path_exists = mock.patch("os.path.exists")
         self.mock_os_path_exists = self.patch_os_path_exists.start()
@@ -97,39 +114,39 @@ class TestModel(TestCase):
     @mock.patch("businessclasses.model.Model.validate_config_file")
     @mock.patch("businessclasses.model.Model.validate_gdb")
     @mock.patch("businessclasses.model.Model.validate_sim")
-    def test_valid_if_model_path_config_gdb_and_sim_are_valid_return_true(self, mock_validate_sim, mock_validate_gdb,
+    def test_valid_emgaats_model_structure_if_model_path_config_gdb_and_sim_are_valid_return_true(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
         mock_validate_gdb.return_value = True
         mock_validate_config_file.return_value = True
         mock_validate_model_path.return_value = True
-        is_valid = self.model.valid
+        is_valid = self.model.valid_emgaats_model_structure()
         self.assertTrue(is_valid)
 
     @mock.patch("businessclasses.model.Model.validate_model_path")
     @mock.patch("businessclasses.model.Model.validate_config_file")
     @mock.patch("businessclasses.model.Model.validate_gdb")
     @mock.patch("businessclasses.model.Model.validate_sim")
-    def test_valid_if_model_path_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
+    def test_valid_emgaats_model_structure_if_model_path_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
         mock_validate_gdb.return_value = True
         mock_validate_config_file.return_value = True
         mock_validate_model_path.return_value = False
-        is_valid = self.model.valid
+        is_valid = self.model.valid_emgaats_model_structure()
         self.assertFalse(is_valid)
 
     @mock.patch("businessclasses.model.Model.validate_model_path")
     @mock.patch("businessclasses.model.Model.validate_config_file")
     @mock.patch("businessclasses.model.Model.validate_gdb")
     @mock.patch("businessclasses.model.Model.validate_sim")
-    def test_valid_if_model_config_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
+    def test_valid_emgaats_model_structure_if_model_config_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = True
         mock_validate_gdb.return_value = True
         mock_validate_config_file.return_value = False
         mock_validate_model_path.return_value = True
-        is_valid = self.model.valid
+        is_valid = self.model.valid_emgaats_model_structure()
         self.assertFalse(is_valid)
 
     @mock.patch("businessclasses.model.Model.validate_model_path")
@@ -149,26 +166,26 @@ class TestModel(TestCase):
     @mock.patch("businessclasses.model.Model.validate_config_file")
     @mock.patch("businessclasses.model.Model.validate_gdb")
     @mock.patch("businessclasses.model.Model.validate_sim")
-    def test_valid_if_sim_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
+    def test_valid_emgaats_model_structure_if_sim_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = False
         mock_validate_gdb.return_value = True
         mock_validate_config_file.return_value = True
         mock_validate_model_path.return_value = True
-        is_valid = self.model.valid
+        is_valid = self.model.valid_emgaats_model_structure()
         self.assertFalse(is_valid)
 
     @mock.patch("businessclasses.model.Model.validate_model_path")
     @mock.patch("businessclasses.model.Model.validate_config_file")
     @mock.patch("businessclasses.model.Model.validate_gdb")
     @mock.patch("businessclasses.model.Model.validate_sim")
-    def test_valid_if_all_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
+    def test_valid_emgaats_model_structure_if_all_invalid_return_false(self, mock_validate_sim, mock_validate_gdb,
                                                    mock_validate_config_file, mock_validate_model_path):
         mock_validate_sim.return_value = False
         mock_validate_gdb.return_value = False
         mock_validate_config_file.return_value = False
         mock_validate_model_path.return_value = False
-        is_valid = self.model.valid
+        is_valid = self.model.valid_emgaats_model_structure()
         self.assertFalse(is_valid)
 
     def test_simulation_folder_path(self):
@@ -268,3 +285,12 @@ class TestModel(TestCase):
             alteration_types = [["zero"], ["one"], ["two"]]
             self.model.create_model_alterations_hydraulic(alteration_types)
             mock_create_model_alterations.assert_called_with(alteration_types, "hydraulic")
+
+    # TODO: write tests to verify diagnostic tools report appropriate errors
+
+    def test_valid_calibration_storms_model_has_two_calibration_storms_returns_true(self):
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1,self.mock_calibration_simulation2]
+
+        is_valid = self.model.valid_calibration_storms()
+        self.assertTrue(is_valid)
+
