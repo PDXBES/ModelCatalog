@@ -2,7 +2,7 @@ import mock
 from unittest import TestCase
 from businessclasses.model_catalog import ModelCatalog
 from businessclasses.model import Model
-from businessclasses.model_catalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
+from businessclasses.model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from mock_config import MockConfig
 
 class TestModelCatalog(TestCase):
@@ -16,13 +16,13 @@ class TestModelCatalog(TestCase):
     def test_model_check_for_duplicates(self):
         self.model1.valid = True
         self.model_catalog.models.append(self.model1)
-        with self.assertRaises(Duplicate_model_Exception):
+        with self.assertRaises(DuplicateModelException):
             self.model_catalog.check_for_duplicate_model(self.model1)
 
     def test_model_check_for_valid(self):
         self.model1.valid = False
         self.model_catalog.models.append(self.model1)
-        with self.assertRaises (Invalid_Model_exception):
+        with self.assertRaises (InvalidModelException):
             self.model_catalog.check_for_valid_model(self.model1)
 
     def test_add_model_new_model_into_empty_list(self):
@@ -46,13 +46,13 @@ class TestModelCatalog(TestCase):
 
         self.model1.valid = False
 
-        with self.assertRaises(Invalid_Model_exception):
+        with self.assertRaises(InvalidModelException):
             self.model_catalog.add_model(self.model1)
 
     def test_add_model_duplicate_model_should_fail(self):
         self.model1.valid = True
         self.model_catalog.add_model(self.model1)
-        with self.assertRaises(Duplicate_model_Exception):
+        with self.assertRaises(DuplicateModelException):
             self.model_catalog.add_model(self.model1)
 
     def test_add_model_list_add_2_models_verify_2_models_in_catalog_models(self):
@@ -79,7 +79,7 @@ class TestModelCatalog(TestCase):
         models.append(self.model1)
         models.append(self.model2)
 
-        with self.assertRaises(Invalid_Model_exception):
+        with self.assertRaises(InvalidModelException):
             self.model_catalog.add_models(models)
 
         self.assertEquals(len(self.model_catalog.models), 0)
@@ -91,7 +91,7 @@ class TestModelCatalog(TestCase):
 
         models.append(self.model1)
 
-        with self.assertRaises(Duplicate_model_Exception):
+        with self.assertRaises(DuplicateModelException):
             self.model_catalog.add_models(models)
 
         self.assertEquals(len(self.model_catalog.models), 1)
@@ -106,7 +106,7 @@ class TestModelCatalog(TestCase):
         models.append(self.model1)
         models.append(self.model1)
 
-        with self.assertRaises(Duplicates_in_input_model_list):
+        with self.assertRaises(DuplicatesInInputModeList):
             self.model_catalog.add_models(models)
 
         self.assertEquals(len(self.model_catalog.models), 0)

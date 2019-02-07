@@ -3,6 +3,7 @@ from businessclasses.model import Model
 import mock
 from mock_config import MockConfig
 from businessclasses.simulation import Simulation
+from businessclasses.model_catalog_exception import InvalidCalibrationStormSimulationDescription
 
 class TestModel(TestCase):
 
@@ -17,10 +18,12 @@ class TestModel(TestCase):
         self.mock_simulation1 = mock.MagicMock(Simulation)
         self.mock_simulation1.storm_id = 1
         self.mock_simulation1.sim_desc = ""
+        self.mock_simulation1.dev_scenario_id = 0
 
         self.mock_simulation2 = mock.MagicMock(Simulation)
         self.mock_simulation2.storm_id = 2
         self.mock_simulation2.sim_desc = ""
+        self.mock_simulation1.dev_scenario_id = 1
 
         self.mock_calibration_simulation1 = mock.MagicMock(Simulation)
         self.mock_calibration_simulation1.storm_id = 0
@@ -288,9 +291,35 @@ class TestModel(TestCase):
 
     # TODO: write tests to verify diagnostic tools report appropriate errors
 
-    def test_valid_calibration_storms_model_has_two_calibration_storms_returns_true(self):
-        self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1,self.mock_calibration_simulation2]
-
-        is_valid = self.model.valid_calibration_storms()
+    def test_valid_calibration_simulations_model_has_two_calibration_storms_returns_true(self):
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
+        is_valid = self.model.valid_calibration_simulations()
         self.assertTrue(is_valid)
 
+    def test_valid_calibration_simulations_model_has_two_calibration_storms_with_invalid_desc_length_returns_false(self):
+        self.mock_calibration_simulation1.sim_desc = "TAGD20190203"
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
+        is_valid = self.model.valid_calibration_simulations()
+        self.assertFalse(is_valid)
+
+    def test_valid_calibration_simulations_model_has_two_calibration_storms_with_invalid_desc_date_returns_false(self):
+        self.mock_calibration_simulation1.sim_desc = "TAG20190250"
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
+        with self.assertRaises(InvalidCalibrationStormSimulationDescription):
+            self.model.valid_calibration_simulations()
+
+    def test_valid_calibration_simulations_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false(self):
+        self.mock_calibration_simulation1.sim_desc = "TAG2019025O"
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
+        with self.assertRaises(InvalidCalibrationStormSimulationDescription):
+            self.model.valid_calibration_simulations()
+
+    def test_valid_calibration_simulations_model_has_no_calibration_storms_returns_false(self):
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2]
+        is_valid = self.model.valid_calibration_simulations()
+        self.assertFalse(is_valid)
+
+    def test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true(self):
+        self.model.simulations = [self.mock_simulation1, self.mock_simulation2]
+        is_valid = self.model.valid_ccsp_characterization_simulations()
+        self.assertTrue(is_valid)

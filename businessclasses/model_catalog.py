@@ -3,7 +3,7 @@ try:
 except:
     pass
 from model import Model
-from model_catalog_exception import Invalid_Model_exception, Duplicate_model_Exception, Duplicates_in_input_model_list
+from model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from config import Config
 import arcpy
 
@@ -43,14 +43,14 @@ class ModelCatalog:
             if model not in model_set:
                 model_set.add(model)
             else:
-                raise Duplicates_in_input_model_list
+                raise DuplicatesInInputModeList
 
     def check_for_duplicate_model(self, model):
         # type: (model) -> None
         if model in self.models:
-            raise Duplicate_model_Exception
+            raise DuplicateModelException
 
     def check_for_valid_model(self, model):
         # type: (model) -> None
         if not model.valid:
-            raise Invalid_Model_exception
+            raise InvalidModelException

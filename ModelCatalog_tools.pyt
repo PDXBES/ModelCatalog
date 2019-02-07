@@ -7,7 +7,7 @@ from dataio.model_data_io import ModelDataIo
 import getpass
 import datetime
 from businessclasses import config
-from businessclasses.model_catalog_exception import Invalid_Model_exception
+from businessclasses.model_catalog_exception import InvalidModelException
 reload(arcpy)
 reload(config)
 # reload(ModelCatalog)
@@ -287,7 +287,7 @@ class EMGAATS_Model_Registration(object):
             self.model_catalog.add_model(self.model)
 
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-        except Invalid_Model_exception:
+        except InvalidModelException:
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
 

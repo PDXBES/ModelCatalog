@@ -7,7 +7,7 @@ except:
     pass
 from businessclasses.model import Model
 from businessclasses.simulation import Simulation
-from businessclasses.model_catalog_exception import Invalid_Model_exception
+from businessclasses.model_catalog_exception import InvalidModelException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from businessclasses.model_alteration import ModelAlteration
@@ -32,7 +32,7 @@ class ModelDataIo(ObjectDataIo):
             del cursor
             arcpy.Delete_management(model_out)
         else:
-            raise Invalid_Model_exception
+            raise InvalidModelException
 
     def read_simulations(self, model):
         # type: (Model) -> List[Simulation]

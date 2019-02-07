@@ -89,6 +89,9 @@ class Config:
 
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
         self.unique_cip_numbers = self.get_unique_cip_numbers()
+
+        # TODO: Here is a stub to check storms
+        self.ccsp_characterization_simulations = {}
         #TODO - move piece to remove unicode empty string to separate function
 
     def get_unique_cip_numbers(self):

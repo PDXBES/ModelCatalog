@@ -1,25 +1,27 @@
 
 
-class ModelCatalog_exception(Exception):
+class ModelCatalogException(Exception):
     pass
 
 
-class Field_names_length_does_not_match_row_length_exception(ModelCatalog_exception):
+class FieldNamesLengthDoesNotMatchRowLengthException(ModelCatalogException):
     pass
 
 
-class Invalid_Model_exception(ModelCatalog_exception):
+class InvalidModelException(ModelCatalogException):
     pass
 
 
-class Duplicate_model_Exception(ModelCatalog_exception):
+class DuplicateModelException(ModelCatalogException):
     pass
 
 
-class Duplicates_in_input_model_list(ModelCatalog_exception):
+class DuplicatesInInputModeList(ModelCatalogException):
     pass
 
-class Invalid_model_path_exception(ModelCatalog_exception):
+class InvalidModelPathException(ModelCatalogException):
     pass
 
+class InvalidCalibrationStormSimulationDescription(ModelCatalogException):
+    pass
 

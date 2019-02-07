@@ -10,6 +10,7 @@ from model_alteration import ModelAlteration
 from project_type import ProjectType
 from collections import OrderedDict
 import datetime
+from model_catalog_exception import InvalidCalibrationStormSimulationDescription
 try:
     from typing import List, Any
 except:
@@ -122,18 +123,25 @@ class Model(GenericObject):
             is_valid = True
         return is_valid
 
-    def valid_calibration_storms(self):
+    def valid_calibration_simulations(self):
         for simulation in self.simulations:
             if simulation.storm_id == 0:
                 if len(simulation.sim_desc) == 11:
-                    sim_year = simulation.sim_desc[3:7]
-                    sim_month =simulation.sim_desc[7:9]
-                    sim_day = simulation.sim_desc[9:11]
-                    current_date = datetime.datetime.now()
-                    simulation_date = datetime.datetime(year=sim_year, month=sim_month, day=sim_day)
-                    if simulation_date < current_date:
+                    try:
+                        sim_year = int(simulation.sim_desc[3:7])
+                        sim_month = int(simulation.sim_desc[7:9])
+                        sim_day = int(simulation.sim_desc[9:11])
+                        current_date = datetime.datetime.now()
+                        simulation_date = datetime.datetime(year=sim_year, month=sim_month, day=sim_day)
+                        if simulation_date < current_date:
+                            return True
+                    except:
+                        raise InvalidCalibrationStormSimulationDescription()
+        return False
 
-
+    def valid_ccsp_characterization_simulations(self):
+        for simulation in self.simulations:
+            pass
 
 
 

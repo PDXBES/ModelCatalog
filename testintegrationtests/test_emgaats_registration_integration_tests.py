@@ -8,7 +8,7 @@ import getpass
 import datetime
 import arcpy
 from businessclasses.config import Config
-from businessclasses.model_catalog_exception import Invalid_Model_exception
+from businessclasses.model_catalog_exception import InvalidModelException
 import mock
 
 # This allows a file without a .py extension to be imported (ESRI pyt file)
@@ -76,7 +76,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
             self.model_catalog.add_model(self.model)
             model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
 
-        except Invalid_Model_exception:
+        except InvalidModelException:
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
         arcpy.AddMessage("\n")

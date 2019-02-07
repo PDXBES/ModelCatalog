@@ -3,22 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/businessclasses/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/MCatalog_RRAD.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/MCatalog_RRAD.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/MCatalog_RRAD_names_only.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/MCatalog_RRAD_names_only.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/Model_Catalog.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/Model_Catalog.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/Model_Catalog_names_only.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/Model_Catalog_names_only.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/RRAD.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/RRAD.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.bat" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/classes.dot" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/classes.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/classes.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/classes.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/finalMCatalog_RRAD.dot" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/finalMCatalog_RRAD.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/finalModel_Catalog.dot" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/finalModel_Catalog.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/finalRRAD.dot" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/finalRRAD.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/names_only_finalMCatalog_RRAD.dot" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/names_only_finalMCatalog_RRAD.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram_Tool/names_only_finalModel_Catalog.dot" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Class_Diagram_Tool/names_only_finalModel_Catalog.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataio/model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,132 +21,82 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="293" column="30" selection-start-line="293" selection-start-column="30" selection-end-line="293" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-                <element signature="e#810#937#0" />
-                <element signature="e#1017#1124#0" />
-                <element signature="e#1216#1305#0" />
-                <element signature="e#1400#1539#0" />
-                <element signature="e#1615#1705#0" />
-                <element signature="e#1786#1920#0" />
-                <element signature="e#2005#2136#0" />
-                <element signature="e#2230#2370#0" />
-                <element signature="e#2544#2626#0" />
-                <element signature="e#2699#2827#0" />
-                <element signature="e#2896#3019#0" />
-                <element signature="e#3099#3231#0" />
-                <element signature="e#3298#3380#0" />
-                <element signature="e#3456#3571#0" />
-                <element signature="e#3644#3767#0" />
-                <element signature="e#3849#3981#0" />
-                <element signature="e#4531#4791#0" />
-                <element signature="e#5259#5521#0" />
-                <element signature="e#5991#6253#0" />
-                <element signature="e#6714#6976#0" />
-                <element signature="e#7437#7699#0" />
-                <element signature="e#8478#8646#0" />
-                <element signature="e#8741#8907#0" />
-                <element signature="e#8991#9137#0" />
-                <element signature="e#9248#9446#0" />
-                <element signature="e#9538#9692#0" />
-                <element signature="e#9801#9995#0" />
-                <element signature="e#10086#10239#0" />
-                <element signature="e#10353#10788#0" />
-                <element signature="e#10910#11377#0" />
-                <element signature="e#11498#11961#0" />
-                <element signature="e#12066#12399#0" />
-                <element signature="e#12165#12399#0" />
-                <element signature="e#12520#12885#0" />
-                <element signature="e#12635#12885#0" />
-                <element signature="e#13004#13365#0" />
-                <element signature="e#13117#13365#0" />
-                <element signature="e#13476#13786#0" />
-                <element signature="e#13585#13786#0" />
-                <element signature="e#13905#14231#0" />
-                <element signature="e#14014#14231#0" />
-                <element signature="e#14349#14673#0" />
-                <element signature="e#14458#14673#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="34" column="62" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="10" column="104" selection-start-line="10" selection-start-column="104" selection-end-line="10" selection-end-column="104" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="129" column="55" lean-forward="true" selection-start-line="129" selection-start-column="55" selection-end-line="129" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-                <element signature="e#1591#2793#0" />
-                <element signature="e#2838#2920#0" />
-                <element signature="e#2966#3130#0" />
-                <element signature="e#3168#3322#0" />
-                <element signature="e#3360#3504#0" />
-                <element signature="e#3552#3627#0" />
-                <element signature="e#3838#4517#0" />
-                <element signature="e#4678#5474#0" />
-                <element signature="e#5333#5540#0" />
-                <element signature="e#5610#5856#0" />
-                <element signature="e#5925#6167#0" />
-                <element signature="e#6256#7002#0" />
-                <element signature="e#6328#7002#0" />
-                <element signature="e#6385#7002#0" />
-                <element signature="e#6437#6568#0" />
-                <element signature="e#6647#6786#0" />
-                <element signature="e#6864#7002#0" />
-                <element signature="e#7073#7126#0" />
-                <element signature="e#7205#7266#0" />
-                <element signature="e#7344#7404#0" />
-                <element signature="e#7468#7701#0" />
-                <element signature="e#7762#7952#0" />
-                <element signature="e#7842#7952#0" />
-                <element signature="e#7996#8057#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.49014974">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="5">
+                  <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="639">
+                  <caret line="48" column="110" lean-forward="true" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="110" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="462">
+                  <caret line="143" column="16" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="528">
+                  <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="50" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="589">
+                  <caret line="92" column="46" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="589">
+                  <caret line="324" column="33" lean-forward="true" selection-start-line="324" selection-start-column="33" selection-end-line="324" selection-end-column="33" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -217,7 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/model.py" />
         <option value="$PROJECT_DIR$/test_model.py" />
         <option value="$PROJECT_DIR$/data_io_exception.py" />
         <option value="$PROJECT_DIR$/test_model_data_io.py" />
@@ -261,20 +204,21 @@
         <option value="$PROJECT_DIR$/testdataio/test_object_data_io.py" />
         <option value="$PROJECT_DIR$/testdataio/test_rehab_data_io.py" />
         <option value="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" />
-        <option value="$PROJECT_DIR$/businessclasses/config.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
         <option value="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.bat" />
+        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
         <option value="$PROJECT_DIR$/businessclasses/model.py" />
+        <option value="$PROJECT_DIR$/businessclasses/config.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="38" />
     <option name="y" value="2" />
-    <option name="width" value="96" />
+    <option name="width" value="136" />
     <option name="height" value="53" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -313,7 +257,7 @@
     <property name="SearchEverywhereHistoryKey" value="Add&#9;null&#9;null&#10;font&#9;ACTION&#9;EditorIncreaseFontSize" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/testintegrationtests" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -339,8 +283,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true">
-    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -350,11 +294,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_all_invalid_return_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -364,11 +308,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_emgaats_model_structure_if_all_invalid_return_false&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_config_invalid_return_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -378,11 +322,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_emgaats_model_structure_if_model_config_invalid_return_false&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_path_invalid_return_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -392,11 +336,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_emgaats_model_structure_if_model_path_invalid_return_false&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_sim_invalid_return_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -406,24 +350,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_emgaats_model_structure_if_sim_invalid_return_false&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_path_invalid_return_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_config_invalid_return_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_sim_invalid_return_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_all_invalid_return_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_all_invalid_return_false" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_sim_invalid_return_false" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_config_invalid_return_false" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_path_invalid_return_false" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false" />
       </list>
     </recent_temporary>
   </component>
@@ -441,35 +385,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_RRAD_capacity_results_integration_tests_TestRRADCapacityResults - 2019.02.04 at 14h 54m 14s.xml">
-      <configuration name="Unittests for test_RRAD_capacity_results_integration_tests.TestRRADCapacityResults" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 40m 38s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel - 2019.02.06 at 11h 07m 27s.xml">
-      <configuration name="Unittests for test_model.TestModel" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 41m 38s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_emgaats_model_structure_if_model_path_config_gdb_and_sim_are_valid_return_true - 2019.02.06 at 11h 12m 08s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_path_config_gdb_and_sim_are_valid_return_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 43m 16s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_emgaats_model_structure_if_model_path_invalid_return_false - 2019.02.06 at 11h 12m 41s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_path_invalid_return_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 43m 35s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_emgaats_model_structure_if_model_config_invalid_return_false - 2019.02.06 at 11h 13m 10s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_model_config_invalid_return_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false - 2019.02.07 at 13h 48m 24s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_emgaats_model_structure_if_sim_invalid_return_false - 2019.02.06 at 11h 14m 07s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_sim_invalid_return_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_no_calibration_storms_returns_false - 2019.02.07 at 13h 54m 24s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_emgaats_model_structure_if_all_invalid_return_false - 2019.02.06 at 11h 14m 37s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_emgaats_model_structure_if_all_invalid_return_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_no_calibration_storms_returns_false - 2019.02.07 at 13h 54m 42s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_returns_true - 2019.02.06 at 11h 37m 56s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_no_calibration_storms_returns_false - 2019.02.07 at 13h 54m 59s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_returns_true - 2019.02.06 at 11h 39m 18s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true - 2019.02.07 at 14h 37m 44s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_returns_true - 2019.02.06 at 11h 52m 35s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true - 2019.02.07 at 14h 38m 39s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -482,20 +426,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1586" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.3744038" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.3743105" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33566433" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" weight="0.46153846" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.27116826" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33516863" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.46111494" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.44528562" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.009677419" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.25830653" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.0681349" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32903227" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.15739268" side_tool="true" weight="0.8686515" />
@@ -624,13 +568,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/_jb_unittest_runner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/python27/ArcGIS10.3/Lib/unittest/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="71">
@@ -683,13 +620,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/python27/ArcGIS10.3/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="364" selection-start-line="364" selection-end-line="364" />
         </state>
       </provider>
     </entry>
@@ -1182,10 +1112,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5">
+          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/python27/ArcGIS10.3/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="328" selection-start-line="328" selection-end-line="328" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="324" column="33" lean-forward="true" selection-start-line="324" selection-start-column="33" selection-end-line="324" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="10" column="104" selection-start-line="10" selection-start-column="104" selection-end-line="10" selection-end-column="104" />
+        <state relative-caret-position="589">
+          <caret line="92" column="46" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -1194,104 +1158,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="34" column="62" selection-start-line="34" selection-start-column="62" selection-end-line="34" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="293" column="30" selection-start-line="293" selection-start-column="30" selection-end-line="293" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#810#937#0" />
-            <element signature="e#1017#1124#0" />
-            <element signature="e#1216#1305#0" />
-            <element signature="e#1400#1539#0" />
-            <element signature="e#1615#1705#0" />
-            <element signature="e#1786#1920#0" />
-            <element signature="e#2005#2136#0" />
-            <element signature="e#2230#2370#0" />
-            <element signature="e#2544#2626#0" />
-            <element signature="e#2699#2827#0" />
-            <element signature="e#2896#3019#0" />
-            <element signature="e#3099#3231#0" />
-            <element signature="e#3298#3380#0" />
-            <element signature="e#3456#3571#0" />
-            <element signature="e#3644#3767#0" />
-            <element signature="e#3849#3981#0" />
-            <element signature="e#4531#4791#0" />
-            <element signature="e#5259#5521#0" />
-            <element signature="e#5991#6253#0" />
-            <element signature="e#6714#6976#0" />
-            <element signature="e#7437#7699#0" />
-            <element signature="e#8478#8646#0" />
-            <element signature="e#8741#8907#0" />
-            <element signature="e#8991#9137#0" />
-            <element signature="e#9248#9446#0" />
-            <element signature="e#9538#9692#0" />
-            <element signature="e#9801#9995#0" />
-            <element signature="e#10086#10239#0" />
-            <element signature="e#10353#10788#0" />
-            <element signature="e#10910#11377#0" />
-            <element signature="e#11498#11961#0" />
-            <element signature="e#12066#12399#0" />
-            <element signature="e#12165#12399#0" />
-            <element signature="e#12520#12885#0" />
-            <element signature="e#12635#12885#0" />
-            <element signature="e#13004#13365#0" />
-            <element signature="e#13117#13365#0" />
-            <element signature="e#13476#13786#0" />
-            <element signature="e#13585#13786#0" />
-            <element signature="e#13905#14231#0" />
-            <element signature="e#14014#14231#0" />
-            <element signature="e#14349#14673#0" />
-            <element signature="e#14458#14673#0" />
-          </folding>
+        <state relative-caret-position="639">
+          <caret line="48" column="110" lean-forward="true" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="110" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="129" column="55" lean-forward="true" selection-start-line="129" selection-start-column="55" selection-end-line="129" selection-end-column="55" />
+        <state relative-caret-position="462">
+          <caret line="143" column="16" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <element signature="e#1591#2793#0" />
-            <element signature="e#2838#2920#0" />
-            <element signature="e#2966#3130#0" />
-            <element signature="e#3168#3322#0" />
-            <element signature="e#3360#3504#0" />
-            <element signature="e#3552#3627#0" />
-            <element signature="e#3838#4517#0" />
-            <element signature="e#4678#5474#0" />
-            <element signature="e#5333#5540#0" />
-            <element signature="e#5610#5856#0" />
-            <element signature="e#5925#6167#0" />
-            <element signature="e#6256#7002#0" />
-            <element signature="e#6328#7002#0" />
-            <element signature="e#6385#7002#0" />
-            <element signature="e#6437#6568#0" />
-            <element signature="e#6647#6786#0" />
-            <element signature="e#6864#7002#0" />
-            <element signature="e#7073#7126#0" />
-            <element signature="e#7205#7266#0" />
-            <element signature="e#7344#7404#0" />
-            <element signature="e#7468#7701#0" />
-            <element signature="e#7762#7952#0" />
-            <element signature="e#7842#7952#0" />
-            <element signature="e#7996#8057#0" />
           </folding>
         </state>
       </provider>
