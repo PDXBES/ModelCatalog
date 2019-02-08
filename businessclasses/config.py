@@ -20,7 +20,7 @@ class Config:
         self.model_catalog_current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
-
+        self.required_simulations_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Required_Simulations"
         self.model_alt_bc_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_BC"
         self.model_alt_hydraulic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydraulic"
         self.model_alt_hydrologic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydrologic"
@@ -91,7 +91,7 @@ class Config:
         self.unique_cip_numbers = self.get_unique_cip_numbers()
 
         # TODO: Here is a stub to check storms
-        self.ccsp_characterization_simulations = {}
+        self.ccsp_characterization_simulations = []
         #TODO - move piece to remove unicode empty string to separate function
 
     def get_unique_cip_numbers(self):
@@ -222,8 +222,23 @@ class Config:
         del cursor
         return db_dict
 
-
     def reverse_dict(self, dictionary):
         # type: (Dict) -> Dict
         reverse_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
         return reverse_dictionary
+
+    #TODO - use existing dicts to convert to ids
+    def retrieve_list_of_required_simulations(self, model_purpose, model_project_phase):
+        if model_project_phase == "Planning":
+            model_project_phase_and_purpose_field_name = "ccsp_" + model_purpose
+        else:
+            raise Exception()
+
+        cursor = arcpy.da.SearchCursor(self.required_simulations_sde_path, ["storm_name", "storm_type", "dev_scenario", model_project_phase_and_purpose_field_name])
+        simulation_list = []
+        for row in cursor:
+            if row[3] == 1:
+                simulation_list.append(((row[0], row[1]), row[2]))
+        del cursor
+        return simulation_list
+

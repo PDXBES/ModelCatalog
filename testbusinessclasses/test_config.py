@@ -11,6 +11,10 @@ class TestConfig(TestCase):
         self.config_real = Config()
         self.mock_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_search_cursor.__iter__.return_value = iter([(1, "02yr6h", "D"), (2, "05yr6h", "D")])
+
+        self.mock_search_cursor_for_required_simulation_list = mock.MagicMock(arcpy.da.SearchCursor)
+        self.mock_search_cursor_for_required_simulation_list.__iter__.return_value = iter([("02yr6h", "D", "EX", 0), ("05yr6h", "D", "50", 1)])
+
         self.mock_dev_scenario_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_dev_scenario_search_cursor.__iter__.return_value = iter([(1, "EX"), (2, "50")])
 
@@ -178,3 +182,18 @@ class TestConfig(TestCase):
         self.assertItemsEqual(unique_values, ["VALUE", "VALUE1"])
         self.assertEqual(unique_values[0], "VALUE1")
         self.assertEqual(unique_values[1], "VALUE")
+
+    def test_retrieve_list_of_required_simulations_with_purpose_characterization_calls_search_cursor_with_correct_arguments(self):
+        model_purpose = "characterization"
+        model_project_phase = "Planning"
+        self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
+        self.config_real.retrieve_list_of_required_simulations(model_purpose, model_project_phase)
+        self.mock_search_cursor_instance.assert_called_with(self.config_real.required_simulations_sde_path, ["storm_name", "storm_type", "dev_scenario", "ccsp_characterization"])
+
+    def test_retrieve_list_of_required_simulations_with_purpose_characterization_returns_correct_list_of_required_simulations(self):
+        model_purpose = "characterization"
+        model_project_phase = "Planning"
+        self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
+        required_simulations = self.config_real.retrieve_list_of_required_simulations(model_purpose, model_project_phase)
+        self.assertEqual(required_simulations, [(("05yr6h", "D"),"50")])
+

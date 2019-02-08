@@ -142,7 +142,7 @@ class Model(GenericObject):
     def valid_ccsp_characterization_simulations(self):
         for simulation in self.simulations:
             pass
-
+    #TODO finish this
 
 
     def model_valid_diagnostic(self):
