@@ -1,10 +1,14 @@
 import os
 import arcpy
+from model_catalog_exception import InvalidDevScenarioInRequiredSimulationsTable
+from model_catalog_exception import InvalidStormNameOrStormTypeInRequiredSimulationsTable
+
 try:
     from typing import Dict
     from typing import List
 except:
     pass
+
 
 class Config:
     def __init__(self):
@@ -90,8 +94,9 @@ class Config:
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
         self.unique_cip_numbers = self.get_unique_cip_numbers()
 
-        # TODO: Here is a stub to check storms
-        self.ccsp_characterization_simulations = []
+        self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("characterization", "Planning")
+        self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("alternative", "Planning")
+        self.ccsp_recommended_plan_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("recommended_plan", "Planning")
         #TODO - move piece to remove unicode empty string to separate function
 
     def get_unique_cip_numbers(self):
@@ -227,18 +232,32 @@ class Config:
         reverse_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
         return reverse_dictionary
 
-    #TODO - use existing dicts to convert to ids
-    def retrieve_list_of_required_simulations(self, model_purpose, model_project_phase):
+    def retrieve_required_storm_and_dev_scenario_ids(self, model_purpose, model_project_phase):
         if model_project_phase == "Planning":
             model_project_phase_and_purpose_field_name = "ccsp_" + model_purpose
         else:
             raise Exception()
 
         cursor = arcpy.da.SearchCursor(self.required_simulations_sde_path, ["storm_name", "storm_type", "dev_scenario", model_project_phase_and_purpose_field_name])
-        simulation_list = []
+        simulation_ids = []
         for row in cursor:
             if row[3] == 1:
-                simulation_list.append(((row[0], row[1]), row[2]))
+                storm_name = row[0]
+                storm_type = row[1]
+                dev_scenario = row[2]
+                try:
+                    storm_id = self.storm_id[(storm_name, storm_type)]
+                except:
+                    raise InvalidStormNameOrStormTypeInRequiredSimulationsTable
+                try:
+                    dev_scenario_id = self.dev_scenario_id[dev_scenario]
+                except:
+                    raise InvalidDevScenarioInRequiredSimulationsTable
+
+                simulation_ids.append((storm_id, dev_scenario_id))
         del cursor
-        return simulation_list
+
+        return simulation_ids
+
+
 

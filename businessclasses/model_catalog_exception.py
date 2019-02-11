@@ -25,3 +25,10 @@ class InvalidModelPathException(ModelCatalogException):
 class InvalidCalibrationStormSimulationDescription(ModelCatalogException):
     pass
 
+class InvalidStormNameOrStormTypeInRequiredSimulationsTable(ModelCatalogException):
+    pass
+
+class InvalidDevScenarioInRequiredSimulationsTable(ModelCatalogException):
+    pass
+
+

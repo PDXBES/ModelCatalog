@@ -3,16 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/businessclasses/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_config.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,26 +14,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49014974">
+    <splitter split-orientation="horizontal" split-proportion="0.46661368">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="5">
-                  <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
+                <state relative-caret-position="119">
+                  <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="639">
-                  <caret line="48" column="110" lean-forward="true" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="110" />
                 </state>
               </provider>
             </entry>
@@ -48,8 +32,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="462">
-                  <caret line="143" column="16" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
+                <state relative-caret-position="265">
+                  <caret line="144" column="21" lean-forward="true" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -58,19 +42,10 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="528">
-                  <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="50" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="589">
-                  <caret line="92" column="46" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
+                <state relative-caret-position="-262">
+                  <caret line="233" selection-start-line="233" selection-end-line="233" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -81,12 +56,24 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="589">
-                  <caret line="324" column="33" lean-forward="true" selection-start-line="324" selection-start-column="33" selection-end-line="324" selection-end-column="33" />
+                <state relative-caret-position="248">
+                  <caret line="324" selection-start-line="324" selection-end-line="324" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="44">
+                  <caret line="8" selection-start-line="8" selection-end-line="8" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -189,7 +176,6 @@
         <option value="$PROJECT_DIR$/dataio/rehab_data_io.py" />
         <option value="$PROJECT_DIR$/dataio/rrad_data_io.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" />
-        <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_area.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_generic_object.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_pipe.py" />
@@ -208,18 +194,18 @@
         <option value="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
         <option value="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.bat" />
-        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
         <option value="$PROJECT_DIR$/businessclasses/model.py" />
+        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
+        <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
         <option value="$PROJECT_DIR$/businessclasses/config.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="38" />
-    <option name="y" value="2" />
-    <option name="width" value="136" />
-    <option name="height" value="53" />
+    <option name="x" value="36" />
+    <option name="width" value="138" />
+    <option name="height" value="54" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -229,7 +215,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -251,6 +236,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,8 +269,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true">
-    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests in testbusinessclasses">
+    <configuration name="Unittests for test_config.TestConfig" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -294,11 +280,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false&quot;" />
+      <option name="_new_target" value="&quot;test_config.TestConfig&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -308,11 +294,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false&quot;" />
+      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -322,11 +308,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false&quot;" />
+      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -336,11 +322,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false&quot;" />
+      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in testbusinessclasses" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -350,24 +336,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testbusinessclasses&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" />
-      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" />
+      <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
+      <item itemvalue="Python tests.Unittests in testbusinessclasses" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" />
-        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_length_returns_false" />
+        <item itemvalue="Python tests.Unittests in testbusinessclasses" />
+        <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
+        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" />
+        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" />
+        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" />
       </list>
     </recent_temporary>
   </component>
@@ -385,35 +371,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 40m 38s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations - 2019.02.11 at 11h 39m 16s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 41m 38s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 01m 52s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 43m 16s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 05m 31s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false - 2019.02.07 at 13h 43m 35s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_date_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 05m 46s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false - 2019.02.07 at 13h 48m 24s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 10m 56s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_no_calibration_storms_returns_false - 2019.02.07 at 13h 54m 24s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict - 2019.02.11 at 12h 13m 10s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_no_calibration_storms_returns_false - 2019.02.07 at 13h 54m 42s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict - 2019.02.11 at 12h 13m 55s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_calibration_storms_model_has_no_calibration_storms_returns_false - 2019.02.07 at 13h 54m 59s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_calibration_storms_model_has_no_calibration_storms_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict - 2019.02.11 at 12h 15m 01s.xml">
+      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true - 2019.02.07 at 14h 37m 44s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_config_TestConfig - 2019.02.11 at 12h 16m 02s.xml">
+      <configuration name="Unittests for test_config.TestConfig" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_TestModel_test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true - 2019.02.07 at 14h 38m 39s.xml">
-      <configuration name="Unittests for test_model.TestModel.test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_in_testbusinessclasses - 2019.02.11 at 12h 17m 11s.xml">
+      <configuration name="Unittests in testbusinessclasses" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -426,16 +412,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1586" extended-state="6" />
+    <frame x="-6" y="-6" width="1292" height="702" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.3743105" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.37360892" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33516863" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.46111494" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.44528562" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33449477" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.28222996" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.19337979" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.009677419" />
@@ -762,13 +748,6 @@
             <element signature="e#1301#1412#0" />
             <element signature="e#1488#1584#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
         </state>
       </provider>
     </entry>
@@ -1112,23 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/python27/ArcGIS10.3/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1136,37 +1098,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="324" column="33" lean-forward="true" selection-start-line="324" selection-start-column="33" selection-end-line="324" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="200">
+          <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="92" column="46" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
+        <state relative-caret-position="-262">
+          <caret line="233" selection-start-line="233" selection-end-line="233" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="48" column="110" lean-forward="true" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="110" />
+        <state relative-caret-position="170">
+          <caret line="48" column="110" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="143" column="16" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
+        <state relative-caret-position="265">
+          <caret line="144" column="21" lean-forward="true" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

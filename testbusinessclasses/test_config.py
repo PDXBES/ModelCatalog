@@ -3,6 +3,9 @@ import mock
 import arcpy
 from mock_config import MockConfig
 from businessclasses.config import Config
+from businessclasses.model_catalog_exception import InvalidStormNameOrStormTypeInRequiredSimulationsTable
+from businessclasses.model_catalog_exception import InvalidDevScenarioInRequiredSimulationsTable
+
 
 class TestConfig(TestCase):
     def setUp(self):
@@ -11,6 +14,7 @@ class TestConfig(TestCase):
         self.config_real = Config()
         self.mock_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_search_cursor.__iter__.return_value = iter([(1, "02yr6h", "D"), (2, "05yr6h", "D")])
+
 
         self.mock_search_cursor_for_required_simulation_list = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_search_cursor_for_required_simulation_list.__iter__.return_value = iter([("02yr6h", "D", "EX", 0), ("05yr6h", "D", "50", 1)])
@@ -183,17 +187,32 @@ class TestConfig(TestCase):
         self.assertEqual(unique_values[0], "VALUE1")
         self.assertEqual(unique_values[1], "VALUE")
 
-    def test_retrieve_list_of_required_simulations_with_purpose_characterization_calls_search_cursor_with_correct_arguments(self):
+    def test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_calls_search_cursor_with_correct_arguments(self):
         model_purpose = "characterization"
         model_project_phase = "Planning"
         self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
-        self.config_real.retrieve_list_of_required_simulations(model_purpose, model_project_phase)
+        self.config_real.retrieve_required_storm_and_dev_scenario_ids(model_purpose, model_project_phase)
         self.mock_search_cursor_instance.assert_called_with(self.config_real.required_simulations_sde_path, ["storm_name", "storm_type", "dev_scenario", "ccsp_characterization"])
 
-    def test_retrieve_list_of_required_simulations_with_purpose_characterization_returns_correct_list_of_required_simulations(self):
+    def test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations(self):
         model_purpose = "characterization"
         model_project_phase = "Planning"
         self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
-        required_simulations = self.config_real.retrieve_list_of_required_simulations(model_purpose, model_project_phase)
-        self.assertEqual(required_simulations, [(("05yr6h", "D"),"50")])
+        required_simulations = self.config_real.retrieve_required_storm_and_dev_scenario_ids(model_purpose, model_project_phase)
+        self.assertEqual(required_simulations, [(2, 2)])
 
+    def test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict(self):
+        model_purpose = "characterization"
+        model_project_phase = "Planning"
+        self.mock_search_cursor_for_required_simulation_list.__iter__.return_value = iter([("02yr6h", "D", "EX", 0), ("incorrect_storm_name", "D", "50", 1)])
+        self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
+        with self.assertRaises(InvalidStormNameOrStormTypeInRequiredSimulationsTable):
+            self.config_real.retrieve_required_storm_and_dev_scenario_ids(model_purpose, model_project_phase)
+
+    def test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict(self):
+        model_purpose = "characterization"
+        model_project_phase = "Planning"
+        self.mock_search_cursor_for_required_simulation_list.__iter__.return_value = iter([("02yr6h", "D", "EX", 0), ("05yr6h", "D", "incorrect_dev_scenario", 1)])
+        self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
+        with self.assertRaises(InvalidDevScenarioInRequiredSimulationsTable):
+            self.config_real.retrieve_required_storm_and_dev_scenario_ids(model_purpose, model_project_phase)
