@@ -11,6 +11,8 @@ from project_type import ProjectType
 from collections import OrderedDict
 import datetime
 from model_catalog_exception import InvalidCalibrationStormSimulationDescription
+from model_catalog_exception import InvalidModelPurpose
+from model_catalog_exception import InvalidProjectPhase
 try:
     from typing import List, Any
 except:
@@ -139,11 +141,31 @@ class Model(GenericObject):
                         raise InvalidCalibrationStormSimulationDescription()
         return False
 
-    def valid_ccsp_characterization_simulations(self):
-        for simulation in self.simulations:
-            pass
-    #TODO finish this
+    def valid_required_simulations(self):
+        required_storm_and_dev_scenario_ids = self.required_storm_and_dev_scenario_ids()
 
+        for required_storm_id, required_dev_scenario in required_storm_and_dev_scenario_ids:
+            required_simulation_found = False
+            for simulation in self.simulations:
+                if required_storm_id == simulation.storm_id and required_dev_scenario == simulation.dev_scenario_id:
+                    required_simulation_found = True
+            if required_simulation_found == False:
+                return False
+        return True
+
+    def required_storm_and_dev_scenario_ids(self):
+        if self.project_phase_id == self.config.proj_phase_id["Planning"]:
+            if self.model_purpose_id == self.config.model_purpose_id["characterization"]:
+                required_storm_and_dev_scenario_ids = self.config.ccsp_characterization_storm_and_dev_scenario_ids
+            elif self.model_purpose_id == self.config.model_purpose_id["alternative"]:
+                required_storm_and_dev_scenario_ids = self.config.ccsp_alternative_storm_and_dev_scenario_ids
+            elif self.model_purpose_id == self.config.model_purpose_id["recommended_plan"]:
+                required_storm_and_dev_scenario_ids = self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids
+            else:
+                raise InvalidModelPurpose
+        else:
+            raise InvalidProjectPhase
+        return required_storm_and_dev_scenario_ids
 
     def model_valid_diagnostic(self):
         self.valid_emgaats_model_structure_diagnostic()

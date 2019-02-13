@@ -31,4 +31,10 @@ class InvalidStormNameOrStormTypeInRequiredSimulationsTable(ModelCatalogExceptio
 class InvalidDevScenarioInRequiredSimulationsTable(ModelCatalogException):
     pass
 
+class InvalidModelPurpose(ModelCatalogException):
+    pass
+
+class InvalidProjectPhase(ModelCatalogException):
+    pass
+
 

@@ -4,6 +4,8 @@ import mock
 from mock_config import MockConfig
 from businessclasses.simulation import Simulation
 from businessclasses.model_catalog_exception import InvalidCalibrationStormSimulationDescription
+from businessclasses.model_catalog_exception import InvalidModelPurpose
+from businessclasses.model_catalog_exception import InvalidProjectPhase
 
 class TestModel(TestCase):
 
@@ -23,7 +25,7 @@ class TestModel(TestCase):
         self.mock_simulation2 = mock.MagicMock(Simulation)
         self.mock_simulation2.storm_id = 2
         self.mock_simulation2.sim_desc = ""
-        self.mock_simulation1.dev_scenario_id = 1
+        self.mock_simulation2.dev_scenario_id = 1
 
         self.mock_calibration_simulation1 = mock.MagicMock(Simulation)
         self.mock_calibration_simulation1.storm_id = 0
@@ -319,7 +321,51 @@ class TestModel(TestCase):
         is_valid = self.model.valid_calibration_simulations()
         self.assertFalse(is_valid)
 
-    def test_valid_ccsp_characterization_simulations_model_has_all_required_storms_returns_true(self):
+    def test_valid_required_simulations_model_has_all_required_storms_returns_true(self):
+        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
         self.model.simulations = [self.mock_simulation1, self.mock_simulation2]
-        is_valid = self.model.valid_ccsp_characterization_simulations()
+        is_valid = self.model.valid_required_simulations()
         self.assertTrue(is_valid)
+
+    def test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false(self):
+        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        self.model.simulations = [self.mock_simulation1]
+        is_valid = self.model.valid_required_simulations()
+        self.assertFalse(is_valid)
+
+    def test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false(self):
+        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        self.model.simulations = []
+        is_valid = self.model.valid_required_simulations()
+        self.assertFalse(is_valid)
+
+    def test_required_storm_and_dev_scenario_ids_project_phase_planning_model_purpose_characterization_returns_correct_storm_dev_scenario_ids(self):
+        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        required_storm_and_dev_scenario_ids = self.model.required_storm_and_dev_scenario_ids()
+        self.assertEquals(required_storm_and_dev_scenario_ids, self.config.ccsp_characterization_storm_and_dev_scenario_ids)
+
+    def test_required_storm_and_dev_scenario_ids_project_phase_planning_model_purpose_alternative_returns_correct_storm_dev_scenario_ids(self):
+        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+        self.model.model_purpose_id = self.config.model_purpose_id["alternative"]
+        required_storm_and_dev_scenario_ids = self.model.required_storm_and_dev_scenario_ids()
+        self.assertEquals(required_storm_and_dev_scenario_ids, self.config.ccsp_alternative_storm_and_dev_scenario_ids)
+
+    def test_required_storm_and_dev_scenario_ids_project_phase_planning_model_purpose_recommended_plan_returns_correct_storm_dev_scenario_ids(self):
+        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+        self.model.model_purpose_id = self.config.model_purpose_id["recommended_plan"]
+        required_storm_and_dev_scenario_ids = self.model.required_storm_and_dev_scenario_ids()
+        self.assertEquals(required_storm_and_dev_scenario_ids, self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids)
+
+    def test_required_storm_and_dev_scenario_ids_invalid_model_purpose_raises_exception(self):
+        self.model.model_purpose_id = 27
+        with self.assertRaises(InvalidModelPurpose):
+            self.model.required_storm_and_dev_scenario_ids()
+
+    def test_required_storm_and_dev_scenario_ids_invalid_project_phase_raises_exception(self):
+        self.model.project_phase_id = 27
+        with self.assertRaises(InvalidProjectPhase):
+            self.model.required_storm_and_dev_scenario_ids()

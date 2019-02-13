@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbusinessclasses/mock_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/mock_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,13 +15,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.46661368">
+    <splitter split-orientation="horizontal" split-proportion="0.4880763">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="119">
+                <state relative-caret-position="153">
                   <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
@@ -32,11 +33,51 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="265">
-                  <caret line="144" column="21" lean-forward="true" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
+                <state relative-caret-position="55">
+                  <caret line="143" column="34" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="34" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
+                    <element signature="e#1687#2889#0" />
+                    <element signature="e#2934#3016#0" />
+                    <element signature="e#3062#3226#0" />
+                    <element signature="e#3264#3418#0" />
+                    <element signature="e#3456#3600#0" />
+                    <element signature="e#3648#3723#0" />
+                    <element signature="e#3837#3880#0" />
+                    <element signature="e#3935#4614#0" />
+                    <element signature="e#4669#5410#0" />
+                    <element signature="e#4717#5389#0" />
+                    <element signature="e#4762#5389#0" />
+                    <element signature="e#4817#5389#0" />
+                    <element signature="e#4846#5284#0" />
+                    <element signature="e#5598#5645#0" />
+                    <element signature="e#5711#6507#0" />
+                    <element signature="e#6569#6776#0" />
+                    <element signature="e#6846#7092#0" />
+                    <element signature="e#7161#7403#0" />
+                    <element signature="e#7492#8238#0" />
+                    <element signature="e#7564#8238#0" />
+                    <element signature="e#7621#8238#0" />
+                    <element signature="e#7673#7804#0" />
+                    <element signature="e#7883#8022#0" />
+                    <element signature="e#8100#8238#0" />
+                    <element signature="e#8309#8362#0" />
+                    <element signature="e#8441#8502#0" />
+                    <element signature="e#8580#8640#0" />
+                    <element signature="e#8704#8937#0" />
+                    <element signature="e#8998#9188#0" />
+                    <element signature="e#9078#9188#0" />
+                    <element signature="e#9232#9293#0" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
                 </state>
               </provider>
             </entry>
@@ -44,8 +85,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-262">
-                  <caret line="233" selection-start-line="233" selection-end-line="233" />
+                <state relative-caret-position="170">
+                  <caret line="88" column="26" selection-start-line="88" selection-start-column="13" selection-end-line="88" selection-end-column="26" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -60,23 +101,69 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="248">
-                  <caret line="324" selection-start-line="324" selection-end-line="324" />
+                <state relative-caret-position="191">
+                  <caret line="339" column="86" selection-start-line="339" selection-start-column="86" selection-end-line="339" selection-end-column="86" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
+                    <element signature="e#1739#1866#0" />
+                    <element signature="e#1946#2053#0" />
+                    <element signature="e#2145#2234#0" />
+                    <element signature="e#2329#2468#0" />
+                    <element signature="e#2544#2634#0" />
+                    <element signature="e#2715#2849#0" />
+                    <element signature="e#2934#3065#0" />
+                    <element signature="e#3159#3299#0" />
+                    <element signature="e#3473#3555#0" />
+                    <element signature="e#3628#3756#0" />
+                    <element signature="e#3825#3948#0" />
+                    <element signature="e#4028#4160#0" />
+                    <element signature="e#4227#4309#0" />
+                    <element signature="e#4385#4500#0" />
+                    <element signature="e#4573#4696#0" />
+                    <element signature="e#4778#4910#0" />
+                    <element signature="e#5484#5770#0" />
+                    <element signature="e#6262#6550#0" />
+                    <element signature="e#7044#7332#0" />
+                    <element signature="e#7793#8055#0" />
+                    <element signature="e#8540#8828#0" />
+                    <element signature="e#9313#9604#0" />
+                    <element signature="e#9657#9825#0" />
+                    <element signature="e#9920#10086#0" />
+                    <element signature="e#10170#10316#0" />
+                    <element signature="e#10427#10625#0" />
+                    <element signature="e#10717#10871#0" />
+                    <element signature="e#10980#11174#0" />
+                    <element signature="e#11265#11418#0" />
+                    <element signature="e#11532#11967#0" />
+                    <element signature="e#12089#12556#0" />
+                    <element signature="e#12677#13140#0" />
+                    <element signature="e#13245#13578#0" />
+                    <element signature="e#13344#13578#0" />
+                    <element signature="e#13699#14064#0" />
+                    <element signature="e#13814#14064#0" />
+                    <element signature="e#14183#14544#0" />
+                    <element signature="e#14296#14544#0" />
+                    <element signature="e#14655#14965#0" />
+                    <element signature="e#14764#14965#0" />
+                    <element signature="e#15084#15410#0" />
+                    <element signature="e#15193#15410#0" />
+                    <element signature="e#15528#15852#0" />
+                    <element signature="e#15637#15852#0" />
+                    <element signature="e#16036#16273#0" />
+                    <element signature="e#16405#16711#0" />
+                    <element signature="e#16841#17182#0" />
+                    <element signature="e#17322#17663#0" />
+                    <element signature="e#17769#17937#0" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="44">
-                  <caret line="8" selection-start-line="8" selection-end-line="8" />
-                  <folding>
-                    <element signature="e#0#29#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="169">
+                  <caret line="55" column="76" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
                 </state>
               </provider>
             </entry>
@@ -148,7 +235,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test_model.py" />
         <option value="$PROJECT_DIR$/data_io_exception.py" />
         <option value="$PROJECT_DIR$/test_model_data_io.py" />
         <option value="$PROJECT_DIR$/model_data_io.py" />
@@ -194,11 +280,12 @@
         <option value="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
         <option value="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.bat" />
-        <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
-        <option value="$PROJECT_DIR$/businessclasses/model.py" />
-        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
         <option value="$PROJECT_DIR$/businessclasses/config.py" />
+        <option value="$PROJECT_DIR$/testbusinessclasses/mock_config.py" />
+        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
+        <option value="$PROJECT_DIR$/businessclasses/model.py" />
+        <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
       </list>
     </option>
   </component>
@@ -221,16 +308,6 @@
             <path>
               <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-              <item name="businessclasses" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-              <item name="testbusinessclasses" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -269,8 +346,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in testbusinessclasses">
-    <configuration name="Unittests for test_config.TestConfig" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests in testdataio">
+    <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -280,11 +357,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -294,11 +371,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_has_all_required_storms_returns_true" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -308,21 +385,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations&quot;" />
+      <option name="_new_target" value="&quot;test_model.TestModel.test_valid_required_simulations_model_has_all_required_storms_returns_true&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -340,20 +403,34 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests in testdataio" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testdataio&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" />
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" />
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" />
-      <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
       <item itemvalue="Python tests.Unittests in testbusinessclasses" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_required_simulations_model_has_all_required_storms_returns_true" />
+      <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false" />
+      <item itemvalue="Python tests.Unittests in testdataio" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in testdataio" />
         <item itemvalue="Python tests.Unittests in testbusinessclasses" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" />
-        <item itemvalue="Python tests.Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false" />
+        <item itemvalue="Python tests.Unittests for test_model.TestModel.test_valid_required_simulations_model_has_all_required_storms_returns_true" />
       </list>
     </recent_temporary>
   </component>
@@ -371,35 +448,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations - 2019.02.11 at 11h 39m 16s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_with_purpose_characterization_returns_correct_list_of_required_simulations" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_required_storm_and_dev_scenario_ids_invalid_model_purpose_raises_exception - 2019.02.13 at 10h 46m 05s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_required_storm_and_dev_scenario_ids_invalid_model_purpose_raises_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 01m 52s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_required_storm_and_dev_scenario_ids_invalid_project_phase_raises_exception - 2019.02.13 at 10h 47m 22s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_required_storm_and_dev_scenario_ids_invalid_project_phase_raises_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 05m 31s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_TestModel_test_required_storm_and_dev_scenario_ids_invalid_project_phase_raises_exception - 2019.02.13 at 10h 47m 44s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_required_storm_and_dev_scenario_ids_invalid_project_phase_raises_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 05m 46s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict - 2019.02.11 at 12h 10m 56s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_storm_name_not_in_storm_id_dict" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict - 2019.02.11 at 12h 13m 10s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict - 2019.02.11 at 12h 13m 55s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig_test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict - 2019.02.11 at 12h 15m 01s.xml">
-      <configuration name="Unittests for test_config.TestConfig.test_retrieve_required_storm_and_dev_scenario_ids_throws_exception_when_dev_scenario_not_in_dev_scenario_dict" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_config_TestConfig - 2019.02.11 at 12h 16m 02s.xml">
-      <configuration name="Unittests for test_config.TestConfig" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_testbusinessclasses - 2019.02.11 at 12h 17m 11s.xml">
+    <history-entry file="Unittests_in_testbusinessclasses - 2019.02.13 at 10h 50m 34s.xml">
       <configuration name="Unittests in testbusinessclasses" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false - 2019.02.13 at 10h 51m 12s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_required_simulations_model_has_all_required_storms_returns_true - 2019.02.13 at 10h 51m 53s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_has_all_required_storms_returns_true" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false - 2019.02.13 at 10h 52m 08s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_model_TestModel_test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false - 2019.02.13 at 10h 52m 24s.xml">
+      <configuration name="Unittests for test_model.TestModel.test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_testbusinessclasses - 2019.02.13 at 10h 53m 30s.xml">
+      <configuration name="Unittests in testbusinessclasses" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_testdataio - 2019.02.13 at 10h 53m 51s.xml">
+      <configuration name="Unittests in testdataio" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -417,11 +494,11 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.37360892" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.37360892" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33449477" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.28222996" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.19337979" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.36236933" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.40940768" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.009677419" />
@@ -436,15 +513,15 @@
     <layout-to-restore>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.26550078" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.37360892" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33566433" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" weight="0.39721254" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.2937063" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33449477" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.36236933" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.19337979" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.009677419" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.25830653" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.0681349" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32903227" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.15739268" side_tool="true" weight="0.8686515" />
@@ -1098,53 +1175,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="27" column="16" lean-forward="true" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-262">
-          <caret line="233" selection-start-line="233" selection-end-line="233" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="-474">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#394#1607#0" />
+            <element signature="e#1641#1777#0" />
+            <element signature="e#1833#2096#0" />
+            <element signature="e#2160#2402#0" />
+            <element signature="e#2501#2650#0" />
+            <element signature="e#2725#3196#0" />
+            <element signature="e#3294#3536#0" />
+            <element signature="e#3407#3536#0" />
+            <element signature="e#3635#3879#0" />
+            <element signature="e#3748#3879#0" />
+            <element signature="e#3985#4243#0" />
+            <element signature="e#4098#4243#0" />
+            <element signature="e#4350#4610#0" />
+            <element signature="e#4463#4610#0" />
+            <element signature="e#4710#4956#0" />
+            <element signature="e#4823#4956#0" />
+            <element signature="e#5055#5299#0" />
+            <element signature="e#5168#5299#0" />
+            <element signature="e#5396#5636#0" />
+            <element signature="e#5509#5636#0" />
+            <element signature="e#5732#5970#0" />
+            <element signature="e#5845#5970#0" />
+            <element signature="e#6065#6265#0" />
+            <element signature="e#6364#6578#0" />
+            <element signature="e#6671#6995#0" />
+            <element signature="e#7096#7376#0" />
+            <element signature="e#7205#7376#0" />
+            <element signature="e#7448#7738#0" />
+            <element signature="e#7557#7738#0" />
+            <element signature="e#7846#8136#0" />
+            <element signature="e#7955#8136#0" />
+            <element signature="e#8215#8512#0" />
+            <element signature="e#8324#8512#0" />
+            <element signature="e#8610#8903#0" />
+            <element signature="e#8719#8903#0" />
+            <element signature="e#8990#9315#0" />
+            <element signature="e#9099#9315#0" />
+            <element signature="e#9385#9587#0" />
+            <element signature="e#9693#9912#0" />
+            <element signature="e#9987#10228#0" />
+            <element signature="e#10345#10605#0" />
+            <element signature="e#10690#10973#0" />
+            <element signature="e#11075#11449#0" />
+            <element signature="e#11597#12066#0" />
+            <element signature="e#12216#12586#0" />
+            <element signature="e#12715#13254#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="324" selection-start-line="324" selection-end-line="324" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="48" column="110" selection-start-line="48" selection-start-column="46" selection-end-line="48" selection-end-column="110" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="153">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="28" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -1152,12 +1240,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="144" column="21" lean-forward="true" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
+        <state relative-caret-position="170">
+          <caret line="88" column="26" selection-start-line="88" selection-start-column="13" selection-end-line="88" selection-end-column="26" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="55" column="76" selection-start-line="55" selection-start-column="76" selection-end-line="55" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="339" column="86" selection-start-line="339" selection-start-column="86" selection-end-line="339" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#1739#1866#0" />
+            <element signature="e#1946#2053#0" />
+            <element signature="e#2145#2234#0" />
+            <element signature="e#2329#2468#0" />
+            <element signature="e#2544#2634#0" />
+            <element signature="e#2715#2849#0" />
+            <element signature="e#2934#3065#0" />
+            <element signature="e#3159#3299#0" />
+            <element signature="e#3473#3555#0" />
+            <element signature="e#3628#3756#0" />
+            <element signature="e#3825#3948#0" />
+            <element signature="e#4028#4160#0" />
+            <element signature="e#4227#4309#0" />
+            <element signature="e#4385#4500#0" />
+            <element signature="e#4573#4696#0" />
+            <element signature="e#4778#4910#0" />
+            <element signature="e#5484#5770#0" />
+            <element signature="e#6262#6550#0" />
+            <element signature="e#7044#7332#0" />
+            <element signature="e#7793#8055#0" />
+            <element signature="e#8540#8828#0" />
+            <element signature="e#9313#9604#0" />
+            <element signature="e#9657#9825#0" />
+            <element signature="e#9920#10086#0" />
+            <element signature="e#10170#10316#0" />
+            <element signature="e#10427#10625#0" />
+            <element signature="e#10717#10871#0" />
+            <element signature="e#10980#11174#0" />
+            <element signature="e#11265#11418#0" />
+            <element signature="e#11532#11967#0" />
+            <element signature="e#12089#12556#0" />
+            <element signature="e#12677#13140#0" />
+            <element signature="e#13245#13578#0" />
+            <element signature="e#13344#13578#0" />
+            <element signature="e#13699#14064#0" />
+            <element signature="e#13814#14064#0" />
+            <element signature="e#14183#14544#0" />
+            <element signature="e#14296#14544#0" />
+            <element signature="e#14655#14965#0" />
+            <element signature="e#14764#14965#0" />
+            <element signature="e#15084#15410#0" />
+            <element signature="e#15193#15410#0" />
+            <element signature="e#15528#15852#0" />
+            <element signature="e#15637#15852#0" />
+            <element signature="e#16036#16273#0" />
+            <element signature="e#16405#16711#0" />
+            <element signature="e#16841#17182#0" />
+            <element signature="e#17322#17663#0" />
+            <element signature="e#17769#17937#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="143" column="34" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#1687#2889#0" />
+            <element signature="e#2934#3016#0" />
+            <element signature="e#3062#3226#0" />
+            <element signature="e#3264#3418#0" />
+            <element signature="e#3456#3600#0" />
+            <element signature="e#3648#3723#0" />
+            <element signature="e#3837#3880#0" />
+            <element signature="e#3935#4614#0" />
+            <element signature="e#4669#5410#0" />
+            <element signature="e#4717#5389#0" />
+            <element signature="e#4762#5389#0" />
+            <element signature="e#4817#5389#0" />
+            <element signature="e#4846#5284#0" />
+            <element signature="e#5598#5645#0" />
+            <element signature="e#5711#6507#0" />
+            <element signature="e#6569#6776#0" />
+            <element signature="e#6846#7092#0" />
+            <element signature="e#7161#7403#0" />
+            <element signature="e#7492#8238#0" />
+            <element signature="e#7564#8238#0" />
+            <element signature="e#7621#8238#0" />
+            <element signature="e#7673#7804#0" />
+            <element signature="e#7883#8022#0" />
+            <element signature="e#8100#8238#0" />
+            <element signature="e#8309#8362#0" />
+            <element signature="e#8441#8502#0" />
+            <element signature="e#8580#8640#0" />
+            <element signature="e#8704#8937#0" />
+            <element signature="e#8998#9188#0" />
+            <element signature="e#9078#9188#0" />
+            <element signature="e#9232#9293#0" />
           </folding>
         </state>
       </provider>

@@ -50,15 +50,19 @@ class MockConfig():
 
         self.config.model_alt_hydraulic = {0: "zero_hydraulic", 1: "one_hydraulic", 2: "two_hydraulic"}
         self.config.model_alt_hydraulic_id = {"zero_hydraulic": 0, "one_hydraulic": 1, "two_hydraulic": 2}
-        #
-        # self.config.model_purpose =
-        # self.config.model_purpose_id =
+
+        self.config.ccsp_characterization_storm_and_dev_scenario_ids = [(1, 0), (2, 1)]
+        self.config.ccsp_alternative_storm_and_dev_scenario_ids = [(3, 4), (2, 1)]
+        self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids = [(5, 0), (2, 1)]
+
+        self.config.model_purpose = {0: "characterization", 1: "alternative", 2: "recommended_plan"}
+        self.config.model_purpose_id = {"characterization": 0, "alternative": 1, "recommended_plan": 2}
         #
         # self.config.model_status =
         # self.config.model_status_id =
         #
-        # self.config.proj_phase =
-        # self.config.proj_phase_id =
+        self.config.proj_phase = {0: "Planning"}
+        self.config.proj_phase_id = {"Planning": 0}
         #
         # self.config.proj_type =
         # self.config.proj_type_id =
