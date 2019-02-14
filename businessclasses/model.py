@@ -100,7 +100,30 @@ class Model(GenericObject):
 #TODO: move dataIO functions to a DataIO class; Validate results.gdb;
     @property
     def valid(self):
-        return self.valid_emgaats_model_structure()
+        if self.config.model_status[self.model_status_id] == "Working":
+            if self.valid_emgaats_model_structure():
+                return True
+        elif self.config.model_status[self.model_status_id] == "Final":
+            if self.project_phase_id == self.config.proj_phase_id["Pre Design"] or \
+                    self.project_phase_id == self.config.proj_phase_id["Design 30"] or \
+                    self.project_phase_id == self.config.proj_phase_id["Design 60"] or \
+                    self.project_phase_id == self.config.proj_phase_id["Design 90"]:
+                if self.valid_emgaats_model_structure():
+                    return True
+            elif self.project_phase_id == self.config.proj_phase_id["Planning"]:
+                if self.model_purpose_id == self.config.model_purpose_id["Calibration"]:
+                    if self.valid_emgaats_model_structure() and self.valid_calibration_simulations():
+                        return True
+                elif self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                        return True
+                elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                        return True
+                elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                        return True
+            return False
 
     def valid_emgaats_model_structure(self):
         if self.validate_model_path():
@@ -245,3 +268,9 @@ class Model(GenericObject):
         self.simulations = self.object_data_io.read_simulations(self)
 
     # TODO: Create tests for add_project and add_project_types
+
+    def ready_to_register(self):
+        if self.config.model_status[self.model_status_id] == "Working":
+            return self.valid
+        return False
+    #Todo : change this to call a diagnostic method

@@ -369,3 +369,247 @@ class TestModel(TestCase):
         self.model.project_phase_id = 27
         with self.assertRaises(InvalidProjectPhase):
             self.model.required_storm_and_dev_scenario_ids()
+
+    def test_ready_to_register_valid_working_model_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = True
+            self.model.model_status_id = self.config.model_status_id["Working"]
+            is_ready_to_register = self.model.ready_to_register()
+            self.assertTrue(is_ready_to_register)
+
+    def test_ready_to_register_invalid_working_model_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = False
+            self.model.model_status_id = self.config.model_status_id["Working"]
+            is_ready_to_register = self.model.ready_to_register()
+            self.assertFalse(is_ready_to_register)
+
+    def test_valid_working_model_valid_emgaats_structure_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = True
+            self.model.model_status_id = self.config.model_status_id["Working"]
+            is_valid = self.model.valid
+            self.assertTrue(is_valid)
+
+    def test_valid_working_model_invalid_emgaats_structure_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = False
+            self.model.model_status_id = self.config.model_status_id["Working"]
+            is_valid = self.model.valid
+            self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_predesign_valid_emgaats_structure_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = True
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Pre Design"]
+            is_valid = self.model.valid
+            self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_predesign_invalid_emgaats_structure_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = False
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Pre Design"]
+            is_valid = self.model.valid
+            self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_design30_valid_emgaats_structure_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = True
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Design 30"]
+            is_valid = self.model.valid
+            self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_design30_invalid_emgaats_structure_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = False
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Design 30"]
+            is_valid = self.model.valid
+            self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_design60_valid_emgaats_structure_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = True
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Design 60"]
+            is_valid = self.model.valid
+            self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_design60_invalid_emgaats_structure_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = False
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Design 60"]
+            is_valid = self.model.valid
+            self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_design90_valid_emgaats_structure_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = True
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Design 90"]
+            is_valid = self.model.valid
+            self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_design90_invalid_emgaats_structure_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            mock_valid_emgaats_model_structure.return_value = False
+            self.model.model_status_id = self.config.model_status_id["Final"]
+            self.model.project_phase_id = self.config.proj_phase_id["Design 90"]
+            is_valid = self.model.valid
+            self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_calibration_valid_emgaats_structure_valid_calibration_simulation_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                mock_valid_emgaats_model_structure.return_value = True
+                mock_valid_calibration_simulations.return_value = True
+                self.model.model_status_id = self.config.model_status_id["Final"]
+                self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                self.model.model_purpose_id= self.config.model_purpose_id["Calibration"]
+                is_valid = self.model.valid
+                self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_calibration_valid_emgaats_structure_invalid_calibration_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                mock_valid_emgaats_model_structure.return_value = True
+                mock_valid_calibration_simulations.return_value = False
+                self.model.model_status_id = self.config.model_status_id["Final"]
+                self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                self.model.model_purpose_id= self.config.model_purpose_id["Calibration"]
+                is_valid = self.model.valid
+                self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_calibration_invalid_emgaats_structure_valid_calibration_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                mock_valid_emgaats_model_structure.return_value = False
+                mock_valid_calibration_simulations.return_value = True
+                self.model.model_status_id = self.config.model_status_id["Final"]
+                self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                self.model.model_purpose_id= self.config.model_purpose_id["Calibration"]
+                is_valid = self.model.valid
+                self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_calibration_invalid_emgaats_structure_invalid_calibration_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                mock_valid_emgaats_model_structure.return_value = False
+                mock_valid_calibration_simulations.return_value = False
+                self.model.model_status_id = self.config.model_status_id["Final"]
+                self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                self.model.model_purpose_id= self.config.model_purpose_id["Calibration"]
+                is_valid = self.model.valid
+                self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_characterization_valid_emgaats_structure_valid_required_simulation_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Characterization"]
+                    is_valid = self.model.valid
+                    self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_characterization_valid_emgaats_structure_invalid_required_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Characterization"]
+                    is_valid = self.model.valid
+                    self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_characterization_invalid_emgaats_structure_invalid_required_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = False
+                    mock_valid_required_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Characterization"]
+                    is_valid = self.model.valid
+                    self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_alternative_valid_emgaats_structure_valid_required_simulation_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Alternative"]
+                    is_valid = self.model.valid
+                    self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_alternative_valid_emgaats_structure_invalid_required_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Alternative"]
+                    is_valid = self.model.valid
+                    self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_alternative_invalid_emgaats_structure_invalid_required_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = False
+                    mock_valid_required_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Alternative"]
+                    is_valid = self.model.valid
+                    self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_recommended_plan_valid_emgaats_structure_valid_required_simulation_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Recommended Plan"]
+                    is_valid = self.model.valid
+                    self.assertTrue(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_recommended_plan_valid_emgaats_structure_invalid_required_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Recommended Plan"]
+                    is_valid = self.model.valid
+                    self.assertFalse(is_valid)
+
+    def test_valid_final_model_project_phase_planning_model_purpose_recommended_plan_invalid_emgaats_structure_invalid_required_simulation_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = False
+                    mock_valid_required_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Recommended Plan"]
+                    is_valid = self.model.valid
+                    self.assertFalse(is_valid)

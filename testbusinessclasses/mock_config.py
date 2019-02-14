@@ -55,15 +55,16 @@ class MockConfig():
         self.config.ccsp_alternative_storm_and_dev_scenario_ids = [(3, 4), (2, 1)]
         self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids = [(5, 0), (2, 1)]
 
-        self.config.model_purpose = {0: "characterization", 1: "alternative", 2: "recommended_plan"}
-        self.config.model_purpose_id = {"characterization": 0, "alternative": 1, "recommended_plan": 2}
-        #
-        # self.config.model_status =
-        # self.config.model_status_id =
-        #
-        self.config.proj_phase = {0: "Planning"}
-        self.config.proj_phase_id = {"Planning": 0}
-        #
-        # self.config.proj_type =
+        self.config.model_purpose = {0: "Characterization", 1: "Alternative", 2: "Recommended Plan", 3: "Calibration"}
+        self.config.model_purpose_id = {"Characterization": 0, "Alternative": 1, "Recommended Plan": 2, "Calibration": 3}
+        #TODO - changing text case broke things in other refs - need to fix
+
+        self.config.model_status = {0: "Working", 1: "Final"}
+        self.config.model_status_id = {"Working": 0, "Final": 1}
+
+        self.config.proj_phase = {0: "Planning", 1: "Pre Design", 2: "Design 30", 3: "Design 60", 4: "Design 90"}
+        self.config.proj_phase_id = {"Planning": 0, "Pre Design": 1, "Design 30": 2, "Design 60": 3, "Design 90": 4}
+
+         #self.config.proj_type =
         # self.config.proj_type_id =
 
