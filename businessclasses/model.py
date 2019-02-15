@@ -178,11 +178,11 @@ class Model(GenericObject):
 
     def required_storm_and_dev_scenario_ids(self):
         if self.project_phase_id == self.config.proj_phase_id["Planning"]:
-            if self.model_purpose_id == self.config.model_purpose_id["characterization"]:
+            if self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
                 required_storm_and_dev_scenario_ids = self.config.ccsp_characterization_storm_and_dev_scenario_ids
-            elif self.model_purpose_id == self.config.model_purpose_id["alternative"]:
+            elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
                 required_storm_and_dev_scenario_ids = self.config.ccsp_alternative_storm_and_dev_scenario_ids
-            elif self.model_purpose_id == self.config.model_purpose_id["recommended_plan"]:
+            elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
                 required_storm_and_dev_scenario_ids = self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids
             else:
                 raise InvalidModelPurpose
@@ -274,3 +274,14 @@ class Model(GenericObject):
             return self.valid
         return False
     #Todo : change this to call a diagnostic method
+
+    def ready_to_write_to_rrad(self):
+        if self.valid:
+            if self.project_phase_id ==self.config.proj_phase_id["Planning"]:
+                if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
+                    return True
+        return False
+
+
+
+

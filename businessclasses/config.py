@@ -2,6 +2,8 @@ import os
 import arcpy
 from model_catalog_exception import InvalidDevScenarioInRequiredSimulationsTable
 from model_catalog_exception import InvalidStormNameOrStormTypeInRequiredSimulationsTable
+from model_catalog_exception import InvalidProjectPhase
+from model_catalog_exception import InvalidModelPurpose
 
 try:
     from typing import Dict
@@ -94,9 +96,9 @@ class Config:
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
         self.unique_cip_numbers = self.get_unique_cip_numbers()
 
-        self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("characterization", "Planning")
-        self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("alternative", "Planning")
-        self.ccsp_recommended_plan_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("recommended_plan", "Planning")
+        self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
+        self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
+        self.ccsp_recommended_plan_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Recommended Plan", "Planning")
         #TODO - move piece to remove unicode empty string to separate function
 
     def get_unique_cip_numbers(self):
@@ -234,9 +236,17 @@ class Config:
 
     def retrieve_required_storm_and_dev_scenario_ids(self, model_purpose, model_project_phase):
         if model_project_phase == "Planning":
-            model_project_phase_and_purpose_field_name = "ccsp_" + model_purpose
+            if model_purpose == "Characterization":
+                model_project_phase_and_purpose_field_name = "ccsp_characterization"
+            elif model_purpose == "Alternative":
+                model_project_phase_and_purpose_field_name = "ccsp_alternative"
+            elif model_purpose == "Recommended Plan":
+                model_project_phase_and_purpose_field_name = "ccsp_recommended_plan"
+            else:
+                raise InvalidModelPurpose()
+
         else:
-            raise Exception()
+            raise InvalidProjectPhase()
 
         cursor = arcpy.da.SearchCursor(self.required_simulations_sde_path, ["storm_name", "storm_type", "dev_scenario", model_project_phase_and_purpose_field_name])
         simulation_ids = []

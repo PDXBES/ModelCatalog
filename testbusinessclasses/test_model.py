@@ -16,6 +16,7 @@ class TestModel(TestCase):
         self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
         self.model = Model.initialize_with_current_id(self.config, self.mock_object_data_io)
         self.model.model_path = r"c:\temp"
+        self.model.model_status_id = 0
 
         self.mock_simulation1 = mock.MagicMock(Simulation)
         self.mock_simulation1.storm_id = 1
@@ -323,40 +324,40 @@ class TestModel(TestCase):
 
     def test_valid_required_simulations_model_has_all_required_storms_returns_true(self):
         self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model.simulations = [self.mock_simulation1, self.mock_simulation2]
         is_valid = self.model.valid_required_simulations()
         self.assertTrue(is_valid)
 
     def test_valid_required_simulations_model_does_not_have_all_required_storms_returns_false(self):
         self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model.simulations = [self.mock_simulation1]
         is_valid = self.model.valid_required_simulations()
         self.assertFalse(is_valid)
 
     def test_valid_required_simulations_model_does_not_have_any_required_storms_returns_false(self):
         self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model.simulations = []
         is_valid = self.model.valid_required_simulations()
         self.assertFalse(is_valid)
 
     def test_required_storm_and_dev_scenario_ids_project_phase_planning_model_purpose_characterization_returns_correct_storm_dev_scenario_ids(self):
         self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-        self.model.model_purpose_id = self.config.model_purpose_id["characterization"]
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         required_storm_and_dev_scenario_ids = self.model.required_storm_and_dev_scenario_ids()
         self.assertEquals(required_storm_and_dev_scenario_ids, self.config.ccsp_characterization_storm_and_dev_scenario_ids)
 
     def test_required_storm_and_dev_scenario_ids_project_phase_planning_model_purpose_alternative_returns_correct_storm_dev_scenario_ids(self):
         self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-        self.model.model_purpose_id = self.config.model_purpose_id["alternative"]
+        self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
         required_storm_and_dev_scenario_ids = self.model.required_storm_and_dev_scenario_ids()
         self.assertEquals(required_storm_and_dev_scenario_ids, self.config.ccsp_alternative_storm_and_dev_scenario_ids)
 
     def test_required_storm_and_dev_scenario_ids_project_phase_planning_model_purpose_recommended_plan_returns_correct_storm_dev_scenario_ids(self):
         self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-        self.model.model_purpose_id = self.config.model_purpose_id["recommended_plan"]
+        self.model.model_purpose_id = self.config.model_purpose_id["Recommended Plan"]
         required_storm_and_dev_scenario_ids = self.model.required_storm_and_dev_scenario_ids()
         self.assertEquals(required_storm_and_dev_scenario_ids, self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids)
 
@@ -369,20 +370,6 @@ class TestModel(TestCase):
         self.model.project_phase_id = 27
         with self.assertRaises(InvalidProjectPhase):
             self.model.required_storm_and_dev_scenario_ids()
-
-    def test_ready_to_register_valid_working_model_returns_true(self):
-        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
-            mock_valid_emgaats_model_structure.return_value = True
-            self.model.model_status_id = self.config.model_status_id["Working"]
-            is_ready_to_register = self.model.ready_to_register()
-            self.assertTrue(is_ready_to_register)
-
-    def test_ready_to_register_invalid_working_model_returns_false(self):
-        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
-            mock_valid_emgaats_model_structure.return_value = False
-            self.model.model_status_id = self.config.model_status_id["Working"]
-            is_ready_to_register = self.model.ready_to_register()
-            self.assertFalse(is_ready_to_register)
 
     def test_valid_working_model_valid_emgaats_structure_returns_true(self):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
@@ -613,3 +600,29 @@ class TestModel(TestCase):
                     self.model.model_purpose_id= self.config.model_purpose_id["Recommended Plan"]
                     is_valid = self.model.valid
                     self.assertFalse(is_valid)
+
+    def test_ready_to_write_to_rrad_project_phase_planning_model_purpose_characterization_valid_storms_returns_true(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Characterization"]
+                    ready_to_write_to_rrad = self.model.ready_to_write_to_rrad()
+                    self.assertTrue(ready_to_write_to_rrad)
+
+    def test_ready_to_write_to_rrad_project_phase_planning_model_purpose_calibration_valid_storms_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id= self.config.model_purpose_id["Calibration"]
+                    ready_to_write_to_rrad = self.model.ready_to_write_to_rrad()
+                    self.assertFalse(ready_to_write_to_rrad)
+
+    # TODO: write more iterations of the above tests to check all logic
