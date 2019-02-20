@@ -275,11 +275,12 @@ class Model(GenericObject):
         return False
     #Todo : change this to call a diagnostic method
 
-    def ready_to_write_to_rrad(self):
+    def write_to_rrad(self):
         if self.valid:
-            if self.project_phase_id ==self.config.proj_phase_id["Planning"]:
-                if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
-                    return True
+            if self.model_status_id == self.config.model_status_id["Final"]:
+                if self.project_phase_id == self.config.proj_phase_id["Planning"]:
+                    if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
+                        return True
         return False
 
 

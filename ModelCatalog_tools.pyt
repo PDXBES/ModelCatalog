@@ -303,7 +303,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         arcpy.AddMessage("Model Added")
     except:
         arcpy.ExecuteError
-
+#change this to write to rrad
     if config.model_status[model.model_status_id] == "Working":
         arcpy.AddMessage("Model Status has been set to 'Working'")
         arcpy.AddMessage("No results will be added to the RRAD")

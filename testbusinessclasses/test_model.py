@@ -601,7 +601,8 @@ class TestModel(TestCase):
                     is_valid = self.model.valid
                     self.assertFalse(is_valid)
 
-    def test_ready_to_write_to_rrad_project_phase_planning_model_purpose_characterization_valid_storms_returns_true(self):
+    def test_write_to_rrad_model_valid_model_status_final_project_phase_planning_model_purpose_not_calibration_returns_true(
+            self):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
@@ -609,11 +610,50 @@ class TestModel(TestCase):
                     mock_valid_required_simulations.return_value = True
                     self.model.model_status_id = self.config.model_status_id["Final"]
                     self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-                    self.model.model_purpose_id= self.config.model_purpose_id["Characterization"]
-                    ready_to_write_to_rrad = self.model.ready_to_write_to_rrad()
+                    self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+                    ready_to_write_to_rrad = self.model.write_to_rrad()
                     self.assertTrue(ready_to_write_to_rrad)
 
-    def test_ready_to_write_to_rrad_project_phase_planning_model_purpose_calibration_valid_storms_returns_false(self):
+    def test_write_to_rrad_model_not_valid_model_status_final_project_phase_planning_model_purpose_not_calibration_returns_false(
+            self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = False
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+                    ready_to_write_to_rrad = self.model.write_to_rrad()
+                    self.assertFalse(ready_to_write_to_rrad)
+
+    def test_write_to_rrad_model_valid_model_status_working_project_phase_planning_model_purpose_not_calibration_returns_false(
+            self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Working"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Planning"]
+                    self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+                    ready_to_write_to_rrad = self.model.write_to_rrad()
+                    self.assertFalse(ready_to_write_to_rrad)
+
+    def test_write_to_rrad_model_valid_model_status_final_project_phase_not_planning_model_purpose_not_calibration_returns_false(
+            self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Pre Design"]
+                    self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+                    ready_to_write_to_rrad = self.model.write_to_rrad()
+                    self.assertFalse(ready_to_write_to_rrad)
+
+    def test_write_to_rrad_model_valid_model_status_final_project_phase_planning_model_purpose_calibration_returns_false(self):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
@@ -621,8 +661,19 @@ class TestModel(TestCase):
                     mock_valid_required_simulations.return_value = True
                     self.model.model_status_id = self.config.model_status_id["Final"]
                     self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-                    self.model.model_purpose_id= self.config.model_purpose_id["Calibration"]
-                    ready_to_write_to_rrad = self.model.ready_to_write_to_rrad()
+                    self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+                    ready_to_write_to_rrad = self.model.write_to_rrad()
                     self.assertFalse(ready_to_write_to_rrad)
 
-    # TODO: write more iterations of the above tests to check all logic
+    def test_write_to_rrad_model_not_valid_model_model_status_working_project_phase_not_planning_model_purpose_calibration_returns_false(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                    mock_valid_emgaats_model_structure.return_value = False
+                    mock_valid_required_simulations.return_value = True
+                    self.model.model_status_id = self.config.model_status_id["Working"]
+                    self.model.project_phase_id = self.config.proj_phase_id["Pre Design"]
+                    self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+                    ready_to_write_to_rrad = self.model.write_to_rrad()
+                    self.assertFalse(ready_to_write_to_rrad)
+
