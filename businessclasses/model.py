@@ -256,6 +256,7 @@ class Model(GenericObject):
         # type: (str)->ProjectType
         project_type = ProjectType.initialize_with_current_id(self.config, self.object_data_io)
         project_type.project_type_id = self.config.proj_type_id[project_type_name]
+        project_type.parent_id = self.id
         return project_type
 
     def create_project_types(self, project_types):

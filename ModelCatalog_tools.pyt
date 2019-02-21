@@ -304,25 +304,28 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     except:
         arcpy.ExecuteError
 #change this to write to rrad
-    if config.model_status[model.model_status_id] == "Working":
-        arcpy.AddMessage("Model Status has been set to 'Working'")
-        arcpy.AddMessage("No results will be added to the RRAD")
-    else:
+    if model.write_to_rrad():
         arcpy.AddMessage("Writing results to RRAD")
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-            arcpy.AddMessage("  Adding Area results:")
-            #simulationdataio.copy_area_results(simulation)
-            simulation.create_areas(simulationdataio)
-            arcpy.AddMessage("  Adding node results:")
-            simulationdataio.copy_node_results(simulation)
-            #TODO: Flooding results not loaded during testing
-            try:
-                arcpy.AddMessage("  Adding node flooding results:")
-                simulationdataio.copy_node_flooding_results(simulation)
-            except:
-                arcpy.AddWarning("This results.gdb does not have a node flooding feature class.")
-                arcpy.AddWarning("The results should be processed with a newer version of EMGAATS.")
-            arcpy.AddMessage("  Adding link results:")
-            simulationdataio.copy_link_results(simulation)
+            # arcpy.AddMessage("  Adding Area results:")
+            # # simulationdataio.copy_area_results(simulation)
+            # simulation.create_areas(simulationdataio)
+            # arcpy.AddMessage("  Adding node results:")
+            # simulationdataio.copy_node_results(simulation)
+            # # TODO: Flooding results not loaded during testing
+            # try:
+            #     arcpy.AddMessage("  Adding node flooding results:")
+            #     simulationdataio.copy_node_flooding_results(simulation)
+            # except:
+            #     arcpy.AddWarning("This results.gdb does not have a node flooding feature class.")
+            #     arcpy.AddWarning("The results should be processed with a newer version of EMGAATS.")
+            # arcpy.AddMessage("  Adding link results:")
+            # simulationdataio.copy_link_results(simulation)
+            simulationdataio.add_simulation_results(simulation)
             arcpy.AddMessage("Results written to RRAD")
+
+    else:
+        arcpy.AddMessage("No results will be added to the RRAD")
+
+

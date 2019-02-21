@@ -53,7 +53,7 @@ class ModelDataIo(ObjectDataIo):
             else:
                 dev_scenario = "EX"
                 storm_type = "U"
-                storm_name = "user_def"
+                storm_name = "User-defined"
             simulation.storm_id = self.config.storm_id[(storm_name, storm_type)]
             simulation.dev_scenario_id = self.config.dev_scenario_id[dev_scenario]
             simulation.sim_desc = simulation_description
