@@ -24,8 +24,7 @@ class Toolbox(object):
         self.alias = ""
 
         # List of tool classes associated with this toolbox
-        self.tools = [EMGAATS_Model_Registration]
-
+        self.tools = [EMGAATS_Model_Registration, TemporaryMonitorQaQc, SlrtQaQc]
 
 class EMGAATS_Model_Registration(object):
     def __init__(self):
@@ -242,7 +241,6 @@ class EMGAATS_Model_Registration(object):
             parameters[11].enabled = False
             parameters[11].value = self.dummy_model_alteration_file_path
 
-
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
         parameter.  This method is called after internal validation."""
@@ -253,8 +251,6 @@ class EMGAATS_Model_Registration(object):
 
         try:
             self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
-            #model_id = self.modelcatalogdataio.retrieve_current_model_id()
-            #self.model.id = model_id
             self.model.parent_model_id = 0
             if parameters[4] == u"None":
                 pass
@@ -290,6 +286,222 @@ class EMGAATS_Model_Registration(object):
         except InvalidModelException:
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
+
+class TemporaryMonitorQaQc(object):
+    def __init__(self):
+        self.label = "Temporary Monitor Data Quality"
+        self.description = "Tool for recording temporary data quality to database"
+        self.config = config.Config()
+        self.model_catalog = ModelCatalog(self.config)
+        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
+        self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
+        self.model_id = ""
+        # Need to create list of model objects from model catalog
+
+    def getParameterInfo(self):
+        model_id = arcpy.Parameter(
+            displayName="Model ID",
+            name="model_id",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+
+        model_id.filter.type = "ValueList"
+        model_id.filter.list = [1, 2, 3] #TODO Need to get list of final calibration models, purpose, paths
+
+        monitor_location_id = arcpy.Parameter(
+            displayName="Location_ID",
+            name="monitor_location_id",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        monitor_location_id.filter.list = [1, 2, 3] #TODO Need to get list of temporary monitors
+
+        simulations_qa_qc = arcpy.Parameter(
+            displayName='Observed Data Quality',
+            name='qaqc_table',
+            datatype='GPValueTable',
+            parameterType='Required',
+            direction='Input')
+
+        simulations_qa_qc.columns = [['String', 'Simulation'], ['String', 'Depth QC'], ['String', 'Flow QC']]
+        simulations_qa_qc.filters[1].type = 'ValueList'
+        simulations_qa_qc.filters[1].list = ["Good", "Fair", "Poor", "NA"]
+        simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
+
+        calculated_data_quality = arcpy.Parameter(
+            displayName="Calculated Data Quality",
+            name="calculated_data_quality",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
+        calculated_data_quality.value = "Good"
+        calculated_data_quality.enabled = False
+
+        override_data_quality = arcpy.Parameter(
+            displayName="Manual Data Quality",
+            name="override_data_quality",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        override_data_quality.filter.list = ["Good", "Fair", "Poor"]
+
+        params = [model_id, monitor_location_id, simulations_qa_qc, calculated_data_quality, override_data_quality]
+        return params
+
+    def isLicensed(self):
+        return True
+
+    def updateParameters(self, parameters):
+        simulations = ["10012019", "09012019"] #TODO Need a list of simulation descriptions based on model id
+        simulation_values = zip(simulations, len(simulations) * [""], len(simulations) * [""])
+
+        if parameters[0].altered and parameters[0].hasBeenValidated == False:
+            parameters[2].values = simulation_values
+
+        if parameters[2] is not None:
+            if len(parameters[2].values) != len(simulations): #TODO need to not allow adding new simulations
+                param = []
+                for simulation in simulations:
+                    deleted = True
+                    val = None
+                    for value in parameters[2].values:
+                        val = value
+                        if value[0] == simulation:
+                            deleted = False
+                            break
+                    if deleted:
+                        param.append([simulation, "", ""])
+                    else:
+                        param.append(val)
+                    parameters[2].values = param
+        pass
+
+    def updateMessages(self, parameters):
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+        return
+
+    def execute(self, parameters, messages):
+        arcpy.AddMessage(self.model_id)
+        pass
+
+class SlrtQaQc(object):
+    def __init__(self):
+        self.label = "SLRT Data Quality"
+        self.description = "Tool for recording SLRT data quality to database"
+        self.config = config.Config()
+        self.model_catalog = ModelCatalog(self.config)
+        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
+        self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
+        # Need to create list of model objects from model catalog
+
+    def getParameterInfo(self):
+        model_id = arcpy.Parameter(
+            displayName="Model ID",
+            name="model_id",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+
+        model_id.filter.type = "ValueList"
+        model_id.filter.list = [1, 2, 3] #TODO Need to get list of final calibration models, purpose, paths
+
+        station_id = arcpy.Parameter(
+            displayName="Station ID",
+            name="station_id",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        station_id.filter.list = [1, 2, 3] #TODO Need to get list of station ids
+
+        h2_id = arcpy.Parameter(
+            displayName="H2 ID",
+            name="h2_id",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        h2_id.filter.list = [1, 2, 3] #TODO Need to get list of h2 id for station
+
+        location_qualifier = arcpy.Parameter(
+            displayName="Location Qualifier",
+            name="location_qualifier",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        location_qualifier.filter.list = [1, 2, 3] #TODO Need to get list of location qualifiers for h2 id
+
+        simulations_qa_qc = arcpy.Parameter(
+            displayName='Observed Data Quality',
+            name='qaqc_table',
+            datatype='GPValueTable',
+            parameterType='Required',
+            direction='Input')
+
+        simulations_qa_qc.columns = [['String', 'Simulation'], ['String', 'Depth QC'], ['String', 'Flow QC']]
+        simulations_qa_qc.filters[1].type = 'ValueList'
+        simulations_qa_qc.filters[1].list = ["Good", "Fair", "Poor", "NA"]
+        simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
+
+        calculated_data_quality = arcpy.Parameter(
+            displayName="Calculated Data Quality",
+            name="calculated_data_quality",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
+        calculated_data_quality.enabled = False
+
+        override_data_quality = arcpy.Parameter(
+            displayName="Data Quality Override",
+            name="override_data_quality",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        override_data_quality.filter.list = ["Good", "Fair", "Poor"]
+
+        params = [model_id, station_id, h2_id, location_qualifier, simulations_qa_qc, calculated_data_quality,
+                  override_data_quality]
+        return params
+
+    def isLicensed(self):
+        return True
+
+    def updateParameters(self, parameters):
+        #TODO Need to prevent user from adding or removing events
+        simulations = ["10012019", "09012019"] #TODO Need a list of simulation descriptions based on model id
+        simulation_values = zip(simulations, len(simulations) * [""], len(simulations) * [""])
+
+        if parameters[0].altered and parameters[0].hasBeenValidated == False:
+            parameters[4].values = simulation_values
+
+        if parameters[4] is not None:
+            if len(parameters[4].values) < len(simulations):
+                param = []
+                for simulation in simulations:
+                    deleted = True
+                    val = None
+                    for value in parameters[4].values:
+                        val = value
+                        if value[0] == simulation:
+                            deleted = False
+                            break
+                    if deleted:
+                        param.append([simulation, "", ""])
+                    else:
+                        param.append(val)
+                    parameters[4].values = param
+        pass
+
+    def updateMessages(self, parameters):
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+
+        return
+
+    def execute(self, parameters, messages):
+        pass
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
