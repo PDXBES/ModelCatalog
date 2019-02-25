@@ -148,7 +148,7 @@ class DbDataIo(object):
         self.create_feature_class_from_objects(output_feature_class_name, object_list, field_attribute_lookup, template_table_path)
         input_table = self.workspace + "\\" + output_feature_class_name
         arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
-        del input_table
+        arcpy.Delete_management(input_table)
 
 
 

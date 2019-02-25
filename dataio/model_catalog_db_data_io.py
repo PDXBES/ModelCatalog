@@ -12,6 +12,7 @@ from object_data_io import ObjectDataIo
 from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.simulation import Simulation
 from businessclasses.area import Area
+from model_data_io import ModelDataIo
 
 
 class ModelCatalogDbDataIo(DbDataIo):
@@ -19,24 +20,6 @@ class ModelCatalogDbDataIo(DbDataIo):
         # type: (Config) -> None
         self.config = config
         self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
-        # self.field_attribute_lookup = OrderedDict()
-        # self.field_attribute_lookup["Model_ID"] = "id"
-        # self.field_attribute_lookup["Parent_Model_ID"] = "parent_model_id"
-        # self.field_attribute_lookup["Model_Request_ID"] = "model_request_id"
-        # self.field_attribute_lookup["Project_Phase_ID"] = "project_phase_id"
-        # self.field_attribute_lookup["Engine_Type_ID"] = "engine_type_id"
-        # self.field_attribute_lookup["Create_Date"] = "create_date"
-        # self.field_attribute_lookup["Created_by"] = "created_by"
-        # self.field_attribute_lookup["Deploy_Date"] = "deploy_date"
-        # self.field_attribute_lookup["Extract_Date"] = "extract_date"
-        # self.field_attribute_lookup["Run_Date"] = "run_date"
-        # self.field_attribute_lookup["Model_Path"] = "model_path"
-        # self.field_attribute_lookup["Model_Purpose_ID"] = "model_purpose_id"
-        # self.field_attribute_lookup["Model_Calibration_file"] = "model_calibration_file"
-        # self.field_attribute_lookup["Model_Status_ID"] = "model_status_id"
-        # self.field_attribute_lookup["Model_Alteration_file"] = "model_alteration_file"
-        # self.field_attribute_lookup["Project_Num"] = "project_num"
-        # self.field_attribute_lookup["Shape@"] = "model_geometry"
         self.workspace = "in_memory"
         self.class_factory = GenericClassFactory(self.config)
         self.class_factory.class_dict = {"model": Model, "simulation": Simulation, "area": Area}
@@ -54,7 +37,7 @@ class ModelCatalogDbDataIo(DbDataIo):
         return current_model_alteration_id
 
     def add_model(self, model, model_data_io):
-        # type: (Model, ObjectDataIo) -> None
+        # type: (Model, ModelDataIo) -> None
 
         editor = model_data_io.start_editing_session(self.config.model_catalog_sde_path)
         try:
@@ -68,5 +51,3 @@ class ModelCatalogDbDataIo(DbDataIo):
             arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
             raise
 
-
-#TODO: Create class factory for model catalog db data IO

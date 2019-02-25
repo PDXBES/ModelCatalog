@@ -31,8 +31,8 @@ class MockConfig():
         self.config.storm_types_sde_path = "storm_types_sde_path"
         self.config.dev_scenarios_sde_path = "dev_scenarios_sde_path"
 
-        self.config.storm = {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
-        self.config.storm_id = {("user_def", "U"): 0, ("25yr6h", "D"): 1, ("10yr6h", "D"): 2}
+        self.config.storm = {0: ("User-defined", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
+        self.config.storm_id = {("User-defined", "U"): 0, ("25yr6h", "D"): 1, ("10yr6h", "D"): 2}
 
         self.config.dev_scenario = {0: "EX", 1: "50", 2: "BO"}
         self.config.dev_scenario_id = {"EX": 0, "50": 1, "BO": 2}
@@ -57,7 +57,6 @@ class MockConfig():
 
         self.config.model_purpose = {0: "Characterization", 1: "Alternative", 2: "Recommended Plan", 3: "Calibration"}
         self.config.model_purpose_id = {"Characterization": 0, "Alternative": 1, "Recommended Plan": 2, "Calibration": 3}
-        #TODO - changing text case broke things in other refs - need to fix
 
         self.config.model_status = {0: "Working", 1: "Final"}
         self.config.model_status_id = {"Working": 0, "Final": 1}

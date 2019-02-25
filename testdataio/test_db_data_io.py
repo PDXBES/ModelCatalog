@@ -25,6 +25,9 @@ class TestDataIO(TestCase):
         self.patch_create_object = mock.patch("businessclasses.generic_class_factory.GenericClassFactory.create_object")
         self.mock_create_object = self.patch_create_object.start()
 
+        self.patch_delete_management = mock.patch("arcpy.Delete_management")
+        self.mock_delete_management = self.patch_delete_management.start()
+
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("object_1", 44), ("object_2", 55)])
 
@@ -91,6 +94,7 @@ class TestDataIO(TestCase):
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.stop()
         self.mock_da_SearchCursor = self.patch_da_SearchCursor.stop()
         self.mock_create_object = self.patch_create_object.stop()
+        self.mock_delete_management = self.patch_delete_management.stop()
         self.mock_create_feature_class = self.patch_create_feature_class.stop()
 
     def test_retrieve_current_id_calls_update_cursor_with_correct_arguments(self):
