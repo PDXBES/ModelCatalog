@@ -330,13 +330,13 @@ class TemporaryMonitorQaQc(object):
         simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
 
         calculated_data_quality = arcpy.Parameter(
-            displayName="Calculated Data Quality",
+            displayName="Calculated Data Quality (Automatically Calculated)",
             name="calculated_data_quality",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
         calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
-        calculated_data_quality.value = "Good"
+        calculated_data_quality.value = "Good" #TODO this will need to calculated in the updateParameters
         calculated_data_quality.enabled = False
 
         override_data_quality = arcpy.Parameter(
@@ -354,29 +354,14 @@ class TemporaryMonitorQaQc(object):
         return True
 
     def updateParameters(self, parameters):
-        simulations = ["10012019", "09012019"] #TODO Need a list of simulation descriptions based on model id
-        simulation_values = zip(simulations, len(simulations) * [""], len(simulations) * [""])
-
-        if parameters[0].altered and parameters[0].hasBeenValidated == False:
-            parameters[2].values = simulation_values
-
-        if parameters[2] is not None:
-            if len(parameters[2].values) != len(simulations): #TODO need to not allow adding new simulations
-                param = []
-                for simulation in simulations:
-                    deleted = True
-                    val = None
-                    for value in parameters[2].values:
-                        val = value
-                        if value[0] == simulation:
-                            deleted = False
-                            break
-                    if deleted:
-                        param.append([simulation, "", ""])
-                    else:
-                        param.append(val)
-                    parameters[2].values = param
-        pass
+        model_id_parameter = parameters[0]
+        data_review_parameter = parameters[2]
+        if model_id_parameter.altered:
+            simulation_values, simulations = data_review_combo_box_get_simulations(model_id_parameter)
+            data_review_combo_box_set_simulation_list(data_review_parameter, model_id_parameter)
+            data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations)
+        else:
+            data_review_parameter.values = None
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
@@ -384,7 +369,6 @@ class TemporaryMonitorQaQc(object):
         return
 
     def execute(self, parameters, messages):
-        arcpy.AddMessage(self.model_id)
         pass
 
 class SlrtQaQc(object):
@@ -445,12 +429,13 @@ class SlrtQaQc(object):
         simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
 
         calculated_data_quality = arcpy.Parameter(
-            displayName="Calculated Data Quality",
+            displayName="Calculated Data Quality (Automatically Calculated)",
             name="calculated_data_quality",
             datatype="GPString",
             parameterType="Required",
             direction="Input")
         calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
+        calculated_data_quality.value = "Good" #TODO this will need to calculated in the updateParameters
         calculated_data_quality.enabled = False
 
         override_data_quality = arcpy.Parameter(
@@ -469,30 +454,14 @@ class SlrtQaQc(object):
         return True
 
     def updateParameters(self, parameters):
-        #TODO Need to prevent user from adding or removing events
-        simulations = ["10012019", "09012019"] #TODO Need a list of simulation descriptions based on model id
-        simulation_values = zip(simulations, len(simulations) * [""], len(simulations) * [""])
-
-        if parameters[0].altered and parameters[0].hasBeenValidated == False:
-            parameters[4].values = simulation_values
-
-        if parameters[4] is not None:
-            if len(parameters[4].values) < len(simulations):
-                param = []
-                for simulation in simulations:
-                    deleted = True
-                    val = None
-                    for value in parameters[4].values:
-                        val = value
-                        if value[0] == simulation:
-                            deleted = False
-                            break
-                    if deleted:
-                        param.append([simulation, "", ""])
-                    else:
-                        param.append(val)
-                    parameters[4].values = param
-        pass
+        model_id_parameter = parameters[0]
+        data_review_parameter = parameters[4]
+        if model_id_parameter.altered:
+            simulation_values, simulations = data_review_combo_box_get_simulations(model_id_parameter)
+            data_review_combo_box_set_simulation_list(data_review_parameter, model_id_parameter)
+            data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations)
+        else:
+            data_review_parameter.values = None
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
@@ -526,4 +495,54 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     else:
         arcpy.AddMessage("No results will be added to the RRAD")
 
+def data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations):
+    # Prevents user from adding or deleting simulations
+    if len(simulations) > 0 and model_id_parameter.hasBeenValidated:
+        if data_review_parameter.values is not None:
+            replace_simulations_deleted = len(data_review_parameter.values) < len(simulations)
+            remove_simulations_added = len(data_review_parameter.values) > len(simulations)
+            if replace_simulations_deleted:
+                data_review_combo_box_replace_deleted_simulations(data_review_parameter, simulations)
+            if remove_simulations_added:
+                data_review_combo_box_remove_added_simulations(data_review_parameter, simulations)
+        else:
+            data_review_parameter.values = simulation_values
+
+def data_review_combo_box_set_simulation_list(data_review_parameter, model_id_parameter):
+    # Gets list of simulations if there is a model id
+    simulation_values, simulations = data_review_combo_box_get_simulations(model_id_parameter)
+    if model_id_parameter.hasBeenValidated == False:
+        # Sets list of simulations if the model id has been changed
+        data_review_parameter.values = simulation_values
+
+#TODO Needs a list of simulation descriptions based on model_id_parameter
+def data_review_combo_box_get_simulations(model_id_parameter):
+    simulations = ["10012019", "09012019",
+                   "08012019"]  # TODO Need a list of simulation descriptions based on model_id_parameter
+    simulation_values = zip(simulations, len(simulations) * [""], len(simulations) * [""])
+    return simulation_values, simulations
+
+def data_review_combo_box_remove_added_simulations(data_review_parameter, simulations):
+    param = []
+    for value in data_review_parameter.values:
+        if value[0] in simulations:
+            param.append(value)
+    data_review_parameter.values = param
+
+def data_review_combo_box_replace_deleted_simulations(data_review_parameter, simulations):
+    param = []
+    for simulation in simulations:
+        deleted_simulation = True
+        existing_simulation = None
+        for value in data_review_parameter.values:
+            if value[0] == simulation:
+                deleted_simulation = False
+                existing_simulation = value
+                break
+        if deleted_simulation:
+            # simulation deleted by user
+            param.append([simulation, "", ""])
+        else:
+            param.append(existing_simulation)
+    data_review_parameter.values = param
 
