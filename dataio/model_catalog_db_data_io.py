@@ -51,3 +51,13 @@ class ModelCatalogDbDataIo(DbDataIo):
             arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
             raise
 
+#TODO: finish these functions
+    def set_registered_model_to_read_only(self, model):
+        pass
+
+    # check python to change file structure to read only (can it be done at folder or file level
+    # if at file level use os.walk to recursively go through files in folder
+
+    def write_model_registration_file(self, model):
+        pass
+    # use xml format to write out: model_id, status(final/working), date_registered(from_model_create_date), model_path

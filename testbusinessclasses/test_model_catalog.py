@@ -4,6 +4,7 @@ from businessclasses.model_catalog import ModelCatalog
 from businessclasses.model import Model
 from businessclasses.model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from mock_config import MockConfig
+from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 
 class TestModelCatalog(TestCase):
     def setUp(self):
@@ -12,6 +13,20 @@ class TestModelCatalog(TestCase):
         self.model_catalog = ModelCatalog(self.config)
         self.model1 = mock.MagicMock(Model)
         self.model2 = mock.MagicMock(Model)
+        self.model_catalog_db_data_io = mock.MagicMock(ModelCatalogDbDataIo)
+        self.model_catalog_db_data_io.workspace = "in_memory"
+
+        self.patch_copy_to_memory = mock.patch.object(self.model_catalog_db_data_io, "copy_to_memory")
+        self.mock_copy_to_memory = self.patch_copy_to_memory.start()
+
+        self.patch_create_objects_from_table = mock.patch.object(self.model_catalog_db_data_io, "create_objects_from_table")
+        self.mock_create_objects_from_table = self.patch_create_objects_from_table.start()
+
+    def tearDown(self):
+        self.mock_copy_to_memory = self.patch_copy_to_memory.stop()
+        self.mock_create_objects_from_table = self.patch_create_objects_from_table.stop()
+
+
 
     def test_model_check_for_duplicates(self):
         self.model1.valid = True
@@ -111,9 +126,21 @@ class TestModelCatalog(TestCase):
 
         self.assertEquals(len(self.model_catalog.models), 0)
 
+    def test_create_models_with_tracking_data_only_from_model_catalog_calls_copy_to_memory_with_correct_arguments(self):
+        input_table = self.config.model_tracking_sde_path
+        in_memory_output_table_name = "model_tracking"
+        self.model_catalog.create_models_with_tracking_data_only_from_model_catalog(self.model_catalog_db_data_io)
+        self.mock_copy_to_memory.assert_called_with(input_table, in_memory_output_table_name)
+
+    def test_create_models_with_tracking_data_only_from_model_catalog_calls_create_objects_from_table_with_correct_arguments(self):
+        table = "in_memory/model_tracking"
+        class_type = "model"
+        field_attribute_lookup = Model.input_field_attribute_lookup()
+        self.model_catalog.create_models_with_tracking_data_only_from_model_catalog(self.model_catalog_db_data_io)
+        self.mock_create_objects_from_table.assert_called_with(table, class_type, field_attribute_lookup)
 
 
+    # test that delete is called (mock delete)
 
-
-
+    #test that a list of models is returned
 

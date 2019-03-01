@@ -184,7 +184,7 @@ class TestSimulationDataIO(TestCase):
         mock_id_to_field_map.return_value = "parent_id_to_db_field_mapping"
 
         self.simulationdataio.copy_area_results_to_memory(self.mock_simulation, "output_table_name")
-        self.mock_model_catalog_db_data_io_copy_to_memory.assert_called_with("area_results_path", "output_table_name", "parent_id_to_db_field_mapping")
+        self.mock_model_catalog_db_data_io_copy_to_memory.assert_called_with("area_results_path", "output_table_name")
 
         patch_area_results_path.stop()
         patch_id_to_field_map.stop()

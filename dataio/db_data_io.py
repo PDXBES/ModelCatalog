@@ -103,7 +103,7 @@ class DbDataIo(object):
     def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None
         in_memory_table = self.workspace + "\\" + "copy_table"
-        self.copy_to_memory(input_table, "copy_table", parent_id_to_db_field_mapping)
+        self.copy_to_memory(input_table, "copy_table")
         self.add_parent_id(in_memory_table, parent_id_to_db_field_mapping)
 
         if field_mappings != None:
@@ -113,7 +113,7 @@ class DbDataIo(object):
         arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
         arcpy.Delete_management(in_memory_table)
 
-    def copy_to_memory(self, input_table, in_memory_output_table_name, parent_id_to_db_field_mapping):
+    def copy_to_memory(self, input_table, in_memory_output_table_name):
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
         arcpy.CopyFeatures_management(input_table, in_memory_table)
 

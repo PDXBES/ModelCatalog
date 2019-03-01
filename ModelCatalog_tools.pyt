@@ -37,6 +37,7 @@ class EMGAATS_Model_Registration(object):
 
         self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
         self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
+        self.dummy_parent_model_path = self.config.dummy_parent_model_path
         arcpy.AddMessage("Init")
 
 #        self.canRunInBackground = True
@@ -61,6 +62,18 @@ class EMGAATS_Model_Registration(object):
             direction="Input")
 
         model_dir.filter.list = ["File System", "Local Database"]
+
+        parent_model_dir = arcpy.Parameter(
+            displayName="Parent Model Directory",
+            name="parent_model_directory",
+            datatype="DEWorkspace",
+            parameterType="Required",
+            direction="Input")
+
+        parent_model_dir.filter.list = ["File System", "Local Database"]
+        parent_model_dir.enabled = False
+        parent_model_dir.value = self.dummy_parent_model_path
+
 
         project_type = arcpy.Parameter(
             displayName="Project Type",
@@ -168,7 +181,7 @@ class EMGAATS_Model_Registration(object):
         model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
 
-        params = [project_no, model_dir, project_type, project_phase, project_cip_number,
+        params = [project_no, model_dir, parent_model_dir, project_type, project_phase, project_cip_number,
                   model_purpose, model_calibration_file, model_status, model_alterations_boundary_conditions,
                   model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
         return params
@@ -182,40 +195,42 @@ class EMGAATS_Model_Registration(object):
         has been changed."""
         arcpy.AddMessage("Update Parameters")
 
-        if parameters[3].valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
-            if parameters[4].value == u"None":
-                parameters[4].value = None
-            parameters[4].enabled = True
-            parameters[4].filter.list = self.config.unique_cip_numbers
-            if parameters[4].value != None or parameters[4].value == u"None":
+        if parameters[4].valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
+            if parameters[5].value == u"None":
+                parameters[5].value = None
+            parameters[5].enabled = True
+            parameters[5].filter.list = self.config.unique_cip_numbers
+            if parameters[5].value != None or parameters[5].value == u"None":
                 parameters[0].value = "ARID"
                 analysis_request_ids = ""
-                for analysis_request_id in self.config.get_cip_analysis_requests(parameters[4].valueAsText):
+                for analysis_request_id in self.config.get_cip_analysis_requests(parameters[5].valueAsText):
                     analysis_request_ids += " " + analysis_request_id
                 analysis_request_ids.strip()
                 parameters[0].value = analysis_request_ids
             else:
                 parameters[0].value = ""
         else:
-            parameters[4].enabled = False
-            parameters[4].filter.list = [u"None"]
-            parameters[4].value = u"None"
+            parameters[5].enabled = False
+            parameters[5].filter.list = [u"None"]
+            parameters[5].value = u"None"
 
         # Enables calibration file field if calibration file
-        if parameters[5].valueAsText == "Calibration":
-            if parameters[6].enabled == False:
-                parameters[6].enabled = True
-                parameters[6].value = ""
+        if parameters[6].valueAsText == "Calibration":
+            if parameters[7].enabled == False:
+                parameters[7].enabled = True
+                parameters[7].value = ""
+            if parameters[2].enabled == True:
+                parameters[2].enabled = False
+                parameters[2].value = self.dummy_parent_model_path
         else:
-            parameters[6].enabled = False
-            parameters[6].value = self.dummy_model_calibration_file_path
+            parameters[7].enabled = False
+            parameters[7].value = self.dummy_model_calibration_file_path
+            if parameters[6].altered:
+                parameters[2].enabled = True
+                parameters[2].value = ""
+
 
         # # Checks that alteration added is not a duplicate
-        if parameters[8].values is not None:
-            number_of_values = len(parameters[8].values)
-            if number_of_values > 1 and parameters[8].values[-1] in parameters[8].values[0:number_of_values-1]:
-                parameters[8].values = parameters[8].values[0:number_of_values-1]
-
         if parameters[9].values is not None:
             number_of_values = len(parameters[9].values)
             if number_of_values > 1 and parameters[9].values[-1] in parameters[9].values[0:number_of_values-1]:
@@ -226,20 +241,25 @@ class EMGAATS_Model_Registration(object):
             if number_of_values > 1 and parameters[10].values[-1] in parameters[10].values[0:number_of_values-1]:
                 parameters[10].values = parameters[10].values[0:number_of_values-1]
 
+        if parameters[11].values is not None:
+            number_of_values = len(parameters[11].values)
+            if number_of_values > 1 and parameters[11].values[-1] in parameters[11].values[0:number_of_values-1]:
+                parameters[11].values = parameters[11].values[0:number_of_values-1]
+
         values_altered= False
         alterations_present = False
         # Enables alteration file field if an alteration is added
-        if (parameters[8].altered or parameters[9].altered or parameters[10].altered):
+        if (parameters[9].altered or parameters[10].altered or parameters[11].altered):
             values_altered = True
-        if (parameters[8].valueAsText is not None) or (parameters[9].valueAsText is not None) or (parameters[10].valueAsText is not None):
+        if (parameters[9].valueAsText is not None) or (parameters[10].valueAsText is not None) or (parameters[11].valueAsText is not None):
             alterations_present = True
         if values_altered and alterations_present:
-            if parameters[11].enabled == False:
-                parameters[11].enabled = True
-                parameters[11].value = ""
+            if parameters[12].enabled == False:
+                parameters[12].enabled = True
+                parameters[12].value = ""
         else:
-            parameters[11].enabled = False
-            parameters[11].value = self.dummy_model_alteration_file_path
+            parameters[12].enabled = False
+            parameters[12].value = self.dummy_model_alteration_file_path
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
@@ -265,7 +285,7 @@ class EMGAATS_Model_Registration(object):
             self.model.engine_type_id = 1  # not currently in use
             self.model.create_date = datetime.datetime.today()
             self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-            self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE (change to results extracted date)
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = parameters[1].valueAsText
@@ -484,7 +504,6 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         arcpy.AddMessage("Model Added")
     except:
         arcpy.ExecuteError
-#change this to write to rrad
     if model.write_to_rrad():
         arcpy.AddMessage("Writing results to RRAD")
         for simulation in model.simulations:

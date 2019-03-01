@@ -140,7 +140,7 @@ class TestDataIO(TestCase):
             self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
 
     def test_copy_to_memory_calls_copy_features_management_with_correct_arguments(self):
-        self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name", self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name")
         self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\in_memory_output_table_name")
 
     def test_copy_calls_add_field_management_with_correct_arguments(self):

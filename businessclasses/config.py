@@ -19,9 +19,13 @@ class Config:
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
         self.dummy_model_alteration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_alteration_file.xlsx"
 
+        self.dummy_parent_model_path = executable_path + "\\" + "DummyFiles" + "\\"
+
         sde_connections = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\connection_files"
 
         model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
+        # need model_catalog_production_sde
+        # need flag to determine test or production
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
         self.model_catalog_current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
