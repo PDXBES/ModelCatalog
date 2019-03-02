@@ -6,7 +6,6 @@ from model import Model
 from model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from config import Config
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
-import arcpy
 
 class ModelCatalog:
     models = None  # type: List[Model]
@@ -56,23 +55,20 @@ class ModelCatalog:
         if not model.valid:
             raise InvalidModelException
 
-# TODO: finish below functions
-    def create_models_with_tracking_data_only_from_model_catalog(self, model_catalog_db_data_io):
+    def create_models_with_tracking_data_only_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> None
-        input_table_name = self.config.model_tracking_sde_path #to make generic
+        input_table_name = self.config.model_tracking_sde_path
         class_type = "model"
-        models = self.create_objects_from_model_catalog(class_type, input_table_name, model_catalog_db_data_io)
-        return models # test that a list of models is returned
+        models = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
+        return models
 
-#could move this to db_data_io, but will not take model_catalog_db_data_io as it has self already
-    def create_objects_from_model_catalog(self, class_type, input_table_name, model_catalog_db_data_io):
-        in_memory_output_table_name = "object_table"
-        table = model_catalog_db_data_io.workspace + "/" + in_memory_output_table_name
-        field_attribute_lookup = Model.input_field_attribute_lookup()
-        model_catalog_db_data_io.copy_to_memory(input_table_name, in_memory_output_table_name)
-        objects = model_catalog_db_data_io.create_objects_from_table(table, class_type, field_attribute_lookup)
-        arcpy.Delete_management(table)  # test this
-        return objects
+    def create_simulations_from_model_catalog_db(self, model_catalog_db_data_io):
+        # type: (ModelCatalogDbDataIo) -> None
+        input_table_name = self.config.simulation_sde_path
+        class_type = "simulation"
+        simulations = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
+        return simulations
+
 
     #create a model to use the below static method
     # read from the sde path from the model tracking table
@@ -83,9 +79,28 @@ class ModelCatalog:
 
     #repeat above with other tables (model alterations (hydro, hydra, bc) project_type, simulation) 5 additional functions
 
-
-    def create_models_from_model_catalog(self, model_catalog_db_data_io):
-        pass
     # Call above functions
     # for each model in the list, populate with data from the other 5 lists
     # use add_models to add them
+
+    def create_models_from_model_catalog_db(self, model_catalog_db_data_io):
+        models = self.create_models_with_tracking_data_only_from_model_catalog_db(model_catalog_db_data_io)
+        simulations = self.create_simulations_from_model_catalog_db(model_catalog_db_data_io)
+        for model in models:
+            for simulation in simulations:
+                if simulation.parent_id == model.id:
+                    model.simulations.append(simulation)
+        return models
+
+    def add_models_from_model_catalog_db(self, model_catalog_db_data_io):
+        self.add_models(self.create_models_from_model_catalog_db(model_catalog_db_data_io))
+
+    def calibration_models(self):
+        calibration_models = []
+        for model in self.models:
+            if self.config.model_purpose[model.model_purpose_id] == "Calibration":
+                calibration_models.append(model)
+        return calibration_models
+
+
+

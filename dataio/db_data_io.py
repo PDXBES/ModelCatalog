@@ -18,7 +18,6 @@ class DbDataIo(object):
         self.workspace = "in_memory"
         self.class_factory = class_factory
 
-
     def retrieve_current_id(self, object_type):
         # type: (str, str) -> int
         field_names = ["Object_Type", "Current_ID"]
@@ -79,12 +78,16 @@ class DbDataIo(object):
             generic_objects.append(generic_object)
         return generic_objects
 
-    def _create_field_map_for_sde_db(self, model_link_results_path):
-        """
+    def create_objects_from_database(self, class_type, input_table_name):
+        in_memory_output_table_name = "object_table"
+        table = self.workspace + "/" + in_memory_output_table_name
+        field_attribute_lookup = self.class_factory.class_dict[class_type].input_field_attribute_lookup()
+        self.copy_to_memory(input_table_name, in_memory_output_table_name)
+        objects = self.create_objects_from_table(table, class_type, field_attribute_lookup)
+        arcpy.Delete_management(table)  # test this
+        return objects
 
-        :param model_link_results_path:
-        :return:
-        """
+    def _create_field_map_for_sde_db(self, model_link_results_path):
         field_mappings = arcpy.FieldMappings()
         fields = arcpy.ListFields(model_link_results_path)
         for field in fields:
