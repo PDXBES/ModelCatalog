@@ -56,14 +56,14 @@ class ModelCatalog:
             raise InvalidModelException
 
     def create_models_with_tracking_data_only_from_model_catalog_db(self, model_catalog_db_data_io):
-        # type: (ModelCatalogDbDataIo) -> None
+        # type: (ModelCatalogDbDataIo) -> List[Model]
         input_table_name = self.config.model_tracking_sde_path
         class_type = "model"
         models = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return models
 
     def create_simulations_from_model_catalog_db(self, model_catalog_db_data_io):
-        # type: (ModelCatalogDbDataIo) -> None
+        # type: (ModelCatalogDbDataIo) -> List[Simualtion]
         input_table_name = self.config.simulation_sde_path
         class_type = "simulation"
         simulations = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
@@ -84,6 +84,7 @@ class ModelCatalog:
     # use add_models to add them
 
     def create_models_from_model_catalog_db(self, model_catalog_db_data_io):
+        # type: (ModelCatalogDbDataIo) -> List[Model]
         models = self.create_models_with_tracking_data_only_from_model_catalog_db(model_catalog_db_data_io)
         simulations = self.create_simulations_from_model_catalog_db(model_catalog_db_data_io)
         for model in models:
