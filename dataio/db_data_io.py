@@ -118,7 +118,11 @@ class DbDataIo(object):
 
     def copy_to_memory(self, input_table, in_memory_output_table_name):
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
-        arcpy.CopyFeatures_management(input_table, in_memory_table)
+        # TODO check if feature class or table and add logic
+        try:
+            arcpy.CopyFeatures_management(input_table, in_memory_table)
+        except:
+            arcpy.CopyRows_management(input_table, in_memory_table)
 
     def add_parent_id(self, in_memory_table, parent_id_to_db_field_mapping):
         for parent_id, db_id_field in parent_id_to_db_field_mapping:

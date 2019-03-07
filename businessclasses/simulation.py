@@ -22,13 +22,18 @@ class Simulation(GenericObject):
         self.storm_id = None
         self.sim_desc = ""
         self.config = config
-        self.input_field_attribute_lookup = OrderedDict()
-        self.input_field_attribute_lookup["Model_ID"] = "parent_id"
-        self.input_field_attribute_lookup["Simulation_ID"] = "id"
-        self.input_field_attribute_lookup["Storm_ID"] = "storm_id"
-        self.input_field_attribute_lookup["Dev_Scenario_ID"] = "dev_scenario_id"
-        self.input_field_attribute_lookup["Sim_Desc"] = "sim_desc"
+        self.input_field_attribute_lookup = Simulation.input_field_attribute_lookup()
         self.areas = []
+
+    @staticmethod
+    def input_field_attribute_lookup():
+        field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["Model_ID"] = "parent_id"
+        field_attribute_lookup["Simulation_ID"] = "id"
+        field_attribute_lookup["Storm_ID"] = "storm_id"
+        field_attribute_lookup["Dev_Scenario_ID"] = "dev_scenario_id"
+        field_attribute_lookup["Sim_Desc"] = "sim_desc"
+        return field_attribute_lookup
 
     def valid(self):
         return self.has_results()
