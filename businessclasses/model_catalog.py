@@ -3,6 +3,11 @@ try:
 except:
     pass
 from model import Model
+from simulation import Simulation
+from model_alt_bc import ModelAltBc
+from model_alt_hydraulic import ModelAltHydraulic
+from model_alt_hydrologic import ModelAltHydrologic
+from project_type import ProjectType
 from model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from config import Config
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
@@ -63,12 +68,39 @@ class ModelCatalog:
         return models
 
     def create_simulations_from_model_catalog_db(self, model_catalog_db_data_io):
-        # type: (ModelCatalogDbDataIo) -> List[Simualtion]
+        # type: (ModelCatalogDbDataIo) -> List[Simulation]
         input_table_name = self.config.simulation_sde_path
         class_type = "simulation"
         simulations = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return simulations
 
+    def create_model_alt_bcs_from_model_catalog_db(self, model_catalog_db_data_io):
+        # type: (ModelCatalogDbDataIo) -> List[ModelAltBc]
+        input_table_name = self.config.model_alt_bc_sde_path
+        class_type = "model_alt_bc"
+        model_alt_bcs = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
+        return model_alt_bcs
+
+    def create_model_alt_hydraulics_from_model_catalog_db(self, model_catalog_db_data_io):
+        # type: (ModelCatalogDbDataIo) -> List[ModelAltHydraulic]
+        input_table_name = self.config.model_alt_hydraulic_sde_path
+        class_type = "model_alt_hydraulic"
+        model_alt_hydraulics = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
+        return model_alt_hydraulics
+
+    def create_model_alt_hydrologics_from_model_catalog_db(self, model_catalog_db_data_io):
+        # type: (ModelCatalogDbDataIo) -> List[ModelAltHydrologic]
+        input_table_name = self.config.model_alt_hydrologic_sde_path
+        class_type = "model_alt_hydrologic"
+        model_alt_hydrologics = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
+        return model_alt_hydrologics
+
+    def create_project_types_from_model_catalog_db(self, model_catalog_db_data_io):
+        # type: (ModelCatalogDbDataIo) -> List[ProjectType]
+        input_table_name = self.config.project_type_sde_path
+        class_type = "project_type"
+        project_types = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
+        return project_types
 
     #create a model to use the below static method
     # read from the sde path from the model tracking table
@@ -87,10 +119,21 @@ class ModelCatalog:
         # type: (ModelCatalogDbDataIo) -> List[Model]
         models = self.create_models_with_tracking_data_only_from_model_catalog_db(model_catalog_db_data_io)
         simulations = self.create_simulations_from_model_catalog_db(model_catalog_db_data_io)
+        model_alterations = []
+        model_alterations += self.create_model_alt_bcs_from_model_catalog_db(model_catalog_db_data_io)
+        model_alterations += self.create_model_alt_hydraulics_from_model_catalog_db(model_catalog_db_data_io)
+        model_alterations += self.create_model_alt_hydrologics_from_model_catalog_db(model_catalog_db_data_io)
+        project_types = self.create_project_types_from_model_catalog_db(model_catalog_db_data_io)
         for model in models:
             for simulation in simulations:
                 if simulation.parent_id == model.id:
                     model.simulations.append(simulation)
+            for model_alteration in model_alterations:
+                if model_alteration.parent_id == model.id:
+                    model.model_alterations.append(model_alteration)
+            for project_type in project_types:
+                if project_type.parent_id == model.id:
+                    model.project_types.append(project_type)
         return models
 
     def add_models_from_model_catalog_db(self, model_catalog_db_data_io):
