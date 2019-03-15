@@ -38,13 +38,13 @@
         <counts>
           <entry key="dummy" value="2" />
           <entry key="py" value="5094" />
-          <entry key="pyt" value="10" />
+          <entry key="pyt" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="5104" />
+          <entry key="Python" value="5105" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -59,66 +59,12 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3859">
-              <caret line="238" selection-start-line="238" selection-end-line="238" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="723">
-              <caret line="301" column="43" lean-forward="true" selection-start-line="301" selection-start-column="43" selection-end-line="301" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1428">
-              <caret line="85" selection-start-line="85" selection-end-line="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2176">
-              <caret line="136" selection-start-line="136" selection-end-line="136" />
-              <folding>
-                <element signature="e#55#78#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="112" selection-start-line="30" selection-start-column="112" selection-end-line="30" selection-end-column="112" />
+            <state relative-caret-position="1037">
+              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
             </state>
           </provider>
         </entry>
@@ -1069,9 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3859">
           <caret line="238" selection-start-line="238" selection-end-line="238" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1103,16 +1046,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="301" column="43" lean-forward="true" selection-start-line="301" selection-start-column="43" selection-end-line="301" selection-end-column="43" />
+        <state relative-caret-position="1037">
+          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
         </state>
       </provider>
     </entry>
