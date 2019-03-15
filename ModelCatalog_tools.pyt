@@ -281,7 +281,7 @@ class EMGAATS_Model_Registration(object):
                 analysis_request_ids.strip()
                 arcpy.AddMessage(analysis_request_ids)
                 self.model.model_request_id = analysis_request_ids
-            self.model.project_phase_id = self.config.proj_phase_id[parameters[3].valueAsText]
+            self.model.project_phase_id = self.config.proj_phase_id[parameters[4].valueAsText]
             self.model.engine_type_id = 1  # not currently in use
             self.model.create_date = datetime.datetime.today()
             self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
@@ -289,14 +289,14 @@ class EMGAATS_Model_Registration(object):
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = parameters[1].valueAsText
-            self.model.create_project_types(parameters[2].values)
-            self.model.create_model_alterations_bc(parameters[8].values)
-            self.model.create_model_alterations_hydrologic(parameters[9].values)
-            self.model.create_model_alterations_hydraulic(parameters[10].values)
-            self.model.model_purpose_id = self.config.model_purpose_id[parameters[5].valueAsText]
-            self.model.model_calibration_file = parameters[6].valueAsText
-            self.model.model_status_id = self.config.model_status_id[parameters[7].valueAsText]
-            self.model.model_alteration_file = parameters[11].valueAsText
+            self.model.create_project_types(parameters[3].values)
+            self.model.create_model_alterations_bc(parameters[9].values)
+            self.model.create_model_alterations_hydrologic(parameters[10].values)
+            self.model.create_model_alterations_hydraulic(parameters[11].values)
+            self.model.model_purpose_id = self.config.model_purpose_id[parameters[6].valueAsText]
+            self.model.model_calibration_file = parameters[7].valueAsText
+            self.model.model_status_id = self.config.model_status_id[parameters[8].valueAsText]
+            self.model.model_alteration_file = parameters[12].valueAsText
             self.model.project_num = parameters[0].valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model.create_simulations()
