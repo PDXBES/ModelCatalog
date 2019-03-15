@@ -181,8 +181,8 @@ class EMGAATS_Model_Registration(object):
         model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
 
-        params = [project_no, project_type, project_phase, project_cip_number,
-                  model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status, model_alterations_boundary_conditions,
+        params = [project_no, model_dir, parent_model_dir, project_type, project_phase, project_cip_number,
+                  model_purpose, model_calibration_file, model_status, model_alterations_boundary_conditions,
                   model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
         return params
 
@@ -195,84 +195,71 @@ class EMGAATS_Model_Registration(object):
         has been changed."""
         arcpy.AddMessage("Update Parameters")
 
-        analysis_request_id_parameter = parameters[0]
-        project_type_parameter = parameters[1]
-        project_phase_parameter = parameters[2]
-        cip_number_parameter = parameters[3]
-        model_purpose_parameter = parameters[5]
-        parent_model_dir_parameter = parameters[6]
-        model_calibration_file_parameter = parameters[7]
-        model_status_parameter = parameters[8]
-        model_alt_bc_parameter = parameters[9]
-        model_alt_hydrologic_parameter = parameters[10]
-        model_alt_hydraulic_parameter = parameters[11]
-        model_alteration_file_parameter = parameters[12]
-
-        if project_phase_parameter.valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
-            if cip_number_parameter.value == u"None":
-                cip_number_parameter.value = None
-            cip_number_parameter.enabled = True
-            cip_number_parameter.filter.list = self.config.unique_cip_numbers
-            if cip_number_parameter.value != None or cip_number_parameter.value == u"None":
-                analysis_request_id_parameter.value = "ARID"
+        if parameters[4].valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
+            if parameters[5].value == u"None":
+                parameters[5].value = None
+            parameters[5].enabled = True
+            parameters[5].filter.list = self.config.unique_cip_numbers
+            if parameters[5].value != None or parameters[5].value == u"None":
+                parameters[0].value = "ARID"
                 analysis_request_ids = ""
-                for analysis_request_id in self.config.get_cip_analysis_requests(cip_number_parameter.value):
+                for analysis_request_id in self.config.get_cip_analysis_requests(parameters[5].valueAsText):
                     analysis_request_ids += " " + analysis_request_id
                 analysis_request_ids.strip()
-                analysis_request_id_parameter.value = analysis_request_ids
+                parameters[0].value = analysis_request_ids
             else:
-                analysis_request_id_parameter.value = ""
+                parameters[0].value = ""
         else:
-            cip_number_parameter.enabled = False
-            cip_number_parameter.filter.list = [u"None"]
-            cip_number_parameter.value = u"None"
+            parameters[5].enabled = False
+            parameters[5].filter.list = [u"None"]
+            parameters[5].value = u"None"
 
         # Enables calibration file field if calibration file
-        if model_purpose_parameter.valueAsText == "Calibration":
-            if model_calibration_file_parameter.enabled == False:
-                model_calibration_file_parameter.enabled = True
-                model_calibration_file_parameter.value = ""
-            if parent_model_dir_parameter.enabled == True:
-                parent_model_dir_parameter.enabled = False
-                parent_model_dir_parameter.value = self.dummy_parent_model_path
+        if parameters[6].valueAsText == "Calibration":
+            if parameters[7].enabled == False:
+                parameters[7].enabled = True
+                parameters[7].value = ""
+            if parameters[2].enabled == True:
+                parameters[2].enabled = False
+                parameters[2].value = self.dummy_parent_model_path
         else:
-            model_calibration_file_parameter.enabled = False
-            model_calibration_file_parameter.value = self.dummy_model_calibration_file_path
-            if model_purpose_parameter.altered and not parent_model_dir_parameter.enabled:
-                parent_model_dir_parameter.enabled = True
-                parent_model_dir_parameter.value = ""
+            parameters[7].enabled = False
+            parameters[7].value = self.dummy_model_calibration_file_path
+            if parameters[6].altered:
+                parameters[2].enabled = True
+                parameters[2].value = ""
 
 
         # # Checks that alteration added is not a duplicate
-        if model_alt_bc_parameter.values is not None:
-            number_of_values = len(model_alt_bc_parameter.values)
-            if number_of_values > 1 and model_alt_bc_parameter.values[-1] in model_alt_bc_parameter.values[0:number_of_values-1]:
-                model_alt_bc_parameter.values = model_alt_bc_parameter.values[0:number_of_values-1]
+        if parameters[9].values is not None:
+            number_of_values = len(parameters[9].values)
+            if number_of_values > 1 and parameters[9].values[-1] in parameters[9].values[0:number_of_values-1]:
+                parameters[9].values = parameters[9].values[0:number_of_values-1]
 
-        if model_alt_hydrologic_parameter.values is not None:
-            number_of_values = len(model_alt_hydrologic_parameter.values)
-            if number_of_values > 1 and model_alt_hydrologic_parameter.values[-1] in model_alt_hydrologic_parameter.values[0:number_of_values-1]:
-                model_alt_hydrologic_parameter.values = model_alt_hydrologic_parameter.values[0:number_of_values-1]
+        if parameters[10].values is not None:
+            number_of_values = len(parameters[10].values)
+            if number_of_values > 1 and parameters[10].values[-1] in parameters[10].values[0:number_of_values-1]:
+                parameters[10].values = parameters[10].values[0:number_of_values-1]
 
-        if model_alt_hydraulic_parameter.values is not None:
-            number_of_values = len(model_alt_hydraulic_parameter.values)
-            if number_of_values > 1 and model_alt_hydraulic_parameter.values[-1] in model_alt_hydraulic_parameter.values[0:number_of_values-1]:
-                model_alt_hydraulic_parameter.values = model_alt_hydraulic_parameter.values[0:number_of_values-1]
+        if parameters[11].values is not None:
+            number_of_values = len(parameters[11].values)
+            if number_of_values > 1 and parameters[11].values[-1] in parameters[11].values[0:number_of_values-1]:
+                parameters[11].values = parameters[11].values[0:number_of_values-1]
 
-        values_altered = False
+        values_altered= False
         alterations_present = False
         # Enables alteration file field if an alteration is added
-        if (model_alt_bc_parameter.altered or model_alt_hydrologic_parameter.altered or model_alt_hydraulic_parameter.altered):
+        if (parameters[9].altered or parameters[10].altered or parameters[11].altered):
             values_altered = True
-        if (model_alt_bc_parameter.valueAsText is not None) or (model_alt_hydrologic_parameter.valueAsText is not None) or (model_alt_hydraulic_parameter.valueAsText is not None):
+        if (parameters[9].valueAsText is not None) or (parameters[10].valueAsText is not None) or (parameters[11].valueAsText is not None):
             alterations_present = True
         if values_altered and alterations_present:
-            if model_alteration_file_parameter.enabled == False:
-                model_alteration_file_parameter.enabled = True
-                model_alteration_file_parameter.value = ""
+            if parameters[12].enabled == False:
+                parameters[12].enabled = True
+                parameters[12].value = ""
         else:
-            model_alteration_file_parameter.enabled = False
-            model_alteration_file_parameter.value = self.dummy_model_alteration_file_path
+            parameters[12].enabled = False
+            parameters[12].value = self.dummy_model_alteration_file_path
 
     def updateMessages(self, parameters):
         """Modify the messages created by internal validation for each tool
@@ -285,47 +272,32 @@ class EMGAATS_Model_Registration(object):
         try:
             self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
             self.model.parent_model_id = 0
-
-            analysis_request_id_parameter = parameters[0]
-            project_type_parameter = parameters[1]
-            project_phase_parameter = parameters[2]
-            cip_number_parameter = parameters[3]
-            model_path_parameter = parameters[4]
-            model_purpose_parameter = parameters[5]
-            parent_model_dir_parameter = parameters[6]
-            model_calibration_file_parameter = parameters[7]
-            model_status_parameter = parameters[8]
-            model_alt_bc_parameter = parameters[9]
-            model_alt_hydrologic_parameter = parameters[10]
-            model_alt_hydraulic_parameter = parameters[11]
-            model_alteration_file_parameter = parameters[12]
-
-            if cip_number_parameter == u"None":
+            if parameters[4] == u"None":
                 pass
             else:
                 analysis_request_ids = ""
-                for analysis_request_id in self.config.get_cip_analysis_requests(cip_number_parameter.valueAsText):
+                for analysis_request_id in self.config.get_cip_analysis_requests(parameters[4].valueAsText):
                     analysis_request_ids += " " + analysis_request_id
                 analysis_request_ids.strip()
                 arcpy.AddMessage(analysis_request_ids)
                 self.model.model_request_id = analysis_request_ids
-            self.model.project_phase_id = self.config.proj_phase_id[project_phase_parameter.valueAsText]
+            self.model.project_phase_id = self.config.proj_phase_id[parameters[4].valueAsText]
             self.model.engine_type_id = 1  # not currently in use
             self.model.create_date = datetime.datetime.today()
             self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE (change to results extracted date)
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
-            self.model.model_path = model_path_parameter.valueAsText
-            self.model.create_project_types(project_type_parameter.values)
-            self.model.create_model_alterations_bc(model_alt_bc_parameter.values)
-            self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values)
-            self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values)
-            self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
-            self.model.model_calibration_file = model_calibration_file_parameter.valueAsText
-            self.model.model_status_id = self.config.model_status_id[model_status_parameter.valueAsText]
-            self.model.model_alteration_file = model_alteration_file_parameter.valueAsText
-            self.model.project_num = analysis_request_id_parameter.valueAsText
+            self.model.model_path = parameters[1].valueAsText
+            self.model.create_project_types(parameters[3].values)
+            self.model.create_model_alterations_bc(parameters[9].values)
+            self.model.create_model_alterations_hydrologic(parameters[10].values)
+            self.model.create_model_alterations_hydraulic(parameters[11].values)
+            self.model.model_purpose_id = self.config.model_purpose_id[parameters[6].valueAsText]
+            self.model.model_calibration_file = parameters[7].valueAsText
+            self.model.model_status_id = self.config.model_status_id[parameters[8].valueAsText]
+            self.model.model_alteration_file = parameters[12].valueAsText
+            self.model.project_num = parameters[0].valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model.create_simulations()
             self.model_catalog.add_model(self.model)
