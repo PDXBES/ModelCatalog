@@ -18,7 +18,6 @@ class DbDataIo(object):
         self.workspace = "in_memory"
         self.class_factory = class_factory
 
-
     def retrieve_current_id(self, object_type):
         # type: (str, str) -> int
         field_names = ["Object_Type", "Current_ID"]
@@ -79,12 +78,16 @@ class DbDataIo(object):
             generic_objects.append(generic_object)
         return generic_objects
 
-    def _create_field_map_for_sde_db(self, model_link_results_path):
-        """
+    def create_objects_from_database(self, class_type, input_table_name):
+        in_memory_output_table_name = "object_table"
+        table = self.workspace + "/" + in_memory_output_table_name
+        field_attribute_lookup = self.class_factory.class_dict[class_type].input_field_attribute_lookup()
+        self.copy_to_memory(input_table_name, in_memory_output_table_name)
+        objects = self.create_objects_from_table(table, class_type, field_attribute_lookup)
+        arcpy.Delete_management(table)  # test this
+        return objects
 
-        :param model_link_results_path:
-        :return:
-        """
+    def _create_field_map_for_sde_db(self, model_link_results_path):
         field_mappings = arcpy.FieldMappings()
         fields = arcpy.ListFields(model_link_results_path)
         for field in fields:
@@ -103,7 +106,7 @@ class DbDataIo(object):
     def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None
         in_memory_table = self.workspace + "\\" + "copy_table"
-        self.copy_to_memory(input_table, "copy_table", parent_id_to_db_field_mapping)
+        self.copy_to_memory(input_table, "copy_table")
         self.add_parent_id(in_memory_table, parent_id_to_db_field_mapping)
 
         if field_mappings != None:
@@ -113,9 +116,13 @@ class DbDataIo(object):
         arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
         arcpy.Delete_management(in_memory_table)
 
-    def copy_to_memory(self, input_table, in_memory_output_table_name, parent_id_to_db_field_mapping):
+    def copy_to_memory(self, input_table, in_memory_output_table_name):
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
-        arcpy.CopyFeatures_management(input_table, in_memory_table)
+        # TODO check if feature class or table and add logic
+        try:
+            arcpy.CopyFeatures_management(input_table, in_memory_table)
+        except:
+            arcpy.CopyRows_management(input_table, in_memory_table)
 
     def add_parent_id(self, in_memory_table, parent_id_to_db_field_mapping):
         for parent_id, db_id_field in parent_id_to_db_field_mapping:

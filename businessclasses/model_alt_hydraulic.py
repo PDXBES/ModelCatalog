@@ -14,10 +14,16 @@ class ModelAltHydraulic(ModelAlteration):
        #ModelAlteration.__init__(self, config)
         self.name = "model_alt_hydraulic"
 
-        self.input_field_attribute_lookup = OrderedDict()
-        self.input_field_attribute_lookup["Model_ID"] = "parent_id"
-        self.input_field_attribute_lookup["Model_Alt_Hydra_ID"] = "id"
-        self.input_field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
+        self.input_field_attribute_lookup = ModelAltHydraulic.input_field_attribute_lookup()
+
+    @staticmethod
+    def input_field_attribute_lookup():
+        field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["Model_ID"] = "parent_id"
+        field_attribute_lookup["Model_Alt_Hydra_ID"] = "id"
+        field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
+        return field_attribute_lookup
+
 
     def valid(self):
         return True

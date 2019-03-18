@@ -94,6 +94,21 @@ class ModelDataIo(ObjectDataIo):
         for project_type in model.project_types:
             self.add_project_type(model.id, project_type)
 
+# TODO: finish the below functions
+    def read_extraction_date_from_emgaats_config_file(self):
+        pass
+
+    # get list of emgaats data for all models in the folder
+    #use brents existing xml notes
+    # will return the list
+
+    def read_deploy_date_and_results_extracted_date_from_emgaats_config_file(self):
+        pass
+    #get list of emgaats data for all simulations in the folder
+    #will return the list
+    #awaiting changes from Arnel
+
+
 
 
 

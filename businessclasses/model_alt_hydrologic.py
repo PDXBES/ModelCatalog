@@ -13,11 +13,15 @@ class ModelAltHydrologic(ModelAlteration):
         super(ModelAltHydrologic, self).__init__(self.config)
        #ModelAlteration.__init__(self, config)
         self.name = "model_alt_hydrologic"
+        self.input_field_attribute_lookup = ModelAltHydrologic.input_field_attribute_lookup()
 
-        self.input_field_attribute_lookup = OrderedDict()
-        self.input_field_attribute_lookup["Model_ID"] = "parent_id"
-        self.input_field_attribute_lookup["Model_Alt_Hydro_ID"] = "id"
-        self.input_field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
+    @staticmethod
+    def input_field_attribute_lookup():
+        field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["Model_ID"] = "parent_id"
+        field_attribute_lookup["Model_Alt_Hydro_ID"] = "id"
+        field_attribute_lookup["Model_Alteration_Domain_ID"] = "model_alteration_type_id"
+        return field_attribute_lookup
 
     def valid(self):
         return True

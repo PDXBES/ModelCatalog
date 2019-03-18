@@ -12,6 +12,10 @@ from object_data_io import ObjectDataIo
 from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.simulation import Simulation
 from businessclasses.area import Area
+from businessclasses.model_alt_bc import ModelAltBc
+from businessclasses.model_alt_hydraulic import ModelAltHydraulic
+from businessclasses.model_alt_hydrologic import ModelAltHydrologic
+from businessclasses.project_type import ProjectType
 from model_data_io import ModelDataIo
 
 
@@ -22,7 +26,9 @@ class ModelCatalogDbDataIo(DbDataIo):
         self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
         self.workspace = "in_memory"
         self.class_factory = GenericClassFactory(self.config)
-        self.class_factory.class_dict = {"model": Model, "simulation": Simulation, "area": Area}
+        self.class_factory.class_dict = {"model": Model, "simulation": Simulation, "area": Area,
+                                         "model_alt_bc": ModelAltBc, "model_alt_hydraulic": ModelAltHydraulic,
+                                         "model_alt_hydrologic": ModelAltHydrologic, "project_type": ProjectType}
 
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id("model")
@@ -51,3 +57,13 @@ class ModelCatalogDbDataIo(DbDataIo):
             arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
             raise
 
+#TODO: finish these functions
+    def set_registered_model_to_read_only(self, model):
+        pass
+
+    # check python to change file structure to read only (can it be done at folder or file level
+    # if at file level use os.walk to recursively go through files in folder
+
+    def write_model_registration_file(self, model):
+        pass
+    # use xml format to write out: model_id, status(final/working), date_registered(from_model_create_date), model_path

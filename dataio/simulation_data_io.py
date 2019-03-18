@@ -74,7 +74,7 @@ class SimulationDataIO(ObjectDataIo):
     def copy_area_results_to_memory(self, simulation, output_table_name):
         input_table = self.area_results_path(simulation)
         parent_id_to_db_field_mapping = self._id_to_field_map(simulation)
-        self.model_catalog_db_data_io.copy_to_memory(input_table, output_table_name, parent_id_to_db_field_mapping)
+        self.model_catalog_db_data_io.copy_to_memory(input_table, output_table_name)
 
     def append_area_results_to_db(self, area_results):
 
@@ -97,3 +97,5 @@ class SimulationDataIO(ObjectDataIo):
             self.stop_editing_session(editor, False)
             arcpy.AddMessage("DB Error while adding area results. Changes rolled back.")
             raise
+
+

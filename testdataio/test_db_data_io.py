@@ -5,9 +5,10 @@ import arcpy
 from dataio.db_data_io import DbDataIo
 from collections import OrderedDict
 from businessclasses.generic_class_factory import GenericClassFactory
+from businessclasses.generic_object import GenericObject
 
 
-class TestDataIO(TestCase):
+class TestDbDataIO(TestCase):
 
     def setUp(self):
         mock_config = MockConfig()
@@ -66,12 +67,6 @@ class TestDataIO(TestCase):
 
         self.mock_da_InsertCursor.return_value = self.mock_insert_cursor
 
-        self.mock_generic_object = mock.MagicMock("GenericObject")
-        self.mock_generic_object.id = 1
-        self.mock_generic_object.name = "name"
-        self.mock_generic_object.valid = False
-        self.mock_generic_object.parent_id = 2
-
         self.field_attribute_lookup_add_object = OrderedDict()
         self.field_attribute_lookup_add_object["id_field"] = "id"
         self.field_attribute_lookup_add_object["name"] = "name"
@@ -81,6 +76,19 @@ class TestDataIO(TestCase):
         self.field_attribute_lookup_create_object["parent_id_db"] = "parent_id"
 
         self.field_attribute_lookup_create_table_from_objects = self.field_attribute_lookup_create_object
+
+        self.mock_generic_object = mock.MagicMock(GenericObject)
+        self.mock_generic_object.id = 1
+        self.mock_generic_object.name = "name"
+        self.mock_generic_object.valid = False
+        self.mock_generic_object.parent_id = 2
+        self.mock_generic_object.input_field_attribute_lookup.return_value = self.field_attribute_lookup_create_object
+
+        self.patch_input_field_attribute_lookup = mock.patch("businessclasses.generic_object.GenericObject.input_field_attribute_lookup")
+        self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.start()
+        self.mock_input_field_attribute_lookup.return_value = self.field_attribute_lookup_create_table_from_objects
+
+        self.db_data_io.class_factory.class_dict = {"generic_object": GenericObject}
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
 
@@ -96,6 +104,7 @@ class TestDataIO(TestCase):
         self.mock_create_object = self.patch_create_object.stop()
         self.mock_delete_management = self.patch_delete_management.stop()
         self.mock_create_feature_class = self.patch_create_feature_class.stop()
+        self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.stop()
 
     def test_retrieve_current_id_calls_update_cursor_with_correct_arguments(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -140,7 +149,7 @@ class TestDataIO(TestCase):
             self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
 
     def test_copy_to_memory_calls_copy_features_management_with_correct_arguments(self):
-        self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name", self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name")
         self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\in_memory_output_table_name")
 
     def test_copy_calls_add_field_management_with_correct_arguments(self):
@@ -249,8 +258,34 @@ class TestDataIO(TestCase):
                                                            target_path)
                 self.mock_append.assert_called_with("in_memory\\intermediate_feature_class_to_append", "target_path", "NO_TEST", "field_mapping_for_sde_db")
 
+    def test_create_objects_from_database_calls_copy_to_memory_with_correct_arguments(self):
+        input_table = self.config.model_tracking_sde_path
+        class_type = "generic_object"
+        in_memory_output_table_name = "object_table"
+        with mock.patch.object(self.db_data_io, "copy_to_memory") as mock_copy_to_memory:
+            with mock.patch.object(self.db_data_io, "create_objects_from_table"):
+                self.db_data_io.create_objects_from_database(class_type, input_table)
+                mock_copy_to_memory.assert_called_with(input_table, in_memory_output_table_name)
 
+    def test_create_objects_from_database_calls_create_objects_from_table_with_correct_arguments(self):
+        input_table = self.config.model_tracking_sde_path
+        table = "in_memory/object_table"
+        class_type = "generic_object"
+        field_attribute_lookup = self.field_attribute_lookup_create_object
+        with mock.patch.object(self.db_data_io, "copy_to_memory"):
+            with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+                self.db_data_io.create_objects_from_database(class_type, input_table)
+                mock_create_objects_from_table.assert_called_with(table, class_type, field_attribute_lookup)
 
+    def test_create_objects_from_database_calls_delete_management_with_correct_arguements(self):
+        input_table = self.config.model_tracking_sde_path
+        table = "in_memory/object_table"
+        class_type = "generic_object"
+        field_attribute_lookup = self.field_attribute_lookup_create_object
+        with mock.patch.object(self.db_data_io, "copy_to_memory"):
+            with mock.patch.object(self.db_data_io, "create_objects_from_table"):
+                self.db_data_io.create_objects_from_database(class_type, input_table)
+                self.mock_delete_management.assert_called_with(table)
 
 
 

@@ -24,6 +24,10 @@ class GenericObject(object):
         generic_object.object_data_io = object_data_io
         return generic_object
 
+    @staticmethod
+    def input_field_attribute_lookup():
+        pass
+
     @property
     def valid(self):
         # type: () -> bool
