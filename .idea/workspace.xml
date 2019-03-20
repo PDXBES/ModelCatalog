@@ -5,15 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/db_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/model_catalog_db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_catalog_db_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/simulation_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdataio/test_db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_db_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,55 +13,154 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1428817085">
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="46" />
-          <entry key="pyt" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="47" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="dummy" value="2" />
-          <entry key="py" value="5094" />
-          <entry key="pyt" value="11" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="5105" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.12" value="3" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="5" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.4968479">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2375">
+                  <caret line="338" column="39" selection-start-line="338" selection-start-column="39" selection-end-line="338" selection-end-column="39" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1355">
+                  <caret line="136" selection-start-line="136" selection-end-line="136" />
+                  <folding>
+                    <element signature="e#55#78#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/dataio/utility.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="600">
+                  <caret line="33" column="30" lean-forward="true" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="450">
+                  <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="30" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="214">
+                  <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="622">
+                  <caret line="38" selection-start-line="38" selection-end-line="38" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1003">
+                  <caret line="34" column="33" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="33" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_utility.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="472">
+                  <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-480">
+                  <caret line="162" column="45" lean-forward="true" selection-start-line="162" selection-start-column="45" selection-end-line="162" selection-end-column="45" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="784">
+                  <caret line="63" column="51" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-2250">
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="35">
+                  <caret line="79" selection-start-line="79" selection-end-line="79" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="318">
+                  <caret line="147" column="44" lean-forward="true" selection-start-line="147" selection-start-column="31" selection-end-line="147" selection-end-column="44" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -81,8 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>config</find>
-      <find>alterations</find>
       <find>add_o</find>
       <find>output_pip</find>
       <find>copy</find>
@@ -111,6 +200,8 @@
       <find>Delete_</find>
       <find>date</find>
       <find>type</find>
+      <find>exc</find>
+      <find>exce</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -134,9 +225,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/area.py" />
-        <option value="$PROJECT_DIR$/simulation_data_io.py" />
-        <option value="$PROJECT_DIR$/test_simulation_data_io.py" />
         <option value="$PROJECT_DIR$/test_RRAD_capacity_results_integration_tests.py" />
         <option value="$PROJECT_DIR$/test_emgaats_registration_integration_tests.py" />
         <option value="$PROJECT_DIR$/dataio/rehab_data_io.py" />
@@ -153,11 +241,9 @@
         <option value="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
         <option value="$PROJECT_DIR$/docs/Class_Diagram_Tool/class_diagram.bat" />
-        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
         <option value="$PROJECT_DIR$/businessclasses/model_alteration.py" />
-        <option value="$PROJECT_DIR$/businessclasses/model.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/xml_test.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/mock_config.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" />
@@ -183,16 +269,21 @@
         <option value="$PROJECT_DIR$/businessclasses/model_catalog.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" />
         <option value="$PROJECT_DIR$/dataio/model_catalog_db_data_io.py" />
+        <option value="$PROJECT_DIR$/businessclasses/model.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py" />
+        <option value="$PROJECT_DIR$/testdataio/test_utility_class.py" />
         <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
+        <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
+        <option value="$PROJECT_DIR$/dataio/utility.py" />
+        <option value="$PROJECT_DIR$/testdataio/test_utility.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="2576" />
+    <option name="height" value="1586" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -223,11 +314,6 @@
             <path>
               <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-              <item name="testbusinessclasses" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
               <item name="testdataio" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -245,7 +331,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/sgould/Documents/ModelCatalog/businessclasses/model_catalog.py&#10;Add&#9;null&#9;null&#10;font&#9;ACTION&#9;EditorIncreaseFontSize" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/testintegrationtests" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -272,57 +358,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.read_model_integration_test">
-    <configuration name="read_model_integration_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_calibration_models_returns_list_of_calibration_models" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model_catalog.TestModelCatalog.test_calibration_models_returns_list_of_calibration_models&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests in testbusinessclasses" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testbusinessclasses&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests in testdataio" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception">
+    <configuration name="Unittests for test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -332,38 +369,80 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testdataio&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in testintegrationtests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_returns_correct_path" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testintegrationtests&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_returns_correct_path&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_utility.TestUtility.test_check_path_is_unc_path_returns_correct_path" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_utility.TestUtility.test_check_path_is_unc_path_returns_correct_path&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_utility.TestUtility.test_convert_mapped_letter_drive_to_unc_path_returns_unc_path" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_utility.TestUtility.test_convert_mapped_letter_drive_to_unc_path_returns_unc_path&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_calibration_models_returns_list_of_calibration_models" />
-      <item itemvalue="Python tests.Unittests in testbusinessclasses" />
-      <item itemvalue="Python tests.Unittests in testdataio" />
-      <item itemvalue="Python tests.Unittests in testintegrationtests" />
-      <item itemvalue="Python.read_model_integration_test" />
+      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments" />
+      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_convert_mapped_letter_drive_to_unc_path_returns_unc_path" />
+      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_returns_correct_path" />
+      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_is_unc_path_returns_correct_path" />
+      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.read_model_integration_test" />
-        <item itemvalue="Python tests.Unittests in testintegrationtests" />
-        <item itemvalue="Python tests.Unittests in testdataio" />
-        <item itemvalue="Python tests.Unittests in testbusinessclasses" />
-        <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_calibration_models_returns_list_of_calibration_models" />
+        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" />
+        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_is_unc_path_returns_correct_path" />
+        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_returns_correct_path" />
+        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_convert_mapped_letter_drive_to_unc_path_returns_unc_path" />
+        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments" />
       </list>
     </recent_temporary>
   </component>
@@ -381,35 +460,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_create_models_from_model_catalog_returns_correct_values - 2019.03.11 at 09h 54m 31s.xml">
-      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_create_models_from_model_catalog_returns_correct_values" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 17m 06s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_create_models_from_model_catalog_returns_correct_values - 2019.03.11 at 09h 57m 36s.xml">
-      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_create_models_from_model_catalog_returns_correct_values" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 17m 54s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_create_models_from_model_catalog_returns_correct_values - 2019.03.11 at 09h 59m 21s.xml">
-      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_create_models_from_model_catalog_returns_correct_values" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 26m 12s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_create_models_from_model_catalog_returns_correct_values - 2019.03.11 at 10h 16m 40s.xml">
-      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_create_models_from_model_catalog_returns_correct_values" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 26m 52s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_create_models_from_model_catalog_returns_correct_values - 2019.03.11 at 10h 17m 20s.xml">
-      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_create_models_from_model_catalog_returns_correct_values" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 27m 33s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_calibration_models_returns_list_of_calibration_models - 2019.03.11 at 10h 18m 38s.xml">
-      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_calibration_models_returns_list_of_calibration_models" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 27m 57s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testbusinessclasses - 2019.03.11 at 10h 20m 52s.xml">
-      <configuration name="Unittests in testbusinessclasses" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 29m 43s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testbusinessclasses - 2019.03.11 at 10h 23m 29s.xml">
-      <configuration name="Unittests in testbusinessclasses" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 29m 50s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testdataio - 2019.03.11 at 10h 23m 56s.xml">
-      <configuration name="Unittests in testdataio" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 30m 23s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testintegrationtests - 2019.03.11 at 10h 31m 52s.xml">
-      <configuration name="Unittests in testintegrationtests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_utility_TestUtility_test_check_path_raise_exception_when_winError_throws_exception - 2019.03.20 at 16h 30m 41s.xml">
+      <configuration name="Unittests for test_utility.TestUtility.test_check_path_raise_exception_when_winError_throws_exception" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="1">
@@ -422,20 +501,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="2576" height="1586" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.22391991" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.22379826" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33188722" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" weight="0.40819672" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.58032787" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.3916036" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.27804542" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.18356644" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.0681349" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.40812114" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32903227" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.15739268" side_tool="true" weight="0.8686515" />
@@ -462,9 +541,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -515,29 +591,24 @@
           <option name="timeStamp" value="186" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/businessclasses/model_catalog.py</url>
-          <line>124</line>
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataio/db_data_io.py</url>
-          <line>83</line>
-          <option name="timeStamp" value="193" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataio/db_data_io.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="194" />
+          <url>file://$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/dataio/db_data_io.py</url>
           <line>85</line>
-          <option name="timeStamp" value="195" />
+          <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/businessclasses/model_catalog.py</url>
-          <line>136</line>
-          <option name="timeStamp" value="196" />
+          <url>file://$PROJECT_DIR$/dataio/db_data_io.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataio/db_data_io.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="200" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -604,202 +675,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/python27/ArcGIS10.3/Lib/collections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3179">
-          <caret line="187" column="6" selection-start-line="187" selection-start-column="6" selection-end-line="187" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/xml_test.py" />
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="21" lean-forward="true" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="79" column="6" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="6" />
-          <folding>
-            <element signature="e#466#1888#0" />
-            <element signature="e#1922#2049#0" />
-            <element signature="e#2129#2236#0" />
-            <element signature="e#2328#2417#0" />
-            <element signature="e#2512#2651#0" />
-            <element signature="e#2727#2817#0" />
-            <element signature="e#2898#3032#0" />
-            <element signature="e#3117#3248#0" />
-            <element signature="e#3342#3482#0" />
-            <element signature="e#3656#3738#0" />
-            <element signature="e#3811#3939#0" />
-            <element signature="e#4008#4131#0" />
-            <element signature="e#4211#4343#0" />
-            <element signature="e#4410#4492#0" />
-            <element signature="e#4568#4683#0" />
-            <element signature="e#4756#4879#0" />
-            <element signature="e#4961#5093#0" />
-            <element signature="e#5667#5953#0" />
-            <element signature="e#6445#6733#0" />
-            <element signature="e#7227#7515#0" />
-            <element signature="e#7976#8238#0" />
-            <element signature="e#8723#9011#0" />
-            <element signature="e#9496#9787#0" />
-            <element signature="e#9840#10008#0" />
-            <element signature="e#10103#10269#0" />
-            <element signature="e#10353#10499#0" />
-            <element signature="e#10610#10808#0" />
-            <element signature="e#10900#11054#0" />
-            <element signature="e#11163#11357#0" />
-            <element signature="e#11448#11601#0" />
-            <element signature="e#11715#12150#0" />
-            <element signature="e#12272#12739#0" />
-            <element signature="e#12860#13323#0" />
-            <element signature="e#13428#13761#0" />
-            <element signature="e#13527#13761#0" />
-            <element signature="e#13882#14247#0" />
-            <element signature="e#13997#14247#0" />
-            <element signature="e#14366#14727#0" />
-            <element signature="e#14479#14727#0" />
-            <element signature="e#14838#15148#0" />
-            <element signature="e#14947#15148#0" />
-            <element signature="e#15267#15593#0" />
-            <element signature="e#15376#15593#0" />
-            <element signature="e#15711#16035#0" />
-            <element signature="e#15820#16035#0" />
-            <element signature="e#16219#16456#0" />
-            <element signature="e#16588#16894#0" />
-            <element signature="e#17024#17365#0" />
-            <element signature="e#17505#17846#0" />
-            <element signature="e#17952#18120#0" />
-            <element signature="e#18220#18547#0" />
-            <element signature="e#18658#18963#0" />
-            <element signature="e#19074#19358#0" />
-            <element signature="e#19517#19891#0" />
-            <element signature="e#20045#20409#0" />
-            <element signature="e#20568#20942#0" />
-            <element signature="e#21047#21193#0" />
-            <element signature="e#21298#21444#0" />
-            <element signature="e#21531#21862#0" />
-            <element signature="e#21650#21862#0" />
-            <element signature="e#21952#22285#0" />
-            <element signature="e#22071#22285#0" />
-            <element signature="e#22394#22805#0" />
-            <element signature="e#22513#22805#0" />
-            <element signature="e#22917#23330#0" />
-            <element signature="e#23036#23330#0" />
-            <element signature="e#23438#23848#0" />
-            <element signature="e#23557#23848#0" />
-            <element signature="e#23959#24371#0" />
-            <element signature="e#24078#24371#0" />
-            <element signature="e#24479#24889#0" />
-            <element signature="e#24598#24889#0" />
-            <element signature="e#25000#25412#0" />
-            <element signature="e#25119#25412#0" />
-            <element signature="e#25520#25930#0" />
-            <element signature="e#25639#25930#0" />
-            <element signature="e#26041#26453#0" />
-            <element signature="e#26160#26453#0" />
-            <element signature="e#26616#27324#0" />
-            <element signature="e#26735#27324#0" />
-            <element signature="e#26858#27324#0" />
-            <element signature="e#27490#28200#0" />
-            <element signature="e#27609#28200#0" />
-            <element signature="e#27732#28200#0" />
-            <element signature="e#28366#29076#0" />
-            <element signature="e#28485#29076#0" />
-            <element signature="e#28608#29076#0" />
-            <element signature="e#29244#29955#0" />
-            <element signature="e#29363#29955#0" />
-            <element signature="e#29486#29955#0" />
-            <element signature="e#30120#30975#0" />
-            <element signature="e#30239#30975#0" />
-            <element signature="e#30362#30975#0" />
-            <element signature="e#30483#30975#0" />
-            <element signature="e#31143#32000#0" />
-            <element signature="e#31262#32000#0" />
-            <element signature="e#31385#32000#0" />
-            <element signature="e#31506#32000#0" />
-            <element signature="e#32170#33028#0" />
-            <element signature="e#32289#33028#0" />
-            <element signature="e#32412#33028#0" />
-            <element signature="e#32533#33028#0" />
-            <element signature="e#33188#34038#0" />
-            <element signature="e#33307#34038#0" />
-            <element signature="e#33430#34038#0" />
-            <element signature="e#33551#34038#0" />
-            <element signature="e#34201#35053#0" />
-            <element signature="e#34320#35053#0" />
-            <element signature="e#34443#35053#0" />
-            <element signature="e#34564#35053#0" />
-            <element signature="e#35218#36071#0" />
-            <element signature="e#35337#36071#0" />
-            <element signature="e#35460#36071#0" />
-            <element signature="e#35581#36071#0" />
-            <element signature="e#36236#37091#0" />
-            <element signature="e#36355#37091#0" />
-            <element signature="e#36478#37091#0" />
-            <element signature="e#36599#37091#0" />
-            <element signature="e#37259#38116#0" />
-            <element signature="e#37378#38116#0" />
-            <element signature="e#37501#38116#0" />
-            <element signature="e#37622#38116#0" />
-            <element signature="e#38286#39144#0" />
-            <element signature="e#38405#39144#0" />
-            <element signature="e#38528#39144#0" />
-            <element signature="e#38649#39144#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="186" column="117" selection-start-line="186" selection-start-column="117" selection-end-line="186" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="101" column="34" lean-forward="true" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -827,13 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="138" column="91" selection-start-line="138" selection-start-column="91" selection-end-line="138" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -855,13 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -949,16 +814,6 @@
     <entry file="file://$PROJECT_DIR$/businessclasses/temporary_monitor.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1018,16 +873,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.MonitorQAQC.pyt.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1428">
-          <caret line="85" selection-start-line="85" selection-end-line="85" />
+        <state relative-caret-position="2125">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
+        <state relative-caret-position="1355">
           <caret line="136" selection-start-line="136" selection-end-line="136" />
           <folding>
             <element signature="e#55#78#0" expanded="true" />
@@ -1035,24 +900,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="112" selection-start-line="30" selection-start-column="112" selection-end-line="30" selection-end-column="112" />
+        <state relative-caret-position="450">
+          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        <state relative-caret-position="214">
+          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="2375">
+          <caret line="338" column="39" selection-start-line="338" selection-start-column="39" selection-end-line="338" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="147" column="44" lean-forward="true" selection-start-line="147" selection-start-column="31" selection-end-line="147" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1003">
+          <caret line="34" column="33" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-480">
+          <caret line="162" column="45" lean-forward="true" selection-start-line="162" selection-start-column="45" selection-end-line="162" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2250">
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="63" column="51" selection-start-line="63" selection-start-column="51" selection-end-line="63" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/1739283446/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="758" column="6" selection-start-line="758" selection-start-column="6" selection-end-line="758" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/python27/ArcGIS10.3/Lib/ctypes/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="470" column="18" selection-start-line="470" selection-start-column="18" selection-end-line="470" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/utility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="33" column="30" lean-forward="true" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_utility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

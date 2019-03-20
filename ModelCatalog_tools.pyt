@@ -21,7 +21,7 @@ class Toolbox(object):
         """Define the toolbox (the name of the toolbox is the name of the
         .pyt file)."""
         self.label = "Model Catalog tools"
-        self.alias = ""
+        self.alias = "Model Catalog Tools"
 
         # List of tool classes associated with this toolbox
         self.tools = [EMGAATS_Model_Registration, TemporaryMonitorQaQc, SlrtQaQc]
@@ -192,7 +192,9 @@ class EMGAATS_Model_Registration(object):
     def updateParameters(self, parameters):
         """Modify the values and properties of parameters before internal
         validation is performed.  This method is called whenever a parameter
-        has been changed."""
+        has been changed.
+        Where we put the logic in to enable/disable fields
+        """
         arcpy.AddMessage("Update Parameters")
 
         analysis_request_id_parameter = parameters[0]
@@ -318,14 +320,17 @@ class EMGAATS_Model_Registration(object):
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = model_path_parameter.valueAsText
+            # call get_unc_path
             self.model.create_project_types(project_type_parameter.values)
             self.model.create_model_alterations_bc(model_alt_bc_parameter.values)
             self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values)
             self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values)
             self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
             self.model.model_calibration_file = model_calibration_file_parameter.valueAsText
+            # call get_unc_path
             self.model.model_status_id = self.config.model_status_id[model_status_parameter.valueAsText]
             self.model.model_alteration_file = model_alteration_file_parameter.valueAsText
+            # call get_unc_path
             self.model.project_num = analysis_request_id_parameter.valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model.create_simulations()
