@@ -1,6 +1,7 @@
 from unittest import TestCase
 import mock
 import arcpy
+import os
 from mock_config import MockConfig
 from businessclasses.config import Config
 from businessclasses.model_catalog_exception import InvalidStormNameOrStormTypeInRequiredSimulationsTable
@@ -12,10 +13,9 @@ class TestConfig(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config_mock = mock_config.config
-        self.config_real = Config()
+        self.config_real = Config("TEST")
         self.mock_search_cursor = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_search_cursor.__iter__.return_value = iter([(1, "02yr6h", "D"), (2, "05yr6h", "D")])
-
 
         self.mock_search_cursor_for_required_simulation_list = mock.MagicMock(arcpy.da.SearchCursor)
         self.mock_search_cursor_for_required_simulation_list.__iter__.return_value = iter([("02yr6h", "D", "EX", 0), ("05yr6h", "D", "50", 1)])
@@ -235,3 +235,26 @@ class TestConfig(TestCase):
         self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
         with self.assertRaises(InvalidModelPurpose):
             self.config_real.retrieve_required_storm_and_dev_scenario_ids(model_purpose, model_project_phase)
+
+    def test_config_init_with_test_flag_as_true_sde_path_to_test_server(self):
+        test_bool = "TEST"
+        config = Config(test_bool)
+        sde_connections = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\connection_files"
+
+        model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
+        rehab_test_sde = r"BESDBTEST1.REHAB.sde"
+        RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
+        EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
+        ASM_WORK_test_sde = r"BESDBTEST1.ASM_WORK.sde"
+
+        model_catalog_test_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
+        rehab_test_sde_path = os.path.join(sde_connections, rehab_test_sde)
+        RRAD_test_sde_path = os.path.join(sde_connections, RRAD_test_sde)
+        EMGAATS_test_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
+        ASM_WORK_test_sde_path = os.path.join(sde_connections, ASM_WORK_test_sde)
+
+        self.assertEquals(config.model_catalog_sde_path, model_catalog_test_sde_path)
+        self.assertEquals(config.rehab_sde_path, rehab_test_sde_path)
+        self.assertEquals(config.RRAD_sde_path, RRAD_test_sde_path)
+        self.assertEquals(config.EMGAATS_sde_path, EMGAATS_test_sde_path)
+        self.assertEquals(config.ASM_WORK_sde_path, ASM_WORK_test_sde_path)

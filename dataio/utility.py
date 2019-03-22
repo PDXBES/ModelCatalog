@@ -7,11 +7,6 @@ from businessclasses.model_catalog_exception import InvalidModelPathException
 
 class Utility:
 
-
-
-
-
-
     def convert_mapped_letter_drive_to_unc_path(self, path):
         #https://stackoverflow.com/questions/34801315/get-full-computer-name-from-a-network-drive-letter-in-python
         mpr = ctypes.WinDLL('mpr')
@@ -22,7 +17,6 @@ class Utility:
         mpr.WNetGetConnectionW.argtypes = (wintypes.LPCWSTR,
                                            wintypes.LPWSTR,
                                            wintypes.LPDWORD)
-
 
         length = (wintypes.DWORD * 1)()
         result = mpr.WNetGetConnectionW(path, None, length)
@@ -44,9 +38,10 @@ class Utility:
             return path
 
         except:
-            arcpy.AddMessage("Could Not Convert Mapped Drive Path th UNC Path")
+            arcpy.AddMessage("Path provided is not a valid path for Model Registration")
+            arcpy.AddMessage("Note that local files and paths can not be registered, check your path: ")
             arcpy.AddMessage(path)
-            raise
+            raise InvalidModelPathException
 
 
 #

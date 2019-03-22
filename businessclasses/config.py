@@ -13,7 +13,8 @@ except:
 
 
 class Config:
-    def __init__(self):
+    def __init__(self, test_flag):
+        init_options = {"PROD": 0, "TEST": 1}
         executable_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
@@ -22,8 +23,9 @@ class Config:
         self.dummy_parent_model_path = executable_path + "\\" + "DummyFiles" + "\\"
 
         sde_connections = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\connection_files"
-
+##
         model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
+        model_catalog_prod_sde =r"BESDBPROD1.MODELCATALOG.sde"
         # need model_catalog_production_sde
         # need flag to determine test or production
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
@@ -36,12 +38,12 @@ class Config:
         self.model_alt_hydrologic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydrologic"
 
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
-
+##
         rehab_test_sde = r"BESDBTEST1.REHAB.sde"
-        self.rehab_test_sde_path = os.path.join(sde_connections, rehab_test_sde)
-        self.rehab_nbcr_data_sde_path = self.rehab_test_sde_path + r"\REHAB.GIS.nBCR_Data"
-        self.rehab_branches_sde_path = self.rehab_test_sde_path + r"\REHAB.GIS.REHAB_Branches"
-
+        self.rehab_sde_path = os.path.join(sde_connections, rehab_test_sde)
+        self.rehab_nbcr_data_sde_path = self.rehab_sde_path + r"\REHAB.GIS.nBCR_Data"
+        self.rehab_branches_sde_path = self.rehab_sde_path + r"\REHAB.GIS.REHAB_Branches"
+##
         RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
         self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
 
@@ -54,14 +56,14 @@ class Config:
         self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
 
         self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
-
+##
         EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
 
         self.storms_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMS"
         self.storm_types_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMTYPES"
         self.dev_scenarios_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.DEVSCENARIOS"
-
+##
         ASM_WORK_test_sde = r"BESDBTEST1.ASM_WORK.sde"
         self.ASM_WORK_sde_path = os.path.join(sde_connections, ASM_WORK_test_sde)
 

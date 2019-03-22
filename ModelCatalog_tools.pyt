@@ -6,10 +6,12 @@ from dataio.simulation_data_io import SimulationDataIO
 from dataio.model_data_io import ModelDataIo
 import getpass
 import datetime
+from dataio import utility
 from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
 reload(arcpy)
 reload(config)
+reload(utility)
 # reload(ModelCatalog)
 # reload(Model)
 # reload(ModelCatalogDbDataIo)
@@ -34,6 +36,7 @@ class EMGAATS_Model_Registration(object):
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
+        self.utility = utility.Utility()
 
         self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
         self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
@@ -319,18 +322,21 @@ class EMGAATS_Model_Registration(object):
             self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE (change to results extracted date)
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
-            self.model.model_path = model_path_parameter.valueAsText
-            # call get_unc_path
+            self.model.model_path = self.utility.check_path(model_path_parameter.valueAsText)
             self.model.create_project_types(project_type_parameter.values)
             self.model.create_model_alterations_bc(model_alt_bc_parameter.values)
             self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values)
             self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values)
             self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
-            self.model.model_calibration_file = model_calibration_file_parameter.valueAsText
-            # call get_unc_path
+            if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
+                self.model.model_calibration_file = self.utility.check_path(model_calibration_file_parameter.valueAsText)
+            else:
+                self.model.model_calibration_file = None
             self.model.model_status_id = self.config.model_status_id[model_status_parameter.valueAsText]
-            self.model.model_alteration_file = model_alteration_file_parameter.valueAsText
-            # call get_unc_path
+            if len(self.model.model_alterations) > 0:
+                self.model.model_alteration_file = self.utility.check_path(model_alteration_file_parameter.valueAsText)
+            else:
+                self.model.model_alteration_file = None
             self.model.project_num = analysis_request_id_parameter.valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model.create_simulations()
