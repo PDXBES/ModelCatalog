@@ -11,10 +11,13 @@ try:
 except:
     pass
 
-
+#TODO: This config is too big to fail, look to break this up logically into smaller configs/utilities
 class Config:
     def __init__(self, test_flag):
         init_options = {"PROD": 0, "TEST": 1}
+
+
+
         executable_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 
         self.dummy_model_calibration_file_path = executable_path + "\\" + "DummyFiles" + "\\" + "model_calibration_file.xlsx"
@@ -24,11 +27,21 @@ class Config:
 
         sde_connections = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\connection_files"
 ##
-        model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
-        model_catalog_prod_sde =r"BESDBPROD1.MODELCATALOG.sde"
-        # need model_catalog_production_sde
-        # need flag to determine test or production
-        self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
+        server = None
+
+        if init_options[test_flag] == 1 :
+            server = "BESDBTEST1"
+        elif init_options[test_flag] == 0:
+            server = "BESDBPROD1"
+
+        model_catalog_sde = server + ".MODELCATALOG.sde"
+        rehab_sde = server + ".REHAB.sde"
+        RRAD_sde = server + ".RRAD_write.sde"
+        EMGAATS_sde = server + ".EMGAATS.sde"
+        ASM_WORK_sde = server + ".ASM_WORK.sde"
+
+        self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_sde)
+
         self.model_catalog_current_id_table_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Current_ID"
         self.model_tracking_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.ModelTracking"
         self.simulation_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Simulation"
@@ -39,13 +52,13 @@ class Config:
 
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
 ##
-        rehab_test_sde = r"BESDBTEST1.REHAB.sde"
-        self.rehab_sde_path = os.path.join(sde_connections, rehab_test_sde)
+
+        self.rehab_sde_path = os.path.join(sde_connections, rehab_sde)
         self.rehab_nbcr_data_sde_path = self.rehab_sde_path + r"\REHAB.GIS.nBCR_Data"
         self.rehab_branches_sde_path = self.rehab_sde_path + r"\REHAB.GIS.REHAB_Branches"
 ##
-        RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
-        self.RRAD_sde_path = os.path.join(sde_connections, RRAD_test_sde)
+
+        self.RRAD_sde_path = os.path.join(sde_connections, RRAD_sde)
 
         self.rehab_tracking_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Tracking"
         self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
@@ -57,15 +70,15 @@ class Config:
 
         self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
 ##
-        EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
-        self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
+
+        self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
 
         self.storms_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMS"
         self.storm_types_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.STORMTYPES"
         self.dev_scenarios_sde_path = self.EMGAATS_sde_path + r"\EMGAATS.GIS.DEVSCENARIOS"
 ##
-        ASM_WORK_test_sde = r"BESDBTEST1.ASM_WORK.sde"
-        self.ASM_WORK_sde_path = os.path.join(sde_connections, ASM_WORK_test_sde)
+
+        self.ASM_WORK_sde_path = os.path.join(sde_connections, ASM_WORK_sde)
 
         self.analysis_requests_sde_path = self.ASM_WORK_sde_path + r"\ASM_Work.GIS.Analysis_Requests"
 

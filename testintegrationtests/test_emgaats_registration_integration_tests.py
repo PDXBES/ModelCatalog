@@ -17,10 +17,11 @@ pyt_path = os.path.abspath(os.path.join(executable_path, '..', "ModelCatalog_too
 from imp import load_source
 model_catalog_tools = load_source("ModelCatalog_tools", pyt_path)
 
-
+test_flag = "TEST"
 class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def setUp(self):
-        self.config = Config()
+
+        self.config = Config(test_flag)
         cip_numbers = self.config.unique_cip_numbers
         self.model_catalog_dataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.model_catalog_dataio)

@@ -51,6 +51,8 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.add_simulations(model)
             model_data_io.add_model_alterations(model)
             model_data_io.add_project_types(model)
+            #TODO: write registration file here
+            #TODO: make model read only here
             model_data_io.stop_editing_session(editor, True)
         except:
             model_data_io.stop_editing_session(editor, False)
@@ -66,4 +68,7 @@ class ModelCatalogDbDataIo(DbDataIo):
 
     def write_model_registration_file(self, model):
         pass
-    # use xml format to write out: model_id, status(final/working), date_registered(from_model_create_date), model_path
+    # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
+    #data = {"model_ID": 12345, "date": "3/27/19"}
+    #with open('data.json', 'w') as outfile:
+     #   json.dump(data, outfile)

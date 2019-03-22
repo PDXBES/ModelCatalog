@@ -18,6 +18,8 @@ reload(utility)
 # reload(ModelDataIo)
 # reload(SimulationDataIO)
 
+test_flag = "TEST"
+
 class Toolbox(object):
     def __init__(self):
         """Define the toolbox (the name of the toolbox is the name of the
@@ -32,7 +34,7 @@ class EMGAATS_Model_Registration(object):
     def __init__(self):
         self.label = "EMGAATS Model Registration"
         self.description = "Tool for registering EMGAATS derived models"
-        self.config = config.Config()
+        self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
@@ -351,7 +353,7 @@ class TemporaryMonitorQaQc(object):
     def __init__(self):
         self.label = "Temporary Monitor Data Quality"
         self.description = "Tool for recording temporary data quality to database"
-        self.config = config.Config()
+        self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
@@ -435,7 +437,7 @@ class SlrtQaQc(object):
     def __init__(self):
         self.label = "SLRT Data Quality"
         self.description = "Tool for recording SLRT data quality to database"
-        self.config = config.Config()
+        self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)

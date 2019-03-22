@@ -1,6 +1,7 @@
 from unittest import TestCase
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 import mock
+import json
 from businessclasses.model_catalog import ModelCatalog
 from businessclasses.model import Model
 import arcpy
@@ -121,13 +122,14 @@ class TestModelCatalogDbDataIO(TestCase):
     def test_add_model_calls_stop_editing_session_exception_thrown_with_save_changes_false(self):
         self.mock_add_simulations.side_effect = Exception()
         save_changes = False
-
         try:
             self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         except:
             self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
-
+    def test_write_model_registration_file_creates_json_with_correct_arguments(self):
+        pass
+        #https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
 
 
 

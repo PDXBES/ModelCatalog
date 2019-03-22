@@ -6,11 +6,12 @@ from businessclasses.simulation import Simulation
 import mock
 import unittest
 
-
+test_flag = "TEST"
 class TestRRADCapacityResults(TestCase):
 
     def setUp(self):
-        self.config = Config()
+
+        self.config = Config(test_flag)
         self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
         self.simulation_data_io = SimulationDataIO(self.config, self.model_catalog_db_data_io)
         self.simulation = Simulation(self.config)

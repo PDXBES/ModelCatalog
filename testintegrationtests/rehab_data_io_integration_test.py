@@ -5,7 +5,8 @@ from dataio.rrad_data_io import RradDbDataIo
 import datetime
 import time
 
-config = Config()
+test_flag = "TEST"
+config = Config(test_flag)
 
 rrad_data_io = RradDbDataIo(config)
 rehab_data_io = RehabDataIO(config)
