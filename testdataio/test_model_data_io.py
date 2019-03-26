@@ -1,7 +1,6 @@
 from unittest import TestCase
 import mock
 import arcpy
-import __builtin__
 from stat import S_IREAD, S_IRGRP, S_IROTH
 from dataio.model_data_io import ModelDataIo
 from businessclasses.model import Model
@@ -100,6 +99,9 @@ class TestModelDataIO(TestCase):
         self.patch_open = mock.patch("__builtin__.open")
         self.mock_open = self.patch_open.start()
 
+        self.patch_json_dump = mock.patch("json.dump")
+        self.mock_json_dump = self.patch_json_dump.start()
+
     def tearDown(self):
         self.mock_dissolve = self.patch_dissolve.stop()
         self.mock_insert_cursor = self.patch_insert_cursor.stop()
@@ -109,6 +111,7 @@ class TestModelDataIO(TestCase):
         self.mock_os_walk = self.patch_os_walk.stop()
         self.mock_os_chmod = self.patch_os_chmod.stop()
         self.mock_open = self.patch_open.stop()
+        self.mock_json_dump = self.patch_json_dump.stop()
 
     def test_read_simulations_calls_os_walk(self):
         self.model_data_io.read_simulations(self.mock_model)
@@ -251,5 +254,12 @@ class TestModelDataIO(TestCase):
         self.model_data_io.write_model_registration_file(self.mock_model)
         self.mock_open.assert_called_with(model_registration_file, "w")
 
-    #def test_write_model_registration_file_calls_json_dump_with_correct_arguments(self):
-        #add return value for open method
+    def test_write_model_registration_file_calls_json_dump_with_correct_arguments(self):
+        #debug - DCA
+        file_path = self.mock_model.model_path
+        file_name = "model_registration.json"
+        model_registration_file = file_path + "\\" + file_name
+        self.mock_open.return_value = model_registration_file
+        data = {"id": 123}
+        self.model_data_io.write_model_registration_file(self.mock_model)
+        self.mock_json_dump.assert_called_with(data, self.mock_open.return_value)

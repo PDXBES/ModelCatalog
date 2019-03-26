@@ -95,7 +95,6 @@ class ModelDataIo(ObjectDataIo):
         for project_type in model.project_types:
             self.add_project_type(model.id, project_type)
 
-    # TODO: finish these functions
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
         model_path = model.model_path
@@ -104,12 +103,14 @@ class ModelDataIo(ObjectDataIo):
                 filepath = os.path.join(root, filename)
                 os.chmod(filepath, S_IREAD | S_IRGRP | S_IROTH)
 
+    # TODO: finish this function
     def write_model_registration_file(self, model):
         pass
         # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
-        # data = {"id": 12345, "create_date": "3/27/19", "model_purpose_id", "model_purpose"}
-        # build data dictionary from model properties
+
         # check that a registration file does not already exist - different function?
+
+        #data = {"id": model.id, "create_date": model.create_date, "model_purpose_id": model.model_purpose_id, "model_purpose": self.config.reverse_dict(model.model_purpose_id)}
 
         file_path = model.model_path
         file_name = "model_registration.json"
