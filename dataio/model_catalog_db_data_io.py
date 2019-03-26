@@ -52,23 +52,10 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.add_model_alterations(model)
             model_data_io.add_project_types(model)
             #TODO: write registration file here
-            #TODO: make model read only here
+            model_data_io.set_registered_model_to_read_only(model)
             model_data_io.stop_editing_session(editor, True)
         except:
             model_data_io.stop_editing_session(editor, False)
             arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
             raise
 
-#TODO: finish these functions
-    def set_registered_model_to_read_only(self, model):
-        pass
-
-    # check python to change file structure to read only (can it be done at folder or file level
-    # if at file level use os.walk to recursively go through files in folder
-
-    def write_model_registration_file(self, model):
-        pass
-    # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
-    #data = {"model_ID": 12345, "date": "3/27/19"}
-    #with open('data.json', 'w') as outfile:
-     #   json.dump(data, outfile)

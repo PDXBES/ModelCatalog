@@ -68,6 +68,9 @@ class TestModelCatalogDbDataIO(TestCase):
         self.patch_stop_editing_session = mock.patch("dataio.model_data_io.ModelDataIo.stop_editing_session")
         self.mock_stop_editing_session = self.patch_stop_editing_session.start()
 
+        self.patch_set_registered_model_to_read_only = mock.patch("dataio.model_data_io.ModelDataIo.set_registered_model_to_read_only")
+        self.mock_set_registered_model_to_read_only = self.patch_set_registered_model_to_read_only.start()
+
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.stop()
@@ -78,6 +81,7 @@ class TestModelCatalogDbDataIO(TestCase):
         self.mock_add_project_types = self.patch_add_project_types.stop()
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
+        self.mock_set_registered_model_to_read_only = self.patch_set_registered_model_to_read_only.stop()
 
     def test_retrieve_current_model_id(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -130,6 +134,11 @@ class TestModelCatalogDbDataIO(TestCase):
     def test_write_model_registration_file_creates_json_with_correct_arguments(self):
         pass
         #https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
+
+    def test_add_model_calls_set_registered_model_to_read_only_with_correct_arguments(self):
+        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.mock_set_registered_model_to_read_only.assert_called_with(self.model)
+
 
 
 

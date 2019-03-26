@@ -1,6 +1,8 @@
 from unittest import TestCase
 import mock
 import arcpy
+import __builtin__
+from stat import S_IREAD, S_IRGRP, S_IROTH
 from dataio.model_data_io import ModelDataIo
 from businessclasses.model import Model
 from businessclasses.simulation import Simulation
@@ -92,6 +94,12 @@ class TestModelDataIO(TestCase):
         self.patch_os_walk = mock.patch("os.walk")
         self.mock_os_walk = self.patch_os_walk.start()
 
+        self.patch_os_chmod = mock.patch("os.chmod")
+        self.mock_os_chmod = self.patch_os_chmod.start()
+
+        self.patch_open = mock.patch("__builtin__.open")
+        self.mock_open = self.patch_open.start()
+
     def tearDown(self):
         self.mock_dissolve = self.patch_dissolve.stop()
         self.mock_insert_cursor = self.patch_insert_cursor.stop()
@@ -99,6 +107,8 @@ class TestModelDataIO(TestCase):
         self.mock_retrieve_current_simulation_id = self.patch_retrieve_current_simulation_id.stop()
         self.mock_add_object = self.patch_add_object.stop()
         self.mock_os_walk = self.patch_os_walk.stop()
+        self.mock_os_chmod = self.patch_os_chmod.stop()
+        self.mock_open = self.patch_open.stop()
 
     def test_read_simulations_calls_os_walk(self):
         self.model_data_io.read_simulations(self.mock_model)
@@ -216,3 +226,30 @@ class TestModelDataIO(TestCase):
         self.model_data_io.add_project_types(self.mock_model)
         mock_add_project_type.assert_called_with(11, self.mock_project_type)
         patch_add_project_type.stop()
+
+    def test_set_registered_model_to_read_only_calls_os_walk_with_correct_arguments(self):
+        self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+        self.mock_os_walk.assert_called_with(r"C:\model_path")
+
+    def test_set_registered_model_to_read_only_calls_os_path_join_with_correct_arguments(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+            mock_os_path_join.assert_called_with("root", "filenames")
+
+    def test_set_registered_model_to_read_only_calls_chmod_with_corrent_arguments(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = "filepath"
+            self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+            self.mock_os_chmod.assert_called_with("filepath", S_IREAD | S_IRGRP | S_IROTH)
+
+    def test_write_model_registration_file_calls_open_with_correct_arguments(self):
+        file_path = self.mock_model.model_path
+        file_name = "model_registration.json"
+        model_registration_file = file_path + "\\" + file_name
+        self.model_data_io.write_model_registration_file(self.mock_model)
+        self.mock_open.assert_called_with(model_registration_file, "w")
+
+    #def test_write_model_registration_file_calls_json_dump_with_correct_arguments(self):
+        #add return value for open method

@@ -1,6 +1,7 @@
 import os
 import arcpy
 from businessclasses.config import Config
+from stat import S_IREAD, S_IRGRP, S_IROTH
 try:
     from typing import List, Any
 except:
@@ -93,6 +94,29 @@ class ModelDataIo(ObjectDataIo):
         # type: (Model) -> None
         for project_type in model.project_types:
             self.add_project_type(model.id, project_type)
+
+    # TODO: finish these functions
+    def set_registered_model_to_read_only(self, model):
+        # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
+        model_path = model.model_path
+        for root, directories, filenames in os.walk(model_path):
+            for filename in filenames:
+                filepath = os.path.join(root, filename)
+                os.chmod(filepath, S_IREAD | S_IRGRP | S_IROTH)
+
+    def write_model_registration_file(self, model):
+        pass
+        # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
+        # data = {"id": 12345, "create_date": "3/27/19", "model_purpose_id", "model_purpose"}
+        # build data dictionary from model properties
+        # check that a registration file does not already exist - different function?
+
+        file_path = model.model_path
+        file_name = "model_registration.json"
+        model_registration_file = os.path.join(file_path, file_name)
+        with open(model_registration_file, 'w') as outfile:
+            pass
+        #   json.dump(data, outfile)
 
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):
