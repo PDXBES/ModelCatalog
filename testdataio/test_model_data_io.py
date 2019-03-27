@@ -1,6 +1,7 @@
 from unittest import TestCase
 import mock
 import arcpy
+import json
 from stat import S_IREAD, S_IRGRP, S_IROTH
 from dataio.model_data_io import ModelDataIo
 from businessclasses.model import Model
@@ -58,7 +59,7 @@ class TestModelDataIO(TestCase):
         self.mock_object_data_io = mock.Mock()
         self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
 
-        self.mock_model = mock.MagicMock(Model)
+        self.mock_model = mock.MagicMock(spec = Model)
         self.mock_model.model_path = r"C:\model_path"
         self.mock_model.object_data_io = self.mock_object_data_io
         self.mock_model.id = 11
@@ -256,10 +257,10 @@ class TestModelDataIO(TestCase):
 
     def test_write_model_registration_file_calls_json_dump_with_correct_arguments(self):
         #debug - DCA
-        file_path = self.mock_model.model_path
-        file_name = "model_registration.json"
-        model_registration_file = file_path + "\\" + file_name
-        self.mock_open.return_value = model_registration_file
+        #file_path = self.mock_model.model_path
+        #file_name = "model_registration.json"
+        #model_registration_file = file_path + "\\" + file_name
+        self.mock_open.__enter__.return_value = "filepath"
         data = {"id": 123}
         self.model_data_io.write_model_registration_file(self.mock_model)
-        self.mock_json_dump.assert_called_with(data, self.mock_open.return_value)
+        self.mock_json_dump.assert_called_with(data, "filepath")

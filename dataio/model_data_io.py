@@ -65,7 +65,6 @@ class ModelDataIo(ObjectDataIo):
         # type: (int, Simulation) -> None
         self.add_object(model_id, simulation, simulation.input_field_attribute_lookup, self.config.simulation_sde_path)
 
-
     def add_simulations(self, model):
         # type: (Model) -> None
         for simulation in model.simulations:
@@ -97,6 +96,7 @@ class ModelDataIo(ObjectDataIo):
 
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
+        #TODO: add piece to validate EMGAATS structure - ensures that we're pointing to a model directory
         model_path = model.model_path
         for root, directories, filenames in os.walk(model_path):
             for filename in filenames:
@@ -108,16 +108,16 @@ class ModelDataIo(ObjectDataIo):
         pass
         # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
 
-        # check that a registration file does not already exist - different function?
+        # check that a registration file does not already exist - in different function?
 
-        #data = {"id": model.id, "create_date": model.create_date, "model_purpose_id": model.model_purpose_id, "model_purpose": self.config.reverse_dict(model.model_purpose_id)}
+        #data = {"id": model.id, "create_date": model.create_date, "model_purpose_id": model.model_purpose_id, "model_purpose": self.config.model_purpose[model.model_purpose_id]}
 
         file_path = model.model_path
         file_name = "model_registration.json"
         model_registration_file = os.path.join(file_path, file_name)
         with open(model_registration_file, 'w') as outfile:
-            pass
-        #   json.dump(data, outfile)
+            #pass
+            json.dump(data, outfile)
 
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):
