@@ -1,5 +1,7 @@
 import os
 import arcpy
+import json
+import traceback
 from businessclasses.config import Config
 from stat import S_IREAD, S_IRGRP, S_IROTH
 try:
@@ -9,6 +11,7 @@ except:
 from businessclasses.model import Model
 from businessclasses.simulation import Simulation
 from businessclasses.model_catalog_exception import InvalidModelException
+from businessclasses.model_catalog_exception import InvalidModelPathException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from businessclasses.model_alteration import ModelAlteration
@@ -96,28 +99,38 @@ class ModelDataIo(ObjectDataIo):
 
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
-        #TODO: add piece to validate EMGAATS structure - ensures that we're pointing to a model directory
-        model_path = model.model_path
-        for root, directories, filenames in os.walk(model_path):
-            for filename in filenames:
-                filepath = os.path.join(root, filename)
-                os.chmod(filepath, S_IREAD | S_IRGRP | S_IROTH)
 
-    # TODO: finish this function
+        if model.valid_emgaats_model_structure() == True:
+            model_path = model.model_path
+            for root, directories, filenames in os.walk(model_path):
+                for filename in filenames:
+                    filepath = os.path.join(root, filename)
+                    os.chmod(filepath, S_IREAD | S_IRGRP | S_IROTH)
+        else:
+            raise InvalidModelPathException
+
     def write_model_registration_file(self, model):
         pass
         # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
 
         # check that a registration file does not already exist - in different function?
-
-        #data = {"id": model.id, "create_date": model.create_date, "model_purpose_id": model.model_purpose_id, "model_purpose": self.config.model_purpose[model.model_purpose_id]}
+        # TODO Model Status
+        model_registration_data = {"id": model.id,
+                                   "create_date": model.create_date.strftime("%d-%b-%Y (%H:%M:%S.%f)"),
+                                   "model_purpose_id": model.model_purpose_id,
+                                   "model_purpose": self.config.model_purpose[model.model_purpose_id]}
 
         file_path = model.model_path
         file_name = "model_registration.json"
         model_registration_file = os.path.join(file_path, file_name)
-        with open(model_registration_file, 'w') as outfile:
-            #pass
-            json.dump(data, outfile)
+        outfile = open(model_registration_file, 'w')
+        try:
+            json.dump(model_registration_data, outfile)
+        except:
+            traceback.print_exc()
+            pass
+        #TODO figure out how to make this testable
+        outfile.close()
 
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):

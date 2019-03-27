@@ -14,6 +14,7 @@ from businessclasses.model_alt_hydraulic import ModelAltHydraulic
 from collections import OrderedDict
 from businessclasses.project_type import ProjectType
 from dataio.data_io_exception import AddObjectException, AddModelAlterationException
+from businessclasses.model_catalog_exception import InvalidModelPathException
 
 
 class TestModelDataIO(TestCase):
@@ -25,9 +26,9 @@ class TestModelDataIO(TestCase):
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
 
-        self.mock_model_alt_bc = mock.MagicMock(ModelAltBc)
-        self.mock_model_alt_hydrologic = mock.MagicMock(ModelAltHydrologic)
-        self.mock_model_alt_hydraulic = mock.MagicMock(ModelAltHydraulic)
+        self.mock_model_alt_bc = mock.MagicMock(spec = ModelAltBc)
+        self.mock_model_alt_hydrologic = mock.MagicMock(spec = ModelAltHydrologic)
+        self.mock_model_alt_hydraulic = mock.MagicMock(spec = ModelAltHydraulic)
         self.generic_field_attribute_lookup = OrderedDict()
         self.generic_field_attribute_lookup["Generic_ID"] = "id"
         self.generic_field_attribute_lookup["Generic_Domain_ID"] = "generic_domain_id"
@@ -39,7 +40,7 @@ class TestModelDataIO(TestCase):
         self.mock_model_alt_hydraulic.input_field_attribute_lookup = self.generic_field_attribute_lookup
         self.mock_model_alt_hydraulic.name = "model_alt_hydraulic"
 
-        self.mock_simulation = mock.MagicMock(Simulation)
+        self.mock_simulation = mock.MagicMock(spec = Simulation)
         self.mock_simulation.simulation_id = 22
         self.mock_simulation.storm_id = 33
         self.mock_simulation.dev_scenario_id = 44
@@ -53,7 +54,7 @@ class TestModelDataIO(TestCase):
         field_attribute_lookup[4] = ["Sim_Desc", "sim_desc"]
         self.mock_simulation.input_field_attribute_lookup = field_attribute_lookup
 
-        self.mock_project_type = mock.MagicMock(ProjectType)
+        self.mock_project_type = mock.MagicMock(spec = ProjectType)
         self.mock_project_type.input_field_attribute_lookup = self.generic_field_attribute_lookup
 
         self.mock_object_data_io = mock.Mock()
@@ -66,9 +67,11 @@ class TestModelDataIO(TestCase):
         self.mock_model.valid = True
         self.mock_model.simulations = [self.mock_simulation]
         self.mock_model.project_types = [self.mock_project_type]
+        self.mock_model.create_date = "create_date"
+        self.mock_model.model_purpose_id = 1
 
-        self.mock_insert_cursor_object = mock.MagicMock(arcpy.da.InsertCursor)
-        self.mock_search_cursor_object = mock.MagicMock(arcpy.da.SearchCursor)
+        self.mock_insert_cursor_object = mock.MagicMock(spec = arcpy.da.InsertCursor)
+        self.mock_search_cursor_object = mock.MagicMock(spec = arcpy.da.SearchCursor)
         self.mock_search_cursor_object.__iter__.return_value = iter([["geom"]])
 
         self.patch_dissolve = mock.patch("arcpy.Dissolve_management")
@@ -100,8 +103,15 @@ class TestModelDataIO(TestCase):
         self.patch_open = mock.patch("__builtin__.open")
         self.mock_open = self.patch_open.start()
 
+#        self.patch_close = mock.patch("__builtin__.close")
+#        self.mock_close = self.patch_close.start()
+
         self.patch_json_dump = mock.patch("json.dump")
         self.mock_json_dump = self.patch_json_dump.start()
+
+        self.patch_valid_emgaats_model_structure = mock.patch.object(self.mock_model, "valid_emgaats_model_structure")
+        self.mock_valid_emgaats_model_structure = self.patch_valid_emgaats_model_structure.start()
+        self.mock_valid_emgaats_model_structure.return_value = True
 
     def tearDown(self):
         self.mock_dissolve = self.patch_dissolve.stop()
@@ -112,7 +122,9 @@ class TestModelDataIO(TestCase):
         self.mock_os_walk = self.patch_os_walk.stop()
         self.mock_os_chmod = self.patch_os_chmod.stop()
         self.mock_open = self.patch_open.stop()
+#        self.mock_close = self.patch_close.stop()
         self.mock_json_dump = self.patch_json_dump.stop()
+        self.mock_valid_emgaats_model_structure = self.patch_valid_emgaats_model_structure.stop()
 
     def test_read_simulations_calls_os_walk(self):
         self.model_data_io.read_simulations(self.mock_model)
@@ -241,12 +253,38 @@ class TestModelDataIO(TestCase):
             self.model_data_io.set_registered_model_to_read_only(self.mock_model)
             mock_os_path_join.assert_called_with("root", "filenames")
 
-    def test_set_registered_model_to_read_only_calls_chmod_with_corrent_arguments(self):
+    def test_set_registered_model_to_read_only_calls_chmod_with_correct_arguments(self):
         with mock.patch("os.path.join") as mock_os_path_join:
             self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
             mock_os_path_join.return_value = "filepath"
             self.model_data_io.set_registered_model_to_read_only(self.mock_model)
             self.mock_os_chmod.assert_called_with("filepath", S_IREAD | S_IRGRP | S_IROTH)
+
+    def test_set_registered_model_to_read_only_calls_valid_emgaats_model_structure(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = "filepath"
+            self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+            self.assertTrue(self.mock_valid_emgaats_model_structure.called)
+
+    def test_set_registered_model_to_read_only_invalid_emgaats_model_structure_raises_exception(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = "filepath"
+            self.mock_valid_emgaats_model_structure.return_value = False
+            with self.assertRaises((Exception, InvalidModelPathException)):
+                self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+
+    def test_set_registered_model_to_read_only_invalid_emgaats_model_structure_chmod_not_called(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = "filepath"
+            self.mock_valid_emgaats_model_structure.return_value = False
+            try:
+                self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+            except:
+                pass
+            self.assertFalse(self.mock_os_chmod.called)
 
     def test_write_model_registration_file_calls_open_with_correct_arguments(self):
         file_path = self.mock_model.model_path
@@ -256,11 +294,12 @@ class TestModelDataIO(TestCase):
         self.mock_open.assert_called_with(model_registration_file, "w")
 
     def test_write_model_registration_file_calls_json_dump_with_correct_arguments(self):
-        #debug - DCA
-        #file_path = self.mock_model.model_path
-        #file_name = "model_registration.json"
-        #model_registration_file = file_path + "\\" + file_name
-        self.mock_open.__enter__.return_value = "filepath"
-        data = {"id": 123}
+        #TODO: figure out how to mock/patch "with" and open(), close()
+        self.mock_open.return_value = "filepath"
+        model_registration_data = {"id": self.mock_model.id, "create_date": self.mock_model.create_date,
+                                   "model_purpose_id": self.mock_model.model_purpose_id,
+                                   "model_purpose": self.config.model_purpose[self.mock_model.model_purpose_id]}
         self.model_data_io.write_model_registration_file(self.mock_model)
-        self.mock_json_dump.assert_called_with(data, "filepath")
+        self.mock_json_dump.assert_called_with(model_registration_data, "filepath")
+
+
