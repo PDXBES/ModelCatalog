@@ -52,8 +52,8 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.add_model_alterations(model)
             model_data_io.add_project_types(model)
             model_data_io.write_model_registration_file(model)
-            # TODO only do this for final models
-            model_data_io.set_registered_model_to_read_only(model)
+            if model.model_status_id == self.config.model_status_id["Final"]:
+                model_data_io.set_registered_model_to_read_only(model)
             model_data_io.stop_editing_session(editor, True)
         except:
             model_data_io.stop_editing_session(editor, False)

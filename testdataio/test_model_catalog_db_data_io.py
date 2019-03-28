@@ -31,7 +31,7 @@ class TestModelCatalogDbDataIO(TestCase):
         self.model.project_type_id = None
         self.model.model_purpose_id = None
         self.model.model_calibration_file = None
-        self.model.model_status_id = None
+        self.model.model_status_id = self.config.model_status_id["Final"]
         self.model.model_alteration_file = None
         self.model.project_num = None
         self.model.model_geometry = None
@@ -135,10 +135,6 @@ class TestModelCatalogDbDataIO(TestCase):
         except:
             self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
-    def test_write_model_registration_file_creates_json_with_correct_arguments(self):
-        pass
-        #https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
-
     def test_add_model_calls_set_registered_model_to_read_only_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.mock_set_registered_model_to_read_only.assert_called_with(self.model)
@@ -147,7 +143,14 @@ class TestModelCatalogDbDataIO(TestCase):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
         self.mock_write_model_registration_file.assert_called_with(self.model)
 
+    def test_add_model_model_status_is_set_to_final_set_registered_model_to_read_only_called(self):
+        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.assertTrue(self.mock_set_registered_model_to_read_only.called)
 
+    def test_add_model_model_status_is_set_to_working_set_registered_model_to_read_only_not_called(self):
+        self.model.model_status_id = self.config.model_status_id["Working"]
+        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.assertFalse(self.mock_set_registered_model_to_read_only.called)
 
 
 
