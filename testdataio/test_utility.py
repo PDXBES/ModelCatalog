@@ -14,19 +14,18 @@ class TestUtility(TestCase):
 
 
     def setUp(self):
-        self.utility = Utility()
+        mock_config = MockConfig()
+        self.config = mock_config.config
+        self.utility = Utility(self.config)
         self.patch_convert_mapped_letter_drive_to_unc_path = mock.patch.object(self.utility, "convert_mapped_letter_drive_to_unc_path")
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.start()
 
-        self.patch_model_catalog_test_data_cleanup = mock.patch.object(self.utility, "model_catalog_test_data_cleanup")
-        self.mock_model_catalog_test_data_cleanup = self.patch_model_catalog_test_data_cleanup.start()
-
-        self.patch_model_catalog_test_data_cleanup = mock.patch("arcpy.DeleteRows_management")
-        self.mock_model_catalog_test_data_cleanup = self.patch_model_catalog_test_data_cleanup.start()
+        self.patch_DeleteRows_management = mock.patch("arcpy.DeleteRows_management")
+        self.mock_DeleteRows_management = self.patch_DeleteRows_management.start()
 
     def tearDown(self):
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.stop()
-        self.mock_model_catalog_test_data_cleanup = self.patch_model_catalog_test_data_cleanup.stop()
+        self.mock_DeleteRows_management = self.patch_DeleteRows_management.stop()
 
     def test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments(self):
         mock_path = r"V:\test\test"
@@ -51,9 +50,23 @@ class TestUtility(TestCase):
             self.utility.check_path(mock_path)
 
     def test_model_catalog_test_data_cleanup_calls_delete_rows_with_correct_arguments(self):
-        self.utility.model_catalog_test_data_cleanup
-        self.mock_model_catalog_test_data_cleanup.assert_called_with(["fc1", "fc2"])
+        self.utility.model_catalog_test_data_cleanup()
+        feature_class_list = ["model_tracking_sde_path", "model_alt_bc_sde_path", "model_alt_hydraulic_sde_path",
+                              "model_alt_hydrologic_sde_path", "project_type_sde_path", "required_simulations_sde_path"]
 
+        for counter, argument in enumerate(self.mock_DeleteRows_management.call_args_list):
+            feature_class = argument[0][0]
+            self.assertEquals(feature_class, feature_class_list[counter])
+
+    def test_rrad_test_data_cleanup_calls_delete_rows_with_correct_arguments(self):
+        self.utility.rrad_test_data_cleanup()
+        feature_class_list = ["rehab_tracking_sde_path", "rehab_results_sde_path", "area_results_sde_path",
+                              "link_results_sde_path", "node_results_sde_path", "node_flooding_results_sde_path",
+                              "directors_sde_path"]
+
+        for counter, argument in enumerate(self.mock_DeleteRows_management.call_args_list):
+            feature_class = argument[0][0]
+            self.assertEquals(feature_class, feature_class_list[counter])
 
 
 

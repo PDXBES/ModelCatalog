@@ -7,7 +7,9 @@ from businessclasses.model_catalog_exception import InvalidModelPathException
 
 class Utility:
 
-    config = Config()
+    def __init__(self, config):
+
+        self.config = config
 
     def convert_mapped_letter_drive_to_unc_path(self, path):
         #https://stackoverflow.com/questions/34801315/get-full-computer-name-from-a-network-drive-letter-in-python
@@ -40,24 +42,24 @@ class Utility:
             return path
 
         except:
-            arcpy.AddMessage("Path provided is not a valid path for Model Registration")
-            arcpy.AddMessage("Note that local files and paths can not be registered, check your path: ")
-            arcpy.AddMessage(path)
+            arcpy.AddError("Path provided is not a valid path for Model Registration")
+            arcpy.AddError("Note that local files and paths can not be registered, check your path: ")
+            arcpy.AddError(path)
             raise InvalidModelPathException
 
 
     def model_catalog_test_data_cleanup(self):
-        feature_class_list = [config.model_tracking_sde_path, config.model_alt_bc_sde_path,
-                              config.model_alt_hydraulic_sde_path, config.model_alt_hydrologic_sde_path,
-                              config.project_type_sde_path, config.required_simulations_sde_path]
+        feature_class_list = [self.config.model_tracking_sde_path, self.config.model_alt_bc_sde_path,
+                              self.config.model_alt_hydraulic_sde_path, self.config.model_alt_hydrologic_sde_path,
+                              self.config.project_type_sde_path, self.config.required_simulations_sde_path]
         for feature_class in feature_class_list:
             arcpy.DeleteRows_management(feature_class)
 
-    # def rrad_test_data_cleanup(self):
-    #     feature_class_list = [config.rehab_tracking_sde_path, config.rehab_results_sde_path,
-    #                           config.area_results_sde_path, config.link_results_sde_path,
-    #                           config.node_results_sde_path, config.flooding_results_sde_path,
-    #                           config.directors_sde_path]
-    #     for feature_class in feature_class_list:
-    #         arcpy.DeleteRows_management(feature_class)
+    def rrad_test_data_cleanup(self):
+        feature_class_list = [self.config.rehab_tracking_sde_path, self.config.rehab_results_sde_path,
+                              self.config.area_results_sde_path, self.config.link_results_sde_path,
+                              self.config.node_results_sde_path, self.config.node_flooding_results_sde_path,
+                              self.config.directors_sde_path]
+        for feature_class in feature_class_list:
+            arcpy.DeleteRows_management(feature_class)
 

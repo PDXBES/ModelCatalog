@@ -67,7 +67,7 @@ class SimulationDataIO(ObjectDataIo):
     def copy_node_flooding_results(self, simulation):
         # type: (Simulation) -> None
         model_node_flooding_results_path = self.node_flooding_results_path(simulation)
-        rrad_node_flooding_results_path = self.config.flooding_results_sde_path
+        rrad_node_flooding_results_path = self.config.node_flooding_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
         self.model_catalog_db_data_io.copy(model_node_flooding_results_path, rrad_node_flooding_results_path, None, id_to_db_field_mapping)
 

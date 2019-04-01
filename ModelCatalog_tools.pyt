@@ -38,7 +38,7 @@ class EMGAATS_Model_Registration(object):
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
-        self.utility = utility.Utility()
+        self.utility = utility.Utility(self.config)
 
         self.dummy_model_calibration_file_path = self.config.dummy_model_calibration_file_path
         self.dummy_model_alteration_file_path = self.config.dummy_model_alteration_file_path
