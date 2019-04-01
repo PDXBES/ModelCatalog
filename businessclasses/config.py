@@ -67,6 +67,7 @@ class Config:
         self.flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
         self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
         self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
+        self.directors_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Directors"
 
         self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
 ##

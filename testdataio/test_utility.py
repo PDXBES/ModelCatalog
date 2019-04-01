@@ -1,8 +1,10 @@
 from unittest import TestCase
 import os
+import arcpy
 import ctypes
 from ctypes import wintypes
 import mock
+from businessclasses.config import Config
 from businessclasses.model_catalog_exception import InvalidModelPathException
 from dataio.utility import Utility
 from testbusinessclasses.mock_config import MockConfig
@@ -16,9 +18,15 @@ class TestUtility(TestCase):
         self.patch_convert_mapped_letter_drive_to_unc_path = mock.patch.object(self.utility, "convert_mapped_letter_drive_to_unc_path")
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.start()
 
+        self.patch_model_catalog_test_data_cleanup = mock.patch.object(self.utility, "model_catalog_test_data_cleanup")
+        self.mock_model_catalog_test_data_cleanup = self.patch_model_catalog_test_data_cleanup.start()
+
+        self.patch_model_catalog_test_data_cleanup = mock.patch("arcpy.DeleteRows_management")
+        self.mock_model_catalog_test_data_cleanup = self.patch_model_catalog_test_data_cleanup.start()
+
     def tearDown(self):
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.stop()
-
+        self.mock_model_catalog_test_data_cleanup = self.patch_model_catalog_test_data_cleanup.stop()
 
     def test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments(self):
         mock_path = r"V:\test\test"
@@ -41,6 +49,11 @@ class TestUtility(TestCase):
         self.mock_convert_mapped_letter_drive_to_unc_path.side_effect = Exception
         with self.assertRaises(Exception):
             self.utility.check_path(mock_path)
+
+    def test_model_catalog_test_data_cleanup_calls_delete_rows_with_correct_arguments(self):
+        self.utility.model_catalog_test_data_cleanup
+        self.mock_model_catalog_test_data_cleanup.assert_called_with(["fc1", "fc2"])
+
 
 
 

@@ -114,7 +114,7 @@ class ModelDataIo(ObjectDataIo):
         # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
 
         # check that a registration file does not already exist - in different function?
-        # TODO Model Status
+        # TODO Model Status - done in model_catalog_db_data_io.add_model?
         model_registration_data = {"id": model.id,
                                    "create_date": model.create_date.strftime("%d-%b-%Y (%H:%M:%S.%f)"),
                                    "model_purpose_id": model.model_purpose_id,

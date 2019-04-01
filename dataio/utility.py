@@ -1,11 +1,13 @@
 import os
-from stat import S_IREAD, S_IRGRP, S_IROTH
+from businessclasses.config import Config
 import ctypes
 from ctypes import wintypes
 import arcpy
 from businessclasses.model_catalog_exception import InvalidModelPathException
 
 class Utility:
+
+    config = Config()
 
     def convert_mapped_letter_drive_to_unc_path(self, path):
         #https://stackoverflow.com/questions/34801315/get-full-computer-name-from-a-network-drive-letter-in-python
@@ -44,13 +46,18 @@ class Utility:
             raise InvalidModelPathException
 
 
-#
+    def model_catalog_test_data_cleanup(self):
+        feature_class_list = [config.model_tracking_sde_path, config.model_alt_bc_sde_path,
+                              config.model_alt_hydraulic_sde_path, config.model_alt_hydrologic_sde_path,
+                              config.project_type_sde_path, config.required_simulations_sde_path]
+        for feature_class in feature_class_list:
+            arcpy.DeleteRows_management(feature_class)
 
-#
-# # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
-# model_path = r"C: \Test"
-# for root, directories, filenames in os.walk(model_path):
-#     for filename in filenames:
-#         filepath = os.path.join(root, filename)
-#         os.chmod(filepath, S_IREAD | S_IRGRP | S_IROTH)
+    # def rrad_test_data_cleanup(self):
+    #     feature_class_list = [config.rehab_tracking_sde_path, config.rehab_results_sde_path,
+    #                           config.area_results_sde_path, config.link_results_sde_path,
+    #                           config.node_results_sde_path, config.flooding_results_sde_path,
+    #                           config.directors_sde_path]
+    #     for feature_class in feature_class_list:
+    #         arcpy.DeleteRows_management(feature_class)
 
