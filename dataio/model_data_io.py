@@ -3,7 +3,7 @@ import arcpy
 import json
 import traceback
 from businessclasses.config import Config
-from stat import S_IREAD, S_IRGRP, S_IROTH
+from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWRITE, S_IWGRP, S_IWOTH
 try:
     from typing import List, Any
 except:
@@ -146,8 +146,24 @@ class ModelDataIo(ObjectDataIo):
     #will return the list
     #awaiting changes from Arnel
 
+    def set_model_to_read_write(self, model):
+        # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
 
+        model_path = model.model_path
+        for root, directories, filenames in os.walk(model_path):
+            for filename in filenames:
+                filepath = os.path.join(root, filename)
+                os.chmod(filepath, S_IWRITE | S_IWGRP | S_IWOTH )
 
+    def check_model_is_read_only(self, model):
+        model_path = model.model_path
+        for root, directories, filenames in os.walk(model_path):
+            for filename in filenames:
+                filepath = os.path.join(root, filename)
+                if os.access(filepath, os.W_OK):
+                    return False
+
+        return True
 
 
 

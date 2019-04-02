@@ -2,7 +2,8 @@ from unittest import TestCase
 import mock
 import arcpy
 import json
-from stat import S_IREAD, S_IRGRP, S_IROTH
+from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWRITE, S_IWGRP, S_IWOTH
+import os
 from dataio.model_data_io import ModelDataIo
 from businessclasses.model import Model
 from businessclasses.simulation import Simulation
@@ -101,6 +102,9 @@ class TestModelDataIO(TestCase):
         self.patch_os_chmod = mock.patch("os.chmod")
         self.mock_os_chmod = self.patch_os_chmod.start()
 
+        self.patch_os_access = mock.patch("os.access")
+        self.mock_os_access = self.patch_os_access.start()
+
         self.patch_open = mock.patch("__builtin__.open")
         self.mock_open = self.patch_open.start()
 
@@ -126,6 +130,7 @@ class TestModelDataIO(TestCase):
 #        self.mock_close = self.patch_close.stop()
         self.mock_json_dump = self.patch_json_dump.stop()
         self.mock_valid_emgaats_model_structure = self.patch_valid_emgaats_model_structure.stop()
+        self.mock_os_access = self.patch_os_access.stop()
 
     def test_read_simulations_calls_os_walk(self):
         self.model_data_io.read_simulations(self.mock_model)
@@ -305,4 +310,53 @@ class TestModelDataIO(TestCase):
     #     self.model_data_io.write_model_registration_file(self.mock_model)
     #     self.mock_json_dump.assert_called_with(model_registration_data, "filepath")
 
+    def test_set_model_to_read_write_calls_os_walk_with_correct_arguments(self):
+        self.model_data_io.set_model_to_read_write(self.mock_model)
+        self.mock_os_walk.assert_called_with(r"C:\model_path")
+
+    def test_set_model_to_read_write_calls_os_path_join_with_correct_arguments(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            self.model_data_io.set_model_to_read_write(self.mock_model)
+            mock_os_path_join.assert_called_with("root", "filenames")
+
+    def test_set_model_to_read_write_calls_chmod_with_correct_arguments(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = "filepath"
+            self.model_data_io.set_registered_model_to_read_only(self.mock_model)
+            self.mock_os_chmod.assert_called_with("filepath",  S_IREAD | S_IRGRP | S_IROTH)
+
+    def test_check_model_is_read_only_calls_os_walk_with_correct_arguments(self):
+        self.model_data_io.check_model_is_read_only(self.mock_model)
+        self.mock_os_walk.assert_called_with(r"C:\model_path")
+
+    def test_check_model_is_read_only_calls_os_path_join_with_correct_arguments(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            self.model_data_io.check_model_is_read_only(self.mock_model)
+            mock_os_path_join.assert_called_with("root", "filenames")
+
+    def test_check_model_is_read_only_calls_os_access_with_correct_arguments(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = r"C:\model_path"
+            self.model_data_io.check_model_is_read_only(self.mock_model)
+            self.mock_os_access.assert_called_with(r"C:\model_path", os.W_OK)
+
+    def test_check_model_is_read_only_model_is_read_only_returns_true(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = r"C:\model_path"
+            self.mock_os_access.return_value = False
+            read_status = self.model_data_io.check_model_is_read_only(self.mock_model)
+            self.assertEquals(read_status, True)
+
+    def test_check_model_is_read_only_model_is_not_read_only_returns_false(self):
+        with mock.patch("os.path.join") as mock_os_path_join:
+            self.mock_os_walk.return_value = [["root", "directories", ["filenames"]]]
+            mock_os_path_join.return_value = r"C:\model_path"
+            self.mock_os_access.return_value = True
+            read_status = self.model_data_io.check_model_is_read_only(self.mock_model)
+            self.assertEquals(read_status, False)
 
