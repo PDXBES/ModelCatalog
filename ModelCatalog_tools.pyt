@@ -250,12 +250,9 @@ class EMGAATS_Model_Registration(object):
                 parent_model_dir_parameter.enabled = True
                 parent_model_dir_parameter.value = ""
 
+        file = open("c:\\temp\\log.txt", "w")
 
-        # # Checks that alteration added is not a duplicate
-        if model_alt_bc_parameter.values is not None:
-            number_of_values = len(model_alt_bc_parameter.values)
-            if number_of_values > 1 and model_alt_bc_parameter.values[-1] in model_alt_bc_parameter.values[0:number_of_values-1]:
-                model_alt_bc_parameter.values = model_alt_bc_parameter.values[0:number_of_values-1]
+        combo_box_remove_duplicates_and_items_not_in_domain(model_alt_bc_parameter)
 
         if model_alt_hydrologic_parameter.values is not None:
             number_of_values = len(model_alt_hydrologic_parameter.values)
@@ -590,6 +587,17 @@ def data_review_combo_box_remove_added_simulations(data_review_parameter, simula
         if value[0] in simulations:
             param.append(value)
     data_review_parameter.values = param
+
+def combo_box_remove_duplicates_and_items_not_in_domain(parameter):
+    # # Checks that value added is not a duplicate
+    if parameter.values is not None:
+        number_of_values = len(parameter.values)
+        # Checks that value added is not a duplicate
+        if number_of_values > 1 and parameter.values[-1] in parameter.values[0:number_of_values - 1]:
+            parameter.values = parameter.values[0:number_of_values - 1]
+        # Checks that value added is in domain
+        if number_of_values >= 1 and not parameter.valueAsText.split(";")[-1] in parameter.filters[0].list:
+            parameter.values = parameter.values[0:number_of_values - 1]
 
 def data_review_combo_box_replace_deleted_simulations(data_review_parameter, simulations):
     param = []
