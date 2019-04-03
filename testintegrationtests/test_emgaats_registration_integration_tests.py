@@ -51,25 +51,34 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.create_model_alterations_hydraulic([["Pipe Roughness"]])
         self.model.create_project_types(["Storm"])
         self.model.create_simulations()
+        self.model_dataio.set_model_to_read_write(self.model)
+
+    def tearDown(self):
+        self.model_dataio.set_model_to_read_write(self.model)
+
 
     def test_model_registration_with_model_status_working(self):
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+        self.assertFalse(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
+
+#TODO: Create appropriate models with correct simulation storms
 
     def test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad(self):
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]
-        self.model_dataio.create_model_geometry(self.model)
         self.model.create_date = datetime.datetime.today()
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+        self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad(self):
         self.model.model_path = r"\\BESFile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Carolina_Trunk\Base_Calib"
+        self.model_dataio.set_model_to_read_write(self.model)
         self.model.create_simulations()
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
@@ -79,6 +88,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+        self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_invalid(self):
