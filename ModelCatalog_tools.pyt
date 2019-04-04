@@ -252,9 +252,12 @@ class EMGAATS_Model_Registration(object):
 
         file = open("c:\\temp\\log.txt", "w")
 
-        combo_box_remove_duplicates_and_items_not_in_domain(model_alt_bc_parameter)
-        combo_box_remove_duplicates_and_items_not_in_domain(model_alt_hydrologic_parameter)
-        combo_box_remove_duplicates_and_items_not_in_domain(model_alt_hydraulic_parameter)
+        combo_box_remove_duplicates(model_alt_bc_parameter)
+        combo_box_remove_items_not_in_domain(model_alt_bc_parameter, file)
+        combo_box_remove_duplicates(model_alt_hydrologic_parameter)
+        combo_box_remove_items_not_in_domain(model_alt_hydrologic_parameter, file)
+        combo_box_remove_duplicates(model_alt_hydraulic_parameter)
+        combo_box_remove_items_not_in_domain(model_alt_hydraulic_parameter, file)
 
         values_altered = False
         alterations_present = False
@@ -580,13 +583,25 @@ def data_review_combo_box_remove_added_simulations(data_review_parameter, simula
             param.append(value)
     data_review_parameter.values = param
 
-def combo_box_remove_duplicates_and_items_not_in_domain(parameter):
+def combo_box_remove_duplicates(parameter):
     # # Checks that value added is not a duplicate
     if parameter.values is not None:
         number_of_values = len(parameter.values)
         # Checks that value added is not a duplicate
         if number_of_values > 1 and parameter.values[-1] in parameter.values[0:number_of_values - 1]:
             parameter.values = parameter.values[0:number_of_values - 1]
+
+def combo_box_remove_items_not_in_domain(parameter, file):
+    # # Checks that value added is not a duplicate
+
+    if parameter.values is not None:
+        file.write(parameter.ValueAsText)
+        number_of_values = len(parameter.values)
+        file.write("\n")
+        file.write(str(number_of_values))
+        file.write("\n")
+        file.write(str(parameter.filters[0].list))
+        file.write("\n")
         # Checks that value added is in domain
         if number_of_values >= 1 and not parameter.valueAsText.split(";")[-1] in parameter.filters[0].list:
             parameter.values = parameter.values[0:number_of_values - 1]
