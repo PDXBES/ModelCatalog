@@ -6,6 +6,8 @@ from dataio.simulation_data_io import SimulationDataIO
 from dataio.model_data_io import ModelDataIo
 import getpass
 import datetime
+import traceback
+import sys
 from dataio import utility
 from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
@@ -229,7 +231,7 @@ class EMGAATS_Model_Registration(object):
                 analysis_request_ids.strip()
                 analysis_request_id_parameter.value = analysis_request_ids
             else:
-                analysis_request_id_parameter.value = ""
+                analysis_request_id_parameter.value = " "
         else:
             cip_number_parameter.enabled = False
             cip_number_parameter.filter.list = [u"None"]
@@ -250,14 +252,17 @@ class EMGAATS_Model_Registration(object):
                 parent_model_dir_parameter.enabled = True
                 parent_model_dir_parameter.value = ""
 
-        file = open("c:\\temp\\log.txt", "w")
+        drop_down_list_remove_value_not_in_domain(model_status_parameter)
+        drop_down_list_remove_value_not_in_domain(model_purpose_parameter)
+        drop_down_list_remove_value_not_in_domain(project_phase_parameter)
+        drop_down_list_remove_value_not_in_domain(cip_number_parameter)
 
         combo_box_remove_duplicates(model_alt_bc_parameter)
-        combo_box_remove_items_not_in_domain(model_alt_bc_parameter, file)
+        combo_box_remove_value_not_in_domain(model_alt_bc_parameter)
         combo_box_remove_duplicates(model_alt_hydrologic_parameter)
-        combo_box_remove_items_not_in_domain(model_alt_hydrologic_parameter, file)
+        combo_box_remove_value_not_in_domain(model_alt_hydrologic_parameter)
         combo_box_remove_duplicates(model_alt_hydraulic_parameter)
-        combo_box_remove_items_not_in_domain(model_alt_hydraulic_parameter, file)
+        combo_box_remove_value_not_in_domain(model_alt_hydraulic_parameter)
 
         values_altered = False
         alterations_present = False
@@ -283,6 +288,7 @@ class EMGAATS_Model_Registration(object):
         arcpy.AddMessage("Execute")
 
         try:
+
             self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
             self.model.parent_model_id = 0
 
@@ -322,6 +328,7 @@ class EMGAATS_Model_Registration(object):
             self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values)
             self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values)
             self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
+
             if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
                 self.model.model_calibration_file = self.utility.check_path(model_calibration_file_parameter.valueAsText)
             else:
@@ -331,14 +338,27 @@ class EMGAATS_Model_Registration(object):
                 self.model.model_alteration_file = self.utility.check_path(model_alteration_file_parameter.valueAsText)
             else:
                 self.model.model_alteration_file = None
+
             self.model.project_num = analysis_request_id_parameter.valueAsText
             self.model_dataio.create_model_geometry(self.model)
             self.model.create_simulations()
+            arcpy.AddError("1")
+            attribute_names = Model.input_field_attribute_lookup().values()
+            for attribute_name in attribute_names:
+                attribute_value = getattr(self.model, attribute_name)
+                arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
+            arcpy.AddError("2")
             self.model_catalog.add_model(self.model)
-
+            arcpy.AddError("1")
+            attribute_names = Model.input_field_attribute_lookup().values()
+            for attribute_name in attribute_names:
+                attribute_value = getattr(self.model, attribute_name)
+                arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
+            arcpy.AddError("2")
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-        except InvalidModelException:
+        except Exception:
             self.model.model_valid_diagnostic()
+            traceback.print_exc(file = sys.stdout)
             arcpy.AddError("Model is not valid")
 
 class TemporaryMonitorQaQc(object):
@@ -584,27 +604,21 @@ def data_review_combo_box_remove_added_simulations(data_review_parameter, simula
     data_review_parameter.values = param
 
 def combo_box_remove_duplicates(parameter):
-    # # Checks that value added is not a duplicate
     if parameter.values is not None:
         number_of_values = len(parameter.values)
-        # Checks that value added is not a duplicate
         if number_of_values > 1 and parameter.values[-1] in parameter.values[0:number_of_values - 1]:
             parameter.values = parameter.values[0:number_of_values - 1]
 
-def combo_box_remove_items_not_in_domain(parameter, file):
-    # # Checks that value added is not a duplicate
-
+def combo_box_remove_value_not_in_domain(parameter):
     if parameter.values is not None:
-        file.write(parameter.ValueAsText)
         number_of_values = len(parameter.values)
-        file.write("\n")
-        file.write(str(number_of_values))
-        file.write("\n")
-        file.write(str(parameter.filters[0].list))
-        file.write("\n")
-        # Checks that value added is in domain
-        if number_of_values >= 1 and not parameter.valueAsText.split(";")[-1] in parameter.filters[0].list:
+        if number_of_values >= 1 and not parameter.values[-1][0] in parameter.filters[0].list:
             parameter.values = parameter.values[0:number_of_values - 1]
+
+def drop_down_list_remove_value_not_in_domain(parameter):
+    if parameter.value is not None:
+        if not parameter.value in parameter.filter.list:
+            parameter.value = None
 
 def data_review_combo_box_replace_deleted_simulations(data_review_parameter, simulations):
     param = []

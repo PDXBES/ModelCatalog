@@ -123,6 +123,10 @@ class Model(GenericObject):
                 elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
+            attribute_names = self.input_field_attribute_lookup.values()
+            for attribute_name in attribute_names:
+                attribute_value = getattr(self, attribute_name)
+                arcpy.AddMessage(attribute_name + ":" + attribute_value)
             return False
 
     def valid_emgaats_model_structure(self):

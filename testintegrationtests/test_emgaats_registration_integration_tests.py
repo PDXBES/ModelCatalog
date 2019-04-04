@@ -37,8 +37,8 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
-        self.model.model_path = r"\\BESFile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Carolina_Trunk\Base_Calib"
-        #self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\Final"
+        #self.model.model_path = r"\\BESFile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Carolina_Trunk\Base_Calib"
+        self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\Final"
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"
@@ -72,6 +72,12 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.create_date = datetime.datetime.today()
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
+        arcpy.AddError("1")
+        attribute_names = Model.input_field_attribute_lookup().values()
+        for attribute_name in attribute_names:
+            attribute_value = getattr(self.model, attribute_name)
+            arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
+        arcpy.AddError("2")
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
