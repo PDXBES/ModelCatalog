@@ -253,16 +253,8 @@ class EMGAATS_Model_Registration(object):
         file = open("c:\\temp\\log.txt", "w")
 
         combo_box_remove_duplicates_and_items_not_in_domain(model_alt_bc_parameter)
-
-        if model_alt_hydrologic_parameter.values is not None:
-            number_of_values = len(model_alt_hydrologic_parameter.values)
-            if number_of_values > 1 and model_alt_hydrologic_parameter.values[-1] in model_alt_hydrologic_parameter.values[0:number_of_values-1]:
-                model_alt_hydrologic_parameter.values = model_alt_hydrologic_parameter.values[0:number_of_values-1]
-
-        if model_alt_hydraulic_parameter.values is not None:
-            number_of_values = len(model_alt_hydraulic_parameter.values)
-            if number_of_values > 1 and model_alt_hydraulic_parameter.values[-1] in model_alt_hydraulic_parameter.values[0:number_of_values-1]:
-                model_alt_hydraulic_parameter.values = model_alt_hydraulic_parameter.values[0:number_of_values-1]
+        combo_box_remove_duplicates_and_items_not_in_domain(model_alt_hydrologic_parameter)
+        combo_box_remove_duplicates_and_items_not_in_domain(model_alt_hydraulic_parameter)
 
         values_altered = False
         alterations_present = False
