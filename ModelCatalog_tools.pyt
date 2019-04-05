@@ -338,27 +338,14 @@ class EMGAATS_Model_Registration(object):
                 self.model.model_alteration_file = self.utility.check_path(model_alteration_file_parameter.valueAsText)
             else:
                 self.model.model_alteration_file = None
-
             self.model.project_num = analysis_request_id_parameter.valueAsText
-            self.model_dataio.create_model_geometry(self.model)
             self.model.create_simulations()
-            arcpy.AddError("1")
-            attribute_names = Model.input_field_attribute_lookup().values()
-            for attribute_name in attribute_names:
-                attribute_value = getattr(self.model, attribute_name)
-                arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
-            arcpy.AddError("2")
+            self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
-            arcpy.AddError("1")
-            attribute_names = Model.input_field_attribute_lookup().values()
-            for attribute_name in attribute_names:
-                attribute_value = getattr(self.model, attribute_name)
-                arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
-            arcpy.AddError("2")
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
-        except Exception:
+        except InvalidModelException:
+            self.model._write_attributes_to_screen()
             self.model.model_valid_diagnostic()
-            traceback.print_exc(file = sys.stdout)
             arcpy.AddError("Model is not valid")
 
 class TemporaryMonitorQaQc(object):

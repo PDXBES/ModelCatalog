@@ -1,5 +1,6 @@
 from dataio.object_data_io import ObjectDataIo
 from config import Config
+import arcpy
 try:
     from typing import List, Any, Dict
 except:
@@ -32,3 +33,12 @@ class GenericObject(object):
     def valid(self):
         # type: () -> bool
         return False
+
+    def _write_attributes_to_screen(self):
+        arcpy.AddError("Begin Attribute Dump")
+        arcpy.AddError("Object Type:" + self.name)
+        attribute_names = self.input_field_attribute_lookup.values()
+        for attribute_name in attribute_names:
+            attribute_value = getattr(self, attribute_name)
+            arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
+        arcpy.AddError("End Attribute Dump")

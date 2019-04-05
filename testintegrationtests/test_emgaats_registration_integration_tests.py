@@ -72,12 +72,6 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.create_date = datetime.datetime.today()
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)
-        arcpy.AddError("1")
-        attribute_names = Model.input_field_attribute_lookup().values()
-        for attribute_name in attribute_names:
-            attribute_value = getattr(self.model, attribute_name)
-            arcpy.AddMessage(attribute_name + ":" + str(attribute_value))
-        arcpy.AddError("2")
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
