@@ -28,13 +28,13 @@ class Toolbox(object):
         self.alias = "Model Catalog Tools"
 
         # List of tool classes associated with this toolbox
-        self.tools = [SlrtQaQc]
+        self.tools = [CharacterizationReporting]
 
 
-class SlrtQaQc(object):
+class CharacterizationReporting(object):
     def __init__(self):
-        self.label = "SLRT Data Quality"
-        self.description = "Tool for recording SLRT data quality to database"
+        self.label = "Characterization Reporting"
+        self.description = "Tool to create characterization snapshot for mapping"
         self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
@@ -42,75 +42,27 @@ class SlrtQaQc(object):
         # Need to create list of model objects from model catalog
 
     def getParameterInfo(self):
-        model_id = arcpy.Parameter(
-            displayName="Model ID",
-            name="model_id",
+        characterization_models = arcpy.Parameter(
+            displayName="Characterization Models",
+            name="characterization_models",
             datatype="GPString",
             parameterType="Required",
-            direction="Input")
+            direction="Input",
+            multiValue=True)
 
-        model_id.filter.type = "ValueList"
-        model_id.filter.list = [1, 2, 3] #TODO Need to get list of final calibration models, purpose, paths
+        characterization_models.filter.type = "ValueList"
+        characterization_models.filter.list = ["\\besfile1\CCSP\Models\TAG\2Cali\Final", "\\besfile1\CCSP\Models\TAG\2Cali\Base3" ]
+        #TODO:write function to retrieve characterization models from model tracking table
 
-        station_id = arcpy.Parameter(
-            displayName="Station ID",
-            name="station_id",
+        requested_by = arcpy.Parameter(
+            displayName="Requested By",
+            name="requested_by",
             datatype="GPString",
             parameterType="Required",
-            direction="Input")
-        station_id.filter.list = [1, 2, 3] #TODO Need to get list of station ids
+            direction="Input"
+        )
 
-        h2_id = arcpy.Parameter(
-            displayName="H2 ID",
-            name="h2_id",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        h2_id.filter.list = [1, 2, 3] #TODO Need to get list of h2 id for station
-
-        location_qualifier = arcpy.Parameter(
-            displayName="Location Qualifier",
-            name="location_qualifier",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        location_qualifier.filter.list = [1, 2, 3] #TODO Need to get list of location qualifiers for h2 id
-
-        simulations_qa_qc = arcpy.Parameter(
-            displayName='Observed Data Quality',
-            name='qaqc_table',
-            datatype='GPValueTable', # this is the combo box
-            parameterType='Required',
-            direction='Input')
-
-
-
-        simulations_qa_qc.columns = [['String', 'Simulation'], ['String', 'Depth QC'], ['String', 'Flow QC']]
-        simulations_qa_qc.values = [["sim1" , "Good","Fair"]]
-        simulations_qa_qc.filters[1].type = 'ValueList'
-        simulations_qa_qc.filters[1].list = ["Good", "Fair", "Poor", "NA"]
-        simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
-
-        calculated_data_quality = arcpy.Parameter(
-            displayName="Calculated Data Quality (Automatically Calculated)",
-            name="calculated_data_quality",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
-        calculated_data_quality.value = "Good" #TODO this will need to calculated in the updateParameters
-        calculated_data_quality.enabled = False
-
-        override_data_quality = arcpy.Parameter(
-            displayName="Data Quality Override",
-            name="override_data_quality",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        override_data_quality.filter.list = ["Good", "Fair", "Poor"]
-
-        params = [model_id, station_id, h2_id, location_qualifier, simulations_qa_qc, calculated_data_quality,
-                  override_data_quality]
+        params = [characterization_models, requested_by]
         return params
 
     def isLicensed(self):

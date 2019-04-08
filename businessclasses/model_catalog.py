@@ -102,19 +102,6 @@ class ModelCatalog:
         project_types = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return project_types
 
-    #create a model to use the below static method
-    # read from the sde path from the model tracking table
-    # may need the model to access static method field_to_attribute_lookup
-    # copy to memory( model_catalog_db_data_io)
-    # create objects from that table in memory (model_catalog_db_data_io)
-    # will return a list of models with only tracking data (to use with business classes)
-
-    #repeat above with other tables (model alterations (hydro, hydra, bc) project_type, simulation) 5 additional functions
-
-    # Call above functions
-    # for each model in the list, populate with data from the other 5 lists
-    # use add_models to add them
-
     def create_models_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[Model]
         models = self.create_models_with_tracking_data_only_from_model_catalog_db(model_catalog_db_data_io)
