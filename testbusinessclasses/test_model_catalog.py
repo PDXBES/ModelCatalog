@@ -10,6 +10,7 @@ from businessclasses.project_type import ProjectType
 from businessclasses.model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from mock_config import MockConfig
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
+import datetime
 
 class TestModelCatalog(TestCase):
     def setUp(self):
@@ -22,12 +23,18 @@ class TestModelCatalog(TestCase):
         self.model1.simulations = []
         self.model1.model_alterations = []
         self.model1.project_types = []
+        self.model1.model_path = "model_path1"
+        self.model1.create_date = "create_date1"
+        self.model1.created_by = "created_by2"
         self.model2 = mock.MagicMock(Model)
         self.model2.id = 2
         self.model2.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model2.simulations = []
         self.model2.model_alterations = []
         self.model2.project_types = []
+        self.model2.model_path = "model_path2"
+        self.model2.create_date = "create_date2"
+        self.model2.created_by = "created_by2"
         self.simulation1 = mock.MagicMock(Simulation)
         self.simulation1.id = 1
         self.simulation1.parent_id = 1
@@ -268,4 +275,33 @@ class TestModelCatalog(TestCase):
         self.model_catalog.models = [self.model1, self.model2]
         calibration_models = self.model_catalog.calibration_models()
         self.assertEqual(calibration_models, [self.model1])
+
+    def test_characterization_models_returns_list_of_characterization_models(self):
+        self.model_catalog.models = [self.model1, self.model2]
+        characterization_models = self.model_catalog.characterization_models()
+        self.assertEqual(characterization_models, [self.model2])
+
+    def test_format_characterization_models_calls_characterization_models(self):
+        with mock.patch.object(self.model_catalog, "characterization_models") as mock_characterization_models:
+            self.model_catalog.format_characterization()
+            self.assertTrue(mock_characterization_models.called)
+
+    def test_format_characterization_models_returns_formatted_list_of_strings(self):
+        model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by
+        model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by
+        sample_characterization_models = [model_string1, model_string2]
+        self.model1.model_purpose_id = self.config.model_purpose_id["Characterization"]
+        with mock.patch.object(self.model_catalog, "characterization_models") as mock_characterization_models:
+            with mock.patch.object(self.model_catalog, "format_date") as mock_format_date:
+                mock_format_date.return_value = "date string"
+                mock_characterization_models.return_value = [self.model1, self.model2]
+                formatted_characterization_models = self.model_catalog.format_characterization()
+                self.assertEqual(sample_characterization_models, formatted_characterization_models)
+
+    def test_format_date_string_calls_strftime_with_correct_date_string_argument(self):
+        date = mock.MagicMock(datetime.date)
+        date.strftime.return_value = "date string"
+        return_string = self.model_catalog.format_date(date)
+        self.assertEquals(return_string, "date string")
+        self.assertEquals("%m/%d/%Y %H:%M %p", date.strftime.call_args[0][0])
 

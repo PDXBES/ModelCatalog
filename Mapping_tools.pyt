@@ -39,6 +39,7 @@ class CharacterizationReporting(object):
         self.model_catalog = ModelCatalog(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
+        self.model_catalog.add_models_from_model_catalog_db(self.modelcatalogdataio)
         # Need to create list of model objects from model catalog
 
     def getParameterInfo(self):
@@ -51,7 +52,7 @@ class CharacterizationReporting(object):
             multiValue=True)
 
         characterization_models.filter.type = "ValueList"
-        characterization_models.filter.list = ["\\besfile1\CCSP\Models\TAG\2Cali\Final", "\\besfile1\CCSP\Models\TAG\2Cali\Base3" ]
+        characterization_models.filter.list = self.model_catalog.format_characterization()
         #TODO:write function to retrieve characterization models from model tracking table
 
         requested_by = arcpy.Parameter(

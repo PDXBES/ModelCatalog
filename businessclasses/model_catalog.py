@@ -11,6 +11,7 @@ from project_type import ProjectType
 from model_catalog_exception import InvalidModelException, DuplicateModelException, DuplicatesInInputModeList
 from config import Config
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
+from datetime import datetime
 
 class ModelCatalog:
     models = None  # type: List[Model]
@@ -133,5 +134,22 @@ class ModelCatalog:
                 calibration_models.append(model)
         return calibration_models
 
+    def characterization_models(self):
+        characterization_models = []
+        for model in self.models:
+            if self.config.model_purpose[model.model_purpose_id] == "Characterization":
+                characterization_models.append(model)
+        return characterization_models
 
+    def format_date(self, date_object):
+        return date_object.strftime("%m/%d/%Y %H:%M %p")
+
+    def format_characterization(self):
+        formatted_characterization_models = []
+        characterization_models = self.characterization_models()
+        for model in characterization_models:
+            characterization_string = model.model_path + "   " + self.format_date(model.create_date) + "   " + model.created_by
+            formatted_characterization_models.append(characterization_string)
+        return formatted_characterization_models
+    #TODO: create dict - model object: formatted model string
 

@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/Mapping_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/Mapping_tools.pyt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mapping_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mapping_tools.pyt.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,14 +15,41 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.44833067">
+    <splitter split-orientation="horizontal" split-proportion="0.7626854">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Mapping_tools.pyt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" selection-end-column="34" />
+                <state relative-caret-position="197">
+                  <caret line="55" column="90" lean-forward="true" selection-start-line="55" selection-start-column="90" selection-end-line="55" selection-end-column="90" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="65">
+                  <caret line="146" column="31" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="31" />
+                  <folding>
+                    <element signature="e#55#78#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="92">
+                  <caret line="33" column="24" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#0#9#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -29,7 +57,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dataio/utility.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
+                <state relative-caret-position="980">
                   <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
@@ -45,80 +73,31 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="198" column="8" lean-forward="true" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="8" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1028">
-                  <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="462">
-                  <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
-                  <folding>
-                    <element signature="e#0#9#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="220">
-                  <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-                  <folding>
-                    <element signature="e#0#54#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6820">
-                  <caret line="358" column="51" selection-start-line="358" selection-start-column="51" selection-end-line="358" selection-end-column="51" />
-                  <folding>
-                    <element signature="e#0#29#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="470">
-                  <caret line="49" selection-start-line="49" selection-end-line="49" />
+                <state relative-caret-position="160">
+                  <caret line="198" column="8" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="8" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-287">
-                  <caret line="103" selection-start-line="103" selection-end-line="103" />
+                <state relative-caret-position="149">
+                  <caret line="295" column="9" lean-forward="true" selection-start-line="295" selection-start-column="9" selection-end-line="295" selection-end-column="9" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="28" column="81" selection-start-line="28" selection-start-column="81" selection-end-line="28" selection-end-column="81" />
+                <state relative-caret-position="-660">
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -137,7 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>altera</find>
       <find>.start</find>
       <find>.stop</find>
       <find>mock_model</find>
@@ -167,6 +145,7 @@
       <find>director</find>
       <find>node</find>
       <find>geometry</find>
+      <find>create_date</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -220,7 +199,6 @@
         <option value="$PROJECT_DIR$/businessclasses/monitor.py" />
         <option value="$PROJECT_DIR$/businessclasses/slrt.py" />
         <option value="$PROJECT_DIR$/businessclasses/data_review.py" />
-        <option value="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" />
         <option value="$PROJECT_DIR$/testdataio/test_utility_class.py" />
         <option value="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
@@ -240,6 +218,7 @@
         <option value="$PROJECT_DIR$/businessclasses/generic_object.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" />
         <option value="$PROJECT_DIR$/businessclasses/model_catalog.py" />
+        <option value="$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py" />
         <option value="$PROJECT_DIR$/Mapping_tools.pyt" />
       </list>
     </option>
@@ -258,7 +237,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -279,6 +257,11 @@
             <path>
               <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
+              <item name="testbusinessclasses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
               <item name="testdataio" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -290,6 +273,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -323,7 +307,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad">
+  <component name="RunManager" selected="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings">
     <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -338,76 +322,76 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_characterization_models_returns_list_of_characterization_models" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad&quot;" />
+      <option name="_new_target" value="&quot;test_model_catalog.TestModelCatalog.test_characterization_models_returns_list_of_characterization_models&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_calls_characterization_models" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working&quot;" />
+      <option name="_new_target" value="&quot;test_model_catalog.TestModelCatalog.test_format_characterization_models_calls_characterization_models&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_not_read_only_returns_false" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_not_read_only_returns_false&quot;" />
+      <option name="_new_target" value="&quot;test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_read_only_returns_true" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_read_only_returns_true&quot;" />
+      <option name="_new_target" value="&quot;test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_read_only_returns_true" />
-      <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_not_read_only_returns_false" />
-      <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working" />
       <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" />
-      <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad" />
+      <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_characterization_models_returns_list_of_characterization_models" />
+      <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_calls_characterization_models" />
+      <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings" />
+      <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings" />
+        <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" />
+        <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_calls_characterization_models" />
+        <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_characterization_models_returns_list_of_characterization_models" />
         <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" />
-        <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad" />
-        <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working" />
-        <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_not_read_only_returns_false" />
-        <item itemvalue="Python tests.Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_read_only_returns_true" />
       </list>
     </recent_temporary>
   </component>
@@ -425,35 +409,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO_test_check_model_is_read_only_model_is_read_only_returns_true - 2019.04.02 at 11h 53m 45s.xml">
-      <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_read_only_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 44m 06s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO_test_check_model_is_read_only_model_is_read_only_returns_true - 2019.04.02 at 11h 54m 52s.xml">
-      <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_read_only_returns_true" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 47m 13s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO_test_check_model_is_read_only_model_is_not_read_only_returns_false - 2019.04.02 at 11h 55m 02s.xml">
-      <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_not_read_only_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 48m 43s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_model_data_io_TestModelDataIO_test_check_model_is_read_only_model_is_not_read_only_returns_false - 2019.04.02 at 11h 55m 21s.xml">
-      <configuration name="Unittests for test_model_data_io.TestModelDataIO.test_check_model_is_read_only_model_is_not_read_only_returns_false" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 49m 07s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest_test_model_registration_with_model_status_working - 2019.04.02 at 11h 55m 55s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 49m 21s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest_test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad - 2019.04.02 at 12h 00m 13s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 52m 11s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest_test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad - 2019.04.02 at 12h 04m 51s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_date_string_calls_strftime - 2019.04.10 at 11h 52m 17s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_date_string_calls_strftime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest_test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad - 2019.04.02 at 12h 10m 30s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_characterization_models_returns_formatted_list_of_strings - 2019.04.10 at 11h 59m 46s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest_test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad - 2019.04.04 at 16h 21m 11s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_characterization_models_returns_formatted_list_of_strings - 2019.04.10 at 11h 59m 51s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_emgaats_registration_integration_tests_EmgaatsRegistrationIntegrationTest_test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad - 2019.04.04 at 16h 21m 53s.xml">
-      <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_format_characterization_models_returns_formatted_list_of_strings - 2019.04.10 at 12h 00m 09s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_format_characterization_models_returns_formatted_list_of_strings" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="1">
@@ -471,15 +455,15 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.19952305" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.20374708" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.33144155" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" weight="0.28263336" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.052447554" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.41008404" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.37478992" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.18356644" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.40812114" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.2937063" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.39159665" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32903227" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32939914" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.15739268" side_tool="true" weight="0.8686515" />
@@ -574,6 +558,11 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>date.strftime.call_args[0][0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>os.access(filepath, os.W_OK)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -613,21 +602,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>self.ffe_above_crown()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/businessclasses/area.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="35" selection-start-line="35" selection-end-line="37" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/project_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -729,13 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3859">
-          <caret line="238" selection-start-line="238" selection-end-line="238" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.MonitorQAQC.pyt.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -758,13 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
           <caret line="34" column="8" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5700">
-          <caret line="285" lean-forward="true" selection-start-line="285" selection-end-line="285" />
         </state>
       </provider>
     </entry>
@@ -831,23 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6820">
-          <caret line="358" column="51" selection-start-line="358" selection-start-column="51" selection-end-line="358" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="28" column="81" selection-start-line="28" selection-start-column="81" selection-end-line="28" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/generic_object.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
@@ -862,23 +808,6 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="124" column="35" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1028">
-          <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -900,7 +829,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/utility.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="980">
           <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -908,9 +837,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1240">
+          <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
+        <state relative-caret-position="660">
           <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -920,39 +856,98 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="4" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state relative-caret-position="160">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6820">
+          <caret line="358" column="51" selection-start-line="358" selection-start-column="51" selection-end-line="358" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="28" column="81" selection-start-line="28" selection-start-column="81" selection-end-line="28" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
+        <state relative-caret-position="316">
           <caret line="49" selection-start-line="49" selection-end-line="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="198" column="8" lean-forward="true" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="8" />
+        <state relative-caret-position="160">
+          <caret line="198" column="8" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-287">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        <state relative-caret-position="5280">
+          <caret line="285" lean-forward="true" selection-start-line="285" selection-end-line="285" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="33" column="24" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-660">
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="295" column="9" lean-forward="true" selection-start-line="295" selection-start-column="9" selection-end-line="295" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Mapping_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" selection-end-column="34" />
+        <state relative-caret-position="197">
+          <caret line="55" column="90" lean-forward="true" selection-start-line="55" selection-start-column="90" selection-end-line="55" selection-end-column="90" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="146" column="31" selection-start-line="146" selection-start-column="8" selection-end-line="146" selection-end-column="31" />
+          <folding>
+            <element signature="e#55#78#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
