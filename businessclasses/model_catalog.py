@@ -144,12 +144,12 @@ class ModelCatalog:
     def format_date(self, date_object):
         return date_object.strftime("%m/%d/%Y %H:%M %p")
 
-    def format_characterization(self):
-        formatted_characterization_models = []
+    def create_characterization_dictionary(self):
+        characterization_dictionary = {}
         characterization_models = self.characterization_models()
         for model in characterization_models:
             characterization_string = model.model_path + "   " + self.format_date(model.create_date) + "   " + model.created_by
-            formatted_characterization_models.append(characterization_string)
-        return formatted_characterization_models
-    #TODO: create dict - model object: formatted model string
+            characterization_dictionary[characterization_string] = model
+        return characterization_dictionary
+    # TODO: create dict - model object: formatted model string
 

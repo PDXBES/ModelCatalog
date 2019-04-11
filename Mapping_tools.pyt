@@ -8,6 +8,7 @@ import getpass
 import datetime
 from dataio import utility
 from businessclasses import config
+from ui.characterization_reporting import CharacterizationReporting
 from businessclasses.model_catalog_exception import InvalidModelException
 reload(arcpy)
 reload(config)
@@ -36,9 +37,12 @@ class CharacterizationReporting(object):
         self.label = "Characterization Reporting"
         self.description = "Tool to create characterization snapshot for mapping"
         self.config = config.Config(test_flag)
+        self.characterization_reporting = CharacterizationReporting(self.config)
         self.model_catalog = ModelCatalog(self.config)
+
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
+
         self.model_catalog.add_models_from_model_catalog_db(self.modelcatalogdataio)
         # Need to create list of model objects from model catalog
 
@@ -52,7 +56,7 @@ class CharacterizationReporting(object):
             multiValue=True)
 
         characterization_models.filter.type = "ValueList"
-        characterization_models.filter.list = self.model_catalog.format_characterization()
+        characterization_models.filter.list = self.model_catalog.create_characterization_dictionary().keys()
         #TODO:write function to retrieve characterization models from model tracking table
 
         requested_by = arcpy.Parameter(

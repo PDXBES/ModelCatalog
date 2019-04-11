@@ -281,22 +281,23 @@ class TestModelCatalog(TestCase):
         characterization_models = self.model_catalog.characterization_models()
         self.assertEqual(characterization_models, [self.model2])
 
-    def test_format_characterization_models_calls_characterization_models(self):
+    def test_create_characterization_dictionary_calls_characterization_models(self):
         with mock.patch.object(self.model_catalog, "characterization_models") as mock_characterization_models:
-            self.model_catalog.format_characterization()
+            self.model_catalog.create_characterization_dictionary()
             self.assertTrue(mock_characterization_models.called)
 
-    def test_format_characterization_models_returns_formatted_list_of_strings(self):
+    def test_create_characterization_dictionary_returns_formatted_list_of_strings(self):
         model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by
         model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by
-        sample_characterization_models = [model_string1, model_string2]
+        sample_characterization_models = {model_string1: self.model1, model_string2: self.model2}
         self.model1.model_purpose_id = self.config.model_purpose_id["Characterization"]
         with mock.patch.object(self.model_catalog, "characterization_models") as mock_characterization_models:
             with mock.patch.object(self.model_catalog, "format_date") as mock_format_date:
                 mock_format_date.return_value = "date string"
                 mock_characterization_models.return_value = [self.model1, self.model2]
-                formatted_characterization_models = self.model_catalog.format_characterization()
-                self.assertEqual(sample_characterization_models, formatted_characterization_models)
+                formatted_characterization_models = self.model_catalog.create_characterization_dictionary()
+
+                self.assertEqual(sample_characterization_models.keys(), formatted_characterization_models.keys())
 
     def test_format_date_string_calls_strftime_with_correct_date_string_argument(self):
         date = mock.MagicMock(datetime.date)
@@ -304,4 +305,23 @@ class TestModelCatalog(TestCase):
         return_string = self.model_catalog.format_date(date)
         self.assertEquals(return_string, "date string")
         self.assertEquals("%m/%d/%Y %H:%M %p", date.strftime.call_args[0][0])
+
+    def test_create_characterization_dictionary_returns_dictionary_with_models(self):
+        model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by
+        model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by
+        sample_characterization_dictionary = {model_string1: self.model1, model_string2: self.model2}
+        self.model1.model_purpose_id = self.config.model_purpose_id["Characterization"]
+        with mock.patch.object(self.model_catalog, "characterization_models") as mock_characterization_models:
+            with mock.patch.object(self.model_catalog, "format_date") as mock_format_date:
+                mock_format_date.return_value = "date string"
+                mock_characterization_models.return_value = [self.model1, self.model2]
+                characterization_dictionary = self.model_catalog.create_characterization_dictionary()
+                self.assertEqual(characterization_dictionary, sample_characterization_dictionary)
+
+    def test_get_models_selected_from_characterization_reporting_selected_strings_returns_correct_models(self):
+        model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by
+        model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by
+        sample_characterization_dictionary = {model_string1: self.model1, model_string2: self.model2}
+        self.fail("move to test_ui")
+        correct_models = self.get_models_selected_from_characterization_reporting(model_string1, sample_characterization_dictionary)
 
