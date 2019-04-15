@@ -9,6 +9,7 @@ from businessclasses.model_catalog_exception import InvalidModelPathException
 from dataio.utility import Utility
 from testbusinessclasses.mock_config import MockConfig
 from stat import S_IREAD, S_IRGRP, S_IROTH
+import datetime
 
 class TestUtility(TestCase):
 
@@ -17,7 +18,7 @@ class TestUtility(TestCase):
         mock_config = MockConfig()
         self.config = mock_config.config
         self.utility = Utility(self.config)
-        self.patch_convert_mapped_letter_drive_to_unc_path = mock.patch.object(self.utility, "convert_mapped_letter_drive_to_unc_path")
+        self.patch_convert_mapped_letter_drive_to_unc_path = mock.patch("dataio.utility.Utility.convert_mapped_letter_drive_to_unc_path")
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.start()
 
         self.patch_DeleteRows_management = mock.patch("arcpy.DeleteRows_management")
@@ -29,7 +30,7 @@ class TestUtility(TestCase):
 
     def test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments(self):
         mock_path = r"V:\test\test"
-        self.utility.check_path(mock_path)
+        Utility.check_path(mock_path)
         self.mock_convert_mapped_letter_drive_to_unc_path.assert_called_with("V:")
 
     def test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_returns_correct_path(self):
@@ -68,6 +69,12 @@ class TestUtility(TestCase):
             feature_class = argument[0][0]
             self.assertEquals(feature_class, feature_class_list[counter])
 
+    def test_format_date_string_calls_strftime_with_correct_date_string_argument(self):
+        date = mock.MagicMock(datetime.date)
+        date.strftime.return_value = "date string"
+        return_string = Utility.format_date(date)
+        self.assertEquals(return_string, "date string")
+        self.assertEquals("%m/%d/%Y %H:%M %p", date.strftime.call_args[0][0])
 
 
 

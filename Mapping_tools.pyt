@@ -8,11 +8,12 @@ import getpass
 import datetime
 from dataio import utility
 from businessclasses import config
-from ui.characterization_reporting import CharacterizationReporting
+from ui import characterization_reporting
 from businessclasses.model_catalog_exception import InvalidModelException
 reload(arcpy)
 reload(config)
 reload(utility)
+reload(characterization_reporting)
 # reload(ModelCatalog)
 # reload(Model)
 # reload(ModelCatalogDbDataIo)
@@ -29,22 +30,20 @@ class Toolbox(object):
         self.alias = "Model Catalog Tools"
 
         # List of tool classes associated with this toolbox
-        self.tools = [CharacterizationReporting]
+        self.tools = [CharacterizationReportingTool]
 
 
-class CharacterizationReporting(object):
+class CharacterizationReportingTool(object):
     def __init__(self):
         self.label = "Characterization Reporting"
         self.description = "Tool to create characterization snapshot for mapping"
         self.config = config.Config(test_flag)
-        self.characterization_reporting = CharacterizationReporting(self.config)
         self.model_catalog = ModelCatalog(self.config)
+        self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
 
-        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
-        self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
-
-        self.model_catalog.add_models_from_model_catalog_db(self.modelcatalogdataio)
-        # Need to create list of model objects from model catalog
+        self.characterization_reporting = characterization_reporting.CharacterizationReporting(self.config,
+                                                                                               self.model_catalog,
+                                                                                               self.model_catalog_db_data_io)
 
     def getParameterInfo(self):
         characterization_models = arcpy.Parameter(
@@ -56,7 +55,7 @@ class CharacterizationReporting(object):
             multiValue=True)
 
         characterization_models.filter.type = "ValueList"
-        characterization_models.filter.list = self.model_catalog.create_characterization_dictionary().keys()
+        characterization_models.filter.list = self.characterization_reporting.characterization_model.keys()
         #TODO:write function to retrieve characterization models from model tracking table
 
         requested_by = arcpy.Parameter(

@@ -4,14 +4,15 @@ import ctypes
 from ctypes import wintypes
 import arcpy
 from businessclasses.model_catalog_exception import InvalidModelPathException
-
+from datetime import date
 class Utility:
 
     def __init__(self, config):
 
         self.config = config
 
-    def convert_mapped_letter_drive_to_unc_path(self, path):
+    @staticmethod
+    def convert_mapped_letter_drive_to_unc_path(path):
         #https://stackoverflow.com/questions/34801315/get-full-computer-name-from-a-network-drive-letter-in-python
         mpr = ctypes.WinDLL('mpr')
         ERROR_SUCCESS = 0x0000
@@ -32,11 +33,12 @@ class Utility:
             raise ctypes.WinError(result)
         return remote_name.value
 
-    def check_path(self, path):
+    @staticmethod
+    def check_path(path):
         try:
             if ":" in path:
                 drive_letter = path[:2]
-                network_path = self.convert_mapped_letter_drive_to_unc_path(drive_letter)
+                network_path = Utility.convert_mapped_letter_drive_to_unc_path(drive_letter)
                 path = network_path + path[2:]
 
             return path
@@ -63,3 +65,6 @@ class Utility:
         for feature_class in feature_class_list:
             arcpy.DeleteRows_management(feature_class)
 
+    @staticmethod
+    def format_date(date_object):
+        return date_object.strftime("%m/%d/%Y %H:%M %p")

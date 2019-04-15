@@ -127,6 +127,7 @@ class TestModelCatalogDbDataIO(TestCase):
         save_changes = True
         self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
+    # this test will cause a traceback with an exception. it is testing the rollback.
     def test_add_model_calls_stop_editing_session_exception_thrown_with_save_changes_false(self):
         self.mock_add_simulations.side_effect = Exception()
         save_changes = False
