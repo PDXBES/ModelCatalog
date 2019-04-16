@@ -14,23 +14,22 @@ from dataio.utility import Utility
 
 class CharacterizationReporting(object):
 
-    def __init__(self, config1, model_catalog, model_catalog_data_io):
+    def __init__(self, config1, model_catalog, model_catalog_db_data_io):
         self.config = config1
         self.model_catalog = model_catalog
-        self.model_catalog_data_io = model_catalog_data_io
+        self.model_catalog_db_data_io = model_catalog_db_data_io
 
+        self.characterization_model = None
 
-        self.model_catalog.add_models_from_model_catalog_db(self.model_catalog_data_io)
-        self.characterization_model = self.model_catalog.create_characterization_dictionary()
-        self.characterization_model_description = self.config.reverse_dict(self.characterization_model)
-
-    def create_characterization_dictionary(self):
+    def create_characterization_model_dictionary(self):
         characterization_dictionary = {}
+        self.model_catalog.add_models_from_model_catalog_db(self.model_catalog_db_data_io)
+        # TODO - only show valid models
         characterization_models = self.model_catalog.characterization_models()
         for model in characterization_models:
             characterization_string = model.model_path + "   " + Utility.format_date(model.create_date) + "   " + model.created_by
             characterization_dictionary[characterization_string] = model
-        return characterization_dictionary
+        self.characterization_model = characterization_dictionary
 
     def get_models_selected_from_characterization_reporting(self, characterization_model_descriptions):
         characterization_models = []
