@@ -36,3 +36,7 @@ class CharacterizationReporting(object):
         for characterization_model_description in characterization_model_descriptions:
             characterization_models.append(self.characterization_model[characterization_model_description])
         return characterization_models
+
+    #TODO - in pyt? - get current ID and create snapshot record, populate (see add object)
+    #TODO - in config - create snapshot type domain to go back and forth (text:int)
+
