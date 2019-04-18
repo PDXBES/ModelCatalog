@@ -15,7 +15,7 @@ class MappingNode(MappingObject):
         field_attribute_lookup = OrderedDict()
         field_attribute_lookup["Global_ID"] = "global_id"
         field_attribute_lookup["Node_Symbology"] = "node_symbology"
-        field_attribute_lookup["Min_Freboard_Ft"] = "min_freeboard_ft"
+        field_attribute_lookup["Min_Freeboard_Ft"] = "min_freeboard_ft"
         field_attribute_lookup.update(MappingObject.mapping_object_field_attribute_lookup())
         return field_attribute_lookup
 
