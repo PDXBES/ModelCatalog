@@ -24,8 +24,6 @@ class MappingLink(MappingObject):
         self.geometry = None
         self.input_field_attribute_lookup = MappingLink.input_field_attribute_lookup()
 
-
-
     @staticmethod
     def input_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()

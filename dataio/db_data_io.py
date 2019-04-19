@@ -157,6 +157,17 @@ class DbDataIo(object):
         arcpy.Append_management(input_table, target_path, "NO_TEST", field_mappings)
         arcpy.Delete_management(input_table)
 
+    def copy_to_memory_with_id_filter(self, input_table, in_memory_output_table_name, id_field_name, id_list):
+        in_memory_table = self.workspace + "\\" + in_memory_output_table_name
+        where_clause = id_field_name + " in ("
+        for count, id in enumerate(id_list):
+            where_clause += str(id)
+            if len(id_list) > 1 and count + 1 < len(id_list):
+                where_clause += ","
+        where_clause += ")"
+        arcpy.MakeQueryTable_management(input_table, in_memory_table, "", "", "", where_clause)
+
+
 
 
 

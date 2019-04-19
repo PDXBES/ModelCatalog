@@ -40,6 +40,9 @@ class TestDbDataIO(TestCase):
         self.patch_append = mock.patch("arcpy.Append_management")
         self.mock_append = self.patch_append.start()
 
+        self.patch_make_query_table = mock.patch("arcpy.MakeQueryTable_management")
+        self.mock_make_query_table = self.patch_make_query_table.start()
+
         self.patch_copy_features_management = mock.patch("arcpy.CopyFeatures_management")
         self.mock_copy_features_management = self.patch_copy_features_management.start()
 
@@ -105,6 +108,7 @@ class TestDbDataIO(TestCase):
         self.mock_delete_management = self.patch_delete_management.stop()
         self.mock_create_feature_class = self.patch_create_feature_class.stop()
         self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.stop()
+        self.mock_make_query_table = self.patch_make_query_table.stop()
 
     def test_retrieve_current_id_calls_update_cursor_with_correct_arguments(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -287,7 +291,23 @@ class TestDbDataIO(TestCase):
                 self.db_data_io.create_objects_from_database(class_type, input_table)
                 self.mock_delete_management.assert_called_with(table)
 
+    def test_copy_to_memory_with_id_filter_single_value_calls_make_query_table_with_correct_arguments(self):
+        input_table = "input_table"
+        output_table = "output_table"
+        id_field_name = "id_field_name"
+        id_list = [9999]
+        where_clause = "id_field_name in (9999)"
+        self.db_data_io.copy_to_memory_with_id_filter(input_table, output_table, id_field_name, id_list)
+        self.mock_make_query_table.assert_called_with(input_table, "in_memory\\output_table","","","",where_clause)
 
+    def test_copy_to_memory_with_id_filter_multi_value_calls_make_query_table_with_correct_arguments(self):
+        input_table = "input_table"
+        output_table = "output_table"
+        id_field_name = "id_field_name"
+        id_list = [9999, 666]
+        where_clause = "id_field_name in (9999,666)"
+        self.db_data_io.copy_to_memory_with_id_filter(input_table, output_table, id_field_name, id_list)
+        self.mock_make_query_table.assert_called_with(input_table, "in_memory\\output_table","","","",where_clause)
 
 
 
