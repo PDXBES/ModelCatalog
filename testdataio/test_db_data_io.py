@@ -281,7 +281,7 @@ class TestDbDataIO(TestCase):
                 self.db_data_io.create_objects_from_database(class_type, input_table)
                 mock_create_objects_from_table.assert_called_with(table, class_type, field_attribute_lookup)
 
-    def test_create_objects_from_database_calls_delete_management_with_correct_arguements(self):
+    def test_create_objects_from_database_calls_delete_management_with_correct_arguments(self):
         input_table = self.config.model_tracking_sde_path
         table = "in_memory/object_table"
         class_type = "generic_object"
@@ -290,6 +290,18 @@ class TestDbDataIO(TestCase):
             with mock.patch.object(self.db_data_io, "create_objects_from_table"):
                 self.db_data_io.create_objects_from_database(class_type, input_table)
                 self.mock_delete_management.assert_called_with(table)
+
+    def test_create_objects_from_database_returns_correct_object(self):
+        input_table = self.config.model_tracking_sde_path
+        table = "in_memory/object_table"
+        class_type = "generic_object"
+        field_attribute_lookup = self.field_attribute_lookup_create_object
+        with mock.patch.object(self.db_data_io, "copy_to_memory"):
+            with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+                test_object = "test_object"
+                mock_create_objects_from_table.return_value = test_object
+                objects = self.db_data_io.create_objects_from_database(class_type, input_table)
+                self.assertEqual(test_object, objects)
 
     def test_copy_to_memory_with_id_filter_single_value_calls_make_query_table_with_correct_arguments(self):
         input_table = "input_table"
@@ -309,5 +321,48 @@ class TestDbDataIO(TestCase):
         self.db_data_io.copy_to_memory_with_id_filter(input_table, output_table, id_field_name, id_list)
         self.mock_make_query_table.assert_called_with(input_table, "in_memory\\output_table","","","",where_clause)
 
+    def test_create_objects_from_database_with_id_filter_calls_copy_to_memory_with_correct_arguments(self):
+        class_type = "generic_object"
+        input_table_name = "input_table_name"
+        id_field_name = "id_field_name"
+        id_list = "id_list"
+        in_memory_output_table_name = "object_table"
+        with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+                self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
+                mock_copy_to_memory_with_id_filter.assert_called_with(input_table_name, in_memory_output_table_name, id_field_name, id_list)
 
+    def test_create_objects_from_database_with_id_filter_calls_create_objects_from_table_with_correct_arguments(self):
+        class_type = "generic_object"
+        input_table_name = "input_table_name"
+        id_field_name = "id_field_name"
+        id_list = "id_list"
+        in_memory_output_table_name = "object_table"
+        table = "in_memory/object_table"
+        with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+                self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
+                mock_create_objects_from_table.assert_called_with(table, class_type, self.field_attribute_lookup_create_table_from_objects)
 
+    def test_create_objects_from_database_with_id_filter_calls_delete_management_with_correct_arguments(self):
+        class_type = "generic_object"
+        input_table_name = "input_table_name"
+        id_field_name = "id_field_name"
+        id_list = "id_list"
+        table = "in_memory/object_table"
+        with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+                self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
+                self.mock_delete_management.assert_called_with(table)
+
+    def test_create_objects_from_database_with_id_filter_returns_correct_objects(self):
+        class_type = "generic_object"
+        input_table_name = "input_table_name"
+        id_field_name = "id_field_name"
+        id_list = "id_list"
+        test_objects = "test_objects"
+        with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+                mock_create_objects_from_table.return_value = test_objects
+                objects = self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
+                self.assertEquals(objects, test_objects)

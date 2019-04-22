@@ -84,7 +84,7 @@ class DbDataIo(object):
         field_attribute_lookup = self.class_factory.class_dict[class_type].input_field_attribute_lookup()
         self.copy_to_memory(input_table_name, in_memory_output_table_name)
         objects = self.create_objects_from_table(table, class_type, field_attribute_lookup)
-        arcpy.Delete_management(table)  # test this
+        arcpy.Delete_management(table)
         return objects
 
     def _create_field_map_for_sde_db(self, model_link_results_path):
@@ -167,8 +167,14 @@ class DbDataIo(object):
         where_clause += ")"
         arcpy.MakeQueryTable_management(input_table, in_memory_table, "", "", "", where_clause)
 
-
-
+    def create_objects_from_database_with_id_filter(self, class_type, input_table_name, id_field_name, id_list):
+        in_memory_output_table_name = "object_table"
+        table = self.workspace + "/" + in_memory_output_table_name
+        field_attribute_lookup = self.class_factory.class_dict[class_type].input_field_attribute_lookup()
+        self.copy_to_memory_with_id_filter(input_table_name, in_memory_output_table_name, id_field_name, id_list)
+        objects = self.create_objects_from_table(table, class_type, field_attribute_lookup)
+        arcpy.Delete_management(table)
+        return objects
 
 
 
