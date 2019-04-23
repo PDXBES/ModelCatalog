@@ -26,6 +26,9 @@ class TestDbDataIO(TestCase):
         self.patch_create_object = mock.patch("businessclasses.generic_class_factory.GenericClassFactory.create_object")
         self.mock_create_object = self.patch_create_object.start()
 
+        self.patch_create_object_with_current_id = mock.patch("businessclasses.generic_class_factory.GenericClassFactory.create_object_with_id")
+        self.mock_create_object_with_current_id = self.patch_create_object_with_current_id.start()
+
         self.patch_delete_management = mock.patch("arcpy.Delete_management")
         self.mock_delete_management = self.patch_delete_management.start()
 
@@ -204,11 +207,24 @@ class TestDbDataIO(TestCase):
         self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
 
     def test_create_objects_from_table_returns_list_with_correct_object(self):
-        self.patch_create_object.return_value = self.mock_generic_object
+        self.mock_create_object.return_value = self.mock_generic_object
         list_of_objects = self.db_data_io.create_objects_from_table("table", "area", self.field_attribute_lookup_create_object)
         object_1 = list_of_objects[0]
         self.assertEqual(object_1.id, 1)
         self.assertEqual(object_1.parent_id, 2)
+
+    def test_create_objects_from_table_with_current_id_calls_search_cursor_with_correct_arguments(self):
+        self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object, "object_data_io")
+        self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
+
+    def test_create_objects_from_table_with_current_id_returns_list_with_correct_object(self):
+        self.mock_create_object_with_current_id.return_value = self.mock_generic_object
+        list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object, "object_data_io" )
+        object_1 = list_of_objects[0]
+        self.assertEqual(object_1.id, 1)
+        self.assertEqual(object_1.parent_id, 2)
+
+#TODO add test that mock_create_object_with_current_id called with correct argument self.class_factory.create_object(class_type).initialize_with_current_id(object_data_io)
 
     def test_create_feature_class_from_objects_calls_create_table_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
