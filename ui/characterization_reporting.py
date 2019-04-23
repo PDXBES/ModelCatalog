@@ -37,6 +37,14 @@ class CharacterizationReporting(object):
             characterization_models.append(self.characterization_model[characterization_model_description])
         return characterization_models
 
+    def get_simulations_from_selected_models(self, model_descriptions):
+        models = self.get_models_selected_from_characterization_reporting(model_descriptions)
+        simulations = []
+        for model in models:
+            simulations += model.simulations
+        return simulations
+
+
     #TODO - in pyt? - get current ID and create snapshot record, populate (see add object)
     #TODO - in config - create snapshot type domain to go back and forth (text:int)
 

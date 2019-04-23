@@ -21,17 +21,18 @@ class MappingSnapshot(GenericObject):
         self.mapping_areas = []
 
 
-    def create_mapping_links(self, mapping_basis_dat_io):
+    def create_mapping_links(self, mapping_basis_data_io, simulations):
         # type: (self, MappingBasisDataIo) -> List[MappingLink]
 
         pass
 
-    def create_mapping_nodes(self, mapping_basis_dat_io):
+    def create_mapping_nodes(self, mapping_basis_data_io, simulations):
         # type: (self, MappingBasisDataIo) -> List[MappingNode]
 
         pass
 
-    def create_mapping_areas(self, mapping_basis_dat_io):
+    def create_mapping_areas(self, mapping_basis_data_io, simulations):
         # type: (self, MappingBasisDataIo) -> List[MappingArea]
 
         pass
+

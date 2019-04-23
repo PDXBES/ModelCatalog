@@ -2,6 +2,7 @@ import mock
 from unittest import TestCase
 from testbusinessclasses.mock_config import MockConfig
 from businessclasses.model import Model
+from businessclasses.simulation import Simulation
 from businessclasses.model_catalog import ModelCatalog
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 from ui.characterization_reporting import CharacterizationReporting
@@ -18,10 +19,14 @@ class TestCharacterizationReporting(TestCase):
         self.patch_add_models_from_model_catalog_db = mock.patch("businessclasses.model_catalog.ModelCatalog.add_models_from_model_catalog_db")
         self.mock_add_models_from_model_catalog_db = self.patch_add_models_from_model_catalog_db.start()
 
+        self.simulation1 = mock.MagicMock(Simulation)
+        self.simulation2 = mock.MagicMock(Simulation)
+        self.simulation3 = mock.MagicMock(Simulation)
+
         self.model1 = mock.MagicMock(Model)
         self.model1.id = 1
         self.model1.model_purpose_id = self.config.model_purpose_id["Characterization"]
-        self.model1.simulations = []
+        self.model1.simulations = [self.simulation1]
         self.model1.model_alterations = []
         self.model1.project_types = []
         self.model1.model_path = "model_path1"
@@ -30,7 +35,7 @@ class TestCharacterizationReporting(TestCase):
         self.model2 = mock.MagicMock(Model)
         self.model2.id = 2
         self.model2.model_purpose_id = self.config.model_purpose_id["Characterization"]
-        self.model2.simulations = []
+        self.model2.simulations = [self.simulation2, self.simulation3]
         self.model2.model_alterations = []
         self.model2.project_types = []
         self.model2.model_path = "model_path2"
@@ -78,8 +83,22 @@ class TestCharacterizationReporting(TestCase):
         self.assertEqual(self.characterization_reporting.characterization_model.keys(), formatted_characterization_models_keys)
 
     def test_get_models_selected_from_characterization_reporting_selected_strings_returns_correct_models(self):
-        model_strings = [self.model_string1, self.model_string2]
+        model_descriptions = [self.model_string1, self.model_string2]
         models = [self.model1, self.model2]
         self.characterization_reporting.characterization_model = self.test_characterization_model
-        correct_models = self.characterization_reporting.get_models_selected_from_characterization_reporting(model_strings)
+        correct_models = self.characterization_reporting.get_models_selected_from_characterization_reporting(model_descriptions)
         self.assertEquals(correct_models, models)
+
+    def test_get_simulations_from_selected_models_calls_get_models_selected_from_characterization_reporting_called_with_correct_arguments(self):
+        model_descriptions = [self.model_string1, self.model_string2]
+        with mock.patch.object(self.characterization_reporting, "get_models_selected_from_characterization_reporting") as mock_get_models_selected_from_characterization_reporting:
+            self.characterization_reporting.get_simulations_from_selected_models(model_descriptions)
+            mock_get_models_selected_from_characterization_reporting.assert_called_with(model_descriptions)
+
+    def test_get_simulations_from_selected_models_returns_correct_simulations(self):
+        model_descriptions = [self.model_string1, self.model_string2]
+        with mock.patch.object(self.characterization_reporting, "get_models_selected_from_characterization_reporting") as mock_get_models_selected_from_characterization_reporting:
+            mock_get_models_selected_from_characterization_reporting.return_value = [self.model1, self.model2]
+            simulations_list = self.characterization_reporting.get_simulations_from_selected_models(model_descriptions)
+            correct_simulations = [self.simulation1, self.simulation2, self.simulation3]
+            self.assertEqual(simulations_list, correct_simulations)
