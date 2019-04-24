@@ -56,11 +56,11 @@ class Simulation(GenericObject):
                        + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
 
-    def create_areas(self, simulation_data_io):
+    def create_areas(self, simulation_data_io, rrad_data_io):
         in_memory_table = simulation_data_io.model_catalog_db_data_io.workspace + "\\in_memory_table"
         simulation_data_io.copy_area_results_to_memory(self, "in_memory_table")
         area_field_attribute_lookup = Area.input_field_attribute_lookup()
-        area_results = simulation_data_io.model_catalog_db_data_io.create_objects_from_table(in_memory_table, "area", area_field_attribute_lookup)
+        area_results = rrad_data_io.create_objects_from_table_with_current_id(in_memory_table, "area", area_field_attribute_lookup)
         for area in area_results:
             area.parent_id = self.id
         self.areas = area_results

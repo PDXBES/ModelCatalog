@@ -16,6 +16,7 @@ class Area(GenericObject):
         self.parent_id = None
         self.input_field_attribute_lookup = None
         self.id = None
+        self.area_id = None
         self.name = "area"
         self.area_name = None
         self.first_floor_elev_ft = None
@@ -36,7 +37,7 @@ class Area(GenericObject):
     @staticmethod
     def input_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["area_id"] = "id"
+        field_attribute_lookup["area_id"] = "area_id"
         field_attribute_lookup["area_name"] = "area_name"
         field_attribute_lookup["first_floor_elev_ft"] = "first_floor_elev_ft"
         field_attribute_lookup["first_floor_elev_qc"] = "first_floor_elev_qc"
@@ -55,7 +56,7 @@ class Area(GenericObject):
         output_field_attribute_lookup = Area.input_field_attribute_lookup()
         output_field_attribute_lookup["Simulation_ID"] = "parent_id"
         output_field_attribute_lookup["bsbr"] = "bsbr"
-
+        output_field_attribute_lookup["RRAD_Area_ID"] = "id"
         return output_field_attribute_lookup
 
 

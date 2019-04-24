@@ -84,8 +84,8 @@ class SimulationDataIO(ObjectDataIo):
             self.model_catalog_db_data_io.append_feature_class_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
 
 
-    def add_simulation_results(self, simulation):
-        simulation.create_areas(self)
+    def add_simulation_results(self, simulation, rrad_data_io):
+        simulation.create_areas(self, rrad_data_io)
         editor = self.start_editing_session(self.config.RRAD_sde_path)
         try:
             self.copy_link_results(simulation)

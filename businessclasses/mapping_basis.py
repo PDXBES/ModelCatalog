@@ -1,8 +1,13 @@
 from dataio.db_data_io import DbDataIo
 
-class MappingBasis(DbDataIo):
+class MappingBasis(object):
 
-    pass
+    def __init__(self, config):
+        self.config = config
+        self.mapping_snapshots = []
+
+    def add_mapping_snapshot(self, mapping_snapshot):
+        self.mapping_snapshots.append(mapping_snapshot)
 
     #TODO add snapshot.  create in memory object
     #TODO Get current ids for each object type

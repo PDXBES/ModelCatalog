@@ -11,6 +11,7 @@ import sys
 from dataio import utility
 from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
+from dataio.rrad_data_io import RradDbDataIo
 reload(arcpy)
 reload(config)
 reload(utility)
@@ -535,6 +536,7 @@ class SlrtQaQc(object):
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
+    rrad_data_io = RradDbDataIo(config)
     modelcatalogdataio = ModelCatalogDbDataIo(config)
     modeldataio = ModelDataIo(config, modelcatalogdataio)
     simulationdataio = SimulationDataIO(config, modelcatalogdataio)
@@ -550,7 +552,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         #TODO: Create a single add simulation function in model_data_io
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-            simulationdataio.add_simulation_results(simulation)
+            simulationdataio.add_simulation_results(simulation, rrad_data_io)
             arcpy.AddMessage("Results written to RRAD")
 
     else:

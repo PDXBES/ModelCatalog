@@ -27,5 +27,5 @@ class TestRRADCapacityResults(TestCase):
         self.mock_simulation_path = self.patch_simulation_path.stop()
 
     def test_add_simulation_results(self):
-        self.simulation_data_io.add_simulation_results(self.simulation)
+        self.simulation_data_io.add_simulation_results(self.simulation, None)
 

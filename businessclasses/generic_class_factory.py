@@ -13,7 +13,7 @@ class GenericClassFactory():
     def create_object(self, class_type):
         return self.class_dict[class_type](self.config)
 
-    def create_object_with_id(self, class_type, object_data_io):
-        return self.class_dict[class_type].initialize_with_current_id(self.config, object_data_io)
+    def create_object_with_id(self, class_type, db_data_io):
+        return self.class_dict[class_type].initialize_with_current_id(self.config, db_data_io)
 
 
