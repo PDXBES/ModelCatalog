@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mapping_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mapping_tools.pyt.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/area.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/area.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/generic_class_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/generic_class_factory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/mapping_basis.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/mapping_basis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/rrad_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/rrad_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/simulation_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_simulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_simulation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataio/model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_data_io.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,29 +14,89 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1428817085">
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="3" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5233898">
+    <splitter split-orientation="horizontal" split-proportion="0.6875">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
+            <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+                <state relative-caret-position="32">
+                  <caret line="86" column="57" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret lean-forward="true" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/monitor.py">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/generic_object.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="265">
+                  <caret line="17" column="58" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="58" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="11">
+                  <caret line="85" column="59" lean-forward="true" selection-start-line="85" selection-start-column="59" selection-end-line="85" selection-end-column="59" />
+                  <folding>
+                    <element signature="e#0#15#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="101">
+                  <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="162">
+                  <caret line="30" column="36" lean-forward="true" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="158">
+                  <caret line="205" column="92" lean-forward="true" selection-start-line="205" selection-start-column="92" selection-end-line="205" selection-end-column="92" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="295">
+                  <caret line="342" column="34" lean-forward="true" selection-start-line="342" selection-start-column="34" selection-end-line="342" selection-end-column="34" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -51,15 +105,23 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
-              <provider selected="true" editor-type-id="text-editor" />
+            <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="183">
+                  <caret line="267" column="48" selection-start-line="267" selection-start-column="48" selection-end-line="267" selection-end-column="48" />
+                </state>
+              </provider>
             </entry>
           </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/mapping_basis_data_io.py">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="34">
-                  <caret line="2" column="60" lean-forward="true" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+                <state relative-caret-position="564">
+                  <caret line="384" lean-forward="true" selection-start-line="384" selection-end-line="384" />
                 </state>
               </provider>
             </entry>
@@ -67,74 +129,41 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="28" column="63" lean-forward="true" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+                <state relative-caret-position="-18">
+                  <caret line="2" selection-start-line="2" selection-end-line="2" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-918">
+                  <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="40" />
                   <folding>
-                    <element signature="e#0#25#0" expanded="true" />
+                    <element signature="e#0#11#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_generic_object.py">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1632">
-                  <caret line="113" column="51" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/generic_object.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="20" column="87" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="87" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1343">
-                  <caret line="80" column="68" selection-start-line="80" selection-start-column="68" selection-end-line="80" selection-end-column="68" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/area.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="816">
-                  <caret line="50" column="71" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="71" />
+                <state relative-caret-position="90">
+                  <caret line="13" selection-start-line="3" selection-end-line="13" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dataio/rrad_data_io.py">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="367">
-                  <caret line="361" selection-start-line="361" selection-end-line="361" />
+                <state relative-caret-position="137">
+                  <caret line="25" selection-start-line="25" selection-end-line="26" />
+                  <folding>
+                    <element signature="e#55#96#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -242,13 +271,11 @@
         <option value="$PROJECT_DIR$/testdataio/test_db_data_io.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_generic_object.py" />
-        <option value="$PROJECT_DIR$/dataio/model_data_io.py" />
         <option value="$PROJECT_DIR$/testdataio/test_model_data_io.py" />
         <option value="$PROJECT_DIR$/dataio/db_data_io.py" />
         <option value="$PROJECT_DIR$/businessclasses/area.py" />
         <option value="$PROJECT_DIR$/businessclasses/simulation.py" />
         <option value="$PROJECT_DIR$/dataio/simulation_data_io.py" />
-        <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
         <option value="$PROJECT_DIR$/businessclasses/generic_class_factory.py" />
         <option value="$PROJECT_DIR$/dataio/rrad_data_io.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_simulation.py" />
@@ -257,14 +284,16 @@
         <option value="$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_basis.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_snapshot.py" />
+        <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
+        <option value="$PROJECT_DIR$/dataio/model_data_io.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="1943" />
-    <option name="height" value="1056" />
+    <option name="x" value="2428" />
+    <option name="y" value="-13" />
+    <option name="width" value="576" />
+    <option name="height" value="310" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -291,11 +320,6 @@
               <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
               <item name="testbusinessclasses" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-              <item name="testdataio" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -477,15 +501,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.22286618" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" weight="0.22286618" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.1882353" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.39154014" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.4303665" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.46890756" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -765,13 +789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3655">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model_alt_bc.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -816,13 +833,6 @@
     <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/pipe.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -857,16 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="554" selection-start-line="554" selection-end-line="554" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/generic_class_factory.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -889,7 +889,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/rrad_data_io.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="25" selection-start-line="25" selection-end-line="26" />
+          <folding>
+            <element signature="e#55#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -901,13 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="58" column="59" selection-start-line="58" selection-start-column="47" selection-end-line="58" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -915,17 +915,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="202" column="8" selection-start-line="202" selection-start-column="8" selection-end-line="202" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11">
           <caret line="85" column="59" lean-forward="true" selection-start-line="85" selection-start-column="59" selection-end-line="85" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -933,37 +929,57 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-918">
           <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="80" column="68" selection-start-line="80" selection-start-column="68" selection-end-line="80" selection-end-column="68" />
+        <state relative-caret-position="32">
+          <caret line="86" column="57" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="361" selection-start-line="361" selection-end-line="361" />
+        <state relative-caret-position="564">
+          <caret line="384" lean-forward="true" selection-start-line="384" selection-end-line="384" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/monitor.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/generic_object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="87" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="13" selection-start-line="3" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/mapping_basis_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -977,23 +993,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/mapping_basis_data_io.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="60" lean-forward="true" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+        <state relative-caret-position="118">
+          <caret line="58" column="59" selection-start-line="58" selection-start-column="47" selection-end-line="58" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
+    <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="28" column="63" lean-forward="true" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+        <state relative-caret-position="158">
+          <caret line="205" column="92" lean-forward="true" selection-start-line="205" selection-start-column="92" selection-end-line="205" selection-end-column="92" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/generic_object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="17" column="58" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="342" column="34" lean-forward="true" selection-start-line="342" selection-start-column="34" selection-end-line="342" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="267" column="48" selection-start-line="267" selection-start-column="48" selection-end-line="267" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
         </state>
       </provider>
     </entry>

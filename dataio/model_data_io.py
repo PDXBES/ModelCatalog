@@ -41,6 +41,8 @@ class ModelDataIo(ObjectDataIo):
     def read_simulations(self, model):
         # type: (Model) -> List[Simulation]
         simulations = []  # type: List[Simulation]
+        arcpy.AddMessage(model.simulation_folder_path())
+        arcpy.AddMessage(os.walk(model.simulation_folder_path()))
         simulation_descriptions = os.walk(model.simulation_folder_path()).next()[1]
         for simulation_description in simulation_descriptions:
             simulation = Simulation.initialize_with_current_id(self.config, self.db_data_io)

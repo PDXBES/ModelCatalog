@@ -290,7 +290,7 @@ class EMGAATS_Model_Registration(object):
 
         try:
 
-            self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
+            self.model = Model.initialize_with_current_id(self.config, self.modelcatalogdataio)
             self.model.parent_model_id = 0
 
             analysis_request_id_parameter = parameters[0]
