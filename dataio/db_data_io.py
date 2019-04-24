@@ -4,8 +4,6 @@ try:
     from typing import List, Any
 except:
     pass
-
-#from generic_object import GenericObject
 from data_io_exception import DataIoException
 from data_io_exception import FieldNamesLengthDoesNotMatchRowLengthException
 

@@ -23,6 +23,8 @@ class TestModelDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
+        self.mock_db_data_io = mock.Mock()
+        self.mock_db_data_io.retrieve_current_id.return_value = 1
         self.model_catalog_data_io = ModelCatalogDbDataIo(self.config)
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
@@ -58,12 +60,8 @@ class TestModelDataIO(TestCase):
         self.mock_project_type = mock.MagicMock(spec = ProjectType)
         self.mock_project_type.input_field_attribute_lookup = self.generic_field_attribute_lookup
 
-        self.mock_object_data_io = mock.Mock()
-        self.mock_object_data_io.db_data_io.retrieve_current_id.return_value = 1
-
         self.mock_model = mock.MagicMock(spec = Model)
         self.mock_model.model_path = r"C:\model_path"
-        self.mock_model.object_data_io = self.mock_object_data_io
         self.mock_model.id = 11
         self.mock_model.valid = True
         self.mock_model.simulations = [self.mock_simulation]
@@ -85,6 +83,10 @@ class TestModelDataIO(TestCase):
         self.patch_search_cursor = mock.patch("arcpy.da.SearchCursor")
         self.mock_search_cursor = self.patch_search_cursor.start()
         self.mock_search_cursor.return_value = self.mock_search_cursor_object
+
+        self.patch_retrieve_current_id = mock.patch("dataio.db_data_io.DbDataIo.retrieve_current_id")
+        self.mock_retrieve_current_id  = self.patch_retrieve_current_id.start()
+        self.mock_retrieve_current_id.return_value = 1
 
         self.patch_retrieve_current_simulation_id = mock.patch("dataio.model_catalog_db_data_io.ModelCatalogDbDataIo.retrieve_current_simulation_id")
         self.mock_retrieve_current_simulation_id = self.patch_retrieve_current_simulation_id.start()
@@ -170,7 +172,7 @@ class TestModelDataIO(TestCase):
 
     def test_read_simulation_reads_user_defined_simulation_returns_simulation_object(self):
         self.mock_os_walk.return_value = iter([("path", ["Dec2015"], "file name")])
-        list_of_simulations = self.model_data_io.read_simulations(self.mock_model,self.model_catalog_data_io)
+        list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
         self.assertEquals(first_simulation.model_path, r"C:\model_path")
         self.assertEquals(first_simulation.dev_scenario_id, 0)
