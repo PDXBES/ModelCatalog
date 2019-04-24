@@ -1,5 +1,3 @@
-from dataio.db_data_io import DbDataIo
-
 class MappingBasis(object):
 
     def __init__(self, config):

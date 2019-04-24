@@ -1,6 +1,5 @@
 from config import Config
 from generic_object import GenericObject
-from dataio.mapping_basis_data_io import MappingBasisDataIo
 from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_area import MappingArea
 from businessclasses.mapping_link import MappingLink
