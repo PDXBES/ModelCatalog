@@ -214,12 +214,12 @@ class TestDbDataIO(TestCase):
         self.assertEqual(object_1.parent_id, 2)
 
     def test_create_objects_from_table_with_current_id_calls_search_cursor_with_correct_arguments(self):
-        self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object, "object_data_io")
+        self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
         self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
 
     def test_create_objects_from_table_with_current_id_returns_list_with_correct_object(self):
         self.mock_create_object_with_current_id.return_value = self.mock_generic_object
-        list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object, "object_data_io" )
+        list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
         object_1 = list_of_objects[0]
         self.assertEqual(object_1.id, 1)
         self.assertEqual(object_1.parent_id, 2)

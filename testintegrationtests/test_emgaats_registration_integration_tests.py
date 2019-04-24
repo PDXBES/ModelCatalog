@@ -26,7 +26,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model_catalog_dataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.model_catalog_dataio)
         self.model_catalog = ModelCatalog(self.config)
-        self.model = Model.initialize_with_current_id(self.config, self.model_dataio)
+        self.model = Model.initialize_with_current_id(self.config, self.model_catalog_dataio)
 
         self.model.parent_model_id = 555
         self.model.model_request_id = 777
@@ -46,11 +46,11 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.model_alteration_file = "C:\Temp\BC"
         self.model.project_num = "E10TEST"
         self.model.create_date = datetime.datetime.today()
-        self.model.create_model_alterations_bc([["Stage"]])
-        self.model.create_model_alterations_hydrologic([["Area Factor"]])
-        self.model.create_model_alterations_hydraulic([["Pipe Roughness"]])
-        self.model.create_project_types(["Storm"])
-        self.model.create_simulations()
+        self.model.create_model_alterations_bc([["Stage"]], self.model_catalog_dataio)
+        self.model.create_model_alterations_hydrologic([["Area Factor"]], self.model_catalog_dataio)
+        self.model.create_model_alterations_hydraulic([["Pipe Roughness"]], self.model_catalog_dataio)
+        self.model.create_project_types(["Storm"], self.model_catalog_dataio)
+        self.model.create_simulations(self.model_dataio)
         self.model_dataio.set_model_to_read_write(self.model)
 
     def tearDown(self):
@@ -79,7 +79,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
     def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad(self):
         self.model.model_path = r"\\BESFile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Carolina_Trunk\Base_Calib"
         self.model_dataio.set_model_to_read_write(self.model)
-        self.model.create_simulations()
+        self.model.create_simulations(self.model_dataio)
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]

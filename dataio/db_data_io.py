@@ -78,12 +78,12 @@ class DbDataIo(object):
             generic_objects.append(generic_object)
         return generic_objects
 
-    def create_objects_from_table_with_current_id(self, table, class_type, field_attribute_lookup, object_data_io):
+    def create_objects_from_table_with_current_id(self, table, class_type, field_attribute_lookup):
         generic_objects = []
         fields = field_attribute_lookup.keys()
         cursor = arcpy.da.SearchCursor(table, fields)
         for row in cursor:
-            generic_object = self.class_factory.create_object_with_id(class_type, object_data_io)
+            generic_object = self.class_factory.create_object_with_id(class_type, self)
             self.create_object_from_row(generic_object, field_attribute_lookup, row)
             generic_objects.append(generic_object)
         return generic_objects

@@ -323,10 +323,10 @@ class EMGAATS_Model_Registration(object):
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = self.utility.check_path(model_path_parameter.valueAsText)
-            self.model.create_project_types(project_type_parameter.values)
-            self.model.create_model_alterations_bc(model_alt_bc_parameter.values)
-            self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values)
-            self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values)
+            self.model.create_project_types(project_type_parameter.values, self.modelcatalogdataio)
+            self.model.create_model_alterations_bc(model_alt_bc_parameter.values, self.modelcatalogdataio)
+            self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values, self.modelcatalogdataio)
+            self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values, self.modelcatalogdataio)
             self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
 
             if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
@@ -339,7 +339,7 @@ class EMGAATS_Model_Registration(object):
             else:
                 self.model.model_alteration_file = None
             self.model.project_num = analysis_request_id_parameter.valueAsText
-            self.model.create_simulations()
+            self.model.create_simulations(self.model_dataio)
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)

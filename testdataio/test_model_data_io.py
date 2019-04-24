@@ -170,7 +170,7 @@ class TestModelDataIO(TestCase):
 
     def test_read_simulation_reads_user_defined_simulation_returns_simulation_object(self):
         self.mock_os_walk.return_value = iter([("path", ["Dec2015"], "file name")])
-        list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
+        list_of_simulations = self.model_data_io.read_simulations(self.mock_model,self.model_catalog_data_io)
         first_simulation = list_of_simulations[0]  # type: Simulation
         self.assertEquals(first_simulation.model_path, r"C:\model_path")
         self.assertEquals(first_simulation.dev_scenario_id, 0)

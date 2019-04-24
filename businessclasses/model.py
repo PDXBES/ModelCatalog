@@ -50,7 +50,6 @@ class Model(GenericObject):
         self.config_file_path = None
         self.gdb_file_path = None
         self.sim_file_path = None
-        self.object_data_io = None
         self.input_field_attribute_lookup = Model.input_field_attribute_lookup()
 
     @staticmethod
@@ -213,60 +212,60 @@ class Model(GenericObject):
         else:
             arcpy.AddMessage("Sim folder is not valid: " + self.sim_file_path)
 
-    def create_model_alt_bc(self, alteration_type):
-        model_alt_bc = ModelAltBc.initialize_with_current_id(self.config, self.object_data_io)
+    def create_model_alt_bc(self, alteration_type, modelcatalog_db_data_io):
+        model_alt_bc = ModelAltBc.initialize_with_current_id(self.config, modelcatalog_db_data_io)
         model_alt_bc.model_alteration_type_id = self.config.model_alt_bc_id[alteration_type]
         return model_alt_bc
 
-    def create_model_alt_hydrologic(self, alteration_type):
-        model_alt_hydrologic = ModelAltHydrologic.initialize_with_current_id(self.config,self.object_data_io)
+    def create_model_alt_hydrologic(self, alteration_type, modelcatalog_db_data_io):
+        model_alt_hydrologic = ModelAltHydrologic.initialize_with_current_id(self.config, modelcatalog_db_data_io)
         model_alt_hydrologic.model_alteration_type_id = self.config.model_alt_hydrologic_id[alteration_type]
         return model_alt_hydrologic
 
-    def create_model_alt_hydraulic(self, alteration_type):
-        model_alt_hydraulic = ModelAltHydraulic.initialize_with_current_id(self.config, self.object_data_io)
+    def create_model_alt_hydraulic(self, alteration_type, modelcatalog_db_data_io):
+        model_alt_hydraulic = ModelAltHydraulic.initialize_with_current_id(self.config, modelcatalog_db_data_io)
         model_alt_hydraulic.model_alteration_type_id = self.config.model_alt_hydraulic_id[alteration_type]
         return model_alt_hydraulic
 
-    def create_model_alterations(self, alteration_types, alteration_category):
+    def create_model_alterations(self, alteration_types, alteration_category, modelcatalog_db_data_io):
         if alteration_types is None:
             pass
         else:
             for alteration_type in alteration_types:
                 if alteration_category == "bc":
-                    model_alteration = self.create_model_alt_bc(alteration_type[0])
+                    model_alteration = self.create_model_alt_bc(alteration_type[0], modelcatalog_db_data_io)
                     self.model_alterations.append(model_alteration)
                 elif alteration_category == "hydrologic":
-                    model_alteration = self.create_model_alt_hydrologic(alteration_type[0])
+                    model_alteration = self.create_model_alt_hydrologic(alteration_type[0], modelcatalog_db_data_io)
                     self.model_alterations.append(model_alteration)
                 elif alteration_category == "hydraulic":
-                    model_alteration = self.create_model_alt_hydraulic(alteration_type[0])
+                    model_alteration = self.create_model_alt_hydraulic(alteration_type[0], modelcatalog_db_data_io)
                     self.model_alterations.append(model_alteration)
 
-    def create_model_alterations_bc(self, alteration_types):
-        self.create_model_alterations(alteration_types, "bc")
+    def create_model_alterations_bc(self, alteration_types, modelcatalog_db_data_io):
+        self.create_model_alterations(alteration_types, "bc", modelcatalog_db_data_io)
 
-    def create_model_alterations_hydrologic(self, alteration_types):
-        self.create_model_alterations(alteration_types, "hydrologic")
+    def create_model_alterations_hydrologic(self, alteration_types, modelcatalog_db_data_io):
+        self.create_model_alterations(alteration_types, "hydrologic", modelcatalog_db_data_io)
 
-    def create_model_alterations_hydraulic(self, alteration_types):
-        self.create_model_alterations(alteration_types, "hydraulic")
+    def create_model_alterations_hydraulic(self, alteration_types, modelcatalog_db_data_io):
+        self.create_model_alterations(alteration_types, "hydraulic", modelcatalog_db_data_io)
 
-    def create_project_type(self, project_type_name):
+    def create_project_type(self, project_type_name, modelcatalog_db_data_io):
         # type: (str)->ProjectType
-        project_type = ProjectType.initialize_with_current_id(self.config, self.object_data_io)
+        project_type = ProjectType.initialize_with_current_id(self.config, modelcatalog_db_data_io)
         project_type.project_type_id = self.config.proj_type_id[project_type_name]
         project_type.parent_id = self.id
         return project_type
 
-    def create_project_types(self, project_types):
+    def create_project_types(self, project_types, modelcatalog_db_data_io):
         # type: (str)->None
         for project_type_name in project_types:
-            project_type = self.create_project_type(project_type_name)
+            project_type = self.create_project_type(project_type_name, modelcatalog_db_data_io)
             self.project_types.append(project_type)
 
-    def create_simulations(self):
-        self.simulations = self.object_data_io.read_simulations(self)
+    def create_simulations(self, model_data_io):
+        self.simulations = model_data_io.read_simulations(self)
 
     # TODO: Create tests for add_project and add_project_types
 
