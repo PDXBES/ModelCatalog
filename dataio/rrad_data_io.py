@@ -15,6 +15,7 @@ class RradDbDataIo(DbDataIo):
         # type: (Config) -> None
         self.config = config
         self.current_id_database_table_path = self.config.rrad_current_id_table_sde_path
+        self.workspace = "in_memory"
         self.field_attribute_lookup = OrderedDict()
         self.field_attribute_lookup["Rehab_ID"] = "id"
         self.field_attribute_lookup["Extract_Date"] = "extract_date"
@@ -29,4 +30,6 @@ class RradDbDataIo(DbDataIo):
 
     def add_rehab(self, rehab):
         # type: (Rehab) -> None
-        self.add_object(rehab, self.field_attribute_lookup, self.config.rehab_tracking_sde_path)
+        self.append_object_to_db(rehab, self.field_attribute_lookup,
+                                self.config.rehab_tracking_sde_path,
+                                self.config.rehab_tracking_sde_path)

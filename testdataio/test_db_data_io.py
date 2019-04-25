@@ -136,16 +136,6 @@ class TestDbDataIO(TestCase):
         self.assertTrue(self.mock_update_cursor.updateRow.called)
         self.mock_update_cursor.updateRow.assert_called_with(["object_2", 56])
 
-    def test_add_object_calls_insert_cursor_with_correct_arguments(self):
-        self.mock_generic_object.valid = True
-        self.db_data_io.add_object(self.mock_generic_object, self.field_attribute_lookup_add_object, self.object_tracking_sde_path)
-        self.mock_da_InsertCursor.assert_called_with("object_tracking_sde_path", ["id_field", "name"])
-
-    def test_add_object_calls_insertRow_with_correct_arguments(self):
-        self.mock_generic_object.valid = True
-        self.db_data_io.add_object(self.mock_generic_object, self.field_attribute_lookup_add_object, self.object_tracking_sde_path)
-        self.mock_insert_cursor.insertRow.assert_called_with([1, "name"])
-
     def test_create_row_from_object_creates_row_with_correct_values(self):
         row = self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
         self.assertEquals(row, [1, "name"])
@@ -260,7 +250,7 @@ class TestDbDataIO(TestCase):
             field_attribute_lookup = OrderedDict()
             template_feature_class_path = "template_feature_class_path"
             target_path = "target_path"
-            self.db_data_io.append_feature_class_to_db(object_list, field_attribute_lookup, template_feature_class_path, target_path)
+            self.db_data_io.append_objects_to_db(object_list, field_attribute_lookup, template_feature_class_path, target_path)
             mock_create_feature_class_from_objects.assert_called_with(output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path)
 
     def test_append_feature_class_to_db_calls_append_with_correct_arguments(self):
@@ -274,8 +264,8 @@ class TestDbDataIO(TestCase):
                 target_path = "target_path"
                 mock_create_field_map_for_sde_db.return_value = "field_mapping_for_sde_db"
 
-                self.db_data_io.append_feature_class_to_db(object_list, field_attribute_lookup, template_feature_class_path,
-                                                           target_path)
+                self.db_data_io.append_objects_to_db(object_list, field_attribute_lookup, template_feature_class_path,
+                                                     target_path)
                 self.mock_append.assert_called_with("in_memory\\intermediate_feature_class_to_append", "target_path", "NO_TEST", "field_mapping_for_sde_db")
 
     def test_create_objects_from_database_calls_copy_to_memory_with_correct_arguments(self):

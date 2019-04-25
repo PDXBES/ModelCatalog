@@ -13,5 +13,5 @@ class TestMappingBasisDataIo(TestCase):
         self.mock_mapping_snapshot = mock.MagicMock(MappingSnapshot)
         self.mock_mapping_snapshot.valid = True
 
-    def test_add_mapping_snapshot_
+#    def test_add_mapping_snapshot_
 

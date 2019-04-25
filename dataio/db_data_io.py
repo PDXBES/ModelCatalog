@@ -29,22 +29,6 @@ class DbDataIo(object):
         del cursor
         return current_id
 
-    def add_object(self, object_class, field_attribute_lookup, object_table_sde_path):
-
-        if not object_class.valid:
-            raise DataIoException
-
-        row = self.create_row_from_object(object_class, field_attribute_lookup)
-        field_names = field_attribute_lookup.keys()
-
-        if len(field_names) != len(row):
-            raise FieldNamesLengthDoesNotMatchRowLengthException
-
-        cursor = arcpy.da.InsertCursor(object_table_sde_path, field_names)
-
-        cursor.insertRow(row)
-        del cursor
-
     def create_row_from_object(self, generic_object, field_attribute_lookup):
         attribute_names = field_attribute_lookup.values()
         row = []
@@ -148,7 +132,10 @@ class DbDataIo(object):
 
     def create_feature_class_from_objects(self, output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path):
         spatial_reference_template = template_feature_class_path
-        arcpy.CreateFeatureclass_management(self.workspace, output_feature_class_name, "", template_feature_class_path, "", "", spatial_reference_template)
+        try:
+            arcpy.CreateFeatureclass_management(self.workspace, output_feature_class_name, "", template_feature_class_path, "", "", spatial_reference_template)
+        except:
+            arcpy.CreateTable_management(self.workspace, output_feature_class_name,template_feature_class_path)
         output_feature_class_path = self.workspace + "\\" + output_feature_class_name
         field_list = field_attribute_lookup.keys()
         cursor = arcpy.da.InsertCursor(output_feature_class_path, field_list)
@@ -157,7 +144,10 @@ class DbDataIo(object):
             cursor.insertRow(row)
         del cursor
 
-    def append_feature_class_to_db(self, object_list, field_attribute_lookup, template_table_path, target_path):
+    def append_object_to_db(self, object, field_attribute_lookup, template_table_path, target_path):
+        self.append_objects_to_db([object], field_attribute_lookup, template_table_path, target_path)
+
+    def append_objects_to_db(self, object_list, field_attribute_lookup, template_table_path, target_path):
         field_mappings = self._create_field_map_for_sde_db(template_table_path)
         output_feature_class_name = "intermediate_feature_class_to_append"
         self.create_feature_class_from_objects(output_feature_class_name, object_list, field_attribute_lookup, template_table_path)

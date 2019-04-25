@@ -61,17 +61,17 @@ class TestObjectDataIo(TestCase):
         self.mock_stopOperation = self.patch_stopOperation.stop()
         self.mock_stopEditing = self.patch_stopEditing.stop()
 
-    def test_add_object_sets_generic_object_parent_id(self):
+    def test_append_object_to_db_sets_generic_object_parent_id(self):
         self.mock_generic_object.valid = True
         self.mock_generic_object.parent_id = None
-        self.object_data_io.add_object(self.parent_id, self.mock_generic_object, self.field_attribute_lookup, self.object_table_sde_path)
+        self.object_data_io.append_object_to_db(self.parent_id, self.mock_generic_object, self.field_attribute_lookup, self.object_table_sde_path)
         self.assertEqual(self.mock_generic_object.parent_id, 1)
 
-    def test_add_object_calls_db_data_io_add_object_with_correct_arguments(self):
+    def test_append_object_to_db_calls_db_data_io_add_object_with_correct_arguments(self):
         self.mock_generic_object.valid = True
-        self.object_data_io.add_object(self.parent_id, self.mock_generic_object,
-                                       self.field_attribute_lookup, self.object_table_sde_path)
-        self.mock_db_data_io.add_object.assert_called_with(self.mock_generic_object, self.field_attribute_lookup, self.object_table_sde_path)
+        self.object_data_io.append_object_to_db(self.parent_id, self.mock_generic_object,
+                                                self.field_attribute_lookup, self.object_table_sde_path)
+        self.mock_db_data_io.append_object_to_db.assert_called_with(self.mock_generic_object, self.field_attribute_lookup, self.object_table_sde_path, self.object_table_sde_path)
 
     def test_start_editing_session_creates_editor_object(self):
         workspace_path = "workspace_path"

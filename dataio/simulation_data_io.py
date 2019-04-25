@@ -81,7 +81,7 @@ class SimulationDataIO(ObjectDataIo):
             field_attribute_lookup = Area.output_field_attribute_lookup()
             template_table_path = self.config.area_results_sde_path
             target_path = self.config.area_results_sde_path
-            self.model_catalog_db_data_io.append_feature_class_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
+            self.model_catalog_db_data_io.append_objects_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
 
 
     def add_simulation_results(self, simulation, rrad_data_io):

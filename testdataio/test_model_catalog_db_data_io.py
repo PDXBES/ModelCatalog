@@ -45,8 +45,8 @@ class TestModelCatalogDbDataIO(TestCase):
         self.patch_da_InsertCursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.start()
 
-        self.patch_add_object = mock.patch.object(self.modelcatalogdataio, "add_object")
-        self.mock_add_object = self.patch_add_object.start()
+        self.patch_append_object_to_db = mock.patch.object(self.modelcatalogdataio, "append_object_to_db")
+        self.mock_append_object_to_db = self.patch_append_object_to_db.start()
 
         self.patch_read_simulations = mock.patch("dataio.model_data_io.ModelDataIo.read_simulations")
         self.mock_read_simulations = self.patch_read_simulations.start()
@@ -77,7 +77,7 @@ class TestModelCatalogDbDataIO(TestCase):
     def tearDown(self):
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.stop()
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.stop()
-        self.mock_add_object = self.patch_add_object.stop()
+        self.mock_append_object_to_db = self.patch_append_object_to_db.stop()
         self.mock_read_simulations = self.patch_read_simulations.stop()
         self.mock_add_simulations = self.patch_add_simulations.stop()
         self.mock_add_model_alterations = self.patch_add_model_alterations.stop()
@@ -102,9 +102,10 @@ class TestModelCatalogDbDataIO(TestCase):
         current_model_alteration_id = self.modelcatalogdataio.retrieve_current_model_alteration_id()
         self.assertTrue(current_model_alteration_id == 66)
 
-    def test_add_model_calls_add_object_with_correct_arguments(self):
+    def test_add_model_calls_append_object_to_db_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)
-        self.mock_add_object.assert_called_with(self.model, Model.input_field_attribute_lookup(), "model_tracking_sde_path")
+        self.mock_append_object_to_db.assert_called_with(self.model, Model.input_field_attribute_lookup(),
+                                                         "model_tracking_sde_path", "model_tracking_sde_path")
 
     def test_add_model_calls_add_simulations_with_correct_arguments(self):
         self.modelcatalogdataio.add_model(self.model, self.model_data_io)

@@ -66,7 +66,7 @@ class ModelDataIo(ObjectDataIo):
 
     def add_simulation(self, model_id, simulation):
         # type: (int, Simulation) -> None
-        self.add_object(model_id, simulation, simulation.input_field_attribute_lookup, self.config.simulation_sde_path)
+        self.append_object_to_db(model_id, simulation, simulation.input_field_attribute_lookup, self.config.simulation_sde_path)
 
     def add_simulations(self, model):
         # type: (Model) -> None
@@ -76,11 +76,11 @@ class ModelDataIo(ObjectDataIo):
     def add_model_alteration(self, model_id, model_alteration):
         # type: (int, ModelAlteration) -> None
         if model_alteration.name == "model_alt_bc":
-            self.add_object(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_bc_sde_path)
+            self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_bc_sde_path)
         elif model_alteration.name == "model_alt_hydrologic":
-            self.add_object(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydrologic_sde_path)
+            self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydrologic_sde_path)
         elif model_alteration.name == "model_alt_hydraulic":
-            self.add_object(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydraulic_sde_path)
+            self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydraulic_sde_path)
 
     def add_model_alterations(self, model):
         # type: (Model) -> None
@@ -89,8 +89,8 @@ class ModelDataIo(ObjectDataIo):
 
     def add_project_type(self, model_id, project_type):
         # type: (int, ProjectType) -> None
-        self.add_object(model_id, project_type, project_type.input_field_attribute_lookup,
-                        self.config.project_type_sde_path)
+        self.append_object_to_db(model_id, project_type, project_type.input_field_attribute_lookup,
+                                 self.config.project_type_sde_path)
 
     def add_project_types(self, model):
         # type: (Model) -> None

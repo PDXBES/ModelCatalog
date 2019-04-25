@@ -25,8 +25,8 @@ class TestSimulationDataIO(TestCase):
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
         self.simulationdataio = SimulationDataIO(self.config, mock_model_catalog_db_data_io)
 
-        self.patch_append_feature_class_to_db = mock.patch.object(mock_model_catalog_db_data_io, "append_feature_class_to_db")
-        self.mock_append_feature_class_to_db = self.patch_append_feature_class_to_db.start()
+        self.patch_append_objects_to_db = mock.patch.object(mock_model_catalog_db_data_io, "append_objects_to_db")
+        self.mock_append_objects_to_db = self.patch_append_objects_to_db.start()
 
         self.patch_start_editing_session = mock.patch.object(self.simulationdataio, "start_editing_session")
         self.mock_start_editing_session = self.patch_start_editing_session.start()
@@ -86,7 +86,7 @@ class TestSimulationDataIO(TestCase):
         self.mock_da_InsertCursor = self.patch_insert_cursor.stop()
         self.mock_model_catalog_db_data_io_copy = self.patch_model_catalog_db_data_io_copy.stop()
         self.mock_model_catalog_db_data_io_copy_to_memory = self.patch_model_catalog_db_data_io_copy_to_memory.stop()
-        self.mock_append_feature_class_to_db = self.patch_append_feature_class_to_db.stop()
+        self.mock_append_objects_to_db = self.patch_append_objects_to_db.stop()
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
         self.mock_create_areas = self.patch_create_areas.stop()
@@ -198,7 +198,7 @@ class TestSimulationDataIO(TestCase):
         area_results = ["area1", "area2"]
         field_attribute_lookup = Area.output_field_attribute_lookup()
         self.simulationdataio.append_area_results_to_db(area_results)
-        self.mock_append_feature_class_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")
+        self.mock_append_objects_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")
 
     def test_add_simulation_results_calls_create_areas_with_correct_arguments(self):
         with mock.patch.object(self.simulationdataio, "copy_link_results"):

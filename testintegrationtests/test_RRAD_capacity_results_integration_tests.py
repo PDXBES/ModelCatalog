@@ -2,6 +2,7 @@ from unittest import TestCase
 from dataio.simulation_data_io import SimulationDataIO
 from businessclasses.config import Config
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
+from dataio.rrad_data_io import RradDbDataIo
 from businessclasses.simulation import Simulation
 import mock
 import unittest
@@ -13,6 +14,7 @@ class TestRRADCapacityResults(TestCase):
 
         self.config = Config(test_flag)
         self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
+        self.rrad_db_data_io = RradDbDataIo(self.config)
         self.simulation_data_io = SimulationDataIO(self.config, self.model_catalog_db_data_io)
         self.simulation = Simulation(self.config)
         self.simulation.id = 999998
@@ -27,5 +29,5 @@ class TestRRADCapacityResults(TestCase):
         self.mock_simulation_path = self.patch_simulation_path.stop()
 
     def test_add_simulation_results(self):
-        self.simulation_data_io.add_simulation_results(self.simulation, None)
+        self.simulation_data_io.add_simulation_results(self.simulation, self.rrad_db_data_io)
 

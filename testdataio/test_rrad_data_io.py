@@ -31,6 +31,6 @@ class TestRradDataIO(TestCase):
         self.assertTrue(current_model_id == 44)
 
     def test_add_rehab_calls_add_object(self):
-        with mock.patch.object(self.rrad_data_io, "add_object") as mock_add_object:
+        with mock.patch.object(self.rrad_data_io, "append_object_to_db") as mock_append_object_to_db:
             self.rrad_data_io.add_rehab(self.mock_rehab)
-            self.assertTrue(mock_add_object.called)
+            self.assertTrue(mock_append_object_to_db.called)
