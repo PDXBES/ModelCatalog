@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mapping_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Mapping_tools.pyt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/model_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/mapping_basis.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/mapping_basis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,75 +12,24 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1428817085">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="dummy" value="4" />
-          <entry key="py" value="450" />
-          <entry key="pyt" value="423" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="873" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="27" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="27" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.46915254">
+    <splitter split-orientation="horizontal" split-proportion="0.16234158">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
+            <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1128">
-                  <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+                <state relative-caret-position="36">
+                  <caret line="2" selection-start-line="2" selection-end-line="2" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="171">
-                  <caret line="127" column="47" lean-forward="true" selection-start-line="127" selection-start-column="47" selection-end-line="127" selection-end-column="47" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_object_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="561">
-                  <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1683">
+                <state relative-caret-position="414">
+                  <caret line="31" column="82" selection-start-line="31" selection-start-column="82" selection-end-line="31" selection-end-column="82" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -91,44 +38,33 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2312">
-                  <caret line="137" selection-start-line="137" selection-end-line="137" />
-                  <folding>
-                    <marker date="1556226245612" expanded="true" signature="7154:7262" ph="..." />
-                    <marker date="1556226245612" expanded="true" signature="7364:7373" ph="..." />
-                  </folding>
+                <state relative-caret-position="281">
+                  <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_mapping_basis_data_io.py">
+            <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+                <state relative-caret-position="18">
+                  <caret line="1" selection-start-line="1" selection-end-line="2" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="25" column="69" lean-forward="true" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-                </state>
-              </provider>
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+              <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
+            <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot_exception.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-646">
-                  <caret line="31" column="82" lean-forward="true" selection-start-line="31" selection-start-column="82" selection-end-line="31" selection-end-column="82" />
-                  <folding>
-                    <element signature="e#0#29#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="126">
+                  <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
                 </state>
               </provider>
             </entry>
@@ -138,91 +74,54 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="34">
-                  <caret line="2" selection-start-line="2" selection-end-line="2" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="40" />
+                <state relative-caret-position="19">
+                  <caret line="114" column="52" lean-forward="true" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="52" />
                   <folding>
-                    <element signature="e#0#11#0" expanded="true" />
+                    <element signature="e#717#3397#0" />
+                    <element signature="e#3431#3518#0" />
+                    <element signature="e#3575#3780#0" />
+                    <element signature="e#3832#4033#0" />
+                    <element signature="e#4099#4367#0" />
+                    <element signature="e#4425#4581#0" />
+                    <element signature="e#4856#5041#0" />
+                    <element signature="e#5920#6192#0" />
+                    <element signature="e#6297#6625#0" />
+                    <element signature="e#6756#7033#0" />
+                    <element signature="e#7142#7374#0" />
+                    <element signature="e#7486#7745#0" />
+                    <element signature="e#7835#8058#0" />
+                    <element signature="e#8172#8437#0" />
+                    <element signature="e#8529#8758#0" />
+                    <element signature="e#8879#9165#0" />
+                    <element signature="e#9264#9514#0" />
+                    <element signature="e#9636#9925#0" />
+                    <element signature="e#10025#10278#0" />
+                    <element signature="e#10392#10657#0" />
+                    <element signature="e#10749#10978#0" />
+                    <element signature="e#11064#13755#0" />
+                    <element signature="e#11229#13755#0" />
+                    <element signature="e#11360#13755#0" />
+                    <element signature="e#11538#13755#0" />
+                    <element signature="e#11738#13755#0" />
+                    <element signature="e#11948#13755#0" />
+                    <element signature="e#12150#13755#0" />
+                    <element signature="e#13839#14022#0" />
+                    <element signature="e#14116#14314#0" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="13" selection-start-line="3" selection-end-line="13" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/rrad_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-                  <folding>
-                    <element signature="e#55#96#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="249">
-                  <caret line="62" selection-start-line="62" selection-end-line="62" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="294">
-                  <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+                <state relative-caret-position="317">
+                  <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
                   <folding>
-                    <element signature="e#0#29#0" expanded="true" />
+                    <element signature="e#0#11#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="365">
-                  <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="36" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="23" selection-start-line="23" selection-end-line="23" />
                 </state>
               </provider>
             </entry>
@@ -294,7 +193,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/read_model_integration_test.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
         <option value="$PROJECT_DIR$/businessclasses/config.py" />
@@ -319,7 +217,6 @@
         <option value="$PROJECT_DIR$/businessclasses/mapping_area.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_link.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/query_layer_test.py" />
-        <option value="$PROJECT_DIR$/businessclasses/model_catalog.py" />
         <option value="$PROJECT_DIR$/businessclasses/model.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_generic_object.py" />
@@ -327,8 +224,6 @@
         <option value="$PROJECT_DIR$/dataio/simulation_data_io.py" />
         <option value="$PROJECT_DIR$/businessclasses/generic_class_factory.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_simulation.py" />
-        <option value="$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py" />
-        <option value="$PROJECT_DIR$/businessclasses/mapping_basis.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_snapshot.py" />
         <option value="$PROJECT_DIR$/ModelCatalog_tools.pyt" />
         <option value="$PROJECT_DIR$/dataio/model_data_io.py" />
@@ -345,21 +240,25 @@
         <option value="$PROJECT_DIR$/testdataio/test_model_data_io.py" />
         <option value="$PROJECT_DIR$/dataio/rrad_data_io.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" />
+        <option value="$PROJECT_DIR$/businessclasses/model_catalog.py" />
+        <option value="$PROJECT_DIR$/businessclasses/mapping_snapshot_exception.py" />
+        <option value="$PROJECT_DIR$/businessclasses/mapping_basis.py" />
+        <option value="$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="888" />
-    <option name="y" value="178" />
-    <option name="width" value="864" />
-    <option name="height" value="465" />
+    <option name="x" value="383" />
+    <option name="y" value="-8" />
+    <option name="width" value="576" />
+    <option name="height" value="310" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
+      <foldersAlwaysOnTop value="false" />
     </navigator>
     <panes>
       <pane id="ProjectPane">
@@ -372,12 +271,12 @@
             <path>
               <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-              <item name="dataio" type="462c0819:PsiDirectoryNode" />
+              <item name="businessclasses" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ModelCatalog" type="b2602c69:ProjectViewProjectNode" />
               <item name="ModelCatalog" type="462c0819:PsiDirectoryNode" />
-              <item name="testintegrationtests" type="462c0819:PsiDirectoryNode" />
+              <item name="testbusinessclasses" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -417,105 +316,91 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test_RRAD_capacity_results_integration_tests.py">
-    <configuration name="rehab_data_io" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dataio" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataio/rehab_data_io.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="rehab_data_io_integration_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests in test_RRAD_capacity_results_integration_tests.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_mapping_basis.TestMappingBasis">
+    <configuration name="Unittests for test_mapping_basis.TestMappingBasis" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_mapping_basis.TestMappingBasis&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in testdataio" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testdataio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testdataio&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in testintegrationtests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_not_empty_mapping_basis_snapshot_not_added_to_mapping_basis" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/testintegrationtests&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="_new_target" value="&quot;test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_not_empty_mapping_basis_snapshot_not_added_to_mapping_basis&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_not_added_to_mapping_basis" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_not_added_to_mapping_basis&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_add_model_list_1_model_valid_1_model_invalid" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_model_catalog.TestModelCatalog.test_add_model_list_1_model_valid_1_model_invalid&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests in testdataio" />
-      <item itemvalue="Python.rehab_data_io_integration_test" />
-      <item itemvalue="Python.rehab_data_io" />
-      <item itemvalue="Python tests.Unittests in testintegrationtests" />
-      <item itemvalue="Python tests.Unittests in test_RRAD_capacity_results_integration_tests.py" />
+      <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis" />
+      <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_add_model_list_1_model_valid_1_model_invalid" />
+      <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis" />
+      <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_not_empty_mapping_basis_snapshot_not_added_to_mapping_basis" />
+      <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_not_added_to_mapping_basis" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests in test_RRAD_capacity_results_integration_tests.py" />
-        <item itemvalue="Python.rehab_data_io_integration_test" />
-        <item itemvalue="Python tests.Unittests in testintegrationtests" />
-        <item itemvalue="Python.rehab_data_io" />
-        <item itemvalue="Python tests.Unittests in testdataio" />
+        <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis" />
+        <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_not_added_to_mapping_basis" />
+        <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_not_empty_mapping_basis_snapshot_not_added_to_mapping_basis" />
+        <item itemvalue="Python tests.Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis" />
+        <item itemvalue="Python tests.Unittests for test_model_catalog.TestModelCatalog.test_add_model_list_1_model_valid_1_model_invalid" />
       </list>
     </recent_temporary>
   </component>
@@ -533,35 +418,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_testdataio - 2019.04.25 at 14h 19m 25s.xml">
-      <configuration name="Unittests in testdataio" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis_test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_raises_duplicate_mapping_snapshot_exception - 2019.04.25 at 15h 35m 42s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_raises_duplicate_mapping_snapshot_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testdataio - 2019.04.25 at 14h 19m 56s.xml">
-      <configuration name="Unittests in testdataio" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis_test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_raises_duplicate_mapping_snapshot_exception - 2019.04.25 at 15h 37m 56s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_raises_duplicate_mapping_snapshot_exception" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testdataio - 2019.04.25 at 14h 21m 08s.xml">
-      <configuration name="Unittests in testdataio" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis - 2019.04.25 at 15h 39m 52s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rrad_data_io_TestRradDataIO_test_retrieve_current_rehab_id - 2019.04.25 at 14h 22m 35s.xml">
-      <configuration name="Unittests for test_rrad_data_io.TestRradDataIO.test_retrieve_current_rehab_id" configurationId="tests" />
+    <history-entry file="Unittests_for_test_model_catalog_TestModelCatalog_test_add_model_list_1_model_valid_1_model_invalid - 2019.04.25 at 15h 41m 34s.xml">
+      <configuration name="Unittests for test_model_catalog.TestModelCatalog.test_add_model_list_1_model_valid_1_model_invalid" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_model_data_io_py - 2019.04.25 at 14h 31m 49s.xml">
-      <configuration name="Unittests in test_model_data_io.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis_test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis - 2019.04.25 at 15h 42m 44s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testdataio - 2019.04.25 at 14h 32m 04s.xml">
-      <configuration name="Unittests in testdataio" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis_test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis - 2019.04.25 at 15h 44m 19s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_empty_mapping_basis_snapshot_not_added_to_mapping_basis" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testdataio - 2019.04.25 at 14h 33m 26s.xml">
-      <configuration name="Unittests in testdataio" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis - 2019.04.25 at 15h 44m 47s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_testintegrationtests - 2019.04.25 at 14h 41m 30s.xml">
-      <configuration name="Unittests in testintegrationtests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis_test_add_mapping_snapshot_invalid_snapshot_not_empty_mapping_basis_snapshot_not_added_to_mapping_basis - 2019.04.25 at 15h 46m 42s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_invalid_snapshot_not_empty_mapping_basis_snapshot_not_added_to_mapping_basis" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_RRAD_capacity_results_integration_tests_py - 2019.04.25 at 14h 49m 39s.xml">
-      <configuration name="Unittests in test_RRAD_capacity_results_integration_tests.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis_test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_not_added_to_mapping_basis - 2019.04.25 at 15h 47m 23s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis.test_add_mapping_snapshot_valid_snapshot_in_mapping_basis_duplicate_snapshot_not_added_to_mapping_basis" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_RRAD_capacity_results_integration_tests_py - 2019.04.25 at 14h 52m 43s.xml">
-      <configuration name="Unittests in test_RRAD_capacity_results_integration_tests.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_basis_TestMappingBasis - 2019.04.25 at 15h 47m 31s.xml">
+      <configuration name="Unittests for test_mapping_basis.TestMappingBasis" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="1">
@@ -574,16 +459,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.22286618" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.13697916" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.43600866" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.4295011" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.46854663" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.31623036" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.46806282" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.2937063" />
@@ -614,9 +499,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -683,7 +565,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/testdataio/test_model_data_io.py</url>
-          <line>132</line>
+          <line>128</line>
           <option name="timeStamp" value="263" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -756,20 +638,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_ui/test_characterization_reporting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/mapping_area.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -873,16 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/monitor.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -893,13 +751,6 @@
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/utility.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
@@ -921,23 +772,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="113" column="20" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="15" selection-start-line="15" selection-end-line="17" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="13" selection-start-line="3" selection-end-line="13" />
         </state>
       </provider>
     </entry>
@@ -993,67 +827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_mapping_basis_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1128">
-          <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_object_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1683">
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="25" column="69" lean-forward="true" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-646">
-          <caret line="31" column="82" lean-forward="true" selection-start-line="31" selection-start-column="82" selection-end-line="31" selection-end-column="82" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="127" column="47" lean-forward="true" selection-start-line="127" selection-start-column="47" selection-end-line="127" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/ArcGIS/Desktop10.3/arcpy/arcpy/arcobjects/_base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -1068,34 +841,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
+    <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        <state relative-caret-position="1728">
+          <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <marker date="1556226245612" expanded="true" signature="7154:7262" ph="..." />
-            <marker date="1556226245612" expanded="true" signature="7364:7373" ph="..." />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py">
+    <entry file="file://$PROJECT_DIR$/testdataio/test_mapping_basis_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="198">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="31" column="82" selection-start-line="31" selection-start-column="82" selection-end-line="31" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="121" selection-start-line="121" selection-end-line="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="324">
           <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/utility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-65">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_object_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="124" column="47" selection-start-line="124" selection-start-column="47" selection-end-line="124" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/rrad_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="306">
           <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding>
             <element signature="e#55#96#0" expanded="true" />
@@ -1103,26 +954,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot_exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="8" />
+        <state relative-caret-position="126">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py">
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_basis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="18">
+          <caret line="1" selection-start-line="1" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_model_catalog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="114" column="52" lean-forward="true" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="52" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#717#3397#0" />
+            <element signature="e#3431#3518#0" />
+            <element signature="e#3575#3780#0" />
+            <element signature="e#3832#4033#0" />
+            <element signature="e#4099#4367#0" />
+            <element signature="e#4425#4581#0" />
+            <element signature="e#4856#5041#0" />
+            <element signature="e#5920#6192#0" />
+            <element signature="e#6297#6625#0" />
+            <element signature="e#6756#7033#0" />
+            <element signature="e#7142#7374#0" />
+            <element signature="e#7486#7745#0" />
+            <element signature="e#7835#8058#0" />
+            <element signature="e#8172#8437#0" />
+            <element signature="e#8529#8758#0" />
+            <element signature="e#8879#9165#0" />
+            <element signature="e#9264#9514#0" />
+            <element signature="e#9636#9925#0" />
+            <element signature="e#10025#10278#0" />
+            <element signature="e#10392#10657#0" />
+            <element signature="e#10749#10978#0" />
+            <element signature="e#11064#13755#0" />
+            <element signature="e#11229#13755#0" />
+            <element signature="e#11360#13755#0" />
+            <element signature="e#11538#13755#0" />
+            <element signature="e#11738#13755#0" />
+            <element signature="e#11948#13755#0" />
+            <element signature="e#12150#13755#0" />
+            <element signature="e#13839#14022#0" />
+            <element signature="e#14116#14314#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_basis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
