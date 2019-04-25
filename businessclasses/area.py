@@ -31,7 +31,7 @@ class Area(GenericObject):
         self.geometry = None
         self.bsbr = None
         self.basement_depth = 8
-        self.storm_bsbr_lookup = {"02yr6h": 91535, "05yr6h": 36614, "25yr6h": 7323}
+        self.storm_bsbr_lookup = {"02yr6h": 91535, "05yr6h": 36614, "10yr6h": 18307, "25yr6h": 7323}
         self.san_connect_type = None
 
     @staticmethod
@@ -107,7 +107,11 @@ class Area(GenericObject):
             self.bsbr = 0
         else:
             storm = self.config.storm[simulation.storm_id][0]
-            self.bsbr = self.storm_bsbr_lookup[storm]
+            try:
+                self.bsbr = self.storm_bsbr_lookup[storm]
+            except:
+                #TODO need to check that storm is in list of BSBR storms? Not all storms require BSBR ei Summer 6
+                pass
 
 
 

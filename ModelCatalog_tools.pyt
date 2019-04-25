@@ -188,10 +188,22 @@ class EMGAATS_Model_Registration(object):
         model_alteration_file.value = self.dummy_model_alteration_file_path
         model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
-
-        params = [project_no, project_type, project_phase, project_cip_number,
-                  model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status, model_alterations_boundary_conditions,
-                  model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
+        if test_flag == "TEST":
+            read_write = arcpy.Parameter(
+                displayName="Make model read/write before registration",
+                name="read_write",
+                datatype="GPBoolean",
+                parameterType="Required",
+                direction="Input",
+            )
+            read_write.value = False
+            params = [project_no, project_type, project_phase, project_cip_number,
+                      model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status, model_alterations_boundary_conditions,
+                      model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file, read_write]
+        else:
+            params = [project_no, project_type, project_phase, project_cip_number,
+                      model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status, model_alterations_boundary_conditions,
+                      model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
         return params
 
     def isLicensed(self):
@@ -289,7 +301,6 @@ class EMGAATS_Model_Registration(object):
         arcpy.AddMessage("Execute")
 
         try:
-
             self.model = Model.initialize_with_current_id(self.config, self.modelcatalogdataio)
             self.model.parent_model_id = 0
 
@@ -343,11 +354,42 @@ class EMGAATS_Model_Registration(object):
             self.model.create_simulations(self.model_dataio)
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
+
+            if test_flag == "TEST":
+                if parameters[-1].value:
+                    self.model_dataio.set_model_to_read_write(self.model)
+
             EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         except InvalidModelException:
             self.model._write_attributes_to_screen()
             self.model.model_valid_diagnostic()
             arcpy.AddError("Model is not valid")
+
+def EMGAATS_Model_Registration_function(model_catalog, config):
+    # type: (ModelCatalog, Config) -> None
+    rrad_data_io = RradDbDataIo(config)
+    modelcatalogdataio = ModelCatalogDbDataIo(config)
+    modeldataio = ModelDataIo(config, modelcatalogdataio)
+    simulationdataio = SimulationDataIO(config, modelcatalogdataio)
+    model = model_catalog.models[0]
+    try:
+        arcpy.AddMessage("Adding Model...")
+        modelcatalogdataio.add_model(model, modeldataio)
+        arcpy.AddMessage("Model Added")
+    except:
+        arcpy.ExecuteError
+    if model.write_to_rrad():
+        arcpy.AddMessage("Writing results to RRAD")
+        #TODO: Create a single add simulation function in model_data_io
+        for simulation in model.simulations:
+            arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
+            simulationdataio.add_simulation_results(simulation, rrad_data_io)
+            arcpy.AddMessage("Results written to RRAD")
+
+    else:
+        arcpy.AddMessage("No results will be added to the RRAD")
+
+########################################################################################################################
 
 class TemporaryMonitorQaQc(object):
     def __init__(self):
@@ -533,30 +575,6 @@ class SlrtQaQc(object):
 
     def execute(self, parameters, messages):
         pass
-
-def EMGAATS_Model_Registration_function(model_catalog, config):
-    # type: (ModelCatalog, Config) -> None
-    rrad_data_io = RradDbDataIo(config)
-    modelcatalogdataio = ModelCatalogDbDataIo(config)
-    modeldataio = ModelDataIo(config, modelcatalogdataio)
-    simulationdataio = SimulationDataIO(config, modelcatalogdataio)
-    model = model_catalog.models[0]
-    try:
-        arcpy.AddMessage("Adding Model...")
-        modelcatalogdataio.add_model(model, modeldataio)
-        arcpy.AddMessage("Model Added")
-    except:
-        arcpy.ExecuteError
-    if model.write_to_rrad():
-        arcpy.AddMessage("Writing results to RRAD")
-        #TODO: Create a single add simulation function in model_data_io
-        for simulation in model.simulations:
-            arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-            simulationdataio.add_simulation_results(simulation, rrad_data_io)
-            arcpy.AddMessage("Results written to RRAD")
-
-    else:
-        arcpy.AddMessage("No results will be added to the RRAD")
 
 def data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations):
     # Prevents user from adding or deleting simulations
