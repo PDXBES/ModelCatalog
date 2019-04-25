@@ -21,4 +21,7 @@ class MappingBasisDataIo(DbDataIo):
                                          "mapping_link": MappingLink,
                                          "mapping_area": MappingArea}
 
+    #def add_mapping_snapshot(self):
+        # use add object - see model catalog db data io for ref
+
 #TODO: add snapshot- add snapshot to db

@@ -188,6 +188,11 @@ class EMGAATS_Model_Registration(object):
         model_alteration_file.value = self.dummy_model_alteration_file_path
         model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
+        params = [project_no, project_type, project_phase, project_cip_number,
+                  model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status,
+                  model_alterations_boundary_conditions,
+                  model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
+
         if test_flag == "TEST":
             read_write = arcpy.Parameter(
                 displayName="Make model read/write before registration",
@@ -197,13 +202,8 @@ class EMGAATS_Model_Registration(object):
                 direction="Input",
             )
             read_write.value = False
-            params = [project_no, project_type, project_phase, project_cip_number,
-                      model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status, model_alterations_boundary_conditions,
-                      model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file, read_write]
-        else:
-            params = [project_no, project_type, project_phase, project_cip_number,
-                      model_dir, model_purpose, parent_model_dir, model_calibration_file, model_status, model_alterations_boundary_conditions,
-                      model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
+            params.append(read_write)
+
         return params
 
     def isLicensed(self):

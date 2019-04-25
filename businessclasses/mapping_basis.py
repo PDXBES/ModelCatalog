@@ -5,7 +5,9 @@ class MappingBasis(object):
         self.mapping_snapshots = []
 
     def add_mapping_snapshot(self, mapping_snapshot):
-        self.mapping_snapshots.append(mapping_snapshot)
+        if mapping_snapshot.valid:
+            if mapping_snapshot not in self.mapping_snapshots:
+                self.mapping_snapshots.append(mapping_snapshot)
 
-    #TODO add snapshot.  create in memory object
+
     #TODO Get current ids for each object type
