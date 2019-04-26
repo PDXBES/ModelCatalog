@@ -85,6 +85,7 @@ class SimulationDataIO(ObjectDataIo):
 
 
     def add_simulation_results(self, simulation, rrad_data_io):
+        #TODO add if statement and only run this if simulation.required by RRAD is true
         simulation.create_areas(self, rrad_data_io)
         editor = self.start_editing_session(self.config.RRAD_sde_path)
         try:

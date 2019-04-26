@@ -24,6 +24,7 @@ class Simulation(GenericObject):
         self.config = config
         self.input_field_attribute_lookup = Simulation.input_field_attribute_lookup()
         self.areas = []
+        #TODO add attribute required_for_rrad
 
     @staticmethod
     def input_field_attribute_lookup():
