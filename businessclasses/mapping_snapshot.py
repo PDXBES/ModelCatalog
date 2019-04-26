@@ -19,7 +19,7 @@ class MappingSnapshot(GenericObject):
         self.mapping_nodes = []
         self.mapping_areas = []
 
-
+#TODO: create input_field_attribute_lookup
     def create_mapping_links(self, mapping_basis_data_io, simulations):
         # type: (self, MappingBasisDataIo) -> List[MappingLink]
 

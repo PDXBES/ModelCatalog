@@ -13,10 +13,10 @@ class TestModelCatalogDbDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
-        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
+        self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
         self.model_catalog = mock.MagicMock(ModelCatalog)
         self.model = mock.MagicMock(Model)
-        self.model_data_io = ModelDataIo(self.config, self.modelcatalogdataio)
+        self.model_data_io = ModelDataIo(self.config, self.model_catalog_db_data_io)
         self.model.model_id = 0
         self.model.parent_model_id = 0
         self.model.model_request_id = 0
@@ -45,7 +45,7 @@ class TestModelCatalogDbDataIO(TestCase):
         self.patch_da_InsertCursor = mock.patch("arcpy.da.InsertCursor")
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.start()
 
-        self.patch_append_object_to_db = mock.patch.object(self.modelcatalogdataio, "append_object_to_db")
+        self.patch_append_object_to_db = mock.patch.object(self.model_catalog_db_data_io, "append_object_to_db")
         self.mock_append_object_to_db = self.patch_append_object_to_db.start()
 
         self.patch_read_simulations = mock.patch("dataio.model_data_io.ModelDataIo.read_simulations")
@@ -89,42 +89,42 @@ class TestModelCatalogDbDataIO(TestCase):
 
     def test_retrieve_current_model_id(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        current_model_id = self.modelcatalogdataio.retrieve_current_model_id()
+        current_model_id = self.model_catalog_db_data_io.retrieve_current_model_id()
         self.assertTrue(current_model_id == 44)
 
     def test_retrieve_current_simulation_id(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        current_simulation_id = self.modelcatalogdataio.retrieve_current_simulation_id()
+        current_simulation_id = self.model_catalog_db_data_io.retrieve_current_simulation_id()
         self.assertTrue(current_simulation_id == 55)
 
     def test_retrieve_current_model_alteration_id(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        current_model_alteration_id = self.modelcatalogdataio.retrieve_current_model_alteration_id()
+        current_model_alteration_id = self.model_catalog_db_data_io.retrieve_current_model_alteration_id()
         self.assertTrue(current_model_alteration_id == 66)
 
     def test_add_model_calls_append_object_to_db_with_correct_arguments(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_append_object_to_db.assert_called_with(self.model, Model.input_field_attribute_lookup(),
                                                          "model_tracking_sde_path", "model_tracking_sde_path")
 
     def test_add_model_calls_add_simulations_with_correct_arguments(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_add_simulations.assert_called_with(self.model)
 
     def test_add_model_calls_add_model_alterations_with_correct_arguments(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_add_model_alterations.assert_called_with(self.model)
 
     def test_add_model_calls_add_project_types_with_correct_arguments(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_add_project_types.assert_called_with(self.model)
 
     def test_add_model_calls_start_editing_session_with_correct_workspace(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_start_editing_session.assert_called_with(self.config.model_catalog_sde_path)
 
     def test_add_model_calls_stop_editing_session_no_exception_with_save_changes_true(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         save_changes = True
         self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
@@ -133,25 +133,25 @@ class TestModelCatalogDbDataIO(TestCase):
         self.mock_add_simulations.side_effect = Exception()
         save_changes = False
         try:
-            self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+            self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         except:
             self.mock_stop_editing_session.assert_called_with("editor", save_changes)
 
     def test_add_model_calls_set_registered_model_to_read_only_with_correct_arguments(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_set_registered_model_to_read_only.assert_called_with(self.model)
 
     def test_add_model_calls_write_model_registration_file_with_correct_arguments(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.mock_write_model_registration_file.assert_called_with(self.model)
 
     def test_add_model_model_status_is_set_to_final_set_registered_model_to_read_only_called(self):
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.assertTrue(self.mock_set_registered_model_to_read_only.called)
 
     def test_add_model_model_status_is_set_to_working_set_registered_model_to_read_only_not_called(self):
         self.model.model_status_id = self.config.model_status_id["Working"]
-        self.modelcatalogdataio.add_model(self.model, self.model_data_io)
+        self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
         self.assertFalse(self.mock_set_registered_model_to_read_only.called)
 
 

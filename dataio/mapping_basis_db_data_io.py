@@ -6,7 +6,7 @@ from businessclasses.mapping_link import MappingLink
 from businessclasses.mapping_area import MappingArea
 
 from db_data_io import DbDataIo
-class MappingBasisDataIo(DbDataIo):
+class MappingBasisDbDataIo(DbDataIo):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config
@@ -21,7 +21,10 @@ class MappingBasisDataIo(DbDataIo):
                                          "mapping_link": MappingLink,
                                          "mapping_area": MappingArea}
 
-    #def add_mapping_snapshot(self):
-        # use add object - see model catalog db data io for ref
+    def add_mapping_snapshot(self, mapping_snapshot, mapping_snapshot_data_io):
+        editor = mapping_snapshot_data_io.start_editing_session(self.config.RRAD_MAPPING_sde_path)
 
+        self.append_object_to_db(mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
+                                  self.config.snapshot_tracking_sde_path,
+                                  self.config.snapshot_tracking_sde_path)
 #TODO: add snapshot- add snapshot to db

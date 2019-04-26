@@ -1,7 +1,7 @@
 from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.config import Config
 from object_data_io import ObjectDataIo
-from mapping_basis_data_io import MappingBasisDataIo
+from mapping_basis_db_data_io import MappingBasisDbDataIo
 
 class MappingSnapshotDataIo(ObjectDataIo):
 

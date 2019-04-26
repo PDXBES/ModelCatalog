@@ -28,10 +28,18 @@ class MockConfig():
         self.config.model_alt_hydrologic_sde_path = "model_alt_hydrologic_sde_path"
         self.config.model_alt_hydraulic_sde_path = "model_alt_hydraulic_sde_path"
 
+        self.config.RRAD_MAPPING_sde_path = "RRAD_MAPPING_sde_path"
+        self.config.areas_sde_path = "areas_sde_path"
+        self.config.current_id_sde_path = "current_id_sde_path"
+        self.config.links_sde_path = "links_sde_path"
+        self.config.nodes_sde_path = "nodes_sde_path"
+        self.config.snapshot_tracking_sde_path = "snapshot_tracking_sde_path"
+
         self.config.EMGAATS_sde_path = "EMGAATS_sde_path"
         self.config.storms_sde_path = "storms_sde_path"
         self.config.storm_types_sde_path = "storm_types_sde_path"
         self.config.dev_scenarios_sde_path = "dev_scenarios_sde_path"
+
 
         self.config.storm = {0: ("User-defined", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.config.storm_id = {("User-defined", "U"): 0, ("25yr6h", "D"): 1, ("10yr6h", "D"): 2}

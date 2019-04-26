@@ -47,9 +47,14 @@ class TestSimulationDataIO(TestCase):
         self.mock_simulation.storm_id = 22
         self.mock_simulation.dev_scenario_id = 33
         self.mock_simulation.areas = "areas"
+        self.mock_simulation.required_for_rrad.return_value = True
+        self.mock_simulation.sim_desc = "sim_desc"
 
         self.patch_create_areas = mock.patch.object(self.mock_simulation, "create_areas")
         self.mock_create_areas = self.patch_create_areas.start()
+
+        self.patch_add_message = mock.patch("arcpy.AddMessage")
+        self.mock_add_message = self.patch_add_message.start()
 
         self.mock_model = mock.MagicMock(Model)
         self.simulation = Simulation(self.config)
@@ -91,6 +96,8 @@ class TestSimulationDataIO(TestCase):
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
         self.mock_create_areas = self.patch_create_areas.stop()
         self.mock_simulation_path = self.patch_simulation_path.stop()
+        self.mock_add_message = self.patch_add_message.stop()
+
 
     def test_area_results_path_creates_correct_path(self):
         self.mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
@@ -200,49 +207,84 @@ class TestSimulationDataIO(TestCase):
         self.simulationdataio.append_area_results_to_db(area_results)
         self.mock_append_objects_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")
 
-    def test_add_simulation_results_calls_create_areas_with_correct_arguments(self):
+    def test_add_simulation_results_simulation_required_for_rrad_calls_create_areas_with_correct_arguments(self):
         with mock.patch.object(self.simulationdataio, "copy_link_results"):
             with mock.patch.object(self.simulationdataio, "copy_node_results"):
                 with mock.patch.object(self.simulationdataio, "copy_node_flooding_results"):
                     with mock.patch.object(self.simulationdataio, "append_area_results_to_db"):
-                        self.simulationdataio.add_simulation_results(self.mock_simulation, model,
+                        self.simulationdataio.add_simulation_results(self.mock_simulation, self.mock_model,
                                                                      self.mock_rrad_data_io)
                         self.mock_create_areas.assert_called_with(self.simulationdataio, self.mock_rrad_data_io)
 
-    def test_add_simulation_results_calls_start_editing_session_with_correct_workspace(self):
+    def test_add_simulation_results_simulation_required_for_rrad_calls_start_editing_session_with_correct_workspace(self):
         with mock.patch.object(self.simulationdataio, "copy_link_results"):
             with mock.patch.object(self.simulationdataio, "copy_node_results"):
                 with mock.patch.object(self.simulationdataio, "copy_node_flooding_results"):
                     with mock.patch.object(self.simulationdataio, "append_area_results_to_db"):
-                        self.simulationdataio.add_simulation_results(self.mock_simulation, model, None)
+                        self.simulationdataio.add_simulation_results(self.mock_simulation,  self.mock_model, self.mock_rrad_data_io)
                         self.mock_start_editing_session.assert_called_with("RRAD_sde_path")
 
-    def test_add_simulation_results_calls_copies_and_append_results_methods_with_correct_arguments(self):
+    def test_add_simulation_results_simulation_required_for_rrad_calls_copies_and_append_results_methods_with_correct_arguments(self):
         with mock.patch.object(self.simulationdataio, "copy_link_results") as mock_copy_link_results:
             with mock.patch.object(self.simulationdataio, "copy_node_results") as mock_copy_node_results:
                 with mock.patch.object(self.simulationdataio, "copy_node_flooding_results") as mock_copy_node_flooding_results:
                     with mock.patch.object(self.simulationdataio, "append_area_results_to_db") as mock_append_area_results:
-                        self.simulationdataio.add_simulation_results(self.mock_simulation, model, None)
+                        self.simulationdataio.add_simulation_results(self.mock_simulation,  self.mock_model, self.mock_rrad_data_io)
                         mock_copy_link_results.assert_called_with(self.mock_simulation)
                         mock_copy_node_results.assert_called_with(self.mock_simulation)
                         mock_copy_node_flooding_results.assert_called_with(self.mock_simulation)
                         mock_append_area_results.assert_called_with("areas")
 
-    def test_add_simulation_results_calls_stop_editing_no_exception_saves_changes(self):
+    def test_add_simulation_results_simulation_required_for_rrad_calls_stop_editing_no_exception_saves_changes(self):
         with mock.patch.object(self.simulationdataio, "copy_link_results"):
             with mock.patch.object(self.simulationdataio, "copy_node_results"):
                 with mock.patch.object(self.simulationdataio,"copy_node_flooding_results"):
                     with mock.patch.object(self.simulationdataio,"append_area_results_to_db"):
-                        self.simulationdataio.add_simulation_results(self.mock_simulation, model, None)
+                        self.simulationdataio.add_simulation_results(self.mock_simulation,  self.mock_model, self.mock_rrad_data_io)
                         self.mock_stop_editing_session.assert_called_with("editor", True)
 
-    def test_add_simulation_results_calls_stop_editing_exception_thrown_save_changes_false(self):
+    def test_add_simulation_results_simulation_required_for_rrad_calls_stop_editing_exception_thrown_save_changes_false(self):
         with mock.patch.object(self.simulationdataio, "copy_link_results")as mock_copy_link_results:
             with mock.patch.object(self.simulationdataio, "copy_node_results"):
                 with mock.patch.object(self.simulationdataio,"copy_node_flooding_results"):
                     with mock.patch.object(self.simulationdataio,"append_area_results_to_db"):
                         mock_copy_link_results.side_effect = Exception()
                         try:
-                            self.simulationdataio.add_simulation_results(self.mock_simulation, model, None)
+                            self.simulationdataio.add_simulation_results(self.mock_simulation,  self.mock_model, self.mock_rrad_data_io)
                         except:
                             self.mock_stop_editing_session.assert_called_with("editor", False)
+
+    def test_add_simulation_results_calls_simulation_required_for_rrad_with_correct_arguments(self):
+        with mock.patch.object(self.simulationdataio, "copy_link_results")as mock_copy_link_results:
+            with mock.patch.object(self.simulationdataio, "copy_node_results"):
+                with mock.patch.object(self.simulationdataio, "copy_node_flooding_results"):
+                    with mock.patch.object(self.simulationdataio, "append_area_results_to_db"):
+                        self.simulationdataio.add_simulation_results(self.mock_simulation,  self.mock_model, self.mock_rrad_data_io)
+                        self.mock_simulation.required_for_rrad.assert_called_with(self.mock_model)
+
+    def test_add_simulation_results_simulation_not_required_does_not_call_copies_and_append_results_methods(self):
+        self.mock_simulation.required_for_rrad.return_value = False
+        with mock.patch.object(self.simulationdataio, "copy_link_results") as mock_copy_link_results:
+            with mock.patch.object(self.simulationdataio, "copy_node_results") as mock_copy_node_results:
+                with mock.patch.object(self.simulationdataio,
+                                       "copy_node_flooding_results") as mock_copy_node_flooding_results:
+                    with mock.patch.object(self.simulationdataio,
+                                           "append_area_results_to_db") as mock_append_area_results:
+                        self.simulationdataio.add_simulation_results(self.mock_simulation, self.mock_model,
+                                                                     self.mock_rrad_data_io)
+                        self.assertFalse(mock_copy_link_results.called)
+                        self.assertFalse(mock_copy_node_results.called)
+                        self.assertFalse(mock_copy_node_flooding_results.called)
+                        self.assertFalse(mock_append_area_results.called)
+
+    def test_add_simulation_results_simulation_not_required_add_message_called_with_correct_message(self):
+        self.mock_simulation.required_for_rrad.return_value = False
+        with mock.patch.object(self.simulationdataio, "copy_link_results") as mock_copy_link_results:
+            with mock.patch.object(self.simulationdataio, "copy_node_results") as mock_copy_node_results:
+                with mock.patch.object(self.simulationdataio,
+                                       "copy_node_flooding_results") as mock_copy_node_flooding_results:
+                    with mock.patch.object(self.simulationdataio,
+                                           "append_area_results_to_db") as mock_append_area_results:
+                        self.simulationdataio.add_simulation_results(self.mock_simulation, self.mock_model,
+                                                                     self.mock_rrad_data_io)
+                        self.mock_add_message.assert_called_with("Simulation: sim_desc is not required for the RRAD.")

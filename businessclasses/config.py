@@ -39,6 +39,7 @@ class Config:
         RRAD_sde = server + ".RRAD_write.sde"
         EMGAATS_sde = server + ".EMGAATS.sde"
         ASM_WORK_sde = server + ".ASM_WORK.sde"
+        RRAD_MAPPING_sde = server + ".RRAD_MAPPING.sde"
 
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_sde)
 
@@ -71,6 +72,12 @@ class Config:
 
         self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
 ##
+        self.RRAD_MAPPING_sde_path = os.path.join(sde_connections, RRAD_MAPPING_sde)
+        self.areas_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Areas"
+        self.current_id_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Current_ID"
+        self.links_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Links"
+        self.nodes_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Nodes"
+        self.snapshot_tracking_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.SnapshotTracking"
 
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
 
