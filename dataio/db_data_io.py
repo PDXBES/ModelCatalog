@@ -18,15 +18,22 @@ class DbDataIo(object):
 
     def retrieve_current_id(self, object_type):
         # type: (str, str) -> int
-        field_names = ["Object_Type", "Current_ID"]
-        cursor = arcpy.da.UpdateCursor(self.current_id_database_table_path, field_names)
-        for row in cursor:
-            object_name, current_id = row
-            if object_type == object_name:
-                next_id = current_id + 1
-                break
-        cursor.updateRow([object_name, next_id])
-        del cursor
+        current_id = self.retrieve_block_of_ids(object_type, 1)
+        return current_id
+
+    def retrieve_block_of_ids(self, object_type, number_of_ids):
+        if number_of_ids > 0:
+            field_names = ["Object_Type", "Current_ID"]
+            cursor = arcpy.da.UpdateCursor(self.current_id_database_table_path, field_names)
+            for row in cursor:
+                object_name, current_id = row
+                if object_type == object_name:
+                    next_id = current_id + number_of_ids
+                    break
+            cursor.updateRow([object_name, next_id])
+            del cursor
+        else:
+            raise Exception()
         return current_id
 
     def create_row_from_object(self, generic_object, field_attribute_lookup):
@@ -63,10 +70,17 @@ class DbDataIo(object):
     def create_objects_from_table_with_current_id(self, table, class_type, field_attribute_lookup):
         generic_objects = []
         fields = field_attribute_lookup.keys()
+        number_of_objects = int(arcpy.GetCount_management(table)[0])
+        current_id = self.retrieve_block_of_ids(class_type, number_of_objects)
+        next_id = current_id + number_of_objects
         cursor = arcpy.da.SearchCursor(table, fields)
         for row in cursor:
-            generic_object = self.class_factory.create_object_with_id(class_type, self)
+            if current_id == next_id:
+                raise Exception
+            generic_object = self.class_factory.create_object(class_type)
             self.create_object_from_row(generic_object, field_attribute_lookup, row)
+            generic_object.id = current_id
+            current_id += 1
             generic_objects.append(generic_object)
         return generic_objects
 

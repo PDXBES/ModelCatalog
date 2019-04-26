@@ -65,6 +65,10 @@ class TestDbDataIO(TestCase):
         self.mock_da_SearchCursor = self.patch_da_SearchCursor.start()
         self.mock_da_SearchCursor.return_value = self.mock_search_cursor
 
+        self.patch_get_count_management = mock.patch("arcpy.GetCount_management")
+        self.mock_get_count_management = self.patch_get_count_management.start()
+        self.mock_get_count_management.return_value = ["1"]
+
         self.patch_create_field_map_for_sde_db = mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db")
         self.mock_create_field_map_for_sde_db = self.patch_create_field_map_for_sde_db.start()
 
@@ -136,6 +140,21 @@ class TestDbDataIO(TestCase):
         self.assertTrue(self.mock_update_cursor.updateRow.called)
         self.mock_update_cursor.updateRow.assert_called_with(["object_2", 56])
 
+    def test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2(self):
+        self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+        self.db_data_io.retrieve_block_of_ids("object_2", 100)
+        self.assertTrue(self.mock_update_cursor.updateRow.called)
+        self.mock_update_cursor.updateRow.assert_called_with(["object_2", 155])
+
+    #TODO create better exceptions
+    def test_retrieve_block_of_ids_number_of_objects_is_zero_throws_exception(self):
+        with self.assertRaises(Exception):
+            self.db_data_io.retrieve_block_of_ids("object_2", 0)
+
+    def test_retrieve_block_of_ids_number_of_objects_is_less_than_zero_throws_exception(self):
+        with self.assertRaises(Exception):
+            self.db_data_io.retrieve_block_of_ids("object_2", -1)
+
     def test_create_row_from_object_creates_row_with_correct_values(self):
         row = self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
         self.assertEquals(row, [1, "name"])
@@ -204,17 +223,33 @@ class TestDbDataIO(TestCase):
         self.assertEqual(object_1.parent_id, 2)
 
     def test_create_objects_from_table_with_current_id_calls_search_cursor_with_correct_arguments(self):
-        self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
-        self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
+        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 0
+            self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+            self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
+
+    def test_create_objects_from_table_with_current_id_calls_retrieve_block_of_ids_with_correct_arguments(self):
+        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 0
+            self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+            mock_return_block_of_ids.assert_called_with("area", 1)
 
     def test_create_objects_from_table_with_current_id_returns_list_with_correct_object(self):
-        self.mock_create_object_with_current_id.return_value = self.mock_generic_object
-        list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
-        object_1 = list_of_objects[0]
-        self.assertEqual(object_1.id, 1)
-        self.assertEqual(object_1.parent_id, 2)
+        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 1
+            self.mock_create_object_with_current_id.return_value = self.mock_generic_object
+            list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+            object_1 = list_of_objects[0]
+            self.assertEqual(1, object_1.id)
+            self.assertEqual(2, object_1.parent_id)
 
-#TODO add test that mock_create_object_with_current_id called with correct argument self.class_factory.create_object(class_type).initialize_with_current_id(object_data_io)
+    def test_create_objects_from_table_with_current_id_exceeds_maximum_id_throws_exception(self):
+        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 0
+            self.mock_get_count_management.return_value = ["0"]
+            self.mock_create_object_with_current_id.return_value = self.mock_generic_object
+            with self.assertRaises(Exception):
+                self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
 
     def test_create_feature_class_from_objects_calls_create_table_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
