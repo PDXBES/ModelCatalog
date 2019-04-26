@@ -61,9 +61,6 @@ class ModelDataIo(ObjectDataIo):
             simulation.storm_id = self.config.storm_id[(storm_name, storm_type)]
             simulation.dev_scenario_id = self.config.dev_scenario_id[dev_scenario]
             simulation.sim_desc = simulation_description
-            #TODO check if simulation required for RRAD
-            #TODO set simulation.required_for_rrad to true if it is
-            # simulation.required_for_RRAD =
             simulations.append(simulation)
         return simulations
 

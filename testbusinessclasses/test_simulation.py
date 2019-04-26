@@ -7,6 +7,7 @@ from businessclasses.generic_class_factory import GenericClassFactory
 from collections import OrderedDict
 from dataio.simulation_data_io import SimulationDataIO
 from businessclasses.area import Area
+from businessclasses.model import Model
 
 class TestSimulation(TestCase):
     def setUp(self):
@@ -20,6 +21,7 @@ class TestSimulation(TestCase):
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1
         self.simulation_data_io = SimulationDataIO(mock_config, self.db_data_io)
+        self.mock_model = mock.MagicMock(Model)
         area1 = Area(mock_config)
         area2 = Area(mock_config)
         self.mock_areas = [area1, area2]
@@ -135,6 +137,16 @@ class TestSimulation(TestCase):
         self.simulation.calculate_bsbrs_for_areas()
         self.assertEquals(self.mock_calculate_bsbr.call_count, 2)
 
+    def test_required_for_rrad_required_storm_id_and_dev_scenario_id_returns_true(self):
+        self.simulation.storm_id, self.simulation.dev_scenario_id = self.config.ccsp_characterization_storm_and_dev_scenario_ids[0]
+        self.mock_model.required_storm_and_dev_scenario_ids.return_value = self.config.ccsp_characterization_storm_and_dev_scenario_ids
+        required = self.simulation.required_for_rrad(self.mock_model)
+        self.assertTrue(required)
+
+    def test_required_for_rrad_not_required_storm_id_and_dev_scenario_id_returns_false(self):
+        self.mock_model.required_storm_and_dev_scenario_ids.return_value = [(-1,-1)]
+        required = self.simulation.required_for_rrad(self.mock_model)
+        self.assertFalse(required)
 
 
 

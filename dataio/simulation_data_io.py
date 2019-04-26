@@ -83,20 +83,22 @@ class SimulationDataIO(ObjectDataIo):
             target_path = self.config.area_results_sde_path
             self.model_catalog_db_data_io.append_objects_to_db(area_results, field_attribute_lookup, template_table_path, target_path)
 
-
-    def add_simulation_results(self, simulation, rrad_data_io):
-        #TODO add if statement and only run this if simulation.required by RRAD is true
-        simulation.create_areas(self, rrad_data_io)
-        editor = self.start_editing_session(self.config.RRAD_sde_path)
-        try:
-            self.copy_link_results(simulation)
-            self.copy_node_results(simulation)
-            self.copy_node_flooding_results(simulation)
-            self.append_area_results_to_db(simulation.areas)
-            self.stop_editing_session(editor, True)
-        except:
-            self.stop_editing_session(editor, False)
-            arcpy.AddMessage("DB Error while adding area results. Changes rolled back.")
-            raise
+    def add_simulation_results(self, simulation, model, rrad_data_io):
+        # TODO add tests for the new if statement
+        if simulation.required_for_rrad(model):
+            simulation.create_areas(self, rrad_data_io)
+            editor = self.start_editing_session(self.config.RRAD_sde_path)
+            try:
+                self.copy_link_results(simulation)
+                self.copy_node_results(simulation)
+                self.copy_node_flooding_results(simulation)
+                self.append_area_results_to_db(simulation.areas)
+                self.stop_editing_session(editor, True)
+            except:
+                self.stop_editing_session(editor, False)
+                arcpy.AddMessage("DB Error while adding area results. Changes rolled back.")
+                raise
+        else:
+            arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the RRAD.")
 
 

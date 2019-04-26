@@ -24,7 +24,6 @@ class Simulation(GenericObject):
         self.config = config
         self.input_field_attribute_lookup = Simulation.input_field_attribute_lookup()
         self.areas = []
-        #TODO add attribute required_for_rrad
 
     @staticmethod
     def input_field_attribute_lookup():
@@ -71,4 +70,10 @@ class Simulation(GenericObject):
     def calculate_bsbrs_for_areas(self):
         for area in self.areas:
             area.calculate_bsbr(self)
+
+    def required_for_rrad(self, model):
+        if (self.storm_id, self.dev_scenario_id) in model.required_storm_and_dev_scenario_ids():
+            return True
+        else:
+            return False
 
