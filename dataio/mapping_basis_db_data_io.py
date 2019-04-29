@@ -4,7 +4,8 @@ from businessclasses.mapping_snapshot import MappingSnapshot
 from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_link import MappingLink
 from businessclasses.mapping_area import MappingArea
-
+import arcpy
+import traceback
 from db_data_io import DbDataIo
 class MappingBasisDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -24,7 +25,15 @@ class MappingBasisDbDataIo(DbDataIo):
     def add_mapping_snapshot(self, mapping_snapshot, mapping_snapshot_data_io):
         editor = mapping_snapshot_data_io.start_editing_session(self.config.RRAD_MAPPING_sde_path)
 
-        self.append_object_to_db(mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
+        try:
+            self.append_object_to_db(mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
                                   self.config.snapshot_tracking_sde_path,
                                   self.config.snapshot_tracking_sde_path)
+
+            mapping_snapshot_data_io.stop_editing_session(editor, True)
+        except:
+            mapping_snapshot_data_io.stop_editing_session(editor, False)
+            arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
+            traceback.print_exc()
+            raise
 #TODO: add snapshot- add snapshot to db

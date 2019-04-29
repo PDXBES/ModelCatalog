@@ -30,6 +30,8 @@ class TestMappingBasisDbDataIo(TestCase):
         self.patch_append_object_to_db = mock.patch.object(self.mapping_basis_db_data_io, "append_object_to_db")
         self.mock_append_object_to_db = self.patch_append_object_to_db.start()
 
+
+
     def tearDown(self):
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
@@ -41,6 +43,26 @@ class TestMappingBasisDbDataIo(TestCase):
         self.mock_start_editing_session.assert_called_with(self.config.RRAD_MAPPING_sde_path)
 
     def test_add_mapping_snapshot_append_object_to_db_with_correct_arguments(self):
-        self.mapping_basis_db_data_io.add_mapping_snapshot(self.model, self.mapping_snapshot_data_io)
-        self.mock_append_object_to_db.assert_called_with(self.model, Model.input_field_attribute_lookup(),
-                                                         "model_tracking_sde_path", "model_tracking_sde_path")
+        self.mapping_basis_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_append_object_to_db.assert_called_with(self.mock_mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
+                                                         "snapshot_tracking_sde_path", "snapshot_tracking_sde_path")
+
+    def test_add_mapping_snapshot_no_exceptions_saved_changes_true_stop_editing_session_called_with_correct_arguments(self):
+        save_changes = True
+        self.mapping_basis_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_stop_editing_session.assert_called_with("editor", save_changes)
+
+    def test_add_mapping_snapshot_exception_thrown_saved_changes_false_stop_editing_session_called_changes_not_saved(self):
+        self.mock_append_object_to_db.side_effect = Exception()
+        save_changes = False
+        self.mapping_basis_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_stop_editing_session.assert_called_with("editor", save_changes)
+
+    # this test will cause a traceback with an exception. it is testing the rollback.
+    def test_add_mapping_snapshot_exception_thrown_saved_changes_false_stop_editing_session_called_changes_not_saved_exception_raised(self):
+        self.mock_append_object_to_db.side_effect = Exception()
+        save_changes = False
+        try:
+            self.mapping_basis_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        except:
+            self.mock_stop_editing_session.assert_called_with("editor", save_changes)
