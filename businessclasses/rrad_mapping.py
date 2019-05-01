@@ -1,7 +1,7 @@
 from businessclasses.mapping_snapshot_exception import InvalidMappingSnapshotException
 from businessclasses.mapping_snapshot_exception import DuplicateMappingSnapshotException
 
-class MappingBasis(object):
+class RradMapping(object):
 
     def __init__(self, config):
         self.config = config

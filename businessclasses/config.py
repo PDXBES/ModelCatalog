@@ -73,11 +73,11 @@ class Config:
         self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
 ##
         self.RRAD_MAPPING_sde_path = os.path.join(sde_connections, RRAD_MAPPING_sde)
-        self.areas_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Areas"
-        self.current_id_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Current_ID"
-        self.links_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Links"
-        self.nodes_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Nodes"
-        self.snapshot_tracking_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.SnapshotTracking"
+        self.mapping_areas_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Areas"
+        self.mapping_current_id_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Current_ID"
+        self.mapping_links_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Links"
+        self.mapping_nodes_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Nodes"
+        self.mapping_snapshot_tracking_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.SnapshotTracking"
 
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
 

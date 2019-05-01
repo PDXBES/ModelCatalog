@@ -7,7 +7,7 @@ from businessclasses.mapping_area import MappingArea
 import arcpy
 import traceback
 from db_data_io import DbDataIo
-class MappingBasisDbDataIo(DbDataIo):
+class RradMappingDbDataIo(DbDataIo):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config
@@ -27,8 +27,8 @@ class MappingBasisDbDataIo(DbDataIo):
 
         try:
             self.append_object_to_db(mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
-                                  self.config.snapshot_tracking_sde_path,
-                                  self.config.snapshot_tracking_sde_path)
+                                     self.config.mapping_snapshot_tracking_sde_path,
+                                     self.config.mapping_snapshot_tracking_sde_path)
 
             mapping_snapshot_data_io.stop_editing_session(editor, True)
         except:

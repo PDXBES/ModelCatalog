@@ -7,9 +7,7 @@ class MappingArea(MappingObject):
     def __init__(self):
         self.area_id = None
         self.area_name = None
-
         self.bsbr = None
-
         self.input_field_attribute_lookup = MappingArea.input_field_attribute_lookup()
 
     @staticmethod

@@ -29,11 +29,11 @@ class MockConfig():
         self.config.model_alt_hydraulic_sde_path = "model_alt_hydraulic_sde_path"
 
         self.config.RRAD_MAPPING_sde_path = "RRAD_MAPPING_sde_path"
-        self.config.areas_sde_path = "areas_sde_path"
-        self.config.current_id_sde_path = "current_id_sde_path"
-        self.config.links_sde_path = "links_sde_path"
-        self.config.nodes_sde_path = "nodes_sde_path"
-        self.config.snapshot_tracking_sde_path = "snapshot_tracking_sde_path"
+        self.config.mapping_areas_sde_path = "mapping_areas_sde_path"
+        self.config.mapping_current_id_sde_path = "mapping_current_id_sde_path"
+        self.config.mapping_links_sde_path = "mapping_links_sde_path"
+        self.config.mapping_nodes_sde_path = "mapping_nodes_sde_path"
+        self.config.mapping_snapshot_tracking_sde_path = "mapping_snapshot_tracking_sde_path"
 
         self.config.EMGAATS_sde_path = "EMGAATS_sde_path"
         self.config.storms_sde_path = "storms_sde_path"

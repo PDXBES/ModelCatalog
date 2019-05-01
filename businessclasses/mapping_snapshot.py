@@ -16,6 +16,7 @@ class MappingSnapshot(GenericObject):
         self.config = config
         self.id = None
         self.type = None
+        self.simulations = []
         self.mapping_links = []
         self.mapping_nodes = []
         self.mapping_areas = []
@@ -51,3 +52,5 @@ class MappingSnapshot(GenericObject):
 
         pass
 
+    def id_list(self):
+        pass
