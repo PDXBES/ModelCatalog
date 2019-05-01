@@ -6,3 +6,6 @@ class InvalidMappingSnapshotException(MappingSnapshotException):
 
 class DuplicateMappingSnapshotException(MappingSnapshotException):
     pass
+
+class NoSimulationsInMappingSnapshotException(MappingSnapshotException):
+    pass

@@ -4,6 +4,8 @@ from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_area import MappingArea
 from businessclasses.mapping_link import MappingLink
 from collections import OrderedDict
+from businessclasses.mapping_snapshot_exception import NoSimulationsInMappingSnapshotException
+from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
 
 try:
     from typing import List, Any
@@ -37,20 +39,27 @@ class MappingSnapshot(GenericObject):
         return field_attribute_lookup
 
 #TODO: create input_field_attribute_lookup
-    def create_mapping_links(self, mapping_basis_data_io, simulations):
+    def create_mapping_links(self, rrad_mapping_db_data_io, simulations):
         # type: (self, MappingBasisDataIo) -> List[MappingLink]
 
         pass
 
-    def create_mapping_nodes(self, mapping_basis_data_io, simulations):
+    def create_mapping_nodes(self, rrad_mapping_db_data_io, simulations):
         # type: (self, MappingBasisDataIo) -> List[MappingNode]
 
         pass
 
-    def create_mapping_areas(self, mapping_basis_data_io, simulations):
-        # type: (self, MappingBasisDataIo) -> List[MappingArea]
+    def create_mapping_areas(self, mapping_snapshot_data_io, simulations):
+        # type: (self, MappingSnapshotDataIo) -> List[MappingArea]
+        mapping_snapshot_data_io.copy_mapping_areas_to_memory()
 
-        pass
+ 
+    def simulation_ids(self):
+        simulation_ids = []
+        if len(self.simulations) == 0 or self.simulations is None:
+            raise NoSimulationsInMappingSnapshotException
+        else:
+            for simulation in self.simulations:
+                simulation_ids.append(simulation.id)
+            return simulation_ids
 
-    def id_list(self):
-        pass

@@ -12,9 +12,14 @@ class MappingSnapshotDataIo(ObjectDataIo):
     def copy_mapping_areas_to_memory(self, mapping_snapshot, output_table_name):
         input_table = self.config.mapping_areas_sde_path
         id_field_name = "Simulation_ID"
-        id_list = mapping_snapshot.id_list()
+        id_list = mapping_snapshot.simulation_ids()
         self.rrad_mapping_data_io.copy_to_memory_with_id_filter(input_table, output_table_name, id_field_name, id_list)
 
+    def copy_mapping_nodes_to_memory(self, mapping_snapshot, output_table_name):
+        input_table = self.config.mapping_nodes_sde_path
+        id_field_name = "Simulation_ID"
+        id_list = mapping_snapshot.simulation_ids()
+        self.rrad_mapping_data_io.copy_to_memory_with_id_filter(input_table, output_table_name, id_field_name, id_list)
 
     def append_mapping_links(self):
         pass
