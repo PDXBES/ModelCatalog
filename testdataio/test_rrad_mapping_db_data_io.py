@@ -45,7 +45,7 @@ class TestRradMappingDbDataIo(TestCase):
     def test_add_mapping_snapshot_append_object_to_db_with_correct_arguments(self):
         self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
         self.mock_append_object_to_db.assert_called_with(self.mock_mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
-                                                         "snapshot_tracking_sde_path", "snapshot_tracking_sde_path")
+                                                         "mapping_snapshot_tracking_sde_path", "mapping_snapshot_tracking_sde_path")
 
     def test_add_mapping_snapshot_no_exceptions_saved_changes_true_stop_editing_session_called_with_correct_arguments(self):
         save_changes = True

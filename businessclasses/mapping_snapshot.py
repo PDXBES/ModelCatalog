@@ -1,11 +1,11 @@
 from config import Config
+import arcpy
 from generic_object import GenericObject
 from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_area import MappingArea
 from businessclasses.mapping_link import MappingLink
 from collections import OrderedDict
 from businessclasses.mapping_snapshot_exception import NoSimulationsInMappingSnapshotException
-from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
 
 try:
     from typing import List, Any
@@ -50,10 +50,16 @@ class MappingSnapshot(GenericObject):
         pass
 
     def create_mapping_areas(self, mapping_snapshot_data_io, simulations):
-        # type: (self, MappingSnapshotDataIo) -> List[MappingArea]
-        mapping_snapshot_data_io.copy_mapping_areas_to_memory()
+        workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
+        output_table_name = "mapping_area_in_memory_table"
+        in_memory_table = workspace + "\\" +output_table_name
+        mapping_snapshot_data_io.copy_mapping_areas_to_memory(self, output_table_name)
+        mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(output_table_name,
+                                                                               "mapping_area",
+                                                                               MappingArea.rrad_input_field_attribute_lookup())
+        arcpy.Delete_management(in_memory_table)
 
- 
+
     def simulation_ids(self):
         simulation_ids = []
         if len(self.simulations) == 0 or self.simulations is None:
