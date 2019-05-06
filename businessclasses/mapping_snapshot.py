@@ -44,19 +44,24 @@ class MappingSnapshot(GenericObject):
 
         pass
 
-    def create_mapping_nodes(self, rrad_mapping_db_data_io, simulations):
-        # type: (self, MappingBasisDataIo) -> List[MappingNode]
-
-        pass
+    def create_mapping_nodes(self, mapping_snapshot_data_io, simulations):
+        workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
+        output_table_name = "mapping_node_in_memory_table"
+        in_memory_table = workspace + "\\" + output_table_name
+        mapping_snapshot_data_io.copy_mapping_nodes_to_memory(self, output_table_name)
+        mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(output_table_name,
+                                                                                                    "mapping_node",
+                                                                                                    MappingNode.rrad_input_field_attribute_lookup())
+        arcpy.Delete_management(in_memory_table)
 
     def create_mapping_areas(self, mapping_snapshot_data_io, simulations):
         workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
         output_table_name = "mapping_area_in_memory_table"
-        in_memory_table = workspace + "\\" +output_table_name
+        in_memory_table = workspace + "\\" + output_table_name
         mapping_snapshot_data_io.copy_mapping_areas_to_memory(self, output_table_name)
         mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(output_table_name,
-                                                                               "mapping_area",
-                                                                               MappingArea.rrad_input_field_attribute_lookup())
+                                                                                                   "mapping_area",
+                                                                                                   MappingArea.rrad_input_field_attribute_lookup())
         arcpy.Delete_management(in_memory_table)
 
 

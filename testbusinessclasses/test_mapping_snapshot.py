@@ -7,6 +7,7 @@ from businessclasses.mapping_snapshot_exception import NoSimulationsInMappingSna
 from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
 from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
 from businessclasses.mapping_area import MappingArea
+from businessclasses.mapping_node import MappingNode
 
 class TestMappingSnapshot(TestCase):
     def setUp(self):
@@ -30,6 +31,9 @@ class TestMappingSnapshot(TestCase):
         self.patch_copy_mapping_areas_to_memory = mock.patch.object(self.mock_mapping_snapshot_data_io, "copy_mapping_areas_to_memory")
         self.mock_copy_mapping_areas_to_memory = self.patch_copy_mapping_areas_to_memory.start()
 
+        self.patch_copy_mapping_nodes_to_memory = mock.patch.object(self.mock_mapping_snapshot_data_io, "copy_mapping_nodes_to_memory")
+        self.mock_copy_mapping_nodes_to_memory = self.patch_copy_mapping_nodes_to_memory.start()
+
         self.patch_create_objects_from_table_with_current_id = mock.patch.object(self.mock_rrad_mapping_db_data_io, "create_objects_from_table_with_current_id")
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.start()
 
@@ -41,6 +45,7 @@ class TestMappingSnapshot(TestCase):
         self.mock_copy_mapping_areas_to_memory = self.patch_copy_mapping_areas_to_memory.stop()
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.stop()
         self.mock_arcpy_delete_management = self.patch_arcpy_delete_management.stop()
+        self.mock_copy_mapping_nodes_to_memory = self.patch_copy_mapping_nodes_to_memory.stop()
 
     def test_simulation_ids_returns_list_of_correct_simulations(self):
         simulation_ids = self.mapping_snapshot.simulation_ids()
@@ -64,3 +69,17 @@ class TestMappingSnapshot(TestCase):
     def test_create_mapping_areas_calls_arcpy_delete_management_with_correct_arguments(self):
         self.mapping_snapshot.create_mapping_areas(self.mock_mapping_snapshot_data_io, self.mapping_snapshot.simulations)
         self.mock_arcpy_delete_management.assert_called_with("in_memory\\mapping_area_in_memory_table")
+
+    def test_create_mapping_nodes_calls_copy_mapping_areas_to_memory_with_correct_arguments(self):
+        self.mapping_snapshot.create_mapping_nodes(self.mock_mapping_snapshot_data_io, self.mapping_snapshot.simulations)
+        self.mock_copy_mapping_nodes_to_memory.assert_called_with(self.mapping_snapshot, "mapping_node_in_memory_table")
+
+    def test_create_mapping_nodes_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
+        self.mapping_snapshot.create_mapping_nodes(self.mock_mapping_snapshot_data_io, self.mapping_snapshot.simulations)
+        self.mock_create_objects_from_table_with_current_id.assert_called_with("mapping_node_in_memory_table",
+                                                                               "mapping_node",
+                                                                               MappingNode.rrad_input_field_attribute_lookup())
+
+    def test_create_mapping_nodes_calls_arcpy_delete_management_with_correct_arguments(self):
+        self.mapping_snapshot.create_mapping_nodes(self.mock_mapping_snapshot_data_io, self.mapping_snapshot.simulations)
+        self.mock_arcpy_delete_management.assert_called_with("in_memory\\mapping_node_in_memory_table")
