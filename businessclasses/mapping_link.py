@@ -28,7 +28,7 @@ class MappingLink(MappingObject):
     @staticmethod
     def input_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["GLOBALID"] = "global_id"
+        field_attribute_lookup["dme_global_id"] = "global_id"
         field_attribute_lookup["Rehab_ID"] = "rehab_id"
         field_attribute_lookup["BPW"] = "mortality_BPW"
         field_attribute_lookup["FailureYear"] = "failure_year"
@@ -48,6 +48,7 @@ class MappingLink(MappingObject):
     @staticmethod
     def rrad_field_attribute_lookup():
         rrad_field_attribute_lookup = OrderedDict()
+        rrad_field_attribute_lookup["dme_global_id"] = "global_id"
         rrad_field_attribute_lookup["Rehab_ID"] = "rehab_id"
         rrad_field_attribute_lookup["BPW"] = "bpw"
         rrad_field_attribute_lookup["FailureYear"] = "failure_year"

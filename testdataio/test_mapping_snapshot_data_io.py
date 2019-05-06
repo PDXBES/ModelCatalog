@@ -60,3 +60,24 @@ class TestMappingSnapshotDataIo(TestCase):
                                                           MappingNode.input_field_attribute_lookup(),
                                                           "mapping_nodes_sde_path",
                                                           "mapping_nodes_sde_path")
+
+    def test_copy_mapping_links_for_capacity_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments(self):
+        input_table = "link_results_sde_path"
+        in_memory_output_table_name = "in_memory_table"
+        id_field_name = "Simulation_ID"
+        id_list = "id_list"
+        self.mapping_snapshot_data_io.copy_mapping_links_for_capacity_to_memory(self.mock_mapping_snapshot,
+                                                                   in_memory_output_table_name)
+        self.mock_copy_to_memory_with_id_filter.assert_called_with(input_table, in_memory_output_table_name,
+                                                                   id_field_name, id_list)
+
+    def test_copy_mapping_links_for_rehab_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments(self):
+        input_table = "rehab_results_sde_path"
+        in_memory_output_table_name = "in_memory_table"
+        id_field_name = "Simulation_ID"
+        id_list = "id_list"
+        self.mapping_snapshot_data_io.copy_mapping_links_for_rehab_to_memory(self.mock_mapping_snapshot,
+                                                                   in_memory_output_table_name)
+        self.mock_copy_to_memory_with_id_filter.assert_called_with(input_table, in_memory_output_table_name,
+                                                                   id_field_name, id_list)
+

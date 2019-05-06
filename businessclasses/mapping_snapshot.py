@@ -38,13 +38,21 @@ class MappingSnapshot(GenericObject):
         field_attribute_lookup["Created_by"] = "created_by"
         return field_attribute_lookup
 
-#TODO: create input_field_attribute_lookup
-    def create_mapping_links(self, rrad_mapping_db_data_io, simulations):
-        # type: (self, MappingBasisDataIo) -> List[MappingLink]
+    def join_rehab_and_capacity_in_memory_tables(self, mapping_snapshot_data_io):
+        capacity_output_table_name = "capacity_links_in_memory_table"
+        rehab_output_table_name = "rehab_links_in_memory_table"
+        capacity_global_id_field = "dme_global_id"
+        rehab_global_id_field = "GLOBALID"
+        join_type = "KEEP_ALL"
+        mapping_snapshot_data_io.copy_mapping_links_for_capacity_to_memory(self, capacity_output_table_name)
+        mapping_snapshot_data_io.copy_mapping_links_for_rehab_to_memory(self, rehab_output_table_name)
+        arcpy.AddJoin_management(capacity_output_table_name, capacity_global_id_field, rehab_output_table_name, rehab_global_id_field, join_type)
 
-        pass
 
-    def create_mapping_nodes(self, mapping_snapshot_data_io, simulations):
+    def create_mapping_links(self, mapping_snapshot_data_io):
+        self.join_rehab_and_capacity_in_memory_tables(mapping_snapshot_data_io)
+
+    def create_mapping_nodes(self, mapping_snapshot_data_io):
         workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
         output_table_name = "mapping_node_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
@@ -54,7 +62,7 @@ class MappingSnapshot(GenericObject):
                                                                                                     MappingNode.rrad_input_field_attribute_lookup())
         arcpy.Delete_management(in_memory_table)
 
-    def create_mapping_areas(self, mapping_snapshot_data_io, simulations):
+    def create_mapping_areas(self, mapping_snapshot_data_io):
         workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
         output_table_name = "mapping_area_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name

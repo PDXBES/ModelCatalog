@@ -23,6 +23,19 @@ class MappingSnapshotDataIo(ObjectDataIo):
         id_list = mapping_snapshot.simulation_ids()
         self.rrad_mapping_db_data_io.copy_to_memory_with_id_filter(input_table, output_table_name, id_field_name, id_list)
 
+    def copy_mapping_links_for_capacity_to_memory(self, mapping_snapshot, output_table_name):
+        input_table = self.config.link_results_sde_path
+        id_field_name = "Simulation_ID"
+        id_list = mapping_snapshot.simulation_ids()
+        self.rrad_mapping_db_data_io.copy_to_memory_with_id_filter(input_table, output_table_name, id_field_name, id_list)
+
+    def copy_mapping_links_for_rehab_to_memory(self, mapping_snapshot, output_table_name):
+        input_table = self.config.rehab_results_sde_path
+        id_field_name = "Simulation_ID"
+        id_list = mapping_snapshot.simulation_ids()
+        self.rrad_mapping_db_data_io.copy_to_memory_with_id_filter(input_table, output_table_name, id_field_name,
+                                                                   id_list)
+
     def append_mapping_links(self):
         pass
 
