@@ -45,6 +45,8 @@ class CharacterizationReportingTool(object):
                                                                                                self.model_catalog,
                                                                                                self.model_catalog_db_data_io)
 
+        self.characterization_reporting.create_characterization_model_dictionary()
+
     def getParameterInfo(self):
         characterization_models = arcpy.Parameter(
             displayName="Characterization Models",
@@ -56,7 +58,6 @@ class CharacterizationReportingTool(object):
 
         characterization_models.filter.type = "ValueList"
         characterization_models.filter.list = self.characterization_reporting.characterization_model.keys()
-        #TODO:write function to retrieve characterization models from model tracking table
 
         requested_by = arcpy.Parameter(
             displayName="Requested By",

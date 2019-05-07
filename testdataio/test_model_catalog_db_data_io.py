@@ -51,14 +51,14 @@ class TestModelCatalogDbDataIO(TestCase):
         self.patch_read_simulations = mock.patch("dataio.model_data_io.ModelDataIo.read_simulations")
         self.mock_read_simulations = self.patch_read_simulations.start()
 
-        self.patch_add_simulations = mock.patch("dataio.model_data_io.ModelDataIo.add_simulations")
-        self.mock_add_simulations = self.patch_add_simulations.start()
+        self.patch_append_simulations = mock.patch("dataio.model_data_io.ModelDataIo.append_simulations")
+        self.mock_append_simulations = self.patch_append_simulations.start()
 
-        self.patch_add_model_alterations = mock.patch("dataio.model_data_io.ModelDataIo.add_model_alterations")
-        self.mock_add_model_alterations = self.patch_add_model_alterations.start()
+        self.patch_append_model_alterations = mock.patch("dataio.model_data_io.ModelDataIo.append_model_alterations")
+        self.mock_append_model_alterations = self.patch_append_model_alterations.start()
 
-        self.patch_add_project_types = mock.patch("dataio.model_data_io.ModelDataIo.add_project_types")
-        self.mock_add_project_types = self.patch_add_project_types.start()
+        self.patch_append_project_types = mock.patch("dataio.model_data_io.ModelDataIo.append_project_types")
+        self.mock_append_project_types = self.patch_append_project_types.start()
 
         self.patch_start_editing_session = mock.patch("dataio.model_data_io.ModelDataIo.start_editing_session")
         self.mock_start_editing_session = self.patch_start_editing_session.start()
@@ -79,9 +79,9 @@ class TestModelCatalogDbDataIO(TestCase):
         self.mock_da_InsertCursor = self.patch_da_InsertCursor.stop()
         self.mock_append_object_to_db = self.patch_append_object_to_db.stop()
         self.mock_read_simulations = self.patch_read_simulations.stop()
-        self.mock_add_simulations = self.patch_add_simulations.stop()
-        self.mock_add_model_alterations = self.patch_add_model_alterations.stop()
-        self.mock_add_project_types = self.patch_add_project_types.stop()
+        self.mock_append_simulations = self.patch_append_simulations.stop()
+        self.mock_add_model_alterations = self.patch_append_model_alterations.stop()
+        self.mock_append_project_types = self.patch_append_project_types.stop()
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
         self.mock_set_registered_model_to_read_only = self.patch_set_registered_model_to_read_only.stop()
@@ -107,17 +107,17 @@ class TestModelCatalogDbDataIO(TestCase):
         self.mock_append_object_to_db.assert_called_with(self.model, Model.input_field_attribute_lookup(),
                                                          "model_tracking_sde_path", "model_tracking_sde_path")
 
-    def test_add_model_calls_add_simulations_with_correct_arguments(self):
+    def test_add_model_calls_append_simulations_with_correct_arguments(self):
         self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
-        self.mock_add_simulations.assert_called_with(self.model)
+        self.mock_append_simulations.assert_called_with(self.model)
 
-    def test_add_model_calls_add_model_alterations_with_correct_arguments(self):
+    def test_add_model_calls_append_model_alterations_with_correct_arguments(self):
         self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
-        self.mock_add_model_alterations.assert_called_with(self.model)
+        self.mock_append_model_alterations.assert_called_with(self.model)
 
-    def test_add_model_calls_add_project_types_with_correct_arguments(self):
+    def test_add_model_calls_append_project_types_with_correct_arguments(self):
         self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
-        self.mock_add_project_types.assert_called_with(self.model)
+        self.mock_append_project_types.assert_called_with(self.model)
 
     def test_add_model_calls_start_editing_session_with_correct_workspace(self):
         self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)
@@ -130,7 +130,7 @@ class TestModelCatalogDbDataIO(TestCase):
 
     # this test will cause a traceback with an exception. it is testing the rollback.
     def test_add_model_calls_stop_editing_session_exception_thrown_with_save_changes_false(self):
-        self.mock_add_simulations.side_effect = Exception()
+        self.mock_append_simulations.side_effect = Exception()
         save_changes = False
         try:
             self.model_catalog_db_data_io.add_model(self.model, self.model_data_io)

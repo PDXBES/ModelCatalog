@@ -50,9 +50,9 @@ class ModelCatalogDbDataIo(DbDataIo):
             self.append_object_to_db(model, Model.input_field_attribute_lookup(),
                                       self.config.model_tracking_sde_path,
                                       self.config.model_tracking_sde_path)
-            model_data_io.add_simulations(model)
-            model_data_io.add_model_alterations(model)
-            model_data_io.add_project_types(model)
+            model_data_io.append_simulations(model)
+            model_data_io.append_model_alterations(model)
+            model_data_io.append_project_types(model)
             model_data_io.write_model_registration_file(model)
             if model.model_status_id == self.config.model_status_id["Final"]:
                 model_data_io.set_registered_model_to_read_only(model)

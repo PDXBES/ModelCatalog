@@ -177,8 +177,8 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 0)
         self.assertEquals(first_simulation.sim_desc, "Dec2015")
 
-    def test_add_simulation_calls_add_object_with_correct_arguments(self):
-        self.model_data_io.add_simulation(11, self.mock_simulation)
+    def test_append_simulation_calls_append_object_with_correct_arguments(self):
+        self.model_data_io.append_simulation(11, self.mock_simulation)
         self.mock_append_object_to_db.assert_called_with(11, self.mock_simulation, self.mock_simulation.input_field_attribute_lookup,
                                                          self.config.simulation_sde_path)
 
@@ -196,59 +196,59 @@ class TestModelDataIO(TestCase):
         self.model_data_io.create_model_geometry(self.mock_model)
         self.assertEqual(self.mock_model.model_geometry, "geom")
 
-    def test_add_model_alteration_called_with_alt_bc_calls_add_object_with_correct_arguments(self):
+    def test_append_model_alteration_called_with_alt_bc_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.add_model_alteration(11, self.mock_model_alt_bc)
+            self.model_data_io.append_model_alteration(11, self.mock_model_alt_bc)
             mock_append_object_to_db.assert_called_with(11, self.mock_model_alt_bc,
                                                self.generic_field_attribute_lookup,
                                                self.config.model_alt_bc_sde_path)
 
-    def test_add_model_alteration_called_with_alt_hydrologic_calls_add_object_with_correct_arguments(self):
+    def test_append_model_alteration_called_with_alt_hydrologic_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydrologic)
+            self.model_data_io.append_model_alteration(11, self.mock_model_alt_hydrologic)
             mock_append_object_to_db.assert_called_with(11, self.mock_model_alt_hydrologic,
                                                self.generic_field_attribute_lookup,
                                                self.config.model_alt_hydrologic_sde_path)
 
-    def test_add_model_alteration_called_with_alt_hydraulic_calls_add_object_with_correct_arguments(self):
+    def test_append_model_alteration_called_with_alt_hydraulic_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydraulic)
+            self.model_data_io.append_model_alteration(11, self.mock_model_alt_hydraulic)
             mock_append_object_to_db.assert_called_with(11, self.mock_model_alt_hydraulic,
                                                self.generic_field_attribute_lookup,
                                                self.config.model_alt_hydraulic_sde_path)
 
-    def test_add_model_alteration_add_object_raises_exception_raises_add_model_alteration_exception(self):
+    def test_append_model_alteration_append_object_raises_exception_raises_append_model_alteration_exception(self):
         self.mock_append_object_to_db.side_effect = AddObjectException()
         with self.assertRaises((Exception, AddModelAlterationException)):
-            self.model_data_io.add_model_alteration(11, self.mock_model_alt_hydraulic)
+            self.model_data_io.append_model_alteration(11, self.mock_model_alt_hydraulic)
 
-    def test_add_simulations_calls_add_simulation_with_correct_arguments(self):
-        patch_add_simulation = mock.patch.object(self.model_data_io, "add_simulation")
-        mock_add_simulation = patch_add_simulation.start()
-        self.model_data_io.add_simulations(self.mock_model)
-        mock_add_simulation.assert_called_with(11, self.mock_simulation)
-        patch_add_simulation.stop()
+    def test_append_simulations_calls_append_simulation_with_correct_arguments(self):
+        patch_append_simulation = mock.patch.object(self.model_data_io, "append_simulation")
+        mock_append_simulation = patch_append_simulation.start()
+        self.model_data_io.append_simulations(self.mock_model)
+        mock_append_simulation.assert_called_with(11, self.mock_simulation)
+        patch_append_simulation.stop()
 
-    def test_add_model_alterations_calls_add_model_alteration_with_correct_arguments(self):
-        patch_add_model_alteration = mock.patch.object(self.model_data_io, "add_model_alteration")
-        mock_add_model_alteration = patch_add_model_alteration.start()
-        self.model_data_io.add_model_alterations(self.mock_model)
-        mock_add_model_alteration.assert_called_with(11, self.mock_model_alt_bc)
-        patch_add_model_alteration.stop()
+    def test_append_model_alterations_calls_append_model_alteration_with_correct_arguments(self):
+        patch_append_model_alteration = mock.patch.object(self.model_data_io, "append_model_alteration")
+        mock_append_model_alteration = patch_append_model_alteration.start()
+        self.model_data_io.append_model_alterations(self.mock_model)
+        mock_append_model_alteration.assert_called_with(11, self.mock_model_alt_bc)
+        patch_append_model_alteration.stop()
 
-    def test_add_project_type_calls_add_object_with_correct_arguments(self):
+    def test_append_project_type_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.add_project_type(11, self.mock_project_type)
+            self.model_data_io.append_project_type(11, self.mock_project_type)
             mock_append_object_to_db.assert_called_with(11, self.mock_project_type,
                                                self.generic_field_attribute_lookup,
                                                self.config.project_type_sde_path)
 
-    def test_add_project_types_calls_add_project_type_with_correct_arguments(self):
-        patch_add_project_type = mock.patch.object(self.model_data_io, "add_project_type")
-        mock_add_project_type = patch_add_project_type.start()
-        self.model_data_io.add_project_types(self.mock_model)
-        mock_add_project_type.assert_called_with(11, self.mock_project_type)
-        patch_add_project_type.stop()
+    def test_append_project_types_calls_append_project_type_with_correct_arguments(self):
+        patch_append_project_type = mock.patch.object(self.model_data_io, "append_project_type")
+        mock_append_project_type = patch_append_project_type.start()
+        self.model_data_io.append_project_types(self.mock_model)
+        mock_append_project_type.assert_called_with(11, self.mock_project_type)
+        patch_append_project_type.stop()
 
     def test_set_registered_model_to_read_only_calls_os_walk_with_correct_arguments(self):
         self.model_data_io.set_registered_model_to_read_only(self.mock_model)

@@ -8,6 +8,7 @@ from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
 from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
 from businessclasses.mapping_area import MappingArea
 from businessclasses.mapping_node import MappingNode
+from businessclasses.mapping_link import MappingLink
 
 class TestMappingSnapshot(TestCase):
     def setUp(self):
@@ -118,6 +119,16 @@ class TestMappingSnapshot(TestCase):
             self.mapping_snapshot.create_mapping_links(self.mock_mapping_snapshot_data_io)
             mock_join_rehab_and_capacity_in_memory_tables.assert_called_with(self.mock_mapping_snapshot_data_io)
             mock_join_rehab_and_capacity_in_memory_tables.stop()
+
+    def test_create_mapping_links_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
+        self.mapping_snapshot.create_mapping_links(self.mock_mapping_snapshot_data_io)
+        self.mock_create_objects_from_table_with_current_id.assert_called_with("mapping_link_in_memory_table",
+                                                                               "mapping_link",
+                                                                               MappingLink.rrad_field_attribute_lookup())
+
+    def test_create_mapping_links_calls_arcpy_delete_management_with_correct_arguments(self):
+        self.mapping_snapshot.create_mapping_links(self.mock_mapping_snapshot_data_io)
+        self.mock_arcpy_delete_management.assert_called_with("in_memory\\mapping_link_in_memory_table")
 
 
 

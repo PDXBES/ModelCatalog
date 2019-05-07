@@ -4,6 +4,7 @@ from object_data_io import ObjectDataIo
 from rrad_mapping_db_data_io import RradMappingDbDataIo
 from businessclasses.mapping_area import MappingArea
 from businessclasses.mapping_node import MappingNode
+from businessclasses.mapping_link import MappingLink
 
 class MappingSnapshotDataIo(ObjectDataIo):
 
@@ -36,9 +37,14 @@ class MappingSnapshotDataIo(ObjectDataIo):
         self.rrad_mapping_db_data_io.copy_to_memory_with_id_filter(input_table, output_table_name, id_field_name,
                                                                    id_list)
 
-    def append_mapping_links(self):
-        pass
-
+    def append_mapping_links(self, object_list):
+        field_attribute_lookup = MappingLink.input_field_attribute_lookup()
+        template_table_path = self.config.mapping_links_sde_path
+        target_path = self.config.mapping_links_sde_path
+        self.rrad_mapping_db_data_io.append_objects_to_db(object_list,
+                                                          field_attribute_lookup,
+                                                          template_table_path,
+                                                          target_path)
 
     def append_mapping_nodes(self, object_list):
         field_attribute_lookup = MappingNode.input_field_attribute_lookup()
@@ -51,8 +57,8 @@ class MappingSnapshotDataIo(ObjectDataIo):
 
     def append_mapping_areas(self, object_list):
         field_attribute_lookup = MappingArea.input_field_attribute_lookup()
-        template_table_path = self.config.mapping_nodes_sde_path
-        target_path = self.config.mapping_nodes_sde_path
+        template_table_path = self.config.mapping_areas_sde_path
+        target_path = self.config.mapping_areas_sde_path
         self.rrad_mapping_db_data_io.append_objects_to_db(object_list,
                                                           field_attribute_lookup,
                                                           template_table_path,

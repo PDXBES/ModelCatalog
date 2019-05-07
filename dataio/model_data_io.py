@@ -64,16 +64,16 @@ class ModelDataIo(ObjectDataIo):
             simulations.append(simulation)
         return simulations
 
-    def add_simulation(self, model_id, simulation):
+    def append_simulation(self, model_id, simulation):
         # type: (int, Simulation) -> None
         self.append_object_to_db(model_id, simulation, simulation.input_field_attribute_lookup, self.config.simulation_sde_path)
 
-    def add_simulations(self, model):
+    def append_simulations(self, model):
         # type: (Model) -> None
         for simulation in model.simulations:
-            self.add_simulation(model.id, simulation)
+            self.append_simulation(model.id, simulation)
 
-    def add_model_alteration(self, model_id, model_alteration):
+    def append_model_alteration(self, model_id, model_alteration):
         # type: (int, ModelAlteration) -> None
         if model_alteration.name == "model_alt_bc":
             self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_bc_sde_path)
@@ -82,20 +82,20 @@ class ModelDataIo(ObjectDataIo):
         elif model_alteration.name == "model_alt_hydraulic":
             self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydraulic_sde_path)
 
-    def add_model_alterations(self, model):
+    def append_model_alterations(self, model):
         # type: (Model) -> None
         for model_alteration in model.model_alterations:
-            self.add_model_alteration(model.id, model_alteration)
+            self.append_model_alteration(model.id, model_alteration)
 
-    def add_project_type(self, model_id, project_type):
+    def append_project_type(self, model_id, project_type):
         # type: (int, ProjectType) -> None
         self.append_object_to_db(model_id, project_type, project_type.input_field_attribute_lookup,
                                  self.config.project_type_sde_path)
 
-    def add_project_types(self, model):
+    def append_project_types(self, model):
         # type: (Model) -> None
         for project_type in model.project_types:
-            self.add_project_type(model.id, project_type)
+            self.append_project_type(model.id, project_type)
 
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
