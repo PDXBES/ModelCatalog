@@ -4,6 +4,7 @@ from businessclasses.mapping_snapshot import MappingSnapshot
 from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
 from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
 from businessclasses.config import Config
+from businessclasses.simulation import Simulation
 import arcpy
 import mock
 
@@ -29,8 +30,17 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot.requested_by = "Keith"
         self.mapping_snapshot.created_by = "Joe"
 
+        self.simulation_1 = Simulation(self.config)
+        self.simulation_1.id = 1382
+        self.simulation_1.sim_desc = "Simulation_1"
 
+        self.simulation_2 = Simulation(self.config)
+        self.simulation_2.id = 1384
+        self.simulation_2.sim_desc = "Simulation_2"
+        
+        self.mapping_snapshot.simulations = [self.simulation_1, self.simulation_2]
 
 
     def test_add_mapping_snapshot_called(self):
+
         self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mapping_snapshot, self.mapping_snapshot_data_io)

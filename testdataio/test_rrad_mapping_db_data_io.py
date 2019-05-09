@@ -30,12 +30,37 @@ class TestRradMappingDbDataIo(TestCase):
         self.patch_append_object_to_db = mock.patch.object(self.rrad_mapping_db_data_io, "append_object_to_db")
         self.mock_append_object_to_db = self.patch_append_object_to_db.start()
 
+        self.patch_append_mapping_links = mock.patch("dataio.mapping_snapshot_data_io.MappingSnapshotDataIo.append_mapping_links")
+        self.mock_append_mapping_links = self.patch_append_mapping_links.start()
+
+        self.patch_append_mapping_nodes = mock.patch(
+            "dataio.mapping_snapshot_data_io.MappingSnapshotDataIo.append_mapping_nodes")
+        self.mock_append_mapping_nodes = self.patch_append_mapping_nodes.start()
+
+        self.patch_append_mapping_areas = mock.patch(
+            "dataio.mapping_snapshot_data_io.MappingSnapshotDataIo.append_mapping_areas")
+        self.mock_append_mapping_areas = self.patch_append_mapping_areas.start()
+
+        self.patch_create_mapping_links = mock.patch.object(self.mock_mapping_snapshot, "create_mapping_links")
+        self.mock_create_mapping_links = self.patch_create_mapping_links.start()
+
+        self.patch_create_mapping_nodes = mock.patch.object(self.mock_mapping_snapshot, "create_mapping_nodes")
+        self.mock_create_mapping_nodes = self.patch_create_mapping_nodes.start()
+
+        self.patch_create_mapping_areas = mock.patch.object(self.mock_mapping_snapshot, "create_mapping_areas")
+        self.mock_create_mapping_areas = self.patch_create_mapping_areas.start()
 
 
     def tearDown(self):
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
         self.mock_append_object_to_db = self.patch_append_object_to_db.stop()
+        self.mock_append_mapping_links = self.patch_append_mapping_links.stop()
+        self.mock_append_mapping_nodes = self.patch_append_mapping_nodes.stop()
+        self.mock_append_mapping_areas = self.patch_append_mapping_areas.stop()
+        self.mock_create_mapping_links = self.patch_create_mapping_links.stop()
+        self.mock_create_mapping_nodes = self.patch_create_mapping_nodes.stop()
+        self.mock_create_mapping_areas = self.patch_create_mapping_areas.stop()
 
 
     def test_add_mapping_snapshot_calls_start_editing_session_with_correct_workspace(self):
@@ -60,3 +85,28 @@ class TestRradMappingDbDataIo(TestCase):
             self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
         except:
             self.mock_stop_editing_session.assert_called_with("editor", save_changes)
+
+    def test_add_mapping_snapshot_calls_append_mapping_links_with_correct_arguments(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_append_mapping_links.assert_called_with(self.mock_mapping_snapshot)
+
+
+    def test_add_mapping_snapshot_calls_append_mapping_nodes_with_correct_arguments(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_append_mapping_nodes.assert_called_with(self.mock_mapping_snapshot)
+
+    def test_add_mapping_snapshot_calls_append_mapping_areas_with_correct_arguments(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_append_mapping_areas.assert_called_with(self.mock_mapping_snapshot)
+
+    def test_add_mapping_snapshot_calls_create_mapping_links_with_correct_arguments(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_create_mapping_links.assert_called_with(self.mapping_snapshot_data_io)
+
+    def test_add_mapping_snapshot_calls_create_mapping_nodes_with_correct_arguments(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_create_mapping_nodes.assert_called_with(self.mapping_snapshot_data_io)
+
+    def test_add_mapping_snapshot_calls_create_mapping_areas_with_correct_arguments(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.mock_create_mapping_areas.assert_called_with(self.mapping_snapshot_data_io)

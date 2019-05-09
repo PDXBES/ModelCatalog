@@ -18,7 +18,7 @@ class TestSimulationDataIO(TestCase):
 
         self.patch_model_catalog_db_data_io_copy = mock.patch.object(mock_model_catalog_db_data_io, "copy")
         self.mock_model_catalog_db_data_io_copy = self.patch_model_catalog_db_data_io_copy.start()
-
+        pass
         self.patch_model_catalog_db_data_io_copy_to_memory = mock.patch.object(mock_model_catalog_db_data_io, "copy_to_memory")
         self.mock_model_catalog_db_data_io_copy_to_memory = self.patch_model_catalog_db_data_io_copy_to_memory.start()
 

@@ -8,13 +8,18 @@ from businessclasses.mapping_area import MappingArea
 from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_link import MappingLink
 
+
 class TestMappingSnapshotDataIo(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
         self.rrad_mapping_db_data_io = RradMappingDbDataIo(self.config)
         self.mapping_snapshot_data_io = MappingSnapshotDataIo(self.config, self.rrad_mapping_db_data_io)
-        self.mock_mapping_snapshot = mock.MagicMock(MappingSnapshot)
+        self.mock_mapping_snapshot = mock.MagicMock(spec = MappingSnapshot)
+
+        self.mock_mapping_snapshot.mapping_links = ["link_1", "link_2"]
+        self.mock_mapping_snapshot.mapping_nodes = ["node_1", "node_2"]
+        self.mock_mapping_snapshot.mapping_areas = ["area_1", "area_2"]
 
         self.simulation_ids = mock.patch.object(self.mock_mapping_snapshot, "simulation_ids")
         self.simulation_ids = self.simulation_ids.start()
@@ -49,15 +54,15 @@ class TestMappingSnapshotDataIo(TestCase):
         self.mock_copy_to_memory_with_id_filter.assert_called_with(input_table, in_memory_output_table_name, id_field_name, id_list)
 
     def test_append_mapping_areas_calls_append_objects_to_db_with_correct_arguments(self):
-        self.mapping_snapshot_data_io.append_mapping_areas("object_list")
-        self.mock_append_objects_to_db.assert_called_with("object_list",
+        self.mapping_snapshot_data_io.append_mapping_areas(self.mock_mapping_snapshot)
+        self.mock_append_objects_to_db.assert_called_with(self.mock_mapping_snapshot.mapping_areas,
                                                           MappingArea.input_field_attribute_lookup(),
                                                           "mapping_areas_sde_path",
                                                           "mapping_areas_sde_path")
 
     def test_append_mapping_nodes_calls_append_objects_to_db_with_correct_arguments(self):
-        self.mapping_snapshot_data_io.append_mapping_nodes("object_list")
-        self.mock_append_objects_to_db.assert_called_with("object_list",
+        self.mapping_snapshot_data_io.append_mapping_nodes(self.mock_mapping_snapshot)
+        self.mock_append_objects_to_db.assert_called_with(self.mock_mapping_snapshot.mapping_nodes,
                                                           MappingNode.input_field_attribute_lookup(),
                                                           "mapping_nodes_sde_path",
                                                           "mapping_nodes_sde_path")
@@ -83,8 +88,9 @@ class TestMappingSnapshotDataIo(TestCase):
                                                                    id_field_name, id_list)
 
     def test_append_mapping_links_calls_append_objects_to_db_with_correct_arguments(self):
-        self.mapping_snapshot_data_io.append_mapping_links("object_list")
-        self.mock_append_objects_to_db.assert_called_with("object_list",
+        self.mapping_snapshot_data_io.append_mapping_links(self.mock_mapping_snapshot)
+
+        self.mock_append_objects_to_db.assert_called_with(self.mock_mapping_snapshot.mapping_links,
                                                           MappingLink.input_field_attribute_lookup(),
                                                           "mapping_links_sde_path",
                                                           "mapping_links_sde_path")
