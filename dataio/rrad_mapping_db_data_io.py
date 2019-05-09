@@ -14,7 +14,7 @@ class RradMappingDbDataIo(DbDataIo):
         self.mapping_snapshots = []
 
         self.config = config
-        self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
+        self.current_id_database_table_path = self.config.mapping_current_id_sde_path
         self.workspace = "in_memory"
         self.class_factory = GenericClassFactory(self.config)
         self.class_factory.class_dict = {"mapping_snapshot": MappingSnapshot,
@@ -34,7 +34,7 @@ class RradMappingDbDataIo(DbDataIo):
             mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)
             mapping_snapshot.create_mapping_areas(mapping_snapshot_data_io)
 
-            mapping_snapshot_data_io.append_mapping_links(mapping_snapshot)
+            #mapping_snapshot_data_io.append_mapping_links(mapping_snapshot)
             mapping_snapshot_data_io.append_mapping_nodes(mapping_snapshot)
             mapping_snapshot_data_io.append_mapping_areas(mapping_snapshot)
 

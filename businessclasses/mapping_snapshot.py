@@ -53,7 +53,7 @@ class MappingSnapshot(GenericObject):
         output_table_name = "mapping_link_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
         self.join_rehab_and_capacity_in_memory_tables(mapping_snapshot_data_io)
-        mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
+        self.mapping_links = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
                                                                                                    "mapping_link",
                                                                                                    MappingLink.rrad_field_attribute_lookup())
         arcpy.Delete_management(in_memory_table)
@@ -63,7 +63,7 @@ class MappingSnapshot(GenericObject):
         output_table_name = "mapping_node_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
         mapping_snapshot_data_io.copy_mapping_nodes_to_memory(self, output_table_name)
-        mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
+        self.mapping_nodes = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
                                                                                                     "mapping_node",
                                                                                                     MappingNode.rrad_input_field_attribute_lookup())
         arcpy.Delete_management(in_memory_table)
@@ -73,7 +73,7 @@ class MappingSnapshot(GenericObject):
         output_table_name = "mapping_area_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
         mapping_snapshot_data_io.copy_mapping_areas_to_memory(self, output_table_name)
-        mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
+        self.mapping_areas = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
                                                                                                    "mapping_area",
                                                                                                    MappingArea.rrad_input_field_attribute_lookup())
         arcpy.Delete_management(in_memory_table)

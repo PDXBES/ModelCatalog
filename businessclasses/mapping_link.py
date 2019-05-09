@@ -23,6 +23,7 @@ class MappingLink(MappingObject):
         self.link_flow_type = None
         self.link_symbology = None
         self.geometry = None
+        self.name = "mapping_link"
         self.input_field_attribute_lookup = MappingLink.input_field_attribute_lookup()
     #TODO: verify that these match the RRAD - capacity links and rehab results
     @staticmethod
