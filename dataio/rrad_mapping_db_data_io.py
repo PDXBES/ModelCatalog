@@ -16,6 +16,7 @@ class RradMappingDbDataIo(DbDataIo):
         self.config = config
         self.current_id_database_table_path = self.config.mapping_current_id_sde_path
         self.workspace = "in_memory"
+        #self.workspace = r"C:\Users\bfreeman\Desktop\snapshot.gdb"
         self.class_factory = GenericClassFactory(self.config)
         self.class_factory.class_dict = {"mapping_snapshot": MappingSnapshot,
                                          "mapping_node": MappingNode,
@@ -30,13 +31,13 @@ class RradMappingDbDataIo(DbDataIo):
                                      self.config.mapping_snapshot_tracking_sde_path,
                                      self.config.mapping_snapshot_tracking_sde_path)
 
-            #mapping_snapshot.create_mapping_links(mapping_snapshot_data_io)
-            mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)
-            mapping_snapshot.create_mapping_areas(mapping_snapshot_data_io)
+            mapping_snapshot.create_mapping_links(mapping_snapshot_data_io)
+            #mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)
+            #mapping_snapshot.create_mapping_areas(mapping_snapshot_data_io)
 
-            #mapping_snapshot_data_io.append_mapping_links(mapping_snapshot)
-            mapping_snapshot_data_io.append_mapping_nodes(mapping_snapshot)
-            mapping_snapshot_data_io.append_mapping_areas(mapping_snapshot)
+            mapping_snapshot_data_io.append_mapping_links(mapping_snapshot)
+            #mapping_snapshot_data_io.append_mapping_nodes(mapping_snapshot)
+            #mapping_snapshot_data_io.append_mapping_areas(mapping_snapshot)
 
             mapping_snapshot_data_io.stop_editing_session(editor, True)
         except:

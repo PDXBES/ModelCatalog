@@ -24,7 +24,7 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot_data_io = MappingSnapshotDataIo(self.config, self.rrad_mapping_db_data_io)
         self.mapping_snapshot = MappingSnapshot(self.config)
 
-        self.mapping_snapshot.snapshot_id = 1
+        self.mapping_snapshot.id = 1
         self.mapping_snapshot.snapshot_type = "Characterization"
         self.mapping_snapshot.logic = "User Defined"
         self.mapping_snapshot.requested_by = "Keith"

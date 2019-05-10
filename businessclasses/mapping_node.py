@@ -16,11 +16,13 @@ class MappingNode(MappingObject):
     def input_field_attribute_lookup():
         field_attribute_lookup = MappingNode.rrad_input_field_attribute_lookup()
         field_attribute_lookup.update(MappingObject.mapping_object_field_attribute_lookup())
+        field_attribute_lookup["sim_desc"] = "sim_desc"
         return field_attribute_lookup
 
     @staticmethod
     def rrad_input_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["Simulation_ID"] = "simulation_id"
         field_attribute_lookup["node_id"] = "node_id"
         field_attribute_lookup["node_symbology"] = "node_symbology"
         field_attribute_lookup["MinFreeboardFt"] = "min_freeboard_ft"

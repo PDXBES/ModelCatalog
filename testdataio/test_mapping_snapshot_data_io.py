@@ -38,7 +38,7 @@ class TestMappingSnapshotDataIo(TestCase):
         self.mock_append_objects_to_db = self.patch_append_objects_to_db.stop()
 
     def test_copy_mapping_areas_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments(self):
-        input_table = "mapping_areas_sde_path"
+        input_table = "area_results_sde_path"
         in_memory_output_table_name = "in_memory_table"
         id_field_name = "Simulation_ID"
         id_list = "id_list"
@@ -46,7 +46,7 @@ class TestMappingSnapshotDataIo(TestCase):
         self.mock_copy_to_memory_with_id_filter.assert_called_with(input_table, in_memory_output_table_name, id_field_name, id_list)
 
     def test_copy_mapping_nodes_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments(self):
-        input_table = "mapping_nodes_sde_path"
+        input_table = "node_results_sde_path"
         in_memory_output_table_name = "in_memory_table"
         id_field_name = "Simulation_ID"
         id_list = "id_list"

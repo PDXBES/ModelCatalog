@@ -42,6 +42,7 @@ class MappingLink(MappingObject):
         field_attribute_lookup["link_symbology"] = "link_symbology"
         field_attribute_lookup["DesignFlowCfs"] = "design_flow_cfs"
         field_attribute_lookup["MaxFlowCfs"] = "max_flow_cfs"
+        field_attribute_lookup["sim_desc"] = "sim_desc"
         field_attribute_lookup.update(MappingObject.mapping_object_field_attribute_lookup())
         return field_attribute_lookup
 
@@ -62,5 +63,7 @@ class MappingLink(MappingObject):
         rrad_field_attribute_lookup["link_symbology"] = "link_symbology"
         rrad_field_attribute_lookup["DesignFlowCfs"] = "design_flow_cfs"
         rrad_field_attribute_lookup["MaxFlowCfs"] = "max_flow_cfs"
+        rrad_field_attribute_lookup["Shape@"] = "geometry"
+        rrad_field_attribute_lookup["Simulation_ID"] = "simulation_id"
         return rrad_field_attribute_lookup
 
