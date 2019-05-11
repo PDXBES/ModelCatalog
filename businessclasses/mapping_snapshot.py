@@ -47,8 +47,7 @@ class MappingSnapshot(GenericObject):
         join_type = "KEEP_ALL"
         mapping_snapshot_data_io.copy_mapping_links_for_capacity_to_memory(self, capacity_rehab_in_memory_table_name)
         mapping_snapshot_data_io.copy_mapping_links_for_rehab_to_memory(self, rehab_output_table_name)
-        #arcpy.AddJoin_management(in_memory_capacity_table, capacity_global_id_field, in_memory_rehab_table, rehab_global_id_field, join_type)
-        arcpy.JoinField_management(in_memory_capacity_table, capacity_global_id_field, in_memory_rehab_table, rehab_global_id_field)
+        arcpy.AddJoin_management(in_memory_capacity_table, capacity_global_id_field, in_memory_rehab_table, rehab_global_id_field, join_type)
 
     def create_mapping_links(self, mapping_snapshot_data_io):
         workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace

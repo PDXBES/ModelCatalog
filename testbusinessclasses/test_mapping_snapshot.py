@@ -40,11 +40,22 @@ class TestMappingSnapshot(TestCase):
 
 
         self.mapping_area_1 = mock.MagicMock(MappingArea)
+        self.mapping_area_1.sim_desc = None
+        self.mapping_area_1.snapshot_id = None
+        self.mapping_area_1.simulation_id = 1
         self.mapping_area_2 = mock.MagicMock(MappingArea)
+        self.mapping_area_2.sim_desc = None
+        self.mapping_area_2.snapshot_id = None
+        self.mapping_area_2.simulation_id = 2
 
         self.mapping_link_1 = mock.MagicMock(MappingLink)
+        self.mapping_link_1.sim_desc = None
+        self.mapping_link_1.snapshot_id = None
+        self.mapping_link_1.simulation_id = 1
         self.mapping_link_2 = mock.MagicMock(MappingLink)
-
+        self.mapping_link_2.sim_desc = None
+        self.mapping_link_2.snapshot_id = None
+        self.mapping_link_2.simulation_id = 2
 
         self.mock_rrad_mapping_db_data_io = mock.MagicMock(RradMappingDbDataIo)
         self.mock_rrad_mapping_db_data_io.workspace = "in_memory"
@@ -123,21 +134,24 @@ class TestMappingSnapshot(TestCase):
         self.mock_arcpy_delete_management.assert_called_with("in_memory\\mapping_node_in_memory_table")
 
     def test_join_rehab_and_capacity_in_memory_tables_calls_mapping_links_for_capacity_to_memory_with_correct_arguments(self):
-        self.mapping_snapshot.join_rehab_and_capacity_in_memory_tables(self.mock_mapping_snapshot_data_io, )
-        self.mock_copy_mapping_links_for_capacity_to_memory.assert_called_with(self.mapping_snapshot,"capacity_links_in_memory_table")
+        capacity_rehab_in_memory_table_name = "capacity_rehab_in_memory_table"
+        self.mapping_snapshot.join_rehab_and_capacity_in_memory_tables(self.mock_mapping_snapshot_data_io, capacity_rehab_in_memory_table_name)
+        self.mock_copy_mapping_links_for_capacity_to_memory.assert_called_with(self.mapping_snapshot,"capacity_rehab_in_memory_table")
 
     def test_join_rehab_and_capacity_in_memory_tables_calls_mapping_links_for_rehab_to_memory_with_correct_arguments(self):
-        self.mapping_snapshot.join_rehab_and_capacity_in_memory_tables(self.mock_mapping_snapshot_data_io, )
+        capacity_rehab_in_memory_table_name = "capacity_rehab_in_memory_table"
+        self.mapping_snapshot.join_rehab_and_capacity_in_memory_tables(self.mock_mapping_snapshot_data_io, capacity_rehab_in_memory_table_name)
         self.mock_copy_mapping_links_for_rehab_to_memory.assert_called_with(self.mapping_snapshot,"rehab_links_in_memory_table")
 
     def test_join_rehab_and_capacity_in_memory_tables_calls_arcpy_AddJoin_management_with_correct_arguments(self):
-        self.mapping_snapshot.join_rehab_and_capacity_in_memory_tables(self.mock_mapping_snapshot_data_io, )
-        self.mock_arcpy_add_join_management.assert_called_with("capacity_links_in_memory_table", "dme_global_id", "rehab_links_in_memory_table", "GLOBALID", "KEEP_ALL")
+        capacity_rehab_in_memory_table_name = "capacity_rehab_in_memory_table"
+        self.mapping_snapshot.join_rehab_and_capacity_in_memory_tables(self.mock_mapping_snapshot_data_io, capacity_rehab_in_memory_table_name)
+        self.mock_arcpy_add_join_management.assert_called_with("in_memory\\capacity_rehab_in_memory_table", "dme_global_id", "in_memory\\rehab_links_in_memory_table", "GLOBALID", "KEEP_ALL")
 
     def test_create_mapping_links_calls_join_rehab_and_capacity_in_memory_tables_with_correct_arguments(self):
         with mock.patch.object(self.mapping_snapshot, "join_rehab_and_capacity_in_memory_tables") as mock_join_rehab_and_capacity_in_memory_tables:
             self.mapping_snapshot.create_mapping_links(self.mock_mapping_snapshot_data_io)
-            mock_join_rehab_and_capacity_in_memory_tables.assert_called_with(self.mock_mapping_snapshot_data_io)
+            mock_join_rehab_and_capacity_in_memory_tables.assert_called_with(self.mock_mapping_snapshot_data_io, 'mapping_link_in_memory_table')
 
     def test_create_mapping_links_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
         self.mapping_snapshot.create_mapping_links(self.mock_mapping_snapshot_data_io)

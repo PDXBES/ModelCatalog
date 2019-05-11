@@ -1,20 +1,18 @@
 import unittest
-import os
 from businessclasses.mapping_snapshot import MappingSnapshot
 from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
 from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
 from businessclasses.config import Config
 from businessclasses.simulation import Simulation
-import arcpy
-import mock
 
 # This allows a file without a .py extension to be imported (ESRI pyt file)
-executable_path = os.path.dirname(os.path.realpath(__file__))
-pyt_path = os.path.abspath(os.path.join(executable_path, '..', "Mapping_tools.pyt"))
-from imp import load_source
-mapping_tools = load_source("Mapping_tools", pyt_path)
+# executable_path = os.path.dirname(os.path.realpath(__file__))
+# pyt_path = os.path.abspath(os.path.join(executable_path, '..', "Mapping_tools.pyt"))
+# from imp import load_source
+# mapping_tools = load_source("Mapping_tools", pyt_path)
 
 test_flag = "TEST"
+
 
 class CharacterizationReportIntegrationTest(unittest.TestCase):
     def setUp(self):
@@ -24,7 +22,7 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot_data_io = MappingSnapshotDataIo(self.config, self.rrad_mapping_db_data_io)
         self.mapping_snapshot = MappingSnapshot(self.config)
 
-        self.mapping_snapshot.id = 1
+        self.mapping_snapshot.id = 2
         self.mapping_snapshot.snapshot_type = "Characterization"
         self.mapping_snapshot.logic = "User Defined"
         self.mapping_snapshot.requested_by = "Keith"
@@ -39,7 +37,6 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.simulation_2.sim_desc = "Simulation_2"
         
         self.mapping_snapshot.simulations = [self.simulation_1, self.simulation_2]
-
 
     def test_add_mapping_snapshot_called(self):
 

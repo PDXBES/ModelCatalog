@@ -32,12 +32,12 @@ class RradMappingDbDataIo(DbDataIo):
                                      self.config.mapping_snapshot_tracking_sde_path)
 
             mapping_snapshot.create_mapping_links(mapping_snapshot_data_io)
-            #mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)
-            #mapping_snapshot.create_mapping_areas(mapping_snapshot_data_io)
+            mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)
+            mapping_snapshot.create_mapping_areas(mapping_snapshot_data_io)
 
             mapping_snapshot_data_io.append_mapping_links(mapping_snapshot)
-            #mapping_snapshot_data_io.append_mapping_nodes(mapping_snapshot)
-            #mapping_snapshot_data_io.append_mapping_areas(mapping_snapshot)
+            mapping_snapshot_data_io.append_mapping_nodes(mapping_snapshot)
+            mapping_snapshot_data_io.append_mapping_areas(mapping_snapshot)
 
             mapping_snapshot_data_io.stop_editing_session(editor, True)
         except:
