@@ -40,6 +40,10 @@ class Config:
         EMGAATS_sde = server + ".EMGAATS.sde"
         ASM_WORK_sde = server + ".ASM_WORK.sde"
         RRAD_MAPPING_sde = server + ".RRAD_MAPPING.sde"
+        GISDB1 = "GISDB1.EGH_PUBLIC.sde"
+
+        self.egh_public = os.path.join(sde_connections, GISDB1)
+        self.tv_ratings_sde_path = self.egh_public + r"\EGH_Public.ARCMAP_ADMIN.Collection_TVRatings_BES_pdx"
 
         self.model_catalog_sde_path = os.path.join(sde_connections, model_catalog_sde)
 
