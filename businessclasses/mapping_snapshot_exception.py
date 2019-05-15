@@ -9,3 +9,9 @@ class DuplicateMappingSnapshotException(MappingSnapshotException):
 
 class NoSimulationsInMappingSnapshotException(MappingSnapshotException):
     pass
+
+class MaxFlowIsNoneException(MappingSnapshotException):
+    pass
+
+class DesignFlowIsNoneException(MappingSnapshotException):
+    pass

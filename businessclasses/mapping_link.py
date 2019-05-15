@@ -1,5 +1,7 @@
 from mapping_object import MappingObject
 from collections import OrderedDict
+from mapping_snapshot_exception import MaxFlowIsNoneException
+from mapping_snapshot_exception import DesignFlowIsNoneException
 
 
 class MappingLink(MappingObject):
@@ -15,7 +17,7 @@ class MappingLink(MappingObject):
         self.last_inspection_date = None
         self.root_grade = None
         self.flow_ratio = None
-        self.hydraulically_deficient = None
+        #self.hydraulically_deficient = None
         self.design_flow_cfs = None
         self.max_flow_cfs = None
         self.material = None
@@ -25,6 +27,22 @@ class MappingLink(MappingObject):
         self.geometry = None
         self.name = "mapping_link"
         self.input_field_attribute_lookup = MappingLink.input_field_attribute_lookup()
+
+    @property
+    def hydraulically_deficient(self):
+        hydraulically_deficient_threshold = 1.2
+        if self.max_flow_cfs is None:
+            raise MaxFlowIsNoneException
+        if self.design_flow_cfs is None:
+            raise DesignFlowIsNoneException
+        if self.design_flow_cfs == 0:
+            return False
+
+        hydraulically_deficient_bool = self.max_flow_cfs / self.design_flow_cfs
+        if hydraulically_deficient_bool >= hydraulically_deficient_threshold:
+            return True
+        return False
+
     #TODO: verify that these match the RRAD - capacity links and rehab results
     @staticmethod
     def input_field_attribute_lookup():
@@ -42,6 +60,7 @@ class MappingLink(MappingObject):
         field_attribute_lookup["link_symbology"] = "link_symbology"
         field_attribute_lookup["DesignFlowCfs"] = "design_flow_cfs"
         field_attribute_lookup["MaxFlowCfs"] = "max_flow_cfs"
+        field_attribute_lookup["Hydraulically_Deficient"] = "hydraulically_deficient"
         field_attribute_lookup["sim_desc"] = "sim_desc"
         field_attribute_lookup["Shape@"] = "geometry"
         field_attribute_lookup.update(MappingObject.mapping_object_field_attribute_lookup())

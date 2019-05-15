@@ -23,7 +23,7 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot = MappingSnapshot(self.config)
 
         self.mapping_snapshot.id = 2
-        self.mapping_snapshot.snapshot_type = "Characterization"
+        self.mapping_snapshot.snapshot_type_id = "Characterization"
         self.mapping_snapshot.logic = "User Defined"
         self.mapping_snapshot.requested_by = "Keith"
         self.mapping_snapshot.created_by = "Joe"

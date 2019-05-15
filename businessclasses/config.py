@@ -124,6 +124,9 @@ class Config:
         self.proj_type = self.retrieve_proj_type_domain_as_dict()
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
+        self.mapping_snapshot_type = self.retrieve_mapping_snapshot_type_domain_as_dict()
+        self.mapping_snapshot_type_id = self.reverse_dict(self.mapping_snapshot_type)
+
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
         self.unique_cip_numbers = self.get_unique_cip_numbers()
 
@@ -187,6 +190,9 @@ class Config:
 
     def retrieve_proj_type_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Proj_Type")
+
+    def retrieve_mapping_snapshot_type_domain_as_dict(self):
+        return self.retrieve_domain_as_dict("Type")
 
     def retrieve_storm_dict(self):
         storm_id = "storm_id"

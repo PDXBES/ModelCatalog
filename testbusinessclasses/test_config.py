@@ -283,3 +283,8 @@ class TestConfig(TestCase):
             self.assertEquals(config.RRAD_sde_path, RRAD_prod_sde_path)
             self.assertEquals(config.EMGAATS_sde_path, EMGAATS_prod_sde_path)
             self.assertEquals(config.ASM_WORK_sde_path, ASM_WORK_prod_sde_path)
+
+    def test_retrieve_mapping_snapshot_type_domain_as_dict_called_with_correct_domain_name(self):
+        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
+            self.config_real.retrieve_mapping_snapshot_type_domain_as_dict()
+            mock_retrieve_domain_as_dict.assert_called_with("Type")

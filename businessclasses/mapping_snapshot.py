@@ -22,7 +22,7 @@ class MappingSnapshot(GenericObject):
         self.mapping_links = []
         self.mapping_nodes = []
         self.mapping_areas = []
-        self.snapshot_type = None
+        self.snapshot_type_id = None
         self.logic = None
         self.requested_by = None
         self.created_by = None
@@ -31,7 +31,7 @@ class MappingSnapshot(GenericObject):
     def input_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
         field_attribute_lookup["Snapshot_ID"] = "id"
-        field_attribute_lookup["Snapshot_Type"] = "snapshot_type"
+        field_attribute_lookup["Snapshot_Type"] = "snapshot_type_id"
         field_attribute_lookup["Logic"] = "logic"
         field_attribute_lookup["Requested_by"] = "requested_by"
         field_attribute_lookup["Created_by"] = "created_by"
