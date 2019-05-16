@@ -18,14 +18,21 @@ class MappingSnapshot(GenericObject):
         self.config = config
         self.id = None
         self.type = None
+        self.name = "mapping_snapshot"
         self.simulations = []
         self.mapping_links = []
         self.mapping_nodes = []
         self.mapping_areas = []
+        self.create_date = None
         self.snapshot_type_id = None
         self.logic = None
         self.requested_by = None
         self.created_by = None
+
+    #TODO: determine what valid snaspshot is
+    @property
+    def valid(self):
+        return True
 
     @staticmethod
     def input_field_attribute_lookup():
@@ -35,6 +42,7 @@ class MappingSnapshot(GenericObject):
         field_attribute_lookup["Logic"] = "logic"
         field_attribute_lookup["Requested_by"] = "requested_by"
         field_attribute_lookup["Created_by"] = "created_by"
+        field_attribute_lookup["Create_Date"] = "create_date"
         return field_attribute_lookup
 
     def join_rehab_and_capacity_in_memory_tables(self, mapping_snapshot_data_io, capacity_rehab_in_memory_table_name):

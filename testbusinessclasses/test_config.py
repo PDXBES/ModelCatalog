@@ -50,7 +50,7 @@ class TestConfig(TestCase):
         self.assertEquals(test_reverse, reverse_dictionary)
 
     def test_retrieve_domain_as_dict_calls_list_of_domains_with_correct_arguments(self):
-        self.config_real.retrieve_domain_as_dict("Engine_Type")
+        self.config_real.retrieve_domain_as_dict("Engine_Type", self.config_real.model_catalog_sde_path)
         self.mock_list_of_domains.assert_called_with(self.config_real.model_catalog_sde_path)
 
     def test_retrieve_domain_as_dict_returns_correct_dict(self):
@@ -60,48 +60,48 @@ class TestConfig(TestCase):
         mock_domain2 = mock.MagicMock(arcpy.da.Domain)
         mock_domain2.name = "Storm_Type"
         self.mock_list_of_domains.return_value = [mock_domain1, mock_domain2]
-        domain_dict_of_scenarios = self.config_real.retrieve_domain_as_dict("Engine_Type")
+        domain_dict_of_scenarios = self.config_real.retrieve_domain_as_dict("Engine_Type", self.config_real.model_catalog_sde_path)
         self.assertEquals(domain_dict_of_scenarios, {1: "EMGAATS"})
 
     def test_retrieve_engine_type_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_engine_type_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Engine_Type")
+            mock_retrieve_domain_as_dict.assert_called_with("Engine_Type", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_model_alt_bc_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_model_alt_bc_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_BC")
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_BC", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_model_alt_hydraulic_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_model_alt_hydraulic_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydraulic")
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydraulic", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_model_alt_hydrologic_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_model_alt_hydrologic_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydrologic")
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Alt_Hydrologic", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_model_purpose_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_model_purpose_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Model_Purpose")
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Purpose", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_model_status_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_model_status_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Model_Status")
+            mock_retrieve_domain_as_dict.assert_called_with("Model_Status", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_proj_phase_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_proj_phase_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Proj_Phase")
+            mock_retrieve_domain_as_dict.assert_called_with("Proj_Phase", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_proj_type_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_proj_type_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Proj_Type")
+            mock_retrieve_domain_as_dict.assert_called_with("Proj_Type", self.config_real.model_catalog_sde_path)
 
     def test_retrieve_dict_from_db_calls_search_cursor_with_correct_arguments(self):
         self.config_real.retrieve_dict_from_db(self.key_field, self.value_fields, self.db_table)
@@ -287,4 +287,4 @@ class TestConfig(TestCase):
     def test_retrieve_mapping_snapshot_type_domain_as_dict_called_with_correct_domain_name(self):
         with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
             self.config_real.retrieve_mapping_snapshot_type_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Type")
+            mock_retrieve_domain_as_dict.assert_called_with("Type", self.config_real.RRAD_MAPPING_sde_path)

@@ -16,7 +16,7 @@ class Config:
     def __init__(self, test_flag):
         init_options = {"PROD": 0, "TEST": 1}
 
-
+        self.test_flag = test_flag
 
         executable_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
 
@@ -158,8 +158,9 @@ class Config:
                     standard_simulation_names.append(simulation_name)
         return standard_simulation_names
 
-    def retrieve_domain_as_dict(self, domain_name):
-        list_of_domains = arcpy.da.ListDomains(self.model_catalog_sde_path)
+#TODO: give retrieve domain as dict a sde path and refactor to use in mapping snapshot
+    def retrieve_domain_as_dict(self, domain_name, sde_path):
+        list_of_domains = arcpy.da.ListDomains(sde_path)
         dict_of_scenarios = None
         for domain in list_of_domains:
             if domain.name == domain_name:
@@ -168,31 +169,31 @@ class Config:
         return dict_of_scenarios
 
     def retrieve_engine_type_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Engine_Type")
+        return self.retrieve_domain_as_dict("Engine_Type", self.model_catalog_sde_path)
 
     def retrieve_model_alt_bc_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Model_Alt_BC")
+        return self.retrieve_domain_as_dict("Model_Alt_BC", self.model_catalog_sde_path)
 
     def retrieve_model_alt_hydraulic_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Model_Alt_Hydraulic")
+        return self.retrieve_domain_as_dict("Model_Alt_Hydraulic", self.model_catalog_sde_path)
 
     def retrieve_model_alt_hydrologic_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Model_Alt_Hydrologic")
+        return self.retrieve_domain_as_dict("Model_Alt_Hydrologic", self.model_catalog_sde_path)
 
     def retrieve_model_purpose_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Model_Purpose")
+        return self.retrieve_domain_as_dict("Model_Purpose", self.model_catalog_sde_path)
 
     def retrieve_model_status_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Model_Status")
+        return self.retrieve_domain_as_dict("Model_Status", self.model_catalog_sde_path)
 
     def retrieve_proj_phase_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Proj_Phase")
+        return self.retrieve_domain_as_dict("Proj_Phase", self.model_catalog_sde_path)
 
     def retrieve_proj_type_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Proj_Type")
+        return self.retrieve_domain_as_dict("Proj_Type", self.model_catalog_sde_path)
 
     def retrieve_mapping_snapshot_type_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Type")
+        return self.retrieve_domain_as_dict("Type", self.RRAD_MAPPING_sde_path)
 
     def retrieve_storm_dict(self):
         storm_id = "storm_id"

@@ -76,5 +76,12 @@ class TestUtility(TestCase):
         self.assertEquals(return_string, "date string")
         self.assertEquals("%m/%d/%Y %H:%M %p", date.strftime.call_args[0][0])
 
+    def test_rrad_mapping_test_data_cleanup_calls_delete_rows_with_correct_sde_paths(self):
+        self.utility.rrad_mapping_test_data_cleanup()
+        feature_class_list = ["mapping_areas_sde_path", "mapping_links_sde_path",
+                              "mapping_nodes_sde_path", "mapping_snapshot_tracking_sde_path"]
+        for counter, argument in enumerate(self.mock_DeleteRows_management.call_args_list):
+            feature_class = argument[0][0]
+            self.assertEquals(feature_class, feature_class_list[counter])
 
 
