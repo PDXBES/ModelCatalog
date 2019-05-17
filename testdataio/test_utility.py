@@ -24,9 +24,14 @@ class TestUtility(TestCase):
         self.patch_DeleteRows_management = mock.patch("arcpy.DeleteRows_management")
         self.mock_DeleteRows_management = self.patch_DeleteRows_management.start()
 
+        self.patch_TruncateTable_management = mock.patch("arcpy.TruncateTable_management")
+        self.mock_TruncateTable_management = self.patch_TruncateTable_management.start()
+
     def tearDown(self):
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.stop()
         self.mock_DeleteRows_management = self.patch_DeleteRows_management.stop()
+        self.mock_TruncateTable_management = self.patch_TruncateTable_management.stop()
+
 
     def test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments(self):
         mock_path = r"V:\test\test"
@@ -50,22 +55,22 @@ class TestUtility(TestCase):
         with self.assertRaises(Exception):
             self.utility.check_path(mock_path)
 
-    def test_model_catalog_test_data_cleanup_calls_delete_rows_with_correct_arguments(self):
+    def test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments(self):
         self.utility.model_catalog_test_data_cleanup()
         feature_class_list = ["model_tracking_sde_path", "model_alt_bc_sde_path", "model_alt_hydraulic_sde_path",
                               "model_alt_hydrologic_sde_path", "project_type_sde_path", "required_simulations_sde_path"]
-
-        for counter, argument in enumerate(self.mock_DeleteRows_management.call_args_list):
+        self.assertTrue(self.mock_TruncateTable_management.called)
+        for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
             feature_class = argument[0][0]
             self.assertEquals(feature_class, feature_class_list[counter])
 
-    def test_rrad_test_data_cleanup_calls_delete_rows_with_correct_arguments(self):
+    def test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths(self):
         self.utility.rrad_test_data_cleanup()
         feature_class_list = ["rehab_tracking_sde_path", "rehab_results_sde_path", "area_results_sde_path",
                               "link_results_sde_path", "node_results_sde_path", "node_flooding_results_sde_path",
                               "directors_sde_path"]
-
-        for counter, argument in enumerate(self.mock_DeleteRows_management.call_args_list):
+        self.assertTrue(self.mock_TruncateTable_management.called)
+        for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
             feature_class = argument[0][0]
             self.assertEquals(feature_class, feature_class_list[counter])
 
@@ -76,12 +81,14 @@ class TestUtility(TestCase):
         self.assertEquals(return_string, "date string")
         self.assertEquals("%m/%d/%Y %H:%M %p", date.strftime.call_args[0][0])
 
-    def test_rrad_mapping_test_data_cleanup_calls_delete_rows_with_correct_sde_paths(self):
+    def test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths(self):
         self.utility.rrad_mapping_test_data_cleanup()
         feature_class_list = ["mapping_areas_sde_path", "mapping_links_sde_path",
                               "mapping_nodes_sde_path", "mapping_snapshot_tracking_sde_path"]
-        for counter, argument in enumerate(self.mock_DeleteRows_management.call_args_list):
+        self.assertTrue(self.mock_TruncateTable_management.called)
+        for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
             feature_class = argument[0][0]
             self.assertEquals(feature_class, feature_class_list[counter])
 
+    #TODO: test for test flags in test data cleanup
 

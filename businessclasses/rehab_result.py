@@ -1,5 +1,5 @@
 import math
-class Pipe():
+class RehabResult():
     def __init__(self):
         self.rehab_id = None
         self.compkey = None
@@ -20,6 +20,10 @@ class Pipe():
         self.apwwhole = None
         self.lateralcount = None
         self.globalid = None
+        self.failure_year = None     # "FailureYear",
+        self.integer_grade = None    # "grade_h5",
+        self.inspection_date = None  # "inspDate"
+        self.inspection_year = None
 
 
     def calculate_apw(self):

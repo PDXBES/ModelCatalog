@@ -2,13 +2,13 @@ try:
     from typing import List, Any
 except:
     pass
-from pipe import Pipe
+from rehab_result import RehabResult
 from config import Config
 from generic_object import GenericObject
 import datetime
 
 class Rehab(GenericObject):
-    pipes = None  # type: List[Pipe]
+    pipes = None  # type: List[RehabResult]
 
     def __init__(self, config):
         # type: (Config) -> None

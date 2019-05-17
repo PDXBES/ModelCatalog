@@ -4,7 +4,7 @@ import mock
 from testbusinessclasses.mock_config import MockConfig
 from businessclasses.rehab import Rehab
 import arcpy
-from businessclasses.pipe import Pipe
+from businessclasses.rehab_result import RehabResult
 
 class TestRehabDataIO(TestCase):
 
@@ -91,7 +91,7 @@ class TestRehabDataIO(TestCase):
                                    "material2", 52, 62,
                                    72, "asmrecommendedaction2",
                                    92, 102, 112, 122, 132, 1000, 3000,111]
-        self.mock_pipe = mock.MagicMock(Pipe)
+        self.mock_pipe = mock.MagicMock(RehabResult)
 
         self.mock_pipe.compkey = self.output_pipes_table_row[0]
         self.mock_pipe.bpw = self.output_pipes_table_row[1]

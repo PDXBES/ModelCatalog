@@ -56,7 +56,7 @@ class Utility:
                                   self.config.model_alt_hydraulic_sde_path, self.config.model_alt_hydrologic_sde_path,
                                   self.config.project_type_sde_path, self.config.required_simulations_sde_path]
             for feature_class in feature_class_list:
-                arcpy.DeleteRows_management(feature_class)
+                arcpy.TruncateTable_management(feature_class)
         else:
             print("Config set to other than TEST, data will not be deleted")
 
@@ -67,7 +67,7 @@ class Utility:
                                   self.config.node_results_sde_path, self.config.node_flooding_results_sde_path,
                                   self.config.directors_sde_path]
             for feature_class in feature_class_list:
-                arcpy.DeleteRows_management(feature_class)
+                arcpy.TruncateTable_management(feature_class)
         else:
             print("Config set to other than TEST, data will not be deleted")
 
@@ -76,7 +76,7 @@ class Utility:
             feature_class_list = [self.config.mapping_areas_sde_path, self.config.mapping_links_sde_path,
                                   self.config.mapping_nodes_sde_path, self.config.mapping_snapshot_tracking_sde_path]
             for feature_class in feature_class_list:
-                arcpy.DeleteRows_management(feature_class)
+                arcpy.TruncateTable_management(feature_class)
         else:
             print("Config set to other than TEST, data will not be deleted")
 

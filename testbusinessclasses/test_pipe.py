@@ -1,11 +1,11 @@
 from unittest import TestCase
-from businessclasses.pipe import Pipe
+from businessclasses.rehab_result import RehabResult
 import mock
 
 
 class TestPipe(TestCase):
     def setUp(self):
-        self.pipe = Pipe()
+        self.pipe = RehabResult()
 
     def test_calculate_apw_recommended_action_is_spot(self):
         self.pipe.asmrecommendedaction = "SP"

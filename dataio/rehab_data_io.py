@@ -1,17 +1,20 @@
 import arcpy
+from businessclasses.rehab import Rehab
+from dataio.object_data_io import ObjectDataIo
+import datetime
 try:
     from typing import List, Any
 except:
     pass
 from businessclasses.config import Config
-from businessclasses.pipe import Pipe
+from businessclasses.rehab_result import RehabResult
 
 
-class RehabDataIO():
-    def __init__(self, config):
+class RehabDataIO(ObjectDataIo):
+    def __init__(self, config, rrad_db_data_io):
         # type: (Config) -> None
         self.config = config
-
+        self.rrad_db_data_io = rrad_db_data_io
         self.active_whole_pipe_layer = "nbcr_data_whole_pipes_layer"
         self.active_whole_pipe_feature_class = "nbcr_data_whole_pipes"
         self.rehab_branches_feature_class = "rehab_branches"
@@ -29,13 +32,53 @@ class RehabDataIO():
         self.select_whole_pipe_sql = "cutno = 0 and compkey is not Null"
         self.select_active_whole_pipe_sql = self.select_active_segments_sql + " and " + self.select_whole_pipe_sql
 
-        self.whole_pipe_fields = ["compkey", "bpw", "usnode",
-                                  "dsnode", "diamwidth", "length",
-                                  "material", "lateralcost", "manholecost",
-                                  "asmrecommendednbcr", "asmrecommendedaction",
-                                  "apwspot", "apwliner", "apwwhole", "lateralcount", "globalid"]
+        self.whole_pipe_fields = ["compkey",
+                                  "bpw",
+                                  "usnode",
+                                  "dsnode",
+                                  "diamwidth",
+                                  "length",
+                                  "material",
+                                  "lateralcost",
+                                  "manholecost",
+                                  "asmrecommendednbcr",
+                                  "asmrecommendedaction",
+                                  "apwspot",
+                                  "apwliner",
+                                  "apwwhole",
+                                  "lateralcount",
+                                  "globalid",
+                                  "FailureYear",
+                                  "grade_h5",
+                                  "inspDate"]
 
-        self.output_pipes_table_fields = self.whole_pipe_fields + ["apw", "capitalcost", "rehab_id"]
+# FailureYear data
+# Integer_Condition_Grade
+# Last_Inspection_Date Data (inspDate)
+# Integer_Root_Grade
+
+        self.output_pipes_table_fields = ["compkey",
+                                  "bpw",
+                                  "usnode",
+                                  "dsnode",
+                                  "diamwidth",
+                                  "length",
+                                  "material",
+                                  "lateralcost",
+                                  "manholecost",
+                                  "asmrecommendednbcr",
+                                  "asmrecommendedaction",
+                                  "apwspot",
+                                  "apwliner",
+                                  "apwwhole",
+                                  "lateralcount",
+                                  "globalid",
+                                  "FailureYear",
+                                  "Integer_Condition_Grade",
+                                  "Last_Inspection_Date",
+                                  "apw",
+                                  "capitalcost",
+                                  "rehab_id"]
 
     def _select_nbcr_data_pipes(self):
 
@@ -74,25 +117,28 @@ class RehabDataIO():
         pipes = []
         cursor = arcpy.da.SearchCursor(self.nbcr_data_whole_pipe_table_path, self.whole_pipe_fields)
         for row in cursor:
-            pipe = Pipe()
-            pipe.rehab_id = rehab_id
-            pipe.compkey = row[0]
-            pipe.bpw = row[1]
-            pipe.usnode = row[2]
-            pipe.dsnode = row[3]
-            pipe.diamwidth = row[4]
-            pipe.length = row[5]
-            pipe.material = row[6]
-            pipe.lateralcost = row[7]
-            pipe.manholecost = row[8]
-            pipe.asmrecommendednbcr = row[9]
-            pipe.asmrecommendedaction = row[10]
-            pipe.apwspot = row[11]
-            pipe.apwliner = row[12]
-            pipe.apwwhole = row[13]
-            pipe.lateralcount = row[14]
-            pipe.globalid = row[15]
-            pipes.append(pipe)
+            rehab_result = RehabResult()
+            rehab_result.rehab_id = rehab_id
+            rehab_result.compkey = row[0]
+            rehab_result.bpw = row[1]
+            rehab_result.usnode = row[2]
+            rehab_result.dsnode = row[3]
+            rehab_result.diamwidth = row[4]
+            rehab_result.length = row[5]
+            rehab_result.material = row[6]
+            rehab_result.lateralcost = row[7]
+            rehab_result.manholecost = row[8]
+            rehab_result.asmrecommendednbcr = row[9]
+            rehab_result.asmrecommendedaction = row[10]
+            rehab_result.apwspot = row[11]
+            rehab_result.apwliner = row[12]
+            rehab_result.apwwhole = row[13]
+            rehab_result.lateralcount = row[14]
+            rehab_result.globalid = row[15]
+            rehab_result.failure_year = row[16]
+            rehab_result.integer_grade = row[17]
+            rehab_result.inspection_date = row[18]
+            pipes.append(rehab_result)
         return pipes
 
     def write_pipes_to_table(self, rehab):
@@ -117,6 +163,11 @@ class RehabDataIO():
                 row.append(pipe.apwwhole)
                 row.append(pipe.lateralcount)
                 row.append(pipe.globalid)
+
+                row.append(pipe.failure_year)
+                row.append(pipe.integer_grade)
+                row.append(pipe.inspection_date)
+
                 row.append(pipe.apw)
                 row.append(pipe.capitalcost)
                 row.append(pipe.rehab_id)
@@ -186,3 +237,35 @@ class RehabDataIO():
             edit.stopEditing(False)
 
     # TODO - write method using add model that uses and edit session like append above
+
+    def create_rehab_snapshot_for_characterization_mapping_snapshot(self):
+        rehab_id = self.create_rehab_snapshot("Characterization")
+        return rehab_id
+
+    def create_rehab_snapshot(self, purpose):
+
+        rehab_id = self.rrad_db_data_io.retrieve_current_rehab_id()
+        rehab = Rehab(self.config)
+        rehab.id = rehab_id
+        rehab.extract_date = datetime.datetime.today()
+        rehab.last_inspection_date = datetime.datetime.today()
+        rehab.purpose = purpose
+        self.rrad_db_data_io.add_rehab(rehab)
+
+        self.convert_nbcr_data_to_table()
+
+        rehab.pipes = self.create_pipes(rehab_id)
+
+        rehab.calculate_apw()
+
+        rehab.calculate_capital_cost()
+
+        self.write_pipes_to_table(rehab)
+
+        self.delete_fields_except_compkey_from_feature()
+
+        self.join_output_pipe_table_and_geometry()
+
+        self.append_whole_pipes_to_rehab_results()
+
+        return rehab.id

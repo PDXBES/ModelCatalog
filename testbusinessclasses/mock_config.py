@@ -4,6 +4,7 @@ from businessclasses.config import Config
 class MockConfig():
     def __init__(self):
         self.config = mock.MagicMock(Config)
+        self.config.test_flag = "TEST"
         self.config.model_catalog_sde_path = "model_catalog_sde_path"
         self.config.model_catalog_current_id_table_sde_path = "model_catalog_current_id_table_sde_path"
         self.config.model_tracking_sde_path = "model_tracking_sde_path"

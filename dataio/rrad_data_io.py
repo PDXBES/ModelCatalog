@@ -5,7 +5,7 @@ except:
 from businessclasses.config import Config
 from db_data_io import DbDataIo
 from businessclasses.rehab import Rehab
-from businessclasses.pipe import Pipe
+from businessclasses.rehab_result import RehabResult
 from businessclasses.area import Area
 from collections import OrderedDict
 from businessclasses.generic_class_factory import GenericClassFactory
@@ -22,7 +22,7 @@ class RradDbDataIo(DbDataIo):
         self.field_attribute_lookup["Last_Inspection_Date"] = "last_inspection_date"
         self.field_attribute_lookup["Purpose"] = "purpose"
         self.class_factory = GenericClassFactory(self.config)
-        self.class_factory.class_dict = {"pipe": Pipe, "rehab": Rehab, "area": Area}
+        self.class_factory.class_dict = {"pipe": RehabResult, "rehab": Rehab, "area": Area}
 
     def retrieve_current_rehab_id(self):
         rehab_id = self.retrieve_current_id("rehab")

@@ -1,7 +1,7 @@
 from unittest import TestCase
 from businessclasses.rehab import Rehab
 from mock_config import MockConfig
-from businessclasses.pipe import Pipe
+from businessclasses.rehab_result import RehabResult
 import datetime
 
 class TestRehab(TestCase):
@@ -16,7 +16,7 @@ class TestRehab(TestCase):
         self.rehab.last_inspection_date = datetime.datetime.today()
         self.rehab.purpose = "purpose"
 
-        self.pipe = Pipe()
+        self.pipe = RehabResult()
         self.pipe.asmrecommendedaction = "SP"
         self.pipe.apw = 1
         self.pipe.apwspot = 3

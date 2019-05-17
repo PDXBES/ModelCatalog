@@ -9,7 +9,7 @@ test_flag = "TEST"
 config = Config(test_flag)
 
 rrad_data_io = RradDbDataIo(config)
-rehab_data_io = RehabDataIO(config)
+rehab_data_io = RehabDataIO(config, rrad_data_io)
 rehab = Rehab(config)
 
 # TODO: Rehab tracking table is not versioned, these should be wrapped in edit sessions when we next refactor the tools
