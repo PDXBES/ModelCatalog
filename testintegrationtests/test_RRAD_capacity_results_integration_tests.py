@@ -2,7 +2,7 @@ from unittest import TestCase
 from dataio.simulation_data_io import SimulationDataIO
 from businessclasses.config import Config
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
-from dataio.rrad_data_io import RradDbDataIo
+from dataio.rrad_db_data_io import RradDbDataIo
 from businessclasses.simulation import Simulation
 import mock
 import unittest

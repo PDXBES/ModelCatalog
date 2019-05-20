@@ -4,6 +4,8 @@ from businessclasses.mapping_snapshot import MappingSnapshot
 from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_link import MappingLink
 from businessclasses.mapping_area import MappingArea
+from dataio.rrad_db_data_io import RradDbDataIo
+from dataio.rehab_data_io import RehabDataIo
 import arcpy
 import traceback
 from db_data_io import DbDataIo
@@ -24,6 +26,15 @@ class RradMappingDbDataIo(DbDataIo):
                                          "mapping_area": MappingArea}
 
     def add_mapping_snapshot(self, mapping_snapshot, mapping_snapshot_data_io):
+        # create rrad_db_data_io
+        # create rehab_data_io
+        #call create_rehab_results_snapshot from rehab_data_io
+        # this will get us a rehab_id
+
+        rrad_db_data_io = RradDbDataIo(self.config)
+        rehab_data_io = RehabDataIo(self.config, rrad_db_data_io)
+        mapping_snapshot.rehab_id = rehab_data_io.create_rehab_snapshot_for_characterization_mapping_snapshot()
+
         editor = mapping_snapshot_data_io.start_editing_session(self.config.RRAD_MAPPING_sde_path)
 
         try:

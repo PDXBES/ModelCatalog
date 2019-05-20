@@ -10,7 +10,7 @@ from businessclasses.config import Config
 from businessclasses.rehab_result import RehabResult
 
 
-class RehabDataIO(ObjectDataIo):
+class RehabDataIo(ObjectDataIo):
     def __init__(self, config, rrad_db_data_io):
         # type: (Config) -> None
         self.config = config
@@ -145,7 +145,7 @@ class RehabDataIO(ObjectDataIo):
         arcpy.CreateTable_management(self.workspace, self.output_pipes_table, self.config.rehab_results_sde_path)
         cursor = arcpy.da.InsertCursor(self.output_pipes_table_path, self.output_pipes_table_fields)
         for pipe in rehab.pipes:
-            if pipe.valid():
+            #if pipe.valid():
                 row = []
                 row.append(pipe.compkey)
                 row.append(pipe.bpw)
@@ -235,6 +235,7 @@ class RehabDataIO(ObjectDataIo):
             edit.undoOperation()
             edit.abortOperation()
             edit.stopEditing(False)
+            raise
 
     # TODO - write method using add model that uses and edit session like append above
 

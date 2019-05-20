@@ -1,10 +1,12 @@
 from unittest import TestCase
-from dataio.rehab_data_io import RehabDataIO
+from dataio.rehab_data_io import RehabDataIo
 import mock
 from testbusinessclasses.mock_config import MockConfig
 from businessclasses.rehab import Rehab
 import arcpy
 from businessclasses.rehab_result import RehabResult
+from dataio.rrad_db_data_io import RradDbDataIo
+
 
 class TestRehabDataIO(TestCase):
 
@@ -13,8 +15,9 @@ class TestRehabDataIO(TestCase):
         self.config = mock_config.config
 
         self.mock_rehab = mock.MagicMock(Rehab)
+        self.rrad_db_data_io = RradDbDataIo(self.config)
 
-        self.rehab_data_io = RehabDataIO(self.config)
+        self.rehab_data_io = RehabDataIo(self.config, self.rrad_db_data_io)
         self.patch_make_feature_layer = mock.patch("arcpy.MakeFeatureLayer_management")
         self.patch_select_by_attribute = mock.patch("arcpy.SelectLayerByAttribute_management")
         self.mock_make_feature_layer = self.patch_make_feature_layer.start()
@@ -59,26 +62,27 @@ class TestRehabDataIO(TestCase):
                                   "dsnode", "diamwidth", "length",
                                   "material", "lateralcost", "manholecost",
                                   "asmrecommendednbcr", "asmrecommendedaction",
-                                  "apwspot","apwliner", "apwwhole", "lateralcount", "globalid"]
+                                  "apwspot","apwliner", "apwwhole", "lateralcount",
+                                  "globalid", 'FailureYear', 'grade_h5', 'inspDate']
 
-        self.output_pipe_table_fields = ["compkey", "bpw", "usnode",
-                                  "dsnode", "diamwidth", "length",
-                                  "material", "lateralcost", "manholecost",
-                                  "asmrecommendednbcr", "asmrecommendedaction",
-                                  "apwspot","apwliner", "apwwhole", "lateralcount", "globalid", "apw", "capitalcost", 
-                                         "rehab_id"]
+        self.output_pipe_table_fields = ['compkey', 'bpw', 'usnode', 'dsnode', 'diamwidth', 'length', 'material',
+                                          'lateralcost', 'manholecost', 'asmrecommendednbcr', 'asmrecommendedaction',
+                                          'apwspot', 'apwliner', 'apwwhole', 'lateralcount', 'globalid', 'FailureYear',
+                                          'Integer_Condition_Grade', 'Last_Inspection_Date', 'apw', 'capitalcost', 'rehab_id']
+
+
 
         self.dummy_row_1 = [1, 2, "usnode1",
                                    "dsnode1", 3, 4,
                                    "material1", 5, 6,
                                    7, "asmrecommendedaction1",
-                                   9, 10, 11, 12, 13]
+                                   9, 10, 11, 12, 13, 2020, 5, "inspection_date_1"]
 
         self.dummy_row_2 = [12, 22, "usnode2",
                                    "dsnode2", 32, 42,
                                    "material2", 52, 62,
                                    72, "asmrecommendedaction2",
-                                   92, 102, 112, 122, 132]
+                                   92, 102, 112, 122, 132, 2010, 4, "inspection_date_2"]
 
         self.mock_da_search_cursor.return_value = [self.dummy_row_1, self.dummy_row_2]
 
@@ -86,33 +90,42 @@ class TestRehabDataIO(TestCase):
         
         self.mock_update_cursor = mock.MagicMock(arcpy.da.InsertCursor)
 
-        self.output_pipes_table_row = [12, 22, "usnode2",
-                                   "dsnode2", 32, 42,
-                                   "material2", 52, 62,
-                                   72, "asmrecommendedaction2",
-                                   92, 102, 112, 122, 132, 1000, 3000,111]
-        self.mock_pipe = mock.MagicMock(RehabResult)
+        self.output_pipes_table_row = ["compkey", "bpw", "usnode2",
+                                   "dsnode2", "diamwidth", "length",
+                                   "material2", "lateral_cost", "manhole_cost",
+                                   "asmrecommendednbcr", "asmrecommendedaction2",
+                                   "apwspot", "apwliner", "apwwhole", "lateralcount",
+                                    "globalid", "failure_year", "integer_grade", "inspection_date",
+                                       "apw", "capitalcost", "rehab_id"]
 
-        self.mock_pipe.compkey = self.output_pipes_table_row[0]
-        self.mock_pipe.bpw = self.output_pipes_table_row[1]
-        self.mock_pipe.usnode = self.output_pipes_table_row[2]
-        self.mock_pipe.dsnode = self.output_pipes_table_row[3]
-        self.mock_pipe.diamwidth = self.output_pipes_table_row[4]
-        self.mock_pipe.length = self.output_pipes_table_row[5]
-        self.mock_pipe.material = self.output_pipes_table_row[6]
-        self.mock_pipe.lateralcost = self.output_pipes_table_row[7]
-        self.mock_pipe.manholecost = self.output_pipes_table_row[8]
-        self.mock_pipe.asmrecommendednbcr = self.output_pipes_table_row[9]
-        self.mock_pipe.asmrecommendedaction = self.output_pipes_table_row[10]
-        self.mock_pipe.apwspot = self.output_pipes_table_row[11]
-        self.mock_pipe.apwliner = self.output_pipes_table_row[12]
-        self.mock_pipe.apwwhole = self.output_pipes_table_row[13]
-        self.mock_pipe.lateralcount = self.output_pipes_table_row[14]
-        self.mock_pipe.globalid = self.output_pipes_table_row[15]
-        self.mock_pipe.apw = self.output_pipes_table_row[16]
-        self.mock_pipe.capitalcost = self.output_pipes_table_row[17]
-        self.mock_pipe.rehab_id = self.output_pipes_table_row[18]
-        self.mock_rehab.pipes = [self.mock_pipe]
+        self.mock_rehab_result = mock.MagicMock(RehabResult)
+
+        self.mock_rehab_result.compkey = self.output_pipes_table_row[0]
+        self.mock_rehab_result.bpw = self.output_pipes_table_row[1]
+        self.mock_rehab_result.usnode = self.output_pipes_table_row[2]
+        self.mock_rehab_result.dsnode = self.output_pipes_table_row[3]
+        self.mock_rehab_result.diamwidth = self.output_pipes_table_row[4]
+        self.mock_rehab_result.length = self.output_pipes_table_row[5]
+        self.mock_rehab_result.material = self.output_pipes_table_row[6]
+        self.mock_rehab_result.lateralcost = self.output_pipes_table_row[7]
+        self.mock_rehab_result.manholecost = self.output_pipes_table_row[8]
+        self.mock_rehab_result.asmrecommendednbcr = self.output_pipes_table_row[9]
+        self.mock_rehab_result.asmrecommendedaction = self.output_pipes_table_row[10]
+        self.mock_rehab_result.apwspot = self.output_pipes_table_row[11]
+        self.mock_rehab_result.apwliner = self.output_pipes_table_row[12]
+        self.mock_rehab_result.apwwhole = self.output_pipes_table_row[13]
+        self.mock_rehab_result.lateralcount = self.output_pipes_table_row[14]
+        self.mock_rehab_result.globalid = self.output_pipes_table_row[15]
+        self.mock_rehab_result.failure_year = self.output_pipes_table_row[16]
+        self.mock_rehab_result.integer_grade = self.output_pipes_table_row[17]
+        self.mock_rehab_result.inspection_date = self.output_pipes_table_row[18]
+        self.mock_rehab_result.apw = self.output_pipes_table_row[19]
+        self.mock_rehab_result.capitalcost = self.output_pipes_table_row[20]
+        self.mock_rehab_result.rehab_id = self.output_pipes_table_row[21]
+
+
+
+        self.mock_rehab.pipes = [self.mock_rehab_result]
 
     def tearDown(self):
         self.mock_make_feature_layer = self.patch_make_feature_layer.stop()
@@ -205,7 +218,7 @@ class TestRehabDataIO(TestCase):
 
     def test_create_pipes_returns_list_of_two_pipes(self):
         return_pipes = self.rehab_data_io.create_pipes(self.rehab_id)
-        self.assertTrue(len(return_pipes),2)
+        self.assertTrue(len(return_pipes), 2)
 
     def test_create_pipes_returns_matching_values(self):
         return_pipes = self.rehab_data_io.create_pipes(self.rehab_id)
@@ -332,3 +345,5 @@ class TestRehabDataIO(TestCase):
         self.mock_append.assert_called_with("in_memory/nbcr_data_whole_pipes",
                                             "rehab_results_sde_path",
                                             "NO_TEST")
+
+    # TODO - write tests for create_rehab_snapshot()

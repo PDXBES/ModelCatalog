@@ -2,7 +2,7 @@ from unittest import TestCase
 import mock
 from testbusinessclasses.mock_config import MockConfig
 import arcpy
-from dataio.rrad_data_io import RradDbDataIo
+from dataio.rrad_db_data_io import RradDbDataIo
 from businessclasses.rehab import Rehab
 from businessclasses.generic_class_factory import GenericClassFactory
 

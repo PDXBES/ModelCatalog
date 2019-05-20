@@ -11,7 +11,7 @@ import sys
 from dataio import utility
 from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
-from dataio.rrad_data_io import RradDbDataIo
+from dataio.rrad_db_data_io import RradDbDataIo
 reload(arcpy)
 reload(config)
 reload(utility)

@@ -1,7 +1,7 @@
-from dataio.rehab_data_io import RehabDataIO
+from dataio.rehab_data_io import RehabDataIo
 from businessclasses.rehab import Rehab
 from businessclasses.config import Config
-from dataio.rrad_data_io import RradDbDataIo
+from dataio.rrad_db_data_io import RradDbDataIo
 import datetime
 import time
 
@@ -9,7 +9,7 @@ test_flag = "TEST"
 config = Config(test_flag)
 
 rrad_data_io = RradDbDataIo(config)
-rehab_data_io = RehabDataIO(config, rrad_data_io)
+rehab_data_io = RehabDataIo(config, rrad_data_io)
 rehab = Rehab(config)
 
 # TODO: Rehab tracking table is not versioned, these should be wrapped in edit sessions when we next refactor the tools

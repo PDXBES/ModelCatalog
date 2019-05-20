@@ -6,7 +6,7 @@ from dataio.simulation_data_io import SimulationDataIO
 from testbusinessclasses.mock_config import MockConfig
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 from businessclasses.area import Area
-from dataio.rrad_data_io import RradDbDataIo
+from dataio.rrad_db_data_io import RradDbDataIo
 
 
 class TestSimulationDataIO(TestCase):

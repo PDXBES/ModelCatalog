@@ -16,6 +16,7 @@ class TestMappingSnapshotDataIo(TestCase):
         self.rrad_mapping_db_data_io = RradMappingDbDataIo(self.config)
         self.mapping_snapshot_data_io = MappingSnapshotDataIo(self.config, self.rrad_mapping_db_data_io)
         self.mock_mapping_snapshot = mock.MagicMock(spec = MappingSnapshot)
+        self.mock_mapping_snapshot.rehab_id = 1
 
         self.mock_mapping_snapshot.mapping_links = ["link_1", "link_2"]
         self.mock_mapping_snapshot.mapping_nodes = ["node_1", "node_2"]
@@ -80,8 +81,8 @@ class TestMappingSnapshotDataIo(TestCase):
     def test_copy_mapping_links_for_rehab_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments(self):
         input_table = "rehab_results_sde_path"
         in_memory_output_table_name = "in_memory_table"
-        id_field_name = "Simulation_ID"
-        id_list = "id_list"
+        id_field_name = "Rehab_ID"
+        id_list = [1]
         self.mapping_snapshot_data_io.copy_mapping_links_for_rehab_to_memory(self.mock_mapping_snapshot,
                                                                    in_memory_output_table_name)
         self.mock_copy_to_memory_with_id_filter.assert_called_with(input_table, in_memory_output_table_name,

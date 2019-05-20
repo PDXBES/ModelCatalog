@@ -28,8 +28,9 @@ class MappingSnapshot(GenericObject):
         self.logic = None
         self.requested_by = None
         self.created_by = None
+        self.rehab_id = None
 
-    #TODO: determine what valid snaspshot is
+    #TODO: determine what valid snapshot is
     @property
     def valid(self):
         return True

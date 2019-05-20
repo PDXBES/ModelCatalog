@@ -3,17 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/pipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/rehab_result.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/rehab.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/rehab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessclasses/mapping_snapshot.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/mapping_snapshot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataio/rehab_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/rehab_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/rrad_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/rrad_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/utility.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/mock_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/mock_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_pipe.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_pipe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testbusinessclasses/test_rehab.py" beforeDir="false" afterPath="$PROJECT_DIR$/testbusinessclasses/test_rehab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataio/rrad_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/rrad_db_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdataio/test_mapping_snapshot_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_mapping_snapshot_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testdataio/test_rehab_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_rehab_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdataio/test_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdataio/test_rrad_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_rrad_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdataio/test_rrad_mapping_db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_rrad_mapping_db_data_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_simulation_data_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/test_RRAD_capacity_results_integration_tests.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,34 +25,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5432961">
+    <splitter split-orientation="horizontal" split-proportion="0.53869045">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="394">
-                  <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/utility.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="213">
-                  <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py">
+            <entry file="file://$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="484">
-                  <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+                <state relative-caret-position="187">
+                  <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
                   <folding>
-                    <element signature="e#0#44#0" expanded="true" />
+                    <element signature="e#0#69#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-2142">
+                  <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="17" />
+                  <folding>
+                    <element signature="e#0#12#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -58,72 +55,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="731">
-                  <caret line="60" column="78" selection-start-line="60" selection-start-column="78" selection-end-line="60" selection-end-column="78" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/businessclasses/rehab_result.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="528">
-                  <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="28" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="633">
-                  <caret line="168" column="47" selection-start-line="168" selection-start-column="47" selection-end-line="168" selection-end-column="47" />
-                  <folding>
-                    <element signature="e#0#12#0" expanded="true" />
-                    <element signature="e#5710#6222#0" />
-                    <element signature="e#5828#5938#0" />
-                    <element signature="e#5973#6222#0" />
-                    <element signature="e#6469#6968#0" />
-                    <element signature="e#6574#6823#0" />
-                    <element signature="e#6858#6968#0" />
-                    <element signature="e#7114#7230#0" />
-                    <element signature="e#7771#8399#0" />
-                    <element signature="e#8255#8399#0" />
-                    <element signature="e#8750#8831#0" />
-                    <element signature="e#8534#10331#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="198">
-                  <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/rrad_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="21" column="84" lean-forward="true" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="84" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dataio/mapping_link_data_io.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
-                  <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+                <state relative-caret-position="204">
+                  <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -133,33 +66,24 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
+            <entry file="file://$PROJECT_DIR$/testintegrationtests/test_characterization_reporting_integration_tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="119" column="66" selection-start-line="119" selection-start-column="66" selection-end-line="119" selection-end-column="66" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_snapshot.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2203">
-                  <caret line="148" column="105" selection-start-line="148" selection-start-column="105" selection-end-line="148" selection-end-column="105" />
+                <state relative-caret-position="153">
+                  <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
                   <folding>
-                    <element signature="e#0#29#0" expanded="true" />
+                    <element signature="e#0#15#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/testintegrationtests/test_characterization_reporting_integration_tests.py">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_mapping_db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="88">
-                  <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+                <state relative-caret-position="1003">
+                  <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
                   <folding>
-                    <element signature="e#0#15#0" expanded="true" />
+                    <element signature="e#0#11#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -179,7 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create_date</find>
       <find>red</find>
       <find>form</find>
       <find>fact</find>
@@ -209,6 +132,7 @@
       <find>dateti</find>
       <find>execute(</find>
       <find>model_alt_hydraulic_parameter</find>
+      <find>insert</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -234,8 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dataio/mapping_link_data_io.py" />
-        <option value="$PROJECT_DIR$/testintegrationtests/query_layer_test.py" />
         <option value="$PROJECT_DIR$/businessclasses/model_catalog.py" />
         <option value="$PROJECT_DIR$/businessclasses/model.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_model.py" />
@@ -262,20 +184,16 @@
         <option value="$PROJECT_DIR$/testdataio/test_model_data_io.py" />
         <option value="$PROJECT_DIR$/dataio/model_data_io.py" />
         <option value="$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py" />
-        <option value="$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_object.py" />
-        <option value="$PROJECT_DIR$/testdataio/test_mapping_snapshot_data_io.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_node.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_area.py" />
         <option value="$PROJECT_DIR$/dataio/db_data_io.py" />
-        <option value="$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/test_characterization_reporting_integration_tests.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_mapping_snapshot.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_snapshot_exception.py" />
         <option value="$PROJECT_DIR$/businessclasses/mapping_link.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_mapping_link.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/test_config.py" />
-        <option value="$PROJECT_DIR$/businessclasses/mapping_snapshot.py" />
         <option value="$PROJECT_DIR$/businessclasses/config.py" />
         <option value="$PROJECT_DIR$/Mapping_tools.pyt" />
         <option value="$PROJECT_DIR$/testbusinessclasses/mock_config.py" />
@@ -284,15 +202,21 @@
         <option value="$PROJECT_DIR$/businessclasses/rehab_results.py" />
         <option value="$PROJECT_DIR$/businessclasses/rehab_result.py" />
         <option value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
+        <option value="$PROJECT_DIR$/businessclasses/mapping_snapshot.py" />
+        <option value="$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py" />
+        <option value="$PROJECT_DIR$/testdataio/test_rehab_data_io.py" />
+        <option value="$PROJECT_DIR$/testdataio/test_mapping_snapshot_data_io.py" />
         <option value="$PROJECT_DIR$/dataio/rehab_data_io.py" />
+        <option value="$PROJECT_DIR$/testdataio/test_rrad_mapping_db_data_io.py" />
+        <option value="$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="202" />
-    <option name="y" value="71" />
-    <option name="width" value="2357" />
-    <option name="height" value="1540" />
+    <option name="x" value="1914" />
+    <option name="y" value="-10" />
+    <option name="width" value="1932" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -302,6 +226,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -343,7 +268,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,29 +301,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.rehab_data_io_integration_test">
-    <configuration name="rehab_data_io_integration_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="ModelCatalog" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testintegrationtests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test_utility.TestUtility.test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo">
+    <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -409,11 +312,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_utility.TestUtility.test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments&quot;" />
+      <option name="_new_target" value="&quot;test_rrad_mapping_db_data_io.TestRradMappingDbDataIo&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_delete_rows_with_correct_sde_paths" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -423,11 +326,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_delete_rows_with_correct_sde_paths&quot;" />
+      <option name="_new_target" value="&quot;test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -437,11 +340,25 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths&quot;" />
+      <option name="_new_target" value="&quot;test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in testbusinessclasses" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ModelCatalog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testbusinessclasses" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testbusinessclasses&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in testdataio" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -451,24 +368,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testdataio&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_delete_rows_with_correct_sde_paths" />
-      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" />
-      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" />
-      <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments" />
-      <item itemvalue="Python.rehab_data_io_integration_test" />
+      <item itemvalue="Python tests.Unittests in testdataio" />
+      <item itemvalue="Python tests.Unittests in testbusinessclasses" />
+      <item itemvalue="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot" />
+      <item itemvalue="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value" />
+      <item itemvalue="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.rehab_data_io_integration_test" />
-        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments" />
-        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" />
-        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" />
-        <item itemvalue="Python tests.Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_delete_rows_with_correct_sde_paths" />
+        <item itemvalue="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo" />
+        <item itemvalue="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value" />
+        <item itemvalue="Python tests.Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot" />
+        <item itemvalue="Python tests.Unittests in testbusinessclasses" />
+        <item itemvalue="Python tests.Unittests in testdataio" />
       </list>
     </recent_temporary>
   </component>
@@ -486,35 +403,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 29m 46s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_in_testdataio - 2019.05.20 at 14h 33m 53s.xml">
+      <configuration name="Unittests in testdataio" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 32m 37s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_for_test_mapping_snapshot_data_io_TestMappingSnapshotDataIo_test_copy_mapping_links_for_rehab_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments - 2019.05.20 at 14h 35m 15s.xml">
+      <configuration name="Unittests for test_mapping_snapshot_data_io.TestMappingSnapshotDataIo.test_copy_mapping_links_for_rehab_to_memory_calls_copy_to_memory_with_id_filter_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 34m 40s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_in_testdataio - 2019.05.20 at 14h 35m 36s.xml">
+      <configuration name="Unittests in testdataio" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 39m 14s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_in_testbusinessclasses - 2019.05.20 at 14h 36m 29s.xml">
+      <configuration name="Unittests in testbusinessclasses" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 40m 34s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rrad_mapping_db_data_io_TestRradMappingDbDataIo_test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot - 2019.05.20 at 14h 59m 55s.xml">
+      <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 40m 58s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rrad_mapping_db_data_io_TestRradMappingDbDataIo_test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot - 2019.05.20 at 15h 02m 57s.xml">
+      <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 42m 44s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rrad_mapping_db_data_io_TestRradMappingDbDataIo_test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot - 2019.05.20 at 15h 06m 55s.xml">
+      <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths - 2019.05.17 at 14h 42m 56s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rrad_mapping_db_data_io_TestRradMappingDbDataIo_test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value - 2019.05.20 at 15h 11m 00s.xml">
+      <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments - 2019.05.17 at 14h 43m 40s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rrad_mapping_db_data_io_TestRradMappingDbDataIo_test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value - 2019.05.20 at 15h 11m 37s.xml">
+      <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo.test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_utility_TestUtility_test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments - 2019.05.17 at 14h 44m 32s.xml">
-      <configuration name="Unittests for test_utility.TestUtility.test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rrad_mapping_db_data_io_TestRradMappingDbDataIo - 2019.05.20 at 15h 12m 16s.xml">
+      <configuration name="Unittests for test_rrad_mapping_db_data_io.TestRradMappingDbDataIo" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="2">
@@ -527,20 +444,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.20547946" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.18303572" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.12938747" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.2829582" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.3922918" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.227224" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.32206118" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6666667" weight="0.29284164" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.20096353" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49940476" weight="0.20042872" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32759807" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.15739268" side_tool="true" weight="0.8686515" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32867134" />
@@ -638,8 +555,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/dataio/rehab_data_io.py</url>
-          <line>140</line>
-          <option name="timeStamp" value="332" />
+          <line>146</line>
+          <option name="timeStamp" value="334" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -701,7 +618,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dataio/mapping_basis_db_data_io.py" />
     <entry file="file://$PROJECT_DIR$/businessclasses/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1584">
@@ -716,13 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
           <caret line="76" column="84" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/object_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -823,13 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_mapping_snapshot_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files (x86)/ArcGIS/Desktop10.3/arcpy/arcpy/management.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
@@ -888,9 +790,6 @@
           <caret line="13" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/rrad_mapping.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -956,23 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="119" column="66" selection-start-line="119" selection-start-column="66" selection-end-line="119" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_characterization_reporting_integration_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-671">
@@ -994,20 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_link.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_mapping_db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="88" column="8" selection-start-line="88" selection-start-column="8" selection-end-line="88" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/characterization_reporting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="616">
@@ -1015,95 +883,150 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/utility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/mapping_link_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="119" column="66" selection-start-line="119" selection-start-column="66" selection-end-line="119" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/rehab_result.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-70" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_link.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/object_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/rrad_mapping.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_snapshot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2203">
-          <caret line="148" column="105" selection-start-line="148" selection-start-column="105" selection-end-line="148" selection-end-column="105" />
+        <state relative-caret-position="463">
+          <caret line="164" selection-start-line="162" selection-end-line="164" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/rrad_data_io.py">
+    <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="21" column="84" lean-forward="true" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/mapping_link_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/utility.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="60" column="78" selection-start-line="60" selection-start-column="78" selection-end-line="60" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/rehab_result.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="13" lean-forward="true" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="168" column="47" selection-start-line="168" selection-start-column="47" selection-end-line="168" selection-end-column="47" />
+        <state relative-caret-position="289">
+          <caret line="348" column="10" lean-forward="true" selection-start-line="348" selection-start-column="10" selection-end-line="348" selection-end-column="10" />
           <folding>
-            <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#5710#6222#0" />
-            <element signature="e#5828#5938#0" />
-            <element signature="e#5973#6222#0" />
-            <element signature="e#6469#6968#0" />
-            <element signature="e#6574#6823#0" />
-            <element signature="e#6858#6968#0" />
-            <element signature="e#7114#7230#0" />
-            <element signature="e#7771#8399#0" />
-            <element signature="e#8255#8399#0" />
-            <element signature="e#8750#8831#0" />
-            <element signature="e#8534#10331#0" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testintegrationtests/rehab_data_io_integration_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="344">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="34" column="34" lean-forward="true" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/rrad_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="21" column="84" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_mapping_snapshot_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="85" column="47" selection-start-line="85" selection-start-column="47" selection-end-line="85" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_characterization_reporting_integration_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2142">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/rrad_mapping_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_rrad_mapping_db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -16,6 +16,7 @@ class TestRradMappingDbDataIo(TestCase):
 
         self.mock_mapping_snapshot = mock.MagicMock(MappingSnapshot)
         self.mock_mapping_snapshot.valid = True
+        self.mock_mapping_snapshot.rehab_id = None
 
         self.mapping_snapshot_data_io = MappingSnapshotDataIo(self.config, self.rrad_mapping_db_data_io)
 
@@ -50,6 +51,12 @@ class TestRradMappingDbDataIo(TestCase):
         self.patch_create_mapping_areas = mock.patch.object(self.mock_mapping_snapshot, "create_mapping_areas")
         self.mock_create_mapping_areas = self.patch_create_mapping_areas.start()
 
+        self.patch_rrad_db_data_io = mock.patch("dataio.rrad_db_data_io.RradDbDataIo")
+        self.mock_rrad_db_data_io = self.patch_rrad_db_data_io.start()
+
+        self.patch_create_rehab_snapshot_for_characterization_mapping_snapshot = mock.patch("dataio.rehab_data_io.RehabDataIo.create_rehab_snapshot_for_characterization_mapping_snapshot")
+        self.mock_create_rehab_snapshot_for_characterization_mapping_snapshot = self.patch_create_rehab_snapshot_for_characterization_mapping_snapshot.start()
+        self.mock_create_rehab_snapshot_for_characterization_mapping_snapshot.return_value = 1
 
     def tearDown(self):
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
@@ -61,7 +68,17 @@ class TestRradMappingDbDataIo(TestCase):
         self.mock_create_mapping_links = self.patch_create_mapping_links.stop()
         self.mock_create_mapping_nodes = self.patch_create_mapping_nodes.stop()
         self.mock_create_mapping_areas = self.patch_create_mapping_areas.stop()
+        self.mock_rrad_db_data_io = self.patch_rrad_db_data_io.stop()
+        self.mock_create_rehab_snapshot_for_characterization_mapping_snapshot = self.patch_create_rehab_snapshot_for_characterization_mapping_snapshot.stop()
 
+
+    def test_add_mapping_snapshot_calls_create_rehab_snapshot_for_characterization_mapping_snapshot(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.assertTrue(self.mock_create_rehab_snapshot_for_characterization_mapping_snapshot.called)
+
+    def test_add_mapping_snapshot_sets_mapping_snapshot_rehab_id_to_the_correct_value(self):
+        self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
+        self.assertEquals(self.mock_mapping_snapshot.rehab_id, 1)
 
     def test_add_mapping_snapshot_calls_start_editing_session_with_correct_workspace(self):
         self.rrad_mapping_db_data_io.add_mapping_snapshot(self.mock_mapping_snapshot, self.mapping_snapshot_data_io)
