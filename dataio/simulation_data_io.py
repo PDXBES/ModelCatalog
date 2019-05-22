@@ -94,6 +94,7 @@ class SimulationDataIO(ObjectDataIo):
                 self.copy_node_flooding_results(simulation)
                 self.append_area_results_to_db(simulation.areas)
                 self.stop_editing_session(editor, True)
+                arcpy.AddMessage("Results written to RRAD.")
             except:
                 self.stop_editing_session(editor, False)
                 arcpy.AddMessage("DB Error while adding area results. Changes rolled back.")

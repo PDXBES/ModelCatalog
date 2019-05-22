@@ -52,11 +52,6 @@ class RehabDataIo(ObjectDataIo):
                                   "grade_h5",
                                   "inspDate"]
 
-# FailureYear data
-# Integer_Condition_Grade
-# Last_Inspection_Date Data (inspDate)
-# Integer_Root_Grade
-
         self.output_pipes_table_fields = ["compkey",
                                   "bpw",
                                   "usnode",
@@ -177,27 +172,15 @@ class RehabDataIo(ObjectDataIo):
         uppercase_fields_to_keep = [field.upper() for field in fields_to_keep]
         fields = arcpy.ListFields(feature_class)
         for field in fields:
-            if field.name.upper() in uppercase_fields_to_keep or field.type == 'Geometry' or field.type == 'OID':
-                arcpy.AddMessage("Keeping field: " + field.name)
-                arcpy.AddMessage("Field Type: " + field.type)
-            else:
-                arcpy.AddMessage("Deleting field: " + field.name)
-                arcpy.AddMessage("Field Type: " + field.type)
+            if not(field.name.upper() in uppercase_fields_to_keep or field.type == 'Geometry' or field.type == 'OID'):
                 arcpy.DeleteField_management(feature_class, field.name)
-                arcpy.AddMessage("Deleting field: " + field.name)
 
     def delete_specified_fields(self, feature_class, fields_to_delete):
         uppercase_fields_to_delete = [field.upper() for field in fields_to_delete]
         fields = arcpy.ListFields(feature_class)
         for field in fields:
             if field.name.upper() in uppercase_fields_to_delete and field.name.upper() != 'COMPKEY':
-                arcpy.AddMessage("Deleting field: " + field.name)
-                arcpy.AddMessage("Field Type: " + field.type)
                 arcpy.DeleteField_management(feature_class, field.name)
-                arcpy.AddMessage("Deleting field: " + field.name)
-            else:
-                arcpy.AddMessage("Keeping field: " + field.name)
-                arcpy.AddMessage("Field Type: " + field.type)
 
     def delete_fields_except_compkey_from_feature(self):
         fields_to_delete = []

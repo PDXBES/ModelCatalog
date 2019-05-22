@@ -32,7 +32,6 @@ class TestUtility(TestCase):
         self.mock_DeleteRows_management = self.patch_DeleteRows_management.stop()
         self.mock_TruncateTable_management = self.patch_TruncateTable_management.stop()
 
-
     def test_check_path_has_mapped_network_drive_calls_convert_mapped_letter_drive_to_unc_path_called_with_correct_arguments(self):
         mock_path = r"V:\test\test"
         Utility.check_path(mock_path)
@@ -58,7 +57,7 @@ class TestUtility(TestCase):
     def test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments(self):
         self.utility.model_catalog_test_data_cleanup()
         feature_class_list = ["model_tracking_sde_path", "model_alt_bc_sde_path", "model_alt_hydraulic_sde_path",
-                              "model_alt_hydrologic_sde_path", "project_type_sde_path", "required_simulations_sde_path"]
+                              "model_alt_hydrologic_sde_path", "project_type_sde_path", "simulation_sde_path"]
         self.assertTrue(self.mock_TruncateTable_management.called)
         for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
             feature_class = argument[0][0]
@@ -91,4 +90,6 @@ class TestUtility(TestCase):
             self.assertEquals(feature_class, feature_class_list[counter])
 
     #TODO: test for test flags in test data cleanup
+
+    #TODO: test for deleterows if truncate throughs exception in test data cleanup
 

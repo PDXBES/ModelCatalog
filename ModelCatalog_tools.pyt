@@ -377,14 +377,14 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         modelcatalogdataio.add_model(model, modeldataio)
         arcpy.AddMessage("Model Added")
     except:
-        arcpy.ExecuteError
+        raise arcpy.ExecuteError()
+
     if model.write_to_rrad():
         arcpy.AddMessage("Writing results to RRAD")
         #TODO: Create a single add simulation function in model_data_io
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
             simulationdataio.add_simulation_results(simulation, model, rrad_data_io)
-            arcpy.AddMessage("Results written to RRAD")
 
     else:
         arcpy.AddMessage("No results will be added to the RRAD")
