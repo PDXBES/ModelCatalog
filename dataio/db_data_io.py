@@ -7,7 +7,6 @@ except:
 from data_io_exception import DataIoException
 from data_io_exception import FieldNamesLengthDoesNotMatchRowLengthException
 
-
 class DbDataIo(object):
     def __init__(self, config, class_factory):
         # type: (Config) -> None
@@ -48,7 +47,6 @@ class DbDataIo(object):
                   " the attribute " + attribute_name + " could not be found.")
             raise AttributeError
             #TODO find cleaner way to get traceback and stop program
-
         return row
 
     def create_object_from_row(self, generic_object, field_attribute_lookup, row):
@@ -109,16 +107,17 @@ class DbDataIo(object):
 
         return field_mappings
 
-    def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
+    def copy(self, input_table, target, field_mappings, parent_id_to_db_field_mapping, unique_id_field):
         # type: (str, str, arcpy.FieldMappings) -> None
         in_memory_table = self.workspace + "\\" + "copy_table"
         self.copy_to_memory(input_table, "copy_table")
         self.add_parent_id(in_memory_table, parent_id_to_db_field_mapping)
-
+        self.add_unique_ids(in_memory_table, unique_id_field)
         if field_mappings != None:
             arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
         else:
             field_mappings = self._create_field_map_for_sde_db(in_memory_table)
+
         arcpy.Append_management(in_memory_table, target, "NO_TEST", field_mappings)
         arcpy.Delete_management(in_memory_table)
 
@@ -134,6 +133,16 @@ class DbDataIo(object):
         for parent_id, db_id_field in parent_id_to_db_field_mapping:
             arcpy.AddField_management(in_memory_table, db_id_field, "LONG")
             arcpy.CalculateField_management(in_memory_table, db_id_field, parent_id, "PYTHON_9.3")
+
+    def add_unique_ids(self, in_memory_table, unique_id_field):
+        import uuid
+        arcpy.AddField_management(in_memory_table, unique_id_field, "TEXT")
+        cursor = arcpy.da.UpdateCursor(in_memory_table, unique_id_field)
+        for row in cursor:
+            guid = '{' + str(uuid.uuid4()) + '}'
+            row[0] = guid
+            cursor.updateRow(row)
+        del cursor
 
     def copy_db_to_db(self, input_table, target, field_mappings, parent_id_to_db_field_mapping):
         # type: (str, str, arcpy.FieldMappings) -> None

@@ -6,6 +6,7 @@ from dataio.db_data_io import DbDataIo
 from collections import OrderedDict
 from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.generic_object import GenericObject
+import uuid
 
 
 class TestDbDataIO(TestCase):
@@ -98,6 +99,10 @@ class TestDbDataIO(TestCase):
         self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.start()
         self.mock_input_field_attribute_lookup.return_value = self.field_attribute_lookup_create_table_from_objects
 
+        self.patch_uuid_uuid4 = mock.patch("uuid.uuid4")
+        self.mock_uuid_uuid4 = self.patch_uuid_uuid4.start()
+        self.mock_uuid_uuid4.return_value = "guid"
+
         self.db_data_io.class_factory.class_dict = {"generic_object": GenericObject}
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
@@ -116,12 +121,13 @@ class TestDbDataIO(TestCase):
         self.mock_create_feature_class = self.patch_create_feature_class.stop()
         self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.stop()
         self.mock_make_query_table = self.patch_make_query_table.stop()
+        self.mock_uuid_uuid4 = self.patch_uuid_uuid4.stop()
 
     def test_retrieve_current_id_calls_update_cursor_with_correct_arguments(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
         self.db_data_io.current_id_database_table_path = "current_id_database_table_path"
         self.db_data_io.retrieve_current_id("object_1")
-        self.mock_da_UpdateCursor.assert_called_with("current_id_database_table_path",self.field_names_retrieve_id)
+        self.mock_da_UpdateCursor.assert_called_with("current_id_database_table_path", self.field_names_retrieve_id)
 
     def test_retrieve_current_id_return_current_ID(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -169,24 +175,24 @@ class TestDbDataIO(TestCase):
         self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\in_memory_output_table_name")
 
     def test_copy_calls_add_field_management_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping, )
         self.assertEqual(self.mock_add_field_management.call_args_list[0][0], ("in_memory\copy_table", "id_field_one", "LONG"))
         self.assertEqual(self.mock_add_field_management.call_args_list[1][0], ("in_memory\copy_table", "id_field_two", "LONG"))
 
     def test_copy_calls_calculate_field_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping, )
         id_1 = 1
         id_2 = 2
         self.assertEqual( self.mock_calculate_field.call_args_list[0][0], ("in_memory\copy_table", "id_field_one", id_1, 'PYTHON_9.3'))
         self.assertEqual( self.mock_calculate_field.call_args_list[1][0], ("in_memory\copy_table", "id_field_two", id_2, 'PYTHON_9.3'))
 
     def test_copy_if_field_mappings_is_not_None_append_called_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping, )
         self.mock_append.assert_called_with("in_memory\\copy_table", "target", "NO_TEST", "field_mappings")
 
     def test_copy_if_field_mappings_is_None_append_called_with_correct_arguments(self):
         self.mock_create_field_map_for_sde_db.return_value = "field_mappings"
-        self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping)
+        self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping, )
         self.mock_append.assert_called_with("in_memory\copy_table", "target", "NO_TEST", "field_mappings")
 
     def test_copy_db_to_db_if_field_mappings_is_not_None_append_called_with_correct_arguments(self):
@@ -407,3 +413,24 @@ class TestDbDataIO(TestCase):
                 mock_create_objects_from_table.return_value = test_objects
                 objects = self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
                 self.assertEquals(objects, test_objects)
+
+    def test_add_unique_ids_calls_add_field_management_with_correct_arguments(self):
+        in_memory_table = "table"
+        id_field = "GUID"
+        self.db_data_io.add_unique_ids(in_memory_table, id_field)
+        self.mock_add_field_management.assert_called_with("table", "GUID", "TEXT")
+
+    def test_add_unique_ids_calls_update_search_cursor_with_correct_arguments(self):
+        in_memory_table = "table"
+        id_field = "GUID"
+        self.db_data_io.add_unique_ids(in_memory_table, id_field)
+        self.mock_da_UpdateCursor.assert_called_with("table", "GUID")
+
+    def test_add_unique_ids_calls_update_row_with_correct_arguments(self):
+        a = None
+        self.mock_update_cursor.__iter__.return_value = iter([(a)])
+        self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+        in_memory_table = "table"
+        id_field = "GUID"
+        self.db_data_io.add_unique_ids(in_memory_table, id_field)
+        self.mock_update_cursor.updateRow.assert_called_with("{guid}")

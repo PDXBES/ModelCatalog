@@ -48,28 +48,32 @@ class SimulationDataIO(ObjectDataIo):
         model_area_results_path = self.area_results_path(simulation)
         rrad_area_results_path = self.config.area_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
-        self.model_catalog_db_data_io.copy(model_area_results_path, rrad_area_results_path, None, id_to_db_field_mapping)
+        self.model_catalog_db_data_io.copy(model_area_results_path, rrad_area_results_path, None,
+                                           id_to_db_field_mapping, "RRAD_GUID")
 
     def copy_link_results(self, simulation):
         # type: (Simulation) -> None
         model_link_results_path = self.link_results_path(simulation)
         rrad_link_results_path = self.config.link_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
-        self.model_catalog_db_data_io.copy(model_link_results_path, rrad_link_results_path, None, id_to_db_field_mapping)
+        self.model_catalog_db_data_io.copy(model_link_results_path, rrad_link_results_path, None,
+                                           id_to_db_field_mapping, "RRAD_GUID")
 
     def copy_node_results(self, simulation):
         # type: (Simulation) -> None
         model_node_results_path = self.node_results_path(simulation)
         rrad_node_results_path = self.config.node_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
-        self.model_catalog_db_data_io.copy(model_node_results_path, rrad_node_results_path, None, id_to_db_field_mapping)
+        self.model_catalog_db_data_io.copy(model_node_results_path, rrad_node_results_path, None,
+                                           id_to_db_field_mapping, "RRAD_GUID")
 
     def copy_node_flooding_results(self, simulation):
         # type: (Simulation) -> None
         model_node_flooding_results_path = self.node_flooding_results_path(simulation)
         rrad_node_flooding_results_path = self.config.node_flooding_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
-        self.model_catalog_db_data_io.copy(model_node_flooding_results_path, rrad_node_flooding_results_path, None, id_to_db_field_mapping)
+        self.model_catalog_db_data_io.copy(model_node_flooding_results_path, rrad_node_flooding_results_path, None,
+                                           id_to_db_field_mapping, "RRAD_GUID")
 
     def copy_area_results_to_memory(self, simulation, output_table_name):
         input_table = self.area_results_path(simulation)
@@ -97,7 +101,7 @@ class SimulationDataIO(ObjectDataIo):
                 arcpy.AddMessage("Results written to RRAD.")
             except:
                 self.stop_editing_session(editor, False)
-                arcpy.AddMessage("DB Error while adding area results. Changes rolled back.")
+                arcpy.AddMessage("DB Error while adding simulation results. Changes rolled back.")
                 raise
         else:
             arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the RRAD.")
