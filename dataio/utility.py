@@ -59,6 +59,7 @@ class Utility:
                 try:
                     arcpy.TruncateTable_management(feature_class)
                 except:
+                    print("unable to truncate, using Delete Rows")
                     arcpy.DeleteRows_management(feature_class)
         else:
             print("Config set to other than TEST, data will not be deleted")
@@ -73,6 +74,7 @@ class Utility:
                 try:
                     arcpy.TruncateTable_management(feature_class)
                 except:
+                    print("unable to truncate, using Delete Rows")
                     arcpy.DeleteRows_management(feature_class)
         else:
             print("Config set to other than TEST, data will not be deleted")
@@ -85,6 +87,7 @@ class Utility:
                 try:
                     arcpy.TruncateTable_management(feature_class)
                 except:
+                    print("unable to truncate, using Delete Rows")
                     arcpy.DeleteRows_management(feature_class)
         else:
             print("Config set to other than TEST, data will not be deleted")

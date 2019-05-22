@@ -49,6 +49,7 @@ class Area(GenericObject):
         field_attribute_lookup["area_type"] = "area_type"
         field_attribute_lookup["Shape@"] = "geometry"
         field_attribute_lookup["san_connect_type"] = "san_connect_type"
+        field_attribute_lookup["rrad_area_id"] = "id"
         return field_attribute_lookup
 
     @staticmethod
@@ -56,7 +57,7 @@ class Area(GenericObject):
         output_field_attribute_lookup = Area.input_field_attribute_lookup()
         output_field_attribute_lookup["Simulation_ID"] = "parent_id"
         output_field_attribute_lookup["bsbr"] = "bsbr"
-        output_field_attribute_lookup["RRAD_Area_ID"] = "id"
+        output_field_attribute_lookup["rrad_area_id"] = "id"
         return output_field_attribute_lookup
 
 

@@ -57,7 +57,7 @@ class SimulationDataIO(ObjectDataIo):
         rrad_link_results_path = self.config.link_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
         self.model_catalog_db_data_io.copy(model_link_results_path, rrad_link_results_path, None,
-                                           id_to_db_field_mapping, "RRAD_GUID")
+                                           id_to_db_field_mapping, "rrad_link_id")
 
     def copy_node_results(self, simulation):
         # type: (Simulation) -> None
@@ -65,7 +65,7 @@ class SimulationDataIO(ObjectDataIo):
         rrad_node_results_path = self.config.node_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
         self.model_catalog_db_data_io.copy(model_node_results_path, rrad_node_results_path, None,
-                                           id_to_db_field_mapping, "RRAD_GUID")
+                                           id_to_db_field_mapping, "rrad_node_id")
 
     def copy_node_flooding_results(self, simulation):
         # type: (Simulation) -> None
@@ -73,12 +73,14 @@ class SimulationDataIO(ObjectDataIo):
         rrad_node_flooding_results_path = self.config.node_flooding_results_sde_path
         id_to_db_field_mapping = self._id_to_field_map(simulation)
         self.model_catalog_db_data_io.copy(model_node_flooding_results_path, rrad_node_flooding_results_path, None,
-                                           id_to_db_field_mapping, "RRAD_GUID")
+                                           id_to_db_field_mapping, "rrad_node_flooding_id")
 
     def copy_area_results_to_memory(self, simulation, output_table_name):
         input_table = self.area_results_path(simulation)
         parent_id_to_db_field_mapping = self._id_to_field_map(simulation)
         self.model_catalog_db_data_io.copy_to_memory(input_table, output_table_name)
+        output_table = self.model_catalog_db_data_io.workspace + "/" + output_table_name
+        self.model_catalog_db_data_io.add_unique_ids(output_table, "rrad_area_id")
 
     def append_area_results_to_db(self, area_results):
 

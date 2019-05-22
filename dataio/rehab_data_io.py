@@ -50,7 +50,8 @@ class RehabDataIo(ObjectDataIo):
                                   "globalid",
                                   "FailureYear",
                                   "grade_h5",
-                                  "inspDate"]
+                                  "inspDate",
+                                  "rrad_rehab_id"]
 
         self.output_pipes_table_fields = ["compkey",
                                   "bpw",
@@ -73,7 +74,8 @@ class RehabDataIo(ObjectDataIo):
                                   "Last_Inspection_Date",
                                   "apw",
                                   "capitalcost",
-                                  "rehab_id"]
+                                  "rehab_id",
+                                  "rrad_rehab_id"]
 
     def _select_nbcr_data_pipes(self):
 
@@ -110,6 +112,8 @@ class RehabDataIo(ObjectDataIo):
 
     def create_pipes(self, rehab_id):
         pipes = []
+        self.rrad_db_data_io.add_unique_ids(self.nbcr_data_whole_pipe_table_path, "rrad_rehab_id")
+
         cursor = arcpy.da.SearchCursor(self.nbcr_data_whole_pipe_table_path, self.whole_pipe_fields)
         for row in cursor:
             rehab_result = RehabResult()
@@ -133,6 +137,7 @@ class RehabDataIo(ObjectDataIo):
             rehab_result.failure_year = row[16]
             rehab_result.integer_grade = row[17]
             rehab_result.inspection_date = row[18]
+            rehab_result.id = row[19]
             pipes.append(rehab_result)
         return pipes
 
@@ -158,14 +163,13 @@ class RehabDataIo(ObjectDataIo):
                 row.append(pipe.apwwhole)
                 row.append(pipe.lateralcount)
                 row.append(pipe.globalid)
-
                 row.append(pipe.failure_year)
                 row.append(pipe.integer_grade)
                 row.append(pipe.inspection_date)
-
                 row.append(pipe.apw)
                 row.append(pipe.capitalcost)
                 row.append(pipe.rehab_id)
+                row.append(pipe.id)
                 cursor.insertRow(row)
 
     def delete_fields(self, feature_class, fields_to_keep):
@@ -241,15 +245,11 @@ class RehabDataIo(ObjectDataIo):
         rehab.pipes = self.create_pipes(rehab_id)
 
         rehab.calculate_apw()
-
         rehab.calculate_capital_cost()
 
         self.write_pipes_to_table(rehab)
-
         self.delete_fields_except_compkey_from_feature()
-
         self.join_output_pipe_table_and_geometry()
-
         self.append_whole_pipes_to_rehab_results()
 
         return rehab.id

@@ -136,7 +136,7 @@ class DbDataIo(object):
 
     def add_unique_ids(self, in_memory_table, unique_id_field):
         import uuid
-        arcpy.AddField_management(in_memory_table, unique_id_field, "TEXT")
+        arcpy.AddField_management(in_memory_table, unique_id_field, "GUID")
         cursor = arcpy.da.UpdateCursor(in_memory_table, unique_id_field)
         for row in cursor:
             guid = '{' + str(uuid.uuid4()) + '}'

@@ -418,7 +418,7 @@ class TestDbDataIO(TestCase):
         in_memory_table = "table"
         id_field = "GUID"
         self.db_data_io.add_unique_ids(in_memory_table, id_field)
-        self.mock_add_field_management.assert_called_with("table", "GUID", "TEXT")
+        self.mock_add_field_management.assert_called_with("table", "GUID", "GUID")
 
     def test_add_unique_ids_calls_update_search_cursor_with_correct_arguments(self):
         in_memory_table = "table"
@@ -428,9 +428,10 @@ class TestDbDataIO(TestCase):
 
     def test_add_unique_ids_calls_update_row_with_correct_arguments(self):
         a = None
-        self.mock_update_cursor.__iter__.return_value = iter([(a)])
+        self.mock_update_cursor.__iter__.return_value = iter([(("a"))])
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
         in_memory_table = "table"
         id_field = "GUID"
         self.db_data_io.add_unique_ids(in_memory_table, id_field)
-        self.mock_update_cursor.updateRow.assert_called_with("{guid}")
+        self.mock_update_cursor.updateRow.assert_called_with(("{guid}"))
+
