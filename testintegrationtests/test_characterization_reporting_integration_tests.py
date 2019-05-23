@@ -29,11 +29,11 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot.created_by = "Joe"
 
         self.simulation_1 = Simulation(self.config)
-        self.simulation_1.id = 1382
+        self.simulation_1.id = 2734
         self.simulation_1.sim_desc = "Simulation_1"
 
         self.simulation_2 = Simulation(self.config)
-        self.simulation_2.id = 1384
+        self.simulation_2.id = 2735
         self.simulation_2.sim_desc = "Simulation_2"
         
         self.mapping_snapshot.simulations = [self.simulation_1, self.simulation_2]

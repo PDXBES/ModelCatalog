@@ -367,7 +367,7 @@ class EMGAATS_Model_Registration(object):
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
-    rrad_data_io = RradDbDataIo(config)
+    rrad_db_data_io = RradDbDataIo(config)
     modelcatalogdataio = ModelCatalogDbDataIo(config)
     modeldataio = ModelDataIo(config, modelcatalogdataio)
     simulationdataio = SimulationDataIo(config, modelcatalogdataio)
@@ -384,7 +384,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         #TODO: Create a single add simulation function in model_data_io
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-            simulationdataio.append_simulation_results(simulation, model, rrad_data_io)
+            simulationdataio.append_simulation_results(simulation, model, rrad_db_data_io)
 
     else:
         arcpy.AddMessage("No results will be added to the RRAD")

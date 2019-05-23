@@ -97,6 +97,7 @@ class DbDataIo(object):
             generic_object = self.class_factory.create_object(class_type)
             self.create_object_from_row(generic_object, field_attribute_lookup, row)
             generic_objects.append(generic_object)
+        del cursor
         return generic_objects
 
     def create_objects_from_table_with_current_id(self, class_type, input_table, field_attribute_lookup):
@@ -114,6 +115,7 @@ class DbDataIo(object):
             generic_object.id = current_id
             current_id += 1
             generic_objects.append(generic_object)
+        del cursor
         return generic_objects
 
     def create_objects_from_database(self, class_type, input_table):

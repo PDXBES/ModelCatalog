@@ -11,6 +11,7 @@ class MappingNode(MappingObject):
         self.dme_global_id = None
         self.name = "mapping_node"
         self.input_field_attribute_lookup = MappingNode.input_field_attribute_lookup()
+        self.rrad_node_id = None
         super(MappingNode, self).__init__(config)
 
     @staticmethod
@@ -18,6 +19,7 @@ class MappingNode(MappingObject):
         field_attribute_lookup = MappingNode.rrad_input_field_attribute_lookup()
         field_attribute_lookup.update(MappingObject.mapping_object_field_attribute_lookup())
         field_attribute_lookup["sim_desc"] = "sim_desc"
+        field_attribute_lookup["rrad_mapping_node_id"] = "id"
         return field_attribute_lookup
 
     @staticmethod
@@ -29,6 +31,7 @@ class MappingNode(MappingObject):
         field_attribute_lookup["MinFreeboardFt"] = "min_freeboard_ft"
         field_attribute_lookup["dme_global_id"] = "dme_global_id"
         field_attribute_lookup["Shape@"] = "geometry"
+        field_attribute_lookup["rrad_node_id"] = "rrad_node_id"
         return field_attribute_lookup
 
 

@@ -11,6 +11,7 @@ class MappingObject(GenericObject):
         self.simulation_id = None
         self.sim_desc = None
         self.geometry = None
+        self.id = None
 
     @staticmethod
     def mapping_object_field_attribute_lookup():
