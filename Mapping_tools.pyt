@@ -91,6 +91,10 @@ class CharacterizationReportingTool(object):
         mapping_snapshot.requested_by = requested_by
         mapping_snapshot.created_by = getpass.getuser()
         mapping_snapshot.create_date = datetime.datetime.today()
+        models = characterization_reporting.characterization_model.values()
+        desc = characterization_reporting.characterization_model.keys()
+        arcpy.AddMessage(str(models[0].id))
+        arcpy.AddMessage(str(desc[0]))
         mapping_snapshot.simulations = characterization_reporting.get_simulations_from_selected_models(characterization_model_descriptions)
 
         rrad_mapping.add_mapping_snapshot(mapping_snapshot)

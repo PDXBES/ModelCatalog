@@ -5,7 +5,7 @@ from mock_config import MockConfig
 from dataio.db_data_io import DbDataIo
 from businessclasses.generic_class_factory import GenericClassFactory
 from collections import OrderedDict
-from dataio.simulation_data_io import SimulationDataIO
+from dataio.simulation_data_io import SimulationDataIo
 from businessclasses.area import Area
 from businessclasses.model import Model
 
@@ -20,7 +20,7 @@ class TestSimulation(TestCase):
         self.simulation.model_path = model_path
         self.simulation.storm_id = 1
         self.simulation.dev_scenario_id = 1
-        self.simulation_data_io = SimulationDataIO(mock_config, self.db_data_io)
+        self.simulation_data_io = SimulationDataIo(mock_config, self.db_data_io)
         self.mock_model = mock.MagicMock(Model)
         area1 = Area(mock_config)
         area2 = Area(mock_config)
@@ -34,7 +34,7 @@ class TestSimulation(TestCase):
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.start()
         self.mock_create_objects_from_table_with_current_id.return_value = self.mock_areas
 
-        self.patch_copy_area_results_to_memory = mock.patch("dataio.simulation_data_io.SimulationDataIO.copy_area_results_to_memory")
+        self.patch_copy_area_results_to_memory = mock.patch("dataio.simulation_data_io.SimulationDataIo.copy_area_results_to_memory")
         self.mock_copy_area_results_to_memory = self.patch_copy_area_results_to_memory.start()
 
         self.patch_delete_management = mock.patch("arcpy.Delete_management")
@@ -106,13 +106,13 @@ class TestSimulation(TestCase):
     def test_create_areas_calls_copy_area_results_to_memory_with_correct_arguments(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
             self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_copy_area_results_to_memory.assert_called_with(self.simulation, "in_memory_table")
+            self.mock_copy_area_results_to_memory.assert_called_with(self.simulation, "in_memory_table",self.db_data_io)
 
     def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
             self.mock_area_field_attribute_lookup.return_value = "area_field_attribute_lookup"
             self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_create_objects_from_table_with_current_id.assert_called_with("in_memory\\in_memory_table", "area", "area_field_attribute_lookup")
+            self.mock_create_objects_from_table_with_current_id.assert_called_with("area", "in_memory\\in_memory_table", "area_field_attribute_lookup")
 
     def test_create_areas_calls_delete_with_correct_arguments(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:

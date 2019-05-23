@@ -2,7 +2,7 @@ import arcpy
 from businessclasses.model_catalog import ModelCatalog
 from businessclasses.model import Model
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
-from dataio.simulation_data_io import SimulationDataIO
+from dataio.simulation_data_io import SimulationDataIo
 from dataio.model_data_io import ModelDataIo
 import getpass
 import datetime
@@ -370,7 +370,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     rrad_data_io = RradDbDataIo(config)
     modelcatalogdataio = ModelCatalogDbDataIo(config)
     modeldataio = ModelDataIo(config, modelcatalogdataio)
-    simulationdataio = SimulationDataIO(config, modelcatalogdataio)
+    simulationdataio = SimulationDataIo(config, modelcatalogdataio)
     model = model_catalog.models[0]
     try:
         arcpy.AddMessage("Adding Model...")
@@ -384,7 +384,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         #TODO: Create a single add simulation function in model_data_io
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-            simulationdataio.add_simulation_results(simulation, model, rrad_data_io)
+            simulationdataio.append_simulation_results(simulation, model, rrad_data_io)
 
     else:
         arcpy.AddMessage("No results will be added to the RRAD")

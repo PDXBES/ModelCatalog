@@ -31,7 +31,7 @@ t3 = time.time()
 print str(t3-t2) + " seconds"
 
 print "create_pipes"
-rehab.pipes = rehab_data_io.create_pipes(rehab_id)
+rehab.rehab_results = rehab_data_io.create_rehab_results(rehab_id)
 t4 = time.time()
 print str(t4-t3) + " seconds"
 
@@ -46,7 +46,7 @@ t6 = time.time()
 print str(t6-t5) + " seconds"
 
 print "write_pipes_to_table"
-rehab_data_io.write_pipes_to_table(rehab)
+rehab_data_io.write_rehab_results_to_table(rehab)
 t7 = time.time()
 print str(t7-t6) + " seconds"
 

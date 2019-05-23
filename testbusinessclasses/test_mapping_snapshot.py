@@ -111,8 +111,7 @@ class TestMappingSnapshot(TestCase):
 
     def test_create_mapping_areas_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
         self.mapping_snapshot.create_mapping_areas(self.mock_mapping_snapshot_data_io)
-        self.mock_create_objects_from_table_with_current_id.assert_called_with("in_memory\\mapping_area_in_memory_table",
-                                                                               "mapping_area",
+        self.mock_create_objects_from_table_with_current_id.assert_called_with("mapping_area", "in_memory\\mapping_area_in_memory_table",
                                                                                MappingArea.rrad_input_field_attribute_lookup())
 
     def test_create_mapping_areas_calls_arcpy_delete_management_with_correct_arguments(self):
@@ -125,8 +124,7 @@ class TestMappingSnapshot(TestCase):
 
     def test_create_mapping_nodes_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
         self.mapping_snapshot.create_mapping_nodes(self.mock_mapping_snapshot_data_io)
-        self.mock_create_objects_from_table_with_current_id.assert_called_with("in_memory\\mapping_node_in_memory_table",
-                                                                               "mapping_node",
+        self.mock_create_objects_from_table_with_current_id.assert_called_with("mapping_node", "in_memory\\mapping_node_in_memory_table",
                                                                                MappingNode.rrad_input_field_attribute_lookup())
 
     def test_create_mapping_nodes_calls_arcpy_delete_management_with_correct_arguments(self):
@@ -155,8 +153,7 @@ class TestMappingSnapshot(TestCase):
 
     def test_create_mapping_links_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
         self.mapping_snapshot.create_mapping_links(self.mock_mapping_snapshot_data_io)
-        self.mock_create_objects_from_table_with_current_id.assert_called_with("in_memory\\mapping_link_in_memory_table",
-                                                                               "mapping_link",
+        self.mock_create_objects_from_table_with_current_id.assert_called_with("mapping_link", "in_memory\\mapping_link_in_memory_table",
                                                                                MappingLink.rrad_field_attribute_lookup())
 
     def test_create_mapping_links_calls_arcpy_delete_management_with_correct_arguments(self):

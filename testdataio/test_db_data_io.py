@@ -148,18 +148,18 @@ class TestDbDataIO(TestCase):
 
     def test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        self.db_data_io.retrieve_block_of_ids("object_2", 100)
+        self.db_data_io._retrieve_block_of_ids("object_2", 100)
         self.assertTrue(self.mock_update_cursor.updateRow.called)
         self.mock_update_cursor.updateRow.assert_called_with(["object_2", 155])
 
     #TODO create better exceptions
     def test_retrieve_block_of_ids_number_of_objects_is_zero_throws_exception(self):
         with self.assertRaises(Exception):
-            self.db_data_io.retrieve_block_of_ids("object_2", 0)
+            self.db_data_io._retrieve_block_of_ids("object_2", 0)
 
     def test_retrieve_block_of_ids_number_of_objects_is_less_than_zero_throws_exception(self):
         with self.assertRaises(Exception):
-            self.db_data_io.retrieve_block_of_ids("object_2", -1)
+            self.db_data_io._retrieve_block_of_ids("object_2", -1)
 
     def test_create_row_from_object_creates_row_with_correct_values(self):
         row = self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
@@ -174,42 +174,6 @@ class TestDbDataIO(TestCase):
         self.db_data_io.copy_to_memory("input_table", "in_memory_output_table_name")
         self.mock_copy_features_management.assert_called_with("input_table", "in_memory\\in_memory_output_table_name")
 
-    def test_copy_calls_add_field_management_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping, )
-        self.assertEqual(self.mock_add_field_management.call_args_list[0][0], ("in_memory\copy_table", "id_field_one", "LONG"))
-        self.assertEqual(self.mock_add_field_management.call_args_list[1][0], ("in_memory\copy_table", "id_field_two", "LONG"))
-
-    def test_copy_calls_calculate_field_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping, )
-        id_1 = 1
-        id_2 = 2
-        self.assertEqual( self.mock_calculate_field.call_args_list[0][0], ("in_memory\copy_table", "id_field_one", id_1, 'PYTHON_9.3'))
-        self.assertEqual( self.mock_calculate_field.call_args_list[1][0], ("in_memory\copy_table", "id_field_two", id_2, 'PYTHON_9.3'))
-
-    def test_copy_if_field_mappings_is_not_None_append_called_with_correct_arguments(self):
-        self.db_data_io.copy("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping, )
-        self.mock_append.assert_called_with("in_memory\\copy_table", "target", "NO_TEST", "field_mappings")
-
-    def test_copy_if_field_mappings_is_None_append_called_with_correct_arguments(self):
-        self.mock_create_field_map_for_sde_db.return_value = "field_mappings"
-        self.db_data_io.copy("input_table", "target", None, self.parent_id_to_db_field_mapping, )
-        self.mock_append.assert_called_with("in_memory\copy_table", "target", "NO_TEST", "field_mappings")
-
-    def test_copy_db_to_db_if_field_mappings_is_not_None_append_called_with_correct_arguments(self):
-        self.db_data_io.copy_db_to_db("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
-        self.mock_append.assert_called_with("input_table", "target", "NO_TEST", "field_mappings")
-
-    def test_copy_db_to_db_if_field_mappings_is_None_append_called_with_correct_arguments(self):
-        self.db_data_io.copy_db_to_db("input_table", "target", None, self.parent_id_to_db_field_mapping)
-        self.mock_append.assert_called_with("input_table", "target", "NO_TEST")
-
-    def test_copy_db_to_db_calls_calculate_field_with_correct_arguments(self):
-        self.db_data_io.copy_db_to_db("input_table", "target", "field_mappings", self.parent_id_to_db_field_mapping)
-        id_1 = 1
-        id_2 = 2
-        self.assertEqual(self.mock_calculate_field.call_args_list[0][0], ("target", "id_field_one", id_1))
-        self.assertEqual(self.mock_calculate_field.call_args_list[1][0], ("target", "id_field_two", id_2))
-
     def test_create_object_from_row_creates_object_with_correct_attributes(self):
         self.mock_generic_object.id = None
         self.mock_generic_object.parent_id = None
@@ -218,52 +182,58 @@ class TestDbDataIO(TestCase):
         self.assertEqual(self.mock_generic_object.parent_id, 2)
 
     def test_create_objects_from_table_calls_search_cursor_with_correct_arguments(self):
-        self.db_data_io.create_objects_from_table("table", "area", self.field_attribute_lookup_create_object)
+        self.db_data_io.create_objects_from_table("area", "table", self.field_attribute_lookup_create_object)
         self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
 
     def test_create_objects_from_table_returns_list_with_correct_object(self):
         self.mock_create_object.return_value = self.mock_generic_object
-        list_of_objects = self.db_data_io.create_objects_from_table("table", "area", self.field_attribute_lookup_create_object)
+        list_of_objects = self.db_data_io.create_objects_from_table("area", "table",
+                                                                    self.field_attribute_lookup_create_object)
         object_1 = list_of_objects[0]
         self.assertEqual(object_1.id, 1)
         self.assertEqual(object_1.parent_id, 2)
 
     def test_create_objects_from_table_with_current_id_calls_search_cursor_with_correct_arguments(self):
-        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
             mock_return_block_of_ids.return_value = 0
-            self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+            self.db_data_io.create_objects_from_table_with_current_id("area", "table",
+                                                                      self.field_attribute_lookup_create_object)
             self.mock_da_SearchCursor.assert_called_with("table", self.field_attribute_lookup_create_object.keys())
 
     def test_create_objects_from_table_with_current_id_calls_retrieve_block_of_ids_with_correct_arguments(self):
-        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
             mock_return_block_of_ids.return_value = 0
-            self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+            self.db_data_io.create_objects_from_table_with_current_id("area", "table",
+                                                                      self.field_attribute_lookup_create_object)
             mock_return_block_of_ids.assert_called_with("area", 1)
 
     def test_create_objects_from_table_with_current_id_returns_list_with_correct_object(self):
-        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
             mock_return_block_of_ids.return_value = 1
             self.mock_create_object_with_current_id.return_value = self.mock_generic_object
-            list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+            list_of_objects = self.db_data_io.create_objects_from_table_with_current_id("area", "table",
+                                                                                        self.field_attribute_lookup_create_object)
             object_1 = list_of_objects[0]
             self.assertEqual(1, object_1.id)
             self.assertEqual(2, object_1.parent_id)
 
     def test_create_objects_from_table_with_current_id_exceeds_maximum_id_throws_exception(self):
-        with mock.patch.object(self.db_data_io, "retrieve_block_of_ids") as mock_return_block_of_ids:
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
             mock_return_block_of_ids.return_value = 0
             self.mock_get_count_management.return_value = ["0"]
             self.mock_create_object_with_current_id.return_value = self.mock_generic_object
             with self.assertRaises(Exception):
-                self.db_data_io.create_objects_from_table_with_current_id("table", "area", self.field_attribute_lookup_create_object)
+                self.db_data_io.create_objects_from_table_with_current_id("area", "table",
+                                                                          self.field_attribute_lookup_create_object)
 
     def test_create_feature_class_from_objects_calls_create_table_with_correct_arguments(self):
         self.db_data_io.workspace = "in_memory"
         output_feature_class_name = "output_feature_class_name"
         object_list = ["obj1", "obj2"]
         field_attribute_lookup = OrderedDict()
-        template_feature_class_path = "template_feature_class_path"
-        self.db_data_io.create_feature_class_from_objects(output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path)
+        template_feature_class = "template_feature_class_path"
+        self.db_data_io.create_feature_class_from_objects(object_list, self.db_data_io.workspace, output_feature_class_name,
+                                                          field_attribute_lookup, template_feature_class)
         self.mock_create_feature_class.assert_called_with("in_memory", "output_feature_class_name", "", "template_feature_class_path", "", "", "template_feature_class_path")
 
     def test_create_feature_class_from_objects_calls_insert_cursor_with_correct_arguments(self):
@@ -272,7 +242,10 @@ class TestDbDataIO(TestCase):
         object_list = [self.mock_generic_object]
         template_feature_class_path = "template_feature_class_path"
         field_list = ["id_db", "parent_id_db"]
-        self.db_data_io.create_feature_class_from_objects(output_feature_class_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_feature_class_path)
+        self.db_data_io.create_feature_class_from_objects(object_list, self.db_data_io.workspace,
+                                                          output_feature_class_name,
+                                                          self.field_attribute_lookup_create_table_from_objects,
+                                                          template_feature_class_path)
         self.mock_da_InsertCursor.assert_called_with("in_memory\\output_feature_class_name", field_list)
 
     def test_create_feature_class_from_objects_calls_insert_row_with_correct_arguments(self):
@@ -280,7 +253,10 @@ class TestDbDataIO(TestCase):
         output_feature_class_name = "output_feature_class_name"
         object_list = [self.mock_generic_object]
         template_feature_class_path = "template_feature_class_path"
-        self.db_data_io.create_feature_class_from_objects(output_feature_class_name, object_list, self.field_attribute_lookup_create_table_from_objects, template_feature_class_path)
+        self.db_data_io.create_feature_class_from_objects(object_list, self.db_data_io.workspace,
+                                                          output_feature_class_name,
+                                                          self.field_attribute_lookup_create_table_from_objects,
+                                                          template_feature_class_path)
         self.mock_insert_cursor.insertRow.assert_called_with([1, 2])
 
     def test_append_feature_class_to_db_calls_create_feature_class_from_objects_with_correct_arguments(self):
@@ -289,13 +265,13 @@ class TestDbDataIO(TestCase):
             output_feature_class_name = "intermediate_feature_class_to_append"
             object_list = [self.mock_generic_object]
             field_attribute_lookup = OrderedDict()
-            template_feature_class_path = "template_feature_class_path"
+            template_feature_class= "template_feature_class"
             target_path = "target_path"
-            self.db_data_io.append_objects_to_db(object_list, field_attribute_lookup, template_feature_class_path, target_path)
-            mock_create_feature_class_from_objects.assert_called_with(output_feature_class_name, object_list, field_attribute_lookup, template_feature_class_path)
+            self.db_data_io.append_objects_to_db(object_list, field_attribute_lookup, template_feature_class, target_path)
+            mock_create_feature_class_from_objects.assert_called_with(object_list, "in_memory", output_feature_class_name, field_attribute_lookup, template_feature_class)
 
     def test_append_feature_class_to_db_calls_append_with_correct_arguments(self):
-        with mock.patch.object(self.db_data_io, "create_feature_class_from_objects") as mock_create_feature_class_from_objects:
+        with mock.patch.object(self.db_data_io, "create_feature_class_from_objects"):
             with mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db") as mock_create_field_map_for_sde_db:
                 self.db_data_io.workspace = "in_memory"
                 output_feature_class_name = "intermediate_feature_class_to_append"
@@ -326,7 +302,7 @@ class TestDbDataIO(TestCase):
         with mock.patch.object(self.db_data_io, "copy_to_memory"):
             with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
                 self.db_data_io.create_objects_from_database(class_type, input_table)
-                mock_create_objects_from_table.assert_called_with(table, class_type, field_attribute_lookup)
+                mock_create_objects_from_table.assert_called_with( class_type, table, field_attribute_lookup)
 
     def test_create_objects_from_database_calls_delete_management_with_correct_arguments(self):
         input_table = self.config.model_tracking_sde_path
@@ -389,7 +365,7 @@ class TestDbDataIO(TestCase):
         with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
             with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
                 self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
-                mock_create_objects_from_table.assert_called_with(table, class_type, self.field_attribute_lookup_create_table_from_objects)
+                mock_create_objects_from_table.assert_called_with(class_type, table, self.field_attribute_lookup_create_table_from_objects)
 
     def test_create_objects_from_database_with_id_filter_calls_delete_management_with_correct_arguments(self):
         class_type = "generic_object"
@@ -414,24 +390,32 @@ class TestDbDataIO(TestCase):
                 objects = self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
                 self.assertEquals(objects, test_objects)
 
-    def test_add_unique_ids_calls_add_field_management_with_correct_arguments(self):
-        in_memory_table = "table"
-        id_field = "GUID"
-        self.db_data_io.add_unique_ids(in_memory_table, id_field)
-        self.mock_add_field_management.assert_called_with("table", "GUID", "GUID")
+    def test_add_ids_calls_add_field_management_with_correct_arguments(self):
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 1
+            in_memory_table = "table"
+            id_field = "id_field"
+            object_type = "object"
+            self.db_data_io.add_ids(in_memory_table, id_field, object_type)
+            self.mock_add_field_management.assert_called_with("table", "id_field", "LONG")
 
-    def test_add_unique_ids_calls_update_search_cursor_with_correct_arguments(self):
-        in_memory_table = "table"
-        id_field = "GUID"
-        self.db_data_io.add_unique_ids(in_memory_table, id_field)
-        self.mock_da_UpdateCursor.assert_called_with("table", "GUID")
+    def test_add_ids_calls_update_search_cursor_with_correct_arguments(self):
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 1
+            in_memory_table = "table"
+            id_field = "id_field"
+            object_type = "object"
+            self.db_data_io.add_ids(in_memory_table, id_field, object_type)
+            self.mock_da_UpdateCursor.assert_called_with("table", "id_field")
 
-    def test_add_unique_ids_calls_update_row_with_correct_arguments(self):
-        a = None
-        self.mock_update_cursor.__iter__.return_value = iter([(("a"))])
-        self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        in_memory_table = "table"
-        id_field = "GUID"
-        self.db_data_io.add_unique_ids(in_memory_table, id_field)
-        self.mock_update_cursor.updateRow.assert_called_with(("{guid}"))
+    def test_add_ids_calls_update_row_with_correct_arguments(self):
+        with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
+            mock_return_block_of_ids.return_value = 1
+            self.mock_update_cursor.__iter__.return_value = iter([(0)])
+            self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+            in_memory_table = "table"
+            id_field = "id_field"
+            object_type = "object"
+            self.db_data_io.add_ids(in_memory_table, id_field, object_type)
+            self.mock_update_cursor.updateRow.assert_called_with((21))
 

@@ -59,22 +59,24 @@ class MappingSnapshot(GenericObject):
         arcpy.AddJoin_management(in_memory_capacity_table, capacity_global_id_field, in_memory_rehab_table, rehab_global_id_field, join_type)
 
     def create_mapping_links(self, mapping_snapshot_data_io):
-        workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
+        rrad_mapping_db_data_io = mapping_snapshot_data_io.rrad_mapping_db_data_io
+        workspace = rrad_mapping_db_data_io.workspace
         output_table_name = "mapping_link_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
         self.join_rehab_and_capacity_in_memory_tables(mapping_snapshot_data_io, output_table_name)
-        self.mapping_links = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
-                                                                                                   "mapping_link",
-                                                                                                   MappingLink.rrad_field_attribute_lookup())
+        self.mapping_links = rrad_mapping_db_data_io.create_objects_from_table_with_current_id("mapping_link", in_memory_table,
+                                                                               MappingLink.rrad_field_attribute_lookup())
         self.add_snapshot_id_and_sim_desc(self.mapping_links)
         arcpy.Delete_management(in_memory_table)
 
     def create_mapping_nodes(self, mapping_snapshot_data_io):
-        workspace = mapping_snapshot_data_io.rrad_mapping_db_data_io.workspace
+        rrad_mapping_db_data_io = mapping_snapshot_data_io.rrad_mapping_db_data_io
+        workspace = rrad_mapping_db_data_io.workspace
         output_table_name = "mapping_node_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
         mapping_snapshot_data_io.copy_mapping_nodes_to_memory(self, output_table_name)
-        self.mapping_nodes = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table, "mapping_node", MappingNode.rrad_input_field_attribute_lookup())
+        self.mapping_nodes = rrad_mapping_db_data_io.create_objects_from_table_with_current_id("mapping_node", in_memory_table,
+                                                                               MappingNode.rrad_input_field_attribute_lookup())
 
         self.add_snapshot_id_and_sim_desc(self.mapping_nodes)
         arcpy.Delete_management(in_memory_table)
@@ -91,9 +93,9 @@ class MappingSnapshot(GenericObject):
         output_table_name = "mapping_area_in_memory_table"
         in_memory_table = workspace + "\\" + output_table_name
         mapping_snapshot_data_io.copy_mapping_areas_to_memory(self, output_table_name)
-        self.mapping_areas = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id(in_memory_table,
-                                                                                                   "mapping_area",
-                                                                                                   MappingArea.rrad_input_field_attribute_lookup())
+        self.mapping_areas = mapping_snapshot_data_io.rrad_mapping_db_data_io.create_objects_from_table_with_current_id("mapping_area",
+                                                                                                        in_memory_table,
+                                                                                                        MappingArea.rrad_input_field_attribute_lookup())
         self.add_snapshot_id_and_sim_desc(self.mapping_areas)
         arcpy.Delete_management(in_memory_table)
 

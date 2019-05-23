@@ -8,7 +8,7 @@ from generic_object import GenericObject
 import datetime
 
 class Rehab(GenericObject):
-    pipes = None  # type: List[RehabResult]
+    rehab_results = None  # type: List[RehabResult]
 
     def __init__(self, config):
         # type: (Config) -> None
@@ -18,7 +18,7 @@ class Rehab(GenericObject):
         self.extract_date = None
         self.last_inspection_date = None
         self.purpose = None
-        self.pipes = []
+        self.rehab_results = []
 
     @property
     def valid(self):
@@ -28,10 +28,11 @@ class Rehab(GenericObject):
         return False
 
     def calculate_apw(self):
-        for pipe in self.pipes:
-            pipe.calculate_apw()
+        for rehab_result in self.rehab_results:
+            rehab_result.calculate_apw()
 
     def calculate_capital_cost(self):
-        for pipe in self.pipes:
-            pipe.calculate_capital_cost()
+        for rehab_result in self.rehab_results:
+            rehab_result.calculate_capital_cost()
+
 

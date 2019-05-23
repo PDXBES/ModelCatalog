@@ -49,7 +49,6 @@ class Area(GenericObject):
         field_attribute_lookup["area_type"] = "area_type"
         field_attribute_lookup["Shape@"] = "geometry"
         field_attribute_lookup["san_connect_type"] = "san_connect_type"
-        field_attribute_lookup["rrad_area_id"] = "id"
         return field_attribute_lookup
 
     @staticmethod

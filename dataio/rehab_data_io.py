@@ -20,7 +20,6 @@ class RehabDataIo(ObjectDataIo):
         self.rehab_branches_feature_class = "rehab_branches"
 
         self.workspace = "in_memory"
-        # self.workspace = "c:\\temp\\in_memory.gdb"
         self.output_pipes_table = "output_pipes_table"
         self.output_pipes_table_path = self.workspace + "/" + self.output_pipes_table
         self.active_whole_pipe_feature_class_path = self.workspace + "/" + self.active_whole_pipe_feature_class
@@ -51,9 +50,9 @@ class RehabDataIo(ObjectDataIo):
                                   "FailureYear",
                                   "grade_h5",
                                   "inspDate",
-                                  "rrad_rehab_id"]
+                                  "rrad_rehab_result_id"]
 
-        self.output_pipes_table_fields = ["compkey",
+        self.output_rehab_results_table_fields = ["compkey",
                                   "bpw",
                                   "usnode",
                                   "dsnode",
@@ -64,18 +63,18 @@ class RehabDataIo(ObjectDataIo):
                                   "manholecost",
                                   "asmrecommendednbcr",
                                   "asmrecommendedaction",
-                                  "apwspot",
-                                  "apwliner",
-                                  "apwwhole",
-                                  "lateralcount",
-                                  "globalid",
-                                  "FailureYear",
-                                  "Integer_Condition_Grade",
-                                  "Last_Inspection_Date",
-                                  "apw",
-                                  "capitalcost",
-                                  "rehab_id",
-                                  "rrad_rehab_id"]
+                                                  "apwspot",
+                                                  "apwliner",
+                                                  "apwwhole",
+                                                  "lateralcount",
+                                                  "globalid",
+                                                  "FailureYear",
+                                                  "Integer_Condition_Grade",
+                                                  "Last_Inspection_Date",
+                                                  "apw",
+                                                  "capitalcost",
+                                                  "rehab_id",
+                                                  "rrad_rehab_result_id"]
 
     def _select_nbcr_data_pipes(self):
 
@@ -110,10 +109,9 @@ class RehabDataIo(ObjectDataIo):
         self.create_branches_table()
         self.add_bpw_from_branches()
 
-    def create_pipes(self, rehab_id):
-        pipes = []
-        self.rrad_db_data_io.add_unique_ids(self.nbcr_data_whole_pipe_table_path, "rrad_rehab_id")
-
+    def create_rehab_results(self, rehab_id):
+        rehab_results = []
+        self.rrad_db_data_io.add_ids(self.nbcr_data_whole_pipe_table_path, "rrad_rehab_id", "rehab_result")
         cursor = arcpy.da.SearchCursor(self.nbcr_data_whole_pipe_table_path, self.whole_pipe_fields)
         for row in cursor:
             rehab_result = RehabResult()
@@ -138,38 +136,37 @@ class RehabDataIo(ObjectDataIo):
             rehab_result.integer_grade = row[17]
             rehab_result.inspection_date = row[18]
             rehab_result.id = row[19]
-            pipes.append(rehab_result)
-        return pipes
+            rehab_results.append(rehab_result)
+        return rehab_results
 
-    def write_pipes_to_table(self, rehab):
+    def write_rehab_results_to_table(self, rehab):
         arcpy.CreateTable_management(self.workspace, self.output_pipes_table, self.config.rehab_results_sde_path)
-        cursor = arcpy.da.InsertCursor(self.output_pipes_table_path, self.output_pipes_table_fields)
-        for pipe in rehab.pipes:
-            #if pipe.valid():
+        cursor = arcpy.da.InsertCursor(self.output_pipes_table_path, self.output_rehab_results_table_fields)
+        for rehab_result in rehab.rehab_results:
                 row = []
-                row.append(pipe.compkey)
-                row.append(pipe.bpw)
-                row.append(pipe.usnode)
-                row.append(pipe.dsnode)
-                row.append(pipe.diamwidth)
-                row.append(pipe.length)
-                row.append(pipe.material)
-                row.append(pipe.lateralcost)
-                row.append(pipe.manholecost)
-                row.append(pipe.asmrecommendednbcr)
-                row.append(pipe.asmrecommendedaction)
-                row.append(pipe.apwspot)
-                row.append(pipe.apwliner)
-                row.append(pipe.apwwhole)
-                row.append(pipe.lateralcount)
-                row.append(pipe.globalid)
-                row.append(pipe.failure_year)
-                row.append(pipe.integer_grade)
-                row.append(pipe.inspection_date)
-                row.append(pipe.apw)
-                row.append(pipe.capitalcost)
-                row.append(pipe.rehab_id)
-                row.append(pipe.id)
+                row.append(rehab_result.compkey)
+                row.append(rehab_result.bpw)
+                row.append(rehab_result.usnode)
+                row.append(rehab_result.dsnode)
+                row.append(rehab_result.diamwidth)
+                row.append(rehab_result.length)
+                row.append(rehab_result.material)
+                row.append(rehab_result.lateralcost)
+                row.append(rehab_result.manholecost)
+                row.append(rehab_result.asmrecommendednbcr)
+                row.append(rehab_result.asmrecommendedaction)
+                row.append(rehab_result.apwspot)
+                row.append(rehab_result.apwliner)
+                row.append(rehab_result.apwwhole)
+                row.append(rehab_result.lateralcount)
+                row.append(rehab_result.globalid)
+                row.append(rehab_result.failure_year)
+                row.append(rehab_result.integer_grade)
+                row.append(rehab_result.inspection_date)
+                row.append(rehab_result.apw)
+                row.append(rehab_result.capitalcost)
+                row.append(rehab_result.rehab_id)
+                row.append(rehab_result.id)
                 cursor.insertRow(row)
 
     def delete_fields(self, feature_class, fields_to_keep):
@@ -242,12 +239,12 @@ class RehabDataIo(ObjectDataIo):
 
         self.convert_nbcr_data_to_table()
 
-        rehab.pipes = self.create_pipes(rehab_id)
+        rehab.rehab_results = self.create_rehab_results(rehab_id)
 
         rehab.calculate_apw()
         rehab.calculate_capital_cost()
 
-        self.write_pipes_to_table(rehab)
+        self.write_rehab_results_to_table(rehab)
         self.delete_fields_except_compkey_from_feature()
         self.join_output_pipe_table_and_geometry()
         self.append_whole_pipes_to_rehab_results()
