@@ -41,6 +41,8 @@ class MockConfig():
         self.config.storm_types_sde_path = "storm_types_sde_path"
         self.config.dev_scenarios_sde_path = "dev_scenarios_sde_path"
 
+        self.config.tv_ratings_sde_path = "tv_ratings_sde_path"
+
 
         self.config.storm = {0: ("User-defined", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.config.storm_id = {("User-defined", "U"): 0, ("25yr6h", "D"): 1, ("10yr6h", "D"): 2}

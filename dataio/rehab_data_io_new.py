@@ -1,0 +1,231 @@
+import arcpy
+from businessclasses.rehab import Rehab
+from dataio.object_data_io import ObjectDataIo
+import datetime
+try:
+    from typing import List, Any
+except:
+    pass
+from businessclasses.config import Config
+from businessclasses.rehab_result import RehabResult
+
+
+class RehabDataIo(ObjectDataIo):
+    def __init__(self, config, rrad_db_data_io):
+        # type: (Config) -> None
+        self.config = config
+        self.rrad_db_data_io = rrad_db_data_io
+
+        self.workspace = "in_memory"
+
+    def copy_rehab_results_from_nbcr_data_to_memory(self, output_table_name):
+        input_table = self.config.rehab_nbcr_data_sde_path
+        in_memory_table = self.rrad_db_data_io.workspace + "\\" + output_table_name
+        fields = RehabResult.nbcr_data_field_attribute_lookup().keys()
+        active_segments_sql = "hservstat not in ( 'ABAN' , 'TBAB' , 'DNE' )"
+        whole_pipe_sql = "cutno = 0 and compkey is not Null"
+        where_clause = active_segments_sql + " and " + whole_pipe_sql
+        arcpy.MakeQueryTable_management(input_table, in_memory_table, "", "", fields, where_clause)
+
+    def copy_rehab_results_from_rehab_branches_to_memory(self, output_table_name):
+        input_table = self.config.rehab_branches_sde_path
+        in_memory_table = self.rrad_db_data_io.workspace + "\\" + output_table_name
+        fields = RehabResult.rehab_branches_field_attribute_lookup().keys()
+        arcpy.MakeQueryTable_management(input_table, in_memory_table, "", "", fields, "")
+
+    def copy_rehab_results_from_tv_ratings_to_memory(self, output_table_name):
+        input_table = self.config.tv_ratings_sde_path
+        in_memory_table = self.rrad_db_data_io.workspace + "\\" + output_table_name
+        fields = RehabResult.tv_ratings_field_attribute_lookup().keys()
+        arcpy.MakeQueryTable_management(input_table, in_memory_table, "", "", fields, "")
+
+    def join_rehab_results_from_nbcr_data_rehab_branches_tv_obs(self, rehab_results_from_nbcr_data_branches_tv_ratings_in_memory):
+        #copy_rehab_results_from_nbcr_data_to_memory
+        #copy_rehab_results_from_rehab_branches_to_memory
+        #copy_rehab_results_from_tv_ratings_to_memory
+        #join compkey
+        #join GLOBALID
+        pass
+
+    def append_rehab_results(self, rehab):
+        pass
+
+    def _select_nbcr_data_pipes(self):
+
+        arcpy.MakeFeatureLayer_management(self.config.rehab_nbcr_data_sde_path, self.active_whole_pipe_layer,
+                                          self.select_active_whole_pipe_sql, self.workspace)
+
+    def _create_pipe_feature_class(self):
+        arcpy.CopyFeatures_management(self.active_whole_pipe_layer, self.active_whole_pipe_feature_class_path)
+
+
+    def create_branches_table(self):
+        arcpy.CopyRows_management(self.config.rehab_branches_sde_path,
+                                  self.rehab_branches_table_path)
+
+    def delete_nbcr_data_bpw_field(self, input_table):
+        arcpy.DeleteField_management(input_table, "BPW")
+
+    def add_bpw_from_branches(self):
+        arcpy.JoinField_management(self.nbcr_data_whole_pipe_table_path,
+                                   "compkey",
+                                   self.rehab_branches_table_path,
+                                   "compkey",
+                                   "BPW")
+
+    def convert_nbcr_data_to_table(self):
+        self._select_nbcr_data_pipes()
+        self._create_pipe_feature_class()
+        arcpy.TableToTable_conversion(self.config.rehab_nbcr_data_sde_path,
+                                      self.workspace,
+                                      self.nbcr_data_whole_pipe_table,
+                                      self.select_active_whole_pipe_sql)
+        self.delete_nbcr_data_bpw_field(self.nbcr_data_whole_pipe_table_path)
+        self.create_branches_table()
+        self.add_bpw_from_branches()
+
+    def create_rehab_results(self, rehab_id):
+        rehab_results = []
+        self.rrad_db_data_io.add_ids(self.nbcr_data_whole_pipe_table_path, "rrad_rehab_id", "rehab_result")
+        cursor = arcpy.da.SearchCursor(self.nbcr_data_whole_pipe_table_path, self.whole_pipe_fields)
+        for row in cursor:
+            rehab_result = RehabResult()
+            rehab_result.rehab_id = rehab_id
+            rehab_result.compkey = row[0]
+            rehab_result.bpw = row[1]
+            rehab_result.usnode = row[2]
+            rehab_result.dsnode = row[3]
+            rehab_result.diamwidth = row[4]
+            rehab_result.length = row[5]
+            rehab_result.material = row[6]
+            rehab_result.lateralcost = row[7]
+            rehab_result.manholecost = row[8]
+            rehab_result.asmrecommendednbcr = row[9]
+            rehab_result.asmrecommendedaction = row[10]
+            rehab_result.apwspot = row[11]
+            rehab_result.apwliner = row[12]
+            rehab_result.apwwhole = row[13]
+            rehab_result.lateralcount = row[14]
+            rehab_result.globalid = row[15]
+            rehab_result.failure_year = row[16]
+            rehab_result.integer_grade = row[17]
+            rehab_result.inspection_date = row[18]
+            rehab_results.append(rehab_result)
+
+        arcpy.Delete_management(self.nbcr_data_whole_pipe_table_path)
+        del cursor
+
+        return rehab_results
+
+    def write_rehab_results_to_table(self, rehab):
+        arcpy.CreateTable_management(self.workspace, self.output_pipes_table, self.config.rehab_results_sde_path)
+        cursor = arcpy.da.InsertCursor(self.output_pipes_table_path, self.output_rehab_results_table_fields)
+        for rehab_result in rehab.rehab_results:
+            row = []
+            row.append(rehab_result.compkey)
+            row.append(rehab_result.bpw)
+            row.append(rehab_result.usnode)
+            row.append(rehab_result.dsnode)
+            row.append(rehab_result.diamwidth)
+            row.append(rehab_result.length)
+            row.append(rehab_result.material)
+            row.append(rehab_result.lateralcost)
+            row.append(rehab_result.manholecost)
+            row.append(rehab_result.asmrecommendednbcr)
+            row.append(rehab_result.asmrecommendedaction)
+            row.append(rehab_result.apwspot)
+            row.append(rehab_result.apwliner)
+            row.append(rehab_result.apwwhole)
+            row.append(rehab_result.lateralcount)
+            row.append(rehab_result.globalid)
+            row.append(rehab_result.failure_year)
+            row.append(rehab_result.integer_grade)
+            row.append(rehab_result.inspection_date)
+            row.append(rehab_result.apw)
+            row.append(rehab_result.capitalcost)
+            row.append(rehab_result.rehab_id)
+            row.append(rehab_result.id)
+            cursor.insertRow(row)
+
+        del cursor
+
+    def delete_fields(self, feature_class, fields_to_keep):
+        uppercase_fields_to_keep = [field.upper() for field in fields_to_keep]
+        fields = arcpy.ListFields(feature_class)
+        for field in fields:
+            if not(field.name.upper() in uppercase_fields_to_keep or field.type == 'Geometry' or field.type == 'OID'):
+                arcpy.DeleteField_management(feature_class, field.name)
+
+    def delete_specified_fields(self, feature_class, fields_to_delete):
+        uppercase_fields_to_delete = [field.upper() for field in fields_to_delete]
+        fields = arcpy.ListFields(feature_class)
+        for field in fields:
+            if field.name.upper() in uppercase_fields_to_delete and field.name.upper() != 'COMPKEY':
+                arcpy.DeleteField_management(feature_class, field.name)
+
+    def delete_fields_except_compkey_from_feature(self):
+        fields_to_delete = []
+        for field in self.whole_pipe_fields:
+            if field.upper() == "COMPKEY":
+                pass
+            else:
+                fields_to_delete.append(field)
+        self.delete_specified_fields(self.active_whole_pipe_feature_class_path, fields_to_delete)
+        #self.delete_fields(self.active_whole_pipe_feature_class_path, ["compkey", "geom_Length"])
+
+    def join_output_pipe_table_and_geometry(self):
+       arcpy.JoinField_management(self.active_whole_pipe_feature_class_path,
+                                  "compkey",
+                                  self.output_pipes_table_path,
+                                  "compkey")
+
+    def append_whole_pipes_to_rehab_results(self):
+        try:
+            edit = arcpy.da.Editor(self.config.RRAD_sde_path)
+
+            edit.startEditing(False, True)
+
+            edit.startOperation()
+            print("starting append")
+            arcpy.Append_management(self.active_whole_pipe_feature_class_path, self.config.rehab_results_sde_path, "NO_TEST")
+            #raise arcpy.ExecuteError()
+            print("Append Complete")
+            edit.stopOperation()
+
+            edit.stopEditing(True)
+
+        except:
+            print("Exception Raised, stopping edits")
+            edit.undoOperation()
+            edit.abortOperation()
+            edit.stopEditing(False)
+            raise
+
+    # TODO - write method using add model that uses and edit session like append above
+
+    def create_rehab_snapshot_for_characterization_mapping_snapshot(self):
+        rehab_id = self.create_rehab_snapshot("Characterization")
+        return rehab_id
+
+    def create_rehab_snapshot(self, purpose):
+
+        rehab_id = self.rrad_db_data_io.retrieve_current_rehab_id()
+        rehab = Rehab(self.config)
+        rehab.id = rehab_id
+        rehab.extract_date = datetime.datetime.today()
+        rehab.last_inspection_date = datetime.datetime.today()
+        rehab.purpose = purpose
+        self.rrad_db_data_io.add_rehab(rehab)
+        self.convert_nbcr_data_to_table()
+
+        rehab.rehab_results = self.create_rehab_results(rehab_id)
+
+        rehab.calculate_apw()
+        rehab.calculate_capital_cost()
+
+        self.write_rehab_results_to_table(rehab)
+        self.delete_fields_except_compkey_from_feature()
+        self.join_output_pipe_table_and_geometry()
+        self.append_whole_pipes_to_rehab_results()
+
+        return rehab.id

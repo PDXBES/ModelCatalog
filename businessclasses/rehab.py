@@ -35,4 +35,7 @@ class Rehab(GenericObject):
         for rehab_result in self.rehab_results:
             rehab_result.calculate_capital_cost()
 
+    def create_rehab_results(self, rehab_data_io):
+        pass
+
 
