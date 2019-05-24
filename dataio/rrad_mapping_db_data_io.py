@@ -53,7 +53,7 @@ class RradMappingDbDataIo(DbDataIo):
             mapping_snapshot_data_io.stop_editing_session(editor, True)
         except:
             mapping_snapshot_data_io.stop_editing_session(editor, False)
-            arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
+            arcpy.AddMessage("DB Error while adding snapshot. Changes rolled back.")
             traceback.print_exc()
             raise
 #TODO: add snapshot- add snapshot to db

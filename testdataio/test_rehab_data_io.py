@@ -66,7 +66,7 @@ class TestRehabDataIO(TestCase):
                                   "material", "lateralcost", "manholecost",
                                   "asmrecommendednbcr", "asmrecommendedaction",
                                   "apwspot","apwliner", "apwwhole", "lateralcount",
-                                  "globalid", 'FailureYear', 'grade_h5', 'inspDate', "rrad_rehab_result_id"]
+                                  "globalid", 'FailureYear', 'grade_h5', 'inspDate']
 
         self.output_rehab_results_table_fields = ['compkey', 'bpw', 'usnode', 'dsnode', 'diamwidth', 'length', 'material',
                                           'lateralcost', 'manholecost', 'asmrecommendednbcr', 'asmrecommendedaction',

@@ -49,6 +49,9 @@ class Utility:
             arcpy.AddError(path)
             raise InvalidModelPathException
 
+    @staticmethod
+    def format_date(date_object):
+        return date_object.strftime("%m/%d/%Y %H:%M %p")
 
     def model_catalog_test_data_cleanup(self):
         if self.config.test_flag == "TEST":
@@ -92,6 +95,16 @@ class Utility:
         else:
             print("Config set to other than TEST, data will not be deleted")
 
-    @staticmethod
-    def format_date(date_object):
-        return date_object.strftime("%m/%d/%Y %H:%M %p")
+    # TODO write test
+    def set_current_ids_to_zero(self, current_id_table_sde_path):
+        if self.config.test_flag == "TEST":
+            field_names = ["Current_ID"]
+            cursor = arcpy.da.UpdateCursor(current_id_table_sde_path, field_names)
+            for row in cursor:
+                row[0] = 0
+                cursor.updateRow(row)
+            del cursor
+        else:
+            print("Config set to other than TEST, data will not be deleted")
+
+

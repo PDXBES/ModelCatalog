@@ -135,7 +135,6 @@ class RehabDataIo(ObjectDataIo):
             rehab_result.failure_year = row[16]
             rehab_result.integer_grade = row[17]
             rehab_result.inspection_date = row[18]
-            rehab_result.id = row[19]
             rehab_results.append(rehab_result)
 
         arcpy.Delete_management(self.nbcr_data_whole_pipe_table_path)
@@ -242,21 +241,16 @@ class RehabDataIo(ObjectDataIo):
         rehab.last_inspection_date = datetime.datetime.today()
         rehab.purpose = purpose
         self.rrad_db_data_io.add_rehab(rehab)
-        try:
-            self.convert_nbcr_data_to_table()
+        self.convert_nbcr_data_to_table()
 
-            rehab.rehab_results = self.create_rehab_results(rehab_id)
+        rehab.rehab_results = self.create_rehab_results(rehab_id)
 
-            rehab.calculate_apw()
-            rehab.calculate_capital_cost()
+        rehab.calculate_apw()
+        rehab.calculate_capital_cost()
 
-            self.write_rehab_results_to_table(rehab)
-            self.delete_fields_except_compkey_from_feature()
-            self.join_output_pipe_table_and_geometry()
-            self.append_whole_pipes_to_rehab_results()
-        except:
-            pass
+        self.write_rehab_results_to_table(rehab)
+        self.delete_fields_except_compkey_from_feature()
+        self.join_output_pipe_table_and_geometry()
+        self.append_whole_pipes_to_rehab_results()
 
-        finally:
-            arcpy.Delete_management(self.active_whole_pipe_feature_class_path)
         return rehab.id

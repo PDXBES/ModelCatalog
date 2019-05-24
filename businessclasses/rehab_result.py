@@ -27,8 +27,7 @@ class RehabResult(GenericObject):
         self.integer_grade = None    # "grade_h5",
         self.inspection_date = None  # "inspDate"
         self.inspection_year = None
-
-
+        self.id = None
 
     def calculate_apw(self):
         if self.asmrecommendedaction.upper() == "SP":

@@ -6,8 +6,6 @@ from dataio.db_data_io import DbDataIo
 from collections import OrderedDict
 from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.generic_object import GenericObject
-import uuid
-
 
 class TestDbDataIO(TestCase):
 
@@ -35,6 +33,9 @@ class TestDbDataIO(TestCase):
 
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
         self.mock_update_cursor.__iter__.return_value = iter([("object_1", 44), ("object_2", 55)])
+
+        self.mock_update_cursor1 = mock.MagicMock(arcpy.da.UpdateCursor)
+        self.mock_update_cursor1.__iter__.return_value = iter([0])
 
         self.mock_insert_cursor = mock.MagicMock(arcpy.da.InsertCursor)
 
@@ -99,10 +100,6 @@ class TestDbDataIO(TestCase):
         self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.start()
         self.mock_input_field_attribute_lookup.return_value = self.field_attribute_lookup_create_table_from_objects
 
-        self.patch_uuid_uuid4 = mock.patch("uuid.uuid4")
-        self.mock_uuid_uuid4 = self.patch_uuid_uuid4.start()
-        self.mock_uuid_uuid4.return_value = "guid"
-
         self.db_data_io.class_factory.class_dict = {"generic_object": GenericObject}
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
@@ -121,7 +118,6 @@ class TestDbDataIO(TestCase):
         self.mock_create_feature_class = self.patch_create_feature_class.stop()
         self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.stop()
         self.mock_make_query_table = self.patch_make_query_table.stop()
-        self.mock_uuid_uuid4 = self.patch_uuid_uuid4.stop()
 
     def test_retrieve_current_id_calls_update_cursor_with_correct_arguments(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
@@ -274,7 +270,6 @@ class TestDbDataIO(TestCase):
         with mock.patch.object(self.db_data_io, "create_feature_class_from_objects"):
             with mock.patch.object(self.db_data_io, "_create_field_map_for_sde_db") as mock_create_field_map_for_sde_db:
                 self.db_data_io.workspace = "in_memory"
-                output_feature_class_name = "intermediate_feature_class_to_append"
                 object_list = [self.mock_generic_object]
                 field_attribute_lookup = OrderedDict()
                 template_feature_class_path = "template_feature_class_path"
@@ -308,7 +303,6 @@ class TestDbDataIO(TestCase):
         input_table = self.config.model_tracking_sde_path
         table = "in_memory/object_table"
         class_type = "generic_object"
-        field_attribute_lookup = self.field_attribute_lookup_create_object
         with mock.patch.object(self.db_data_io, "copy_to_memory"):
             with mock.patch.object(self.db_data_io, "create_objects_from_table"):
                 self.db_data_io.create_objects_from_database(class_type, input_table)
@@ -318,7 +312,6 @@ class TestDbDataIO(TestCase):
         input_table = self.config.model_tracking_sde_path
         table = "in_memory/object_table"
         class_type = "generic_object"
-        field_attribute_lookup = self.field_attribute_lookup_create_object
         with mock.patch.object(self.db_data_io, "copy_to_memory"):
             with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
                 test_object = "test_object"
@@ -350,7 +343,7 @@ class TestDbDataIO(TestCase):
         id_field_name = "id_field_name"
         id_list = "id_list"
         in_memory_output_table_name = "object_table"
-        with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
+        with mock.patch.object(self.db_data_io, "create_objects_from_table"):
             with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
                 self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
                 mock_copy_to_memory_with_id_filter.assert_called_with(input_table_name, in_memory_output_table_name, id_field_name, id_list)
@@ -360,10 +353,9 @@ class TestDbDataIO(TestCase):
         input_table_name = "input_table_name"
         id_field_name = "id_field_name"
         id_list = "id_list"
-        in_memory_output_table_name = "object_table"
         table = "in_memory/object_table"
         with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
-            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter"):
                 self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
                 mock_create_objects_from_table.assert_called_with(class_type, table, self.field_attribute_lookup_create_table_from_objects)
 
@@ -373,8 +365,8 @@ class TestDbDataIO(TestCase):
         id_field_name = "id_field_name"
         id_list = "id_list"
         table = "in_memory/object_table"
-        with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
-            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+        with mock.patch.object(self.db_data_io, "create_objects_from_table"):
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter"):
                 self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
                 self.mock_delete_management.assert_called_with(table)
 
@@ -385,7 +377,7 @@ class TestDbDataIO(TestCase):
         id_list = "id_list"
         test_objects = "test_objects"
         with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
-            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter") as mock_copy_to_memory_with_id_filter:
+            with mock.patch.object(self.db_data_io, "copy_to_memory_with_id_filter"):
                 mock_create_objects_from_table.return_value = test_objects
                 objects = self.db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
                 self.assertEquals(objects, test_objects)
@@ -411,8 +403,7 @@ class TestDbDataIO(TestCase):
     def test_add_ids_calls_update_row_with_correct_arguments(self):
         with mock.patch.object(self.db_data_io, "_retrieve_block_of_ids") as mock_return_block_of_ids:
             mock_return_block_of_ids.return_value = 1
-            self.mock_update_cursor.__iter__.return_value = iter([(0)])
-            self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
+            self.mock_da_UpdateCursor.return_value = self.mock_update_cursor1
             in_memory_table = "table"
             id_field = "id_field"
             object_type = "object"
