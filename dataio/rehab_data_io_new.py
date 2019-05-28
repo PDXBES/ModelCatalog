@@ -39,13 +39,18 @@ class RehabDataIo(ObjectDataIo):
         fields = RehabResult.tv_ratings_field_attribute_lookup().keys()
         arcpy.MakeQueryTable_management(input_table, in_memory_table, "", "", fields, "")
 
-    def join_rehab_results_from_nbcr_data_rehab_branches_tv_obs(self, rehab_results_from_nbcr_data_branches_tv_ratings_in_memory):
-        #copy_rehab_results_from_nbcr_data_to_memory
-        #copy_rehab_results_from_rehab_branches_to_memory
-        #copy_rehab_results_from_tv_ratings_to_memory
-        #join compkey
-        #join GLOBALID
-        pass
+    def copy_rehab_results_to_memory(self, rehab_results_table_name):
+        rehab_results_from_rehab_branches_table_name = "rehab_results_from_rehab_branches"
+        rehab_results_from_tv_ratings_table_name = "rehab_results_from_tv_ratings"
+        join_type = "KEEP_ALL"
+        output_table = self.rrad_db_data_io.workspace + "\\" + rehab_results_table_name
+        rehab_results_from_rehab_branches_table = self.rrad_db_data_io.workspace + "\\" + rehab_results_from_rehab_branches_table_name
+        rehab_results_from_tv_ratings_table = self.rrad_db_data_io.workspace + "\\" + rehab_results_from_tv_ratings_table_name
+        self.copy_rehab_results_from_nbcr_data_to_memory(rehab_results_table_name)
+        self.copy_rehab_results_from_rehab_branches_to_memory(rehab_results_from_rehab_branches_table_name)
+        self.copy_rehab_results_from_tv_ratings_to_memory(rehab_results_from_tv_ratings_table_name)
+        arcpy.AddJoin_management(output_table, "compkey", rehab_results_from_rehab_branches_table, "compkey", join_type)
+        arcpy.AddJoin_management(output_table, "GLOBALID", rehab_results_from_tv_ratings_table, "GLOBALID", join_type)
 
     def append_rehab_results(self, rehab):
         pass

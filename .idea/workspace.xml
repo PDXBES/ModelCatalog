@@ -21,13 +21,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.87122416">
+    <splitter split-orientation="horizontal" split-proportion="0.7593328">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="425">
+                <state relative-caret-position="2873">
                   <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="39" />
                 </state>
               </provider>
@@ -36,8 +36,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/rehab_result.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="329">
-                  <caret line="92" column="45" lean-forward="true" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
+                <state relative-caret-position="155">
+                  <caret line="92" column="45" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
                   <folding>
                     <element signature="e#0#11#0" expanded="true" />
                   </folding>
@@ -48,7 +48,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="125">
+                <state relative-caret-position="680">
                   <caret line="45" column="23" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="23" />
                 </state>
               </provider>
@@ -57,8 +57,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-545">
-                  <caret line="31" column="114" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="31" selection-end-column="114" />
+                <state relative-caret-position="561">
+                  <caret line="93" column="15" selection-start-line="93" selection-end-line="94" />
                   <folding>
                     <element signature="e#0#12#0" expanded="true" />
                   </folding>
@@ -66,11 +66,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io_new.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="41" column="63" lean-forward="true" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
+                <state relative-caret-position="386">
+                  <caret line="52" column="118" selection-start-line="52" selection-start-column="118" selection-end-line="52" selection-end-column="118" />
                 </state>
               </provider>
             </entry>
@@ -78,17 +78,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="493">
+                <state relative-caret-position="595">
                   <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="293">
-                  <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
+                <state relative-caret-position="256">
+                  <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -96,7 +96,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-170">
+                <state relative-caret-position="-576">
                   <caret line="14" column="78" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="78" />
                 </state>
               </provider>
@@ -105,12 +105,12 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-2142">
-                  <caret selection-end-line="14" selection-end-column="40" />
+                <state relative-caret-position="-2958">
+                  <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -121,11 +121,32 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io_new.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="276">
-                  <caret line="51" selection-start-line="51" selection-end-line="51" />
+                <state relative-caret-position="274">
+                  <caret line="74" column="118" selection-start-line="74" selection-start-column="118" selection-end-line="74" selection-end-column="118" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="91">
+                  <caret line="212" column="70" selection-start-line="212" selection-start-column="70" selection-end-line="212" selection-end-column="70" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_snapshot.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-467">
+                  <caret line="155" column="95" selection-start-line="155" selection-start-column="95" selection-end-line="155" selection-end-column="95" />
                 </state>
               </provider>
             </entry>
@@ -144,7 +165,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mock_create_objects_from_table</find>
       <find>walk</find>
       <find>patch</find>
       <find>exce</find>
@@ -174,6 +194,7 @@
       <find>active_w</find>
       <find>active_whole_pipe_fe</find>
       <find>tv_ratings</find>
+      <find>mock.c</find>
     </findStrings>
     <replaceStrings>
       <replace>m</replace>
@@ -249,17 +270,17 @@
         <option value="$PROJECT_DIR$/dataio/utility.py" />
         <option value="$PROJECT_DIR$/testdataio/test_db_data_io.py" />
         <option value="$PROJECT_DIR$/businessclasses/rehab.py" />
-        <option value="$PROJECT_DIR$/businessclasses/rehab_result.py" />
         <option value="$PROJECT_DIR$/testbusinessclasses/mock_config.py" />
-        <option value="$PROJECT_DIR$/testdataio/test_rehab_data_io_new.py" />
+        <option value="$PROJECT_DIR$/businessclasses/rehab_result.py" />
         <option value="$PROJECT_DIR$/dataio/rehab_data_io_new.py" />
+        <option value="$PROJECT_DIR$/testdataio/test_rehab_data_io_new.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="949" />
-    <option name="width" value="980" />
-    <option name="height" value="1031" />
+    <option name="x" value="633" />
+    <option name="width" value="654" />
+    <option name="height" value="687" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -269,6 +290,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -305,7 +327,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,8 +362,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments">
-    <configuration name="Unittests for test_db_data_io.TestDbDataIO.test_add_ids_calls_update_row_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments">
+    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_rehab_branches_tv_obs_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -352,11 +373,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_db_data_io.TestDbDataIO.test_add_ids_calls_update_row_with_correct_arguments&quot;" />
+      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_rehab_branches_tv_obs_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_db_data_io.TestDbDataIO.test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -366,11 +387,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_db_data_io.TestDbDataIO.test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2&quot;" />
+      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -380,11 +401,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments&quot;" />
+      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_rehab_branches_to_memory" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -394,11 +415,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_rehab_branches_to_memory&quot;" />
+      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -408,24 +429,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments&quot;" />
+      <option name="_new_target" value="&quot;test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.Unittests for test_db_data_io.TestDbDataIO.test_add_ids_calls_update_row_with_correct_arguments" />
-      <item itemvalue="Python tests.Unittests for test_db_data_io.TestDbDataIO.test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2" />
-      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" />
-      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_rehab_branches_to_memory" />
-      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments" />
+      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_rehab_branches_tv_obs_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" />
+      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" />
+      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments" />
+      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments" />
+      <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments" />
-        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_rehab_branches_to_memory" />
-        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" />
-        <item itemvalue="Python tests.Unittests for test_db_data_io.TestDbDataIO.test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2" />
-        <item itemvalue="Python tests.Unittests for test_db_data_io.TestDbDataIO.test_add_ids_calls_update_row_with_correct_arguments" />
+        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" />
+        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments" />
+        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" />
+        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments" />
+        <item itemvalue="Python tests.Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_rehab_branches_tv_obs_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" />
       </list>
     </recent_temporary>
   </component>
@@ -443,35 +464,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_db_data_io_TestDbDataIO_test_add_ids_calls_update_row_with_correct_arguments - 2019.05.24 at 09h 07m 17s.xml">
-      <configuration name="Unittests for test_db_data_io.TestDbDataIO.test_add_ids_calls_update_row_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments - 2019.05.28 at 15h 53m 42s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments - 2019.05.24 at 14h 39m 05s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments - 2019.05.28 at 15h 56m 17s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments - 2019.05.24 at 14h 39m 30s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments - 2019.05.28 at 15h 57m 23s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments - 2019.05.24 at 14h 40m 13s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments - 2019.05.28 at 15h 57m 56s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments - 2019.05.24 at 14h 40m 39s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments - 2019.05.28 at 15h 59m 03s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments - 2019.05.24 at 14h 45m 25s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments - 2019.05.28 at 15h 59m 14s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_rehab_branches_to_memory - 2019.05.24 at 14h 49m 13s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_rehab_branches_to_memory" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments - 2019.05.28 at 15h 59m 28s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_tv_ratings_to_memory_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_rehab_branches_to_memory - 2019.05.24 at 14h 52m 01s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_rehab_branches_to_memory" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments - 2019.05.28 at 15h 59m 40s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_test_copy_rehab_results_to_memory_calls_add_join_management_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments - 2019.05.24 at 15h 11m 45s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments - 2019.05.28 at 15h 59m 49s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_rehab_branches_to_memory_with_correct_arguments" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments - 2019.05.24 at 15h 12m 38s.xml">
-      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_from_tv_ratings_to_memory_calls_make_query_table_with_correct_arguments" configurationId="tests" />
+    <history-entry file="Unittests_for_test_rehab_data_io_new_TestRehabDataIONew_test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments - 2019.05.28 at 15h 59m 56s.xml">
+      <configuration name="Unittests for test_rehab_data_io_new.TestRehabDataIONew.test_copy_rehab_results_to_memory_calls_copy_rehab_results_from_nbcr_data_to_memory_with_correct_arguments" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="2">
@@ -489,10 +510,10 @@
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.19459888" />
+      <window_info content_ui="combo" id="Project" order="2" weight="0.23749007" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.23318872" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.21985815" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80773807" weight="0.62765956" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8426073" visible="true" weight="0.14184397" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.69652265" weight="0.43383947" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -765,16 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="132" column="27" selection-start-line="132" selection-start-column="27" selection-end-line="132" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -872,13 +883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_snapshot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="155" column="95" selection-start-line="155" selection-start-column="95" selection-end-line="155" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/characterization_reporting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -950,27 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/mock_config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -978,10 +961,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2873">
+          <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/rehab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2142">
-          <caret selection-end-line="14" selection-end-column="40" />
+        <state relative-caret-position="-2958">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_mapping_snapshot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-467">
+          <caret line="155" column="95" selection-start-line="155" selection-start-column="95" selection-end-line="155" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdataio/test_simulation_data_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="212" column="70" selection-start-line="212" selection-start-column="70" selection-end-line="212" selection-end-column="70" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -990,15 +1011,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/mapping_snapshot_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
+        <state relative-caret-position="-576">
           <caret line="14" column="78" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-545">
-          <caret line="31" column="114" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="31" selection-end-column="114" />
+        <state relative-caret-position="561">
+          <caret line="93" column="15" selection-start-line="93" selection-end-line="94" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
@@ -1007,35 +1035,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/rehab_result.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="92" column="45" lean-forward="true" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
+        <state relative-caret-position="155">
+          <caret line="92" column="45" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="52" column="118" selection-start-line="52" selection-start-column="118" selection-end-line="52" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_rehab_data_io_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="274">
+          <caret line="74" column="118" selection-start-line="74" selection-start-column="118" selection-end-line="74" selection-end-column="118" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dataio/rehab_data_io_new.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="41" column="63" lean-forward="true" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_snapshot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
         </state>
       </provider>
     </entry>
