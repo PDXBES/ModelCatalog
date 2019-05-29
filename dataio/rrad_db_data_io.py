@@ -22,7 +22,7 @@ class RradDbDataIo(DbDataIo):
         self.field_attribute_lookup["Last_Inspection_Date"] = "last_inspection_date"
         self.field_attribute_lookup["Purpose"] = "purpose"
         self.class_factory = GenericClassFactory(self.config)
-        self.class_factory.class_dict = {"pipe": RehabResult, "rehab": Rehab, "area": Area}
+        self.class_factory.class_dict = {"rehab_result": RehabResult, "rehab": Rehab, "area": Area}
 
     def retrieve_current_rehab_id(self):
         rehab_id = self.retrieve_current_id("rehab")
@@ -33,3 +33,5 @@ class RradDbDataIo(DbDataIo):
         self.append_object_to_db(rehab, self.field_attribute_lookup,
                                 self.config.rehab_tracking_sde_path,
                                 self.config.rehab_tracking_sde_path)
+
+
