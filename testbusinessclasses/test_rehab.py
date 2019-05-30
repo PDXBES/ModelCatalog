@@ -35,7 +35,7 @@ class TestRehab(TestCase):
         self.patch_create_objects_from_table_with_current_id = mock.patch("dataio.rrad_db_data_io.RradDbDataIo.create_objects_from_table_with_current_id")
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.start()
 
-        self.patch_append_rehab_results = mock.patch("dataio.rehab_data_io.RehabDataIo.append_rehab_results")
+        self.patch_append_rehab_results = mock.patch("dataio.rehab_data_io_new.RehabDataIo.append_rehab_results")
         self.mock_append_rehab_results = self.patch_append_rehab_results.start()
 
         self.mock_rehab = mock.MagicMock(Rehab)
@@ -81,15 +81,19 @@ class TestRehab(TestCase):
 
     def test_create_rehab_results_calls_calculate_apw(self):
         with mock.patch.object(self.rehab, "calculate_apw") as mock_calculate_apw:
-            self.rehab.create_rehab_results(self.rehab_data_io)
-            self.assertTrue(mock_calculate_apw.called)
+            with mock.patch.object(self.rehab, "calculate_capital_cost"):
+                self.rehab.create_rehab_results(self.rehab_data_io)
+                self.assertTrue(mock_calculate_apw.called)
 
     def test_create_rehab_results_calls_calculate_capital_cost(self):
-        with mock.patch.object(self.rehab, "calculate_capital_cost") as mock_calculate_capital_cost:
-            self.rehab.create_rehab_results(self.rehab_data_io)
-            self.assertTrue(mock_calculate_capital_cost.called)
+        with mock.patch.object(self.rehab, "calculate_apw"):
+            with mock.patch.object(self.rehab, "calculate_capital_cost") as mock_calculate_capital_cost:
+                self.rehab.create_rehab_results(self.rehab_data_io)
+                self.assertTrue(mock_calculate_capital_cost.called)
 
     def test_create_rehab_results_calls_append_rehab_results_with_correct_arguments(self):
-        self.rehab.create_rehab_results(self.mock_rehab)
-        self.mock_append_rehab_results.assert_called_with(self.mock_rehab)
+        with mock.patch.object(self.rehab, "calculate_apw"):
+            with mock.patch.object(self.rehab, "calculate_capital_cost"):
+                self.rehab.create_rehab_results(self.mock_rehab)
+                self.mock_append_rehab_results.assert_called_with("rehab")
     #TODO - fix test, mock of append_rehab_results is wrong
