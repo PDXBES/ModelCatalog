@@ -26,13 +26,18 @@ class TestRehabDataIONew(TestCase):
         self.patch_add_parent_id = mock.patch("dataio.rrad_db_data_io.RradDbDataIo.add_parent_id")
         self.mock_add_parent_id = self.patch_add_parent_id.start()
 
+        self.patch_append_objects_to_db = mock.patch("dataio.rrad_db_data_io.RradDbDataIo.append_objects_to_db")
+        self.mock_append_objects_to_db = self.patch_append_objects_to_db.start()
+
         self.mock_rehab = mock.MagicMock(Rehab)
         self.mock_rehab.id = 1
+        self.mock_rehab.rehab_results = [1, 2, 3]
 
     def tearDown(self):
         self.mock_make_query_table_management = self.patch_make_query_table.stop()
         self.mock_join_field_management = self.patch_join_field_management.stop()
         self.mock_add_parent_id = self.patch_add_parent_id.stop()
+        self.mock_append_objects_to_db = self.patch_append_objects_to_db.stop()
 
     def test_copy_rehab_results_from_nbcr_data_to_memory_calls_make_query_table_management_with_correct_arguments(self):
         input_table = "rehab_nbcr_data_sde_path"
@@ -119,4 +124,12 @@ class TestRehabDataIONew(TestCase):
                                        "copy_rehab_results_from_tv_ratings_to_memory"):
                     self.rehab_data_io.copy_rehab_results_to_memory(output_table_name, self.mock_rehab)
                     self.mock_add_parent_id.assert_called_with(output_table_name, "rehab_id", 1)
+
+    def test_append_rehab_results_calls_append_objects_to_db_with_correct_arguments(self):
+        self.rehab_data_io.append_rehab_results(self.mock_rehab)
+        self.mock_append_objects_to_db.assert_called_with(self.mock_rehab.rehab_results,
+                                                          RehabResult.input_field_attribute_lookup(),
+                                                          "rehab_results_sde_path",
+                                                          "rehab_results_sde_path")
+
 

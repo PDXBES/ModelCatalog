@@ -55,7 +55,9 @@ class RehabDataIo(ObjectDataIo):
         self.rrad_db_data_io.add_parent_id(rehab_results_table_name, "rehab_id", rehab.id)
 
     def append_rehab_results(self, rehab):
-        pass
+        self.rrad_db_data_io.append_objects_to_db(rehab.rehab_results, RehabResult.input_field_attribute_lookup(),
+                                 self.config.rehab_results_sde_path,
+                                 self.config.rehab_results_sde_path)
 
     def _select_nbcr_data_pipes(self):
 
@@ -64,7 +66,6 @@ class RehabDataIo(ObjectDataIo):
 
     def _create_pipe_feature_class(self):
         arcpy.CopyFeatures_management(self.active_whole_pipe_layer, self.active_whole_pipe_feature_class_path)
-
 
     def create_branches_table(self):
         arcpy.CopyRows_management(self.config.rehab_branches_sde_path,

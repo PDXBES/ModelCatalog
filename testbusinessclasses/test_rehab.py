@@ -35,10 +35,15 @@ class TestRehab(TestCase):
         self.patch_create_objects_from_table_with_current_id = mock.patch("dataio.rrad_db_data_io.RradDbDataIo.create_objects_from_table_with_current_id")
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.start()
 
+        self.patch_append_rehab_results = mock.patch("dataio.rehab_data_io.RehabDataIo.append_rehab_results")
+        self.mock_append_rehab_results = self.patch_append_rehab_results.start()
+
+        self.mock_rehab = mock.MagicMock(Rehab)
+
     def tearDown(self):
         self.mock_copy_rehab_results_to_memory = self.patch_copy_rehab_results_to_memory.stop()
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.stop()
-
+        self.mock_append_rehab_results = self.patch_append_rehab_results.stop()
 
     def test_valid_rehab_has_id_extract_date_last_inspection_date_purpose_returns_true(self):
         is_valid = self.rehab.valid
@@ -74,3 +79,17 @@ class TestRehab(TestCase):
         self.rehab.create_rehab_results(self.rehab_data_io)
         self.mock_create_objects_from_table_with_current_id.assert_called_with("rehab_result", rehab_results_table_name, RehabResult.input_field_attribute_lookup())
 
+    def test_create_rehab_results_calls_calculate_apw(self):
+        with mock.patch.object(self.rehab, "calculate_apw") as mock_calculate_apw:
+            self.rehab.create_rehab_results(self.rehab_data_io)
+            self.assertTrue(mock_calculate_apw.called)
+
+    def test_create_rehab_results_calls_calculate_capital_cost(self):
+        with mock.patch.object(self.rehab, "calculate_capital_cost") as mock_calculate_capital_cost:
+            self.rehab.create_rehab_results(self.rehab_data_io)
+            self.assertTrue(mock_calculate_capital_cost.called)
+
+    def test_create_rehab_results_calls_append_rehab_results_with_correct_arguments(self):
+        self.rehab.create_rehab_results(self.mock_rehab)
+        self.mock_append_rehab_results.assert_called_with(self.mock_rehab)
+    #TODO - fix test, mock of append_rehab_results is wrong
