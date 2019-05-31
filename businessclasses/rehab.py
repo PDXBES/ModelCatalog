@@ -6,6 +6,8 @@ from rehab_result import RehabResult
 from config import Config
 from generic_object import GenericObject
 import datetime
+from collections import OrderedDict
+
 
 class Rehab(GenericObject):
     rehab_results = None  # type: List[RehabResult]
@@ -19,6 +21,14 @@ class Rehab(GenericObject):
         self.last_inspection_date = None
         self.purpose = None
         self.rehab_results = []
+
+    @staticmethod
+    def input_field_attribute_lookup():
+        field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["Rehab_ID"] = "id"
+        field_attribute_lookup["Extract_Date"] = "extract_date"
+        field_attribute_lookup["Last_Inspection_Date"] = "last_inspection_date"
+        field_attribute_lookup["Purpose"] = "purpose"
 
     @property
     def valid(self):
@@ -45,5 +55,8 @@ class Rehab(GenericObject):
 
         self.calculate_apw()
         self.calculate_capital_cost()
-        # append to table: rehab_data_io.append_rehab_results()
+
         # delete in memory - need fully qualified name
+
+
+#TODO: Create append to table: rehab_data_io.append_rehab_results()

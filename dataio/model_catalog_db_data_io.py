@@ -47,9 +47,8 @@ class ModelCatalogDbDataIo(DbDataIo):
 
         editor = model_data_io.start_editing_session(self.config.model_catalog_sde_path)
         try:
-            self.append_object_to_db(model, Model.input_field_attribute_lookup(),
-                                      self.config.model_tracking_sde_path,
-                                      self.config.model_tracking_sde_path)
+            self.append_object_to_db(model, None, self.config.model_tracking_sde_path,
+                                     self.config.model_tracking_sde_path)
             model_data_io.append_simulations(model)
             model_data_io.append_model_alterations(model)
             model_data_io.append_project_types(model)

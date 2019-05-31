@@ -18,8 +18,7 @@ class ObjectDataIo(object):
         # type: (int, GenericObject, Dict, str) -> None
         generic_object.parent_id = parent_id
         # object_class.id = self.db_data_io.retrieve_current_id(object_class.name)
-        self.db_data_io.append_object_to_db(generic_object, field_attribute_lookup,
-                                             object_table_sde_path, object_table_sde_path)
+        self.db_data_io.append_object_to_db(generic_object, None, object_table_sde_path, object_table_sde_path)
 
     def start_editing_session(self, workspace_path):
         editor = arcpy.da.Editor(workspace_path)
