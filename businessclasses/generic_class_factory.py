@@ -5,6 +5,10 @@ except:
     pass
 
 class GenericClassFactory():
+    """
+    Used to generate instances of a class with or without current id.
+    Used by create_object methods in DbDataIo.
+    """
 
     def __init__(self, config):
         self.config = config
