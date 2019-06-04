@@ -25,9 +25,23 @@ class RradDbDataIo(DbDataIo):
 
     #TODO: determine if this should be called append or stay as add for naming consistency
     #TODO: needs to append to  rrrad tracking
-    def add_rehab(self, rehab):
+    def add_rehab(self, rehab, rehab_data_io):
         # type: (Rehab) -> None
-        self.append_object_to_db(rehab, Rehab.input_field_attribute_lookup(), self.config.rehab_tracking_sde_path, self.config.rehab_tracking_sde_path)
+        rehab.create_rehab_results(rehab_data_io)
+
+        editor = rehab_data_io.start_editing_session(self.config.RRAD_sde_path)
+
+        try:
+            self.append_object_to_db(rehab,
+                                     Rehab.input_field_attribute_lookup(),
+                                     self.config.rehab_tracking_sde_path,
+                                     self.config.rehab_tracking_sde_path)
+            rehab_data_io.append_rehab_results(rehab)
+            rehab_data_io.stop_editing_session(editor, True)
+        except:
+            rehab_data_io.stop_editing_session(editor, False)
+
+
         
 
 

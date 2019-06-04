@@ -5,10 +5,15 @@ from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_link import MappingLink
 from businessclasses.mapping_area import MappingArea
 from dataio.rrad_db_data_io import RradDbDataIo
-from dataio.rehab_data_io import RehabDataIo
+from dataio.rehab_data_io_new import RehabDataIo
 import arcpy
 import traceback
+import datetime
 from db_data_io import DbDataIo
+from businessclasses.rehab import Rehab
+from businessclasses.rrad import Rrad
+
+
 class RradMappingDbDataIo(DbDataIo):
     def __init__(self, config):
         # type: (Config) -> None
@@ -26,14 +31,13 @@ class RradMappingDbDataIo(DbDataIo):
                                          "mapping_area": MappingArea}
 
     def add_mapping_snapshot(self, mapping_snapshot, mapping_snapshot_data_io):
-        # create rrad_db_data_io
-        # create rehab_data_io
-        #call create_rehab_results_snapshot from rehab_data_io
-        # this will get us a rehab_id
 
         rrad_db_data_io = RradDbDataIo(self.config)
         rehab_data_io = RehabDataIo(self.config, rrad_db_data_io)
-        mapping_snapshot.rehab_id = rehab_data_io.create_rehab_snapshot_for_characterization_mapping_snapshot()
+        rrad = Rrad(self.config)
+        # TODO: Create tests for lines 39, 40
+        rehab = rrad.create_rehab_for_characterization(rrad_db_data_io)
+        rrad_db_data_io.add_rehab(rehab, rehab_data_io)
 
         mapping_snapshot.create_mapping_links(mapping_snapshot_data_io)
         mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)

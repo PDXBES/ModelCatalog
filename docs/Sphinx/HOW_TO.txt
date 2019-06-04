@@ -1,0 +1,7 @@
+
+HOW TO
+
+from cmd - cd to your local install of sphinx (eg C:\Users\dashney\Documents\Clones\ModelCatalog\docs\Sphinx)
+	 - make.bat html
+
+go to sphinx/_build/html - open index.html in browser (chrome seems to work best)
