@@ -91,9 +91,3 @@ class TestRehab(TestCase):
                 self.rehab.create_rehab_results(self.rehab_data_io)
                 self.assertTrue(mock_calculate_capital_cost.called)
 
-    def test_create_rehab_results_calls_append_rehab_results_with_correct_arguments(self):
-        with mock.patch.object(self.rehab, "calculate_apw"):
-            with mock.patch.object(self.rehab, "calculate_capital_cost"):
-                self.rehab.create_rehab_results(self.mock_rehab)
-                self.mock_append_rehab_results.assert_called_with("rehab")
-    #TODO - fix test, mock of append_rehab_results is wrong

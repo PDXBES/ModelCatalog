@@ -30,14 +30,11 @@ class RradMappingDbDataIo(DbDataIo):
                                          "mapping_link": MappingLink,
                                          "mapping_area": MappingArea}
 
-    def add_mapping_snapshot(self, mapping_snapshot, mapping_snapshot_data_io):
-
-        rrad_db_data_io = RradDbDataIo(self.config)
-        rehab_data_io = RehabDataIo(self.config, rrad_db_data_io)
-        rrad = Rrad(self.config)
-        # TODO: Create tests for lines 39, 40
+    def add_mapping_snapshot(self, mapping_snapshot, mapping_snapshot_data_io, rrad_db_data_io, rehab_data_io, rrad):
         rehab = rrad.create_rehab_for_characterization(rrad_db_data_io)
         rrad_db_data_io.add_rehab(rehab, rehab_data_io)
+
+        mapping_snapshot.rehab_id = rehab.id
 
         mapping_snapshot.create_mapping_links(mapping_snapshot_data_io)
         mapping_snapshot.create_mapping_nodes(mapping_snapshot_data_io)
@@ -46,7 +43,8 @@ class RradMappingDbDataIo(DbDataIo):
         editor = mapping_snapshot_data_io.start_editing_session(self.config.RRAD_MAPPING_sde_path)
 
         try:
-            self.append_object_to_db(mapping_snapshot, None, self.config.mapping_snapshot_tracking_sde_path,
+            self.append_object_to_db(mapping_snapshot, MappingSnapshot.input_field_attribute_lookup(),
+                                     self.config.mapping_snapshot_tracking_sde_path,
                                      self.config.mapping_snapshot_tracking_sde_path)
             mapping_snapshot_data_io.append_mapping_links(mapping_snapshot)
             mapping_snapshot_data_io.append_mapping_nodes(mapping_snapshot)

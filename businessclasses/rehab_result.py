@@ -59,7 +59,7 @@ class RehabResult(GenericObject):
         field_attribute_lookup["capitalCost"] = "capitalcost"
         field_attribute_lookup["Rehab_ID"] = "rehab_id"
         field_attribute_lookup["rrad_rehab_result_id"] = "id"
-        field_attribute_lookup["@Shape"] = "geometry"
+        field_attribute_lookup["shape@"] = "geometry"
         field_attribute_lookup["ROOT_RATING"] = "root_rating"
         return field_attribute_lookup
 
@@ -84,7 +84,7 @@ class RehabResult(GenericObject):
         field_attribute_lookup["FailureYear"] = "failure_year"
         field_attribute_lookup["grade_h5"] = "integer_grade"
         field_attribute_lookup["inspDate"] = "inspection_date"
-        field_attribute_lookup["@Shape"] = "geometry"
+        field_attribute_lookup["shape@"] = "geometry"
         return field_attribute_lookup
 
     @staticmethod

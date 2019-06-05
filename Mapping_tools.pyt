@@ -99,7 +99,7 @@ class CharacterizationReportingTool(object):
 
         rrad_mapping.add_mapping_snapshot(mapping_snapshot)
         mapping_snapshot = rrad_mapping.mapping_snapshots[0]
-        rrad_mapping_db_data_io.add_mapping_snapshot(mapping_snapshot, mapping_snapshot_data_io)
+        rrad_mapping_db_data_io.add_mapping_snapshot(mapping_snapshot, mapping_snapshot_data_io,,, None, None
 
 
 

@@ -27,7 +27,7 @@ class TestRrad(TestCase):
 
     def test_create_rehab_for_characterization_calls_initialize_current_id_with_correct_arguments(self):
         self.rrad.create_rehab_for_characterization(self.mock_rrad_db_data_io)
-        self.mock_initialize_current_id.assert_called_with("rehab", self.config, self.mock_rrad_db_data_io)
+        self.mock_initialize_current_id.assert_called_with(self.config, self.mock_rrad_db_data_io)
 
     def test_create_rehab_for_characterization_creates_rehab_object_for_purpose_of_characterization(self):
         rehab = self.rrad.create_rehab_for_characterization(self.mock_rrad_db_data_io)

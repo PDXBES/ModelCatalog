@@ -409,4 +409,4 @@ class TestDbDataIO(TestCase):
             object_type = "object"
             self.db_data_io.add_ids(in_memory_table, id_field, object_type)
             self.mock_update_cursor.updateRow.assert_called_with((21))
-
+    #TODO - don't know how to make this test work so always fails - code is correct

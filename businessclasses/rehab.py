@@ -14,7 +14,7 @@ class Rehab(GenericObject):
 
     def __init__(self, config):
         # type: (Config) -> None
-        self.name = "Rehab"
+        self.name = "rehab"
         self.config = config
         self.id = None
         self.extract_date = None
@@ -59,4 +59,3 @@ class Rehab(GenericObject):
         # delete in memory - need fully qualified name
 
 
-#TODO: Create append to table: rehab_data_io.append_rehab_results()

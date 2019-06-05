@@ -287,7 +287,7 @@ class TestRehabDataIO(TestCase):
         mock_field_3 = mock.MagicMock(arcpy.Field)
         mock_field_1.name = "apw"
         mock_field_1.type = "not geometry"
-        mock_field_2.name = "@Shape"
+        mock_field_2.name = "Shape@"
         mock_field_2.type = "Geometry"
         mock_field_3.name = "compkey"
         mock_field_3.type = "not Geometry"
@@ -299,7 +299,7 @@ class TestRehabDataIO(TestCase):
         feature_class = "feature_class"
         fields_to_keep = ["compkey"]
         mock_field_2 = mock.MagicMock(arcpy.Field)
-        mock_field_2.name = "@Shape"
+        mock_field_2.name = "Shape@"
         mock_field_2.type = "Geometry"
         self.mock_list_fields.return_value = [mock_field_2]
         self.rehab_data_io.delete_fields(feature_class, fields_to_keep)
@@ -317,15 +317,15 @@ class TestRehabDataIO(TestCase):
 
     def test_delete_specified_fields_calls_list_fields_with_correct_arguments(self):
         feature_class = "feature_class"
-        fields_to_delete = ["@shape"]
+        fields_to_delete = ["shape@"]
         self.rehab_data_io.delete_fields(feature_class, fields_to_delete)
         self.mock_list_fields.assert_called_with("feature_class")
 
     def test_delete_specified_fields_calls_delete_field_management(self):
         feature_class = "feature_class"
-        fields_to_delete = ["@shape"]
+        fields_to_delete = ["shape@"]
         mock_field_1 = mock.MagicMock(arcpy.Field)
-        mock_field_1.name = "@shape"
+        mock_field_1.name = "shape@"
         mock_field_1.type = "@geometry"
         self.mock_list_fields.return_value = [mock_field_1]
         self.rehab_data_io.delete_specified_fields(feature_class, fields_to_delete )
