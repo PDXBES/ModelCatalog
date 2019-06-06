@@ -27,7 +27,7 @@ class Area(GenericObject):
         self.maxHGL = None
         self.san_crown_elev_ft = None
         self.area_type = None
-        self.input_field_attribute_lookup = Area.input_field_attribute_lookup()
+        self.input_field_attribute_lookup = Area.results_field_attribute_lookup()
         self.geometry = None
         self.bsbr = None
         self.basement_depth = 8
@@ -35,7 +35,7 @@ class Area(GenericObject):
         self.san_connect_type = None
 
     @staticmethod
-    def input_field_attribute_lookup():
+    def results_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
         field_attribute_lookup["area_id"] = "area_id"
         field_attribute_lookup["area_name"] = "area_name"
@@ -52,8 +52,8 @@ class Area(GenericObject):
         return field_attribute_lookup
 
     @staticmethod
-    def output_field_attribute_lookup():
-        output_field_attribute_lookup = Area.input_field_attribute_lookup()
+    def input_field_attribute_lookup():
+        output_field_attribute_lookup = Area.results_field_attribute_lookup()
         output_field_attribute_lookup["Simulation_ID"] = "parent_id"
         output_field_attribute_lookup["bsbr"] = "bsbr"
         output_field_attribute_lookup["rrad_area_id"] = "id"

@@ -71,7 +71,7 @@ class SimulationDataIo(ObjectDataIo):
         rrad_db_data_io.add_parent_id(output_table, "Simulation_ID", simulation.id)
 
     def append_area_results_to_db(self, area_results, rrad_db_data_io):
-            field_attribute_lookup = Area.output_field_attribute_lookup()
+            field_attribute_lookup = Area.input_field_attribute_lookup()
             template_table_path = self.config.area_results_sde_path
             target_path = self.config.area_results_sde_path
             rrad_db_data_io.append_objects_to_db(area_results, field_attribute_lookup, template_table_path, target_path)

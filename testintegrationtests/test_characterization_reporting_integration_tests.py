@@ -5,15 +5,9 @@ from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
 from businessclasses.config import Config
 from businessclasses.simulation import Simulation
 from businessclasses.rrad import Rrad
-from dataio.rehab_data_io_new import RehabDataIo
+from dataio.rehab_data_io import RehabDataIo
 from dataio.rrad_db_data_io import RradDbDataIo
 
-
-# This allows a file without a .py extension to be imported (ESRI pyt file)
-# executable_path = os.path.dirname(os.path.realpath(__file__))
-# pyt_path = os.path.abspath(os.path.join(executable_path, '..', "Mapping_tools.pyt"))
-# from imp import load_source
-# mapping_tools = load_source("Mapping_tools", pyt_path)
 
 test_flag = "TEST"
 
@@ -30,7 +24,7 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot_data_io = MappingSnapshotDataIo(self.config, self.rrad_mapping_db_data_io)
         self.mapping_snapshot = MappingSnapshot(self.config)
 
-        self.mapping_snapshot.id = 2
+        self.mapping_snapshot.id = 3
         self.mapping_snapshot.snapshot_type_id = "Characterization"
         self.mapping_snapshot.logic = "User Defined"
         self.mapping_snapshot.requested_by = "Keith"

@@ -174,7 +174,7 @@ class TestSimulationDataIO(TestCase):
         target_path = self.config.area_results_sde_path
         template_path = target_path
         area_results = ["area1", "area2"]
-        field_attribute_lookup = Area.output_field_attribute_lookup()
+        field_attribute_lookup = Area.input_field_attribute_lookup()
         self.simulation_data_io.append_area_results_to_db(area_results, self.rrad_db_data_io)
         self.mock_append_objects_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")
 

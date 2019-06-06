@@ -3,7 +3,8 @@ from businessclasses.generic_object import GenericObject
 from collections import OrderedDict
 
 class RehabResult(GenericObject):
-    def __init__(self):
+    def __init__(self, config):
+        self.config = config
         self.rehab_id = None
         self.compkey = None
         self.bpw = None
@@ -46,7 +47,7 @@ class RehabResult(GenericObject):
         field_attribute_lookup["lateralCost"] = "lateralcost"
         field_attribute_lookup["manholeCost"] = "manholecost"
         field_attribute_lookup["ASMRecommendednBCR"] = "asmrecommendednbcr"
-        field_attribute_lookup["ASMRecommendedAction"] = "asmrecommendedaction",
+        field_attribute_lookup["ASMRecommendedAction"] = "asmrecommendedaction"
         field_attribute_lookup["APWspot"] = "apwspot"
         field_attribute_lookup["APWLiner"] = "apwliner"
         field_attribute_lookup["APWWhole"] = "apwwhole"
@@ -54,51 +55,40 @@ class RehabResult(GenericObject):
         field_attribute_lookup["GLOBALID"] = "globalid"
         field_attribute_lookup["FailureYear"] = "failure_year"
         field_attribute_lookup["Integer_Condition_Grade"] = "integer_grade"
-        field_attribute_lookup["Last_Inspection_Date"] = "inspection_date"
         field_attribute_lookup["APW"] = "apw"
         field_attribute_lookup["capitalCost"] = "capitalcost"
-        field_attribute_lookup["Rehab_ID"] = "rehab_id"
         field_attribute_lookup["rrad_rehab_result_id"] = "id"
+        field_attribute_lookup["Last_Inspection_Date"] = "inspection_date"
+        field_attribute_lookup["Rehab_ID"] = "rehab_id"
         field_attribute_lookup["shape@"] = "geometry"
-        field_attribute_lookup["ROOT_RATING"] = "root_rating"
+        field_attribute_lookup["Integer_Root_Grade"] = "root_rating"
         return field_attribute_lookup
 
     @staticmethod
-    def nbcr_data_field_attribute_lookup():
+    def rehab_result_field_attribute_lookup():
         field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["compkey"] = "compkey"
+        field_attribute_lookup["COMPKEY"] = "compkey"
+        field_attribute_lookup["BPW"] = "bpw"
         field_attribute_lookup["usnode"] = "usnode"
         field_attribute_lookup["dsnode"] = "dsnode"
         field_attribute_lookup["diamWidth"] = "diamwidth"
         field_attribute_lookup["length"] = "length"
         field_attribute_lookup["material"] = "material"
-        field_attribute_lookup["lateralCost"] ="lateralcost"
+        field_attribute_lookup["lateralCost"] = "lateralcost"
         field_attribute_lookup["manholeCost"] = "manholecost"
-        field_attribute_lookup["ASMRecommendednBCR"] ="asmrecommendednbcr"
+        field_attribute_lookup["ASMRecommendednBCR"] = "asmrecommendednbcr"
         field_attribute_lookup["ASMRecommendedAction"] = "asmrecommendedaction"
-        field_attribute_lookup["APWSpot"] = "apwspot"
+        field_attribute_lookup["APWspot"] = "apwspot"
         field_attribute_lookup["APWLiner"] = "apwliner"
         field_attribute_lookup["APWWhole"] = "apwwhole"
-        field_attribute_lookup["lateralCount"] = "lateralcount"
+        field_attribute_lookup["lateralCOUNT"] = "lateralcount"
         field_attribute_lookup["GLOBALID"] = "globalid"
         field_attribute_lookup["FailureYear"] = "failure_year"
-        field_attribute_lookup["grade_h5"] = "integer_grade"
         field_attribute_lookup["inspDate"] = "inspection_date"
+        field_attribute_lookup["Rehab_ID"] = "rehab_id"
         field_attribute_lookup["shape@"] = "geometry"
-        return field_attribute_lookup
-
-    @staticmethod
-    def rehab_branches_field_attribute_lookup():
-        field_attribute_lookup = OrderedDict()
-        field_attribute_lookup["BPW"] = "bpw"
-        field_attribute_lookup["compkey"] = "compkey"
-        return field_attribute_lookup
-
-    @staticmethod
-    def tv_ratings_field_attribute_lookup():
-        field_attribute_lookup = OrderedDict()
+        field_attribute_lookup["grade_h5"] = "integer_grade"
         field_attribute_lookup["ROOT_RATING"] = "root_rating"
-        field_attribute_lookup["GLOBALID"] = "global_id"
         return field_attribute_lookup
 
     def calculate_apw(self):

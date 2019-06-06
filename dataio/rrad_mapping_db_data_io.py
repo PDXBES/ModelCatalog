@@ -5,7 +5,7 @@ from businessclasses.mapping_node import MappingNode
 from businessclasses.mapping_link import MappingLink
 from businessclasses.mapping_area import MappingArea
 from dataio.rrad_db_data_io import RradDbDataIo
-from dataio.rehab_data_io_new import RehabDataIo
+from dataio.rehab_data_io import RehabDataIo
 import arcpy
 import traceback
 import datetime
@@ -23,7 +23,6 @@ class RradMappingDbDataIo(DbDataIo):
         self.config = config
         self.current_id_database_table_path = self.config.mapping_current_id_sde_path
         self.workspace = "in_memory"
-        #self.workspace = r"C:\Users\bfreeman\Desktop\snapshot.gdb"
         self.class_factory = GenericClassFactory(self.config)
         self.class_factory.class_dict = {"mapping_snapshot": MappingSnapshot,
                                          "mapping_node": MappingNode,

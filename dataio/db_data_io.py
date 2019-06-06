@@ -181,7 +181,9 @@ class DbDataIo(object):
 
     def append_objects_to_db(self, generic_object_list, field_attribute_lookup, template_table, target_table):
         output_feature_class = self.workspace + "\\" + "intermediate_feature_class_to_append"
-        self.create_feature_class_from_objects(generic_object_list, self.workspace, "intermediate_feature_class_to_append",
+        arcpy.Delete_management(output_feature_class)
+        self.create_feature_class_from_objects(generic_object_list, self.workspace,
+                                               "intermediate_feature_class_to_append",
                                                field_attribute_lookup, template_table)
         self.append_table_to_db(output_feature_class, target_table)
 

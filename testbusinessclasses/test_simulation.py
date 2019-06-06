@@ -104,15 +104,16 @@ class TestSimulation(TestCase):
         self.assertEquals(sim_path, path)
 
     def test_create_areas_calls_copy_area_results_to_memory_with_correct_arguments(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas"):
             self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
             self.mock_copy_area_results_to_memory.assert_called_with(self.simulation, "in_memory_table",self.db_data_io)
 
     def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
-            self.mock_area_field_attribute_lookup.return_value = "area_field_attribute_lookup"
+        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas"):
             self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_create_objects_from_table_with_current_id.assert_called_with("area", "in_memory\\in_memory_table", "area_field_attribute_lookup")
+            self.mock_create_objects_from_table_with_current_id.assert_called_with("area",
+                                                                                   "in_memory\\in_memory_table",
+                                                                                   Area.results_field_attribute_lookup())
 
     def test_create_areas_calls_delete_with_correct_arguments(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:

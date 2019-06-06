@@ -29,6 +29,7 @@ class Rehab(GenericObject):
         field_attribute_lookup["Extract_Date"] = "extract_date"
         field_attribute_lookup["Last_Inspection_Date"] = "last_inspection_date"
         field_attribute_lookup["Purpose"] = "purpose"
+        return field_attribute_lookup
 
     @property
     def valid(self):
@@ -46,12 +47,13 @@ class Rehab(GenericObject):
             rehab_result.calculate_capital_cost()
 
     def create_rehab_results(self, rehab_data_io):
-        rehab_result = RehabResult()
+        rehab_result = RehabResult(self.config)
         rehab_results_table_name = "rehab_results_table_name"
+        rehab_results_table = rehab_data_io.rrad_db_data_io.workspace + "\\" + "rehab_results_table_name"
         rehab_data_io.copy_rehab_results_to_memory(rehab_results_table_name, self)
         self.rehab_results = rehab_data_io.rrad_db_data_io.create_objects_from_table_with_current_id(rehab_result.name,
-                                                                rehab_results_table_name,
-                                                                rehab_result.input_field_attribute_lookup)
+                                                                                                     rehab_results_table,
+                                                                                                     rehab_result.rehab_result_field_attribute_lookup())
 
         self.calculate_apw()
         self.calculate_capital_cost()

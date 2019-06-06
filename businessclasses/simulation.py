@@ -59,7 +59,7 @@ class Simulation(GenericObject):
     def create_areas(self, simulation_data_io, rrad_db_data_io):
         in_memory_table = simulation_data_io.model_catalog_db_data_io.workspace + "\\in_memory_table"
         simulation_data_io.copy_area_results_to_memory(self, "in_memory_table", rrad_db_data_io)
-        area_field_attribute_lookup = Area.input_field_attribute_lookup()
+        area_field_attribute_lookup = Area.results_field_attribute_lookup()
         area_results = rrad_db_data_io.create_objects_from_table_with_current_id("area", in_memory_table, area_field_attribute_lookup)
         self.areas = area_results
         for area in self.areas:

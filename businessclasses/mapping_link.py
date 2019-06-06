@@ -14,7 +14,7 @@ class MappingLink(MappingObject):
         self.failure_year = None
         self.integer_condition_grade = None
         self.last_inspection_date = None
-        self.root_grade = None
+        self.integer_root_grade = None
         self.design_flow_cfs = None
         self.max_flow_cfs = None
         self.material = None
@@ -23,7 +23,9 @@ class MappingLink(MappingObject):
         self.link_symbology = None
         self.geometry = None
         self.rrad_rehab_result_id = None
+        self.emgaats_link_id = None
         self.name = "mapping_link"
+
         self.rrad_link_id = None
         self.input_field_attribute_lookup = MappingLink.input_field_attribute_lookup()
         super(MappingLink, self).__init__(config)
@@ -68,7 +70,7 @@ class MappingLink(MappingObject):
         field_attribute_lookup["Integer_Condition_Grade"] = "integer_condition_grade"
         field_attribute_lookup["Last_Inspection_Year"] = "last_inspection_year"
         field_attribute_lookup["Last_Inspection_Date"] = "last_inspection_date"
-        field_attribute_lookup["Integer_Root_Grade"] = "root_grade"
+        field_attribute_lookup["Integer_Root_Grade"] = "integer_root_grade"
         field_attribute_lookup["material"] = "material"
         field_attribute_lookup["cross_section_id"] = "cross_section_id"
         field_attribute_lookup["link_flow_type"] = "link_flow_type"
@@ -80,6 +82,7 @@ class MappingLink(MappingObject):
         field_attribute_lookup["sim_desc"] = "sim_desc"
         field_attribute_lookup["Shape@"] = "geometry"
         field_attribute_lookup["rrad_link_id"] = "rrad_link_id"
+        field_attribute_lookup["link_id"] = "emgaats_link_id"
         field_attribute_lookup["rrad_mapping_link_id"] = "id"
         field_attribute_lookup.update(MappingObject.mapping_object_field_attribute_lookup())
         return field_attribute_lookup
@@ -88,10 +91,11 @@ class MappingLink(MappingObject):
     @staticmethod
     def rrad_field_attribute_lookup():
         rrad_field_attribute_lookup = OrderedDict()
+        rrad_field_attribute_lookup["RRAD.GIS.in_memory\\mapping_link_in_memory_table.link_id"] = "emgaats_link_id"
         rrad_field_attribute_lookup["RRAD.GIS.in_memory\\mapping_link_in_memory_table.dme_global_id"] = "global_id"
         rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.Rehab_ID"] = "rehab_id"
         rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.rrad_rehab_result_id"] = "rrad_rehab_result_id"
-        rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.BPW"] = "bpw"
+        rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.BPW"] = "mortality_BPW"
         rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.FailureYear"] = "failure_year"
         rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.Integer_Condition_Grade"] = "integer_condition_grade"
         rrad_field_attribute_lookup["RRAD.GIS.in_memory\\rehab_links_in_memory_table.Last_Inspection_Date"] = "last_inspection_date"

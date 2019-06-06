@@ -4,7 +4,7 @@ from mock_config import MockConfig
 from businessclasses.rehab_result import RehabResult
 import datetime
 import mock
-from dataio.rehab_data_io_new import RehabDataIo
+from dataio.rehab_data_io import RehabDataIo
 from dataio.rrad_db_data_io import RradDbDataIo
 
 class TestRehab(TestCase):
@@ -19,14 +19,14 @@ class TestRehab(TestCase):
         self.rehab.last_inspection_date = datetime.datetime.today()
         self.rehab.purpose = "purpose"
 
-        self.rehab_result = RehabResult()
+        self.rehab_result = RehabResult(self.config)
         self.rehab_result.asmrecommendedaction = "SP"
         self.rehab_result.apw = 1
         self.rehab_result.apwspot = 3
         self.rehab_result.bpw = 2
         self.rehab_result.asmrecommendednbcr = 5
 
-        self.patch_copy_rehab_results_to_memory = mock.patch("dataio.rehab_data_io_new.RehabDataIo.copy_rehab_results_to_memory")
+        self.patch_copy_rehab_results_to_memory = mock.patch("dataio.rehab_data_io.RehabDataIo.copy_rehab_results_to_memory")
         self.mock_copy_rehab_results_to_memory = self.patch_copy_rehab_results_to_memory.start()
 
         self.rrad_db_data_io = RradDbDataIo(self.config)
@@ -35,7 +35,7 @@ class TestRehab(TestCase):
         self.patch_create_objects_from_table_with_current_id = mock.patch("dataio.rrad_db_data_io.RradDbDataIo.create_objects_from_table_with_current_id")
         self.mock_create_objects_from_table_with_current_id = self.patch_create_objects_from_table_with_current_id.start()
 
-        self.patch_append_rehab_results = mock.patch("dataio.rehab_data_io_new.RehabDataIo.append_rehab_results")
+        self.patch_append_rehab_results = mock.patch("dataio.rehab_data_io.RehabDataIo.append_rehab_results")
         self.mock_append_rehab_results = self.patch_append_rehab_results.start()
 
         self.mock_rehab = mock.MagicMock(Rehab)
@@ -75,9 +75,11 @@ class TestRehab(TestCase):
         self.mock_copy_rehab_results_to_memory.assert_called_with(rehab_results_table_name, self.rehab)
 
     def test_create_rehab_results_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
-        rehab_results_table_name = "rehab_results_table_name"
+        rehab_results_table_name = "in_memory\\rehab_results_table_name"
         self.rehab.create_rehab_results(self.rehab_data_io)
-        self.mock_create_objects_from_table_with_current_id.assert_called_with("rehab_result", rehab_results_table_name, RehabResult.input_field_attribute_lookup())
+        self.mock_create_objects_from_table_with_current_id.assert_called_with("rehab_result",
+                                                                               rehab_results_table_name,
+                                                                               RehabResult.rehab_result_field_attribute_lookup())
 
     def test_create_rehab_results_calls_calculate_apw(self):
         with mock.patch.object(self.rehab, "calculate_apw") as mock_calculate_apw:

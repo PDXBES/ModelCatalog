@@ -2,6 +2,7 @@ try:
     from typing import List, Any
 except:
     pass
+import traceback
 from businessclasses.config import Config
 from db_data_io import DbDataIo
 from businessclasses.rehab import Rehab
@@ -24,7 +25,6 @@ class RradDbDataIo(DbDataIo):
         return rehab_id
 
     #TODO: determine if this should be called append or stay as add for naming consistency
-    #TODO: needs to append to  rrrad tracking
     def add_rehab(self, rehab, rehab_data_io):
         # type: (Rehab) -> None
         rehab.create_rehab_results(rehab_data_io)
@@ -40,6 +40,8 @@ class RradDbDataIo(DbDataIo):
             rehab_data_io.stop_editing_session(editor, True)
         except:
             rehab_data_io.stop_editing_session(editor, False)
+            traceback.print_exc()
+
 
 
         
