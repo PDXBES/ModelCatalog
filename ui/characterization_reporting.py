@@ -27,7 +27,7 @@ class CharacterizationReporting(object):
         # TODO - only show valid models
         characterization_models = self.model_catalog.characterization_models()
         for model in characterization_models:
-            characterization_string = model.model_path + "   " + Utility.format_date(model.create_date) + "   " + model.created_by
+            characterization_string = model.model_path + "   " + Utility.format_date(model.create_date) + "   " + model.created_by + " " + str(model.id)
             characterization_dictionary[characterization_string] = model
         self.characterization_model = characterization_dictionary
 

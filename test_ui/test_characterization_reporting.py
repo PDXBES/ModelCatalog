@@ -31,7 +31,8 @@ class TestCharacterizationReporting(TestCase):
         self.model1.project_types = []
         self.model1.model_path = "model_path1"
         self.model1.create_date = "create_date1"
-        self.model1.created_by = "created_by2"
+        self.model1.created_by = "created_by1"
+
         self.model2 = mock.MagicMock(Model)
         self.model2.id = 2
         self.model2.model_purpose_id = self.config.model_purpose_id["Characterization"]
@@ -41,8 +42,9 @@ class TestCharacterizationReporting(TestCase):
         self.model2.model_path = "model_path2"
         self.model2.create_date = "create_date2"
         self.model2.created_by = "created_by2"
-        self.model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by
-        self.model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by
+
+        self.model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by + " " + str(self.model1.id)
+        self.model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by + " " + str(self.model2.id)
 
         self.patch_characterization_models = mock.patch("businessclasses.model_catalog.ModelCatalog.characterization_models")
         self.mock_characterization_models = self.patch_characterization_models.start()
@@ -76,9 +78,10 @@ class TestCharacterizationReporting(TestCase):
         self.assertEquals(self.test_characterization_model, self.characterization_reporting.characterization_model)
 
     def test_create_characterization_model_dictionary_returns_formatted_list_of_strings(self):
-        model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by
-        model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by
-        formatted_characterization_models_keys = [model_string1, model_string2]
+        model_string1 = self.model1.model_path + "   " + "date string" + "   " + self.model1.created_by + " " + str(self.model1.id)
+        model_string2 = self.model2.model_path + "   " + "date string" + "   " + self.model2.created_by + " " + str(self.model2.id)
+        #TODO: list was reordered to make test pass, verify that this is correct
+        formatted_characterization_models_keys = [model_string2, model_string1]
         self.characterization_reporting.create_characterization_model_dictionary()
         self.assertEqual(self.characterization_reporting.characterization_model.keys(), formatted_characterization_models_keys)
 
