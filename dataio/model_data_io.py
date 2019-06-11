@@ -132,6 +132,16 @@ class ModelDataIo(ObjectDataIo):
         #TODO figure out how to make this testable
         outfile.close()
 
+    def read_model_registration_file(self, parent_model_path):
+        #TODO: validate registration file exists during execute see pyt file
+        registration_file = os.path.join(parent_model_path, "model_registration.json")
+        parent_model_id = None
+        with open(registration_file) as json_file:
+            data = json.load(json_file)
+            parent_model_id = data["id"]
+        return parent_model_id
+
+
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):
         pass

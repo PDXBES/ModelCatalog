@@ -51,6 +51,8 @@ class Model(GenericObject):
         self.gdb_file_path = None
         self.sim_file_path = None
         self.input_field_attribute_lookup = Model.input_field_attribute_lookup()
+        self.parent_model_path = None
+        self.parent_model_registration_file_path = None
 
     @staticmethod
     def input_field_attribute_lookup():
@@ -123,6 +125,7 @@ class Model(GenericObject):
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
             return False
+    #TODO: will need to add check for registration_file.json if model is not calibration
 
     def valid_emgaats_model_structure(self):
         if self.validate_model_path():
@@ -284,5 +287,9 @@ class Model(GenericObject):
         return False
 
 
+    def validate_registration(self):
+        self.parent_model_registration_file_path = self.parent_model_path + "\\" + "registration_file.json"
+        parent_model_registration_file_valid = os.path.isfile(self.parent_model_registration_file_path)
+        return parent_model_registration_file_valid
 
 

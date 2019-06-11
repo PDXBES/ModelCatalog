@@ -17,6 +17,7 @@ class TestModel(TestCase):
         self.model = Model.initialize_with_current_id(self.config, self.mock_db_data_io)
         self.model.model_path = r"c:\temp"
         self.model.model_status_id = 0
+        self.model.parent_model_path = r"parent_model_path"
 
         self.mock_simulation1 = mock.MagicMock(Simulation)
         self.mock_simulation1.storm_id = 1
@@ -677,3 +678,15 @@ class TestModel(TestCase):
                     ready_to_write_to_rrad = self.model.write_to_rrad()
                     self.assertFalse(ready_to_write_to_rrad)
 
+
+    def test_valid_registration_file_file_exists_returns_true(self):
+        self.mock_os_path_isfile.return_value = True
+        is_valid = self.model.validate_registration()
+        self.assertTrue(is_valid)
+
+    def test_valid_registration_file_file_does_not_exist_returns_false(self):
+        self.mock_os_path_isfile.return_value = False
+        is_valid = self.model.validate_registration()
+        self.assertFalse(is_valid)
+
+   

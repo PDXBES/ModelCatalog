@@ -29,6 +29,8 @@ class TestModelDataIO(TestCase):
         self.model_data_io = ModelDataIo(self.config, self.model_catalog_data_io)
         self.field_names = ["Model_ID", "Simulation_ID", "Storm_ID", "Dev_Scenario_ID", "Sim_Desc"]
 
+        self.parent_model_path = "parent_model_path"
+
         self.mock_model_alt_bc = mock.MagicMock(spec = ModelAltBc)
         self.mock_model_alt_hydrologic = mock.MagicMock(spec = ModelAltHydrologic)
         self.mock_model_alt_hydraulic = mock.MagicMock(spec = ModelAltHydraulic)
@@ -310,6 +312,11 @@ class TestModelDataIO(TestCase):
     #                                "model_purpose": self.config.model_purpose[self.mock_model.model_purpose_id]}
     #     self.model_data_io.write_model_registration_file(self.mock_model)
     #     self.mock_json_dump.assert_called_with(model_registration_data, "filepath")
+
+    # def test_read_model_registration_file_returns_parent_model_id(self):
+    #
+    #     parent_id = self.model_data_io.read_model_registration_file(self.parent_model_path)
+    #     self.assertEquals(parent_id, 666)
 
     def test_set_model_to_read_write_calls_os_walk_with_correct_arguments(self):
         self.model_data_io.set_model_to_read_write(self.mock_model)
