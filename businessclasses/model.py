@@ -116,13 +116,13 @@ class Model(GenericObject):
                     if self.valid_emgaats_model_structure() and self.valid_calibration_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration():
                         return True
             return False
     #TODO: will need to add check for registration_file.json if model is not calibration
@@ -286,9 +286,8 @@ class Model(GenericObject):
                         return True
         return False
 
-
     def validate_registration(self):
-        self.parent_model_registration_file_path = self.parent_model_path + "\\" + "registration_file.json"
+        self.parent_model_registration_file_path = os.path.join(self.parent_model_path, "registration_file.json")
         parent_model_registration_file_valid = os.path.isfile(self.parent_model_registration_file_path)
         return parent_model_registration_file_valid
 
