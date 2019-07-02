@@ -55,4 +55,3 @@ class RradMappingDbDataIo(DbDataIo):
             arcpy.AddMessage("DB Error while adding snapshot. Changes rolled back.")
             traceback.print_exc()
             raise
-#TODO: add snapshot- add snapshot to db

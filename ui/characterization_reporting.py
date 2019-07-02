@@ -24,7 +24,7 @@ class CharacterizationReporting(object):
     def create_characterization_model_dictionary(self):
         characterization_dictionary = {}
         self.model_catalog.add_models_from_model_catalog_db(self.model_catalog_db_data_io)
-        # TODO - only show valid models
+        # TODO - only show valid models - FYI add_models already does a check for valid model(DCA)
         characterization_models = self.model_catalog.characterization_models()
         for model in characterization_models:
             characterization_string = model.model_path + "   " + Utility.format_date(model.create_date) + "   " + model.created_by + " " + str(model.id)

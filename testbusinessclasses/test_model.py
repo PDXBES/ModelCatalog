@@ -681,12 +681,12 @@ class TestModel(TestCase):
 
     def test_valid_registration_file_file_exists_returns_true(self):
         self.mock_os_path_isfile.return_value = True
-        is_valid = self.model.validate_registration()
+        is_valid = self.model.validate_registration_file()
         self.assertTrue(is_valid)
 
     def test_valid_registration_file_file_does_not_exist_returns_false(self):
         self.mock_os_path_isfile.return_value = False
-        is_valid = self.model.validate_registration()
+        is_valid = self.model.validate_registration_file()
         self.assertFalse(is_valid)
 
 

@@ -27,8 +27,8 @@ class CharacterizationReportIntegrationTest(unittest.TestCase):
         self.mapping_snapshot.id = 3
         self.mapping_snapshot.snapshot_type_id = "Characterization"
         self.mapping_snapshot.logic = "User Defined"
-        self.mapping_snapshot.requested_by = "Keith"
-        self.mapping_snapshot.created_by = "Joe"
+        self.mapping_snapshot.requested_by = "Smokey"
+        self.mapping_snapshot.created_by = "Deebo"
 
         self.simulation_1 = Simulation(self.config)
         self.simulation_1.id = 32

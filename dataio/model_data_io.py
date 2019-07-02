@@ -132,8 +132,7 @@ class ModelDataIo(ObjectDataIo):
         #TODO figure out how to make this testable
         outfile.close()
 
-    def read_model_registration_file(self, model):
-        #TODO: validate registration file exists during execute see pyt file
+    def read_parent_model_id_from_model_registration_file(self, model):
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
         with open(registration_file) as json_file:
             data = json.load(json_file)
@@ -142,16 +141,20 @@ class ModelDataIo(ObjectDataIo):
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):
         pass
-
-    # get list of emgaats data for all models in the folder
+    #get list of emgaats data for all models in the folder
     #use brents existing xml notes
-    # will return the list
+    #will return the list
 
     def read_deploy_date_and_results_extracted_date_from_emgaats_config_file(self):
         pass
     #get list of emgaats data for all simulations in the folder
     #will return the list
     #awaiting changes from Arnel
+    # Q - is this duplicating read_extraction_date_from_emgaats_config_file or a separate thing? (DCA)
+
+    def read_run_date_from_emgaats_config_file(self):
+        pass
+    #similar to above 2 functions
 
     def set_model_to_read_write(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"

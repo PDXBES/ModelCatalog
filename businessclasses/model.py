@@ -52,7 +52,7 @@ class Model(GenericObject):
         self.sim_file_path = None
         self.input_field_attribute_lookup = Model.input_field_attribute_lookup()
         self.parent_model_path = None
-        self.parent_model_registration_file_path = None
+        self.parent_model_registration_file_path = None #TODO - is this really needed or can it just be a local variable?
 
     @staticmethod
     def input_field_attribute_lookup():
@@ -116,16 +116,15 @@ class Model(GenericObject):
                     if self.valid_emgaats_model_structure() and self.valid_calibration_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration_file():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration_file():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration_file():
                         return True
             return False
-    #TODO: will need to add check for registration_file.json if model is not calibration
 
     def valid_emgaats_model_structure(self):
         if self.validate_model_path():
@@ -286,7 +285,7 @@ class Model(GenericObject):
                         return True
         return False
 
-    def validate_registration(self):
+    def validate_registration_file(self):
         self.parent_model_registration_file_path = os.path.join(self.parent_model_path, "registration_file.json")
         parent_model_registration_file_valid = os.path.isfile(self.parent_model_registration_file_path)
         return parent_model_registration_file_valid
