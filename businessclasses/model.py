@@ -76,28 +76,6 @@ class Model(GenericObject):
         field_attribute_lookup["Shape@"] = "model_geometry"
         return field_attribute_lookup
 
-    def validate_model_path(self):
-        valid_model_path = os.path.exists(self.model_path)
-        return valid_model_path
-
-    def validate_config_file(self):
-        self.config_file_path = self.model_path + "\\" + "emgaats.config"
-        config_file_valid = os.path.isfile(self.config_file_path)
-        return config_file_valid
-
-    def validate_gdb(self):
-        self.gdb_file_path = self.model_path + "\\" + "EmgaatsModel.gdb"
-        gdb_file_valid = os.path.exists(self.gdb_file_path)
-        return gdb_file_valid
-
-    def validate_sim(self):
-        self.sim_file_path = self.simulation_folder_path()
-        sim_folder_valid = os.path.exists(self.sim_file_path)
-        return sim_folder_valid
-
-    def simulation_folder_path(self):
-        sim_file_path = self.model_path + "\\" + "sim"
-        return sim_file_path
 #TODO: move dataIO functions to a DataIO class; Validate results.gdb;
     @property
     def valid(self):
@@ -116,15 +94,38 @@ class Model(GenericObject):
                     if self.valid_emgaats_model_structure() and self.valid_calibration_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration_file():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration_file():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
-                    if self.valid_emgaats_model_structure() and self.valid_required_simulations() and self.validate_registration_file():
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
             return False
+
+    def validate_model_path(self):
+        valid_model_path = os.path.exists(self.model_path)
+        return valid_model_path
+
+    def validate_config_file(self):
+        self.config_file_path = self.model_path + "\\" + "emgaats.config"
+        config_file_valid = os.path.isfile(self.config_file_path)
+        return config_file_valid
+
+    def validate_gdb(self):
+        self.gdb_file_path = self.model_path + "\\" + "EmgaatsModel.gdb"
+        gdb_file_valid = os.path.exists(self.gdb_file_path)
+        return gdb_file_valid
+
+    def simulation_folder_path(self):
+        sim_file_path = self.model_path + "\\" + "sim"
+        return sim_file_path
+
+    def validate_sim(self):
+        self.sim_file_path = self.simulation_folder_path()
+        sim_folder_valid = os.path.exists(self.sim_file_path)
+        return sim_folder_valid
 
     def valid_emgaats_model_structure(self):
         if self.validate_model_path():
@@ -176,6 +177,11 @@ class Model(GenericObject):
             if required_simulation_found == False:
                 return False
         return True
+
+    def valid_parent_model_registration_file(self):
+        self.parent_model_registration_file_path = os.path.join(self.parent_model_path, "model_registration.json")
+        parent_model_registration_file_valid = os.path.isfile(self.parent_model_registration_file_path)
+        return parent_model_registration_file_valid
 
     def required_storm_and_dev_scenario_ids(self):
         if self.project_phase_id == self.config.proj_phase_id["Planning"]:
@@ -275,7 +281,7 @@ class Model(GenericObject):
         if self.config.model_status[self.model_status_id] == "Working":
             return self.valid
         return False
-    #Todo : change this to call a diagnostic method
+    #TODO : change this to call a diagnostic method
 
     def write_to_rrad(self):
         if self.valid:
@@ -285,9 +291,5 @@ class Model(GenericObject):
                         return True
         return False
 
-    def validate_registration_file(self):
-        self.parent_model_registration_file_path = os.path.join(self.parent_model_path, "registration_file.json")
-        parent_model_registration_file_valid = os.path.isfile(self.parent_model_registration_file_path)
-        return parent_model_registration_file_valid
 
 

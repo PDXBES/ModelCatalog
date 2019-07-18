@@ -354,6 +354,10 @@ class EMGAATS_Model_Registration(object):
             self.model.project_num = analysis_request_id_parameter.valueAsText
             self.model.create_simulations(self.model_dataio)
             self.model_dataio.create_model_geometry(self.model)
+
+            if self.model.valid_parent_model_registration_file():
+                self.model_dataio.read_model_id_from_model_registration_file(self.model)
+
             self.model_catalog.add_model(self.model)
 
             if test_flag == "TEST":

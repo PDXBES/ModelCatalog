@@ -313,7 +313,7 @@ class TestModelDataIO(TestCase):
     #     self.model_data_io.write_model_registration_file(self.mock_model)
     #     self.mock_json_dump.assert_called_with(model_registration_data, "filepath")
 
-    # def test_read_model_registration_file_returns_parent_model_id(self):
+    # def test_read_model_id_from_model_registration_file_returns_parent_model_id(self):
     #
     #     parent_id = self.model_data_io.read_model_registration_file(self.parent_model_path)
     #     self.assertEquals(parent_id, 666)
