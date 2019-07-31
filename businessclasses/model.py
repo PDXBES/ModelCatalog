@@ -13,6 +13,10 @@ import datetime
 from model_catalog_exception import InvalidCalibrationStormSimulationDescription
 from model_catalog_exception import InvalidModelPurpose
 from model_catalog_exception import InvalidProjectPhase
+
+from dataio.model_data_io import ModelDataIo
+from dataio.db_data_io import DbDataIo
+
 try:
     from typing import List, Any
 except:
@@ -291,5 +295,8 @@ class Model(GenericObject):
                         return True
         return False
 
+    def valid_parent_model_purpose(self):
+        db_data_io = DbDataIo()
+        model_data_io = ModelDataIo(self.config, )
 
 

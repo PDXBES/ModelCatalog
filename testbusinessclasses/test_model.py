@@ -6,6 +6,7 @@ from businessclasses.simulation import Simulation
 from businessclasses.model_catalog_exception import InvalidCalibrationStormSimulationDescription
 from businessclasses.model_catalog_exception import InvalidModelPurpose
 from businessclasses.model_catalog_exception import InvalidProjectPhase
+from dataio.model_data_io import ModelDataIo
 
 class TestModel(TestCase):
 
@@ -14,6 +15,9 @@ class TestModel(TestCase):
         self.config = mock_config.config
         self.mock_db_data_io = mock.Mock()
         self.mock_db_data_io.retrieve_current_id.return_value = 1
+
+        self.mock_model_data_io = mock.MagicMock(ModelDataIo)
+
         self.model = Model.initialize_with_current_id(self.config, self.mock_db_data_io)
         self.model.model_path = r"c:\temp"
         self.model.model_status_id = 0
@@ -780,4 +784,8 @@ class TestModel(TestCase):
                         is_valid = self.model.valid
                         self.assertFalse(is_valid)
 
+
+    def test_valid_parent_model_purpose_calls_read_model_id_from_model_registration_file_with_parent_model(self):
+        self.model.valid_parent_model_purpose()
+        self.assertTrue(self.mock_model_data_io.read_model_id_from_model_registration_file.called)
 
