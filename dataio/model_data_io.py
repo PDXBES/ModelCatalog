@@ -136,7 +136,11 @@ class ModelDataIo(ObjectDataIo):
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
         with open(registration_file) as json_file:
             data = json.load(json_file)
-            model.parent_model_id = data["id"]
+            return data["id"]
+
+    def set_parent_model_id(self, model):
+        parent_model_id = self.read_model_id_from_model_registration_file(model)
+        model.parent_model_id = parent_model_id
 
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):
