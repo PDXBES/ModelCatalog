@@ -297,6 +297,7 @@ class EMGAATS_Model_Registration(object):
         parameter.  This method is called after internal validation."""
         return
 
+#should validate the parent model id before we run execute
     def execute(self, parameters, messages):
         arcpy.AddMessage("Execute")
 

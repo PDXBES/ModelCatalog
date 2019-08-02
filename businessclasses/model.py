@@ -294,8 +294,13 @@ class Model(GenericObject):
         return False
 
     def valid_parent_model_purpose(self):
-        db_data_io = DbDataIo()
-        model_data_io = ModelDataIo(self.config, )
+        #db_data_io = DbDataIo()
+        #model_data_io = ModelDataIo(self.config, )
+        pass
+
+    def set_parent_model_id(self, model_data_io):
+        parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
+        self.parent_model_id = parent_model_id
 
 
 

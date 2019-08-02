@@ -47,9 +47,15 @@ class TestModel(TestCase):
         self.patch_os_path_isfile = mock.patch("os.path.isfile")
         self.mock_os_path_isfile = self.patch_os_path_isfile.start()
 
+        self.patch_read_model_id_from_model_registration_file = mock.patch.object(self.mock_model_data_io, "read_model_id_from_model_registration_file")
+        self.mock_read_model_id_from_model_registration_file = self.patch_read_model_id_from_model_registration_file.start()
+        self.mock_read_model_id_from_model_registration_file.return_value = 2233
+
     def tearDown(self):
         self.mock_os_path_exists = self.patch_os_path_exists.stop()
         self.mock_os_path_isfile = self.patch_os_path_isfile.stop()
+        self.mock_read_model_id_from_model_registration_file = self.patch_read_model_id_from_model_registration_file.stop()
+
 
     def test_validate_model_path_called_with_correct_arguments(self):
         self.model.validate_model_path()
@@ -789,3 +795,12 @@ class TestModel(TestCase):
         self.model.valid_parent_model_purpose()
         self.assertTrue(self.mock_model_data_io.read_model_id_from_model_registration_file.called)
 
+    def test_set_parent_model_id_calls_read_model_id_from_model_registration_file(self):
+        self.model.set_parent_model_id(self.mock_model_data_io)
+        self.assertTrue(self.mock_model_data_io.read_model_id_from_model_registration_file.called)
+
+    def test_set_parent_model_id_sets_parent_model_id(self):
+        self.model.parent_model_id = 1111
+        self.model.set_parent_model_id(self.mock_model_data_io)
+        self.mock_model_data_io.set_parent_model_id(self.mock_model_data_io)
+        self.assertEquals(self.model.parent_model_id, 2233)

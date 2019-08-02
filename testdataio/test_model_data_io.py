@@ -71,7 +71,6 @@ class TestModelDataIO(TestCase):
         #TODO: This needs a date-time object
         self.mock_model.create_date = "create_date"
         self.mock_model.model_purpose_id = 1
-        self.mock_model.parent_id = 2233
 
         self.mock_insert_cursor_object = mock.MagicMock(spec = arcpy.da.InsertCursor)
         self.mock_search_cursor_object = mock.MagicMock(spec = arcpy.da.SearchCursor)
@@ -97,10 +96,6 @@ class TestModelDataIO(TestCase):
 
         self.patch_append_object_to_db = mock.patch.object(self.model_data_io, "append_object_to_db")
         self.mock_append_object_to_db = self.patch_append_object_to_db.start()
-
-        self.patch_read_model_id_from_model_registration_file = mock.patch.object(self.model_data_io, "read_model_id_from_model_registration_file")
-        self.mock_read_model_id_from_model_registration_file = self.patch_read_model_id_from_model_registration_file.start()
-       #self.mock_read_model_id_from_model_registration_file.return_value = 2233
 
 
         self.mock_model.simulations = [self.mock_simulation]
@@ -377,11 +372,4 @@ class TestModelDataIO(TestCase):
             read_status = self.model_data_io.check_model_is_read_only(self.mock_model)
             self.assertEquals(read_status, False)
 
-    def test_set_parent_model_id_calls_read_model_id_from_model_registration_file(self):
-        self.model_data_io.set_parent_model_id(self.mock_model)
-        self.assertTrue(self.model_data_io.read_model_id_from_model_registration_file.called)
-
-    def test_set_parent_model_id_sets_parent_model_id(self):
-        self.model_data_io.set_parent_model_id(self.mock_model)
-        self.assertEquals(self.mock_model.parent_id, 2233)
 
