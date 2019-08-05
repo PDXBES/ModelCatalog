@@ -37,5 +37,7 @@ class InvalidModelPurpose(ModelCatalogException):
 class InvalidProjectPhase(ModelCatalogException):
     pass
 
+class InvalidModelRegistrationFileException(ModelCatalogException):
+    pass
 
 

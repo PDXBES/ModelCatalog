@@ -11,6 +11,7 @@ import sys
 from dataio import utility
 from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
+from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
 from dataio.rrad_db_data_io import RradDbDataIo
 reload(arcpy)
 reload(config)
@@ -336,12 +337,15 @@ class EMGAATS_Model_Registration(object):
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = self.utility.check_path(model_path_parameter.valueAsText)
-            self.model.parent_model_path = self.utility.check_path(parent_model_dir_parameter.valueAsText)
+            #TODO: move this to update messages
+            #self.model.parent_model_path = self.utility.check_path(parent_model_dir_parameter.valueAsText)
             self.model.create_project_types(project_type_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_bc(model_alt_bc_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values, self.modelcatalogdataio)
             self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
+
+            #TODO: if model purpose is calibration should not check registration file for parent id
 
             if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
                 self.model.model_calibration_file = self.utility.check_path(model_calibration_file_parameter.valueAsText)
@@ -356,8 +360,12 @@ class EMGAATS_Model_Registration(object):
             self.model.create_simulations(self.model_dataio)
             self.model_dataio.create_model_geometry(self.model)
 
-            if self.model.valid_parent_model_registration_file():
-                self.model_dataio.read_model_id_from_model_registration_file(self.model)
+            try:
+                self.model.set_parent_model_id(self.model_dataio)
+            except(InvalidModelRegistrationFileException):
+                arcpy.AddError("Invalid Parent Model Registration File")
+                raise arcpy.ExecuteError()
+
 
             self.model_catalog.add_model(self.model)
 

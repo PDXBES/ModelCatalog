@@ -13,6 +13,7 @@ import datetime
 from model_catalog_exception import InvalidCalibrationStormSimulationDescription
 from model_catalog_exception import InvalidModelPurpose
 from model_catalog_exception import InvalidProjectPhase
+from model_catalog_exception import InvalidModelRegistrationFileException
 
 
 try:
@@ -299,8 +300,14 @@ class Model(GenericObject):
         pass
 
     def set_parent_model_id(self, model_data_io):
-        parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
-        self.parent_model_id = parent_model_id
+        if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
+            if self.valid_parent_model_registration_file():
+                parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
+                self.parent_model_id = parent_model_id
+            else:
+                raise InvalidModelRegistrationFileException
+        else:
+            self.parent_model_id = None
 
 
 

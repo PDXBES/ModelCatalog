@@ -7,6 +7,8 @@ from businessclasses.model_catalog_exception import InvalidCalibrationStormSimul
 from businessclasses.model_catalog_exception import InvalidModelPurpose
 from businessclasses.model_catalog_exception import InvalidProjectPhase
 from dataio.model_data_io import ModelDataIo
+from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
+
 
 class TestModel(TestCase):
 
@@ -802,5 +804,18 @@ class TestModel(TestCase):
     def test_set_parent_model_id_sets_parent_model_id(self):
         self.model.parent_model_id = 1111
         self.model.set_parent_model_id(self.mock_model_data_io)
-        self.mock_model_data_io.set_parent_model_id(self.mock_model_data_io)
         self.assertEquals(self.model.parent_model_id, 2233)
+
+    def test_set_parent_model_id_model_purpose_calibration_parent_model_id_set_to_None(self):
+        self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+        self.model.parent_model_id = 2
+        self.model.set_parent_model_id(self.mock_model_data_io)
+        self.assertEqual(self.model.parent_model_id, None)
+
+    def test_set_parent_model_id_invalid_parent_model_registration_file_throws_InvalidModelRegistrationFileException(self):
+        with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_valid_parent_model_registration_file:
+            mock_valid_parent_model_registration_file.return_value = False
+            self.model.parent_model_registration_file_path = "dummy_path"
+
+            with self.assertRaises(InvalidModelRegistrationFileException):
+                self.model.set_parent_model_id(self.mock_model_data_io)

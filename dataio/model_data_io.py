@@ -132,6 +132,7 @@ class ModelDataIo(ObjectDataIo):
         #TODO figure out how to make this testable
         outfile.close()
 
+    #TODO: split this function to take a model registration path and be more "generalic"?
     def read_model_id_from_model_registration_file(self, model):
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
         with open(registration_file) as json_file:
