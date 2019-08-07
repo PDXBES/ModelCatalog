@@ -391,6 +391,17 @@ class TestModel(TestCase):
             is_valid = self.model.valid
             self.assertTrue(is_valid)
 
+    def test_valid_final_calibration_model_invalid_calls_valid_calibration_model_diagnostic(self):
+        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
+            with mock.patch.object(self.model, "valid_calibration_model_diagnostic") as mock_valid_calibration_model_diagnostic:
+                with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
+                    self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+                    mock_valid_emgaats_model_structure.return_value = True
+                    mock_valid_calibration_simulations.return_value = False
+                    self.model.model_status_id = self.config.model_status_id["Final"]
+                    is_valid = self.model.valid
+                    self.assertTrue(mock_valid_calibration_model_diagnostic.called)
+
     def test_valid_working_model_invalid_emgaats_structure_returns_false(self):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             mock_valid_emgaats_model_structure.return_value = False
@@ -819,3 +830,6 @@ class TestModel(TestCase):
 
             with self.assertRaises(InvalidModelRegistrationFileException):
                 self.model.set_parent_model_id(self.mock_model_data_io)
+
+
+

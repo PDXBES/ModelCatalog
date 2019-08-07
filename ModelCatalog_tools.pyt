@@ -337,8 +337,6 @@ class EMGAATS_Model_Registration(object):
             self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.created_by = getpass.getuser()
             self.model.model_path = self.utility.check_path(model_path_parameter.valueAsText)
-            #TODO: move this to update messages
-            #self.model.parent_model_path = self.utility.check_path(parent_model_dir_parameter.valueAsText)
             self.model.create_project_types(project_type_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_bc(model_alt_bc_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values, self.modelcatalogdataio)
@@ -350,6 +348,7 @@ class EMGAATS_Model_Registration(object):
             if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
                 self.model.model_calibration_file = self.utility.check_path(model_calibration_file_parameter.valueAsText)
             else:
+                self.model.parent_model_path = self.utility.check_path(parent_model_dir_parameter.valueAsText)
                 self.model.model_calibration_file = None
             self.model.model_status_id = self.config.model_status_id[model_status_parameter.valueAsText]
             if len(self.model.model_alterations) > 0:
@@ -399,6 +398,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         for simulation in model.simulations:
             arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
             simulationdataio.append_simulation_results(simulation, model, rrad_db_data_io)
+            arcpy.AddMessage("Finished adding results for simulation: " + simulation.sim_desc)
 
     else:
         arcpy.AddMessage("No results will be added to the RRAD")

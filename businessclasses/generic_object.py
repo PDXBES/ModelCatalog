@@ -34,7 +34,7 @@ class GenericObject(object):
     def _write_attributes_to_screen(self):
         arcpy.AddError("Begin Attribute Dump")
         arcpy.AddError("Object Type:" + self.name)
-        attribute_names = self.input_field_attribute_lookup.values()
+        attribute_names = vars(self)
         for attribute_name in attribute_names:
             attribute_value = getattr(self, attribute_name)
             arcpy.AddMessage(attribute_name + ":" + str(attribute_value))

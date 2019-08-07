@@ -96,6 +96,8 @@ class Model(GenericObject):
                 if self.model_purpose_id == self.config.model_purpose_id["Calibration"]:
                     if self.valid_emgaats_model_structure() and self.valid_calibration_simulations():
                         return True
+                    else:
+                        self.valid_calibration_model_diagnostic()
                 elif self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
@@ -106,6 +108,15 @@ class Model(GenericObject):
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
             return False
+
+    def valid_calibration_model_diagnostic(self):
+        arcpy.AddError("Invalid Calibration Model")
+        self._write_attributes_to_screen()
+        arcpy.AddError("Simulations: ")
+        for simulation in self.simulations:
+            arcpy.AddError(simulation.valid())
+            simulation._write_attributes_to_screen()
+        #TODO: later - loop through and test on each sim, provide specific info on issue
 
     def validate_model_path(self):
         valid_model_path = os.path.exists(self.model_path)
@@ -154,6 +165,7 @@ class Model(GenericObject):
         return is_valid
 
     def valid_calibration_simulations(self):
+        """Checks for user defined storms(id=0) and then checks for standard ccsp storm naming convention (11 characters, 3 for basin, the rest for date) """
         for simulation in self.simulations:
             if simulation.storm_id == 0:
                 if len(simulation.sim_desc) == 11:
