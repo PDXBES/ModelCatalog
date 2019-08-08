@@ -165,14 +165,14 @@ class Model(GenericObject):
         return is_valid
 
     def valid_calibration_simulations(self):
-        """Checks for user defined storms(id=0) and then checks for standard ccsp storm naming convention (11 characters, 3 for basin, the rest for date) """
+        """Checks for user defined storms(id=0) and then checks for standard ccsp storm naming convention (8 characters, 3 for basin, the rest for date) """
         for simulation in self.simulations:
             if simulation.storm_id == 0:
-                if len(simulation.sim_desc) == 11:
+                if len(simulation.sim_desc) == 8:
                     try:
-                        sim_year = int(simulation.sim_desc[3:7])
-                        sim_month = int(simulation.sim_desc[7:9])
-                        sim_day = int(simulation.sim_desc[9:11])
+                        sim_year = int(simulation.sim_desc[0:4])
+                        sim_month = int(simulation.sim_desc[4:6])
+                        sim_day = int(simulation.sim_desc[6:8])
                         current_date = datetime.datetime.now()
                         simulation_date = datetime.datetime(year=sim_year, month=sim_month, day=sim_day)
                         if simulation_date < current_date:
@@ -306,10 +306,6 @@ class Model(GenericObject):
                         return True
         return False
 
-    def valid_parent_model_purpose(self):
-        #db_data_io = DbDataIo()
-        #model_data_io = ModelDataIo(self.config, )
-        pass
 
     def set_parent_model_id(self, model_data_io):
         if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
@@ -320,6 +316,24 @@ class Model(GenericObject):
                 raise InvalidModelRegistrationFileException
         else:
             self.parent_model_id = None
+
+    def valid_parent_model_purpose(self, parent_model_purpose):
+
+        if self.config.model_purpose[self.model_purpose_id] == "Characterization":
+            if parent_model_purpose == "Calibration":
+                return True
+        if self.config.model_purpose[self.model_purpose_id] == "Calibration":
+            if parent_model_purpose == "Calibration" or parent_model_purpose == None:
+                return True
+        if self.config.model_purpose[self.model_purpose_id] == "Alternative":
+            if parent_model_purpose == "Characterization":
+                return True
+        if self.config.model_purpose[self.model_purpose_id] == "Recommended Plan":
+            if parent_model_purpose == "Characterization":
+                return True
+        return False
+
+
 
 
 

@@ -37,11 +37,11 @@ class TestModel(TestCase):
 
         self.mock_calibration_simulation1 = mock.MagicMock(Simulation)
         self.mock_calibration_simulation1.storm_id = 0
-        self.mock_calibration_simulation1.sim_desc = "TAG20181225"
+        self.mock_calibration_simulation1.sim_desc = "20181225"
 
         self.mock_calibration_simulation2 = mock.MagicMock(Simulation)
         self.mock_calibration_simulation2.storm_id = 0
-        self.mock_calibration_simulation2.sim_desc = "TAG20191225"
+        self.mock_calibration_simulation2.sim_desc = "20191225"
 
         self.patch_os_path_exists = mock.patch("os.path.exists")
         self.mock_os_path_exists = self.patch_os_path_exists.start()
@@ -313,19 +313,19 @@ class TestModel(TestCase):
         self.assertTrue(is_valid)
 
     def test_valid_calibration_simulations_model_has_two_calibration_storms_with_invalid_desc_length_returns_false(self):
-        self.mock_calibration_simulation1.sim_desc = "TAGD20190203"
+        self.mock_calibration_simulation1.sim_desc = "FAKE20190203"
         self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
         is_valid = self.model.valid_calibration_simulations()
         self.assertFalse(is_valid)
 
     def test_valid_calibration_simulations_model_has_two_calibration_storms_with_invalid_desc_date_returns_false(self):
-        self.mock_calibration_simulation1.sim_desc = "TAG20190250"
+        self.mock_calibration_simulation1.sim_desc = "20190250"
         self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
         with self.assertRaises(InvalidCalibrationStormSimulationDescription):
             self.model.valid_calibration_simulations()
 
     def test_valid_calibration_simulations_model_has_two_calibration_storms_with_invalid_desc_string_in_date_returns_false(self):
-        self.mock_calibration_simulation1.sim_desc = "TAG2019025O"
+        self.mock_calibration_simulation1.sim_desc = "2019025T"
         self.model.simulations = [self.mock_simulation1, self.mock_simulation2, self.mock_calibration_simulation1, self.mock_calibration_simulation2]
         with self.assertRaises(InvalidCalibrationStormSimulationDescription):
             self.model.valid_calibration_simulations()
@@ -831,5 +831,56 @@ class TestModel(TestCase):
             with self.assertRaises(InvalidModelRegistrationFileException):
                 self.model.set_parent_model_id(self.mock_model_data_io)
 
+    def test_valid_parent_model_purpose_model_purpose_characterization_parent_model_calibration_returns_true(self):
+        parent_model_purpose = "Calibration"
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertTrue(is_valid)
 
+    def test_valid_parent_model_purpose_model_purpose_characterization_parent_model_alternative_returns_false(self):
+        parent_model_purpose = "Alternative"
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertFalse(is_valid)
 
+    def test_valid_parent_model_purpose_model_purpose_calibration_parent_model_calibration_returns_true(self):
+        parent_model_purpose = "Calibration"
+        self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertTrue(is_valid)
+
+    def test_valid_parent_model_purpose_model_purpose_calibration_no_parent_model_returns_true(self):
+        parent_model_purpose = None
+        self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertTrue(is_valid)
+
+    def test_valid_parent_model_purpose_model_purpose_calibration_parent_model_alternative_returns_false(self):
+        parent_model_purpose = "Alternative"
+        self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertFalse(is_valid)
+
+    def test_valid_parent_model_purpose_model_purpose_alternative_parent_model_characterization_returns_true(self):
+        parent_model_purpose = "Characterization"
+        self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertTrue(is_valid)
+
+    def test_valid_parent_model_purpose_model_purpose_alternative_parent_model_calibration_returns_false(self):
+        parent_model_purpose = "Calibration"
+        self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertFalse(is_valid)
+
+    def test_valid_parent_model_purpose_model_purpose_recommended_plan_parent_model_characterization_returns_true(self):
+        parent_model_purpose = "Characterization"
+        self.model.model_purpose_id = self.config.model_purpose_id["Recommended Plan"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertTrue(is_valid)
+
+    def test_valid_parent_model_purpose_model_purpose_recommended_plan_parent_model_calibration_returns_false(self):
+        parent_model_purpose = "Calibration"
+        self.model.model_purpose_id = self.config.model_purpose_id["Recommended Plan"]
+        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
+        self.assertFalse(is_valid)

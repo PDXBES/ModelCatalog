@@ -321,6 +321,10 @@ class TestModelDataIO(TestCase):
     #
     #     parent_id = self.model_data_io.read_model_registration_file(self.parent_model_path)
     #     self.assertEquals(parent_id, 666)
+    #
+    # def test_read_model_purpose_id_from_model_registration_file(self.parent_model_path)
+    #   pass
+
 
     def test_set_model_to_read_write_calls_os_walk_with_correct_arguments(self):
         self.model_data_io.set_model_to_read_write(self.mock_model)
