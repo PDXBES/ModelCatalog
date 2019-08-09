@@ -88,9 +88,11 @@ class Model(GenericObject):
         elif self.config.model_status[self.model_status_id] == "Final":
             if self.project_phase_id == self.config.proj_phase_id["Pre Design"] or \
                     self.project_phase_id == self.config.proj_phase_id["Design 30"] or \
-                    self.project_phase_id == self.config.proj_phase_id["Design 60"] or \
-                    self.project_phase_id == self.config.proj_phase_id["Design 90"]:
+                    self.project_phase_id == self.config.proj_phase_id["Design 60"]:
                 if self.valid_emgaats_model_structure():
+                    return True
+            elif self.project_phase_id == self.config.proj_phase_id["Design 90"]:
+                if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                     return True
             elif self.project_phase_id == self.config.proj_phase_id["Planning"]:
                 if self.model_purpose_id == self.config.model_purpose_id["Calibration"]:
@@ -206,8 +208,15 @@ class Model(GenericObject):
                 required_storm_and_dev_scenario_ids = self.config.ccsp_alternative_storm_and_dev_scenario_ids
             elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
                 required_storm_and_dev_scenario_ids = self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids
+
             else:
                 raise InvalidModelPurpose
+        elif self.project_phase_id == self.config.proj_phase_id["Design 90"]:
+
+            if self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
+                required_storm_and_dev_scenario_ids = self.config.ccsp_characterization_storm_and_dev_scenario_ids
+                # TODO: create test for Design 90 and required_storm_and_dev_scenario_ids in config
+
         else:
             raise InvalidProjectPhase
         return required_storm_and_dev_scenario_ids
@@ -301,7 +310,7 @@ class Model(GenericObject):
     def write_to_rrad(self):
         if self.valid:
             if self.model_status_id == self.config.model_status_id["Final"]:
-                if self.project_phase_id == self.config.proj_phase_id["Planning"]:
+                if self.project_phase_id == self.config.proj_phase_id["Planning"] or self.project_phase_id == self.config.proj_phase_id["Design 90"]:
                     if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
                         return True
         return False
