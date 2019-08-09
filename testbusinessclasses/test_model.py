@@ -843,12 +843,6 @@ class TestModel(TestCase):
         is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
         self.assertFalse(is_valid)
 
-    def test_valid_parent_model_purpose_model_purpose_calibration_parent_model_calibration_returns_true(self):
-        parent_model_purpose = "Calibration"
-        self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
-        is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
-        self.assertTrue(is_valid)
-
     def test_valid_parent_model_purpose_model_purpose_calibration_no_parent_model_returns_true(self):
         parent_model_purpose = None
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
@@ -884,3 +878,13 @@ class TestModel(TestCase):
         self.model.model_purpose_id = self.config.model_purpose_id["Recommended Plan"]
         is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
         self.assertFalse(is_valid)
+
+    def test_set_parent_model_id_calls_valid_parent_model_purpose_with_correct_argument(self):
+        with mock.patch.object(self.model, "valid_parent_model_purpose" ) as mock_valid_parent_model_purpose:
+            self.mock_model_data_io.read_model_purpose_from_model_registration_file.return_value = "Characterization"
+
+            #self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
+            self.model.set_parent_model_id(self.mock_model_data_io)
+
+            mock_valid_parent_model_purpose.assert_called_with("Characterization")
+

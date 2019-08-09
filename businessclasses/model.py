@@ -311,7 +311,16 @@ class Model(GenericObject):
         if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
             if self.valid_parent_model_registration_file():
                 parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
+
+                parent_model_purpose = model_data_io.read_model_purpose_from_model_registration_file(self)
+                self.valid_parent_model_purpose(parent_model_purpose)
+                    #if parent model purpose is good,
+                        #set parent model id
+                    #else
+                        #raise invalidparentmodelpurposeexception
+
                 self.parent_model_id = parent_model_id
+
             else:
                 raise InvalidModelRegistrationFileException
         else:
@@ -323,7 +332,7 @@ class Model(GenericObject):
             if parent_model_purpose == "Calibration":
                 return True
         if self.config.model_purpose[self.model_purpose_id] == "Calibration":
-            if parent_model_purpose == "Calibration" or parent_model_purpose == None:
+            if parent_model_purpose == None:
                 return True
         if self.config.model_purpose[self.model_purpose_id] == "Alternative":
             if parent_model_purpose == "Characterization":
