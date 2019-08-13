@@ -53,10 +53,18 @@ class TestModel(TestCase):
         self.mock_read_model_id_from_model_registration_file = self.patch_read_model_id_from_model_registration_file.start()
         self.mock_read_model_id_from_model_registration_file.return_value = 2233
 
+        #TODO: need patch for model_data_io.read_model_purpose_from_model_registration_file
+
+        self.patch_read_model_purpose_from_model_registration_file = mock.patch.object(self.mock_model_data_io, "read_model_purpose_from_model_registration_file")
+        self.mock_read_model_purpose_from_model_registration_file = self.patch_read_model_purpose_from_model_registration_file.start()
+
+        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
+
     def tearDown(self):
         self.mock_os_path_exists = self.patch_os_path_exists.stop()
         self.mock_os_path_isfile = self.patch_os_path_isfile.stop()
         self.mock_read_model_id_from_model_registration_file = self.patch_read_model_id_from_model_registration_file.stop()
+        self.mock_read_model_purpose_from_model_registration_file = self.patch_read_model_purpose_from_model_registration_file.stop()
 
 
     def test_validate_model_path_called_with_correct_arguments(self):
@@ -457,13 +465,15 @@ class TestModel(TestCase):
             is_valid = self.model.valid
             self.assertFalse(is_valid)
 
-    def test_valid_final_model_project_phase_design90_valid_emgaats_structure_returns_true(self):
+    def test_valid_final_model_project_phase_design90_valid_emgaats_structure_and_valid_required_simulations_returns_true(self):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
-            mock_valid_emgaats_model_structure.return_value = True
-            self.model.model_status_id = self.config.model_status_id["Final"]
-            self.model.project_phase_id = self.config.proj_phase_id["Design 90"]
-            is_valid = self.model.valid
-            self.assertTrue(is_valid)
+            with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
+                mock_valid_required_simulations.return_value = True
+                mock_valid_emgaats_model_structure.return_value = True
+                self.model.model_status_id = self.config.model_status_id["Final"]
+                self.model.project_phase_id = self.config.proj_phase_id["Design 90"]
+                is_valid = self.model.valid
+                self.assertTrue(is_valid)
 
     def test_valid_final_model_project_phase_design90_invalid_emgaats_structure_returns_false(self):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
@@ -718,7 +728,7 @@ class TestModel(TestCase):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "validate_registration") as mock_validate_registration:
+                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
                         mock_valid_emgaats_model_structure.return_value = True
                         mock_valid_required_simulations.return_value = True
                         mock_validate_registration.return_value = True
@@ -733,7 +743,7 @@ class TestModel(TestCase):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "validate_registration") as mock_validate_registration:
+                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
                         mock_valid_emgaats_model_structure.return_value = True
                         mock_valid_required_simulations.return_value = True
                         mock_validate_registration.return_value = True
@@ -748,7 +758,7 @@ class TestModel(TestCase):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "validate_registration") as mock_validate_registration:
+                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
                         mock_valid_emgaats_model_structure.return_value = True
                         mock_valid_required_simulations.return_value = True
                         mock_validate_registration.return_value = True
@@ -763,7 +773,7 @@ class TestModel(TestCase):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "validate_registration") as mock_validate_registration:
+                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
                         mock_valid_emgaats_model_structure.return_value = True
                         mock_valid_required_simulations.return_value = True
                         mock_validate_registration.return_value = False
@@ -778,7 +788,7 @@ class TestModel(TestCase):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "validate_registration") as mock_validate_registration:
+                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
                         mock_valid_emgaats_model_structure.return_value = True
                         mock_valid_required_simulations.return_value = True
                         mock_validate_registration.return_value = False
@@ -793,7 +803,7 @@ class TestModel(TestCase):
         with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
             with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
                 with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "validate_registration") as mock_validate_registration:
+                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
                         mock_valid_emgaats_model_structure.return_value = True
                         mock_valid_required_simulations.return_value = True
                         mock_validate_registration.return_value = False
@@ -803,33 +813,6 @@ class TestModel(TestCase):
                         is_valid = self.model.valid
                         self.assertFalse(is_valid)
 
-
-    def test_valid_parent_model_purpose_calls_read_model_id_from_model_registration_file_with_parent_model(self):
-        self.model.valid_parent_model_purpose()
-        self.assertTrue(self.mock_model_data_io.read_model_id_from_model_registration_file.called)
-
-    def test_set_parent_model_id_calls_read_model_id_from_model_registration_file(self):
-        self.model.set_parent_model_id(self.mock_model_data_io)
-        self.assertTrue(self.mock_model_data_io.read_model_id_from_model_registration_file.called)
-
-    def test_set_parent_model_id_sets_parent_model_id(self):
-        self.model.parent_model_id = 1111
-        self.model.set_parent_model_id(self.mock_model_data_io)
-        self.assertEquals(self.model.parent_model_id, 2233)
-
-    def test_set_parent_model_id_model_purpose_calibration_parent_model_id_set_to_None(self):
-        self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
-        self.model.parent_model_id = 2
-        self.model.set_parent_model_id(self.mock_model_data_io)
-        self.assertEqual(self.model.parent_model_id, None)
-
-    def test_set_parent_model_id_invalid_parent_model_registration_file_throws_InvalidModelRegistrationFileException(self):
-        with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_valid_parent_model_registration_file:
-            mock_valid_parent_model_registration_file.return_value = False
-            self.model.parent_model_registration_file_path = "dummy_path"
-
-            with self.assertRaises(InvalidModelRegistrationFileException):
-                self.model.set_parent_model_id(self.mock_model_data_io)
 
     def test_valid_parent_model_purpose_model_purpose_characterization_parent_model_calibration_returns_true(self):
         parent_model_purpose = "Calibration"
@@ -879,11 +862,9 @@ class TestModel(TestCase):
         is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
         self.assertFalse(is_valid)
 
-    #TODO: verify these, make them work
     def test_set_parent_model_id_calls_valid_parent_model_purpose_with_correct_argument(self):
         with mock.patch.object(self.model, "valid_parent_model_purpose" ) as mock_valid_parent_model_purpose:
             self.mock_model_data_io.read_model_purpose_from_model_registration_file.return_value = "Characterization"
-            #self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
             self.model.set_parent_model_id(self.mock_model_data_io)
             mock_valid_parent_model_purpose.assert_called_with("Characterization")
 
@@ -894,4 +875,31 @@ class TestModel(TestCase):
             self.model.set_parent_model_id(self.mock_model_data_io)
             self.assertEquals(self.model.parent_model_id, 2233)
 
-    #TODO: test for invalidparentmodelexception called
+    #TODO: def test_set_parent_model_id_model_has_invalid_purpose_raises_InvalidModelPurposeException
+
+    def test_set_parent_model_id_calls_read_model_id_from_model_registration_file(self):
+        with mock.patch.object(self.model, "valid_parent_model_purpose") as mock_valid_parent_model_purpose:
+            self.model.set_parent_model_id(self.mock_model_data_io)
+            self.assertTrue(self.mock_model_data_io.read_model_id_from_model_registration_file.called)
+
+    def test_set_parent_model_id_sets_parent_model_id(self):
+        with mock.patch.object(self.model, "valid_parent_model_purpose") as mock_valid_parent_model_purpose:
+            self.model.parent_model_id = 1111
+            self.model.set_parent_model_id(self.mock_model_data_io)
+            self.assertEquals(self.model.parent_model_id, 2233)
+
+    def test_set_parent_model_id_model_purpose_calibration_parent_model_id_set_to_None(self):
+        with mock.patch.object(self.model, "valid_parent_model_purpose") as mock_valid_parent_model_purpose:
+            self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
+            self.model.parent_model_id = 2
+            self.model.set_parent_model_id(self.mock_model_data_io)
+            self.assertEqual(self.model.parent_model_id, None)
+
+    def test_set_parent_model_id_invalid_parent_model_registration_file_throws_InvalidModelRegistrationFileException(self):
+        with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_valid_parent_model_registration_file:
+            with mock.patch.object(self.model, "valid_parent_model_purpose") as mock_valid_parent_model_purpose:
+                mock_valid_parent_model_registration_file.return_value = False
+                self.model.parent_model_registration_file_path = "dummy_path"
+
+                with self.assertRaises(InvalidModelRegistrationFileException):
+                    self.model.set_parent_model_id(self.mock_model_data_io)

@@ -144,13 +144,11 @@ class ModelDataIo(ObjectDataIo):
         valid_model_purpose_values = self.config.model_purpose_id.values()
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
         with open(registration_file) as json_file:
-            with open(registration_file) as json_file:
-                data = json.load(json_file)
-                if data["model_purpose"] in valid_model_purpose_values:
-                    return data["model_purpose"]
-                else:
-                    raise InvalidModelPurposeException(None)
-
+            data = json.load(json_file)
+            if data["model_purpose"] in valid_model_purpose_values:
+                return data["model_purpose"]
+            else:
+                raise InvalidModelPurposeException(None)
 
 
 # TODO: finish the below functions

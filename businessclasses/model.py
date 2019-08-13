@@ -333,7 +333,7 @@ class Model(GenericObject):
             else:
                 self.parent_model_id = None
         else:
-            raise InvalidParentModelPurposeException(None)
+            raise InvalidModelPurposeException(None)
 
 
     def valid_parent_model_purpose(self, parent_model_purpose):
