@@ -12,6 +12,7 @@ from dataio import utility
 from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
+from businessclasses.model_catalog_exception import InvalidParentModelPurposeException
 from dataio.rrad_db_data_io import RradDbDataIo
 reload(arcpy)
 reload(config)
@@ -343,8 +344,6 @@ class EMGAATS_Model_Registration(object):
             self.model.create_model_alterations_hydraulic(model_alt_hydraulic_parameter.values, self.modelcatalogdataio)
             self.model.model_purpose_id = self.config.model_purpose_id[model_purpose_parameter.valueAsText]
 
-            #TODO: if model purpose is calibration should not check registration file for parent id
-
             if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
                 self.model.model_calibration_file = self.utility.check_path(model_calibration_file_parameter.valueAsText)
             else:
@@ -364,7 +363,10 @@ class EMGAATS_Model_Registration(object):
             except(InvalidModelRegistrationFileException):
                 arcpy.AddError("Invalid Parent Model Registration File")
                 raise arcpy.ExecuteError()
-
+            except InvalidParentModelPurposeException as e:
+                arcpy.AddError("Invalid Parent Model Purpose")
+                arcpy.AddError(e.parent_model_purpose)
+                raise arcpy.ExecuteError()
 
             self.model_catalog.add_model(self.model)
 

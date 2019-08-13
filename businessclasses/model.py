@@ -11,10 +11,10 @@ from project_type import ProjectType
 from collections import OrderedDict
 import datetime
 from model_catalog_exception import InvalidCalibrationStormSimulationDescription
-from model_catalog_exception import InvalidModelPurpose
+from model_catalog_exception import InvalidModelPurposeException
 from model_catalog_exception import InvalidProjectPhase
 from model_catalog_exception import InvalidModelRegistrationFileException
-
+from model_catalog_exception import InvalidParentModelPurposeException
 
 try:
     from typing import List, Any
@@ -210,7 +210,7 @@ class Model(GenericObject):
                 required_storm_and_dev_scenario_ids = self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids
 
             else:
-                raise InvalidModelPurpose
+                raise InvalidModelPurposeException
         elif self.project_phase_id == self.config.proj_phase_id["Design 90"]:
 
             if self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
@@ -317,23 +317,24 @@ class Model(GenericObject):
 
 
     def set_parent_model_id(self, model_data_io):
-        if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
-            if self.valid_parent_model_registration_file():
-                parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
+        valid_model_purpose_values = self.config.model_purpose_id.values()
+        if self.model_purpose_id in valid_model_purpose_values:
+            if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
+                if self.valid_parent_model_registration_file():
+                    parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
 
-                parent_model_purpose = model_data_io.read_model_purpose_from_model_registration_file(self)
-                self.valid_parent_model_purpose(parent_model_purpose)
-                    #if parent model purpose is good,
-                        #set parent model id
-                    #else
-                        #raise invalidparentmodelpurposeexception
-
-                self.parent_model_id = parent_model_id
-
+                    parent_model_purpose = model_data_io.read_model_purpose_from_model_registration_file(self)
+                    if self.valid_parent_model_purpose(parent_model_purpose):
+                        self.parent_model_id = parent_model_id
+                    else:
+                        raise InvalidParentModelPurposeException(parent_model_purpose)
+                else:
+                    raise InvalidModelRegistrationFileException
             else:
-                raise InvalidModelRegistrationFileException
+                self.parent_model_id = None
         else:
-            self.parent_model_id = None
+            raise InvalidParentModelPurposeException(None)
+
 
     def valid_parent_model_purpose(self, parent_model_purpose):
 

@@ -4,7 +4,7 @@ import mock
 from mock_config import MockConfig
 from businessclasses.simulation import Simulation
 from businessclasses.model_catalog_exception import InvalidCalibrationStormSimulationDescription
-from businessclasses.model_catalog_exception import InvalidModelPurpose
+from businessclasses.model_catalog_exception import InvalidModelPurposeException
 from businessclasses.model_catalog_exception import InvalidProjectPhase
 from dataio.model_data_io import ModelDataIo
 from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
@@ -376,7 +376,7 @@ class TestModel(TestCase):
 
     def test_required_storm_and_dev_scenario_ids_invalid_model_purpose_raises_exception(self):
         self.model.model_purpose_id = 27
-        with self.assertRaises(InvalidModelPurpose):
+        with self.assertRaises(InvalidModelPurposeException):
             self.model.required_storm_and_dev_scenario_ids()
 
     def test_required_storm_and_dev_scenario_ids_invalid_project_phase_raises_exception(self):
@@ -879,12 +879,19 @@ class TestModel(TestCase):
         is_valid = self.model.valid_parent_model_purpose(parent_model_purpose)
         self.assertFalse(is_valid)
 
+    #TODO: verify these, make them work
     def test_set_parent_model_id_calls_valid_parent_model_purpose_with_correct_argument(self):
         with mock.patch.object(self.model, "valid_parent_model_purpose" ) as mock_valid_parent_model_purpose:
             self.mock_model_data_io.read_model_purpose_from_model_registration_file.return_value = "Characterization"
-
             #self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
             self.model.set_parent_model_id(self.mock_model_data_io)
-
             mock_valid_parent_model_purpose.assert_called_with("Characterization")
 
+    def test_set_parent_model_id_valid_parent_model_purpose_correct_parent_model_id_set(self):
+        with mock.patch.object(self.model, "valid_parent_model_purpose" ) as mock_valid_parent_model_purpose:
+            self.mock_model_data_io.read_model_purpose_from_model_registration_file.return_value = "Characterization"
+            self.model.parent_model_id = 1111
+            self.model.set_parent_model_id(self.mock_model_data_io)
+            self.assertEquals(self.model.parent_model_id, 2233)
+
+    #TODO: test for invalidparentmodelexception called

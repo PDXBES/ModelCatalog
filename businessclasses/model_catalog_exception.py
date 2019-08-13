@@ -31,7 +31,7 @@ class InvalidStormNameOrStormTypeInRequiredSimulationsTable(ModelCatalogExceptio
 class InvalidDevScenarioInRequiredSimulationsTable(ModelCatalogException):
     pass
 
-class InvalidModelPurpose(ModelCatalogException):
+class InvalidModelPurposeException(ModelCatalogException):
     pass
 
 class InvalidProjectPhase(ModelCatalogException):
@@ -40,4 +40,6 @@ class InvalidProjectPhase(ModelCatalogException):
 class InvalidModelRegistrationFileException(ModelCatalogException):
     pass
 
-
+class InvalidParentModelPurposeException(ModelCatalogException):
+    def __init__(self, parent_model_purpose):
+        self.parent_model_purpose = parent_model_purpose

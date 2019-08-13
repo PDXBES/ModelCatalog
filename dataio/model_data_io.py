@@ -12,6 +12,7 @@ from businessclasses.model import Model
 from businessclasses.simulation import Simulation
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelPathException
+from businessclasses.model_catalog_exception import InvalidModelPurposeException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from businessclasses.model_alteration import ModelAlteration
@@ -140,12 +141,15 @@ class ModelDataIo(ObjectDataIo):
             return data["id"]
 
     def read_model_purpose_from_model_registration_file(self, model):
+        valid_model_purpose_values = self.config.model_purpose_id.values()
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
         with open(registration_file) as json_file:
             with open(registration_file) as json_file:
                 data = json.load(json_file)
-                return data["model_purpose"]
-
+                if data["model_purpose"] in valid_model_purpose_values:
+                    return data["model_purpose"]
+                else:
+                    raise InvalidModelPurposeException(None)
 
 
 

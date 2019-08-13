@@ -6,7 +6,7 @@ from mock_config import MockConfig
 from businessclasses.config import Config
 from businessclasses.model_catalog_exception import InvalidStormNameOrStormTypeInRequiredSimulationsTable
 from businessclasses.model_catalog_exception import InvalidDevScenarioInRequiredSimulationsTable
-from businessclasses.model_catalog_exception import InvalidModelPurpose
+from businessclasses.model_catalog_exception import InvalidModelPurposeException
 from businessclasses.model_catalog_exception import InvalidProjectPhase
 
 class TestConfig(TestCase):
@@ -233,7 +233,7 @@ class TestConfig(TestCase):
         self.mock_search_cursor_for_required_simulation_list.__iter__.return_value = iter(
             [("02yr6h", "D", "EX", 0), ("05yr6h", "D", "incorrect_dev_scenario", 1)])
         self.mock_search_cursor_instance.return_value = self.mock_search_cursor_for_required_simulation_list
-        with self.assertRaises(InvalidModelPurpose):
+        with self.assertRaises(InvalidModelPurposeException):
             self.config_real.retrieve_required_storm_and_dev_scenario_ids(model_purpose, model_project_phase)
 
     def test_config_init_with_test_flag_as_true_sde_path_to_test_server(self):

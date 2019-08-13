@@ -3,7 +3,7 @@ import arcpy
 from model_catalog_exception import InvalidDevScenarioInRequiredSimulationsTable
 from model_catalog_exception import InvalidStormNameOrStormTypeInRequiredSimulationsTable
 from model_catalog_exception import InvalidProjectPhase
-from model_catalog_exception import InvalidModelPurpose
+from model_catalog_exception import InvalidModelPurposeException
 
 try:
     from typing import Dict
@@ -281,7 +281,7 @@ class Config:
             elif model_purpose == "Recommended Plan":
                 model_project_phase_and_purpose_field_name = "ccsp_recommended_plan"
             else:
-                raise InvalidModelPurpose()
+                raise InvalidModelPurposeException()
 
         else:
             raise InvalidProjectPhase()
