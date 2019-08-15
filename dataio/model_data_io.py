@@ -141,7 +141,7 @@ class ModelDataIo(ObjectDataIo):
             return data["id"]
 
     def read_model_purpose_from_model_registration_file(self, model):
-        valid_model_purpose_values = self.config.model_purpose_id.values()
+        valid_model_purpose_values = self.config.model_purpose_id.keys()
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
         with open(registration_file) as json_file:
             data = json.load(json_file)

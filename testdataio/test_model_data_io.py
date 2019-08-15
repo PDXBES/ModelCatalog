@@ -134,9 +134,7 @@ class TestModelDataIO(TestCase):
         self.patch_retrieve_current_id.stop()
         self.mock_valid_emgaats_model_structure = self.patch_valid_emgaats_model_structure.stop()
         self.mock_os_access = self.patch_os_access.stop()
-        self.mock_read_model_id_from_model_registration_file = self.patch_read_model_id_from_model_registration_file.stop()
 
-        pass
 
     def test_read_simulations_calls_os_walk(self):
         self.model_data_io.read_simulations(self.mock_model)

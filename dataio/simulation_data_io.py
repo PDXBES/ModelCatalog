@@ -102,6 +102,8 @@ class SimulationDataIo(ObjectDataIo):
                 arcpy.AddMessage("Results written to RRAD.")
             except:
                 self.stop_editing_session(editor, False)
+                #if append fails, need to find the last records added to model catalog and delete them,
+                # will need to go through each table to delete the bad records
                 arcpy.AddMessage("DB Error while adding simulation results. Changes rolled back.")
                 raise
             finally:

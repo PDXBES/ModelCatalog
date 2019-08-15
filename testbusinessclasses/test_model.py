@@ -712,12 +712,12 @@ class TestModel(TestCase):
                     self.assertFalse(ready_to_write_to_rrad)
 
 
-    def test_valid_registration_file_file_exists_returns_true(self):
+    def test_valid_parent_model_registration_file_file_exists_returns_true(self):
         self.mock_os_path_isfile.return_value = True
         is_valid = self.model.valid_parent_model_registration_file()
         self.assertTrue(is_valid)
 
-    def test_valid_registration_file_file_does_not_exist_returns_false(self):
+    def test_valid_parent_model_registration_file_file_does_not_exist_returns_false(self):
         self.mock_os_path_isfile.return_value = False
         is_valid = self.model.valid_parent_model_registration_file()
         self.assertFalse(is_valid)
@@ -767,52 +767,6 @@ class TestModel(TestCase):
                         self.model.model_purpose_id = self.config.model_purpose_id["Recommended Plan"]
                         is_valid = self.model.valid
                         self.assertTrue(is_valid)
-
-    def test_valid_final_model_project_phase_planning_model_purpose_characterization_valid_emgaats_structure_valid_required_simulation_invalid_registration_file_returns_false(
-            self):
-        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
-            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
-                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
-                        mock_valid_emgaats_model_structure.return_value = True
-                        mock_valid_required_simulations.return_value = True
-                        mock_validate_registration.return_value = False
-                        self.model.model_status_id = self.config.model_status_id["Final"]
-                        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-                        self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
-                        is_valid = self.model.valid
-                        self.assertFalse(is_valid)
-
-    def test_valid_final_model_project_phase_planning_model_purpose_alternative_valid_emgaats_structure_valid_required_simulation_invalid_registration_file_returns_false(
-            self):
-        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
-            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
-                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
-                        mock_valid_emgaats_model_structure.return_value = True
-                        mock_valid_required_simulations.return_value = True
-                        mock_validate_registration.return_value = False
-                        self.model.model_status_id = self.config.model_status_id["Final"]
-                        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-                        self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
-                        is_valid = self.model.valid
-                        self.assertFalse(is_valid)
-
-    def test_valid_final_model_project_phase_planning_model_purpose_recommended_plan_valid_emgaats_structure_valid_required_simulation_invalid_registration_file_returns_false(
-            self):
-        with mock.patch.object(self.model, "valid_emgaats_model_structure") as mock_valid_emgaats_model_structure:
-            with mock.patch.object(self.model, "valid_calibration_simulations") as mock_valid_calibration_simulations:
-                with mock.patch.object(self.model, "valid_required_simulations") as mock_valid_required_simulations:
-                    with mock.patch.object(self.model, "valid_parent_model_registration_file") as mock_validate_registration:
-                        mock_valid_emgaats_model_structure.return_value = True
-                        mock_valid_required_simulations.return_value = True
-                        mock_validate_registration.return_value = False
-                        self.model.model_status_id = self.config.model_status_id["Final"]
-                        self.model.project_phase_id = self.config.proj_phase_id["Planning"]
-                        self.model.model_purpose_id = self.config.model_purpose_id["Recommended Plan"]
-                        is_valid = self.model.valid
-                        self.assertFalse(is_valid)
-
 
     def test_valid_parent_model_purpose_model_purpose_characterization_parent_model_calibration_returns_true(self):
         parent_model_purpose = "Calibration"
