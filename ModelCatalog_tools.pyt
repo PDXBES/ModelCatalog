@@ -396,11 +396,20 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
 
     if model.write_to_rrad():
         arcpy.AddMessage("Writing results to RRAD")
-        #TODO: Create a single add simulation function in model_data_io
-        for simulation in model.simulations:
-            arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-            simulationdataio.append_simulation_results(simulation, model, rrad_db_data_io)
-            arcpy.AddMessage("Finished adding results for simulation: " + simulation.sim_desc)
+        #try
+        simulationdataio.append_all_simulation_results(model, rrad_db_data_io)
+        #except
+            # if append fails, need to find the last records added to model catalog and delete them,
+            # will need to go through each table to delete the bad records
+            # first select the records based on model id, then delete
+
+        #TODO: Create a single add simulation function in model_data_io that uses the below for loop in a single edit session
+        # for simulation in model.simulations:
+        #     arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
+        #
+        #     simulationdataio.append_simulation_results(simulation, model, rrad_db_data_io)
+        #
+        #     arcpy.AddMessage("Finished adding results for simulation: " + simulation.sim_desc)
 
     else:
         arcpy.AddMessage("No results will be added to the RRAD")
