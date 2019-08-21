@@ -155,6 +155,7 @@ class DbDataIo(object):
     def copy_to_memory(self, input_table, in_memory_output_table_name):
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
         # TODO check if feature class or table and add logic
+        # TODO: check if input table has > 0 records (arcpy.GetCount_management); throw Exception if not
         try:
             arcpy.CopyFeatures_management(input_table, in_memory_table)
         except:

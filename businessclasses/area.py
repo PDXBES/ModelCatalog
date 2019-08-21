@@ -110,7 +110,7 @@ class Area(GenericObject):
             try:
                 self.bsbr = self.storm_bsbr_lookup[storm]
             except:
-                #TODO need to check that storm is in list of BSBR storms? Not all storms require BSBR ei Summer 6
+                #TODO need to check that storm is in list of BSBR storms? Not all storms require BSBR eg Summer 6
                 pass
 
 
