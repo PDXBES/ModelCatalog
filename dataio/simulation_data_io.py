@@ -65,7 +65,8 @@ class SimulationDataIo(ObjectDataIo):
 
     def copy_results_to_memory(self, input_table, output_table_name, rrad_db_data_io, simulation, id_field,
                                object_type):
-        rrad_db_data_io.copy_to_memory(input_table, output_table_name)
+        #rrad_db_data_io.copy_to_memory(input_table, output_table_name)
+        rrad_db_data_io.append_to_memory(input_table, output_table_name)
         output_table = rrad_db_data_io.workspace + "\\" + output_table_name
         rrad_db_data_io.add_ids(output_table, id_field, object_type)
         rrad_db_data_io.add_parent_id(output_table, "Simulation_ID", simulation.id)
@@ -134,6 +135,9 @@ class SimulationDataIo(ObjectDataIo):
                 simulation.create_areas(self, rrad_db_data_io)
 
                 # TODO: need to use db_data_io.append_table_to_db instead of copy
+                # TODO: cannot append to nothing, create table first (not just name it)
+
+
                 self.copy_link_results_to_memory(simulation, link_results_table_name, rrad_db_data_io)
                 self.copy_node_results_to_memory(simulation, node_results_table_name, rrad_db_data_io)
                 self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name, rrad_db_data_io)

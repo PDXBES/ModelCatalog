@@ -161,6 +161,14 @@ class DbDataIo(object):
         except:
             arcpy.CopyRows_management(input_table, in_memory_table)
 
+    def append_to_memory(self, input_table, in_memory_output_table_name):
+        in_memory_table = self.workspace + "\\" + in_memory_output_table_name
+        arcpy.AddMessage(in_memory_table)
+        arcpy.AddMessage(arcpy.Exists(in_memory_table))
+        # TODO check if feature class or table and add logic
+        # TODO: check if input table has > 0 records (arcpy.GetCount_management); throw Exception if not
+        arcpy.Append_management(input_table, in_memory_table, "NO_TEST")
+
     def copy_to_memory_with_id_filter(self, input_table, in_memory_output_table_name, id_field_name, id_list):
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
         where_clause = id_field_name + " in ("
