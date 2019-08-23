@@ -162,11 +162,12 @@ class DbDataIo(object):
             arcpy.CopyRows_management(input_table, in_memory_table)
 
     def append_to_memory(self, input_table, in_memory_output_table_name):
+        # TODO: need tests for this
         in_memory_table = self.workspace + "\\" + in_memory_output_table_name
-        arcpy.AddMessage(in_memory_table)
-        arcpy.AddMessage(arcpy.Exists(in_memory_table))
         # TODO check if feature class or table and add logic
         # TODO: check if input table has > 0 records (arcpy.GetCount_management); throw Exception if not
+        arcpy.CopyFeatures_management(input_table, in_memory_table)
+        arcpy.DeleteRows_management(in_memory_table)
         arcpy.Append_management(input_table, in_memory_table, "NO_TEST")
 
     def copy_to_memory_with_id_filter(self, input_table, in_memory_output_table_name, id_field_name, id_list):

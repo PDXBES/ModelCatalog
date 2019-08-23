@@ -135,7 +135,7 @@ class SimulationDataIo(ObjectDataIo):
                 simulation.create_areas(self, rrad_db_data_io)
 
                 # TODO: need to use db_data_io.append_table_to_db instead of copy
-                # TODO: cannot append to nothing, create table first (not just name it)
+                # TODO: cannot append to nothing, create table first (not just name it - duh)
 
 
                 self.copy_link_results_to_memory(simulation, link_results_table_name, rrad_db_data_io)
