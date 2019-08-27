@@ -47,6 +47,7 @@ class SimulationDataIo(ObjectDataIo):
         input_table = self.link_results_path(simulation)
         self.copy_results_to_memory(input_table, output_table_name, rrad_db_data_io, simulation, "rrad_link_id", "link")
 
+
     def copy_node_results_to_memory(self, simulation, output_table_name, rrad_db_data_io):
         # type: (Simulation, str, RradDbDataIo) -> None
         input_table = self.node_results_path(simulation)
@@ -66,8 +67,8 @@ class SimulationDataIo(ObjectDataIo):
     def copy_results_to_memory(self, input_table, output_table_name, rrad_db_data_io, simulation, id_field,
                                object_type):
         # copy to memory is the original in case we need to revert
-        #rrad_db_data_io.copy_to_memory(input_table, output_table_name)
-        rrad_db_data_io.append_to_memory(input_table, output_table_name)
+        rrad_db_data_io.copy_to_memory(input_table, output_table_name)
+        #rrad_db_data_io.append_to_memory(input_table, output_table_name)
         output_table = rrad_db_data_io.workspace + "\\" + output_table_name
         rrad_db_data_io.add_ids(output_table, id_field, object_type)
         rrad_db_data_io.add_parent_id(output_table, "Simulation_ID", simulation.id)
@@ -117,7 +118,7 @@ class SimulationDataIo(ObjectDataIo):
         else:
             arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the RRAD.")
 
-
+    #TODO: consider moving this out to model
     def append_all_simulation_results(self, model,rrad_db_data_io):
 
 
@@ -131,34 +132,49 @@ class SimulationDataIo(ObjectDataIo):
         link_results_table = rrad_db_data_io.workspace + "\\" + link_results_table_name
         node_results_table = rrad_db_data_io.workspace + "\\" + node_results_table_name
         node_flooding_results_table = rrad_db_data_io.workspace + "\\" + node_flooding_results_table_name
-
-        arcpy.CopyFeatures_management(self.link_results_path(model.simulations[0]), link_results_table)
-        arcpy.CopyFeatures_management(self.node_results_path(model.simulations[0]), node_results_table)
-        arcpy.CopyFeatures_management(self.node_flooding_results_path(model.simulations[0]), node_flooding_results_table)
-
-        arcpy.DeleteRows_management(link_results_table)
-        arcpy.DeleteRows_management(node_results_table)
-        arcpy.DeleteRows_management(node_flooding_results_table)
-
-        def unique_values(table, field):
-            with arcpy.da.SearchCursor(table, [field]) as cursor:
-                return sorted({row[0] for row in cursor})
-
+        #
+        # #TODO: use create feature class with template instead of copy/delete rows
+        # arcpy.CopyFeatures_management(self.link_results_path(model.simulations[0]), link_results_table)
+        # arcpy.CopyFeatures_management(self.node_results_path(model.simulations[0]), node_results_table)
+        # arcpy.CopyFeatures_management(self.node_flooding_results_path(model.simulations[0]), node_flooding_results_table)
+        #
+        # arcpy.DeleteRows_management(link_results_table)
+        # arcpy.DeleteRows_management(node_results_table)
+        # arcpy.DeleteRows_management(node_flooding_results_table)
+        first_sim_to_rrad = True
         for simulation in model.simulations:
             if simulation.required_for_rrad(model):
 
+                link_results_table_name_intermediate = "link_results_table_name_intermediate"
+                link_results_table_intermediate = rrad_db_data_io.workspace + "\\" + link_results_table_name_intermediate
+
+                node_results_table_name_intermediate = "node_results_table_name_intermediate"
+                node_results_table_intermediate = rrad_db_data_io.workspace + "\\" + node_results_table_name_intermediate
+
+                node_flooding_results_table_name_intermediate = "node_flooding_results_table_name_intermediate"
+                node_flooding_results_table_intermediate = rrad_db_data_io.workspace + "\\" + node_flooding_results_table_name_intermediate
+
                 simulation.create_areas(self, rrad_db_data_io)
 
-                # TODO: need to use db_data_io.append_table_to_db instead of copy
-                # TODO: cannot append to nothing, create table first (not just name it - duh)
+                if first_sim_to_rrad:
+                    first_sim_to_rrad = False
+                    self.copy_link_results_to_memory(simulation, link_results_table_name, rrad_db_data_io)
+                    self.copy_node_results_to_memory(simulation, node_results_table_name, rrad_db_data_io)
+                    self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name,rrad_db_data_io)
 
-                arcpy.AddMessage("Copying records for " + str(simulation.id))
-                self.copy_link_results_to_memory(simulation, link_results_table_name, rrad_db_data_io)
+                else:
+                    self.copy_link_results_to_memory(simulation, link_results_table_name_intermediate, rrad_db_data_io)
+                    arcpy.Append_management(link_results_table_intermediate, link_results_table)
+                    arcpy.Delete_management(link_results_table_intermediate)
 
-                arcpy.AddMessage("IDs that exist in memory table: " + str(unique_values(link_results_table, "Simulation_ID")))
-                arcpy.AddMessage("In memory link_results record count: " + str(arcpy.GetCount_management(link_results_table)))
-                self.copy_node_results_to_memory(simulation, node_results_table_name, rrad_db_data_io)
-                self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name, rrad_db_data_io)
+                    self.copy_node_results_to_memory(simulation, node_results_table_name_intermediate, rrad_db_data_io)
+                    arcpy.Append_management(node_results_table_intermediate, node_results_table)
+                    arcpy.Delete_management(node_results_table_intermediate)
+
+                    self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name_intermediate, rrad_db_data_io)
+                    arcpy.Append_management(node_flooding_results_table_intermediate, node_flooding_results_table)
+                    arcpy.Delete_management(node_flooding_results_table_intermediate)
+
             else:
                 arcpy.AddMessage("Simulation: " + model.simulation.sim_desc + " is not required for the RRAD.")
 
@@ -167,7 +183,6 @@ class SimulationDataIo(ObjectDataIo):
         try:
             # if arcpy.GetCount_management(link_results_table) > 0:
 
-            arcpy.AddMessage("ID in table - about to be appended: " + str(unique_values(link_results_table, "Simulation_ID")))
             rrad_db_data_io.append_table_to_db(link_results_table, self.config.link_results_sde_path)
             rrad_db_data_io.append_table_to_db(node_results_table, self.config.node_results_sde_path)
             rrad_db_data_io.append_table_to_db(node_flooding_results_table,self.config.node_flooding_results_sde_path)
@@ -175,14 +190,14 @@ class SimulationDataIo(ObjectDataIo):
             for simulation in model.simulations:
                 self.append_area_results_to_db(simulation.areas, rrad_db_data_io)
 
-            arcpy.AddMessage("Results written to RRAD.")
+
 
             arcpy.Delete_management(link_results_table)
             arcpy.Delete_management(node_results_table)
             arcpy.Delete_management(node_flooding_results_table)
 
             self.stop_editing_session(editor, True)
-
+            arcpy.AddMessage("Results written to RRAD.")
         except:
             self.stop_editing_session(editor, False)
 
