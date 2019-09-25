@@ -121,10 +121,6 @@ class SimulationDataIo(ObjectDataIo):
     #TODO: consider moving this out to model
     def append_all_simulation_results(self, model,rrad_db_data_io):
 
-
-
-        #get block  of ids first and append to an in memory table and then within the edit session append the large table to the databse
-
         link_results_table_name = "link_results_table_name"
         node_results_table_name = "node_results_table_name"
         node_flooding_results_table_name = "node_flooding_results_table_name"
@@ -132,15 +128,35 @@ class SimulationDataIo(ObjectDataIo):
         link_results_table = rrad_db_data_io.workspace + "\\" + link_results_table_name
         node_results_table = rrad_db_data_io.workspace + "\\" + node_results_table_name
         node_flooding_results_table = rrad_db_data_io.workspace + "\\" + node_flooding_results_table_name
-        #
-        # #TODO: use create feature class with template instead of copy/delete rows
-        # arcpy.CopyFeatures_management(self.link_results_path(model.simulations[0]), link_results_table)
-        # arcpy.CopyFeatures_management(self.node_results_path(model.simulations[0]), node_results_table)
-        # arcpy.CopyFeatures_management(self.node_flooding_results_path(model.simulations[0]), node_flooding_results_table)
-        #
-        # arcpy.DeleteRows_management(link_results_table)
-        # arcpy.DeleteRows_management(node_results_table)
-        # arcpy.DeleteRows_management(node_flooding_results_table)
+
+        self.create_simulation_results_tables_in_memory(link_results_table, link_results_table_name, model,
+                                                        node_flooding_results_table, node_flooding_results_table_name,
+                                                        node_results_table, node_results_table_name, rrad_db_data_io)
+
+        editor = self.start_editing_session(self.config.RRAD_sde_path)
+        try:
+            rrad_db_data_io.append_table_to_db(link_results_table, self.config.link_results_sde_path)
+            rrad_db_data_io.append_table_to_db(node_results_table, self.config.node_results_sde_path)
+            rrad_db_data_io.append_table_to_db(node_flooding_results_table,self.config.node_flooding_results_sde_path)
+
+            for simulation in model.simulations:
+                self.append_area_results_to_db(simulation.areas, rrad_db_data_io)
+
+            arcpy.Delete_management(link_results_table)
+            arcpy.Delete_management(node_results_table)
+            arcpy.Delete_management(node_flooding_results_table)
+
+            self.stop_editing_session(editor, True)
+            arcpy.AddMessage("Results written to RRAD.")
+        except:
+            self.stop_editing_session(editor, False)
+
+            arcpy.AddMessage("DB Error while adding simulation results. Changes rolled back.")
+            raise
+
+    def create_simulation_results_tables_in_memory(self, link_results_table, link_results_table_name, model,
+                                                   node_flooding_results_table, node_flooding_results_table_name,
+                                                   node_results_table, node_results_table_name, rrad_db_data_io):
         first_sim_to_rrad = True
         for simulation in model.simulations:
             if simulation.required_for_rrad(model):
@@ -160,7 +176,8 @@ class SimulationDataIo(ObjectDataIo):
                     first_sim_to_rrad = False
                     self.copy_link_results_to_memory(simulation, link_results_table_name, rrad_db_data_io)
                     self.copy_node_results_to_memory(simulation, node_results_table_name, rrad_db_data_io)
-                    self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name,rrad_db_data_io)
+                    self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name,
+                                                              rrad_db_data_io)
 
                 else:
                     self.copy_link_results_to_memory(simulation, link_results_table_name_intermediate, rrad_db_data_io)
@@ -171,38 +188,13 @@ class SimulationDataIo(ObjectDataIo):
                     arcpy.Append_management(node_results_table_intermediate, node_results_table)
                     arcpy.Delete_management(node_results_table_intermediate)
 
-                    self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name_intermediate, rrad_db_data_io)
+                    self.copy_node_flooding_results_to_memory(simulation, node_flooding_results_table_name_intermediate,
+                                                              rrad_db_data_io)
                     arcpy.Append_management(node_flooding_results_table_intermediate, node_flooding_results_table)
                     arcpy.Delete_management(node_flooding_results_table_intermediate)
 
             else:
-                arcpy.AddMessage("Simulation: " + model.simulation.sim_desc + " is not required for the RRAD.")
-
-
-        editor = self.start_editing_session(self.config.RRAD_sde_path)
-        try:
-            # if arcpy.GetCount_management(link_results_table) > 0:
-
-            rrad_db_data_io.append_table_to_db(link_results_table, self.config.link_results_sde_path)
-            rrad_db_data_io.append_table_to_db(node_results_table, self.config.node_results_sde_path)
-            rrad_db_data_io.append_table_to_db(node_flooding_results_table,self.config.node_flooding_results_sde_path)
-
-            for simulation in model.simulations:
-                self.append_area_results_to_db(simulation.areas, rrad_db_data_io)
-
-
-
-            arcpy.Delete_management(link_results_table)
-            arcpy.Delete_management(node_results_table)
-            arcpy.Delete_management(node_flooding_results_table)
-
-            self.stop_editing_session(editor, True)
-            arcpy.AddMessage("Results written to RRAD.")
-        except:
-            self.stop_editing_session(editor, False)
-
-            arcpy.AddMessage("DB Error while adding simulation results. Changes rolled back.")
-            raise
+                arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the RRAD.")
 
 
 

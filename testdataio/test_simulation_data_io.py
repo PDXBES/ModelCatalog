@@ -70,6 +70,9 @@ class TestSimulationDataIO(TestCase):
         self.patch_append_data_to_db = mock.patch("dataio.rrad_db_data_io.RradDbDataIo.append_table_to_db")
         self.mock_append_data_to_db = self.patch_append_data_to_db.start()
 
+        self.patch_create_feature_class = mock.patch("arcpy.CreateFeatureclass_management")
+        self.mock_create_feature_class = self.patch_create_feature_class.start()
+
     def tearDown(self):
         self.mock_simulation_path = self.patch_simulation_path.stop()
 
@@ -82,6 +85,8 @@ class TestSimulationDataIO(TestCase):
         self.mock_add_parent_id = self.patch_add_parent_id.stop()
         self.mock_append_objects_to_db = self.patch_append_objects_to_db.stop()
         self.mock_append_data_to_db = self.patch_append_data_to_db.stop()
+        self.mock_create_feature_class = self.patch_create_feature_class.stop()
+
 
     def test_area_results_path_creates_correct_path(self):
         self.mock_simulation_path.return_value = r"c:\temp\fake\sim\D25yr6h"
@@ -275,3 +280,7 @@ class TestSimulationDataIO(TestCase):
                         self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model,
                                                                           self.mock_rrad_db_data_io)
                         self.mock_add_message.assert_called_with("Simulation: sim_desc is not required for the RRAD.")
+
+    # def test_append_all_simulation_results_calls_create_feature_class_with_correct_arguments(self):
+    #     self.simulation_data_io.append_all_simulation_results(self.mock_model, self.rrad_db_data_io)
+    #     self.mock_create_feature_class.assert_called_with("in_memory\\")
