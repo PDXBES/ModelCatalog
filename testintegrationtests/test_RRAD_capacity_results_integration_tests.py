@@ -30,7 +30,7 @@ class TestRRADCapacityResults(TestCase):
         self.patch_simulation_path = mock.patch.object(self.simulation, "path")
         self.mock_simulation_path = self.patch_simulation_path.start()
 
-        self.mock_simulation_path.return_value = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\BaseR011018V4ic\sim\D25yr6h"
+        self.mock_simulation_path.return_value = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Characterization\Tag_Test\sim\D25yr6h"
 
         self.model_catalog_dataio = ModelCatalogDbDataIo(self.config)
         self.model_dataio = ModelDataIo(self.config, self.model_catalog_dataio)
@@ -46,7 +46,7 @@ class TestRRADCapacityResults(TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
-        self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\Final"
+        self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Characterization\Tag_Test"
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model.model_calibration_file = "C:\Temp\Cal"
