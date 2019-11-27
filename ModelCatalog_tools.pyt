@@ -392,7 +392,7 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         modelcatalogdataio.add_model(model, modeldataio)
         arcpy.AddMessage("Model Added")
     except:
-        raise arcpy.ExecuteError()
+        arcpy.ExecuteError()
 
     if model.write_to_rrad():
         arcpy.AddMessage("Writing results to RRAD")

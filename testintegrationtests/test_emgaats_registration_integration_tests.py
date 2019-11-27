@@ -9,6 +9,7 @@ import datetime
 import arcpy
 from businessclasses.config import Config
 from businessclasses.model_catalog_exception import InvalidModelException
+from businessclasses.model_catalog_exception import AppendModelAlterationsException
 import mock
 
 # This allows a file without a .py extension to be imported (ESRI pyt file)
@@ -37,7 +38,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
-        self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\Final"
+        self.model.model_path = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Calibration\OAK\Final"
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"
@@ -76,7 +77,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad(self):
-        self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\SunnysideSouth\30pct_Base_Cal"
+        self.model.model_path = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Characterization\SunnysideSouth\30pct_Base_Cal"
         self.model_dataio.set_model_to_read_write(self.model)
         self.model.create_simulations(self.model_dataio)
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
@@ -105,14 +106,15 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_working_exception_thrown_after_model_added_to_db_should_rollback(self):
-        #TODO This was changed to throw an arcpy.ExecuteError after rollback to stop execution of the pyt file.
+        #TODO - AppendModelAlterationsException does not seem to be raised to the pyt ExcecuteError (395)
         # The test needs to be reworked to deal with this
         with mock.patch("dataio.model_data_io.ModelDataIo.append_simulations") as mock_add_simulations:
             self.model.id = 999
             mock_add_simulations.side_effect = Exception()
             self.model_dataio.create_model_geometry(self.model)
             self.model_catalog.add_model(self.model)
-            model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+            with self.assertRaises(AppendModelAlterationsException):
+                model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         arcpy.AddMessage("\n")
 
 #TODO: Add test for model without alterations

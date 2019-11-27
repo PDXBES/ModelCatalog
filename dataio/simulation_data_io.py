@@ -176,7 +176,7 @@ class SimulationDataIo(ObjectDataIo):
                     arcpy.Delete_management(node_flooding_results_table_intermediate)
 
             else:
-                arcpy.AddMessage("Simulation: " + model.simulation.sim_desc + " is not required for the RRAD.")
+                arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the RRAD.")
 
 
         editor = self.start_editing_session(self.config.RRAD_sde_path)

@@ -17,6 +17,7 @@ from businessclasses.model_alt_hydraulic import ModelAltHydraulic
 from businessclasses.model_alt_hydrologic import ModelAltHydrologic
 from businessclasses.project_type import ProjectType
 from model_data_io import ModelDataIo
+from businessclasses.model_catalog_exception import AppendModelAlterationsException
 import sys
 
 class ModelCatalogDbDataIo(DbDataIo):
@@ -59,7 +60,7 @@ class ModelCatalogDbDataIo(DbDataIo):
         except:
             model_data_io.stop_editing_session(editor, False)
             arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
-            e = sys.exc_info()[1]
-            arcpy.AddMessage(e.args[0])
-            raise arcpy.ExecuteError()
+            #e = sys.exc_info()[1]
+            #arcpy.AddMessage(e.args[0])
+            raise AppendModelAlterationsException
 

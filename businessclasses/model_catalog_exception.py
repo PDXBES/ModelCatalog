@@ -43,3 +43,6 @@ class InvalidModelRegistrationFileException(ModelCatalogException):
 class InvalidParentModelPurposeException(ModelCatalogException):
     def __init__(self, parent_model_purpose):
         self.parent_model_purpose = parent_model_purpose
+
+class AppendModelAlterationsException(ModelCatalogException):
+    pass
