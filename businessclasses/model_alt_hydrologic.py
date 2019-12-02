@@ -12,7 +12,6 @@ class ModelAltHydrologic(ModelAlteration):
         self.config = config
         super(ModelAltHydrologic, self).__init__(self.config)
        #ModelAlteration.__init__(self, config)
-        self.name = "model_alt_hydrologic"
         self.input_field_attribute_lookup = ModelAltHydrologic.input_field_attribute_lookup()
 
     @staticmethod

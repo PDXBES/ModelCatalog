@@ -7,9 +7,8 @@ from businessclasses.config import Config
 from db_data_io import DbDataIo
 from businessclasses.rehab import Rehab
 from businessclasses.rehab_result import RehabResult
-from businessclasses.area import Area
+from businessclasses.area_results import AreaResults
 from collections import OrderedDict
-from businessclasses.generic_class_factory import GenericClassFactory
 
 class RradDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -17,11 +16,9 @@ class RradDbDataIo(DbDataIo):
         self.config = config
         self.current_id_database_table_path = self.config.rrad_current_id_table_sde_path
         self.workspace = "in_memory"
-        self.class_factory = GenericClassFactory(self.config)
-        self.class_factory.class_dict = {"rehab_result": RehabResult, "rehab": Rehab, "area": Area}
 
     def retrieve_current_rehab_id(self):
-        rehab_id = self.retrieve_current_id("rehab")
+        rehab_id = self.retrieve_current_id(Rehab)
         return rehab_id
 
     #TODO: determine if this should be called append or stay as add for naming consistency

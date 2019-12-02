@@ -11,7 +11,6 @@ class ProjectType(GenericObject):
     def __init__(self, config):
         # type: (Config) -> None
         self.id = None
-        self.name = "project_type"
         self.project_type_id = None
         self.config = config
 

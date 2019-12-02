@@ -10,11 +10,17 @@ except:
     pass
 from businessclasses.model import Model
 from businessclasses.simulation import Simulation
+from businessclasses.node_geometry import NodeGeometry
+from businessclasses.link_geometry import LinkGeometry
+from businessclasses.area_geometry import AreaGeometry
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelPathException
 from businessclasses.model_catalog_exception import InvalidModelPurposeException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
+from businessclasses.model_alt_bc import ModelAltBc
+from businessclasses.model_alt_hydraulic import ModelAltHydraulic
+from businessclasses.model_alt_hydrologic import ModelAltHydrologic
 from businessclasses.model_alteration import ModelAlteration
 from businessclasses.project_type import ProjectType
 
@@ -76,11 +82,11 @@ class ModelDataIo(ObjectDataIo):
 
     def append_model_alteration(self, model_id, model_alteration):
         # type: (int, ModelAlteration) -> None
-        if model_alteration.name == "model_alt_bc":
+        if type(model_alteration) == ModelAltBc:
             self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_bc_sde_path)
-        elif model_alteration.name == "model_alt_hydrologic":
+        elif type(model_alteration) == ModelAltHydrologic:
             self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydrologic_sde_path)
-        elif model_alteration.name == "model_alt_hydraulic":
+        elif type(model_alteration) == ModelAltHydraulic:
             self.append_object_to_db(model_id, model_alteration, model_alteration.input_field_attribute_lookup, self.config.model_alt_hydraulic_sde_path)
 
     def append_model_alterations(self, model):
@@ -97,6 +103,45 @@ class ModelDataIo(ObjectDataIo):
         # type: (Model) -> None
         for project_type in model.project_types:
             self.append_project_type(model.id, project_type)
+
+    def append_model_network(self, model):
+        input_gdb = model.model_path + "\\" + "EmgaatsModel.gdb"
+        input_table = input_gdb + "\\" + "nodes"
+        output_table_name = "in_memory_table_nodes"
+        output_table = self.db_data_io.workspace + "\\" + output_table_name
+        id_field = "model_catalog_node_id"
+        object_type = NodeGeometry
+        self.copy_geometry_to_memory(input_table, output_table_name, self.db_data_io, model, id_field, object_type)
+        self.db_data_io.append_table_to_db(output_table, self.config.geometry_nodes_sde_path)
+
+        input_table_links = input_gdb + "\\" + "links"
+        output_table_name_links = "in_memory_table_links"
+        output_table_links = self.db_data_io.workspace + "\\" + output_table_name_links
+        id_field = "model_catalog_link_id"
+        object_type = LinkGeometry
+        self.copy_geometry_to_memory(input_table_links, output_table_name_links, self.db_data_io, model,
+                                     id_field, object_type)
+        self.db_data_io.append_table_to_db(output_table_links, self.config.geometry_links_sde_path)
+
+        input_table_areas = input_gdb + "\\" + "areas"
+        output_table_name_areas = "in_memory_table_areas"
+        output_table_areas = self.db_data_io.workspace + "\\" + output_table_name_areas
+        id_field = "model_catalog_area_id"
+        object_type = AreaGeometry
+        self.copy_geometry_to_memory(input_table_areas, output_table_name_areas, self.db_data_io, model,
+                                     id_field, object_type)
+        self.db_data_io.append_table_to_db(output_table_areas, self.config.geometry_areas_sde_path)
+
+        arcpy.Delete_management(output_table)
+        arcpy.Delete_management(output_table_links)
+        arcpy.Delete_management(output_table_areas)
+
+    def copy_geometry_to_memory(self, input_table, output_table_name, rrad_db_data_io, model, id_field,
+                               object_type):
+        rrad_db_data_io.copy_to_memory(input_table, output_table_name)
+        output_table = rrad_db_data_io.workspace + "\\" + output_table_name
+        rrad_db_data_io.add_ids(output_table, id_field, object_type)
+        rrad_db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
 
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"

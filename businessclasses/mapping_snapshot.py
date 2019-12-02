@@ -18,7 +18,6 @@ class MappingSnapshot(GenericObject):
         self.config = config
         self.id = None
         self.type = None
-        self.name = "mapping_snapshot"
         self.simulations = []
         self.mapping_links = []
         self.mapping_nodes = []

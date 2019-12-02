@@ -32,7 +32,6 @@ class RehabResult(GenericObject):
         self.geometry = None
         self.root_rating = None
         self.input_field_attribute_lookup = RehabResult.input_field_attribute_lookup()
-        self.name = "rehab_result"
 
     @staticmethod
     def input_field_attribute_lookup():

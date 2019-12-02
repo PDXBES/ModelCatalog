@@ -54,6 +54,14 @@ class Config:
         self.model_alt_bc_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_BC"
         self.model_alt_hydraulic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydraulic"
         self.model_alt_hydrologic_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Model_Alt_Hydrologic"
+        self.results_area_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.AreaResults"
+        self.results_link_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.LinkResults"
+        self.results_node_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.NodeResults"
+        self.results_node_flooding_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.NodeFloodingResults"
+        self.geometry_areas_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Areas"
+        self.geometry_links_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Links"
+        self.geometry_nodes_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Nodes"
+
 
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
 ##
@@ -66,10 +74,10 @@ class Config:
         self.RRAD_sde_path = os.path.join(sde_connections, RRAD_sde)
 
         self.rehab_tracking_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Tracking"
-        self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
-        self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
-        self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
-        self.node_flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
+        #self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
+        #self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
+        #self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
+        #self.node_flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
         self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
         self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
         self.directors_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Directors"

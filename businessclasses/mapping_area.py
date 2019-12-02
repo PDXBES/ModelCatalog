@@ -8,7 +8,6 @@ class MappingArea(MappingObject):
         self.area_id = None
         self.area_name = None
         self.bsbr = None
-        self.name = "mapping_area"
         self.rrad_area_id = None
         self.input_field_attribute_lookup = MappingArea.input_field_attribute_lookup()
         super(MappingArea, self).__init__(config)

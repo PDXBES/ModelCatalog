@@ -12,7 +12,6 @@ class ModelAltBc(ModelAlteration):
         self.config = config
         super(ModelAltBc, self).__init__(self.config)
        #ModelAlteration.__init__(self, config)
-        self.name = "model_alt_bc"
 
         self.input_field_attribute_lookup = ModelAltBc.input_field_attribute_lookup()
 
