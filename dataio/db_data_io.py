@@ -152,6 +152,7 @@ class DbDataIo(object):
         arcpy.Delete_management(table)
         return objects
 
+
     def create_objects_from_database_with_query(self, object_type, input_database, query):
         #TODO: add tests
         in_memory_output_table_name = "object_table"
@@ -186,6 +187,13 @@ class DbDataIo(object):
             arcpy.CopyFeatures_management(input_table, in_memory_table)
         except:
             arcpy.CopyRows_management(input_table, in_memory_table)
+
+    def copy_table_to_memory(self, input_table, in_memory_output_table_name):
+        in_memory_table = self.workspace + "\\" + in_memory_output_table_name
+        # TODO: check if feature class or table and add logic
+        # TODO: check if input table has > 0 records (arcpy.GetCount_management); throw Exception if not
+
+        arcpy.CopyRows_management(input_table, in_memory_table)
 
     def append_to_memory(self, input_table, in_memory_output_table_name):
         # TODO: need tests for this

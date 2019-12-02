@@ -382,7 +382,6 @@ class EMGAATS_Model_Registration(object):
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
-    # rrad_db_data_io = RradDbDataIo(config)
     model_catalog_data_io = ModelCatalogDbDataIo(config)
     model_data_io = ModelDataIo(config, model_catalog_data_io)
     simulation_data_io = SimulationDataIo(config, model_catalog_data_io)
@@ -393,27 +392,6 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         arcpy.AddMessage("Model Added")
     except:
         arcpy.ExecuteError()
-
-#    if model.write_to_rrad():
-#        arcpy.AddMessage("Writing results to RRAD")
-        #try
-#        simulationdataio.append_all_simulation_results(model, rrad_db_data_io)
-        #except
-            # if append fails, need to find the last records added to model catalog and delete them,
-            # will need to go through each table to delete the bad records
-            # first select the records based on model id, then delete
-
-        #TODO: Create a single add simulation function in model_data_io that uses the below for loop in a single edit session
-        # for simulation in model.simulations:
-        #     arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-        #
-        #     simulationdataio.append_simulation_results(simulation, model, rrad_db_data_io)
-        #
-        #     arcpy.AddMessage("Finished adding results for simulation: " + simulation.sim_desc)
-
-#    else:
-#        arcpy.AddMessage("No results will be added to the RRAD")
-
 ########################################################################################################################
 
 def data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations):

@@ -50,14 +50,16 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.append_simulations(model)
             model_data_io.append_model_alterations(model)
             model_data_io.append_project_types(model)
-            model_data_io.write_model_registration_file(model)
+            arcpy.AddMessage("Adding Model Geometry Network")
             model_data_io.append_model_network(model)
+            arcpy.AddMessage("Model Geometry Network Added")
             if model.write_to_rrad():
                 for simulation in model.simulations:
                     simulation_data_io.append_simulation_results(simulation, model)
             else:
-                arcpy.AddMessage("No results will be added to the RRAD")
+                arcpy.AddMessage("No results will be added to the Model Catalog")
 
+            model_data_io.write_model_registration_file(model)
             if model.model_status_id == self.config.model_status_id["Final"]:
                 model_data_io.set_registered_model_to_read_only(model)
             model_data_io.stop_editing_session(editor, True)
