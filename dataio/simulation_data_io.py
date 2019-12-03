@@ -1,6 +1,6 @@
 import arcpy
 from businessclasses.simulation import Simulation
-from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
+from dataio.db_data_io import DbDataIo
 try:
     from typing import List, Any
 except:
@@ -15,7 +15,7 @@ from object_data_io import ObjectDataIo
 
 class SimulationDataIo(ObjectDataIo):
     def __init__(self, config, model_catalog_db_data_io):
-        # type: (Config, ModelCatalogDbDataIo) -> None
+        # type: (Config, DbDataIo) -> None
         self.config = config
         self.model_catalog_db_data_io = model_catalog_db_data_io
 
@@ -46,26 +46,26 @@ class SimulationDataIo(ObjectDataIo):
 # TODO below this could all be probably moved to a separate class called RradSimulationResults or something
 
     def copy_link_results_to_memory(self, simulation, output_table_name, model_catalog_db_data_io):
-        # type: (Simulation, str, ModelCatalogDbDataIo) -> None
+        # type: (Simulation, str, DbDataIo) -> None
         input_table = self.link_results_path(simulation)
         self.copy_results_to_memory(input_table, output_table_name, model_catalog_db_data_io, simulation,
                                     "model_catalog_link_result_id", LinkResults)
 
 
     def copy_node_results_to_memory(self, simulation, output_table_name, model_catalog_db_data_io):
-        # type: (Simulation, str, ModelCatalogDbDataIo) -> None
+        # type: (Simulation, str, DbDataIo) -> None
         input_table = self.node_results_path(simulation)
         self.copy_results_to_memory(input_table, output_table_name, model_catalog_db_data_io, simulation,
                                     "model_catalog_node_result_id", NodeResults)
 
     def copy_node_flooding_results_to_memory(self, simulation, output_table_name, model_catalog_db_data_io):
-        # type: (Simulation, str, ModelCatalogDbDataIo) -> None
+        # type: (Simulation, str, DbDataIo) -> None
         input_table = self.node_flooding_results_path(simulation)
         self.copy_results_to_memory(input_table, output_table_name, model_catalog_db_data_io, simulation,
                                     "model_catalog_nodef_result_id", NodeFloodingResults)
 
     def copy_area_results_to_memory(self, simulation, output_table_name, model_catalog_db_data_io):
-        # type: (Simulation, str, ModelCatalogDbDataIo) -> None
+        # type: (Simulation, str, DbDataIo) -> None
         input_table = self.area_results_path(simulation)
         self.copy_results_to_memory(input_table, output_table_name, model_catalog_db_data_io, simulation,
                                     "model_catalog_area_result_id", AreaResults)
