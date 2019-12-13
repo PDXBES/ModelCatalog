@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelCatalog_tools.pyt" beforeDir="false" afterPath="$PROJECT_DIR$/ModelCatalog_tools.pyt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessclasses/model_catalog_exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/model_catalog_db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/model_catalog_db_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataio/simulation_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataio/simulation_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/testdataio/test_model_catalog_db_data_io.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py" afterDir="false" />
-    </list>
+    <list default="true" id="854ab857-9320-4a7d-ad13-373967afada6" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,127 +31,248 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-675">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6001">
-              <caret line="383" column="42" selection-start-line="383" selection-start-column="42" selection-end-line="383" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2856">
-              <caret line="179" selection-start-line="179" selection-end-line="179" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-              <folding>
-                <element signature="e#325#376#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-340">
-              <caret line="67" column="34" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/utility.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
-              <folding>
-                <element signature="e#268#288#0" />
-                <element signature="e#371#1284#0" />
-                <element signature="e#734#871#0" />
-                <element signature="e#1921#1969#0" />
-                <element signature="e#3316#3540#0" />
-                <element signature="e#3431#3540#0" />
-                <element signature="e#4429#4798#0" />
-                <element signature="e#4477#4707#0" />
-                <element signature="e#4636#4684#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testintegrationtests/cleanup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/businessclasses/area_results.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="48" column="57" selection-start-line="48" selection-start-column="57" selection-end-line="48" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="61" column="36" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.80152327">
+      <split-first>
+        <splitter split-orientation="horizontal" split-proportion="0.33142167">
+          <split-first>
+            <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+              <file leaf-file-name="ModelCatalog_tools.pyt" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="182">
+                      <caret line="394" column="32" selection-start-line="394" selection-start-column="32" selection-end-line="394" selection-end-column="32" />
+                      <folding>
+                        <element signature="e#0#12#0" expanded="true" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="model_catalog_db_data_io.py" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="1088">
+                      <caret line="72" selection-start-line="72" selection-end-line="72" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="simulation_data_io.py" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="1870">
+                      <caret line="112" column="55" selection-start-line="112" selection-start-column="55" selection-end-line="112" selection-end-column="55" />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="rrad_db_data_io.py" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/dataio/rrad_db_data_io.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="170">
+                      <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+                      <folding>
+                        <element signature="e#55#71#0" expanded="true" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="cleanup.py" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/testintegrationtests/cleanup.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="255">
+                      <caret line="16" selection-start-line="16" selection-end-line="16" />
+                      <folding>
+                        <element signature="e#0#41#0" expanded="true" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="config.py" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="1377">
+                      <caret line="302" column="37" selection-start-line="302" selection-start-column="37" selection-end-line="302" selection-end-column="37" />
+                      <folding>
+                        <element signature="e#325#376#0" />
+                        <element signature="e#554#7397#0" />
+                        <element signature="e#7445#7804#0" />
+                        <element signature="e#7670#7745#0" />
+                        <element signature="e#7855#8452#0" />
+                        <element signature="e#7940#8411#0" />
+                        <element signature="e#7987#8411#0" />
+                        <element signature="e#8051#8411#0" />
+                        <element signature="e#8611#8884#0" />
+                        <element signature="e#8744#8851#0" />
+                        <element signature="e#8791#8851#0" />
+                        <element signature="e#8945#9024#0" />
+                        <element signature="e#9086#9166#0" />
+                        <element signature="e#9235#9322#0" />
+                        <element signature="e#9392#9480#0" />
+                        <element signature="e#9543#9624#0" />
+                        <element signature="e#9686#9766#0" />
+                        <element signature="e#9826#9904#0" />
+                        <element signature="e#9963#10040#0" />
+                        <element signature="e#10111#10182#0" />
+                        <element signature="e#10227#10420#0" />
+                        <element signature="e#10472#10709#0" />
+                        <element signature="e#10769#11231#0" />
+                        <element signature="e#11045#11123#0" />
+                        <element signature="e#11305#11454#0" />
+                        <element signature="e#11377#11434#0" />
+                        <element signature="e#11509#11634#0" />
+                        <element signature="e#11706#11981#0" />
+                        <element signature="e#12072#12237#0" />
+                        <element signature="e#12144#12217#0" />
+                        <element signature="e#12300#12447#0" />
+                        <element signature="e#13063#13198#0" />
+                        <element signature="e#13354#13817#0" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="utility.py" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/dataio/utility.py">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="663">
+                      <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
+                      <folding>
+                        <element signature="e#268#288#0" />
+                        <element signature="e#371#1284#0" />
+                        <element signature="e#734#871#0" />
+                        <element signature="e#1921#1969#0" />
+                        <element signature="e#2890#3246#0" />
+                        <element signature="e#2869#3540#0" />
+                        <element signature="e#2821#3631#0" />
+                        <element signature="e#3316#3540#0" />
+                        <element signature="e#3431#3540#0" />
+                        <element signature="e#4429#4798#0" />
+                        <element signature="e#4477#4707#0" />
+                        <element signature="e#4636#4684#0" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
+          </split-first>
+          <split-second>
+            <splitter split-orientation="horizontal" split-proportion="0.5">
+              <split-first>
+                <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+                  <file leaf-file-name="test_emgaats_registration_integration_tests.py" pinned="false" current-in-tab="true">
+                    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
+                      <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="831">
+                          <caret line="108" column="105" selection-start-line="108" selection-start-column="105" selection-end-line="108" selection-end-column="105" />
+                          <folding>
+                            <element signature="e#0#15#0" expanded="true" />
+                          </folding>
+                        </state>
+                      </provider>
+                    </entry>
+                  </file>
+                </leaf>
+              </split-first>
+              <split-second>
+                <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+                  <file leaf-file-name="model_catalog_exception.py" pinned="false" current-in-tab="true">
+                    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+                      <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="782">
+                          <caret line="46" column="37" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="37" />
+                        </state>
+                      </provider>
+                    </entry>
+                  </file>
+                  <file leaf-file-name="model_data_io.py" pinned="false" current-in-tab="false">
+                    <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
+                      <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="1309">
+                          <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
+                          <folding>
+                            <element signature="e#4557#4690#0" />
+                            <element signature="e#4756#5243#0" />
+                            <element signature="e#4916#5185#0" />
+                            <element signature="e#5031#5185#0" />
+                            <element signature="e#5078#5185#0" />
+                            <element signature="e#5305#6317#0" />
+                            <element signature="e#5318#5399#0" />
+                            <element signature="e#5598#5900#0" />
+                            <element signature="e#6204#6242#0" />
+                            <element signature="e#6482#6687#0" />
+                            <element signature="e#6630#6687#0" />
+                            <element signature="e#6767#7203#0" />
+                            <element signature="e#6988#7203#0" />
+                            <element signature="e#7310#7314#0" />
+                            <element signature="e#7319#7373#0" />
+                            <element signature="e#7528#7532#0" />
+                            <element signature="e#7537#7596#0" />
+                            <element signature="e#7822#7826#0" />
+                            <element signature="e#7916#8269#0" />
+                            <element signature="e#8121#8269#0" />
+                            <element signature="e#8164#8269#0" />
+                            <element signature="e#8326#8618#0" />
+                            <element signature="e#8433#8597#0" />
+                            <element signature="e#8476#8597#0" />
+                          </folding>
+                        </state>
+                      </provider>
+                    </entry>
+                  </file>
+                </leaf>
+              </split-second>
+            </splitter>
+          </split-second>
+        </splitter>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="test_model_data_io.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="2023">
+                  <caret line="136" selection-start-line="136" selection-end-line="136" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="model_catalog_exception.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="612">
+                  <caret line="36" column="16" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="25" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test_config.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="17">
+                  <caret line="9" column="71" selection-end-line="9" selection-end-column="71" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="db_data_io.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="3060">
+                  <caret line="181" column="8" selection-start-line="181" selection-start-column="8" selection-end-line="181" selection-end-column="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -288,11 +402,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="19" />
+    <option name="y" value="13" />
+    <option name="width" value="4911" />
+    <option name="height" value="1337" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -302,7 +416,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -334,6 +447,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -387,9 +501,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
     </configuration>
     <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
@@ -403,7 +514,6 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
     <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
@@ -417,7 +527,6 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
     <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
@@ -431,7 +540,6 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
     <configuration name="Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="ModelCatalog" />
@@ -445,7 +553,6 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python tests.Unittests for test_emgaats_registration_integration_tests.EmgaatsRegistrationIntegrationTest.test_model_registration_with_model_status_working" />
@@ -519,44 +626,55 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="19" y="13" width="4911" height="1337" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.4799107" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80558485" weight="0.16202946" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8382508" weight="0.76065576" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8134879" weight="0.42880523" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.08393187" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6659193" weight="0.2897033" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49850523" weight="0.21291448" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49925262" weight="0.43804538" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007474" side_tool="true" weight="0.32733223" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8382508" weight="0.5045872" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49925262" weight="0.32733223" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49850523" weight="0.21291448" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49925262" weight="0.43804538" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8134879" weight="0.43035862" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8382508" weight="0.76065576" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.4799107" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6659193" weight="0.2897033" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49925262" weight="0.32733223" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8134879" weight="0.42880523" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49850523" weight="0.21291448" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007474" side_tool="true" weight="0.32733223" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80558485" weight="0.16202946" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49925262" weight="0.43804538" />
+      <window_info id="Favorites" order="1" side_tool="true" />
     </layout>
     <layout-to-restore>
-      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49925262" weight="0.32733223" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.24107143" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80558485" weight="0.16202946" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8382508" visible="true" weight="0.5040917" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8134879" weight="0.42880523" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6659193" weight="0.2897033" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8382508" visible="true" weight="0.5040917" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49850523" weight="0.21291448" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8134879" weight="0.42880523" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49925262" weight="0.43804538" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007474" side_tool="true" weight="0.32733223" />
-      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49925262" weight="0.32733223" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.80558485" weight="0.16202946" />
+      <window_info id="Favorites" order="1" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -690,6 +808,65 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="831">
+          <caret line="108" column="105" selection-start-line="108" selection-start-column="105" selection-end-line="108" selection-end-column="105" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1377">
+          <caret line="294" column="37" selection-start-line="294" selection-start-column="37" selection-end-line="294" selection-end-column="37" />
+          <folding>
+            <element signature="e#325#376#0" />
+            <element signature="e#554#7397#0" />
+            <element signature="e#7445#7804#0" />
+            <element signature="e#7670#7745#0" />
+            <element signature="e#7855#8452#0" />
+            <element signature="e#7940#8411#0" />
+            <element signature="e#7987#8411#0" />
+            <element signature="e#8051#8411#0" />
+            <element signature="e#8611#8884#0" />
+            <element signature="e#8744#8851#0" />
+            <element signature="e#8791#8851#0" />
+            <element signature="e#8945#9024#0" />
+            <element signature="e#9086#9166#0" />
+            <element signature="e#9235#9322#0" />
+            <element signature="e#9392#9480#0" />
+            <element signature="e#9543#9624#0" />
+            <element signature="e#9686#9766#0" />
+            <element signature="e#9826#9904#0" />
+            <element signature="e#9963#10040#0" />
+            <element signature="e#10111#10182#0" />
+            <element signature="e#10227#10420#0" />
+            <element signature="e#10472#10709#0" />
+            <element signature="e#10769#11231#0" />
+            <element signature="e#11045#11123#0" />
+            <element signature="e#11305#11454#0" />
+            <element signature="e#11377#11434#0" />
+            <element signature="e#11509#11634#0" />
+            <element signature="e#11706#11981#0" />
+            <element signature="e#12072#12237#0" />
+            <element signature="e#12144#12217#0" />
+            <element signature="e#12300#12447#0" />
+            <element signature="e#13063#13198#0" />
+            <element signature="e#13354#13817#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -699,8 +876,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog_exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="16" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="25" />
+        <state relative-caret-position="782">
+          <caret line="46" column="37" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -717,9 +894,6 @@
           <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/mapping_object.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/mapping_node.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -749,9 +923,6 @@
           <caret line="33" column="86" selection-start-line="33" selection-start-column="86" selection-end-line="33" selection-end-column="86" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/businessclasses/rrad_mapping.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/slrt.py" />
     <entry file="file://$PROJECT_DIR$/Test.pyt" />
@@ -825,9 +996,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -840,8 +1008,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testdataio/test_model_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="231" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="2023">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
         </state>
       </provider>
     </entry>
@@ -854,8 +1022,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/rrad_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="170">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding>
+            <element signature="e#55#71#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -885,8 +1056,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testbusinessclasses/test_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="190" column="22" selection-start-line="190" selection-start-column="22" selection-end-line="190" selection-end-column="22" />
+        <state relative-caret-position="17">
+          <caret line="9" column="71" selection-end-line="9" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -939,9 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/python27/ArcGIS10.3/Lib/unittest/loader.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/model_catalog.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-124">
@@ -958,10 +1129,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/businessclasses/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="1377">
+          <caret line="302" column="37" selection-start-line="302" selection-start-column="37" selection-end-line="302" selection-end-column="37" />
           <folding>
             <element signature="e#325#376#0" />
+            <element signature="e#554#7397#0" />
+            <element signature="e#7445#7804#0" />
+            <element signature="e#7670#7745#0" />
+            <element signature="e#7855#8452#0" />
+            <element signature="e#7940#8411#0" />
+            <element signature="e#7987#8411#0" />
+            <element signature="e#8051#8411#0" />
+            <element signature="e#8611#8884#0" />
+            <element signature="e#8744#8851#0" />
+            <element signature="e#8791#8851#0" />
+            <element signature="e#8945#9024#0" />
+            <element signature="e#9086#9166#0" />
+            <element signature="e#9235#9322#0" />
+            <element signature="e#9392#9480#0" />
+            <element signature="e#9543#9624#0" />
+            <element signature="e#9686#9766#0" />
+            <element signature="e#9826#9904#0" />
+            <element signature="e#9963#10040#0" />
+            <element signature="e#10111#10182#0" />
+            <element signature="e#10227#10420#0" />
+            <element signature="e#10472#10709#0" />
+            <element signature="e#10769#11231#0" />
+            <element signature="e#11045#11123#0" />
+            <element signature="e#11305#11454#0" />
+            <element signature="e#11377#11434#0" />
+            <element signature="e#11509#11634#0" />
+            <element signature="e#11706#11981#0" />
+            <element signature="e#12072#12237#0" />
+            <element signature="e#12144#12217#0" />
+            <element signature="e#12300#12447#0" />
+            <element signature="e#13063#13198#0" />
+            <element signature="e#13354#13817#0" />
           </folding>
         </state>
       </provider>
@@ -970,38 +1173,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="48" column="57" selection-start-line="48" selection-start-column="57" selection-end-line="48" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3060">
+          <caret line="181" column="8" selection-start-line="181" selection-start-column="8" selection-end-line="181" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/model_catalog_db_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" column="36" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
+        <state relative-caret-position="1088">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/utility.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="79" column="52" selection-start-line="79" selection-start-column="52" selection-end-line="79" selection-end-column="52" />
+        <state relative-caret-position="663">
+          <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
           <folding>
             <element signature="e#268#288#0" />
             <element signature="e#371#1284#0" />
             <element signature="e#734#871#0" />
             <element signature="e#1921#1969#0" />
+            <element signature="e#2890#3246#0" />
+            <element signature="e#2869#3540#0" />
+            <element signature="e#2821#3631#0" />
             <element signature="e#3316#3540#0" />
             <element signature="e#3431#3540#0" />
             <element signature="e#4429#4798#0" />
@@ -1013,8 +1213,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testintegrationtests/cleanup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+        <state relative-caret-position="255">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1023,32 +1223,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/model_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2856">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
+        <state relative-caret-position="1309">
+          <caret line="82" column="31" selection-start-line="82" selection-start-column="31" selection-end-line="82" selection-end-column="31" />
+          <folding>
+            <element signature="e#4557#4690#0" />
+            <element signature="e#4756#5243#0" />
+            <element signature="e#4916#5185#0" />
+            <element signature="e#5031#5185#0" />
+            <element signature="e#5078#5185#0" />
+            <element signature="e#5305#6317#0" />
+            <element signature="e#5318#5399#0" />
+            <element signature="e#5598#5900#0" />
+            <element signature="e#6204#6242#0" />
+            <element signature="e#6482#6687#0" />
+            <element signature="e#6630#6687#0" />
+            <element signature="e#6767#7203#0" />
+            <element signature="e#6988#7203#0" />
+            <element signature="e#7310#7314#0" />
+            <element signature="e#7319#7373#0" />
+            <element signature="e#7528#7532#0" />
+            <element signature="e#7537#7596#0" />
+            <element signature="e#7822#7826#0" />
+            <element signature="e#7916#8269#0" />
+            <element signature="e#8121#8269#0" />
+            <element signature="e#8164#8269#0" />
+            <element signature="e#8326#8618#0" />
+            <element signature="e#8433#8597#0" />
+            <element signature="e#8476#8597#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dataio/simulation_data_io.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="67" column="34" selection-start-line="67" selection-start-column="34" selection-end-line="67" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1870">
+          <caret line="112" column="55" selection-start-line="112" selection-start-column="55" selection-end-line="112" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testintegrationtests/test_emgaats_registration_integration_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-675">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="831">
+          <caret line="108" column="105" selection-start-line="108" selection-start-column="105" selection-end-line="108" selection-end-column="105" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ModelCatalog_tools.pyt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6001">
-          <caret line="383" column="42" selection-start-line="383" selection-start-column="42" selection-end-line="383" selection-end-column="42" />
+        <state relative-caret-position="182">
+          <caret line="394" column="32" selection-start-line="394" selection-start-column="32" selection-end-line="394" selection-end-column="32" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
