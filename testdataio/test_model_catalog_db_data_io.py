@@ -1,9 +1,10 @@
 from unittest import TestCase
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 import mock
-import json
 from businessclasses.model_catalog import ModelCatalog
 from businessclasses.model import Model
+from businessclasses.simulation import Simulation
+from businessclasses.model_alteration import ModelAlteration
 import arcpy
 from testbusinessclasses.mock_config import MockConfig
 from dataio.model_data_io import ModelDataIo
@@ -38,7 +39,7 @@ class TestModelCatalogDbDataIO(TestCase):
 
 
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
-        self.mock_update_cursor.__iter__.return_value = iter([("model", 44), ("simulation", 55), ("model_alteration", 66)])
+        self.mock_update_cursor.__iter__.return_value = iter([("Model", 44), ("Simulation", 55), ("ModelAlteration", 66)])
         self.patch_da_UpdateCursor = mock.patch("arcpy.da.UpdateCursor")
         self.mock_da_UpdateCursor = self.patch_da_UpdateCursor.start()
 

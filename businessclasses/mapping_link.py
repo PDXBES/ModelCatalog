@@ -24,7 +24,6 @@ class MappingLink(MappingObject):
         self.geometry = None
         self.rrad_rehab_result_id = None
         self.emgaats_link_id = None
-        self.name = "mapping_link"
 
         self.rrad_link_id = None
         self.input_field_attribute_lookup = MappingLink.input_field_attribute_lookup()

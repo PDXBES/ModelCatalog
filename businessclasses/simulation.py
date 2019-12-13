@@ -3,7 +3,7 @@ import arcpy
 from config import Config
 from generic_object import GenericObject
 from collections import OrderedDict
-from businessclasses.area import Area
+from businessclasses.area_results import AreaResults
 
 try:
     from typing import List, Any
@@ -11,13 +11,12 @@ except:
     pass
 
 class Simulation(GenericObject):
-    areas = None  # type: List[Area]
+    areas = None  # type: List[AreaResults]
     def __init__(self, config):
         # type: (str, Config) -> None
         self.model_path = None
         self.id = None
         self.parent_id = None
-        self.name = "simulation"
         self.dev_scenario_id = None
         self.storm_id = None
         self.sim_desc = ""
@@ -59,8 +58,8 @@ class Simulation(GenericObject):
     def create_areas(self, simulation_data_io, rrad_db_data_io):
         in_memory_table = simulation_data_io.model_catalog_db_data_io.workspace + "\\in_memory_table"
         simulation_data_io.copy_area_results_to_memory(self, "in_memory_table", rrad_db_data_io)
-        area_field_attribute_lookup = Area.results_field_attribute_lookup()
-        area_results = rrad_db_data_io.create_objects_from_table_with_current_id("area", in_memory_table, area_field_attribute_lookup)
+        area_field_attribute_lookup = AreaResults.results_field_attribute_lookup()
+        area_results = rrad_db_data_io.create_objects_from_table_with_current_id(AreaResults, in_memory_table, area_field_attribute_lookup)
         self.areas = area_results
         for area in self.areas:
             area.parent_id = self.id

@@ -14,7 +14,6 @@ class Rehab(GenericObject):
 
     def __init__(self, config):
         # type: (Config) -> None
-        self.name = "rehab"
         self.config = config
         self.id = None
         self.extract_date = None
@@ -51,7 +50,7 @@ class Rehab(GenericObject):
         rehab_results_table_name = "rehab_results_table_name"
         rehab_results_table = rehab_data_io.rrad_db_data_io.workspace + "\\" + "rehab_results_table_name"
         rehab_data_io.copy_rehab_results_to_memory(rehab_results_table_name, self)
-        self.rehab_results = rehab_data_io.rrad_db_data_io.create_objects_from_table_with_current_id(rehab_result.name,
+        self.rehab_results = rehab_data_io.rrad_db_data_io.create_objects_from_table_with_current_id(RehabResult,
                                                                                                      rehab_results_table,
                                                                                                      rehab_result.rehab_result_field_attribute_lookup())
 

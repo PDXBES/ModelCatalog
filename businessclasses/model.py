@@ -29,7 +29,6 @@ class Model(GenericObject):
     def __init__(self, config):
         # type: (Config) -> None
         self.id = 0
-        self.name = "model"
         self.parent_model_id = 0
         self.model_request_id = 0
         self.project_phase_id = 0

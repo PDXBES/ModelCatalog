@@ -33,7 +33,7 @@ class Toolbox(object):
         self.alias = "Model Catalog Tools"
 
         # List of tool classes associated with this toolbox
-        self.tools = [EMGAATS_Model_Registration, TemporaryMonitorQaQc, SlrtQaQc]
+        self.tools = [EMGAATS_Model_Registration]
 
 class EMGAATS_Model_Registration(object):
     def __init__(self):
@@ -382,224 +382,17 @@ class EMGAATS_Model_Registration(object):
 
 def EMGAATS_Model_Registration_function(model_catalog, config):
     # type: (ModelCatalog, Config) -> None
-    rrad_db_data_io = RradDbDataIo(config)
-    modelcatalogdataio = ModelCatalogDbDataIo(config)
-    modeldataio = ModelDataIo(config, modelcatalogdataio)
-    simulationdataio = SimulationDataIo(config, modelcatalogdataio)
+    model_catalog_data_io = ModelCatalogDbDataIo(config)
+    model_data_io = ModelDataIo(config, model_catalog_data_io)
+    simulation_data_io = SimulationDataIo(config, model_catalog_data_io)
     model = model_catalog.models[0]
     try:
         arcpy.AddMessage("Adding Model...")
-        modelcatalogdataio.add_model(model, modeldataio)
+        model_catalog_data_io.add_model(model, model_data_io, simulation_data_io)
         arcpy.AddMessage("Model Added")
     except:
         arcpy.ExecuteError()
-
-    if model.write_to_rrad():
-        arcpy.AddMessage("Writing results to RRAD")
-        #try
-        simulationdataio.append_all_simulation_results(model, rrad_db_data_io)
-        #except
-            # if append fails, need to find the last records added to model catalog and delete them,
-            # will need to go through each table to delete the bad records
-            # first select the records based on model id, then delete
-
-        #TODO: Create a single add simulation function in model_data_io that uses the below for loop in a single edit session
-        # for simulation in model.simulations:
-        #     arcpy.AddMessage("Adding results for simulation: " + simulation.sim_desc)
-        #
-        #     simulationdataio.append_simulation_results(simulation, model, rrad_db_data_io)
-        #
-        #     arcpy.AddMessage("Finished adding results for simulation: " + simulation.sim_desc)
-
-    else:
-        arcpy.AddMessage("No results will be added to the RRAD")
-
 ########################################################################################################################
-
-class TemporaryMonitorQaQc(object):
-    def __init__(self):
-        self.label = "Temporary Monitor Data Quality"
-        self.description = "Tool for recording temporary data quality to database"
-        self.config = config.Config(test_flag)
-        self.model_catalog = ModelCatalog(self.config)
-        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
-        self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
-        self.model_id = ""
-        # Need to create list of model objects from model catalog
-
-    def getParameterInfo(self):
-        model_id = arcpy.Parameter(
-            displayName="Model ID",
-            name="model_id",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-
-        model_id.filter.type = "ValueList"
-        model_id.filter.list = [1, 2, 3] #TODO Need to get list of final calibration models, purpose, paths
-
-        monitor_location_id = arcpy.Parameter(
-            displayName="Location_ID",
-            name="monitor_location_id",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        monitor_location_id.filter.list = [1, 2, 3] #TODO Need to get list of temporary monitors
-
-        simulations_qa_qc = arcpy.Parameter(
-            displayName='Observed Data Quality',
-            name='qaqc_table',
-            datatype='GPValueTable',
-            parameterType='Required',
-            direction='Input')
-
-        simulations_qa_qc.columns = [['String', 'Simulation'], ['String', 'Depth QC'], ['String', 'Flow QC']]
-        simulations_qa_qc.filters[1].type = 'ValueList'
-        simulations_qa_qc.filters[1].list = ["Good", "Fair", "Poor", "NA"]
-        simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
-
-        calculated_data_quality = arcpy.Parameter(
-            displayName="Calculated Data Quality (Automatically Calculated)",
-            name="calculated_data_quality",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
-        calculated_data_quality.value = "Good" #TODO this will need to calculated in the updateParameters
-        calculated_data_quality.enabled = False
-
-        override_data_quality = arcpy.Parameter(
-            displayName="Manual Data Quality",
-            name="override_data_quality",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        override_data_quality.filter.list = ["Good", "Fair", "Poor"]
-
-        params = [model_id, monitor_location_id, simulations_qa_qc, calculated_data_quality, override_data_quality]
-        return params
-
-    def isLicensed(self):
-        return True
-
-    def updateParameters(self, parameters):
-        model_id_parameter = parameters[0]
-        data_review_parameter = parameters[2]
-        if model_id_parameter.altered:
-            simulation_values, simulations = data_review_combo_box_get_simulations(model_id_parameter)
-            data_review_combo_box_set_simulation_list(data_review_parameter, model_id_parameter)
-            data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations)
-        else:
-            data_review_parameter.values = None
-
-    def updateMessages(self, parameters):
-        """Modify the messages created by internal validation for each tool
-        parameter.  This method is called after internal validation."""
-        return
-
-    def execute(self, parameters, messages):
-        pass
-
-class SlrtQaQc(object):
-    def __init__(self):
-        self.label = "SLRT Data Quality"
-        self.description = "Tool for recording SLRT data quality to database"
-        self.config = config.Config(test_flag)
-        self.model_catalog = ModelCatalog(self.config)
-        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
-        self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
-        # Need to create list of model objects from model catalog
-
-    def getParameterInfo(self):
-        model_id = arcpy.Parameter(
-            displayName="Model ID",
-            name="model_id",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-
-        model_id.filter.type = "ValueList"
-        model_id.filter.list = [1, 2, 3] #TODO Need to get list of final calibration models, purpose, paths
-
-        station_id = arcpy.Parameter(
-            displayName="Station ID",
-            name="station_id",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        station_id.filter.list = [1, 2, 3] #TODO Need to get list of station ids
-
-        h2_id = arcpy.Parameter(
-            displayName="H2 ID",
-            name="h2_id",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        h2_id.filter.list = [1, 2, 3] #TODO Need to get list of h2 id for station
-
-        location_qualifier = arcpy.Parameter(
-            displayName="Location Qualifier",
-            name="location_qualifier",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        location_qualifier.filter.list = [1, 2, 3] #TODO Need to get list of location qualifiers for h2 id
-
-        simulations_qa_qc = arcpy.Parameter(
-            displayName='Observed Data Quality',
-            name='qaqc_table',
-            datatype='GPValueTable',
-            parameterType='Required',
-            direction='Input')
-
-        simulations_qa_qc.columns = [['String', 'Simulation'], ['String', 'Depth QC'], ['String', 'Flow QC']]
-        simulations_qa_qc.filters[1].type = 'ValueList'
-        simulations_qa_qc.filters[1].list = ["Good", "Fair", "Poor", "NA"]
-        simulations_qa_qc.filters[2].list = ["Good", "Fair", "Poor", "NA"]
-
-        calculated_data_quality = arcpy.Parameter(
-            displayName="Calculated Data Quality (Automatically Calculated)",
-            name="calculated_data_quality",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        calculated_data_quality.filter.list = ["Good", "Fair", "Poor"]
-        calculated_data_quality.value = "Good" #TODO this will need to calculated in the updateParameters
-        calculated_data_quality.enabled = False
-
-        override_data_quality = arcpy.Parameter(
-            displayName="Data Quality Override",
-            name="override_data_quality",
-            datatype="GPString",
-            parameterType="Required",
-            direction="Input")
-        override_data_quality.filter.list = ["Good", "Fair", "Poor"]
-
-        params = [model_id, station_id, h2_id, location_qualifier, simulations_qa_qc, calculated_data_quality,
-                  override_data_quality]
-        return params
-
-    def isLicensed(self):
-        return True
-
-    def updateParameters(self, parameters):
-        model_id_parameter = parameters[0]
-        data_review_parameter = parameters[4]
-        if model_id_parameter.altered:
-            simulation_values, simulations = data_review_combo_box_get_simulations(model_id_parameter)
-            data_review_combo_box_set_simulation_list(data_review_parameter, model_id_parameter)
-            data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations)
-        else:
-            data_review_parameter.values = None
-
-    def updateMessages(self, parameters):
-        """Modify the messages created by internal validation for each tool
-        parameter.  This method is called after internal validation."""
-
-        return
-
-    def execute(self, parameters, messages):
-        pass
 
 def data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations):
     # Prevents user from adding or deleting simulations

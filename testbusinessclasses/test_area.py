@@ -1,7 +1,7 @@
 from unittest import TestCase
 import mock
 from mock_config import MockConfig
-from businessclasses.area import Area
+from businessclasses.area_results import AreaResults
 from businessclasses.simulation import Simulation
 
 class TestArea(TestCase):
@@ -11,7 +11,7 @@ class TestArea(TestCase):
 
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm_id = 1
-        self.area = Area(mock_config.config)
+        self.area = AreaResults(mock_config.config)
         self.area.first_floor_elev_ft = 8
         self.area.san_crown_elev_ft = -1
         self.area.maxHGL = .1

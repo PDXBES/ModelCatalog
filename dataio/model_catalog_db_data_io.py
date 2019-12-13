@@ -6,17 +6,18 @@ except:
     pass
 from businessclasses.model import Model
 from businessclasses.config import Config
+from businessclasses.model_alteration import ModelAlteration
 from db_data_io import DbDataIo
 from collections import OrderedDict
 from object_data_io import ObjectDataIo
-from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.simulation import Simulation
-from businessclasses.area import Area
+from businessclasses.area_results import AreaResults
 from businessclasses.model_alt_bc import ModelAltBc
 from businessclasses.model_alt_hydraulic import ModelAltHydraulic
 from businessclasses.model_alt_hydrologic import ModelAltHydrologic
 from businessclasses.project_type import ProjectType
 from model_data_io import ModelDataIo
+from simulation_data_io import SimulationDataIo
 from businessclasses.model_catalog_exception import AppendModelAlterationsException
 import sys
 
@@ -26,25 +27,21 @@ class ModelCatalogDbDataIo(DbDataIo):
         self.config = config
         self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
         self.workspace = "in_memory"
-        self.class_factory = GenericClassFactory(self.config)
-        self.class_factory.class_dict = {"model": Model, "simulation": Simulation, "area": Area,
-                                         "model_alt_bc": ModelAltBc, "model_alt_hydraulic": ModelAltHydraulic,
-                                         "model_alt_hydrologic": ModelAltHydrologic, "project_type": ProjectType}
 
     def retrieve_current_model_id(self):
-        current_model_id = self.retrieve_current_id("model")
+        current_model_id = self.retrieve_current_id(Model)
         return current_model_id
 
     def retrieve_current_simulation_id(self):
-        current_simulation_id = self.retrieve_current_id("simulation")
+        current_simulation_id = self.retrieve_current_id(Simulation)
         return current_simulation_id
 
     def retrieve_current_model_alteration_id(self):
-        current_model_alteration_id = self.retrieve_current_id("model_alteration")
+        current_model_alteration_id = self.retrieve_current_id(ModelAlteration)
         return current_model_alteration_id
 
-    def add_model(self, model, model_data_io):
-        # type: (Model, ModelDataIo) -> None
+    def add_model(self, model, model_data_io, simulation_data_io):
+        # type: (Model, ModelDataIo, SimulationDataIo) -> None
 
         editor = model_data_io.start_editing_session(self.config.model_catalog_sde_path)
         try:
@@ -53,6 +50,15 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.append_simulations(model)
             model_data_io.append_model_alterations(model)
             model_data_io.append_project_types(model)
+            arcpy.AddMessage("Adding Model Geometry Network")
+            model_data_io.append_model_network(model)
+            arcpy.AddMessage("Model Geometry Network Added")
+            if model.write_to_rrad():
+                for simulation in model.simulations:
+                    simulation_data_io.append_simulation_results(simulation, model)
+            else:
+                arcpy.AddMessage("No results will be added to the Model Catalog")
+
             model_data_io.write_model_registration_file(model)
             if model.model_status_id == self.config.model_status_id["Final"]:
                 model_data_io.set_registered_model_to_read_only(model)
@@ -60,7 +66,9 @@ class ModelCatalogDbDataIo(DbDataIo):
         except:
             model_data_io.stop_editing_session(editor, False)
             arcpy.AddMessage("DB Error while adding model. Changes rolled back.")
-            #e = sys.exc_info()[1]
-            #arcpy.AddMessage(e.args[0])
+            e = sys.exc_info()[1]
+            arcpy.AddMessage(e.args[0])
+            arcpy.AddMessage(e.args[1])
+            arcpy.AddMessage(e.args[2])
             raise AppendModelAlterationsException
 

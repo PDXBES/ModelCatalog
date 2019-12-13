@@ -202,29 +202,33 @@ class TestModelDataIO(TestCase):
 
     def test_append_model_alteration_called_with_alt_bc_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.append_model_alteration(11, self.mock_model_alt_bc)
-            mock_append_object_to_db.assert_called_with(11, self.mock_model_alt_bc,
-                                               self.generic_field_attribute_lookup,
+            model_alt_bc = ModelAltBc(self.config)
+            self.model_data_io.append_model_alteration(11, model_alt_bc)
+            mock_append_object_to_db.assert_called_with(11, model_alt_bc,
+                                               ModelAltBc.input_field_attribute_lookup(),
                                                self.config.model_alt_bc_sde_path)
 
     def test_append_model_alteration_called_with_alt_hydrologic_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.append_model_alteration(11, self.mock_model_alt_hydrologic)
-            mock_append_object_to_db.assert_called_with(11, self.mock_model_alt_hydrologic,
-                                               self.generic_field_attribute_lookup,
+            model_alt_hydrologic = ModelAltHydrologic(self.config)
+            self.model_data_io.append_model_alteration(11, model_alt_hydrologic)
+            mock_append_object_to_db.assert_called_with(11, model_alt_hydrologic,
+                                               ModelAltHydrologic.input_field_attribute_lookup(),
                                                self.config.model_alt_hydrologic_sde_path)
 
     def test_append_model_alteration_called_with_alt_hydraulic_calls_append_object_with_correct_arguments(self):
         with mock.patch.object(self.model_data_io, "append_object_to_db") as mock_append_object_to_db:
-            self.model_data_io.append_model_alteration(11, self.mock_model_alt_hydraulic)
-            mock_append_object_to_db.assert_called_with(11, self.mock_model_alt_hydraulic,
-                                               self.generic_field_attribute_lookup,
-                                               self.config.model_alt_hydraulic_sde_path)
+            model_alt_hydraulic = ModelAltHydraulic(self.config)
+            self.model_data_io.append_model_alteration(11, model_alt_hydraulic)
+            mock_append_object_to_db.assert_called_with(11, model_alt_hydraulic,
+                                                ModelAltHydraulic.input_field_attribute_lookup(),
+                                                self.config.model_alt_hydraulic_sde_path)
 
     def test_append_model_alteration_append_object_raises_exception_raises_append_model_alteration_exception(self):
         self.mock_append_object_to_db.side_effect = AddObjectException()
         with self.assertRaises((Exception, AddModelAlterationException)):
-            self.model_data_io.append_model_alteration(11, self.mock_model_alt_hydraulic)
+            model_alt_hydraulic = ModelAltHydraulic(self.config)
+            self.model_data_io.append_model_alteration(11, model_alt_hydraulic)
 
     def test_append_simulations_calls_append_simulation_with_correct_arguments(self):
         patch_append_simulation = mock.patch.object(self.model_data_io, "append_simulation")

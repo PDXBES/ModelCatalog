@@ -77,7 +77,7 @@ class TestRehab(TestCase):
     def test_create_rehab_results_calls_create_objects_from_table_with_current_id_with_correct_arguments(self):
         rehab_results_table_name = "in_memory\\rehab_results_table_name"
         self.rehab.create_rehab_results(self.rehab_data_io)
-        self.mock_create_objects_from_table_with_current_id.assert_called_with("rehab_result",
+        self.mock_create_objects_from_table_with_current_id.assert_called_with(RehabResult,
                                                                                rehab_results_table_name,
                                                                                RehabResult.rehab_result_field_attribute_lookup())
 

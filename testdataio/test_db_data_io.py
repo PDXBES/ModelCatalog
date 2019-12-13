@@ -1,11 +1,11 @@
+from collections import OrderedDict
 from unittest import TestCase
+import arcpy
 import mock
 from testbusinessclasses.mock_config import MockConfig
-import arcpy
-from dataio.db_data_io import DbDataIo
-from collections import OrderedDict
-from businessclasses.generic_class_factory import GenericClassFactory
 from businessclasses.generic_object import GenericObject
+from dataio.db_data_io import DbDataIo
+
 
 class TestDbDataIO(TestCase):
 
@@ -14,28 +14,29 @@ class TestDbDataIO(TestCase):
         self.config = mock_config.config
 
         self.parent_id_to_db_field_mapping = [(1, "id_field_one"), (2, "id_field_two")]
-        generic_class_factory = GenericClassFactory(self.config)
-        self.db_data_io = DbDataIo(self.config, generic_class_factory)
+        self.db_data_io = DbDataIo(self.config)
         self.object_class = None
         self.field_names_retrieve_id = ["Object_Type", "Current_ID"]
 
         self.mock_row = (1, 2)
         self.field_attribute_lookup_add_object = OrderedDict([("id_db", "id"), ("parent_id_db", "parent_id")])
 
-        self.patch_create_object = mock.patch("businessclasses.generic_class_factory.GenericClassFactory.create_object")
+        self.patch_create_object = mock.patch.object(self.db_data_io, "create_object")
         self.mock_create_object = self.patch_create_object.start()
 
-        self.patch_create_object_with_current_id = mock.patch("businessclasses.generic_class_factory.GenericClassFactory.create_object_with_id")
+        self.patch_create_object_with_current_id = mock.patch.object(self.db_data_io, "create_object_with_id")
         self.mock_create_object_with_current_id = self.patch_create_object_with_current_id.start()
 
         self.patch_delete_management = mock.patch("arcpy.Delete_management")
         self.mock_delete_management = self.patch_delete_management.start()
 
         self.mock_update_cursor = mock.MagicMock(arcpy.da.UpdateCursor)
-        self.mock_update_cursor.__iter__.return_value = iter([("object_1", 44), ("object_2", 55)])
+        self.mock_update_cursor.__iter__.return_value = iter([("MagicMock", 44), ("GenericObject", 55)])
 
         self.mock_update_cursor1 = mock.MagicMock(arcpy.da.UpdateCursor)
-        self.mock_update_cursor1.__iter__.return_value = iter([0])
+        row = [1]
+        row[0] = 1
+        self.mock_update_cursor1.__iter__.return_value = iter([row])
 
         self.mock_insert_cursor = mock.MagicMock(arcpy.da.InsertCursor)
 
@@ -81,7 +82,7 @@ class TestDbDataIO(TestCase):
 
         self.field_attribute_lookup_add_object = OrderedDict()
         self.field_attribute_lookup_add_object["id_field"] = "id"
-        self.field_attribute_lookup_add_object["name"] = "name"
+        self.field_attribute_lookup_add_object["parent_id_field"] = "parent_id"
 
         self.field_attribute_lookup_create_object = OrderedDict()
         self.field_attribute_lookup_create_object["id_db"] = "id"
@@ -91,7 +92,6 @@ class TestDbDataIO(TestCase):
 
         self.mock_generic_object = mock.MagicMock(GenericObject)
         self.mock_generic_object.id = 1
-        self.mock_generic_object.name = "name"
         self.mock_generic_object.valid = False
         self.mock_generic_object.parent_id = 2
         self.mock_generic_object.input_field_attribute_lookup.return_value = self.field_attribute_lookup_create_object
@@ -99,8 +99,6 @@ class TestDbDataIO(TestCase):
         self.patch_input_field_attribute_lookup = mock.patch("businessclasses.generic_object.GenericObject.input_field_attribute_lookup")
         self.mock_input_field_attribute_lookup = self.patch_input_field_attribute_lookup.start()
         self.mock_input_field_attribute_lookup.return_value = self.field_attribute_lookup_create_table_from_objects
-
-        self.db_data_io.class_factory.class_dict = {"generic_object": GenericObject}
 
         self.object_tracking_sde_path = "object_tracking_sde_path"
 
@@ -122,31 +120,31 @@ class TestDbDataIO(TestCase):
     def test_retrieve_current_id_calls_update_cursor_with_correct_arguments(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
         self.db_data_io.current_id_database_table_path = "current_id_database_table_path"
-        self.db_data_io.retrieve_current_id("object_1")
+        self.db_data_io.retrieve_current_id(mock.MagicMock)
         self.mock_da_UpdateCursor.assert_called_with("current_id_database_table_path", self.field_names_retrieve_id)
 
     def test_retrieve_current_id_return_current_ID(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        current_id = self.db_data_io.retrieve_current_id("object_1")
+        current_id = self.db_data_io.retrieve_current_id(mock.MagicMock)
         self.assertTrue(current_id == 44)
 
     def test_retrieve_current_id_update_next_id_of_object_1(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        self.db_data_io.retrieve_current_id("object_1")
+        self.db_data_io.retrieve_current_id(mock.MagicMock)
         self.assertTrue(self.mock_update_cursor.updateRow.called)
-        self.mock_update_cursor.updateRow.assert_called_with(["object_1", 45])
+        self.mock_update_cursor.updateRow.assert_called_with(["MagicMock", 45])
 
     def test_retrieve_current_id_update_next_id_of_object_2(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        self.db_data_io.retrieve_current_id("object_2")
+        self.db_data_io.retrieve_current_id(GenericObject)
         self.assertTrue(self.mock_update_cursor.updateRow.called)
-        self.mock_update_cursor.updateRow.assert_called_with(["object_2", 56])
+        self.mock_update_cursor.updateRow.assert_called_with(["GenericObject", 56])
 
     def test_retrieve_block_of_ids_number_of_objects_is_100_get_next_id_of_object_2(self):
         self.mock_da_UpdateCursor.return_value = self.mock_update_cursor
-        self.db_data_io._retrieve_block_of_ids("object_2", 100)
+        self.db_data_io._retrieve_block_of_ids(GenericObject, 100)
         self.assertTrue(self.mock_update_cursor.updateRow.called)
-        self.mock_update_cursor.updateRow.assert_called_with(["object_2", 155])
+        self.mock_update_cursor.updateRow.assert_called_with(["GenericObject", 155])
 
     #TODO create better exceptions
     def test_retrieve_block_of_ids_number_of_objects_is_zero_throws_exception(self):
@@ -159,7 +157,7 @@ class TestDbDataIO(TestCase):
 
     def test_create_row_from_object_creates_row_with_correct_values(self):
         row = self.db_data_io.create_row_from_object(self.mock_generic_object, self.field_attribute_lookup_add_object)
-        self.assertEquals(row, [1, "name"])
+        self.assertEquals(row, [1, 2])
 
     def test_create_row_from_object_raise_exception_when_attribute_name_does_not_exist(self):
         self.field_attribute_lookup_add_object["color"] = "red"
@@ -282,7 +280,7 @@ class TestDbDataIO(TestCase):
 
     def test_create_objects_from_database_calls_copy_to_memory_with_correct_arguments(self):
         input_table = self.config.model_tracking_sde_path
-        class_type = "generic_object"
+        class_type = GenericObject
         in_memory_output_table_name = "object_table"
         with mock.patch.object(self.db_data_io, "copy_to_memory") as mock_copy_to_memory:
             with mock.patch.object(self.db_data_io, "create_objects_from_table"):
@@ -292,7 +290,7 @@ class TestDbDataIO(TestCase):
     def test_create_objects_from_database_calls_create_objects_from_table_with_correct_arguments(self):
         input_table = self.config.model_tracking_sde_path
         table = "in_memory/object_table"
-        class_type = "generic_object"
+        class_type = GenericObject
         field_attribute_lookup = self.field_attribute_lookup_create_object
         with mock.patch.object(self.db_data_io, "copy_to_memory"):
             with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
@@ -302,7 +300,7 @@ class TestDbDataIO(TestCase):
     def test_create_objects_from_database_calls_delete_management_with_correct_arguments(self):
         input_table = self.config.model_tracking_sde_path
         table = "in_memory/object_table"
-        class_type = "generic_object"
+        class_type = GenericObject
         with mock.patch.object(self.db_data_io, "copy_to_memory"):
             with mock.patch.object(self.db_data_io, "create_objects_from_table"):
                 self.db_data_io.create_objects_from_database(class_type, input_table)
@@ -311,7 +309,7 @@ class TestDbDataIO(TestCase):
     def test_create_objects_from_database_returns_correct_object(self):
         input_table = self.config.model_tracking_sde_path
         table = "in_memory/object_table"
-        class_type = "generic_object"
+        class_type = GenericObject
         with mock.patch.object(self.db_data_io, "copy_to_memory"):
             with mock.patch.object(self.db_data_io, "create_objects_from_table") as mock_create_objects_from_table:
                 test_object = "test_object"
@@ -338,7 +336,7 @@ class TestDbDataIO(TestCase):
         self.mock_make_query_table.assert_called_with(input_table, "in_memory\\output_table","","","",where_clause)
 
     def test_create_objects_from_database_with_id_filter_calls_copy_to_memory_with_correct_arguments(self):
-        class_type = "generic_object"
+        class_type = GenericObject
         input_table_name = "input_table_name"
         id_field_name = "id_field_name"
         id_list = "id_list"
@@ -349,7 +347,7 @@ class TestDbDataIO(TestCase):
                 mock_copy_to_memory_with_id_filter.assert_called_with(input_table_name, in_memory_output_table_name, id_field_name, id_list)
 
     def test_create_objects_from_database_with_id_filter_calls_create_objects_from_table_with_correct_arguments(self):
-        class_type = "generic_object"
+        class_type = GenericObject
         input_table_name = "input_table_name"
         id_field_name = "id_field_name"
         id_list = "id_list"
@@ -360,7 +358,7 @@ class TestDbDataIO(TestCase):
                 mock_create_objects_from_table.assert_called_with(class_type, table, self.field_attribute_lookup_create_table_from_objects)
 
     def test_create_objects_from_database_with_id_filter_calls_delete_management_with_correct_arguments(self):
-        class_type = "generic_object"
+        class_type = GenericObject
         input_table_name = "input_table_name"
         id_field_name = "id_field_name"
         id_list = "id_list"
@@ -371,7 +369,7 @@ class TestDbDataIO(TestCase):
                 self.mock_delete_management.assert_called_with(table)
 
     def test_create_objects_from_database_with_id_filter_returns_correct_objects(self):
-        class_type = "generic_object"
+        class_type = GenericObject
         input_table_name = "input_table_name"
         id_field_name = "id_field_name"
         id_list = "id_list"
@@ -408,5 +406,5 @@ class TestDbDataIO(TestCase):
             id_field = "id_field"
             object_type = "object"
             self.db_data_io.add_ids(in_memory_table, id_field, object_type)
-            self.mock_update_cursor.updateRow.assert_called_with((21))
+            self.mock_update_cursor1.updateRow.assert_called_with([1])
     #TODO - don't know how to make this test work so always fails - code is correct

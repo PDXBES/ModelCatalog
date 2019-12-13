@@ -6,7 +6,7 @@ from dataio.db_data_io import DbDataIo
 from businessclasses.generic_class_factory import GenericClassFactory
 from collections import OrderedDict
 from dataio.simulation_data_io import SimulationDataIo
-from businessclasses.area import Area
+from businessclasses.area_results import AreaResults
 from businessclasses.model import Model
 
 class TestSimulation(TestCase):
@@ -14,7 +14,7 @@ class TestSimulation(TestCase):
         model_path = "String"
         mock_config = MockConfig()
         generic_class_factory = GenericClassFactory(mock_config)
-        self.db_data_io = DbDataIo(mock_config, generic_class_factory)
+        self.db_data_io = DbDataIo(mock_config)
         self.config = mock_config.config
         self.simulation = Simulation(self.config)
         self.simulation.model_path = model_path
@@ -22,8 +22,8 @@ class TestSimulation(TestCase):
         self.simulation.dev_scenario_id = 1
         self.simulation_data_io = SimulationDataIo(mock_config, self.db_data_io)
         self.mock_model = mock.MagicMock(Model)
-        area1 = Area(mock_config)
-        area2 = Area(mock_config)
+        area1 = AreaResults(mock_config)
+        area2 = AreaResults(mock_config)
         self.mock_areas = [area1, area2]
         self.simulation.areas = self.mock_areas
 
@@ -113,7 +113,7 @@ class TestSimulation(TestCase):
             self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
             self.mock_create_objects_from_table_with_current_id.assert_called_with("area",
                                                                                    "in_memory\\in_memory_table",
-                                                                                   Area.results_field_attribute_lookup())
+                                                                                   AreaResults.results_field_attribute_lookup())
 
     def test_create_areas_calls_delete_with_correct_arguments(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:

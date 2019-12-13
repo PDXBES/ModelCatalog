@@ -9,7 +9,6 @@ class MappingNode(MappingObject):
         self.node_symbology = None
         self.min_freeboard_ft = None
         self.dme_global_id = None
-        self.name = "mapping_node"
         self.input_field_attribute_lookup = MappingNode.input_field_attribute_lookup()
         self.rrad_node_id = None
         super(MappingNode, self).__init__(config)

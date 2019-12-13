@@ -12,7 +12,6 @@ class ModelAltHydraulic(ModelAlteration):
         self.config = config
         super(ModelAltHydraulic, self).__init__(self.config)
        #ModelAlteration.__init__(self, config)
-        self.name = "model_alt_hydraulic"
 
         self.input_field_attribute_lookup = ModelAltHydraulic.input_field_attribute_lookup()
 
