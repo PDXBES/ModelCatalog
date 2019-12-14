@@ -3,7 +3,6 @@ from businessclasses.simulation import Simulation
 import mock
 from mock_config import MockConfig
 from dataio.db_data_io import DbDataIo
-from businessclasses.generic_class_factory import GenericClassFactory
 from collections import OrderedDict
 from dataio.simulation_data_io import SimulationDataIo
 from businessclasses.area_results import AreaResults
@@ -13,7 +12,6 @@ class TestSimulation(TestCase):
     def setUp(self):
         model_path = "String"
         mock_config = MockConfig()
-        generic_class_factory = GenericClassFactory(mock_config)
         self.db_data_io = DbDataIo(mock_config)
         self.config = mock_config.config
         self.simulation = Simulation(self.config)
@@ -40,7 +38,7 @@ class TestSimulation(TestCase):
         self.patch_delete_management = mock.patch("arcpy.Delete_management")
         self.mock_delete_management = self.patch_delete_management.start()
 
-        self.patch_calculate_bsbr = mock.patch("businessclasses.area.Area.calculate_bsbr")
+        self.patch_calculate_bsbr = mock.patch("businessclasses.area_results.AreaResults.calculate_bsbr")
         self.mock_calculate_bsbr = self.patch_calculate_bsbr.start()
 
         self.patch_os_path_exists = mock.patch("os.path.exists")
@@ -111,7 +109,7 @@ class TestSimulation(TestCase):
     def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
         with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas"):
             self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_create_objects_from_table_with_current_id.assert_called_with("area",
+            self.mock_create_objects_from_table_with_current_id.assert_called_with(AreaResults,
                                                                                    "in_memory\\in_memory_table",
                                                                                    AreaResults.results_field_attribute_lookup())
 

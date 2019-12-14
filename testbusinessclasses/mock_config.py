@@ -15,12 +15,15 @@ class MockConfig():
         self.config.project_type_sde_path = "project_type_sde_path"
         self.config.required_simulations_sde_path = "required_simulations_sde_path"
 
-
         self.config.RRAD_sde_path = "RRAD_sde_path"
-        self.config.area_results_sde_path = "area_results_sde_path"
-        self.config.link_results_sde_path = "link_results_sde_path"
-        self.config.node_results_sde_path = "node_results_sde_path"
-        self.config.node_flooding_results_sde_path = "node_flooding_results_sde_path"
+        self.config.results_area_sde_path = "results_area_sde_path"
+        self.config.results_link_sde_path = "results_link_sde_path"
+        self.config.results_node_sde_path = "results_node_sde_path"
+        self.config.results_node_flooding_sde_path = "results_node_flooding_sde_path"
+        self.config.geometry_areas_sde_path = "geometry_areas_sde_path"
+        self.config.geometry_links_sde_path = "geometry_links_sde_path"
+        self.config.geometry_nodes_sde_path = "geometry_nodes_sde_path"
+
         self.config.rehab_results_sde_path = "rehab_results_sde_path"
         self.config.rehab_tracking_sde_path = "rehab_tracking_sde_path"
         self.config.directors_sde_path = "directors_sde_path"

@@ -74,8 +74,8 @@ class Utility:
     def rrad_test_data_cleanup(self):
         if self.config.test_flag == "TEST":
             feature_class_list = [self.config.rehab_tracking_sde_path, self.config.rehab_results_sde_path,
-                                  self.config.results_sde_path, self.config.link_results_sde_path,
-                                  self.config.node_results_sde_path, self.config.node_flooding_results_sde_path,
+                                  self.config.results_area_sde_path, self.config.results_link_sde_path,
+                                  self.config.results_node_sde_path, self.config.results_node_flooding_sde_path,
                                   self.config.directors_sde_path]
             for feature_class in feature_class_list:
                 try:
