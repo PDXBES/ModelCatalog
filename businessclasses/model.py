@@ -306,7 +306,7 @@ class Model(GenericObject):
         return False
     #TODO : change this to call a diagnostic method
 
-    def write_to_rrad(self):
+    def write_reults_to_model_catalog(self):
         if self.valid:
             if self.model_status_id == self.config.model_status_id["Final"]:
                 if self.project_phase_id == self.config.proj_phase_id["Planning"] or self.project_phase_id == self.config.proj_phase_id["Design 90"]:

@@ -6,6 +6,9 @@ from dataio.simulation_data_io import SimulationDataIo
 from testbusinessclasses.mock_config import MockConfig
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 from businessclasses.area_results import AreaResults
+from businessclasses.link_results import LinkResults
+from businessclasses.node_results import NodeResults
+from businessclasses.node_flooding_results import NodeFloodingResults
 from dataio.rrad_db_data_io import RradDbDataIo
 
 
@@ -13,16 +16,15 @@ class TestSimulationDataIO(TestCase):
     def setUp(self):
         mock_config = MockConfig()
         self.config = mock_config.config
-        mock_model_catalog_db_data_io = mock.MagicMock(ModelCatalogDbDataIo)
-        mock_model_catalog_db_data_io.config = self.config
+        self.mock_model_catalog_db_data_io = mock.MagicMock(ModelCatalogDbDataIo)
+        self.mock_model_catalog_db_data_io.config = self.config
+        self.mock_model_catalog_db_data_io.workspace = "in_memory"
 
         self.path = r"c:\temp\fake\sim\D25yr6h\results.gdb\AreaResults"
-        self.simulation_data_io = SimulationDataIo(self.config, mock_model_catalog_db_data_io)
+        self.simulation_data_io = SimulationDataIo(self.config, self.mock_model_catalog_db_data_io)
 
         self.patch_simulation_path = mock.patch("businessclasses.simulation.Simulation.path")
         self.mock_simulation_path = self.patch_simulation_path.start()
-
-        self.mock_rrad_db_data_io = mock.MagicMock(RradDbDataIo)
 
         self.mock_simulation = mock.MagicMock(Simulation)
         self.mock_simulation.storm = "D25yr6h"
@@ -39,6 +41,12 @@ class TestSimulationDataIO(TestCase):
 
         self.patch_add_message = mock.patch("arcpy.AddMessage")
         self.mock_add_message = self.patch_add_message.start()
+
+        self.patch_MakeTableView_management = mock.patch("arcpy.MakeTableView_management")
+        self.mock_MakeTableView_management = self.patch_MakeTableView_management.start()
+
+        self.patch_CopyRows = mock.patch("arcpy.CopyRows_management")
+        self.mock_CopyRows = self.patch_CopyRows.start()
 
         self.mock_model = mock.MagicMock(Model)
         self.simulation = Simulation(self.config)
@@ -75,6 +83,8 @@ class TestSimulationDataIO(TestCase):
 
         self.mock_create_areas = self.patch_create_areas.stop()
         self.mock_add_message = self.patch_add_message.stop()
+        self.mock_MakeTableView_management = self.patch_MakeTableView_management.stop()
+        self.mock_CopyRows = self.patch_CopyRows.stop()
         self.mock_start_editing_session = self.patch_start_editing_session.stop()
         self.mock_stop_editing_session = self.patch_stop_editing_session.stop()
         self.mock_copy_to_memory = self.patch_copy_to_memory.stop()
@@ -110,7 +120,8 @@ class TestSimulationDataIO(TestCase):
                 output_table_name = "output_table_name"
                 self.simulation_data_io.copy_link_results_to_memory(self.mock_simulation, output_table_name, self.rrad_db_data_io)
                 mock_copy_results.assert_called_with("mock_link_results_path", output_table_name, self.rrad_db_data_io,
-                                                     self.mock_simulation, "rrad_link_id", "link")
+                                                     self.mock_simulation, "model_catalog_link_result_id", LinkResults)
+
 
     def test_copy_node_results_to_memory_calls_copy_results_to_memory_with_correct_arguments(self):
         with mock.patch.object(self.simulation_data_io, "copy_results_to_memory") as mock_copy_results:
@@ -119,7 +130,7 @@ class TestSimulationDataIO(TestCase):
                 output_table_name = "output_table_name"
                 self.simulation_data_io.copy_node_results_to_memory(self.mock_simulation, output_table_name, self.rrad_db_data_io)
                 mock_copy_results.assert_called_with("mock_node_results_path", output_table_name, self.rrad_db_data_io,
-                                                     self.mock_simulation, "rrad_node_id", "node")
+                                                     self.mock_simulation, "model_catalog_node_result_id", NodeResults)
 
     def test_copy_node_flooding_results_to_memory_calls_copy_results_to_memory_with_correct_arguments(self):
         with mock.patch.object(self.simulation_data_io, "copy_results_to_memory") as mock_copy_results:
@@ -128,7 +139,7 @@ class TestSimulationDataIO(TestCase):
                 output_table_name = "output_table_name"
                 self.simulation_data_io.copy_node_flooding_results_to_memory(self.mock_simulation, output_table_name, self.rrad_db_data_io)
                 mock_copy_results.assert_called_with("mock_node_flooding_results_path", output_table_name, self.rrad_db_data_io,
-                                                     self.mock_simulation, "rrad_node_flooding_id", "node_flooding")
+                                                     self.mock_simulation, "model_catalog_nodef_result_id", NodeFloodingResults)
 
     # TODO create this test
     # def test_copy_area_results_to_memory_calls_copy_results_to_memory_with_correct_arguments(self):
@@ -139,16 +150,6 @@ class TestSimulationDataIO(TestCase):
     #             self.simulation_data_io.copy_area_results_to_memory(self.mock_simulation, output_table_name, self.rrad_db_data_io)
     #             mock_copy_results.assert_called_with("mock_area_results_path", output_table_name, self.rrad_db_data_io,
     #                                                  self.mock_simulation, "rrad_area_id", "area")
-
-    def test_copy_results_to_memory_calls_copy_to_memory_with_correct_arguments(self):
-        input_table = "input_table"
-        output_table_name = "output_table_name"
-        output_table = "in_memory\\output_table_name"
-        id_field = "id_field"
-        object_type = "object_type"
-        self.simulation_data_io.copy_results_to_memory(input_table, output_table_name, self.rrad_db_data_io,
-                                                       self.mock_simulation, id_field, object_type)
-        self.mock_copy_to_memory.assert_called_with(input_table, output_table_name)
 
     def test_copy_results_to_memory_calls_add_ids_with_correct_arguments(self):
         input_table = "input_table"
@@ -168,78 +169,26 @@ class TestSimulationDataIO(TestCase):
         object_type = "object_type"
         self.simulation_data_io.copy_results_to_memory(input_table, output_table_name, self.rrad_db_data_io,
                                                        self.mock_simulation, id_field, object_type)
-        self.mock_add_parent_id.assert_called_with(output_table, "Simulation_ID", 1)
+        self.mock_add_parent_id.assert_called_with(output_table, "SIMULATION_ID", 1)
 
     def test_append_area_results_to_db_calls_append_table_to_db_with_correct_arguments(self):
-        target_path = self.config.area_results_sde_path
+        target_path = self.config.results_area_sde_path
         template_path = target_path
         area_results = ["area1", "area2"]
         field_attribute_lookup = AreaResults.input_field_attribute_lookup()
         self.simulation_data_io.append_area_results_to_db(area_results, self.rrad_db_data_io)
-        self.mock_append_objects_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "area_results_sde_path", "area_results_sde_path")
-
-    def test_append_simulation_results_simulation_required_for_rrad_calls_create_areas_with_correct_arguments(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
-            with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
-                with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
-                        self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        self.mock_create_areas.assert_called_with(self.simulation_data_io, self.rrad_db_data_io)
-
-    def test_append_simulation_results_simulation_required_for_rrad_calls_start_editing_session_with_correct_workspace(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
-            with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
-                with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
-                    with mock.patch.object(self.simulation_data_io, "append_area_results_to_db"):
-                        self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        self.mock_start_editing_session.assert_called_with("RRAD_sde_path")
+        self.mock_append_objects_to_db.assert_called_with(["area1", "area2"], field_attribute_lookup, "results_area_sde_path", "results_area_sde_path")
 
     def test_append_simulation_results_simulation_required_for_rrad_calls_copy_to_memory_with_correct_arguments(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory") as mock_copy_link_results_to_memoryt:
+        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory") as mock_copy_link_results_to_memory:
             with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory") as mock_copy_node_results_to_memory:
                 with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory") as mock_copy_node_flooding_results_to_memory:
-                    with mock.patch.object(self.simulation_data_io, "append_area_results_to_db"):
+                    with mock.patch.object(self.simulation_data_io, "copy_area_results_to_memory") as mock_copy_area_results_to_memory:
                         self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        mock_copy_link_results_to_memoryt.assert_called_with(self.mock_simulation, 'link_results_table_name', self.rrad_db_data_io)
-                        mock_copy_node_results_to_memory.assert_called_with(self.mock_simulation, 'node_results_table_name', self.rrad_db_data_io)
-                        mock_copy_node_flooding_results_to_memory.assert_called_with(self.mock_simulation, 'node_flooding_results_table_name', self.rrad_db_data_io)
-
-    def test_append_simulation_results_simulation_required_for_rrad_calls_append_table_to_db_results_with_correct_arguments(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
-            with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
-                with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
-                    with mock.patch.object(self.simulation_data_io, "append_area_results_to_db"):
-                        self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        self.mock_append_data_to_db.assert_has_calls([mock.call("in_memory\\link_results_table_name", "link_results_sde_path"),
-                                                                       mock.call("in_memory\\node_results_table_name", "node_results_sde_path"),
-                                                                       mock.call("in_memory\\node_flooding_results_table_name", "node_flooding_results_sde_path")])
-
-    def test_append_simulation_results_simulation_required_for_rrad_calls_append_area_results_with_correct_arguments(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
-            with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
-                with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
-                    with mock.patch.object(self.simulation_data_io, "append_area_results_to_db") as mock_append_area_results:
-                        self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        mock_append_area_results.assert_called_with("areas", self.rrad_db_data_io)
-
-    def test_append_simulation_results_simulation_required_for_rrad_calls_stop_editing_no_exception_saves_changes(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
-            with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
-                with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
-                    with mock.patch.object(self.simulation_data_io, "append_area_results_to_db"):
-                        self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        self.mock_stop_editing_session.assert_called_with("editor", True)
-
-    def test_append_simulation_results_simulation_required_for_rrad_calls_stop_editing_exception_thrown_save_changes_false(self):
-        with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory")as mock_copy_link_results_to_memory:
-            with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
-                with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
-                    with mock.patch.object(self.simulation_data_io, "append_area_results_to_db") as mock_append_area_results_to_db:
-                        mock_append_area_results_to_db.side_effect = Exception()
-                        try:
-                            self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        except:
-                            self.mock_stop_editing_session.assert_called_with("editor", False)
-
+                        mock_copy_link_results_to_memory.assert_called_with(self.mock_simulation, 'link_results_table_name', self.mock_model_catalog_db_data_io)
+                        mock_copy_node_results_to_memory.assert_called_with(self.mock_simulation, 'node_results_table_name', self.mock_model_catalog_db_data_io)
+                        mock_copy_node_flooding_results_to_memory.assert_called_with(self.mock_simulation, 'node_flooding_results_table_name', self.mock_model_catalog_db_data_io)
+                        mock_copy_area_results_to_memory.assert_called_with(self.mock_simulation, 'area_results_table_name', self.mock_model_catalog_db_data_io)
     def test_append_simulation_results_calls_simulation_required_for_rrad_with_correct_arguments(self):
         with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
             with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):

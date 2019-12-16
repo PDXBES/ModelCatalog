@@ -56,8 +56,13 @@ class TestUtility(TestCase):
 
     def test_model_catalog_test_data_cleanup_calls_truncate_table_with_correct_arguments(self):
         self.utility.model_catalog_test_data_cleanup()
-        feature_class_list = ["model_tracking_sde_path", "model_alt_bc_sde_path", "model_alt_hydraulic_sde_path",
-                              "model_alt_hydrologic_sde_path", "project_type_sde_path", "simulation_sde_path"]
+        feature_class_list = ["model_tracking_sde_path", "model_alt_bc_sde_path",
+                                  "model_alt_hydraulic_sde_path", "model_alt_hydrologic_sde_path",
+                                  "project_type_sde_path", "simulation_sde_path",
+                                  "geometry_nodes_sde_path", "geometry_areas_sde_path",
+                                  "geometry_links_sde_path",
+                                  "results_area_sde_path", "results_link_sde_path",
+                                  "results_node_sde_path", "results_node_flooding_sde_path"]
         self.assertTrue(self.mock_TruncateTable_management.called)
         for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
             feature_class = argument[0][0]
@@ -65,8 +70,8 @@ class TestUtility(TestCase):
 
     def test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths(self):
         self.utility.rrad_test_data_cleanup()
-        feature_class_list = ["rehab_tracking_sde_path", "rehab_results_sde_path", "area_results_sde_path",
-                              "link_results_sde_path", "node_results_sde_path", "node_flooding_results_sde_path",
+        feature_class_list = ["rehab_tracking_sde_path", "rehab_results_sde_path", "results_area_sde_path",
+                              "results_link_sde_path", "results_node_sde_path", "results_node_flooding_sde_path",
                               "directors_sde_path"]
         self.assertTrue(self.mock_TruncateTable_management.called)
         for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):

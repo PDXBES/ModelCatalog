@@ -53,7 +53,7 @@ class ModelCatalogDbDataIo(DbDataIo):
             arcpy.AddMessage("Adding Model Geometry Network")
             model_data_io.append_model_network(model)
             arcpy.AddMessage("Model Geometry Network Added")
-            if model.write_to_rrad():
+            if model.write_reults_to_model_catalog():
                 for simulation in model.simulations:
                     simulation_data_io.append_simulation_results(simulation, model)
             else:
