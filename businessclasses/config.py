@@ -29,14 +29,14 @@ class Config:
 ##
         server = None
 
-        if init_options[test_flag] == 1 :
+        if init_options[test_flag] == 1:
             server = "BESDBTEST1"
         elif init_options[test_flag] == 0:
             server = "BESDBPROD1"
 
         model_catalog_sde = server + ".MODELCATALOG.sde"
         rehab_sde = server + ".REHAB.sde"
-        RRAD_sde = server + ".RRAD_write.sde"
+        RRAD_sde = server + ".RRAD.sde"
         EMGAATS_sde = server + ".EMGAATS.sde"
         ASM_WORK_sde = server + ".ASM_WORK.sde"
         RRAD_MAPPING_sde = server + ".RRAD_MAPPING.sde"
@@ -141,8 +141,8 @@ class Config:
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
         self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
         self.ccsp_recommended_plan_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Recommended Plan", "Planning")
-        #TODO - move piece to remove unicode empty string to separate function
 
+    #TODO - move piece to remove unicode empty string to separate function
     def get_unique_cip_numbers(self):
         unique_cip_numbers = []
         unique_cip_numbers_w_empty_unicode_string = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
