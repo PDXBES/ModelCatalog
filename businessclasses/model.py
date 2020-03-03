@@ -191,7 +191,11 @@ class Model(GenericObject):
                 if required_storm_id == simulation.storm_id and required_dev_scenario == simulation.dev_scenario_id:
                     required_simulation_found = True
             if required_simulation_found == False:
-                return False
+                storm = self.config.storm[required_storm_id]
+                dev_scenario =self.config.dev_scenario[required_dev_scenario]
+                arcpy.AddError("Storm: " + str(storm) + " and dev scenario: " + str(dev_scenario) + " were not found.")
+                arcpy.AddError("Please run this storm and try to register the model again.") #TODO - pass error up to print in arccatalog; currently only prints in console
+                return False  #TODO Add a function to find ALL missing simulation and provide user feedback (currently only returns first invalid one)
         return True
 
     def valid_parent_model_registration_file(self):
@@ -306,7 +310,7 @@ class Model(GenericObject):
         return False
     #TODO : change this to call a diagnostic method
 
-    def write_reults_to_model_catalog(self):
+    def write_results_to_model_catalog(self):
         if self.valid:
             if self.model_status_id == self.config.model_status_id["Final"]:
                 if self.project_phase_id == self.config.proj_phase_id["Planning"] or self.project_phase_id == self.config.proj_phase_id["Design 90"]:

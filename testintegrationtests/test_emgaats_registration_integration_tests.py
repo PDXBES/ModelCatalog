@@ -77,7 +77,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad(self):
-        self.model.model_path = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Characterization\SunnysideSouth\30pct_Base_Cal"
+        self.model.model_path = r"\\Besfile1\CCSP\Models\OAK\3Char\CharBase"
         self.model_dataio.set_model_to_read_write(self.model)
         self.model.create_simulations(self.model_dataio)
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]

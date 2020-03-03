@@ -645,7 +645,7 @@ class TestModel(TestCase):
                     self.model.model_status_id = self.config.model_status_id["Final"]
                     self.model.project_phase_id = self.config.proj_phase_id["Planning"]
                     self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
-                    ready_to_write_to_rrad = self.model.write_reults_to_model_catalog()
+                    ready_to_write_to_rrad = self.model.write_results_to_model_catalog()
                     self.assertTrue(ready_to_write_to_rrad)
 
     def test_write_to_rrad_model_not_valid_model_status_final_project_phase_planning_model_purpose_not_calibration_returns_false(
@@ -658,7 +658,7 @@ class TestModel(TestCase):
                     self.model.model_status_id = self.config.model_status_id["Final"]
                     self.model.project_phase_id = self.config.proj_phase_id["Planning"]
                     self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
-                    ready_to_write_to_rrad = self.model.write_reults_to_model_catalog()
+                    ready_to_write_to_rrad = self.model.write_results_to_model_catalog()
                     self.assertFalse(ready_to_write_to_rrad)
 
     def test_write_to_rrad_model_valid_model_status_working_project_phase_planning_model_purpose_not_calibration_returns_false(
@@ -671,7 +671,7 @@ class TestModel(TestCase):
                     self.model.model_status_id = self.config.model_status_id["Working"]
                     self.model.project_phase_id = self.config.proj_phase_id["Planning"]
                     self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
-                    ready_to_write_to_rrad = self.model.write_reults_to_model_catalog()
+                    ready_to_write_to_rrad = self.model.write_results_to_model_catalog()
                     self.assertFalse(ready_to_write_to_rrad)
 
     def test_write_to_rrad_model_valid_model_status_final_project_phase_not_planning_model_purpose_not_calibration_returns_false(
@@ -684,7 +684,7 @@ class TestModel(TestCase):
                     self.model.model_status_id = self.config.model_status_id["Final"]
                     self.model.project_phase_id = self.config.proj_phase_id["Pre Design"]
                     self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
-                    ready_to_write_to_rrad = self.model.write_reults_to_model_catalog()
+                    ready_to_write_to_rrad = self.model.write_results_to_model_catalog()
                     self.assertFalse(ready_to_write_to_rrad)
 
     def test_write_to_rrad_model_valid_model_status_final_project_phase_planning_model_purpose_calibration_returns_false(self):
@@ -696,7 +696,7 @@ class TestModel(TestCase):
                     self.model.model_status_id = self.config.model_status_id["Final"]
                     self.model.project_phase_id = self.config.proj_phase_id["Planning"]
                     self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
-                    ready_to_write_to_rrad = self.model.write_reults_to_model_catalog()
+                    ready_to_write_to_rrad = self.model.write_results_to_model_catalog()
                     self.assertFalse(ready_to_write_to_rrad)
 
     def test_write_to_rrad_model_not_valid_model_model_status_working_project_phase_not_planning_model_purpose_calibration_returns_false(self):
@@ -708,7 +708,7 @@ class TestModel(TestCase):
                     self.model.model_status_id = self.config.model_status_id["Working"]
                     self.model.project_phase_id = self.config.proj_phase_id["Pre Design"]
                     self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
-                    ready_to_write_to_rrad = self.model.write_reults_to_model_catalog()
+                    ready_to_write_to_rrad = self.model.write_results_to_model_catalog()
                     self.assertFalse(ready_to_write_to_rrad)
 
 
