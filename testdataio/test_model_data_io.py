@@ -140,7 +140,7 @@ class TestModelDataIO(TestCase):
         self.model_data_io.read_simulations(self.mock_model)
         self.assertTrue(self.mock_os_walk.called)
 
-    def test_read_simulation_reads_standard_simulation_existing_scenario_returns_simulation_object(self):
+    def test_read_simulations_reads_standard_simulation_existing_scenario_returns_simulation_object(self):
         self.mock_os_walk.return_value = iter([("path", ["D25yr6h"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
@@ -149,7 +149,7 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 1)
         self.assertEquals(first_simulation.sim_desc, "D25yr6h")
 
-    def test_read_simulation_reads_standard_simulation_build_out_scenario_returns_simulation_object(self):
+    def test_read_simulations_reads_standard_simulation_build_out_scenario_returns_simulation_object(self):
         self.mock_os_walk.return_value = iter([("path", ["D25yr6h-BO"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
@@ -158,7 +158,7 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.storm_id, 1)
         self.assertEquals(first_simulation.sim_desc, "D25yr6h-BO")
 
-    def test_read_simulation_reads_list_of_simulations_and_returns_correct_simulation_objects(self):
+    def test_read_simulations_reads_list_of_simulations_and_returns_correct_simulation_objects(self):
         self.mock_os_walk.return_value = iter([("path", ["D25yr6h-BO","D10yr6h"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
@@ -172,7 +172,7 @@ class TestModelDataIO(TestCase):
         self.assertEquals(second_simulation.storm_id, 2)
         self.assertEquals(second_simulation.sim_desc, "D10yr6h")
 
-    def test_read_simulation_reads_user_defined_simulation_returns_simulation_object(self):
+    def test_read_simulations_reads_user_defined_simulation_returns_simulation_object(self):
         self.mock_os_walk.return_value = iter([("path", ["Dec2015"], "file name")])
         list_of_simulations = self.model_data_io.read_simulations(self.mock_model)
         first_simulation = list_of_simulations[0]  # type: Simulation
@@ -180,6 +180,9 @@ class TestModelDataIO(TestCase):
         self.assertEquals(first_simulation.dev_scenario_id, 0)
         self.assertEquals(first_simulation.storm_id, 0)
         self.assertEquals(first_simulation.sim_desc, "Dec2015")
+
+    #def test_read_simulations_reads_Dry_simulation_returns_simulation_object(self):
+
 
     def test_append_simulation_calls_append_object_with_correct_arguments(self):
         self.model_data_io.append_simulation(11, self.mock_simulation)
