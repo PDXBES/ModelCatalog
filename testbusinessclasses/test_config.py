@@ -38,6 +38,7 @@ class TestConfig(TestCase):
         self.mock_search_cursor_instance = self.patch_search_cursor.stop()
         self.mock_list_of_domains = self.patch_list_of_domains.stop()
 
+# TODO need to add a test for Dry does not follow logic of D for design + storm name like all of the other storms
     def test_standard_simulation_names(self):
         standard_simulation_names = ['D25yr6h', 'D25yr6h-50', 'D25yr6h-BO', 'D10yr6h', 'D10yr6h-50', 'D10yr6h-BO']
         output_simulation_names = self.config_mock.standard_simulation_names()

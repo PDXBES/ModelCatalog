@@ -16,6 +16,14 @@ class Config:
     def __init__(self, test_flag):
         init_options = {"PROD": 0, "TEST": 1}
 
+        self.emgaats_design_storms_with_D = ["02yr6h", "05yr6h", "10yr6h", "25yr6h", "50yr6h", "100yr6h", "02yr",
+                                             "100yr24hrSCS1A", "05yr", "10yr", "WQ", "25yr", "50yr", "100yr"]
+
+        self.emgaats_design_storms_without_D = ["WQ", "25yr", "50yr", "npdx10s", "100yr", "Dry", "Avg", "AvgSum",
+                                                "AvgWin", "SE3s", "SE10s", "npdx3s", "npdx5w"]
+
+        #self.emgaats_historic_storms = ["4S6", "20151031", "20151207"]
+
         self.test_flag = test_flag
 
         executable_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
@@ -153,12 +161,25 @@ class Config:
         return sorted(unique_cip_numbers, reverse = True)
 
     def standard_simulation_names(self):
+        # TODO add unit test for this logic related to design storms without D
         standard_simulation_names = []
         for storm in self.storm.values():
-            if storm != ("user_def", "U"):
+            if storm[1] == "D":
                 for scenario in self.dev_scenario.values():
                     simulation_name = ""
-                    type_and_storm_name = storm[1] + storm[0]
+                    if storm[0] in self.emgaats_design_storms_with_D:
+                        type_and_storm_name = storm[1] + storm[0]
+                    else:
+                        type_and_storm_name = storm[0]
+                    if scenario == "EX":
+                        simulation_name = type_and_storm_name
+                    else:
+                        simulation_name = type_and_storm_name + "-" + scenario
+                    standard_simulation_names.append(simulation_name)
+            elif storm[1] == "H":
+                for scenario in self.dev_scenario.values():
+                    simulation_name = ""
+                    type_and_storm_name = storm[0]
                     if scenario == "EX":
                         simulation_name = type_and_storm_name
                     else:

@@ -77,13 +77,12 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         arcpy.AddMessage("\n")
 
     def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad(self):
-        self.model.model_path = r"\\Besfile1\CCSP\Models\OAK\3Char\CharBase"
+        self.model.model_path = r"C:\Users\sgould\Desktop\CharBase"
         self.model_dataio.set_model_to_read_write(self.model)
         self.model.create_simulations(self.model_dataio)
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
         self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]
-        self.model_dataio.create_model_geometry(self.model)
         self.model.create_date = datetime.datetime.today()
         self.model_dataio.create_model_geometry(self.model)
         self.model_catalog.add_model(self.model)

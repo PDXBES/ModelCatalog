@@ -87,7 +87,7 @@ class SimulationDataIo(ObjectDataIo):
 
     def append_simulation_results(self, simulation, model):
         # TODO add tests for the new if statement
-        if simulation.required_for_rrad(model):
+        if simulation.required_for_model_catalog(model):
             area_results_table_name = "area_results_table_name"
             link_results_table_name = "link_results_table_name"
             node_results_table_name = "node_results_table_name"
@@ -114,7 +114,7 @@ class SimulationDataIo(ObjectDataIo):
             arcpy.Delete_management(node_results_table)
             arcpy.Delete_management(node_flooding_results_table)
         else:
-            arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the RRAD.")
+            arcpy.AddMessage("Simulation: " + simulation.sim_desc + " is not required for the Model Catalog")
 
 
 

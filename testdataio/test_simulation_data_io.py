@@ -33,7 +33,7 @@ class TestSimulationDataIO(TestCase):
         self.mock_simulation.storm_id = 22
         self.mock_simulation.dev_scenario_id = 33
         self.mock_simulation.areas = "areas"
-        self.mock_simulation.required_for_rrad.return_value = True
+        self.mock_simulation.required_for_model_catalog.return_value = True
         self.mock_simulation.sim_desc = "sim_desc"
 
         self.patch_create_areas = mock.patch.object(self.mock_simulation, "create_areas")
@@ -195,10 +195,10 @@ class TestSimulationDataIO(TestCase):
                 with mock.patch.object(self.simulation_data_io, "copy_node_flooding_results_to_memory"):
                     with mock.patch.object(self.simulation_data_io, "append_area_results_to_db"):
                         self.simulation_data_io.append_simulation_results(self.mock_simulation, self.mock_model)
-                        self.mock_simulation.required_for_rrad.assert_called_with(self.mock_model)
+                        self.mock_simulation.required_for_model_catalog.assert_called_with(self.mock_model)
 
     def test_append_simulation_results_simulation_not_required_does_not_call_copies_and_append_results_methods(self):
-        self.mock_simulation.required_for_rrad.return_value = False
+        self.mock_simulation.required_for_model_catalog.return_value = False
         with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory") as mock_copy_link_results:
             with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory") as mock_copy_node_results:
                 with mock.patch.object(self.simulation_data_io,
@@ -212,7 +212,7 @@ class TestSimulationDataIO(TestCase):
                         self.assertFalse(mock_append_area_results.called)
 
     def test_append_simulation_results_simulation_not_required_add_message_called_with_correct_message(self):
-        self.mock_simulation.required_for_rrad.return_value = False
+        self.mock_simulation.required_for_model_catalog.return_value = False
         with mock.patch.object(self.simulation_data_io, "copy_link_results_to_memory"):
             with mock.patch.object(self.simulation_data_io, "copy_node_results_to_memory"):
                 with mock.patch.object(self.simulation_data_io,

@@ -49,10 +49,15 @@ class Simulation(GenericObject):
         if self.storm_id == 0:
             sim_file_path = self.model_path + "\\" + "sim\\" + self.sim_desc
         else:
-            sim_file_path = self.model_path \
-                       + "\\" + "sim\\" \
-                       + self.config.storm[self.storm_id][1] \
-                       + self.config.storm[self.storm_id][0] + dev_scenario
+            if self.config.storm[self.storm_id][0] in self.config.emgaats_design_storms_with_D:
+                sim_file_path = self.model_path \
+                           + "\\" + "sim\\" \
+                           + self.config.storm[self.storm_id][1] \
+                           + self.config.storm[self.storm_id][0] + dev_scenario
+            else:
+                sim_file_path = self.model_path \
+                                + "\\" + "sim\\" \
+                                + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
 
     def create_areas(self, simulation_data_io, rrad_db_data_io):
@@ -70,7 +75,7 @@ class Simulation(GenericObject):
         for area in self.areas:
             area.calculate_bsbr(self)
 
-    def required_for_rrad(self, model):
+    def required_for_model_catalog(self, model):
         if (self.storm_id, self.dev_scenario_id) in model.required_storm_and_dev_scenario_ids():
             return True
         else:

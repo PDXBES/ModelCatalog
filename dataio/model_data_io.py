@@ -55,8 +55,18 @@ class ModelDataIo(ObjectDataIo):
             if simulation_description in self.config.standard_simulation_names():
                 simulation_desc_parts = simulation_description.split("-")
                 storm_type = simulation_desc_parts[0][0]
-                storm_name = simulation_desc_parts[0][1:]
-                dev_scenario = ""
+                # TODO add test for logic regarding for storms that do not follow the naming convention of
+                #  design storms (D + storm_name)
+                if simulation_desc_parts[0][1:] in self.config.emgaats_design_storms_with_D:
+                    storm_name = simulation_desc_parts[0][1:]
+                    storm_type = "D"
+                elif simulation_desc_parts[0] in self.config.emgaats_design_storms_without_D:
+                    storm_name = simulation_desc_parts[0]
+                    storm_type = "D"
+                else:
+                    storm_name = simulation_desc_parts[0]
+                    storm_type = "H"
+
                 if len(simulation_desc_parts) == 1:
                     dev_scenario = "EX"
                 else:

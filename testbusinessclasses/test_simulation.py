@@ -139,12 +139,12 @@ class TestSimulation(TestCase):
     def test_required_for_rrad_required_storm_id_and_dev_scenario_id_returns_true(self):
         self.simulation.storm_id, self.simulation.dev_scenario_id = self.config.ccsp_characterization_storm_and_dev_scenario_ids[0]
         self.mock_model.required_storm_and_dev_scenario_ids.return_value = self.config.ccsp_characterization_storm_and_dev_scenario_ids
-        required = self.simulation.required_for_rrad(self.mock_model)
+        required = self.simulation.required_for_model_catalog(self.mock_model)
         self.assertTrue(required)
 
     def test_required_for_rrad_not_required_storm_id_and_dev_scenario_id_returns_false(self):
         self.mock_model.required_storm_and_dev_scenario_ids.return_value = [(-1,-1)]
-        required = self.simulation.required_for_rrad(self.mock_model)
+        required = self.simulation.required_for_model_catalog(self.mock_model)
         self.assertFalse(required)
 
 
