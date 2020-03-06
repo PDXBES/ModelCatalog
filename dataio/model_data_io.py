@@ -184,7 +184,7 @@ class ModelDataIo(ObjectDataIo):
             json.dump(model_registration_data, outfile)
         except:
             traceback.print_exc()
-            pass
+            raise Exception
         #TODO figure out how to make this testable
         outfile.close()
 
