@@ -38,7 +38,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
-        self.model.model_path = r"\\besfile1\ccsp\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Calibration\OAK\Final"
+        self.model.model_path = r"\\besfile1\ccsp\Models\OAK\2Cali\Final"
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"
@@ -67,7 +67,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
 #TODO: Create appropriate models with correct simulation storms
 
     def test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad(self):
-        self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
+       # self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]
         self.model.create_date = datetime.datetime.today()
         self.model_dataio.create_model_geometry(self.model)
@@ -81,7 +81,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model_dataio.set_model_to_read_write(self.model)
         self.model.create_simulations(self.model_dataio)
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]
-        self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
+        # self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]
         self.model.create_date = datetime.datetime.today()
         self.model_dataio.create_model_geometry(self.model)
@@ -92,7 +92,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
 
     def test_model_registration_with_model_invalid(self):
         self.model.model_path = r"Invalid_path"
-        self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
+        # self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.create_date = datetime.datetime.today()
         try:
             self.model_dataio.create_model_geometry(self.model)

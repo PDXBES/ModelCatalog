@@ -391,7 +391,9 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
         model_catalog_data_io.add_model(model, model_data_io, simulation_data_io)
         arcpy.AddMessage("Model Added")
     except:
+        arcpy.AddError("Model could not be registered")
         arcpy.ExecuteError()
+
 ########################################################################################################################
 
 def data_review_combo_box_logic(data_review_parameter, model_id_parameter, simulation_values, simulations):

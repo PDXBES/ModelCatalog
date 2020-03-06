@@ -166,7 +166,6 @@ class ModelDataIo(ObjectDataIo):
             raise InvalidModelPathException
 
     def write_model_registration_file(self, model):
-        pass
         # https://stackoverflow.com/questions/12309269/how-do-i-write-json-data-to-a-file
 
         # check that a registration file does not already exist - in different function?
@@ -179,14 +178,13 @@ class ModelDataIo(ObjectDataIo):
         file_path = model.model_path
         file_name = "model_registration.json"
         model_registration_file = os.path.join(file_path, file_name)
-        outfile = open(model_registration_file, 'w')
         try:
-            json.dump(model_registration_data, outfile)
+            with open(model_registration_file, 'w') as outfile:
+                json.dump(model_registration_data, outfile)
         except:
             traceback.print_exc()
             raise Exception
         #TODO figure out how to make this testable
-        outfile.close()
 
     #TODO: split this function to take a model registration path and be more "generalic"?
     def read_model_id_from_model_registration_file(self, model):
