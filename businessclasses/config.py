@@ -45,10 +45,10 @@ class Config:
 
         model_catalog_sde = server + ".MODELCATALOG.sde"
         rehab_sde = server + ".REHAB.sde"
-        RRAD_sde = server + ".RRAD.sde"
+        # RRAD_sde = server + ".RRAD.sde"
         EMGAATS_sde = server + ".EMGAATS.sde"
         ASM_WORK_sde = server + ".ASM_WORK.sde"
-        RRAD_MAPPING_sde = server + ".RRAD_MAPPING.sde"
+        # RRAD_MAPPING_sde = server + ".RRAD_MAPPING.sde"
         GISDB1 = "GISDB1.EGH_PUBLIC.sde"
 
         self.egh_public = os.path.join(sde_connections, GISDB1)
@@ -80,25 +80,20 @@ class Config:
         self.rehab_branches_sde_path = self.rehab_sde_path + r"\REHAB.GIS.REHAB_Branches"
 ##
 
-        self.RRAD_sde_path = os.path.join(sde_connections, RRAD_sde)
+        # self.RRAD_sde_path = os.path.join(sde_connections, RRAD_sde)
 
-        self.rehab_tracking_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Tracking"
-        #self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
-        #self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
-        #self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
-        #self.node_flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
-        self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
-        self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
-        self.directors_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Directors"
+        # self.rehab_tracking_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Tracking"
+        # self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
+        # self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
+        # self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
+        # self.node_flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
+        # self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
+        # self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
+        # self.directors_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Directors"
 
-        self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
+        # self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
 ##
-        self.RRAD_MAPPING_sde_path = os.path.join(sde_connections, RRAD_MAPPING_sde)
-        self.mapping_areas_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Areas"
-        self.mapping_current_id_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Current_ID"
-        self.mapping_links_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Links"
-        self.mapping_nodes_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.Nodes"
-        self.mapping_snapshot_tracking_sde_path = self.RRAD_MAPPING_sde_path + r"\RRAD_MAPPING.GIS.SnapshotTracking"
+
 
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
 
@@ -140,9 +135,6 @@ class Config:
 
         self.proj_type = self.retrieve_proj_type_domain_as_dict()
         self.proj_type_id = self.reverse_dict(self.proj_type)
-
-        self.mapping_snapshot_type = self.retrieve_mapping_snapshot_type_domain_as_dict()
-        self.mapping_snapshot_type_id = self.reverse_dict(self.mapping_snapshot_type)
 
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
         self.unique_cip_numbers = self.get_unique_cip_numbers()
@@ -221,9 +213,6 @@ class Config:
 
     def retrieve_proj_type_domain_as_dict(self):
         return self.retrieve_domain_as_dict("Proj_Type", self.model_catalog_sde_path)
-
-    def retrieve_mapping_snapshot_type_domain_as_dict(self):
-        return self.retrieve_domain_as_dict("Type", self.RRAD_MAPPING_sde_path)
 
     def retrieve_storm_dict(self):
         storm_id = "storm_id"

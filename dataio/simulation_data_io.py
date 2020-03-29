@@ -43,7 +43,7 @@ class SimulationDataIo(ObjectDataIo):
         node_flooding_results_path = sim_path + "\\" + "results.gdb" + "\\" + "NodeFloodingResults"
         return node_flooding_results_path
 
-# TODO below this could all be probably moved to a separate class called RradSimulationResults or something
+# TODO below this could all be probably moved to a separate class called ModelCatalogSimulationResults or something
 
     def copy_link_results_to_memory(self, simulation, output_table_name, model_catalog_db_data_io):
         # type: (Simulation, str, DbDataIo) -> None

@@ -13,7 +13,6 @@ from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
 from businessclasses.model_catalog_exception import InvalidParentModelPurposeException
-from dataio.rrad_db_data_io import RradDbDataIo
 reload(arcpy)
 reload(config)
 reload(utility)
