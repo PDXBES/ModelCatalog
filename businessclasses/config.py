@@ -44,11 +44,8 @@ class Config:
             server = "BESDBPROD1"
 
         model_catalog_sde = server + ".MODELCATALOG.sde"
-        rehab_sde = server + ".REHAB.sde"
-        # RRAD_sde = server + ".RRAD.sde"
         EMGAATS_sde = server + ".EMGAATS.sde"
         ASM_WORK_sde = server + ".ASM_WORK.sde"
-        # RRAD_MAPPING_sde = server + ".RRAD_MAPPING.sde"
         GISDB1 = "GISDB1.EGH_PUBLIC.sde"
 
         self.egh_public = os.path.join(sde_connections, GISDB1)
@@ -71,29 +68,8 @@ class Config:
         self.geometry_links_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Links"
         self.geometry_nodes_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Nodes"
 
-
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
 ##
-
-        self.rehab_sde_path = os.path.join(sde_connections, rehab_sde)
-        self.rehab_nbcr_data_sde_path = self.rehab_sde_path + r"\REHAB.GIS.nBCR_Data"
-        self.rehab_branches_sde_path = self.rehab_sde_path + r"\REHAB.GIS.REHAB_Branches"
-##
-
-        # self.RRAD_sde_path = os.path.join(sde_connections, RRAD_sde)
-
-        # self.rehab_tracking_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Tracking"
-        # self.area_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.AreaResults"
-        # self.link_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.LinkResults"
-        # self.node_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeResults"
-        # self.node_flooding_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.NodeFloodingResults"
-        # self.rehab_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Rehab_Results"
-        # self.rrad_current_id_table_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Current_ID"
-        # self.directors_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.Directors"
-
-        # self.bsbr_results_sde_path = self.RRAD_sde_path + r"\RRAD.GIS.BSBR_results"
-##
-
 
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
 
