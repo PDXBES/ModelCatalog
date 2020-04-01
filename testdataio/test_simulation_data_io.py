@@ -53,7 +53,6 @@ class TestSimulationDataIO(TestCase):
         self.mock_simulation_path = self.patch_simulation_path.start()
         self.mock_simulation_path.return_value = self.path
 
-        self.rrad_db_data_io = RradDbDataIo(self.config)
         self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
 
         self.patch_start_editing_session = mock.patch("dataio.simulation_data_io.SimulationDataIo.start_editing_session")
@@ -121,7 +120,6 @@ class TestSimulationDataIO(TestCase):
                 self.simulation_data_io.copy_link_results_to_memory(self.mock_simulation, output_table_name, self.model_catalog_db_data_io)
                 mock_copy_results.assert_called_with("mock_link_results_path", output_table_name, self.model_catalog_db_data_io,
                                                      self.mock_simulation, "model_catalog_link_result_id", LinkResults)
-
 
     def test_copy_node_results_to_memory_calls_copy_results_to_memory_with_correct_arguments(self):
         with mock.patch.object(self.simulation_data_io, "copy_results_to_memory") as mock_copy_results:

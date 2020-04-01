@@ -244,20 +244,14 @@ class TestConfig(TestCase):
             config = Config(test_bool)
             sde_connections = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\connection_files"
             model_catalog_test_sde = r"BESDBTEST1.MODELCATALOG.sde"
-            rehab_test_sde = r"BESDBTEST1.REHAB.sde"
-            RRAD_test_sde = r"BESDBTEST1.RRAD_write.sde"
             EMGAATS_test_sde = r"BESDBTEST1.EMGAATS.sde"
             ASM_WORK_test_sde = r"BESDBTEST1.ASM_WORK.sde"
 
             model_catalog_test_sde_path = os.path.join(sde_connections, model_catalog_test_sde)
-            rehab_test_sde_path = os.path.join(sde_connections, rehab_test_sde)
-            RRAD_test_sde_path = os.path.join(sde_connections, RRAD_test_sde)
             EMGAATS_test_sde_path = os.path.join(sde_connections, EMGAATS_test_sde)
             ASM_WORK_test_sde_path = os.path.join(sde_connections, ASM_WORK_test_sde)
 
             self.assertEquals(config.model_catalog_sde_path, model_catalog_test_sde_path)
-            self.assertEquals(config.rehab_sde_path, rehab_test_sde_path)
-            self.assertEquals(config.RRAD_sde_path, RRAD_test_sde_path)
             self.assertEquals(config.EMGAATS_sde_path, EMGAATS_test_sde_path)
             self.assertEquals(config.ASM_WORK_sde_path, ASM_WORK_test_sde_path)
 
@@ -268,24 +262,13 @@ class TestConfig(TestCase):
             config = Config(test_bool)
             sde_connections = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\connection_files"
             model_catalog_prod_sde = r"BESDBPROD1.MODELCATALOG.sde"
-            rehab_prod_sde = r"BESDBPROD1.REHAB.sde"
-            RRAD_prod_sde = r"BESDBPROD1.RRAD_write.sde"
             EMGAATS_prod_sde = r"BESDBPROD1.EMGAATS.sde"
             ASM_WORK_prod_sde = r"BESDBPROD1.ASM_WORK.sde"
 
             model_catalog_prod_sde_path = os.path.join(sde_connections, model_catalog_prod_sde)
-            rehab_prod_sde_path = os.path.join(sde_connections, rehab_prod_sde)
-            RRAD_prod_sde_path = os.path.join(sde_connections, RRAD_prod_sde)
             EMGAATS_prod_sde_path = os.path.join(sde_connections, EMGAATS_prod_sde)
             ASM_WORK_prod_sde_path = os.path.join(sde_connections, ASM_WORK_prod_sde)
 
             self.assertEquals(config.model_catalog_sde_path, model_catalog_prod_sde_path)
-            self.assertEquals(config.rehab_sde_path, rehab_prod_sde_path)
-            self.assertEquals(config.RRAD_sde_path, RRAD_prod_sde_path)
             self.assertEquals(config.EMGAATS_sde_path, EMGAATS_prod_sde_path)
             self.assertEquals(config.ASM_WORK_sde_path, ASM_WORK_prod_sde_path)
-
-    def test_retrieve_mapping_snapshot_type_domain_as_dict_called_with_correct_domain_name(self):
-        with mock.patch.object(self.config_real, "retrieve_domain_as_dict") as mock_retrieve_domain_as_dict:
-            self.config_real.retrieve_mapping_snapshot_type_domain_as_dict()
-            mock_retrieve_domain_as_dict.assert_called_with("Type", self.config_real.RRAD_MAPPING_sde_path)

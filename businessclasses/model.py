@@ -180,6 +180,8 @@ class Model(GenericObject):
                             return True
                     except:
                         raise InvalidCalibrationStormSimulationDescription()
+                else:
+                    return False
         return False
 
     def valid_required_simulations(self):

@@ -82,10 +82,10 @@ class Config:
 
         self.analysis_requests_sde_path = self.ASM_WORK_sde_path + r"\ASM_Work.GIS.Analysis_Requests"
 
-        self.storm = self.retrieve_storm_dict()  # {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
+        self.storm = self.retrieve_storm_dict()  # eg - {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.storm_id = self.reverse_dict(self.storm)
 
-        self.dev_scenario = self.retrieve_dev_scenario_dict()  # {0: "EX", 1: "50", 2: "BO"}
+        self.dev_scenario = self.retrieve_dev_scenario_dict()  # eg - {0: "EX", 1: "50", 2: "BO"}
         self.dev_scenario_id = self.reverse_dict(self.dev_scenario)
 
         self.engine_type = self.retrieve_engine_type_domain_as_dict()
@@ -130,7 +130,7 @@ class Config:
         return sorted(unique_cip_numbers, reverse = True)
 
     def standard_simulation_names(self):
-        # TODO add unit test for this logic related to design storms without D
+        # TODO add unit test for this logic related to design storms with D
         standard_simulation_names = []
         for storm in self.storm.values():
             if storm[1] == "D":
