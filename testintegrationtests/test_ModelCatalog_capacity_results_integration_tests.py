@@ -13,13 +13,12 @@ import mock
 import unittest
 
 test_flag = "TEST"
-class TestRRADCapacityResults(TestCase):
+class TestModelCatalogCapacityResults(TestCase):
 
     def setUp(self):
 
         self.config = Config(test_flag)
         self.model_catalog_db_data_io = ModelCatalogDbDataIo(self.config)
-        #self.rrad_db_data_io = RradDbDataIo(self.config)
         self.simulation_data_io = SimulationDataIo(self.config, self.model_catalog_db_data_io)
         self.simulation = Simulation(self.config)
         self.simulation.id = 999998

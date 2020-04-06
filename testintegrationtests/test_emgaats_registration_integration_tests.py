@@ -91,6 +91,21 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         arcpy.AddMessage("\n")
 
     #TODO - test_model_registration_with_model_status_final_model_purpose_alternative_add_model_and results_to_catalog
+    #TODO - cannot run until we include naming requirements for Alternatives
+    def test_model_registration_with_model_status_final_model_purpose_alternative_add_model_and_results_to_catalog(self):
+        #self.model.model_path = r"C:\Users\sgould\Desktop\CharBase" #need model to use for this
+        self.model_dataio.set_model_to_read_write(self.model)
+        self.model.create_simulations(self.model_dataio)
+        self.model.model_purpose_id = self.config.model_purpose_id["Alternative"]
+        # self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
+        self.model.model_status_id = self.config.model_status_id["Final"]
+        self.model.create_date = datetime.datetime.today()
+        self.model_dataio.create_model_geometry(self.model)
+        self.model_catalog.add_model(self.model)
+        model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
+        self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
+        arcpy.AddMessage("\n")
+
 
     def test_model_registration_with_model_invalid(self):
         self.model.model_path = r"Invalid_path"

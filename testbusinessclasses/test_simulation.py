@@ -38,9 +38,6 @@ class TestSimulation(TestCase):
         self.patch_delete_management = mock.patch("arcpy.Delete_management")
         self.mock_delete_management = self.patch_delete_management.start()
 
-        self.patch_calculate_bsbr = mock.patch("businessclasses.area_results.AreaResults.calculate_bsbr")
-        self.mock_calculate_bsbr = self.patch_calculate_bsbr.start()
-
         self.patch_os_path_exists = mock.patch("os.path.exists")
         self.mock_os_path_exists = self.patch_os_path_exists.start()
 
@@ -53,7 +50,6 @@ class TestSimulation(TestCase):
         self.mock_area_field_attribute_lookup = self.patch_area_field_attribute_lookup.stop()
         self.mock_copy_area_results_to_memory = self.patch_copy_area_results_to_memory.stop()
         self.mock_delete_management = self.patch_delete_management.stop()
-        self.mock_calculate_bsbr = self.patch_calculate_bsbr.stop()
         self.mock_os_path_exists = self.patch_os_path_exists.stop()
 
     def test_has_results_check_sim_folder_has_results(self):
