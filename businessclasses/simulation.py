@@ -60,21 +60,6 @@ class Simulation(GenericObject):
                                 + self.config.storm[self.storm_id][0] + dev_scenario
         return sim_file_path
 
-    def create_areas(self, simulation_data_io, rrad_db_data_io):
-        in_memory_table = simulation_data_io.model_catalog_db_data_io.workspace + "\\in_memory_table"
-        simulation_data_io.copy_area_results_to_memory(self, "in_memory_table", rrad_db_data_io)
-        area_field_attribute_lookup = AreaResults.results_field_attribute_lookup()
-        area_results = rrad_db_data_io.create_objects_from_table_with_current_id(AreaResults, in_memory_table, area_field_attribute_lookup)
-        self.areas = area_results
-        for area in self.areas:
-            area.parent_id = self.id
-        self.calculate_bsbrs_for_areas()
-        arcpy.Delete_management(in_memory_table)
-
-    def calculate_bsbrs_for_areas(self):
-        for area in self.areas:
-            area.calculate_bsbr(self)
-
     def required_for_model_catalog(self, model):
         if (self.storm_id, self.dev_scenario_id) in model.required_storm_and_dev_scenario_ids():
             return True

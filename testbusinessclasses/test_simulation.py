@@ -101,48 +101,13 @@ class TestSimulation(TestCase):
         sim_path = self.simulation.path()
         self.assertEquals(sim_path, path)
 
-    def test_create_areas_calls_copy_area_results_to_memory_with_correct_arguments(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas"):
-            self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_copy_area_results_to_memory.assert_called_with(self.simulation, "in_memory_table",self.db_data_io)
-
-    def test_create_areas_calls_create_objects_from_table_with_correct_arguments(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas"):
-            self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_create_objects_from_table_with_current_id.assert_called_with(AreaResults,
-                                                                                   "in_memory\\in_memory_table",
-                                                                                   AreaResults.results_field_attribute_lookup())
-
-    def test_create_areas_calls_delete_with_correct_arguments(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
-            self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.mock_delete_management.assert_called_with("in_memory\\in_memory_table")
-
-    def test_create_areas_sets_area_list_to_correct_value(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
-            self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.assertEquals(self.simulation.areas, self.mock_areas )
-
-    def test_create_areas_calls_calculate_bsbrs_for_areas(self):
-        with mock.patch.object(self.simulation, "calculate_bsbrs_for_areas") as mock_calculate_bsbrs_for_areas:
-            self.simulation.create_areas(self.simulation_data_io, self.db_data_io)
-            self.assertTrue(mock_calculate_bsbrs_for_areas.called)
-
-    def test_calculate_bsbrs_for_areas_calls_calculate_bsbr_with_correct_arguments(self):
-        self.simulation.calculate_bsbrs_for_areas()
-        self.mock_calculate_bsbr.assert_called_with(self.simulation)
-
-    def test_calculate_bsbrs_for_areas_simulation_has_two_areas_calls_calculate_bsbr_twice(self):
-        self.simulation.calculate_bsbrs_for_areas()
-        self.assertEquals(self.mock_calculate_bsbr.call_count, 2)
-
-    def test_required_for_rrad_required_storm_id_and_dev_scenario_id_returns_true(self):
+    def test_required_for_model_catalog_required_storm_id_and_dev_scenario_id_returns_true(self):
         self.simulation.storm_id, self.simulation.dev_scenario_id = self.config.ccsp_characterization_storm_and_dev_scenario_ids[0]
         self.mock_model.required_storm_and_dev_scenario_ids.return_value = self.config.ccsp_characterization_storm_and_dev_scenario_ids
         required = self.simulation.required_for_model_catalog(self.mock_model)
         self.assertTrue(required)
 
-    def test_required_for_rrad_not_required_storm_id_and_dev_scenario_id_returns_false(self):
+    def test_required_for_model_catalog_not_required_storm_id_and_dev_scenario_id_returns_false(self):
         self.mock_model.required_storm_and_dev_scenario_ids.return_value = [(-1,-1)]
         required = self.simulation.required_for_model_catalog(self.mock_model)
         self.assertFalse(required)

@@ -103,6 +103,7 @@ class Model(GenericObject):
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
+                    #TODO - create method for valid_alternative_simulations (basically the same as for calibration but may have different naming convention)
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
@@ -166,7 +167,7 @@ class Model(GenericObject):
         return is_valid
 
     def valid_calibration_simulations(self):
-        """Checks for user defined storms(id=0) and then checks for standard ccsp storm naming convention (8 characters, 3 for basin, the rest for date) """
+        """Checks for user defined storms(id=0) and then checks for standard ccsp storm naming convention (8 characters representing the date) """
         for simulation in self.simulations:
             if simulation.storm_id == 0:
                 if len(simulation.sim_desc) == 8:

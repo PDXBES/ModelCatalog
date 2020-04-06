@@ -38,7 +38,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
-        self.model.model_path = r"\\besfile1\ccsp\Models\OAK\2Cali\Final"
+        self.model.model_path = r"\\besfile1\ccsp\Models\OAK\2Cali\Final" ## does this one have all the required storms?
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"
@@ -66,7 +66,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
 
 #TODO: Create appropriate models with correct simulation storms
 
-    def test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_no_results_to_rrad(self):
+    def test_model_registration_with_model_status_final_model_purpose_calibration_add_model_to_catalog_but_no_results(self):
        # self.model_id = self.model_catalog_dataio.retrieve_current_model_id()
         self.model.model_status_id = self.config.model_status_id["Final"]
         self.model.create_date = datetime.datetime.today()
@@ -76,7 +76,7 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
 
-    def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_to_catalog_results_to_rrad(self):
+    def test_model_registration_with_model_status_final_model_purpose_characterization_add_model_and_results_to_catalog(self):
         self.model.model_path = r"C:\Users\sgould\Desktop\CharBase"
         self.model_dataio.set_model_to_read_write(self.model)
         self.model.create_simulations(self.model_dataio)
@@ -89,6 +89,8 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         model_catalog_tools.EMGAATS_Model_Registration_function(self.model_catalog, self.config)
         self.assertTrue(self.model_dataio.check_model_is_read_only(self.model))
         arcpy.AddMessage("\n")
+
+    #TODO - test_model_registration_with_model_status_final_model_purpose_alternative_add_model_and results_to_catalog
 
     def test_model_registration_with_model_invalid(self):
         self.model.model_path = r"Invalid_path"

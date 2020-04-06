@@ -61,56 +61,6 @@ class AreaResults(GenericObject):
 
     #def determine_area_type(self):
 
-    # check if basement higher than crown
-
-    def ffe_above_crown(self):
-        try:
-            elev_diff = self.first_floor_elev_ft - self.san_crown_elev_ft
-        except:
-            pass
-        return elev_diff >= self.basement_depth
-
-    def max_hgl_above_basement_elev(self):
-
-        return self.first_floor_elev_ft - self.maxHGL < self.basement_depth
-
-    def basement_exists(self):
-        if self.has_basement == "Y" or self.has_basement == "U":
-            return True
-        elif self.has_basement == "N":
-            return False
-        else:
-            raise Exception
-
-    def has_sanitary_connection(self):
-        if self.san_connect_type != None:
-            return True
-        elif self.san_connect_type == None:
-            return False
-        else:
-            raise Exception
-
-    def basement_flooding(self):
-        if self.area_type == "BLDG" and self.has_sanitary_connection() is True:
-            if self.ffe_above_crown() \
-                    and self.max_hgl_above_basement_elev() \
-                    and self.basement_exists():
-                return True
-            else:
-                return False
-        else:
-            return False
-
-    def calculate_bsbr(self, simulation):
-        if self.basement_flooding() == False:
-            self.bsbr = 0
-        else:
-            storm = self.config.storm[simulation.storm_id][0]
-            try:
-                self.bsbr = self.storm_bsbr_lookup[storm]
-            except:
-                #TODO need to check that storm is in list of BSBR storms? Not all storms require BSBR eg Summer 6
-                pass
 
 
 
