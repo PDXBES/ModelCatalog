@@ -71,34 +71,6 @@ class Utility:
         else:
             print("Config set to other than TEST, data will not be deleted")
 
-    def rrad_test_data_cleanup(self):
-        if self.config.test_flag == "TEST":
-            feature_class_list = [self.config.rehab_tracking_sde_path, self.config.rehab_results_sde_path,
-                                  self.config.results_area_sde_path, self.config.results_link_sde_path,
-                                  self.config.results_node_sde_path, self.config.results_node_flooding_sde_path,
-                                  self.config.directors_sde_path]
-            for feature_class in feature_class_list:
-                try:
-                    arcpy.TruncateTable_management(feature_class)
-                except:
-                    print("unable to truncate, using Delete Rows")
-                    arcpy.DeleteRows_management(feature_class)
-        else:
-            print("Config set to other than TEST, data will not be deleted")
-
-    def rrad_mapping_test_data_cleanup(self):
-        if self.config.test_flag == "TEST":
-            feature_class_list = [self.config.mapping_areas_sde_path, self.config.mapping_links_sde_path,
-                                  self.config.mapping_nodes_sde_path, self.config.mapping_snapshot_tracking_sde_path]
-            for feature_class in feature_class_list:
-                try:
-                    arcpy.TruncateTable_management(feature_class)
-                except:
-                    print("unable to truncate, using Delete Rows")
-                    arcpy.DeleteRows_management(feature_class)
-        else:
-            print("Config set to other than TEST, data will not be deleted")
-
     # TODO write test
     def set_current_ids_to_zero(self, current_id_table_sde_path):
         if self.config.test_flag == "TEST":

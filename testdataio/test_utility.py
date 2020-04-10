@@ -68,16 +68,6 @@ class TestUtility(TestCase):
             feature_class = argument[0][0]
             self.assertEquals(feature_class, feature_class_list[counter])
 
-    def test_rrad_test_data_cleanup_calls_truncate_table_with_correct_sde_paths(self):
-        self.utility.rrad_test_data_cleanup()
-        feature_class_list = ["rehab_tracking_sde_path", "rehab_results_sde_path", "results_area_sde_path",
-                              "results_link_sde_path", "results_node_sde_path", "results_node_flooding_sde_path",
-                              "directors_sde_path"]
-        self.assertTrue(self.mock_TruncateTable_management.called)
-        for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
-            feature_class = argument[0][0]
-            self.assertEquals(feature_class, feature_class_list[counter])
-
     def test_format_date_string_calls_strftime_with_correct_date_string_argument(self):
         date = mock.MagicMock(datetime.date)
         date.strftime.return_value = "date string"
@@ -85,16 +75,7 @@ class TestUtility(TestCase):
         self.assertEquals(return_string, "date string")
         self.assertEquals("%m/%d/%Y %H:%M %p", date.strftime.call_args[0][0])
 
-    def test_rrad_mapping_test_data_cleanup_calls_truncate_table_with_correct_sde_paths(self):
-        self.utility.rrad_mapping_test_data_cleanup()
-        feature_class_list = ["mapping_areas_sde_path", "mapping_links_sde_path",
-                              "mapping_nodes_sde_path", "mapping_snapshot_tracking_sde_path"]
-        self.assertTrue(self.mock_TruncateTable_management.called)
-        for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
-            feature_class = argument[0][0]
-            self.assertEquals(feature_class, feature_class_list[counter])
-
     #TODO: test for test flags in test data cleanup
 
-    #TODO: test for deleterows if truncate throughs exception in test data cleanup
+    #TODO: test for deleterows if truncate throws exception in test data cleanup
 
