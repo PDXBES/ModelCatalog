@@ -13,6 +13,7 @@ from businessclasses.simulation import Simulation
 from businessclasses.node_geometry import NodeGeometry
 from businessclasses.link_geometry import LinkGeometry
 from businessclasses.area_geometry import AreaGeometry
+from businessclasses.storages import Storages
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelPathException
 from businessclasses.model_catalog_exception import InvalidModelPurposeException
@@ -146,8 +147,24 @@ class ModelDataIo(ObjectDataIo):
         arcpy.Delete_management(output_table_links)
         arcpy.Delete_management(output_table_areas)
 
+    def append_storage_table(self, model):
+        input_gdb = model.model_path + "\\" + "EmgaatsModel.gdb"
+        input_table = input_gdb + "\\" + "storage"
+        output_table_name = "in_memory_table_storage"
+        output_table = self.db_data_io.workspace + "\\" + output_table_name
+        id_field = "model_catalog_storage_id"
+        object_type = Storages
+        self.copy_geometry_to_memory(input_table, output_table_name, self.db_data_io, model, id_field, object_type)
+        self.db_data_io.append_table_to_db(output_table, self.config.geometry_nodes_sde_path)
+
     def copy_geometry_to_memory(self, input_table, output_table_name, db_data_io, model, id_field, object_type):
         db_data_io.copy_to_memory(input_table, output_table_name)
+        output_table = db_data_io.workspace + "\\" + output_table_name
+        db_data_io.add_ids(output_table, id_field, object_type)
+        db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
+
+    def copy_storage_table_to_memory(self, input_table, output_table_name, db_data_io, model, id_field, object_type):
+        db_data_io.copy_table_to_memory(input_table, output_table_name)
         output_table = db_data_io.workspace + "\\" + output_table_name
         db_data_io.add_ids(output_table, id_field, object_type)
         db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
