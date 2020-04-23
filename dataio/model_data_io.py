@@ -129,8 +129,8 @@ class ModelDataIo(ObjectDataIo):
         output_table_links = self.db_data_io.workspace + "\\" + output_table_name_links
         id_field = "model_catalog_link_id"
         object_type = LinkGeometry
-        self.copy_geometry_to_memory(input_table_links, output_table_name_links, self.db_data_io, model,
-                                     id_field, object_type)
+        self.copy_geometry_to_memory(input_table_links, output_table_name_links, self.db_data_io, model, id_field,
+                                     object_type)
         self.db_data_io.append_table_to_db(output_table_links, self.config.geometry_links_sde_path)
 
         input_table_areas = input_gdb + "\\" + "areas"
@@ -138,20 +138,19 @@ class ModelDataIo(ObjectDataIo):
         output_table_areas = self.db_data_io.workspace + "\\" + output_table_name_areas
         id_field = "model_catalog_area_id"
         object_type = AreaGeometry
-        self.copy_geometry_to_memory(input_table_areas, output_table_name_areas, self.db_data_io, model,
-                                     id_field, object_type)
+        self.copy_geometry_to_memory(input_table_areas, output_table_name_areas, self.db_data_io, model, id_field,
+                                     object_type)
         self.db_data_io.append_table_to_db(output_table_areas, self.config.geometry_areas_sde_path)
 
         arcpy.Delete_management(output_table)
         arcpy.Delete_management(output_table_links)
         arcpy.Delete_management(output_table_areas)
 
-    def copy_geometry_to_memory(self, input_table, output_table_name, rrad_db_data_io, model, id_field,
-                               object_type):
-        rrad_db_data_io.copy_to_memory(input_table, output_table_name)
-        output_table = rrad_db_data_io.workspace + "\\" + output_table_name
-        rrad_db_data_io.add_ids(output_table, id_field, object_type)
-        rrad_db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
+    def copy_geometry_to_memory(self, input_table, output_table_name, db_data_io, model, id_field, object_type):
+        db_data_io.copy_to_memory(input_table, output_table_name)
+        output_table = db_data_io.workspace + "\\" + output_table_name
+        db_data_io.add_ids(output_table, id_field, object_type)
+        db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
 
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"

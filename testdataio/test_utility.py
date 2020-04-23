@@ -18,6 +18,7 @@ class TestUtility(TestCase):
         mock_config = MockConfig()
         self.config = mock_config.config
         self.utility = Utility(self.config)
+
         self.patch_convert_mapped_letter_drive_to_unc_path = mock.patch("dataio.utility.Utility.convert_mapped_letter_drive_to_unc_path")
         self.mock_convert_mapped_letter_drive_to_unc_path = self.patch_convert_mapped_letter_drive_to_unc_path.start()
 
