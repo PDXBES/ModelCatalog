@@ -117,6 +117,7 @@ class ModelDataIo(ObjectDataIo):
 
     def append_model_network(self, model):
         input_gdb = model.model_path + "\\" + "EmgaatsModel.gdb"
+
         input_table = input_gdb + "\\" + "nodes"
         output_table_name = "in_memory_table_nodes"
         output_table = self.db_data_io.workspace + "\\" + output_table_name
@@ -149,13 +150,15 @@ class ModelDataIo(ObjectDataIo):
 
     def append_storage_table(self, model):
         input_gdb = model.model_path + "\\" + "EmgaatsModel.gdb"
-        input_table = input_gdb + "\\" + "storage"
+        input_table = input_gdb + "\\" + "Storages"
         output_table_name = "in_memory_table_storage"
         output_table = self.db_data_io.workspace + "\\" + output_table_name
         id_field = "model_catalog_storage_id"
         object_type = Storages
         self.copy_geometry_to_memory(input_table, output_table_name, self.db_data_io, model, id_field, object_type)
-        self.db_data_io.append_table_to_db(output_table, self.config.geometry_nodes_sde_path)
+        self.db_data_io.append_table_to_db(output_table, self.config.storages_sde_path)
+
+        arcpy.Delete_management(output_table)
 
     def copy_geometry_to_memory(self, input_table, output_table_name, db_data_io, model, id_field, object_type):
         db_data_io.copy_to_memory(input_table, output_table_name)

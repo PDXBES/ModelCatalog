@@ -71,6 +71,7 @@ class DbDataIo(object):
     def create_object(self, object_type):
         return object_type(self.config)
 
+    # not being used?
     def create_object_with_id(self, object_type):
         return object_type.initialize_with_current_id(self.config, self)
 

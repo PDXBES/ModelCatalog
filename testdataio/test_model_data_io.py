@@ -381,4 +381,5 @@ class TestModelDataIO(TestCase):
             read_status = self.model_data_io.check_model_is_read_only(self.mock_model)
             self.assertEquals(read_status, False)
 
+#TODO - create tests for copy_geometry_to_memory, append_model_network, copy_storage_table_to_memory, append_storage_table
 
