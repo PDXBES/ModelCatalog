@@ -166,12 +166,6 @@ class ModelDataIo(ObjectDataIo):
         db_data_io.add_ids(output_table, id_field, object_type)
         db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
 
-    def copy_storage_table_to_memory(self, input_table, output_table_name, db_data_io, model, id_field, object_type):
-        db_data_io.copy_table_to_memory(input_table, output_table_name)
-        output_table = db_data_io.workspace + "\\" + output_table_name
-        db_data_io.add_ids(output_table, id_field, object_type)
-        db_data_io.add_parent_id(output_table, "MODEL_ID", model.id)
-
     def set_registered_model_to_read_only(self, model):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
 

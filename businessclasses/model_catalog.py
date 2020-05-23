@@ -124,6 +124,15 @@ class ModelCatalog:
                     model.project_types.append(project_type)
         return models
 
+
+    def read_models_with_tracking_data_only_from_model_catalog_db(self, model_catalog_db_data_io, id_field_name, id_list):
+        # type: (ModelCatalogDbDataIo) -> List[Model]
+        input_table_name = self.config.model_tracking_sde_path
+        class_type = "model"
+        models = model_catalog_db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
+        return models
+
+
     def add_models_from_model_catalog_db(self, model_catalog_db_data_io):
         self.add_models(self.create_models_from_model_catalog_db(model_catalog_db_data_io))
 
