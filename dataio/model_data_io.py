@@ -4,6 +4,7 @@ import json
 import traceback
 from businessclasses.config import Config
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWRITE, S_IWGRP, S_IWOTH
+import xml.etree.ElementTree as ET
 try:
     from typing import List, Any
 except:
@@ -206,6 +207,18 @@ class ModelDataIo(ObjectDataIo):
             data = json.load(json_file)
             return data["id"]
 
+    def read_root_from_config_file(self, model):
+        tree = ET.parse(model.config_file_path)
+        root = tree.getroot()
+        return root
+
+    def read_extract_date_from_config_file(self, model):
+        root = self.read_root_from_config_file(model)
+        extract_date = root[2].text  # fragile - indexing could change
+        return extract_date
+
+    # TODO: create reads for deploy date and run date (note to change run date to results extracted date)
+
     def read_model_purpose_from_model_registration_file(self, model):
         valid_model_purpose_values = self.config.model_purpose_id.keys()
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
@@ -215,7 +228,6 @@ class ModelDataIo(ObjectDataIo):
                 return data["model_purpose"]
             else:
                 raise InvalidModelPurposeException(None)
-
 
 # TODO: finish the below functions
     def read_extraction_date_from_emgaats_config_file(self):

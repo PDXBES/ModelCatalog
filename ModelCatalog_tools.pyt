@@ -345,7 +345,7 @@ class EMGAATS_Model_Registration(object):
             self.model.create_date = datetime.datetime.today()
             self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
             self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE (change to results extracted date)
-            self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.extract_date = self.model.set_extract_date(self.model_dataio)
             self.model.created_by = getpass.getuser()
             self.model.model_name = model_name_parameter.valueAsText
             self.model.model_path = self.utility.check_path(model_path_parameter.valueAsText)

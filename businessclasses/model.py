@@ -322,6 +322,8 @@ class Model(GenericObject):
                         return True
         return False
 
+    def set_extract_date(self, model_data_io):
+        self.extract_date = model_data_io.read_extract_date_from_config_file(self)
 
     def set_parent_model_id(self, model_data_io):
         valid_model_purpose_values = self.config.model_purpose_id.values()
