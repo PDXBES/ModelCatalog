@@ -381,4 +381,3 @@ class TestModelDataIO(TestCase):
             read_status = self.model_data_io.check_model_is_read_only(self.mock_model)
             self.assertEquals(read_status, False)
 
-    

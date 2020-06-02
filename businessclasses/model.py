@@ -38,6 +38,7 @@ class Model(GenericObject):
         self.run_date = None
         self.extract_date = None
         self.created_by = None
+        self.model_name = None
         self.model_path = None
         self.model_purpose_id = None
         self.model_calibration_file = None
