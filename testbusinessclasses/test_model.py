@@ -857,3 +857,4 @@ class TestModel(TestCase):
 
                 with self.assertRaises(InvalidModelRegistrationFileException):
                     self.model.set_parent_model_id(self.mock_model_data_io)
+

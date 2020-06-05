@@ -70,6 +70,7 @@ class Model(GenericObject):
         field_attribute_lookup["Deploy_Date"] = "deploy_date"
         field_attribute_lookup["Extract_Date"] = "extract_date"
         field_attribute_lookup["Run_Date"] = "run_date"
+        field_attribute_lookup["Model_Name"] = "model_name"
         field_attribute_lookup["Model_Path"] = "model_path"
         field_attribute_lookup["Model_Purpose_ID"] = "model_purpose_id"
         field_attribute_lookup["Model_Calibration_file"] = "model_calibration_file"
@@ -323,7 +324,8 @@ class Model(GenericObject):
         return False
 
     def set_extract_date(self, model_data_io):
-        self.extract_date = model_data_io.read_extract_date_from_config_file(self)
+        if self.validate_config_file():
+            self.extract_date = model_data_io.read_extract_date_from_config_file(self)
 
     def set_parent_model_id(self, model_data_io):
         valid_model_purpose_values = self.config.model_purpose_id.values()

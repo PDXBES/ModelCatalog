@@ -343,12 +343,12 @@ class EMGAATS_Model_Registration(object):
             self.model.project_phase_id = self.config.proj_phase_id[project_phase_parameter.valueAsText]
             self.model.engine_type_id = 1  # not currently in use
             self.model.create_date = datetime.datetime.today()
-            self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-            self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE (change to results extracted date)
-            self.model.extract_date = self.model.set_extract_date(self.model_dataio)
             self.model.created_by = getpass.getuser()
             self.model.model_name = model_name_parameter.valueAsText
             self.model.model_path = self.utility.check_path(model_path_parameter.valueAsText)
+            self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+            self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE (change to results extracted date)
+            self.model.set_extract_date(self.model_dataio)
             self.model.create_project_types(project_type_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_bc(model_alt_bc_parameter.values, self.modelcatalogdataio)
             self.model.create_model_alterations_hydrologic(model_alt_hydrologic_parameter.values, self.modelcatalogdataio)

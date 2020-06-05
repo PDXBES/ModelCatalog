@@ -44,6 +44,7 @@ class TestModelCatalogCapacityResults(TestCase):
         self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
+        self.model_name = "This is what I call my model"
         self.model.model_path = r"\\besfile1\CCSP\03_WP2_Planning_Support_Tools\03_RRAD\CCSP_Data_Management_ToolBox\Test_Cases\Taggart\Final"
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Characterization"]

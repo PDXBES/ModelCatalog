@@ -34,11 +34,11 @@ class EmgaatsRegistrationIntegrationTest(unittest.TestCase):
         self.model.project_phase_id = 1
         self.model.engine_type_id = 1
         self.model.create_date = None
-        self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
-        self.model.extract_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
         self.model.created_by = getpass.getuser()
         self.model.model_path = r"\\besfile1\ccsp\Models\OAK\2Cali\Final" ## does this one have all the required storms?
+        self.model.deploy_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.run_date = None  # TODO NEEDS TO BE EXTRACTED FROM CONFIG FILE
+        self.model.set_extract_date(self.model_dataio)
         self.model.project_type_id = 1
         self.model.model_purpose_id = self.config.model_purpose_id["Calibration"]
         self.model.model_calibration_file = "C:\Temp\Cal"
