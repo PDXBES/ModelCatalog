@@ -346,7 +346,6 @@ class Model(GenericObject):
         else:
             raise InvalidModelPurposeException(None)
 
-
     def valid_parent_model_purpose(self, parent_model_purpose):
 
         if self.config.model_purpose[self.model_purpose_id] == "Characterization":

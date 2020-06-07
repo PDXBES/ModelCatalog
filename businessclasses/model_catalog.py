@@ -40,7 +40,7 @@ class ModelCatalog:
         self.check_for_duplicates_in_input_model_list(models)
 
         for model in models:
-            self.add_model(model) # add_model already runs check for duplicate and check valid - why do it twice? (DCA)
+            self.add_model(model)  # add_model already runs check for duplicate and check valid - why do it twice? (DCA)
 
     def check_for_duplicates_in_input_model_list(self, models):
         # type: (List[Model]) -> None

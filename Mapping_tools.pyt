@@ -1,13 +1,13 @@
 import arcpy
 from businessclasses.model_catalog import ModelCatalog
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
-from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
-from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
-from businessclasses.mapping_snapshot import MappingSnapshot
-from businessclasses.rrad_mapping import RradMapping
-from businessclasses.rrad import Rrad
-from dataio.rehab_data_io import RehabDataIo
-from dataio.rrad_db_data_io import RradDbDataIo
+# from dataio.rrad_mapping_db_data_io import RradMappingDbDataIo
+# from dataio.mapping_snapshot_data_io import MappingSnapshotDataIo
+# from businessclasses.mapping_snapshot import MappingSnapshot
+# from businessclasses.rrad_mapping import RradMapping
+# from businessclasses.rrad import Rrad
+# from dataio.rehab_data_io import RehabDataIo
+# from dataio.rrad_db_data_io import RradDbDataIo
 from businessclasses.config import Config
 from ui.characterization_reporting import CharacterizationReporting
 
@@ -80,31 +80,32 @@ class CharacterizationReportingTool(object):
         return
 
     def execute(self, parameters, messages):
-        rrad = Rrad(config)
-        rrad_db_data_io = RradDbDataIo(config)
-        rehab_data_io = RehabDataIo(config, rrad_db_data_io)
-        characterization_model_descriptions = parameters[0].values
-        requested_by = parameters[1].valueAsText
-
-        rrad_mapping = RradMapping(config)
-        rrad_mapping_db_data_io = RradMappingDbDataIo(config)
-        mapping_snapshot_data_io = MappingSnapshotDataIo(config, rrad_mapping_db_data_io)
-        mapping_snapshot = MappingSnapshot.initialize_with_current_id(config, rrad_mapping_db_data_io)
-
-        mapping_snapshot.snapshot_type_id = config.mapping_snapshot_type_id["Characterization"]
-        mapping_snapshot.logic = "User Defined"
-        mapping_snapshot.requested_by = requested_by
-        mapping_snapshot.created_by = getpass.getuser()
-        mapping_snapshot.create_date = datetime.datetime.today()
-        models = characterization_reporting.characterization_model.values()
-        desc = characterization_reporting.characterization_model.keys()
-        arcpy.AddMessage(str(models[0].id))
-        arcpy.AddMessage(str(desc[0]))
-        mapping_snapshot.simulations = characterization_reporting.get_simulations_from_selected_models(characterization_model_descriptions)
-
-        rrad_mapping.add_mapping_snapshot(mapping_snapshot)
-        mapping_snapshot = rrad_mapping.mapping_snapshots[0]
-        rrad_mapping_db_data_io.add_mapping_snapshot(mapping_snapshot, mapping_snapshot_data_io,rrad_db_data_io, rehab_data_io, rrad)
+        pass
+        # rrad = Rrad(config)
+        # rrad_db_data_io = RradDbDataIo(config)
+        # rehab_data_io = RehabDataIo(config, rrad_db_data_io)
+        # characterization_model_descriptions = parameters[0].values
+        # requested_by = parameters[1].valueAsText
+        #
+        # rrad_mapping = RradMapping(config)
+        # rrad_mapping_db_data_io = RradMappingDbDataIo(config)
+        # mapping_snapshot_data_io = MappingSnapshotDataIo(config, rrad_mapping_db_data_io)
+        # mapping_snapshot = MappingSnapshot.initialize_with_current_id(config, rrad_mapping_db_data_io)
+        #
+        # mapping_snapshot.snapshot_type_id = config.mapping_snapshot_type_id["Characterization"]
+        # mapping_snapshot.logic = "User Defined"
+        # mapping_snapshot.requested_by = requested_by
+        # mapping_snapshot.created_by = getpass.getuser()
+        # mapping_snapshot.create_date = datetime.datetime.today()
+        # models = characterization_reporting.characterization_model.values()
+        # desc = characterization_reporting.characterization_model.keys()
+        # arcpy.AddMessage(str(models[0].id))
+        # arcpy.AddMessage(str(desc[0]))
+        # mapping_snapshot.simulations = characterization_reporting.get_simulations_from_selected_models(characterization_model_descriptions)
+        #
+        # rrad_mapping.add_mapping_snapshot(mapping_snapshot)
+        # mapping_snapshot = rrad_mapping.mapping_snapshots[0]
+        # rrad_mapping_db_data_io.add_mapping_snapshot(mapping_snapshot, mapping_snapshot_data_io,rrad_db_data_io, rehab_data_io, rrad)
 
 
 

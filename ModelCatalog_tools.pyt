@@ -13,6 +13,7 @@ from businessclasses import config
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
 from businessclasses.model_catalog_exception import InvalidParentModelPurposeException
+from ui.model_copy import ModelCopy
 reload(arcpy)
 reload(config)
 reload(utility)
@@ -24,6 +25,14 @@ reload(utility)
 
 test_flag = "TEST"
 
+# config = config.Config(test_flag)
+# model_catalog = ModelCatalog(config)
+# model_catalog_db_data_io = ModelCatalogDbDataIo(config)
+# model_copy = ModelCopy(config,
+#                        model_catalog,
+#                        model_catalog_db_data_io)
+# model_copy.create_registered_model_dictionary()
+
 class Toolbox(object):
     def __init__(self):
         """Define the toolbox (the name of the toolbox is the name of the
@@ -32,7 +41,7 @@ class Toolbox(object):
         self.alias = "Model Catalog Tools"
 
         # List of tool classes associated with this toolbox
-        self.tools = [EMGAATS_Model_Registration]
+        self.tools = [EMGAATS_Model_Registration, Copy_Registered_Model]
 
 class EMGAATS_Model_Registration(object):
     def __init__(self):
@@ -404,6 +413,60 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
     except:
         arcpy.AddError("Model could not be registered")
         arcpy.ExecuteError()
+
+########################################################################################################################
+
+class Copy_Registered_Model(object):
+    def __init__(self):
+        self.label = "Copy Registered Model"
+        self.description = "Tool for making a copy of a model which was previously registered in the Model Catalog. " \
+                           "The resultant copy will be unlocked and editable."
+        self.config = config.Config(test_flag)
+        self.model_catalog = ModelCatalog(self.config)
+        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
+        # self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
+        # self.utility = utility.Utility(self.config)
+
+        #config = config.Config(test_flag)
+        #model_catalog = ModelCatalog(config)
+        #model_catalog_db_data_io = ModelCatalogDbDataIo(config)
+        self.model_copy = ModelCopy(self.config,
+                                    self.model_catalog,
+                                    self.modelcatalogdataio)
+        self.model_copy.create_registered_model_dictionary()
+
+    def getParameterInfo(self):
+        registered_models = arcpy.Parameter(
+            displayName="Registered Models",
+            name="registered_models",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input",
+            multiValue=True)
+        registered_models.filter.type = "ValueList"
+        registered_models.filter.list = self.model_copy.registered_models.keys()
+
+        params = [registered_models]
+        return params
+
+    def isLicensed(self):
+        return True
+
+    def updateParameters(self, parameters):
+        pass
+
+    def updateMessages(self, parameters):
+
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+
+        return
+
+    def execute(self, parameters, messages):
+        pass
+
+def Copy_Registered_Model_function():
+    pass
 
 ########################################################################################################################
 
