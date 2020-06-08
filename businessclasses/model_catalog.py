@@ -64,42 +64,42 @@ class ModelCatalog:
     def create_models_with_tracking_data_only_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[Model]
         input_table_name = self.config.model_tracking_sde_path
-        class_type = "model"
+        class_type = Model
         models = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return models
 
     def create_simulations_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[Simulation]
         input_table_name = self.config.simulation_sde_path
-        class_type = "simulation"
+        class_type = Simulation
         simulations = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return simulations
 
     def create_model_alt_bcs_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[ModelAltBc]
         input_table_name = self.config.model_alt_bc_sde_path
-        class_type = "model_alt_bc"
+        class_type = ModelAltBc
         model_alt_bcs = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return model_alt_bcs
 
     def create_model_alt_hydraulics_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[ModelAltHydraulic]
         input_table_name = self.config.model_alt_hydraulic_sde_path
-        class_type = "model_alt_hydraulic"
+        class_type = ModelAltHydraulic
         model_alt_hydraulics = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return model_alt_hydraulics
 
     def create_model_alt_hydrologics_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[ModelAltHydrologic]
         input_table_name = self.config.model_alt_hydrologic_sde_path
-        class_type = "model_alt_hydrologic"
+        class_type = ModelAltHydrologic
         model_alt_hydrologics = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return model_alt_hydrologics
 
     def create_project_types_from_model_catalog_db(self, model_catalog_db_data_io):
         # type: (ModelCatalogDbDataIo) -> List[ProjectType]
         input_table_name = self.config.project_type_sde_path
-        class_type = "project_type"
+        class_type = ProjectType
         project_types = model_catalog_db_data_io.create_objects_from_database(class_type, input_table_name)
         return project_types
 
@@ -128,7 +128,7 @@ class ModelCatalog:
     def read_models_with_tracking_data_only_from_model_catalog_db(self, model_catalog_db_data_io, id_field_name, id_list):
         # type: (ModelCatalogDbDataIo) -> List[Model]
         input_table_name = self.config.model_tracking_sde_path
-        class_type = "model"
+        class_type = Model
         models = model_catalog_db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
         return models
 

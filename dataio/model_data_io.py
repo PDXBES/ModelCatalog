@@ -18,6 +18,7 @@ from businessclasses.storages import Storages
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelPathException
 from businessclasses.model_catalog_exception import InvalidModelPurposeException
+from businessclasses.model_catalog_exception import InvalidModelRegistrationFileException
 from db_data_io import DbDataIo
 from object_data_io import ObjectDataIo
 from businessclasses.model_alt_bc import ModelAltBc
@@ -200,6 +201,14 @@ class ModelDataIo(ObjectDataIo):
             raise Exception
         #TODO figure out how to make this testable
 
+    def delete_model_registration_file(self, model_path):
+        file_name = "model_registration.json"
+        model_registration_file = os.path.join(model_path, file_name)
+        if os.path.isfile(model_registration_file):
+            os.remove(model_registration_file)
+        else:
+            raise InvalidModelRegistrationFileException
+
     #TODO: split this function to take a model registration path and be more "generalic"?
     def read_model_id_from_model_registration_file(self, model):
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
@@ -251,6 +260,14 @@ class ModelDataIo(ObjectDataIo):
         # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
 
         model_path = model.model_path
+        for root, directories, filenames in os.walk(model_path):
+            for filename in filenames:
+                filepath = os.path.join(root, filename)
+                os.chmod(filepath, S_IWRITE | S_IWGRP | S_IWOTH )
+
+    def set_model_copy_to_read_write(self, model_path):
+        # "https://stackoverflow.com/questions/28492685/change-file-to-read-only-mode-in-python"
+
         for root, directories, filenames in os.walk(model_path):
             for filename in filenames:
                 filepath = os.path.join(root, filename)

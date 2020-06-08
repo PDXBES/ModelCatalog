@@ -4,6 +4,7 @@ from businessclasses.model import Model
 from dataio.model_catalog_db_data_io import ModelCatalogDbDataIo
 from dataio.simulation_data_io import SimulationDataIo
 from dataio.model_data_io import ModelDataIo
+from dataio.db_data_io import DbDataIo
 import getpass
 import datetime
 import traceback
@@ -418,18 +419,16 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
 
 class Copy_Registered_Model(object):
     def __init__(self):
-        self.label = "Copy Registered Model"
+        self.label = "Copy Registered Model(s)"
         self.description = "Tool for making a copy of a model which was previously registered in the Model Catalog. " \
-                           "The resultant copy will be unlocked and editable."
+                           "The resultant copy will be unlocked and editable. " \
+                           "The copy will be created in the same directory as the original."
+
         self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
+        self.db_data_io = DbDataIo(self.config)
         self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
-        # self.model_dataio = ModelDataIo(self.config, self.modelcatalogdataio)
-        # self.utility = utility.Utility(self.config)
-
-        #config = config.Config(test_flag)
-        #model_catalog = ModelCatalog(config)
-        #model_catalog_db_data_io = ModelCatalogDbDataIo(config)
+        self.model_data_io = ModelDataIo(self.config, self.db_data_io)
         self.model_copy = ModelCopy(self.config,
                                     self.model_catalog,
                                     self.modelcatalogdataio)
@@ -463,10 +462,27 @@ class Copy_Registered_Model(object):
         return
 
     def execute(self, parameters, messages):
-        pass
+        arcpy.AddMessage("Execute")
 
-def Copy_Registered_Model_function():
-    pass
+        # get list of models selected by user
+        selected_model_descriptions = parameters[0].values
+        selected_models = self.model_copy.get_models_selected_from_model_dictionary(selected_model_descriptions)
+
+        # for each model, get model.model_dir and make a copy (parse model_dir to get 1 folder level up)
+        for model in selected_models:
+            try:
+                arcpy.AddMessage("Copying " + str(model.model_path) + " ...")
+                self.model_copy.copy_model_folder(model)
+                arcpy.AddMessage(" - Setting copy to read/ write")
+                self.model_data_io.set_model_copy_to_read_write(self.model_copy.new_copy_dir_name(model))
+                arcpy.AddMessage(" - Deleting model registration file")
+                self.model_data_io.delete_model_registration_file(self.model_copy.new_copy_dir_name(model))
+                arcpy.AddMessage("Model Copied and Ready")
+            except:
+                arcpy.AddError(str(model.model_path) + " - Model could not be copied")
+                arcpy.ExecuteError()
+
+
 
 ########################################################################################################################
 
