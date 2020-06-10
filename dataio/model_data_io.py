@@ -216,18 +216,6 @@ class ModelDataIo(ObjectDataIo):
             data = json.load(json_file)
             return data["id"]
 
-    def read_root_from_config_file(self, model):
-        tree = ET.parse(model.config_file_path)
-        root = tree.getroot()
-        return root
-
-    def read_extract_date_from_config_file(self, model):
-        root = self.read_root_from_config_file(model)
-        extract_date = root[2].text  # fragile - indexing could change
-        return extract_date
-
-    # TODO: create reads for deploy date and run date (note to change run date to results extracted date)
-
     def read_model_purpose_from_model_registration_file(self, model):
         valid_model_purpose_values = self.config.model_purpose_id.keys()
         registration_file = os.path.join(model.parent_model_path, "model_registration.json")
@@ -238,21 +226,32 @@ class ModelDataIo(ObjectDataIo):
             else:
                 raise InvalidModelPurposeException(None)
 
-# TODO: finish the below functions
-    def read_extraction_date_from_emgaats_config_file(self):
-        pass
-    #get list of emgaats data for all models in the folder
-    #use brents existing xml notes
-    #will return the list
+    def read_root_from_config_file(self, model):
+        tree = ET.parse(model.config_file_path)
+        root = tree.getroot()
+        return root
 
-    def read_deploy_date_and_results_extracted_date_from_emgaats_config_file(self):
+    def read_extraction_date_from_emgaats_config_file(self, model):
+        root = self.read_root_from_config_file(model)
+        extract_date = root[2].text  # fragile - indexing could change
+        return extract_date
+
+# TODO: create reads for deploy date and run date (note to change run date to results extracted date - verify)
+# TODO: finish the below functions
+
+    def read_deploy_date_and_results_extracted_date_from_emgaats_config_file(self, model):
+        root = self.read_root_from_config_file(model)
+        #deploy_date = root[#].text  # fragile - indexing could change
+        #return deploy_date
         pass
     #get list of emgaats data for all simulations in the folder
     #will return the list
     #awaiting changes from Arnel
-    # Q - is this duplicating read_extraction_date_from_emgaats_config_file or a separate thing? (DCA)
 
-    def read_run_date_from_emgaats_config_file(self):
+    def read_run_date_from_emgaats_config_file(self, model):
+        root = self.read_root_from_config_file(model)
+        #run_date = root[#].text  # fragile - indexing could change
+        #return run_date
         pass
     #similar to above 2 functions
 
