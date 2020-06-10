@@ -6,7 +6,7 @@ except:
     pass
 
 
-class Storages(GenericObject):
+class Storage(GenericObject):
     def __init__(self, config):
         # type: (Config) -> None
         self.config = config

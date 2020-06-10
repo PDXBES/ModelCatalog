@@ -67,7 +67,7 @@ class Config:
         self.geometry_areas_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Areas"
         self.geometry_links_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Links"
         self.geometry_nodes_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Nodes"
-        self.storages_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Storages"
+        self.storage_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Storage"
 
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
 ##
