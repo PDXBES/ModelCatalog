@@ -63,7 +63,7 @@ class TestUtility(TestCase):
                                   "geometry_nodes_sde_path", "geometry_areas_sde_path",
                                   "geometry_links_sde_path",
                                   "results_area_sde_path", "results_link_sde_path",
-                                  "results_node_sde_path", "results_node_flooding_sde_path"]
+                                  "results_node_sde_path", "results_node_flooding_sde_path", "storage_sde_path"]
         self.assertTrue(self.mock_TruncateTable_management.called)
         for counter, argument in enumerate(self.mock_TruncateTable_management.call_args_list):
             feature_class = argument[0][0]

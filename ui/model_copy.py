@@ -22,11 +22,11 @@ class ModelCopy(object):
             model_dictionary[model_string] = model
         self.registered_models = model_dictionary
 
-    def get_models_selected_from_model_dictionary(self, selected_model_descriptions):
-        selected_models = []
-        for model_description in selected_model_descriptions:
-            selected_models.append(self.registered_models[model_description])
-        return selected_models
+    # def get_models_selected_from_model_dictionary(self, selected_model_description):
+    #     #selected_models = []
+    #     #for model_description in selected_model_descriptions:
+    #         #selected_models.append(self.registered_models[model_description])
+    #     return self.registered_models[selected_model_description]
 
     def copy_model_folder(self, model):
         source_folder = model.model_path

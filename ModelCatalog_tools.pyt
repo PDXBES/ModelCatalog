@@ -419,10 +419,10 @@ def EMGAATS_Model_Registration_function(model_catalog, config):
 
 class Copy_Registered_Model(object):
     def __init__(self):
-        self.label = "Copy Registered Model(s)"
+        self.label = "Copy a Registered Model"
         self.description = "Tool for making a copy of a model which was previously registered in the Model Catalog. " \
                            "The resultant copy will be unlocked and editable. " \
-                           "The copy will be created in the same directory as the original."
+                           "The copy will be date stamped and created in the same directory as the original."
 
         self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
@@ -441,7 +441,7 @@ class Copy_Registered_Model(object):
             datatype="GPString",
             parameterType="Required",
             direction="Input",
-            multiValue=True)
+            multiValue=False)
         registered_models.filter.type = "ValueList"
         registered_models.filter.list = self.model_copy.registered_models.keys()
 
@@ -465,22 +465,21 @@ class Copy_Registered_Model(object):
         arcpy.AddMessage("Execute")
 
         # get list of models selected by user
-        selected_model_descriptions = parameters[0].values
-        selected_models = self.model_copy.get_models_selected_from_model_dictionary(selected_model_descriptions)
+        selected_model_description = parameters[0].value
+        selected_model = self.model_copy.registered_models[selected_model_description]
 
-        # for each model, get model.model_dir and make a copy (parse model_dir to get 1 folder level up)
-        for model in selected_models:
-            try:
-                arcpy.AddMessage("Copying " + str(model.model_path) + " ...")
-                self.model_copy.copy_model_folder(model)
-                arcpy.AddMessage(" - Setting copy to read/ write")
-                self.model_data_io.set_model_copy_to_read_write(self.model_copy.new_copy_dir_name(model))
-                arcpy.AddMessage(" - Deleting model registration file")
-                self.model_data_io.delete_model_registration_file(self.model_copy.new_copy_dir_name(model))
-                arcpy.AddMessage("Model Copied and Ready")
-            except:
-                arcpy.AddError(str(model.model_path) + " - Model could not be copied")
-                arcpy.ExecuteError()
+        # get model.model_dir and make a copy (parse model_dir to get 1 folder level up)
+        try:
+            arcpy.AddMessage("Copying " + str(selected_model.model_path) + " ...")
+            self.model_copy.copy_model_folder(selected_model)
+            arcpy.AddMessage(" - Setting copy to read/ write")
+            self.model_data_io.set_model_copy_to_read_write(self.model_copy.new_copy_dir_name(selected_model))
+            arcpy.AddMessage(" - Deleting model registration file")
+            self.model_data_io.delete_model_registration_file(self.model_copy.new_copy_dir_name(selected_model))
+            arcpy.AddMessage("Model Copied and Ready")
+        except:
+            arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
+            arcpy.ExecuteError()
 
 
 
