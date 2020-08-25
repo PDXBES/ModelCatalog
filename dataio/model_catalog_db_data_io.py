@@ -51,6 +51,7 @@ class ModelCatalogDbDataIo(DbDataIo):
             model_data_io.append_model_alterations(model)
             model_data_io.append_project_types(model)
             model_data_io.append_storage_table(model)
+            model_data_io.append_director_table(model)
             arcpy.AddMessage("Adding Model Geometry Network")
             model_data_io.append_model_network(model)
             arcpy.AddMessage("Model Geometry Network Added")

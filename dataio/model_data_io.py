@@ -15,6 +15,7 @@ from businessclasses.node_geometry import NodeGeometry
 from businessclasses.link_geometry import LinkGeometry
 from businessclasses.area_geometry import AreaGeometry
 from businessclasses.storage import Storage
+from businessclasses.director import Director
 from businessclasses.model_catalog_exception import InvalidModelException
 from businessclasses.model_catalog_exception import InvalidModelPathException
 from businessclasses.model_catalog_exception import InvalidModelPurposeException
@@ -159,6 +160,18 @@ class ModelDataIo(ObjectDataIo):
         object_type = Storage
         self.copy_geometry_to_memory(input_table, output_table_name, self.db_data_io, model, id_field, object_type)
         self.db_data_io.append_table_to_db(output_table, self.config.storage_sde_path)
+
+        arcpy.Delete_management(output_table)
+
+    def append_director_table(self, model):
+        input_gdb = model.model_path + "\\" + "EmgaatsModel.gdb"
+        input_table = input_gdb + "\\" + "Directors"
+        output_table_name = "in_memory_table_director"
+        output_table = self.db_data_io.workspace + "\\" + output_table_name
+        id_field = "model_catalog_director_id"
+        object_type = Director
+        self.copy_geometry_to_memory(input_table, output_table_name, self.db_data_io, model, id_field, object_type)
+        self.db_data_io.append_table_to_db(output_table, self.config.director_sde_path)
 
         arcpy.Delete_management(output_table)
 
