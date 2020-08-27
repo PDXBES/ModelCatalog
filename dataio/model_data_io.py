@@ -246,7 +246,7 @@ class ModelDataIo(ObjectDataIo):
 
     def read_extraction_date_from_emgaats_config_file(self, model):
         root = self.read_root_from_config_file(model)
-        extract_date = root[2].text  # fragile - indexing could change
+        extract_date = root.find('ExtractionDateTime').text
         return extract_date
 
 # TODO: create reads for deploy date and run date (note to change run date to results extracted date - verify)
