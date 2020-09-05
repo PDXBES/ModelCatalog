@@ -59,7 +59,7 @@ class ModelCatalogDbDataIo(DbDataIo):
                 for simulation in model.simulations:
                     simulation_data_io.append_simulation_results(simulation, model)
             else:
-                arcpy.AddMessage("No results will be added to the Model Catalog")
+                arcpy.AddMessage("No simulation results will be added to the Model Catalog")
 
             model_data_io.write_model_registration_file(model)
             if model.model_status_id == self.config.model_status_id["Final"]:
