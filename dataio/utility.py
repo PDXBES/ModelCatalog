@@ -64,7 +64,8 @@ class Utility:
                                   self.config.geometry_links_sde_path,
                                   self.config.results_area_sde_path, self.config.results_link_sde_path,
                                   self.config.results_node_sde_path, self.config.results_node_flooding_sde_path,
-                                  self.config.storage_sde_path]
+                                  self.config.storage_sde_path,
+                                  self.config.director_sde_path]
             for feature_class in feature_class_list:
                 try:
                     arcpy.TruncateTable_management(feature_class)
