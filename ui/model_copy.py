@@ -18,8 +18,7 @@ class ModelCopy(object):
         model_dictionary = {}
         self.model_catalog.add_models_from_model_catalog_db(self.model_catalog_db_data_io)
         for model in self.model_catalog.models:
-            model_string = model.model_path + "   " + Utility.format_date \
-                (model.create_date) + "   " + model.created_by + "   Model ID: " + str(model.id)
+            model_string = model.model_name + "   " + model.model_path + "   " + model.created_by + "   " + Utility.format_date(model.create_date)
             model_dictionary[model_string] = model
         self.registered_models = model_dictionary
 
@@ -28,7 +27,7 @@ class ModelCopy(object):
         self.model_catalog.add_models_from_model_catalog_db(self.model_catalog_db_data_io)
         non_calibration_models = self.model_catalog.non_calibration_models()
         for model in non_calibration_models:
-            non_calibration_string = model.model_path + "   " + Utility.format_date(model.create_date) + "   " + model.created_by + " " + str(model.id)
+            non_calibration_string = model.model_name + "   " + model.model_path + "   " + model.created_by + "   " + Utility.format_date(model.create_date)
             non_calibration_dictionary[non_calibration_string] = model
         self.non_calibration_models = non_calibration_dictionary
 
