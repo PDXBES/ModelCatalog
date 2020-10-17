@@ -487,7 +487,7 @@ class Copy_Registered_Model(object):
 class Export_Model_Catalog_Data(object):
     def __init__(self):
         self.label = "Export Selected Models to Geodatabase"
-        self.description = "Tool for exporting model data which was previously registered in the Model Catalog. " \
+        self.description = "Tool for exporting model data which was previously registered in the Model Catalog."
 
         self.config = config.Config(test_flag)
         self.model_catalog = ModelCatalog(self.config)
@@ -510,7 +510,16 @@ class Export_Model_Catalog_Data(object):
         registered_models.filter.type = "ValueList"
         registered_models.filter.list = self.model_copy.non_calibration_models.keys()
 
-        params = [registered_models]
+        output_dir = arcpy.Parameter(
+            displayName="Output Directory",
+            name="output_directory",
+            datatype="DEWorkspace",
+            parameterType="Required",
+            direction="Input")
+
+        output_dir.filter.list = ["File System", "Local Database"]
+
+        params = [registered_models, output_dir]
         return params
 
     def isLicensed(self):
@@ -530,20 +539,25 @@ class Export_Model_Catalog_Data(object):
         arcpy.AddMessage("Execute")
 
         # get list of models selected by user
-        selected_model_description = parameters[0].value
-        selected_model = self.model_copy.registered_models[selected_model_description]
+        selected_model_descriptions = parameters[0].values
+        selected_models = self.model_copy.non_calibration_models[selected_model_descriptions]
+        output_directory = parameters[1].value
 
-        # get model.model_dir and make a copy (parse model_dir to get 1 folder level up)
+        # do this all inside of an edit session (don't want the gdb hanging around if the append fails)
+        # create gdb in output directory
+        # create table structure using MC tables as template OR
+        # append model objects selected through UI into tables
+
         try:
-            arcpy.AddMessage("Copying " + str(selected_model.model_path) + " ...")
-            self.model_copy.copy_model_folder(selected_model)
-            arcpy.AddMessage(" - Setting copy to read/ write")
-            self.model_data_io.set_model_copy_to_read_write(self.model_copy.new_copy_dir_name(selected_model))
-            arcpy.AddMessage(" - Deleting model registration file")
-            self.model_data_io.delete_model_registration_file(self.model_copy.new_copy_dir_name(selected_model))
-            arcpy.AddMessage("Model Copied and Ready")
+            self.modelcatalogdataio.create_todays_gdb(output_directory)
+            arcpy.AddMessage(str(selected_model_descriptions))
+            arcpy.AddMessage(str(output_directory))
+
+            #arcpy.AddMessage("Copying " + str(selected_model.model_path) + " ...")
+            #self.model_copy.copy_model_folder(selected_model)
+            #arcpy.AddMessage("Model Copied and Ready")
         except:
-            arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
+            arcpy.AddError(str(selected_models.model_path) + " - Model could not be copied")
             arcpy.ExecuteError()
 
 

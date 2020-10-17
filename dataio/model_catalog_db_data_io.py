@@ -1,4 +1,5 @@
 import arcpy
+from datetime import datetime
 
 try:
     from typing import List, Any
@@ -16,6 +17,7 @@ from businessclasses.model_alt_bc import ModelAltBc
 from businessclasses.model_alt_hydraulic import ModelAltHydraulic
 from businessclasses.model_alt_hydrologic import ModelAltHydrologic
 from businessclasses.project_type import ProjectType
+from dataio import utility
 from model_data_io import ModelDataIo
 from simulation_data_io import SimulationDataIo
 from businessclasses.model_catalog_exception import AppendModelAlterationsException
@@ -27,6 +29,20 @@ class ModelCatalogDbDataIo(DbDataIo):
         self.config = config
         self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
         self.workspace = "in_memory"
+
+        self.utility = utility.Utility(self.config)
+
+
+    def create_todays_gdb(self, base_folder):
+        todays_gdb_full_path_name = self.utility.todays_gdb_full_path_name(datetime.today(), base_folder)
+        if arcpy.Exists(todays_gdb_full_path_name):
+            arcpy.AddError("gdb already exists")
+            arcpy.ExecuteError()
+            sys.exit("gdb already exists") #TODO - make sure this works as expected
+        else:
+            todays_gdb = self.utility.todays_model_catalog_export_gdb_name(datetime.today())
+            print "Creating gdb " + str(todays_gdb)
+            arcpy.CreateFileGDB_management(base_folder, todays_gdb)
 
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id(Model)
