@@ -153,7 +153,6 @@ class DbDataIo(object):
         arcpy.Delete_management(table)
         return objects
 
-
     def create_objects_from_database_with_query(self, object_type, input_database, query):
         #TODO: add tests
         in_memory_output_table_name = "object_table"

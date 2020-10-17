@@ -150,4 +150,9 @@ class ModelCatalog:
                 characterization_models.append(model)
         return characterization_models
 
-
+    def non_calibration_models(self):
+        non_calibration_models = []
+        for model in self.models:
+            if self.config.model_purpose[model.model_purpose_id] != "Calibration":
+                non_calibration_models.append(model)
+        return non_calibration_models

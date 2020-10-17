@@ -12,6 +12,7 @@ class ModelCopy(object):
         self.model_catalog_db_data_io = model_catalog_db_data_io
 
         self.registered_models = None
+        self.non_calibration_models = None
 
     def create_registered_model_dictionary(self):
         model_dictionary = {}
@@ -22,11 +23,14 @@ class ModelCopy(object):
             model_dictionary[model_string] = model
         self.registered_models = model_dictionary
 
-    # def get_models_selected_from_model_dictionary(self, selected_model_description):
-    #     #selected_models = []
-    #     #for model_description in selected_model_descriptions:
-    #         #selected_models.append(self.registered_models[model_description])
-    #     return self.registered_models[selected_model_description]
+    def create_non_calibration_model_dictionary(self):
+        non_calibration_dictionary = {}
+        self.model_catalog.add_models_from_model_catalog_db(self.model_catalog_db_data_io)
+        non_calibration_models = self.model_catalog.non_calibration_models()
+        for model in non_calibration_models:
+            non_calibration_string = model.model_path + "   " + Utility.format_date(model.create_date) + "   " + model.created_by + " " + str(model.id)
+            non_calibration_dictionary[non_calibration_string] = model
+        self.non_calibration_models = non_calibration_dictionary
 
     def copy_model_folder(self, model):
         source_folder = model.model_path

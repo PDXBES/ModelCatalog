@@ -42,7 +42,7 @@ class Toolbox(object):
         self.alias = "Model Catalog Tools"
 
         # List of tool classes associated with this toolbox
-        self.tools = [EMGAATS_Model_Registration, Copy_Registered_Model]
+        self.tools = [EMGAATS_Model_Registration, Copy_Registered_Model, Export_Model_Catalog_Data]
 
 class EMGAATS_Model_Registration(object):
     def __init__(self):
@@ -481,6 +481,70 @@ class Copy_Registered_Model(object):
             arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
             arcpy.ExecuteError()
 
+
+########################################################################################################################
+
+class Export_Model_Catalog_Data(object):
+    def __init__(self):
+        self.label = "Export Selected Models to Geodatabase"
+        self.description = "Tool for exporting model data which was previously registered in the Model Catalog. " \
+
+        self.config = config.Config(test_flag)
+        self.model_catalog = ModelCatalog(self.config)
+        self.db_data_io = DbDataIo(self.config)
+        self.modelcatalogdataio = ModelCatalogDbDataIo(self.config)
+        self.model_data_io = ModelDataIo(self.config, self.db_data_io)
+        self.model_copy = ModelCopy(self.config,
+                                    self.model_catalog,
+                                    self.modelcatalogdataio)
+        self.model_copy.create_non_calibration_model_dictionary()
+
+    def getParameterInfo(self):
+        registered_models = arcpy.Parameter(
+            displayName="Registered Models",
+            name="registered_models",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input",
+            multiValue=True)
+        registered_models.filter.type = "ValueList"
+        registered_models.filter.list = self.model_copy.non_calibration_models.keys()
+
+        params = [registered_models]
+        return params
+
+    def isLicensed(self):
+        return True
+
+    def updateParameters(self, parameters):
+        pass
+
+    def updateMessages(self, parameters):
+
+        """Modify the messages created by internal validation for each tool
+        parameter.  This method is called after internal validation."""
+
+        return
+
+    def execute(self, parameters, messages):
+        arcpy.AddMessage("Execute")
+
+        # get list of models selected by user
+        selected_model_description = parameters[0].value
+        selected_model = self.model_copy.registered_models[selected_model_description]
+
+        # get model.model_dir and make a copy (parse model_dir to get 1 folder level up)
+        try:
+            arcpy.AddMessage("Copying " + str(selected_model.model_path) + " ...")
+            self.model_copy.copy_model_folder(selected_model)
+            arcpy.AddMessage(" - Setting copy to read/ write")
+            self.model_data_io.set_model_copy_to_read_write(self.model_copy.new_copy_dir_name(selected_model))
+            arcpy.AddMessage(" - Deleting model registration file")
+            self.model_data_io.delete_model_registration_file(self.model_copy.new_copy_dir_name(selected_model))
+            arcpy.AddMessage("Model Copied and Ready")
+        except:
+            arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
+            arcpy.ExecuteError()
 
 
 ########################################################################################################################
