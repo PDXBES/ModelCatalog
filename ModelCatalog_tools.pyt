@@ -540,24 +540,30 @@ class Export_Model_Catalog_Data(object):
 
         # get list of models selected by user
         selected_model_descriptions = parameters[0].values
-        selected_models = self.model_copy.non_calibration_models[selected_model_descriptions]
+        selected_models = []
+        for description in selected_model_descriptions:
+            model_object = self.model_copy.non_calibration_models[description]
+            selected_models.append(model_object)
+
         output_directory = parameters[1].value
 
         # do this all inside of an edit session (don't want the gdb hanging around if the append fails)
+        # need to test if input output dir exists
         # create gdb in output directory
-        # create table structure using MC tables as template OR
-        # append model objects selected through UI into tables
+        # create table structure using MC tables as template and append model objects selected through UI into tables
+        # OR append into in_memory tables and copy those into gdb
 
         try:
+            arcpy.AddMessage("Model Export - Process Started")
             self.modelcatalogdataio.create_todays_gdb(output_directory)
-            arcpy.AddMessage(str(selected_model_descriptions))
-            arcpy.AddMessage(str(output_directory))
 
             #arcpy.AddMessage("Copying " + str(selected_model.model_path) + " ...")
             #self.model_copy.copy_model_folder(selected_model)
             #arcpy.AddMessage("Model Copied and Ready")
+
+            arcpy.AddMessage("Model Export - Process Finished")
         except:
-            arcpy.AddError(str(selected_models.model_path) + " - Model could not be copied")
+            #arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
             arcpy.ExecuteError()
 
 

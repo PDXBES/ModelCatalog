@@ -89,7 +89,8 @@ class Utility:
 
     @staticmethod
     def date_today(date_object):
-        return date_object.strftime('%Y%m%d')
+        date_today = date_object.strftime('%Y%m%d')
+        return date_today
 
     def todays_model_catalog_export_gdb_name(self, date_object):
         basename = "ModelCatalogExport_"
@@ -100,5 +101,5 @@ class Utility:
 
     def todays_gdb_full_path_name(self, date_object, base_folder):
         full_name = self.todays_model_catalog_export_gdb_name(date_object)
-        full_path = os.path.join(base_folder, full_name)
+        full_path = os.path.join(str(base_folder), str(full_name))
         return full_path
