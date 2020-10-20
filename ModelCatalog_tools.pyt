@@ -443,7 +443,7 @@ class Copy_Registered_Model(object):
             direction="Input",
             multiValue=False)
         registered_models.filter.type = "ValueList"
-        registered_models.filter.list = self.model_copy.registered_models.keys()
+        registered_models.filter.list = self.model_copy.registered_model_dict.keys()
 
         params = [registered_models]
         return params
@@ -466,7 +466,7 @@ class Copy_Registered_Model(object):
 
         # get list of models selected by user
         selected_model_description = parameters[0].value
-        selected_model = self.model_copy.registered_models[selected_model_description]
+        selected_model = self.model_copy.registered_model_dict[selected_model_description]
 
         # get model.model_dir and make a copy (parse model_dir to get 1 folder level up)
         try:
@@ -497,6 +497,8 @@ class Export_Model_Catalog_Data(object):
         self.model_copy = ModelCopy(self.config,
                                     self.model_catalog,
                                     self.modelcatalogdataio)
+        self.utility = utility.Utility(self.config)
+
         self.model_copy.create_non_calibration_model_dictionary()
 
     def getParameterInfo(self):
@@ -508,7 +510,7 @@ class Export_Model_Catalog_Data(object):
             direction="Input",
             multiValue=True)
         registered_models.filter.type = "ValueList"
-        registered_models.filter.list = self.model_copy.non_calibration_models.keys()
+        registered_models.filter.list = self.model_copy.non_calibration_model_dict.keys()
 
         output_dir = arcpy.Parameter(
             displayName="Output Directory",
@@ -538,32 +540,33 @@ class Export_Model_Catalog_Data(object):
     def execute(self, parameters, messages):
         arcpy.AddMessage("Execute")
 
+        gdb_full_path_name = self.utility.gdb_full_path_name
+
         # get list of models selected by user
         selected_model_descriptions = parameters[0].values
-        selected_models = []
-        for description in selected_model_descriptions:
-            model_object = self.model_copy.non_calibration_models[description]
-            selected_models.append(model_object)
+        selected_models = self.model_copy.get_selected_non_calibration_models(selected_model_descriptions)
 
         output_directory = parameters[1].value
 
         # do this all inside of an edit session (don't want the gdb hanging around if the append fails)
-        # need to test if input output dir exists
-        # create gdb in output directory
+        # create gdb in output directory - DONE
         # create table structure using MC tables as template and append model objects selected through UI into tables
-        # OR append into in_memory tables and copy those into gdb
+        # OR append into in_memory tables and copy those into gdb (no pre-existing tables needed)
 
         try:
             arcpy.AddMessage("Model Export - Process Started")
-            self.modelcatalogdataio.create_todays_gdb(output_directory)
+            self.modelcatalogdataio.create_output_gdb(gdb_full_path_name)
 
-            #arcpy.AddMessage("Copying " + str(selected_model.model_path) + " ...")
-            #self.model_copy.copy_model_folder(selected_model)
-            #arcpy.AddMessage("Model Copied and Ready")
+            # write model components in 'selected_models' to 'output_directory' gdb
 
             arcpy.AddMessage("Model Export - Process Finished")
         except:
             #arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
+            #arcpy.ExecuteError()
+
+            if arcpy.Exists(gdb_full_path_name):
+                arcpy.Delete_management(self.utility.gdb_full_path_name)
+            arcpy.AddError("Data could not be exported")
             arcpy.ExecuteError()
 
 

@@ -88,18 +88,18 @@ class Utility:
             print("Config set to other than TEST, data will not be deleted")
 
     @staticmethod
-    def date_today(date_object):
-        date_today = date_object.strftime('%Y%m%d')
+    def date_now(date_object):
+        date_today = date_object.strftime('%Y%m%d_%H_%M_%S')
         return date_today
 
-    def todays_model_catalog_export_gdb_name(self, date_object):
+    def model_catalog_export_gdb_name(self, date_object):
         basename = "ModelCatalogExport_"
-        today = self.date_today(date_object)
+        today = self.date_now(date_object)
         extension = ".gdb"
         full_name = basename + today + extension
         return full_name
 
-    def todays_gdb_full_path_name(self, date_object, base_folder):
-        full_name = self.todays_model_catalog_export_gdb_name(date_object)
+    def gdb_full_path_name(self, date_object, base_folder):
+        full_name = self.model_catalog_export_gdb_name(date_object)
         full_path = os.path.join(str(base_folder), str(full_name))
         return full_path

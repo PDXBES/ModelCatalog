@@ -11,8 +11,8 @@ class ModelCopy(object):
         self.model_catalog = model_catalog
         self.model_catalog_db_data_io = model_catalog_db_data_io
 
-        self.registered_models = None
-        self.non_calibration_models = None
+        self.registered_model_dict = None
+        self.non_calibration_model_dict = None
 
     def create_registered_model_dictionary(self):
         model_dictionary = {}
@@ -20,7 +20,7 @@ class ModelCopy(object):
         for model in self.model_catalog.models:
             model_string = model.model_name + "   " + model.model_path + "   " + model.created_by + "   " + Utility.format_date(model.create_date)
             model_dictionary[model_string] = model
-        self.registered_models = model_dictionary
+        self.registered_model_dict = model_dictionary
 
     def create_non_calibration_model_dictionary(self):
         non_calibration_dictionary = {}
@@ -29,7 +29,7 @@ class ModelCopy(object):
         for model in non_calibration_models:
             non_calibration_string = model.model_name + "   " + model.model_path + "   " + model.created_by + "   " + Utility.format_date(model.create_date)
             non_calibration_dictionary[non_calibration_string] = model
-        self.non_calibration_models = non_calibration_dictionary
+        self.non_calibration_model_dict = non_calibration_dictionary
 
     def copy_model_folder(self, model):
         source_folder = model.model_path
@@ -41,3 +41,16 @@ class ModelCopy(object):
         destination_dir = os.path.dirname(model.model_path)
         new_dir = os.path.join(destination_dir, new_folder_name)
         return new_dir
+
+    def get_selected_non_calibration_models(self, non_calibration_model_descriptions):
+        non_calibration_models = []
+        for non_calibration_model_description in non_calibration_model_descriptions:
+            non_calibration_models.append(self.non_calibration_model_dict[non_calibration_model_description])
+        return non_calibration_models
+
+    def get_simulations_from_selected_models(self, model_descriptions):
+        models = self.get_selected_non_calibration_models(model_descriptions)
+        simulations = []
+        for model in models:
+            simulations += model.simulations
+        return simulations

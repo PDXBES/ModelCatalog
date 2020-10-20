@@ -60,7 +60,7 @@ class TestModelCopy(TestCase):
         #TODO: list was reordered to make test pass, verify that this is correct
         formatted_models_keys = [model_string2, model_string1]
         self.model_copy.create_registered_model_dictionary()
-        self.assertEqual(self.model_copy.registered_models.keys(), formatted_models_keys)
+        self.assertEqual(self.model_copy.registered_model_dict.keys(), formatted_models_keys)
 
     #def test_copy_model_folder_calls_new_copy_dir...
 

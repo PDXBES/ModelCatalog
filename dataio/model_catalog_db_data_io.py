@@ -31,14 +31,14 @@ class ModelCatalogDbDataIo(DbDataIo):
         self.current_id_database_table_path = self.config.model_catalog_current_id_table_sde_path
         self.workspace = "in_memory"
 
-    def create_todays_gdb(self, base_folder):
-        todays_gdb_full_path_name = self.utility.todays_gdb_full_path_name(datetime.today(), base_folder)
-        if arcpy.Exists(todays_gdb_full_path_name):
+    def create_output_gdb(self, gdb_full_path_name):
+        #gdb_full_path_name = self.utility.gdb_full_path_name(datetime.today(), base_folder)
+        if arcpy.Exists(gdb_full_path_name):
             arcpy.AddError("gdb already exists")
             arcpy.ExecuteError()
             sys.exit("gdb already exists") #TODO - make sure this works as expected
         else:
-            todays_gdb = self.utility.todays_model_catalog_export_gdb_name(datetime.today())
+            todays_gdb = self.utility.model_catalog_export_gdb_name(datetime.today())
             arcpy.AddMessage("Creating gdb " + str(todays_gdb))
             arcpy.CreateFileGDB_management(base_folder, todays_gdb)
 
