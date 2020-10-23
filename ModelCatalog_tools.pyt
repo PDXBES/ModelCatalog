@@ -550,14 +550,15 @@ class Export_Model_Catalog_Data(object):
 
         # do this all inside of an edit session (don't want the gdb hanging around if the append fails)
         # create gdb in output directory - DONE
-        # create table structure using MC tables as template and append model objects selected through UI into tables
-        # OR append into in_memory tables and copy those into gdb (no pre-existing tables needed)
+        # append selected models into in_memory tables and copy those into gdb (no pre-existing tables needed)
 
         try:
             arcpy.AddMessage("Model Export - Process Started")
             self.modelcatalogdataio.create_output_gdb(gdb_full_path_name)
 
             # write model components in 'selected_models' to 'output_directory' gdb
+            for model in selected_models:
+                pass
 
             arcpy.AddMessage("Model Export - Process Finished")
         except:

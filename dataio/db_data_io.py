@@ -233,6 +233,22 @@ class DbDataIo(object):
                                                field_attribute_lookup, template_table)
         self.append_table_to_db(output_feature_class, target_table)
 
+    def copy_table_to_gdb(self, input_table, output_gdb):
+        # type: (str, str) -> None
+        arcpy.FeatureClassToGeodatabase_conversion(input_table, output_gdb)
+        arcpy.Delete_management(input_table)
+
+    def copy_objects_to_gdb(self, generic_object_list, field_attribute_lookup, template_table, output_gdb):
+        output_feature_class = self.workspace + "\\" + "intermediate_feature_class_to_append"
+        arcpy.Delete_management(output_feature_class)
+        self.create_feature_class_from_objects(generic_object_list, self.workspace,
+                                               "intermediate_feature_class_to_append",
+                                               field_attribute_lookup, template_table)
+        self.copy_table_to_gdb(output_feature_class, output_gdb)
+
+    def copy_object_to_gdb(self, generic_object, field_attribute_lookup, template_table, target_table):
+        self.append_objects_to_db([generic_object], field_attribute_lookup, template_table, target_table)
+
     def append_objects_to_db_with_ids(self, generic_object_list, field_attribute_lookup, template_table, target_table):
         output_feature_class = self.workspace + "\\" + "intermediate_feature_class_to_append"
         arcpy.Delete_management(output_feature_class)
