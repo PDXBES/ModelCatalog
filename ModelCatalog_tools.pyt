@@ -540,13 +540,16 @@ class Export_Model_Catalog_Data(object):
     def execute(self, parameters, messages):
         arcpy.AddMessage("Execute")
 
-        gdb_full_path_name = self.utility.gdb_full_path_name
-
         # get list of models selected by user
         selected_model_descriptions = parameters[0].values
         selected_models = self.model_copy.get_selected_non_calibration_models(selected_model_descriptions)
 
+        ID_list = []
+        for model in selected_models:
+            ID_list.append(model.id)
+
         output_directory = parameters[1].value
+        gdb_full_path_name = self.utility.gdb_full_path_name(output_directory)
 
         # do this all inside of an edit session (don't want the gdb hanging around if the append fails)
         # create gdb in output directory - DONE
@@ -556,9 +559,9 @@ class Export_Model_Catalog_Data(object):
             arcpy.AddMessage("Model Export - Process Started")
             self.modelcatalogdataio.create_output_gdb(gdb_full_path_name)
 
+            arcpy.AddMessage(ID_list)
             # write model components in 'selected_models' to 'output_directory' gdb
-            for model in selected_models:
-                pass
+            self.modelcatalogdataio.copy_data_to_gdb(ID_list, gdb_full_path_name)
 
             arcpy.AddMessage("Model Export - Process Finished")
         except:

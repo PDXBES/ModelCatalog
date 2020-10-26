@@ -27,7 +27,27 @@ class DbDataIo(object):
                 field_name.name = field.name[0:31]
                 field_map.outputField = field_name
                 field_mappings.addFieldMap(field_map)
+        return field_mappings
 
+    def _create_field_map_for_gdb_db(self, source_path):
+        field_mappings = arcpy.FieldMappings()
+        fields = arcpy.ListFields(source_path)
+        for input_field in fields:
+            if input_field.name == "SHAPE_Area"\
+                    or input_field.name == "Shape_Length"\
+                    or input_field.name == "SHAPE_Length"\
+                    or input_field.name == "OBJECTID"\
+                    or input_field.name == "SHAPE"\
+                    or input_field.name == "SHAPE_STLength__"\
+                    or input_field.name == "SHAPE_STArea__":
+                pass
+            else:
+                field_map = arcpy.FieldMap()
+                field_map.addInputField(source_path, input_field.name)
+                output_field_name = field_map.outputField
+                output_field_name.name = input_field.name
+                field_map.outputField = output_field_name
+                field_mappings.addFieldMap(field_map)
         return field_mappings
 
     def retrieve_current_id(self, object_type):

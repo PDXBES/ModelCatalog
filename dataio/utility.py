@@ -5,6 +5,7 @@ from ctypes import wintypes
 import arcpy
 from businessclasses.model_catalog_exception import InvalidModelPathException
 from datetime import date
+from datetime import datetime
 
 class Utility:
 
@@ -88,18 +89,23 @@ class Utility:
             print("Config set to other than TEST, data will not be deleted")
 
     @staticmethod
-    def date_now(date_object):
-        date_today = date_object.strftime('%Y%m%d_%H_%M_%S')
-        return date_today
+    def date_now():
+        date_today = datetime.today()
+        formatted_date_today = date_today.strftime('%Y%m%d_%H_%M_%S')
+        return formatted_date_today
 
-    def model_catalog_export_gdb_name(self, date_object):
+    def model_catalog_export_gdb_name(self):
         basename = "ModelCatalogExport_"
-        today = self.date_now(date_object)
+        today = self.date_now()
         extension = ".gdb"
         full_name = basename + today + extension
         return full_name
 
-    def gdb_full_path_name(self, date_object, base_folder):
-        full_name = self.model_catalog_export_gdb_name(date_object)
+    def gdb_full_path_name(self, base_folder):
+        full_name = self.model_catalog_export_gdb_name()
         full_path = os.path.join(str(base_folder), str(full_name))
         return full_path
+
+    def format_list_for_where_clause(self, input_list):
+        result = ', '.join(map(str, input_list))
+        return result

@@ -132,7 +132,6 @@ class ModelCatalog:
         models = model_catalog_db_data_io.create_objects_from_database_with_id_filter(class_type, input_table_name, id_field_name, id_list)
         return models
 
-
     def add_models_from_model_catalog_db(self, model_catalog_db_data_io):
         self.add_models(self.create_models_from_model_catalog_db(model_catalog_db_data_io))
 

@@ -22,6 +22,7 @@ from model_data_io import ModelDataIo
 from simulation_data_io import SimulationDataIo
 from businessclasses.model_catalog_exception import AppendModelAlterationsException
 import sys
+import os
 
 class ModelCatalogDbDataIo(DbDataIo):
     def __init__(self, config):
@@ -38,9 +39,10 @@ class ModelCatalogDbDataIo(DbDataIo):
             arcpy.ExecuteError()
             sys.exit("gdb already exists") #TODO - make sure this works as expected
         else:
-            todays_gdb = self.utility.model_catalog_export_gdb_name(datetime.today())
-            arcpy.AddMessage("Creating gdb " + str(todays_gdb))
-            arcpy.CreateFileGDB_management(base_folder, todays_gdb)
+            base_folder = os.path.dirname(gdb_full_path_name)
+            gdb_name = os.path.basename(gdb_full_path_name)
+            arcpy.AddMessage("Creating gdb " + str(gdb_name))
+            arcpy.CreateFileGDB_management(base_folder, gdb_name)
 
     def retrieve_current_model_id(self):
         current_model_id = self.retrieve_current_id(Model)
@@ -88,3 +90,64 @@ class ModelCatalogDbDataIo(DbDataIo):
             arcpy.AddMessage(e.args[2])
             raise AppendModelAlterationsException
 
+    def copy_data_to_gdb(self, model_id_list, gdb_full_path_name):
+        # call copy_datum_to_gdb for each fc/table
+        model_tracking = self.config.model_tracking_sde_path
+        areas = self.config.geometry_areas_sde_path
+        links = self.config.geometry_links_sde_path
+        nodes = self.config.geometry_nodes_sde_path
+        storage = self.config.storage_sde_path
+        project_types = self.config.project_type_sde_path
+        directors = self.config.director_sde_path
+        simulations = self.config.simulation_sde_path
+
+        arcpy.AddMessage("Copying Model Tracking")
+        self.copy_datum_to_gdb(model_tracking, model_id_list, gdb_full_path_name)
+        arcpy.AddMessage("Copying Model Areas")
+        self.copy_datum_to_gdb(areas, model_id_list, gdb_full_path_name)
+        self.copy_datum_to_gdb(links, model_id_list, gdb_full_path_name)
+        self.copy_datum_to_gdb(nodes, model_id_list, gdb_full_path_name)
+        self.copy_datum_to_gdb(storage, model_id_list, gdb_full_path_name)
+        self.copy_datum_to_gdb(project_types, model_id_list, gdb_full_path_name)
+        self.copy_datum_to_gdb(directors, model_id_list, gdb_full_path_name)
+        self.copy_datum_to_gdb(simulations, model_id_list, gdb_full_path_name)
+
+    def copy_datum_to_gdb(self, input_data, model_id_list, gdb_full_path_name):
+        arcpy.AddMessage("Selecting records")
+        arcpy.AddMessage(model_id_list)
+        arcpy.AddMessage(input_data)
+        arcpy.AddMessage(gdb_full_path_name) #gets to here
+        arcpy.AddMessage(self.utility.format_list_for_where_clause(model_id_list))
+        arcpy.AddMessage("Model_ID in ({0})".format(self.utility.format_list_for_where_clause(model_id_list)))
+
+        in_memory_selection = arcpy.MakeFeatureLayer_management(input_data, "in_memory\in_memory_selection",
+                                                         "Model_ID in ({0})".format(
+                                                             self.utility.format_list_for_where_clause(model_id_list)))
+
+        #arcpy.SelectLayerByAttribute_management(intermediate,
+                                                #"NEW_SELECTION",
+                                                #"Model_ID in ({0})".format(self.utility.format_list_for_where_clause(model_id_list)))
+        arcpy.AddMessage("before describe")
+        describe = arcpy.Describe(input_data)
+        arcpy.AddMessage("before field mapping")
+        field_mapping = self._create_field_map_for_gdb_db(input_data)
+
+        arcpy.AddMessage("Creating in memory data")
+        try:
+            intermediate = arcpy.CreateFeatureclass_management("in_memory",
+                                                "intermediate",
+                                                describe.shapeType,
+                                                input_data)
+        except:
+            intermediate = arcpy.CreateTable_management("in_memory",
+                                         "intermediate",
+                                         input_data)
+
+        arcpy.AddMessage("Appending")
+        arcpy.Append_management(input_data, intermediate, "NO_TEST", field_mapping)
+
+        arcpy.AddMessage("Saving to gdb")
+        try:
+            arcpy.FeatureClassToGeodatabase_conversion(intermediate, gdb_full_path_name)
+        except:
+            arcpy.TableToGeodatabase_conversion(intermediate, gdb_full_path_name)
