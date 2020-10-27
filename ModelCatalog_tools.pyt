@@ -544,29 +544,38 @@ class Export_Model_Catalog_Data(object):
         selected_model_descriptions = parameters[0].values
         selected_models = self.model_copy.get_selected_non_calibration_models(selected_model_descriptions)
 
-        ID_list = []
+        model_id_list = []
         for model in selected_models:
-            ID_list.append(model.id)
+            model_id_list.append(model.id)
+
+        simulation_id_list = self.model_copy.get_sim_ids_from_model_ids(model_id_list)
 
         output_directory = parameters[1].value
         gdb_full_path_name = self.utility.gdb_full_path_name(output_directory)
-
-        # do this all inside of an edit session (don't want the gdb hanging around if the append fails)
-        # create gdb in output directory - DONE
-        # append selected models into in_memory tables and copy those into gdb (no pre-existing tables needed)
 
         try:
             arcpy.AddMessage("Model Export - Process Started")
             self.modelcatalogdataio.create_output_gdb(gdb_full_path_name)
 
-            arcpy.AddMessage(ID_list)
-            # write model components in 'selected_models' to 'output_directory' gdb
-            self.modelcatalogdataio.copy_data_to_gdb(ID_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_tracking_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.geometry_areas_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.geometry_links_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.geometry_nodes_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.storage_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.project_type_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.director_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.simulation_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_hydrologic_sde_path, "Model_ID", simulation_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_hydraulic_sde_path, "Model_ID", simulation_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_bc_sde_path, "Model_ID", simulation_id_list, gdb_full_path_name)
+
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.results_area_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.results_link_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.results_node_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.results_node_flooding_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
 
             arcpy.AddMessage("Model Export - Process Finished")
         except:
-            #arcpy.AddError(str(selected_model.model_path) + " - Model could not be copied")
-            #arcpy.ExecuteError()
 
             if arcpy.Exists(gdb_full_path_name):
                 arcpy.Delete_management(self.utility.gdb_full_path_name)

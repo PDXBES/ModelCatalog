@@ -91,7 +91,7 @@ class Utility:
     @staticmethod
     def date_now():
         date_today = datetime.today()
-        formatted_date_today = date_today.strftime('%Y%m%d_%H_%M_%S')
+        formatted_date_today = date_today.strftime('%Y%m%d_%H%M%S')
         return formatted_date_today
 
     def model_catalog_export_gdb_name(self):

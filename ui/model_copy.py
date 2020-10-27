@@ -2,6 +2,7 @@ import os
 import shutil
 from datetime import datetime
 from dataio.utility import Utility
+import arcpy
 
 
 class ModelCopy(object):
@@ -41,6 +42,15 @@ class ModelCopy(object):
         destination_dir = os.path.dirname(model.model_path)
         new_dir = os.path.join(destination_dir, new_folder_name)
         return new_dir
+
+    def get_sim_ids_from_model_ids(self, model_id_list):
+        simulation_id_list = []
+        with arcpy.da.SearchCursor(self.config.simulation_sde_path, ["Model_ID", "Simulation_ID"]) as cursor:
+            for row in cursor:
+                if row[0] in model_id_list:
+                    simulation_id_list.append(row[1])
+        simulation_id_set = set(simulation_id_list)
+        return list(simulation_id_set)
 
     def get_selected_non_calibration_models(self, non_calibration_model_descriptions):
         non_calibration_models = []
