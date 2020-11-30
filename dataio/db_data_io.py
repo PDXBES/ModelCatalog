@@ -18,7 +18,10 @@ class DbDataIo(object):
         field_mappings = arcpy.FieldMappings()
         fields = arcpy.ListFields(model_link_results_path)
         for field in fields:
-            if field.name == "SHAPE_Area" or field.name == "SHAPE_Length" or field.name == "OBJECTID" or field.name == "SHAPE":
+            if field.name == "SHAPE_Area" or \
+                    field.name == "SHAPE_Length" or\
+                    field.name == "OBJECTID" or\
+                    field.name == "SHAPE":
                 pass
             else:
                 field_map = arcpy.FieldMap()
