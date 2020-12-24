@@ -574,11 +574,16 @@ class Export_Model_Catalog_Data(object):
             self.modelcatalogdataio.copy_data_to_gdb(self.config.results_node_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
             self.modelcatalogdataio.copy_data_to_gdb(self.config.results_node_flooding_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
 
+            arcpy.AddMessage("Zipping File")
+            self.utility.zip(gdb_full_path_name)
+
             arcpy.AddMessage("Model Export - Process Finished")
         except:
 
             if arcpy.Exists(gdb_full_path_name):
-                arcpy.Delete_management(self.utility.gdb_full_path_name)
+                arcpy.Delete_management(gdb_full_path_name)
+            if arcpy.Exists(gdb_full_path_name + ".zip"):
+                arcpy.Delete_management(gdb_full_path_name + ".zip")
             arcpy.AddError("Data could not be exported")
             arcpy.ExecuteError()
 
