@@ -96,35 +96,40 @@ class ModelCatalogDbDataIo(DbDataIo):
         arcpy.AddMessage(str(rename_basename) + "...")
 
         try:
-            feature_layer_name = "feature_layer_selection"
-            feature_layer_selection = arcpy.MakeFeatureLayer_management(input_data,
-                                                                        feature_layer_name,
-                                                                        "{0} in ({1})".format(
-                                                                        test_field,
-                                                                        self.utility.format_list_for_where_clause(id_list))
-                                                                        )
-
-
-            if arcpy.GetCount_management(feature_layer_selection) > 0:
-                arcpy.AddMessage("...Copying fc to gdb")
-                arcpy.FeatureClassToGeodatabase_conversion(feature_layer_name, gdb_full_path_name)
-                arcpy.Rename_management(os.path.join(gdb_full_path_name, feature_layer_name), rename_basename)
-                del feature_layer_selection
-            else:
-                pass
+            self.select_and_copy_feature_class(gdb_full_path_name, id_list, input_data, rename_basename, test_field)
 
         except:
-            table_view_name = "table_view_selection"
-            table_view_selection = arcpy.MakeTableView_management(input_data,
-                                                                  table_view_name,
-                                                                  "{0} in ({1})".format(
+            self.select_and_copy_table(gdb_full_path_name, id_list, input_data, rename_basename, test_field)
+
+    def select_and_copy_table(self, gdb_full_path_name, id_list, input_data, rename_basename, test_field):
+        table_view_name = "table_view_selection"
+        table_view_selection = arcpy.MakeTableView_management(input_data,
+                                                              table_view_name,
+                                                              "{0} in ({1})".format(
                                                                   test_field,
                                                                   self.utility.format_list_for_where_clause(id_list))
-                                                                  )
-            if arcpy.GetCount_management(table_view_selection) > 0:
-                arcpy.AddMessage("...Copying table to gdb")
-                arcpy.TableToGeodatabase_conversion(table_view_selection, gdb_full_path_name)
-                arcpy.Rename_management(os.path.join(gdb_full_path_name, table_view_name), rename_basename)
-                del table_view_selection
-            else:
-                pass
+                                                              )
+        if arcpy.GetCount_management(table_view_selection) > 0:
+            arcpy.AddMessage("...Copying table to gdb")
+            arcpy.TableToGeodatabase_conversion(table_view_selection, gdb_full_path_name)
+            arcpy.Rename_management(os.path.join(gdb_full_path_name, table_view_name), rename_basename)
+            del table_view_selection
+        else:
+            pass
+
+    def select_and_copy_feature_class(self, gdb_full_path_name, id_list, input_data, rename_basename, test_field):
+        feature_layer_name = "feature_layer_selection"
+        feature_layer_selection = arcpy.MakeFeatureLayer_management(input_data,
+                                                                    feature_layer_name,
+                                                                    "{0} in ({1})".format(
+                                                                        test_field,
+                                                                        self.utility.format_list_for_where_clause(
+                                                                            id_list))
+                                                                    )
+        if arcpy.GetCount_management(feature_layer_selection) > 0:
+            arcpy.AddMessage("...Copying fc to gdb")
+            arcpy.FeatureClassToGeodatabase_conversion(feature_layer_name, gdb_full_path_name)
+            arcpy.Rename_management(os.path.join(gdb_full_path_name, feature_layer_name), rename_basename)
+            del feature_layer_selection
+        else:
+            pass
