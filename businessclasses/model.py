@@ -104,6 +104,9 @@ class Model(GenericObject):
                 elif self.model_purpose_id == self.config.model_purpose_id["Characterization"]:
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
                         return True
+                elif self.model_purpose_id == self.config.model_purpose_id["Characterization without Calibration"]:
+                    if self.valid_emgaats_model_structure() and self.valid_required_simulations():
+                        return True
                 elif self.model_purpose_id == self.config.model_purpose_id["Alternative"]:
                     #TODO - create method for valid_alternative_simulations (basically the same as for calibration but may have different naming convention)
                     if self.valid_emgaats_model_structure() and self.valid_required_simulations():
