@@ -330,7 +330,8 @@ class Model(GenericObject):
     def set_parent_model_id(self, model_data_io):
         valid_model_purpose_values = self.config.model_purpose_id.values()
         if self.model_purpose_id in valid_model_purpose_values:
-            if self.model_purpose_id != self.config.model_purpose_id["Calibration"]:
+            if self.model_purpose_id != self.config.model_purpose_id["Calibration"]\
+                    or self.model_purpose_id != self.config.model_purpose_id["Characterization without Calibration"]:
                 if self.valid_parent_model_registration_file():
                     parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
 
@@ -352,6 +353,9 @@ class Model(GenericObject):
             if parent_model_purpose == "Calibration":
                 return True
         if self.config.model_purpose[self.model_purpose_id] == "Calibration":
+            if parent_model_purpose == None:
+                return True
+        if self.config.model_purpose[self.model_purpose_id] == "Characterization without Calibration":
             if parent_model_purpose == None:
                 return True
         if self.config.model_purpose[self.model_purpose_id] == "Alternative":

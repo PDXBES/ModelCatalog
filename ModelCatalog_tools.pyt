@@ -279,6 +279,13 @@ class EMGAATS_Model_Registration(object):
             if parent_model_dir_parameter.enabled == True:
                 parent_model_dir_parameter.enabled = False
                 parent_model_dir_parameter.value = self.dummy_parent_model_path
+        elif model_purpose_parameter.valueAsText == "Characterization without Calibration":
+            if model_calibration_file_parameter.enabled == True:
+                model_calibration_file_parameter.enabled = False
+                model_calibration_file_parameter.value = self.dummy_model_calibration_file_path
+            if parent_model_dir_parameter.enabled == True:
+                parent_model_dir_parameter.enabled = False
+                parent_model_dir_parameter.value = self.dummy_parent_model_path
         else:
             model_calibration_file_parameter.enabled = False
             model_calibration_file_parameter.value = self.dummy_model_calibration_file_path
@@ -565,9 +572,9 @@ class Export_Model_Catalog_Data(object):
             self.modelcatalogdataio.copy_data_to_gdb(self.config.project_type_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
             self.modelcatalogdataio.copy_data_to_gdb(self.config.director_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
             self.modelcatalogdataio.copy_data_to_gdb(self.config.simulation_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
-            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_hydrologic_sde_path, "Model_ID", simulation_id_list, gdb_full_path_name)
-            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_hydraulic_sde_path, "Model_ID", simulation_id_list, gdb_full_path_name)
-            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_bc_sde_path, "Model_ID", simulation_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_hydrologic_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_hydraulic_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
+            self.modelcatalogdataio.copy_data_to_gdb(self.config.model_alt_bc_sde_path, "Model_ID", model_id_list, gdb_full_path_name)
 
             self.modelcatalogdataio.copy_data_to_gdb(self.config.results_area_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
             self.modelcatalogdataio.copy_data_to_gdb(self.config.results_link_sde_path, "Simulation_ID", simulation_id_list, gdb_full_path_name)
