@@ -374,6 +374,9 @@ class EMGAATS_Model_Registration(object):
 
             if self.model.model_purpose_id == self.config.model_purpose_id["Calibration"]:
                 self.model.model_calibration_file = self.utility.check_path(model_calibration_file_parameter.valueAsText)
+            elif self.model.model_purpose_id == self.config.model_purpose_id["Characterization without Calibration"]:
+                self.model.model_calibration_file = None
+                self.model.parent_model_path = None
             else:
                 self.model.parent_model_path = self.utility.check_path(parent_model_dir_parameter.valueAsText)
                 self.model.model_calibration_file = None

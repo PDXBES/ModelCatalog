@@ -219,7 +219,8 @@ class Model(GenericObject):
                 required_storm_and_dev_scenario_ids = self.config.ccsp_alternative_storm_and_dev_scenario_ids
             elif self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
                 required_storm_and_dev_scenario_ids = self.config.ccsp_recommended_plan_storm_and_dev_scenario_ids
-
+            elif self.model_purpose_id == self.config.model_purpose_id["Characterization without Calibration"]:
+                required_storm_and_dev_scenario_ids = self.config.ccsp_char_without_cal_storm_and_dev_scenario_ids
             else:
                 raise InvalidModelPurposeException
         elif self.project_phase_id == self.config.proj_phase_id["Design 90"]:
@@ -330,11 +331,13 @@ class Model(GenericObject):
         if self.validate_config_file():
             self.extract_date = model_data_io.read_extraction_date_from_emgaats_config_file(self)
 
+    # don't test for valid parent model if 'Calibration' or 'Characterization without Calibration' (cause they don't have one)
     def set_parent_model_id(self, model_data_io):
         valid_model_purpose_values = self.config.model_purpose_id.values()
         if self.model_purpose_id in valid_model_purpose_values:
-            if self.model_purpose_id != self.config.model_purpose_id["Calibration"]\
-                    or self.model_purpose_id != self.config.model_purpose_id["Characterization without Calibration"]:
+            if self.model_purpose_id == self.config.model_purpose_id["Characterization"]\
+                or self.model_purpose_id == self.config.model_purpose_id["Alternative"] \
+                    or self.model_purpose_id == self.config.model_purpose_id["Recommended Plan"]:
                 if self.valid_parent_model_registration_file():
                     parent_model_id = model_data_io.read_model_id_from_model_registration_file(self)
 

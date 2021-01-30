@@ -120,6 +120,7 @@ class Config:
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
         self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
         self.ccsp_recommended_plan_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Recommended Plan", "Planning")
+        self.ccsp_char_without_cal_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization without Calibration", "Planning")
 
     #TODO - move piece to remove unicode empty string to separate function
     def get_unique_cip_numbers(self):
@@ -277,9 +278,10 @@ class Config:
                 model_project_phase_and_purpose_field_name = "ccsp_alternative"
             elif model_purpose == "Recommended Plan":
                 model_project_phase_and_purpose_field_name = "ccsp_recommended_plan"
+            elif model_purpose == "Characterization without Calibration":
+                model_project_phase_and_purpose_field_name = "ccsp_char_without_cal"
             else:
                 raise InvalidModelPurposeException()
-
         else:
             raise InvalidProjectPhase()
 
