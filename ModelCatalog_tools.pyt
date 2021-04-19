@@ -332,12 +332,8 @@ class EMGAATS_Model_Registration(object):
             if cip_number_parameter == u"None":
                 pass
             else:
-                analysis_request_ids = ""
-                for analysis_request_id in self.config.get_cip_analysis_requests(cip_number_parameter.valueAsText):
-                    analysis_request_ids += " " + analysis_request_id
-                analysis_request_ids.strip()
-                arcpy.AddMessage(analysis_request_ids)
-                self.model.model_request_id = analysis_request_ids
+                self.model.project_num = cip_number_parameter.valueAsText
+
             self.model.project_phase_id = self.config.proj_phase_id[project_phase_parameter.valueAsText]
             self.model.engine_type_id = 1  # currently only using EMGAATS
             self.model.create_date = datetime.datetime.today()

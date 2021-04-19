@@ -123,6 +123,7 @@ class Config:
         self.ccsp_char_without_cal_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization without Calibration", "Planning")
 
     #TODO - move piece to remove unicode empty string to separate function
+    #TODO - repoint to Heron source once available
     def get_unique_cip_numbers(self):
         unique_cip_numbers = []
         unique_cip_numbers_w_empty_unicode_string = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
