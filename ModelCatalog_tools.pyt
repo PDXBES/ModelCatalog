@@ -146,7 +146,7 @@ class EMGAATS_Model_Registration(object):
             direction="Input")
 
         model_status.filter.type = "ValueList"
-        model_status.filter.list = ["Working", "Final"]
+        model_status.filter.list = ["Working", "Final", "Legacy"]
 
         model_calibration_file = arcpy.Parameter(
             displayName="Model Calibration File",
@@ -335,7 +335,7 @@ class EMGAATS_Model_Registration(object):
                 self.model.project_num = cip_number_parameter.valueAsText
 
             self.model.project_phase_id = self.config.proj_phase_id[project_phase_parameter.valueAsText]
-            self.model.engine_type_id = 1  # currently only using EMGAATS
+            self.model.engine_type_id = 1  # currently only using EMGAATS as default from the 'EMGAATS Model Registration'
             self.model.create_date = datetime.datetime.today()
             self.model.created_by = getpass.getuser()
             self.model.model_name = model_name_parameter.valueAsText

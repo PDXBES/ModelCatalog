@@ -86,6 +86,9 @@ class Model(GenericObject):
         if self.config.model_status[self.model_status_id] == "Working":
             if self.valid_emgaats_model_structure():
                 return True
+        elif self.config.model_status[self.model_status_id] == "Legacy":
+            if self.valid_emgaats_model_structure():
+                return True
         elif self.config.model_status[self.model_status_id] == "Final":
             if self.project_phase_id == self.config.proj_phase_id["Pre Design"] or \
                     self.project_phase_id == self.config.proj_phase_id["Design 30"] or \
