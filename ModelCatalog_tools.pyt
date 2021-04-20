@@ -128,6 +128,15 @@ class EMGAATS_Model_Registration(object):
         project_cip_number.filter.list = cip_numbers
         project_cip_number.value = u"None"
 
+        project_name = arcpy.Parameter(
+            displayName="CIP Project Name",
+            name="project_name",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input")
+        project_name.value = " "
+        project_name.enabled = False
+
         model_purpose = arcpy.Parameter(
             displayName="Model Purpose",
             name="model_purpose",
@@ -198,7 +207,7 @@ class EMGAATS_Model_Registration(object):
         model_alteration_file.value = self.dummy_model_alteration_file_path
         model_alteration_file.filter.list = ['xls', 'xlsx', 'docx', 'doc', 'txt']
 
-        params = [model_name, model_dir, project_type, project_phase, project_cip_number,
+        params = [model_name, model_dir, project_type, project_phase, project_cip_number, project_name,
                   model_purpose, parent_model_dir, model_calibration_file, model_status,
                   model_alterations_boundary_conditions,
                   model_alterations_hydrologic, model_alterations_hydraulic, model_alteration_file]
@@ -232,14 +241,15 @@ class EMGAATS_Model_Registration(object):
         project_type_parameter = parameters[2]
         project_phase_parameter = parameters[3]
         cip_number_parameter = parameters[4]
-        model_purpose_parameter = parameters[5]
-        parent_model_dir_parameter = parameters[6]
-        model_calibration_file_parameter = parameters[7]
-        model_status_parameter = parameters[8]
-        model_alt_bc_parameter = parameters[9]
-        model_alt_hydrologic_parameter = parameters[10]
-        model_alt_hydraulic_parameter = parameters[11]
-        model_alteration_file_parameter = parameters[12]
+        project_name = parameters[5]
+        model_purpose_parameter = parameters[6]
+        parent_model_dir_parameter = parameters[7]
+        model_calibration_file_parameter = parameters[8]
+        model_status_parameter = parameters[9]
+        model_alt_bc_parameter = parameters[10]
+        model_alt_hydrologic_parameter = parameters[11]
+        model_alt_hydraulic_parameter = parameters[12]
+        model_alteration_file_parameter = parameters[13]
 
 
         if project_phase_parameter.valueAsText in ("Pre Design", "Design 30", "Design 60", "Design 90"):
@@ -320,14 +330,15 @@ class EMGAATS_Model_Registration(object):
             project_type_parameter = parameters[2]
             project_phase_parameter = parameters[3]
             cip_number_parameter = parameters[4]
-            model_purpose_parameter = parameters[5]
-            parent_model_dir_parameter = parameters[6]
-            model_calibration_file_parameter = parameters[7]
-            model_status_parameter = parameters[8]
-            model_alt_bc_parameter = parameters[9]
-            model_alt_hydrologic_parameter = parameters[10]
-            model_alt_hydraulic_parameter = parameters[11]
-            model_alteration_file_parameter = parameters[12]
+            project_name = parameters[5]
+            model_purpose_parameter = parameters[6]
+            parent_model_dir_parameter = parameters[7]
+            model_calibration_file_parameter = parameters[8]
+            model_status_parameter = parameters[9]
+            model_alt_bc_parameter = parameters[10]
+            model_alt_hydrologic_parameter = parameters[11]
+            model_alt_hydraulic_parameter = parameters[12]
+            model_alteration_file_parameter = parameters[13]
 
             if cip_number_parameter == u"None":
                 pass
