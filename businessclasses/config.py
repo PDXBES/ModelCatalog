@@ -84,6 +84,9 @@ class Config:
 
         self.analysis_requests_sde_path = self.ASM_WORK_sde_path + r"\ASM_Work.GIS.Analysis_Requests"
 
+        # dummy path for testing until actual eBuilder output configured
+        self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.dummy_Heron_projects"
+
         self.storm = self.retrieve_storm_dict()  # eg - {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.storm_id = self.reverse_dict(self.storm)
 
@@ -115,6 +118,8 @@ class Config:
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
+        self.ebuilder_projects = self.retrieve_ebuilder_projects_dict()
+
         self.unique_cip_numbers = self.get_unique_cip_numbers()
 
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
@@ -124,9 +129,19 @@ class Config:
 
     #TODO - move piece to remove unicode empty string to separate function
     #TODO - repoint to Heron source once available
+    #TODO - delete version using cip_analysis_requests once we know we're no longer using
+    #def get_unique_cip_numbers(self):
+    #    unique_cip_numbers = []
+    #    unique_cip_numbers_w_empty_unicode_string = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
+    #    for cip_number in unique_cip_numbers_w_empty_unicode_string:
+    #        if cip_number != u'':
+    #            unique_cip_numbers.append(cip_number)
+
+    #    return sorted(unique_cip_numbers, reverse = True)
+
     def get_unique_cip_numbers(self):
         unique_cip_numbers = []
-        unique_cip_numbers_w_empty_unicode_string = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
+        unique_cip_numbers_w_empty_unicode_string = self.get_unique_keys(self.ebuilder_projects)
         for cip_number in unique_cip_numbers_w_empty_unicode_string:
             if cip_number != u'':
                 unique_cip_numbers.append(cip_number)
@@ -160,7 +175,7 @@ class Config:
                     standard_simulation_names.append(simulation_name)
         return standard_simulation_names
 
-#TODO: give retrieve domain as dict a sde path and refactor to use in mapping snapshot
+    #TODO: give retrieve domain as dict a sde path and refactor to use in mapping snapshot
     def retrieve_domain_as_dict(self, domain_name, sde_path):
         list_of_domains = arcpy.da.ListDomains(sde_path)
         dict_of_scenarios = None
@@ -218,6 +233,18 @@ class Config:
         cip_analysis_request_dict = dict(list_of_keys_and_values)
         return cip_analysis_request_dict
 
+    def retrieve_ebuilder_projects_dict(self):
+        project_number = "project_number"
+        project_name = ["project_name"]
+        list_of_keys_and_values = []
+        projects_dict = self.retrieve_dict_from_db(project_number, project_name, self.ebuilder_projects_sde_path)
+        for key, value in projects_dict.iteritems():
+            if value != None:
+                list_of_keys_and_values.append((key, value))
+
+        ebuilder_projects_dict = dict(list_of_keys_and_values)
+        return ebuilder_projects_dict
+
     def get_keys_based_on_value(self, input_dict, input_value):
         keys = []
         for key, value in input_dict.iteritems():
@@ -229,6 +256,12 @@ class Config:
         # type:(Dict) -> List
         values = input_dict.values()
         output_list = list(set(values))
+        return output_list
+    
+    def get_unique_keys(self, input_dict):
+        # type:(Dict) -> List
+        keys = input_dict.keys()
+        output_list = list(set(keys))
         return output_list
 
     def get_unique_values_case_insensitive(self, input_dict):
