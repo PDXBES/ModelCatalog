@@ -45,7 +45,6 @@ class Model(GenericObject):
         self.model_status_id = None
         self.model_alteration_file = None
         self.project_num = None
-        self.project_name = None
         self.simulations = []
         self.config = config
         self.project_types = []
@@ -78,7 +77,6 @@ class Model(GenericObject):
         field_attribute_lookup["Model_Status_ID"] = "model_status_id"
         field_attribute_lookup["Model_Alteration_file"] = "model_alteration_file"
         field_attribute_lookup["Project_Num"] = "project_num"
-        field_attribute_lookup["Project_Name"] = "project_name"
         field_attribute_lookup["Shape@"] = "model_geometry"
         return field_attribute_lookup
 

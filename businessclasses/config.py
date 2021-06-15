@@ -122,7 +122,7 @@ class Config:
         self.ebuilder_projects = self.retrieve_ebuilder_projects_dict()
 
         self.unique_cip_numbers = self.get_unique_cip_numbers()
-        self.cip_numbers_and_names = self.get_key_and_value_as_string(self.retrieve_ebuilder_projects_dict())
+        self.cip_numbers_and_names = self.get_key_and_value_as_string(self.ebuilder_projects)
 
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
         self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
