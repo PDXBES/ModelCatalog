@@ -123,7 +123,8 @@ class EMGAATS_Model_Registration(object):
 
         project_cip_number.enabled = False
         project_cip_number.filter.type = "ValueList"
-        cip_numbers = self.config.unique_cip_numbers
+        #cip_numbers = self.config.unique_cip_numbers
+        cip_numbers = self.config.cip_numbers_and_names
         cip_numbers.append(u"None")
         project_cip_number.filter.list = cip_numbers
         project_cip_number.value = u"None"
@@ -256,7 +257,7 @@ class EMGAATS_Model_Registration(object):
             if cip_number_parameter.value == u"None":
                 cip_number_parameter.value = None
             cip_number_parameter.enabled = True
-            cip_number_parameter.filter.list = self.config.unique_cip_numbers
+            cip_number_parameter.filter.list = self.config.cip_numbers_and_names
 
         else:
             cip_number_parameter.enabled = False

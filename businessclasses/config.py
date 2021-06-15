@@ -84,8 +84,9 @@ class Config:
 
         self.analysis_requests_sde_path = self.ASM_WORK_sde_path + r"\ASM_Work.GIS.Analysis_Requests"
 
+        self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.dbo.HERON_PROJECTS"
         # dummy path for testing until actual eBuilder output configured
-        self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.dummy_Heron_projects"
+        #self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.dummy_Heron_projects"
 
         self.storm = self.retrieve_storm_dict()  # eg - {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.storm_id = self.reverse_dict(self.storm)
@@ -121,6 +122,7 @@ class Config:
         self.ebuilder_projects = self.retrieve_ebuilder_projects_dict()
 
         self.unique_cip_numbers = self.get_unique_cip_numbers()
+        self.cip_numbers_and_names = self.get_key_and_value_as_string(self.retrieve_ebuilder_projects_dict())
 
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
         self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
@@ -147,6 +149,10 @@ class Config:
                 unique_cip_numbers.append(cip_number)
 
         return sorted(unique_cip_numbers, reverse = True)
+        unique_cip_numbers_w_empty_unicode_string = self.get_unique_keys(self.ebuilder_projects)
+        for cip_number in unique_cip_numbers_w_empty_unicode_string:
+            if cip_number != u'':
+                unique_cip_numbers.append(cip_number)
 
     def standard_simulation_names(self):
         # TODO add unit test for this logic related to design storms with D
@@ -262,6 +268,13 @@ class Config:
         # type:(Dict) -> List
         keys = input_dict.keys()
         output_list = list(set(keys))
+        return output_list
+
+    def get_key_and_value_as_string(self, input_dict):
+        # type:(Dict) -> List
+        output_list = []
+        for key, value in input_dict.items():
+            output_list.append(key+" - "+value)
         return output_list
 
     def get_unique_values_case_insensitive(self, input_dict):
