@@ -124,7 +124,7 @@ class EMGAATS_Model_Registration(object):
         project_cip_number.enabled = False
         project_cip_number.filter.type = "ValueList"
         #cip_numbers = self.config.unique_cip_numbers
-        cip_numbers = self.config.cip_numbers_and_names
+        cip_numbers = self.config.cip_numbers_and_names_dict.keys()
         cip_numbers.append(u"None")
         project_cip_number.filter.list = cip_numbers
         project_cip_number.value = u"None"
@@ -247,7 +247,7 @@ class EMGAATS_Model_Registration(object):
             if cip_number_parameter.value == u"None":
                 cip_number_parameter.value = None
             cip_number_parameter.enabled = True
-            cip_number_parameter.filter.list = self.config.cip_numbers_and_names
+            cip_number_parameter.filter.list = self.config.cip_numbers_and_names_dict.keys()
 
         else:
             cip_number_parameter.enabled = False
@@ -333,7 +333,10 @@ class EMGAATS_Model_Registration(object):
             if cip_number_parameter == u"None":
                 pass
             else:
-                self.model.project_num = cip_number_parameter.valueAsText
+                #self.model.project_num = cip_number_parameter.valueAsText
+                selected_number_name = cip_number_parameter.value
+                selected_number = self.config.cip_numbers_and_names_dict[selected_number_name]
+                self.model.project_num = selected_number
 
             self.model.project_phase_id = self.config.proj_phase_id[project_phase_parameter.valueAsText]
             self.model.engine_type_id = 1  # currently only using EMGAATS as default from the 'EMGAATS Model Registration'

@@ -44,8 +44,9 @@ class Config:
             server = "BESDBPROD1"
 
         model_catalog_sde = server + ".MODELCATALOG.sde"
-        EMGAATS_sde = server + ".EMGAATS.sde"
-        ASM_WORK_sde = server + ".ASM_WORK.sde"
+        #EMGAATS_sde = server + ".EMGAATS.sde"
+        EMGAATS_sde = "BESDBPROD1.EMGAATS.sde"
+        ASM_WORK_sde = "BESDBPROD1.ASM_WORK.sde" #not needed, was for model request tracking db
         GISDB1 = "GISDB1.EGH_PUBLIC.sde"
 
         self.egh_public = os.path.join(sde_connections, GISDB1)
@@ -122,7 +123,7 @@ class Config:
         self.ebuilder_projects = self.retrieve_ebuilder_projects_dict()
 
         self.unique_cip_numbers = self.get_unique_cip_numbers()
-        self.cip_numbers_and_names = self.get_key_and_value_as_string(self.ebuilder_projects)
+        self.cip_numbers_and_names_dict = self.get_key_and_value_as_string_dict(self.ebuilder_projects)
 
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
         self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
@@ -270,12 +271,12 @@ class Config:
         output_list = list(set(keys))
         return output_list
 
-    def get_key_and_value_as_string(self, input_dict):
-        # type:(Dict) -> List
-        output_list = []
+    def get_key_and_value_as_string_dict(self, input_dict):
+        output_dict = {}
         for key, value in input_dict.items():
-            output_list.append(key+" - "+value)
-        return output_list
+            string = key+" - "+value
+            output_dict[string] = key
+        return output_dict
 
     def get_unique_values_case_insensitive(self, input_dict):
         # type:(Dict) -> List
