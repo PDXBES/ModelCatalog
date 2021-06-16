@@ -70,8 +70,10 @@ class Config:
         self.geometry_nodes_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Nodes"
         self.storage_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Storage"
         self.director_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Directors"
-
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
+        self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.dbo.HERON_PROJECTS"
+        # dummy path for testing until actual eBuilder output configured
+        # self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.dummy_Heron_projects"
 ##
 
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
@@ -84,10 +86,6 @@ class Config:
         self.ASM_WORK_sde_path = os.path.join(sde_connections, ASM_WORK_sde)
 
         self.analysis_requests_sde_path = self.ASM_WORK_sde_path + r"\ASM_Work.GIS.Analysis_Requests"
-
-        self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.dbo.HERON_PROJECTS"
-        # dummy path for testing until actual eBuilder output configured
-        #self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.dummy_Heron_projects"
 
         self.storm = self.retrieve_storm_dict()  # eg - {0: ("user_def", "U"), 1: ("25yr6h", "D"), 2: ("10yr6h", "D")}
         self.storm_id = self.reverse_dict(self.storm)
@@ -119,11 +117,11 @@ class Config:
         self.proj_type = self.retrieve_proj_type_domain_as_dict()
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
-        self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict()
-        self.ebuilder_projects = self.retrieve_ebuilder_projects_dict()
+        self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict() #not being used
+        self.ebuilder_projects_dict = self.retrieve_ebuilder_projects_dict()
 
         self.unique_cip_numbers = self.get_unique_cip_numbers()
-        self.cip_numbers_and_names_dict = self.get_key_and_value_as_string_dict(self.ebuilder_projects)
+        self.cip_numbers_and_names_dict = self.get_key_and_value_as_string_dict(self.ebuilder_projects_dict)
 
         self.ccsp_characterization_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization", "Planning")
         self.ccsp_alternative_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Alternative", "Planning")
@@ -144,7 +142,7 @@ class Config:
 
     def get_unique_cip_numbers(self):
         unique_cip_numbers = []
-        unique_cip_numbers_w_empty_unicode_string = self.get_unique_keys(self.ebuilder_projects)
+        unique_cip_numbers_w_empty_unicode_string = self.get_unique_keys(self.ebuilder_projects_dict)
         for cip_number in unique_cip_numbers_w_empty_unicode_string:
             if cip_number != u'':
                 unique_cip_numbers.append(cip_number)

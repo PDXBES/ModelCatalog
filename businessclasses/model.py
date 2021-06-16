@@ -30,7 +30,6 @@ class Model(GenericObject):
         # type: (Config) -> None
         self.id = 0
         self.parent_model_id = 0
-        self.model_request_id = 0
         self.project_phase_id = 0
         self.engine_type_id = 0
         self.create_date = None
@@ -45,6 +44,7 @@ class Model(GenericObject):
         self.model_status_id = None
         self.model_alteration_file = None
         self.project_num = None
+        self.project_name = None
         self.simulations = []
         self.config = config
         self.project_types = []
@@ -62,7 +62,6 @@ class Model(GenericObject):
         field_attribute_lookup = OrderedDict()
         field_attribute_lookup["Model_ID"] = "id"
         field_attribute_lookup["Parent_Model_ID"] = "parent_model_id"
-        field_attribute_lookup["Model_Request_ID"] = "model_request_id"
         field_attribute_lookup["Project_Phase_ID"] = "project_phase_id"
         field_attribute_lookup["Engine_Type_ID"] = "engine_type_id"
         field_attribute_lookup["Create_Date"] = "create_date"
@@ -78,6 +77,7 @@ class Model(GenericObject):
         field_attribute_lookup["Model_Alteration_file"] = "model_alteration_file"
         field_attribute_lookup["Project_Num"] = "project_num"
         field_attribute_lookup["Shape@"] = "model_geometry"
+        field_attribute_lookup["Project_Name"] = "project_name"
         return field_attribute_lookup
 
 #TODO: move dataIO functions to a DataIO class; Validate results.gdb;
