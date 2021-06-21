@@ -72,8 +72,8 @@ class Config:
         self.director_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Directors"
         self.project_type_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Project_Type"
         self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.dbo.HERON_PROJECTS"
-        # dummy path for testing until actual eBuilder output configured
-        # self.ebuilder_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.dummy_Heron_projects"
+
+        self.additional_projects_sde_path = self.model_catalog_sde_path + r"\MODEL_CATALOG.GIS.Additional_Projects"
 ##
 
         self.EMGAATS_sde_path = os.path.join(sde_connections, EMGAATS_sde)
@@ -118,7 +118,9 @@ class Config:
         self.proj_type_id = self.reverse_dict(self.proj_type)
 
         self.cip_analysis_requests = self.retrieve_cip_analysis_request_dict() #not being used
-        self.ebuilder_projects_dict = self.retrieve_ebuilder_projects_dict()
+        self.ebuilder_projects_dict = self.retrieve_projects_dict(self.ebuilder_projects_sde_path)
+        self.additional_projects_dict = self.retrieve_projects_dict(self.additional_projects_sde_path)
+        self.ebuilder_projects_dict.update(self.additional_projects_dict)
 
         self.unique_cip_numbers = self.get_unique_cip_numbers()
         self.cip_numbers_and_names_dict = self.get_key_and_value_as_string_dict(self.ebuilder_projects_dict)
@@ -129,17 +131,6 @@ class Config:
         self.ccsp_char_without_cal_storm_and_dev_scenario_ids = self.retrieve_required_storm_and_dev_scenario_ids("Characterization without Calibration", "Planning")
 
     #TODO - move piece to remove unicode empty string to separate function
-    #TODO - repoint to Heron source once available
-    #TODO - delete version using cip_analysis_requests once we know we're no longer using
-    #def get_unique_cip_numbers(self):
-    #    unique_cip_numbers = []
-    #    unique_cip_numbers_w_empty_unicode_string = self.get_unique_values_case_insensitive(self.cip_analysis_requests)
-    #    for cip_number in unique_cip_numbers_w_empty_unicode_string:
-    #        if cip_number != u'':
-    #            unique_cip_numbers.append(cip_number)
-
-    #    return sorted(unique_cip_numbers, reverse = True)
-
     def get_unique_cip_numbers(self):
         unique_cip_numbers = []
         unique_cip_numbers_w_empty_unicode_string = self.get_unique_keys(self.ebuilder_projects_dict)
@@ -148,10 +139,6 @@ class Config:
                 unique_cip_numbers.append(cip_number)
 
         return sorted(unique_cip_numbers, reverse = True)
-        unique_cip_numbers_w_empty_unicode_string = self.get_unique_keys(self.ebuilder_projects)
-        for cip_number in unique_cip_numbers_w_empty_unicode_string:
-            if cip_number != u'':
-                unique_cip_numbers.append(cip_number)
 
     def standard_simulation_names(self):
         # TODO add unit test for this logic related to design storms with D
@@ -238,11 +225,11 @@ class Config:
         cip_analysis_request_dict = dict(list_of_keys_and_values)
         return cip_analysis_request_dict
 
-    def retrieve_ebuilder_projects_dict(self):
+    def retrieve_projects_dict(self, table):
         project_number = "project_number"
         project_name = ["project_name"]
         list_of_keys_and_values = []
-        projects_dict = self.retrieve_dict_from_db(project_number, project_name, self.ebuilder_projects_sde_path)
+        projects_dict = self.retrieve_dict_from_db(project_number, project_name, table)
         for key, value in projects_dict.iteritems():
             if value != None:
                 list_of_keys_and_values.append((key, value))
