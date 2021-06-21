@@ -333,10 +333,12 @@ class EMGAATS_Model_Registration(object):
             if cip_number_parameter == u"None":
                 pass
             else:
-                #self.model.project_num = cip_number_parameter.valueAsText
                 selected_number_name = cip_number_parameter.value
                 selected_number = self.config.cip_numbers_and_names_dict[selected_number_name]
                 self.model.project_num = selected_number
+
+                selected_name = self.config.ebuilder_projects_dict[selected_number]
+                self.model.project_name = selected_name
 
             self.model.project_phase_id = self.config.proj_phase_id[project_phase_parameter.valueAsText]
             self.model.engine_type_id = 1  # currently only using EMGAATS as default from the 'EMGAATS Model Registration'
