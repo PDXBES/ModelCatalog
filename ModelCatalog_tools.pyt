@@ -34,7 +34,6 @@ test_flag = "TEST"
 #                        model_catalog_db_data_io)
 # model_copy.create_registered_model_dictionary()
 
-#test
 
 class Toolbox(object):
     def __init__(self):
